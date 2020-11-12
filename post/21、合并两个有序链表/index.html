@@ -1,0 +1,349 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>21、合并两个有序列表 | Gridea</title>
+<link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1605176845557">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://ganhan999.github.io//styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="21、合并两个有序列表 | Gridea - Atom Feed" href="https://ganhan999.github.io//atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="题目
+&quot;&quot;&quot;
+将两个升序链表合并为一个新的 升序 链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。
+示例：
+输入：1-&gt;2-&gt;4, 1-&gt;3-&gt;4
+输出：1-&gt;1-&g..." />
+    <meta name="keywords" content="leetcode" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://ganhan999.github.io/">
+  <img class="avatar" src="https://ganhan999.github.io//images/avatar.png?v=1605176845557" alt="">
+  </a>
+  <h1 class="site-title">
+    Gridea
+  </h1>
+  <p class="site-description">
+    温故而知新
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              21、合并两个有序列表
+            </h2>
+            <div class="post-info">
+              <span>
+                2020-11-04
+              </span>
+              <span>
+                5 min read
+              </span>
+              
+                <a href="https://ganhan999.github.io/tag/cKyYTCK2Y/" class="post-tag">
+                  # leetcode
+                </a>
+              
+            </div>
+            
+              <img class="post-feature-image" src="https://ganhan999.github.io//post-images/21、合并两个有序链表.jpg" alt="">
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <h1 id="题目">题目</h1>
+<p>&quot;&quot;&quot;<br>
+将两个升序链表合并为一个新的 升序 链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。<br>
+示例：<br>
+输入：1-&gt;2-&gt;4, 1-&gt;3-&gt;4<br>
+输出：1-&gt;1-&gt;2-&gt;3-&gt;4-&gt;4</p>
+<p>&quot;&quot;&quot;</p>
+<h1 id="本体思路">本体思路</h1>
+<p>创建一个新链表，将小的那个值依次填入新链表的next中，直到一个链表为空后，直接将另外一个链表填入新链表的next中。<br>
+值得一提的是必须需要建立一个哑节点，不然新链表在执行的时候端点会跑到后面去。<br>
+这道题非常类似与归并排序</p>
+<h1 id="我的做法">#我的做法：</h1>
+<pre><code class="language-python"># Definition for singly-linked list.
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+class Solution:
+    def mergeTwoLists(self, l1: ListNode, l2: ListNode) -&gt; ListNode:
+        newlist=ListNode(0)#起始值为0，没有任何意义，下一个next才是开始。
+        yajiedian = newlist#哑巴节点
+        while l1 and l2 :
+            if l1.val&lt;=l2.val:
+                newlist.next=l1#可以使用这样更快的方式运行  node.next,l1 = l1,l1.next
+                l1=l1.next
+            else:
+                newlist.next=l2#node.next,l2 = l2,l2.next
+                l2=l2.next
+            newlist=newlist.next
+        if l1:
+            newlist.next=l1
+        else:
+            newlist.next=l2
+        return yajiedian.next
+
+</code></pre>
+<p>&quot;&quot;&quot;</p>
+<h1 id="大神做法">大神做法：</h1>
+<p>利用递归，把最小的那个值取出来赋给L1，然后到最后会有一个链表为空，于是把那个链表直接赋给l1</p>
+<p>&quot;&quot;&quot;</p>
+<pre><code class="language-python">class Solution:
+    def mergeTwoLists(self, l1: ListNode, l2: ListNode) -&gt; ListNode:
+        # 递归
+        if l1 and l2:
+            if l1.val &gt; l2.val:
+                l1, l2 = l2, l1
+            l1.next = self.mergeTwoLists(l1.next, l2)
+        return l1 or l2
+
+#复现成功！
+</code></pre>
+<p>python没有指针哪来的链表？</p>
+<pre><code class="language-python">
+class Node(object):
+    #节点
+    def __init__(self, val):
+        self.val = val#节点的值
+        self.next = None#节点的指针（指向下一个Node）
+        
+在大神做法中，print出来的链表形式是这样的。
+None
+ListNode{val: 4, next: ListNode{val: 4, next: None}}
+ListNode{val: 3, next: ListNode{val: 4, next: ListNode{val: 4, next: None}}}
+ListNode{val: 2, next: ListNode{val: 3, next: ListNode{val: 4, next: ListNode{val: 4, next: None}}}}
+ListNode{val: 1, next: ListNode{val: 2, next: ListNode{val: 3, next: ListNode{val: 4, next: ListNode{val: 4, next: None}}}}}
+ListNode{val: 1, next: ListNode{val: 1, next: ListNode{val: 2, next: ListNode{val: 3, next: ListNode{val: 4, next: ListNode{val: 4, next: None}}}}}}
+</code></pre>
+<figure data-type="image" tabindex="1"><img src="https://ganhan999.github.io//post-images/1604582353766.png" alt="" loading="lazy"></figure>
+<p>python链表介绍</p>
+<pre><code class="language-python">#链表的初始化
+class Node(object):
+    &quot;&quot;&quot;节点&quot;&quot;&quot;
+    def __init__(self, elem):
+        self.elem = elem
+        self.next = None
+        
+#链表封装的一系列操作
+class SingleLinkList(object):
+    &quot;&quot;&quot;单链表&quot;&quot;&quot;
+    def __init__(self, node=None):
+        self.__head = node
+
+    def is_empty(self):
+        &quot;&quot;&quot;链表是否为空&quot;&quot;&quot;
+        return self.__head == None
+
+    def length(self):
+        &quot;&quot;&quot;链表长度&quot;&quot;&quot;
+        # cur游标，用来移动遍历节点
+        cur = self.__head
+        # count记录数量
+        count = 0
+        while cur != None:
+            count += 1
+            cur = cur.next
+        return count
+
+    def travel(self):
+        &quot;&quot;&quot;遍历整个链表&quot;&quot;&quot;
+        cur = self.__head
+        while cur != None:
+            print(cur.elem, end=&quot; &quot;)
+            cur = cur.next
+        print(&quot;&quot;)
+
+    def add(self, item):
+        &quot;&quot;&quot;链表头部添加元素，头插法&quot;&quot;&quot;
+        node = Node(item)
+        node.next = self.__head
+        self.__head = node
+
+    def append(self, item):
+        &quot;&quot;&quot;链表尾部添加元素, 尾插法&quot;&quot;&quot;
+        node = Node(item)
+        if self.is_empty():
+            self.__head = node
+        else:
+            cur = self.__head
+            while cur.next != None:
+                cur = cur.next
+            cur.next = node
+
+    def insert(self, pos, item):
+        &quot;&quot;&quot;指定位置添加元素
+        :param  pos 从0开始
+        &quot;&quot;&quot;
+        if pos &lt;= 0:
+            self.add(item)
+        elif pos &gt; (self.length()-1):
+            self.append(item)
+        else:
+            pre = self.__head
+            count = 0
+            while count &lt; (pos-1):
+                count += 1
+                pre = pre.next
+            # 当循环退出后，pre指向pos-1位置
+            node = Node(item)
+            node.next = pre.next
+            pre.next = node
+
+    def remove(self, item):
+        &quot;&quot;&quot;删除节点&quot;&quot;&quot;
+        cur = self.__head
+        pre = None
+        while cur != None:
+            if cur.elem == item:
+                # 先判断此结点是否是头节点
+                # 头节点
+                if cur == self.__head:
+                    self.__head = cur.next
+                else:
+                    pre.next = cur.next
+                break
+            else:
+                pre = cur
+                cur = cur.next
+
+    def search(self, item):
+        &quot;&quot;&quot;查找节点是否存在&quot;&quot;&quot;
+        cur = self.__head
+        while cur != None:
+            if cur.elem == item:
+                return True
+            else:
+                cur = cur.next
+        return False
+</code></pre>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li><a href="#%E9%A2%98%E7%9B%AE">题目</a></li>
+<li><a href="#%E6%9C%AC%E4%BD%93%E6%80%9D%E8%B7%AF">本体思路</a></li>
+<li><a href="#%E6%88%91%E7%9A%84%E5%81%9A%E6%B3%95">#我的做法：</a></li>
+<li><a href="#%E5%A4%A7%E7%A5%9E%E5%81%9A%E6%B3%95">大神做法：</a></li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://ganhan999.github.io/post/20、有效的括号/">
+              <h3 class="post-title">
+                20、有效的括号
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+  <a class="rss" href="https://ganhan999.github.io//atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

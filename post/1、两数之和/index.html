@@ -1,0 +1,214 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>1、两数之和 | Gridea</title>
+<link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1605176845557">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://ganhan999.github.io//styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="1、两数之和 | Gridea - Atom Feed" href="https://ganhan999.github.io//atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="题目
+&quot;&quot;&quot;
+给定一个整数数组 nums 和一个目标值 target，请你在该数组中找出和为目标值的那两个整数，并返回他们的数组下标。
+你可以假设每种输入只会对应一个答案。但是，数组中同一个元素不能使用两遍。
+..." />
+    <meta name="keywords" content="leetcode" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://ganhan999.github.io/">
+  <img class="avatar" src="https://ganhan999.github.io//images/avatar.png?v=1605176845557" alt="">
+  </a>
+  <h1 class="site-title">
+    Gridea
+  </h1>
+  <p class="site-description">
+    温故而知新
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              1、两数之和
+            </h2>
+            <div class="post-info">
+              <span>
+                2020-11-02
+              </span>
+              <span>
+                2 min read
+              </span>
+              
+                <a href="https://ganhan999.github.io/tag/cKyYTCK2Y/" class="post-tag">
+                  # leetcode
+                </a>
+              
+            </div>
+            
+              <img class="post-feature-image" src="https://ganhan999.github.io//post-images/1、两数之和.jpg" alt="">
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <h1 id="题目">题目</h1>
+<p>&quot;&quot;&quot;<br>
+给定一个整数数组 nums 和一个目标值 target，请你在该数组中找出和为目标值的那两个整数，并返回他们的数组下标。<br>
+你可以假设每种输入只会对应一个答案。但是，数组中同一个元素不能使用两遍。<br>
+&quot;&quot;&quot;</p>
+<h1 id="我的做法">#我的做法：</h1>
+<pre><code class="language-python">class Solution:
+    def twoSum(self,nums,target):
+        len1=len(nums)
+        for i in range(len1):
+            j=i+1
+            for j in range(j,len1):
+              if nums[i]+nums[j]==target:
+                  return [i,j]
+        return [0,0]
+</code></pre>
+<p>&quot;&quot;&quot;</p>
+<h1 id="大神做法">大神做法：</h1>
+<p>参考了大神们的解法，通过哈希来求解，这里通过字典来模拟哈希查询的过程。<br>
+个人理解这种办法相较于方法一其实就是字典记录了 num1 和 num2 的值和位置，而省了再查找 num2 索引的步骤。<br>
+用枚举的方式，构造哈希表<br>
+&quot;&quot;&quot;</p>
+<pre><code class="language-python">class Solution:
+    def twoSum(self,nums, target):
+        hashmap={}
+        for i,j in enumerate(nums):
+            hashmap[j]=i
+        for n,m in enumerate(nums):
+            number=hashmap.get(target-m)
+            if number is not None and n!=number:
+                return[n,number]
+        return[0,0]
+
+#复现成功！
+</code></pre>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li><a href="#%E9%A2%98%E7%9B%AE">题目</a></li>
+<li><a href="#%E6%88%91%E7%9A%84%E5%81%9A%E6%B3%95">#我的做法：</a></li>
+<li><a href="#%E5%A4%A7%E7%A5%9E%E5%81%9A%E6%B3%95">大神做法：</a></li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://ganhan999.github.io/post/今天是记录博客的第一天/">
+              <h3 class="post-title">
+                今天是记录博客的第一天
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+  <a class="rss" href="https://ganhan999.github.io//atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

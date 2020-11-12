@@ -1,0 +1,206 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>58、最后一个单词的长度 | Gridea</title>
+<link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1605176845557">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://ganhan999.github.io//styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="58、最后一个单词的长度 | Gridea - Atom Feed" href="https://ganhan999.github.io//atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="题目
+给定一个仅包含大小写字母和空格 ' ' 的字符串 s，返回其最后一个单词的长度。
+如果字符串从左向右滚动显示，那么最后一个单词就是最后出现的单词。
+如果不存在最后一个单词，请返回 0 。
+说明：一个单词是指仅由字母组成、不包含任何空格..." />
+    <meta name="keywords" content="leetcode" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://ganhan999.github.io/">
+  <img class="avatar" src="https://ganhan999.github.io//images/avatar.png?v=1605176845557" alt="">
+  </a>
+  <h1 class="site-title">
+    Gridea
+  </h1>
+  <p class="site-description">
+    温故而知新
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              58、最后一个单词的长度
+            </h2>
+            <div class="post-info">
+              <span>
+                2020-11-11
+              </span>
+              <span>
+                2 min read
+              </span>
+              
+                <a href="https://ganhan999.github.io/tag/cKyYTCK2Y/" class="post-tag">
+                  # leetcode
+                </a>
+              
+            </div>
+            
+              <img class="post-feature-image" src="https://ganhan999.github.io//post-images/53、最大子序列.jpg" alt="">
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <h1 id="题目">题目</h1>
+<p>给定一个仅包含大小写字母和空格 ' ' 的字符串 s，返回其最后一个单词的长度。<br>
+如果字符串从左向右滚动显示，那么最后一个单词就是最后出现的单词。<br>
+如果不存在最后一个单词，请返回 0 。<br>
+说明：一个单词是指仅由字母组成、不包含任何空格字符的 最大子字符串。</p>
+<p>示例:<br>
+输入: &quot;Hello World&quot;<br>
+输出: 5</p>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="本体思路">本体思路</h1>
+<p>我工作效率低的原因完全是因为有和力扣的题干一样语文为负分的产品经理<br>
+由于有这种情况发生输入:&quot;a &quot;，输出:1<br>
+我们先要把左右测的空格去掉。然后利用rfind函数找到最后一个&quot;&quot;在哪就行了。</p>
+<h1 id="我的做法">#我的做法：</h1>
+<pre><code class="language-python">class Solution:
+    def lengthOfLastWord(self, s: str) -&gt; int:
+        s=s.strip(&quot; &quot;)
+        if &quot; &quot; in s:
+            if set(s)!={&quot; &quot;}:
+                inde=s.rfind(&quot; &quot;)
+                return len(s)-inde-1
+            else:
+                return 0
+        else:
+            return len(s)
+
+</code></pre>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li><a href="#%E9%A2%98%E7%9B%AE">题目</a></li>
+<li><a href="#%E6%9C%AC%E4%BD%93%E6%80%9D%E8%B7%AF">本体思路</a></li>
+<li><a href="#%E6%88%91%E7%9A%84%E5%81%9A%E6%B3%95">#我的做法：</a></li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://ganhan999.github.io/post/jin-tian-xue-dao-liao-fen-zhi-he-dong-tai-gui-hua-de-chu-bu-guo-cheng/">
+              <h3 class="post-title">
+                今天学到了分治和动态规划的初步过程
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+  <a class="rss" href="https://ganhan999.github.io//atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

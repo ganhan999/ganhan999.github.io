@@ -1,0 +1,207 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>比特图像分层 | Gridea</title>
+<link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1605176845557">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://ganhan999.github.io//styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="比特图像分层 | Gridea - Atom Feed" href="https://ganhan999.github.io//atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="常见的256级灰度图片中，每个像素灰度值由8个比特组成，分别将这8个比特分离，形成8幅新的图片，称为比特图像分层。
+举个🌰：
+有一副四个像素（2*2）的图像，像素值分别为1，2，3，4：
+
+这些值转换为二进制为（扩充为8位）：1（0000..." />
+    <meta name="keywords" content="数字图像处理" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://ganhan999.github.io/">
+  <img class="avatar" src="https://ganhan999.github.io//images/avatar.png?v=1605176845557" alt="">
+  </a>
+  <h1 class="site-title">
+    Gridea
+  </h1>
+  <p class="site-description">
+    温故而知新
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              比特图像分层
+            </h2>
+            <div class="post-info">
+              <span>
+                2020-11-02
+              </span>
+              <span>
+                2 min read
+              </span>
+              
+                <a href="https://ganhan999.github.io/tag/6kpimvVf4s/" class="post-tag">
+                  # 数字图像处理
+                </a>
+              
+            </div>
+            
+              <img class="post-feature-image" src="https://ganhan999.github.io//post-images/比特平面分层.jpg" alt="">
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <p>常见的256级灰度图片中，每个像素灰度值由8个比特组成，分别将这8个比特分离，形成8幅新的图片，称为比特图像分层。</p>
+<p>举个🌰：</p>
+<p>有一副四个像素（2*2）的图像，像素值分别为1，2，3，4：<br>
+<img src="https://ganhan999.github.io//post-images/1604302386613.gif" alt="" loading="lazy"></p>
+<p>这些值转换为二进制为（扩充为8位）：1（00000001）2（00000010）3（00000011）4（00000100）</p>
+<p>则这幅图像的8个比特层图像为：<br>
+<img src="https://ganhan999.github.io//post-images/1604302400912.gif" alt="" loading="lazy"></p>
+<p>实例：<br>
+<img src="https://ganhan999.github.io//post-images/1604303058038.png" alt="" loading="lazy"><br>
+读取图片数据：</p>
+<pre><code class="language-python">import cv2
+import numpy as np
+import matplotlib.pyplot as plt
+
+#更改为需要的图片路径
+img = cv2.imread(r'1.png',0)
+h,w = img.shape[0],img.shape[1]
+
+#处理过程
+new_img = np.zeros((h,w,8))
+for i in range(h):
+    for j in range(w):
+        n = str(np.binary_repr(img[i,j],8))
+        for k in range(8):
+            new_img[i,j,k] = n[k]
+
+#依次显示
+for i in range(8):
+    cv2.imshow('image',new_img[:,:,i])
+    cv2.waitKey(0)
+</code></pre>
+<p>结果如下(比特层数递增，最后一张是原图)：<br>
+<img src="https://ganhan999.github.io//post-images/1604302544079.jpg" alt="" loading="lazy"></p>
+
+              </div>
+              <div class="toc-container">
+                
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://ganhan999.github.io/post/13、罗马数字转整数/">
+              <h3 class="post-title">
+                13、罗马数字转整数
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+  <a class="rss" href="https://ganhan999.github.io//atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>
