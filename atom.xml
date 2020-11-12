@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ganhan999.github.io/</id>
     <title>Gridea</title>
-    <updated>2020-11-12T13:39:19.821Z</updated>
+    <updated>2020-11-12T14:47:34.145Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ganhan999.github.io/"/>
     <link rel="self" href="https://ganhan999.github.io/atom.xml"/>
@@ -10,6 +10,119 @@
     <logo>https://ganhan999.github.io/images/avatar.png</logo>
     <icon>https://ganhan999.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Gridea</rights>
+    <entry>
+        <title type="html"><![CDATA[61、加一]]></title>
+        <id>https://ganhan999.github.io/post/61、加一/</id>
+        <link href="https://ganhan999.github.io/post/61、加一/">
+        </link>
+        <updated>2020-11-12T14:41:00.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
+<p>&quot;&quot;&quot;<br>
+给定一个由 整数 组成的 非空 数组所表示的非负整数，在该数的基础上加一。<br>
+最高位数字存放在数组的首位， 数组中每个元素只存储单个数字。<br>
+你可以假设除了整数 0 之外，这个整数不会以零开头。</p>
+<p>示例 1：<br>
+输入：digits = [1,2,3]<br>
+输出：[1,2,4]<br>
+解释：输入数组表示数字 123。</p>
+<p>示例 2：<br>
+输入：digits = [4,3,2,1]<br>
+输出：[4,3,2,2]<br>
+解释：输入数组表示数字 4321。</p>
+<p>示例 3：<br>
+输入：digits = [0]<br>
+输出：[1]</p>
+<p>提示：<br>
+1 &lt;= digits.length &lt;= 100<br>
+0 &lt;= digits[i] &lt;= 9</p>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="本体思路">本体思路</h1>
+<p>转成数字后，加一，再转字符串，注意特殊情况！</p>
+<h1 id="我的做法">#我的做法：</h1>
+<pre><code class="language-python">class Solution:
+    def plusOne(self, digits: List[int]) -&gt; List[int]:
+        lens=len(digits)
+        sum=0
+        sumlist=[]
+        for i in range(lens):
+            sum=10**(lens-i-1)*digits[i]+sum#转为数字
+        sum=sum+1
+        strnum=str(sum)
+        for i in range(len(strnum)):
+            sumlist.append(int(strnum[i]))#再转字符串
+        if lens-len(sumlist)==-1 or lens-len(sumlist)==0:#如果出现0，0，9变0，1，0的情况判断是否前面是不是有多余的0.
+            return sumlist
+        else:
+            anum=lens-len(sumlist)
+            for i in range(anum):
+                sumlist.insert(0,0)
+        return sumlist
+
+</code></pre>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="大神做法">#大神做法：</h1>
+<p>从倒数第一个数字开始，如果数字为9，那么置为0，判断前一个如果不是9，那么就只要加上1就结束了！！<br>
+如果是9呢，那么就继续置为0，以此类推。如果到第一个数字都还是9，那么置为0后，我们需要插入一个1。</p>
+<pre><code class="language-Python">class Solution:
+    def plusOne(self, digits: List[int]) -&gt; List[int]:
+        for i in range(len(digits)-1,-1,-1):
+            if digits[i]!=9:
+                digits[i] += 1
+                return digits
+            else:
+                digits[i] =0
+        digits.insert(0,1)
+        return digits
+</code></pre>
+<pre><code>'''
+下面是join函数的介绍
+
+Python join() 方法用于将序列中的元素以指定的字符连接生成一个新的字符串。
+它只能用在字符串中！！！
+
+语法：
+
+join()方法语法：
+
+‘sep’.join（strseq）
+
+strseq.join(sep)
+
+sep：分隔符，可以为空
+
+strseq：字符串
+
+
+
+
+下面是map函数的介绍
+
+map() 会根据提供的函数对指定序列做映射。
+
+第一个参数 function 以参数序列中的每一个元素调用 function 函数，返回包含每次 function 函数返回值的新列表。
+
+语法：
+
+map() 函数语法：
+
+map(function, iterable, ...)
+
+&gt;&gt;&gt;def square(x) :            # 计算平方数
+...     return x ** 2
+
+&gt;&gt;&gt; map(square, [1,2,3,4,5])   # 计算列表各个元素的平方
+[1, 4, 9, 16, 25]
+&gt;&gt;&gt; map(lambda x: x ** 2, [1, 2, 3, 4, 5])  # 使用 lambda 匿名函数
+[1, 4, 9, 16, 25]
+ 
+# 提供了两个列表，对相同位置的列表数据进行相加
+&gt;&gt;&gt; map(lambda x, y: x + y, [1, 3, 5, 7, 9], [2, 4, 6, 8, 10])
+[3, 7, 11, 15, 19]
+
+'''
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Python集合运算汇总]]></title>
         <id>https://ganhan999.github.io/post/Python集合运算汇总/</id>
@@ -4160,6 +4273,24 @@ i love c++ python
             return len(s)
 
 </code></pre>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="大神做法">#大神做法：</h1>
+<p>为了解决最后一个字符串后面还有空格，倒序查找就行，当没有字符 (len = 0)<br>
+时候，遇到空格就直接跳过。从有字符开始，每次不是空格就加 11，此时 len &gt; 0<br>
+再次遇到空格，直接 return就是结果。要注意原字符串为全都是空格组成的字符串的情况，<br>
+也就是倒序扫描到字符串的开头依旧没更新 len，因此在循环外还需要 return 这种情况</p>
+<pre><code>class Solution:
+    def lengthOfLastWord(self, s: str) -&gt; int:
+        length = 0
+        for i in range(len(s)-1, -1, -1):
+            if length == 0 and s[i] == &quot; &quot;:
+                continue
+            if length != 0 and s[i] == &quot; &quot;:
+                return length
+            if s[i] != &quot; &quot;:
+                length += 1
+        return length
+</code></pre>
 ]]></content>
     </entry>
     <entry>
@@ -4483,217 +4614,6 @@ Python 2.x 返回列表。</p>
 </blockquote>
 </blockquote>
 </blockquote>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[35、搜索插入位置]]></title>
-        <id>https://ganhan999.github.io/post/35、搜索插入位置/</id>
-        <link href="https://ganhan999.github.io/post/35、搜索插入位置/">
-        </link>
-        <updated>2020-11-08T11:54:00.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
-<p>&quot;&quot;&quot;<br>
-给定一个排序数组和一个目标值，在数组中找到目标值，并返回其索引。<br>
-如果目标值不存在于数组中，返回它将会被按顺序插入的位置</p>
-<p>你可以假设数组中无重复元素。<br>
-示例 1:<br>
-输入: [1,3,5,6], 5<br>
-输出: 2</p>
-<p>示例 2:<br>
-输入: [1,3,5,6], 2<br>
-输出: 1</p>
-<p>示例 3:<br>
-输入: [1,3,5,6], 7<br>
-输出: 4</p>
-<p>示例 4:<br>
-输入: [1,3,5,6], 0<br>
-输出: 0</p>
-<p>&quot;&quot;&quot;</p>
-<h1 id="本体思路">本体思路</h1>
-<p>利用python中index函数便可以直接找到，子字符串的初始位置。</p>
-<h1 id="我的做法">#我的做法：</h1>
-<pre><code class="language-python">class Solution:
-    def searchInsert(self, nums: List[int], target: int) -&gt; int:
-        if target in nums:
-            return nums.index(target)
-        else:
-            nums.append(target)
-            nums.sort(reverse=False)
-            return nums.index(target)
-
-
-</code></pre>
-<p>&quot;&quot;&quot;</p>
-<h1 id="大神做法1">大神做法1：</h1>
-<p>因为有序，所以只需要比较比它小的数的最大值</p>
-<p>&quot;&quot;&quot;</p>
-<pre><code class="language-python">class Solution:
-    def searchInsert(self, nums: List[int], target: int) -&gt; int:
-        return len([i for i in nums if i &lt; target])
-
-
-#复现成功！
-</code></pre>
-<h1 id="大神做法2">大神做法2：</h1>
-<p>利用切片思想，循环len(haystack) - len(needle) + 1次</p>
-<p>&quot;&quot;&quot;</p>
-<pre><code class="language-python">class Solution:
-    def searchInsert(self, nums: List[int], target: int) -&gt; int:
-        low=0
-        high=len(nums)
-        while(low&lt;high):
-            mid=low+(high-low)//2# “ / ” 为浮点数除法，返回浮点结果
-                                 # “ // ” 表示整数除法，返回不大于结果的一个最大整数
-            if nums[mid] &gt; target:
-                high=mid
-            elif nums[mid]&lt;target:
-                low=mid+1
-            else:
-                return mid
-        return low
-
-#复现成功！
-</code></pre>
-<p>&quot;&quot;&quot;</p>
-<p>&quot;&quot;&quot;</p>
-<p>Python如何对列表排序？<br>
-Python list内置sort()方法用来排序，也可以用python内置的全局sorted()方法来对可迭代的序列排序生成新的序列。</p>
-<p>1）排序基础</p>
-<p>简单的升序排序是非常容易的。只需要调用sorted()方法。它返回一个新的list，新的list的元素基于小于运算符(<strong>lt</strong>)来排序。</p>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>sorted([5, 2, 3, 1, 4])<br>
-[1, 2, 3, 4, 5]<br>
-你也可以使用list.sort()方法来排序，此时list本身将被修改。通常此方法不如sorted()方便，但是如果你不需要保留原来的list，此方法将更有效。</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>a = [5, 2, 3, 1, 4]<br>
-a.sort()<br>
-a<br>
-[1, 2, 3, 4, 5]<br>
-另一个不同就是list.sort()方法仅被定义在list中，相反地sorted()方法对所有的可迭代序列都有效。</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>sorted({1: 'D', 2: 'B', 3: 'B', 4: 'E', 5: 'A'})<br>
-[1, 2, 3, 4, 5]</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<p>2）key参数/函数</p>
-<p>从python2.4开始，list.sort()和sorted()函数增加了key参数来指定一个函数，此函数将在每个元素比较前被调用。 例如通过key指定的函数来忽略字符串的大小写：</p>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>sorted(&quot;This is a test string from Andrew&quot;.split(), key=str.lower)<br>
-['a', 'Andrew', 'from', 'is', 'string', 'test', 'This']<br>
-key参数的值为一个函数，此函数只有一个参数且返回一个值用来进行比较。这个技术是快速的因为key指定的函数将准确地对每个元素调用。</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<p>更广泛的使用情况是用复杂对象的某些值来对复杂对象的序列排序，例如：</p>
-<p>复制代码</p>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>student_tuples = [<br>
-('john', 'A', 15),<br>
-('jane', 'B', 12),<br>
-('dave', 'B', 10),<br>
-]</p>
-</blockquote>
-</blockquote>
-<blockquote>
-<blockquote>
-<p>sorted(student_tuples, key=lambda student: student[2])   # sort by age<br>
-[('dave', 'B', 10), ('jane', 'B', 12), ('john', 'A', 15)]</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<p>&quot;&quot;&quot;</p>
-<p>Python如何在列表中增加元素？</p>
-<ol>
-<li>append() 追加单个元素到List的尾部，只接受一个参数，参数可以是任何数据类型，被追加的元素在List中保持着原结构类型。</li>
-</ol>
-<p>此元素如果是一个list，那么这个list将作为一个整体进行追加，注意append()和extend()的区别。</p>
-<p>复制代码代码如下:</p>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>list1=['a','b']<br>
-list1.append('c')<br>
-list1<br>
-['a', 'b', 'c']</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<ol start="2">
-<li>extend() 将一个列表中每个元素分别添加到另一个列表中，只接受一个参数；extend()相当于是将list B 连接到list A上。</li>
-</ol>
-<p>复制代码代码如下:</p>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>list1<br>
-['a', 'b', 'c']</p>
-</blockquote>
-</blockquote>
-<blockquote>
-<blockquote>
-<p>list1.extend('d')<br>
-list1<br>
-['a', 'b', 'c', 'd']</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<ol start="3">
-<li>insert() 将一个元素插入到列表中，但其参数有两个（如insert(1,”g”)），第一个参数是索引点，即插入的位置，第二个参数是插入的元素。</li>
-</ol>
-<p>复制代码代码如下:</p>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>list1<br>
-['a', 'b', 'c', 'd']</p>
-</blockquote>
-</blockquote>
-<blockquote>
-<blockquote>
-<p>list1.insert(1,'x')<br>
-list1<br>
-['a', 'x', 'b', 'c', 'd']</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<ol start="4">
-<li>+加号，将两个list相加，会返回到一个新的list对象，注意与前三种的区别。前面三种方法（append, extend, insert）可对列表增加元素的操作，他们没有返回值，是直接修改了原数据对象。 注意：将两个list相加，需要创建新的list对象，从而需要消耗额外的内存，特别是当list较大时，尽量不要使用“+”来添加list，而应该尽可能使用List的append()方法。</li>
-</ol>
-<p>复制代码代码如下:</p>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>list1<br>
-['a', 'x', 'b', 'c', 'd']</p>
-</blockquote>
-</blockquote>
-<blockquote>
-<blockquote>
-<p>list2=['y','z']<br>
-list3=list1+list2<br>
-list3<br>
-['a', 'x', 'b', 'c', 'd', 'y', 'z']</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<p>&quot;&quot;&quot;</p>
 ]]></content>
     </entry>
 </feed>
