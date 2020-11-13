@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ganhan999.github.io/</id>
     <title>Gridea</title>
-    <updated>2020-11-13T01:38:50.686Z</updated>
+    <updated>2020-11-13T14:31:40.966Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ganhan999.github.io/"/>
     <link rel="self" href="https://ganhan999.github.io/atom.xml"/>
@@ -10,6 +10,53 @@
     <logo>https://ganhan999.github.io/images/avatar.png</logo>
     <icon>https://ganhan999.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Gridea</rights>
+    <entry>
+        <title type="html"><![CDATA[67、二进制求和]]></title>
+        <id>https://ganhan999.github.io/post/67、二进制求和/</id>
+        <link href="https://ganhan999.github.io/post/67、二进制求和/">
+        </link>
+        <updated>2020-11-13T14:31:00.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
+<p>&quot;&quot;&quot;<br>
+给你两个二进制字符串，返回它们的和（用二进制表示）。<br>
+输入为 非空 字符串且只包含数字 1 和 0。</p>
+<p>示例 1:<br>
+输入: a = &quot;11&quot;, b = &quot;1&quot;<br>
+输出: &quot;100&quot;</p>
+<p>示例 2:<br>
+输入: a = &quot;1010&quot;, b = &quot;1011&quot;<br>
+输出: &quot;10101&quot;</p>
+<p>提示：<br>
+每个字符串仅由字符 '0' 或 '1' 组成。<br>
+1 &lt;= a.length, b.length &lt;= 10^4<br>
+字符串如果不是 &quot;0&quot; ，就都不含前导零</p>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="本体思路">本体思路</h1>
+<p>先换成十进制然后换二进制，最后取一个[2:]，注意bin（）后返回的是一个字符串</p>
+<h1 id="我的做法">#我的做法：</h1>
+<pre><code class="language-python">class Solution:
+    def addBinary(self, a: str, b: str) -&gt; str:
+        anum=int(a,base=2)
+        bnum=int(b,base=2)
+        return (bin(anum+bnum)[2:])
+</code></pre>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="大神做法">#大神做法：</h1>
+<p>非内置函数，利用二进制算法计算。</p>
+<pre><code class="language-Python">class Solution:
+    def addBinary(self, a: str, b: str) -&gt; str:
+        r, p = '', 0
+        d = len(b) - len(a)
+        a = '0' * d + a
+        b = '0' * -d + b
+        for i, j in zip(a[::-1], b[::-1]):#这里是对二进制的掌握程度
+            s = int(i) + int(j) + p
+            r = str(s % 2) + r
+            p = s // 2
+        return '1' + r if p else r#如果最后p还是进位了，那么就往前面加1，否则就不加！
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[科目一97分 美滋滋]]></title>
         <id>https://ganhan999.github.io/post/ke-mu-yi-97-fen-mei-zi-zi/</id>
@@ -4405,175 +4452,6 @@ i love c++ python
         # 返回三个中的最大值
         return max(max_right, max_left, max_l + max_r)
  #复现成功
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[38、外观数列]]></title>
-        <id>https://ganhan999.github.io/post/38、外观数列/</id>
-        <link href="https://ganhan999.github.io/post/38、外观数列/">
-        </link>
-        <updated>2020-11-09T13:31:00.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
-<p>给定一个正整数 n ，输出外观数列的第 n 项。<br>
-「外观数列」是一个整数序列，从数字 1 开始，序列中的每一项都是对前一项的描述。<br>
-你可以将其视作是由递归公式定义的数字字符串序列：countAndSay(1) = &quot;1&quot;<br>
-countAndSay(n) 是对 countAndSay(n-1) 的描述，然后转换成另一个数字字符串。<br>
-前五项如下：</p>
-<ol>
-<li>
-<pre><code>1
-</code></pre>
-</li>
-<li>
-<pre><code>11
-</code></pre>
-</li>
-<li>
-<pre><code>21
-</code></pre>
-</li>
-<li>
-<pre><code>1211
-</code></pre>
-</li>
-<li>
-<pre><code>111221
-</code></pre>
-</li>
-</ol>
-<p>第一项是数字 1<br>
-描述前一项，这个数是 1 即 “ 一 个 1 ”，记作 &quot;11&quot;<br>
-描述前一项，这个数是 11 即 “ 二 个 1 ” ，记作 &quot;21&quot;<br>
-描述前一项，这个数是 21 即 “ 一 个 2 + 一 个 1 ” ，记作 &quot;1211&quot;<br>
-描述前一项，这个数是 1211 即 “ 一 个 1 + 一 个 2 + 二 个 1 ” ，记作 &quot;111221&quot;<br>
-要 描述 一个数字字符串，首先要将字符串分割为 最小 数量的组，每个组都由连续的最多<br>
-相同字符 组成。然后对于每个组，先描述字符的数量，然后描述字符，形成一个描述组。<br>
-要将描述转换为数字字符串，先将每组中的字符数量用数字替换，再将所有描述组连接起来。</p>
-<p>示例 1：<br>
-输入：n = 1<br>
-输出：&quot;1&quot;<br>
-解释：这是一个基本样例。</p>
-<p>示例 2：<br>
-输入：n = 4<br>
-输出：&quot;1211&quot;<br>
-解释：<br>
-countAndSay(1) = &quot;1&quot;<br>
-countAndSay(2) = 读 &quot;1&quot; = 一 个 1 = &quot;11&quot;<br>
-countAndSay(3) = 读 &quot;11&quot; = 二 个 1 = &quot;21&quot;<br>
-countAndSay(4) = 读 &quot;21&quot; = 一 个 2 + 一 个 1 = &quot;12&quot; + &quot;11&quot; = &quot;1211&quot;</p>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="本体思路">本体思路</h1>
-<p>利用递归的思想，如果当后一个元素不等于前一个元素停止计数，以此类推。主要是递归的思想要掌握！</p>
-<h1 id="我的做法">#我的做法：</h1>
-<pre><code class="language-python">class Solution:
-    def searchInsert(self, nums: List[int], target: int) -&gt; int:
-        if target in nums:
-            return nums.index(target)
-        else:
-            nums.append(target)
-            nums.sort(reverse=False)
-            return nums.index(target)
-
-
-</code></pre>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="大神做法1">大神做法1：</h1>
-<p>双指针探测</p>
-<p>如图所示<br>
-<img src="https://ganhan999.github.io//post-images/1604929111425.gif" alt="" loading="lazy"></p>
-<pre><code class="language-python">class Solution:
-    def countAndSay(self, n: int) -&gt; str:
-        pre = ''
-        cur = '1'#默认为“1”
-        # 从第 2 项开始
-        for _ in range(1, n):
-            # 这里注意要将 cur 赋值给 pre
-            # 因为当前项，就是下一项的前一项。有点绕，尝试理解下
-            pre = cur
-            # 这里 cur 初始化为空，重新拼接
-            cur = ''
-            # 定义双指针 start，end
-            start = 0
-            end = 0
-            # 开始遍历前一项，开始描述
-            while end &lt; len(pre):
-                # 统计重复元素的次数，出现不同元素时，停止
-                # 记录出现的次数，
-                while end &lt; len(pre) and pre[start] == pre[end]:
-                    end += 1
-                # 元素出现次数与元素进行拼接
-                cur += str(end - start) + pre[start]
-                # 这里更新 start，开始记录下一个元素
-                start = end
-        return cur
-
-
-#复现成功！
-</code></pre>
-<p>&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="大神做法2">大神做法2：</h1>
-<p>递归和迭代简单算法</p>
-<pre><code class="language-python">#递归
-def countAndSay(self, n: int) -&gt; str:
-    if n == 1:
-        return '1'
-    s = self.countAndSay(n - 1)
-
-    i, res = 0, ''
-    for j, c in enumerate(s):
-        if c != s[i]:
-            res += str(j - i) + s[i]#后面使用 j - i 来统计相同元素的个数，这样最后会剩下最后一堆相同的数字。
-            i = j
-    res += str(len(s) - i) + s[-1]  # 所以最后一个元素莫忘统计
-    return res
-
-#迭代
-def countAndSay(self, n: int) -&gt; str:
-    res = '1'#默认为“1”
-    for _ in range(n-1):  # 控制循环次数
-        i, tmp = 0, ''
-        for j, c in enumerate(res):
-            if c != res[i]:
-                tmp += str(j-i) + res[i]
-                i = j
-        res = tmp + str(len(res) - i) + res[-1]
-    return res
-
-#复现成功！
-</code></pre>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;<br>
-Python递归的要点<br>
-1、一定要画图<br>
-2、在最前面写上递归停止的条件<br>
-3、在递归函数后面要写上你相对应的操作，并在最后写上return</p>
-<p>Python迭代的要点<br>
-1、利用while循环将递归变为非递归</p>
-<p>递归和迭代的区别：</p>
-<p>斐波那契数列的实现</p>
-<pre><code>【递归实现】
-
-def fib(x):
-    if x &lt;2:
-        return 0 if x==0 else 1
-    else:
-        return fib(x - 1) + fib(x - 2)
-print(fib(6))
-</code></pre>
-<p>【迭代实现】</p>
-<pre><code>def fib(x):
-    n1 = 1
-    n2 = 1
-    n3 = 1
-    while x-2 &gt; 0:
-       n3 = n2 + n1
-       n1 = n2
-       n2 = n3
-       x -= 1
-   return n3
-
-num = int(input('请输入一个正整数：'))
-print(fib(num))
 </code></pre>
 ]]></content>
     </entry>
