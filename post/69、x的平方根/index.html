@@ -4,7 +4,7 @@
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-<title>14、最长公共前缀 | Gridea</title>
+<title>69、x的平方根 | Gridea</title>
 
 <link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1605362239489">
 
@@ -89,11 +89,11 @@
         <div class="post-detail gt-bg-theme-color-second">
             <article class="gt-post-content">
                 <h2 class="post-title">
-                    14、最长公共前缀
+                    69、x的平方根
                 </h2>
                 <div class="post-info">
                     <time class="post-time gt-c-content-color-first">
-                        · 2020-11-03 ·
+                        · 2020-11-14 ·
                     </time>
                     
                         <a href="https://ganhan999.github.io/tag/cKyYTCK2Y/" class="post-tags">
@@ -103,106 +103,46 @@
                 </div>
                 <div class="post-content">
                     <h1 id="题目">题目</h1>
-<p>&quot;&quot;&quot;<br>
-编写一个函数来查找字符串数组中的最长公共前缀。<br>
-如果不存在公共前缀，返回空字符串 &quot;&quot;。<br>
-示例 1:<br>
-输入: [&quot;flower&quot;,&quot;flow&quot;,&quot;flight&quot;]<br>
-输出: &quot;fl&quot;<br>
-示例 2:<br>
-输入: [&quot;dog&quot;,&quot;racecar&quot;,&quot;car&quot;]<br>
-输出: &quot;&quot;<br>
-解释: 输入不存在公共前缀。<br>
-说明:<br>
-所有输入只包含小写字母 a-z 。</p>
-<p>&quot;&quot;&quot;</p>
+<p>实现 int sqrt(int x) 函数。<br>
+计算并返回 x 的平方根，其中 x 是非负整数。<br>
+由于返回类型是整数，结果只保留整数的部分，小数部分将被舍去。</p>
+<p>示例 1:<br>
+输入: 4<br>
+输出: 2</p>
+<p>示例 2:<br>
+输入: 8<br>
+输出: 2<br>
+说明: 8 的平方根是 2.82842...,<br>
+由于返回类型是整数，小数部分将被舍去。</p>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
 <h1 id="本体思路">本体思路</h1>
-<p>首先样例可能有<br>
-🌰1、&quot;a&quot;,&quot;b&quot;<br>
-🌰2、&quot;a&quot;,&quot;&quot;<br>
-🌰3、&quot;ab&quot;,&quot;a&quot;<br>
-🌰4、&quot;abbba&quot;,&quot;abbba&quot;<br>
-🌰5、&quot;&quot;<br>
-这几种特殊情况，首先分析，如果空列表，就直接输出“”,例如🌰5。<br>
-其次如果出现🌰2这种情况，那么就要算出最小值如果是0，那么输出“”。<br>
-先算出最大可能前缀为a( (min(strs, key=lambda i: len(i)))) ，然后遍历所有列表的元素ele，进行比较。<br>
-注意如果出现了🌰4，那么就需要在最后return  strs[0][:i+1]。<br>
-其他情况下return strs[0][:i]，因为比较完的下一个不是相同前缀。<br>
-以后一定要记得先举例子分析！！！！</p>
-<h1 id="我的做法超级傻逼遇到了很多困难">#我的做法（超级傻逼，遇到了很多困难）：</h1>
+<p>二分法就完事了，比较简单（但是我一开始还是想穷举法，笨啊！）</p>
+<h1 id="我的做法">#我的做法：</h1>
 <pre><code class="language-python">class Solution:
-    def longestCommonPrefix(self, strs: List[str]) -&gt; str:
-        if not strs :
-            return ''
-        a = (min(strs, key=lambda i: len(i)))
-        n = len(a)
-        if n==0 :
-            return a
-        for i in range(n):
-            c=strs[0][i]
-            for ele in strs:
-                if ele[i]==c:
-                    continue
-                else:
-                        break
+    def mySqrt(self, x: int) -&gt; int:
+        low=0
+        high=x
+        while low&lt;=high:
+            mid=(low+high)//2
+            if mid**2&lt;=x:
+                ans=mid
+                low=mid+1
             else:
-                continue
-            return strs[0][:i]
-        return  strs[0][:i+1]
-</code></pre>
-<p>&quot;&quot;&quot;</p>
-<h1 id="大神做法">大神做法：</h1>
-<p>python两种让你拍大腿的解法，时间复杂度你想象不到，短小精悍。<br>
-1、利用python的max()和min()，在Python里字符串是可以比较的，<br>
-按照ascII值排，举例abb， aba，abac，最大为abb，最小为aba。<br>
-所以只需要比较最大最小的公共前缀就是整个数组的公共前缀(太妙了！！！）</p>
-<p>2、利用python的zip函数，把str看成list然后把输入看成二维数组，<br>
-左对齐纵向压缩，然后把每项利用集合去重，之后遍历list中找到元素<br>
-长度大于1之前的就是公共前缀（天才，灵活运用函数！）<br>
-&quot;&quot;&quot;</p>
-<pre><code class="language-python">class Solution:
-    def longestCommonPrefix(self, strs: List[str]) -&gt; str:
-        if not strs: return &quot;&quot;
-        s1 = min(strs)#利用ASCII码，最大和最小的比就行了。天才！
-        s2 = max(strs)
-        for i,x in enumerate(s1):
-            if x != s2[i]:
-                return s2[:i]
-        return s1
+                high=mid-1
+        return ans
 
-#复现成功！
 </code></pre>
-<pre><code class="language-python">class Solution:
-    def longestCommonPrefix(self, strs: List[str]) -&gt; str:
-        if not strs: return &quot;&quot;
-        ss = list(map(set, zip(*strs)))#这里zip(*strs)是一个迭代器，如果list出来则是
-                        # [('a', 'a', 'a'), ('b', 'b', 'b'), ('b', 'a', 'c'), ('a', 'a', 'a')]
-                      #相当于二维数组左对齐，然后用set map一下，就变成”a“，”b“，”b，a，c“，”a“。然后算出长度就行了。
-        res = &quot;&quot;
-        for i, x in enumerate(ss):
-            x = list(x)
-            if len(x) &gt; 1:
-                break
-            res = res + x[0]
-        return res
-        
- #复现成功！
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="大神做法">#大神做法：</h1>
+<p>√x=e的1/2lnx次方（有点蠢）</p>
+<pre><code class="language-Python">class Solution:
+    def mySqrt(self, x: int) -&gt; int:
+        if x == 0:
+            return 0
+        ans = int(math.exp(0.5 * math.log(x)))
+        return ans + 1 if (ans + 1) ** 2 &lt;= x else ans
+
 </code></pre>
-<p>如何跳出双重循环？</p>
-<pre><code class="language-python">for i in range(5):
-  for j in range(5):
-    print(i, j)
-    if i == 3 and j == 3:
-      break
-  else:
-    continue
-  break
-</code></pre>
-<p>下面是zip函数的介绍</p>
-<figure data-type="image" tabindex="1"><img src="https://ganhan999.github.io//post-images/1604333260016.png" alt="" loading="lazy"></figure>
-<p>下面是 enumerate函数介绍</p>
-<p><img src="https://ganhan999.github.io//post-images/1604333288960.png" alt="" loading="lazy"><br>
-<img src="https://ganhan999.github.io//post-images/1604333292784.jpg" alt="" loading="lazy"></p>
 
                 </div>
             </article>
@@ -211,14 +151,14 @@
         
             <div class="next-post">
                 <div class="next gt-c-content-color-first">下一篇</div>
-                <a href="https://ganhan999.github.io/post/比特平面分层/" class="post-title gt-a-link">
-                    比特图像分层
+                <a href="https://ganhan999.github.io/post/jin-tian-song-liao-quan-ban-hen-duo-yi-ren-yi-ge-bu-ding/" class="post-title gt-a-link">
+                    今天送了全班很多一人一个布丁🍮
                 </a>
             </div>
         
 
         
-            <span id="/post/14、最长公共前缀 /" class="leancloud_visitors" data-flag-title="14、最长公共前缀">
+            <span id="/post/69、x的平方根/" class="leancloud_visitors" data-flag-title="69、x的平方根">
                 <em class="post-meta-item-text">阅读量 </em>
                 <i class="leancloud-visitors-count">0</i>
             </span>
