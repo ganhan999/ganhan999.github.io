@@ -4,7 +4,7 @@
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-<title>1、两数之和 | Gridea</title>
+<title>83、删除排序链表中的重复元素 | Gridea</title>
 
 <link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1605532565535">
 
@@ -89,11 +89,11 @@
         <div class="post-detail gt-bg-theme-color-second">
             <article class="gt-post-content">
                 <h2 class="post-title">
-                    1、两数之和
+                    83、删除排序链表中的重复元素
                 </h2>
                 <div class="post-info">
                     <time class="post-time gt-c-content-color-first">
-                        · 2020-11-02 ·
+                        · 2020-11-16 ·
                     </time>
                     
                         <a href="https://ganhan999.github.io/tag/cKyYTCK2Y/" class="post-tags">
@@ -103,39 +103,64 @@
                 </div>
                 <div class="post-content">
                     <h1 id="题目">题目</h1>
-<p>&quot;&quot;&quot;<br>
-给定一个整数数组 nums 和一个目标值 target，请你在该数组中找出和为目标值的那两个整数，并返回他们的数组下标。<br>
-你可以假设每种输入只会对应一个答案。但是，数组中同一个元素不能使用两遍。<br>
-&quot;&quot;&quot;</p>
+<p>假设你正在爬楼梯。需要 n 阶你才能到达楼顶。<br>
+每次你可以爬 1 或 2 个台阶。你有多少种不同的方法可以爬到楼顶呢？</p>
+<p>注意：给定 n 是一个正整数。</p>
+<p>示例 1：<br>
+输入： 2<br>
+输出： 2<br>
+解释： 有两种方法可以爬到楼顶。</p>
+<ol>
+<li>1 阶 + 1 阶</li>
+<li>2 阶</li>
+</ol>
+<p>示例 2：<br>
+输入： 3<br>
+输出： 3<br>
+解释： 有三种方法可以爬到楼顶。</p>
+<ol>
+<li>1 阶 + 1 阶 + 1 阶</li>
+<li>1 阶 + 2 阶</li>
+<li>2 阶 + 1 阶</li>
+</ol>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="本体思路">本体思路</h1>
+<p>删除链表操作而已。</p>
 <h1 id="我的做法">#我的做法：</h1>
 <pre><code class="language-python">class Solution:
-    def twoSum(self,nums,target):
-        len1=len(nums)
-        for i in range(len1):
-            j=i+1
-            for j in range(j,len1):
-              if nums[i]+nums[j]==target:
-                  return [i,j]
-        return [0,0]
+    def deleteDuplicates(self, head: ListNode) -&gt; ListNode:
+        node = head#注意这里是引用地址，标记这初始地址，但是next是调用属性，所以操作node实际上就是改变了head链表，head还是一开始的地址，但是node已经不是了
+        while node and node.next:#注意先把node放前面，因为如果node为空，node会出现断路现象，保护后面next条件不报错
+            if node.val == node.next.val:
+                node.next = node.next.next
+            else:
+                node = node.next
+        return head#返回初始地址！所以不能用node
 </code></pre>
-<p>&quot;&quot;&quot;</p>
-<h1 id="大神做法">大神做法：</h1>
-<p>参考了大神们的解法，通过哈希来求解，这里通过字典来模拟哈希查询的过程。<br>
-个人理解这种办法相较于方法一其实就是字典记录了 num1 和 num2 的值和位置，而省了再查找 num2 索引的步骤。<br>
-用枚举的方式，构造哈希表<br>
-&quot;&quot;&quot;</p>
-<pre><code class="language-python">class Solution:
-    def twoSum(self,nums, target):
-        hashmap={}
-        for i,j in enumerate(nums):
-            hashmap[j]=i
-        for n,m in enumerate(nums):
-            number=hashmap.get(target-m)
-            if number is not None and n!=number:
-                return[n,number]
-        return[0,0]
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="大神做法1">#大神做法1：</h1>
+<p>双指针算法<br>
+建议自己多画画图就知道了，用a来遍历整个链表，用head来改变整个链表。</p>
+<pre><code class="language-Python">class Solution:
+    def deleteDuplicates(self, head: ListNode) -&gt; ListNode:
+        if head is None or head.next is None:
+            return head
+        head_copy = head
+        a = head
+        while a:
+            if a.val == head.val:
+                a = a.next
+                if a.next is None:
+                    if a.val == head.val:
+                        head.next = None
+                    else:
+                        head.next = a
+                    break
+            else:
+                head.next = a
+                head = head.next
 
-#复现成功！
+        return head_copy
 </code></pre>
 
                 </div>
@@ -145,14 +170,14 @@
         
             <div class="next-post">
                 <div class="next gt-c-content-color-first">下一篇</div>
-                <a href="https://ganhan999.github.io/post/今天是记录博客的第一天/" class="post-title gt-a-link">
-                    今天是记录博客的第一天
+                <a href="https://ganhan999.github.io/post/70、爬楼梯/" class="post-title gt-a-link">
+                    70、爬楼梯
                 </a>
             </div>
         
 
         
-            <span id="/post/1、两数之和/" class="leancloud_visitors" data-flag-title="1、两数之和">
+            <span id="/post/83.、删除排序链表中的重复元素/" class="leancloud_visitors" data-flag-title="83、删除排序链表中的重复元素">
                 <em class="post-meta-item-text">阅读量 </em>
                 <i class="leancloud-visitors-count">0</i>
             </span>
