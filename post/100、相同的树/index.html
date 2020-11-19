@@ -4,7 +4,7 @@
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-<title>11.8杂记 | Gridea</title>
+<title>100、相同的树 | Gridea</title>
 
 <link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1605776419208">
 
@@ -89,24 +89,81 @@
         <div class="post-detail gt-bg-theme-color-second">
             <article class="gt-post-content">
                 <h2 class="post-title">
-                    11.8杂记
+                    100、相同的树
                 </h2>
                 <div class="post-info">
                     <time class="post-time gt-c-content-color-first">
-                        · 2020-11-08 ·
+                        · 2020-11-18 ·
                     </time>
                     
-                        <a href="https://ganhan999.github.io/tag/P1Rgvx92_/" class="post-tags">
-                            # 生活日常
+                        <a href="https://ganhan999.github.io/tag/cKyYTCK2Y/" class="post-tags">
+                            # leetcode
                         </a>
                     
                 </div>
                 <div class="post-content">
-                    <p>体测起来之后直接废人一个 跪了TAT<br>
-今天Python算法书终于到了 舒服的很<br>
-opencv库真有点意思 老师讲的也不错<br>
-之后就是算法<br>
-然后就是狂神 yyds了！</p>
+                    <h1 id="题目">题目</h1>
+<ol>
+<li>
+<p>给定两个二叉树，编写一个函数来检验它们是否相同。</p>
+<p>如果两个树在结构上相同，并且节点具有相同的值，则认为它们是相同的。</p>
+<p>示例 1:<br>
+输入:       1         1<br>
+/ \       / <br>
+2   3     2   3</p>
+<pre><code>    [1,2,3],   [1,2,3]
+</code></pre>
+<p>输出: true</p>
+<p>示例 2:<br>
+输入:      1          1<br>
+/           <br>
+2             2</p>
+<pre><code>    [1,2],     [1,null,2]
+</code></pre>
+<p>输出: false</p>
+<p>示例 3:<br>
+输入:       1         1<br>
+/ \       / <br>
+2   1     1   2</p>
+<pre><code>    [1,2,1],   [1,1,2]
+</code></pre>
+<p>输出: false</p>
+</li>
+</ol>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="本体思路">本体思路</h1>
+<p>递归大法好。<br>
+一句话, 先想出口：<br>
+空的话怎么办？<br>
+一个出口怎么办？<br>
+通常情况下怎么处理当前元素, 同时减少问题规模？</p>
+<h1 id="我的做法">#我的做法：</h1>
+<pre><code class="language-python">class Solution:
+    def isSameTree(self, p: TreeNode, q: TreeNode) -&gt; bool:
+        if not p and not q: return True
+        if not p or not q: return False
+        if p.val != q.val: return False
+        return self.isSameTree(p.left, q.left) and self.isSameTree(p.right, q.right)
+</code></pre>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="大神做法">#大神做法：</h1>
+<p>深度优先遍历，把遍历的数字加入数组中。</p>
+<pre><code class="language-Python">class Solution:
+    def isSameTree(self, p: TreeNode, q: TreeNode) -&gt; bool:
+        resp, resq = [], []
+        self.DFS(p, resp)
+        self.DFS(q, resq)
+        return resp == resq
+
+    def DFS(self, tree, res):
+        if not tree:
+            res.append('')
+            return
+        res.append(tree.val)
+        self.DFS(tree.left, res)
+        self.DFS(tree.right, res)
+
+</code></pre>
 
                 </div>
             </article>
@@ -115,14 +172,14 @@ opencv库真有点意思 老师讲的也不错<br>
         
             <div class="next-post">
                 <div class="next gt-c-content-color-first">下一篇</div>
-                <a href="https://ganhan999.github.io/post/ti-ce-jie-shu-liao/" class="post-title gt-a-link">
-                    体测结束了
+                <a href="https://ganhan999.github.io/post/88、合并两个有序数组/" class="post-title gt-a-link">
+                    88、合并两个有序数组
                 </a>
             </div>
         
 
         
-            <span id="/post/11.8杂记/" class="leancloud_visitors" data-flag-title="11.8杂记">
+            <span id="/post/100、相同的树/" class="leancloud_visitors" data-flag-title="100、相同的树">
                 <em class="post-meta-item-text">阅读量 </em>
                 <i class="leancloud-visitors-count">0</i>
             </span>

@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ganhan999.github.io/</id>
     <title>Gridea</title>
-    <updated>2020-11-17T09:56:21.393Z</updated>
+    <updated>2020-11-19T09:00:21.720Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ganhan999.github.io/"/>
     <link rel="self" href="https://ganhan999.github.io/atom.xml"/>
@@ -10,6 +10,182 @@
     <logo>https://ganhan999.github.io/images/avatar.png</logo>
     <icon>https://ganhan999.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Gridea</rights>
+    <entry>
+        <title type="html"><![CDATA[101、对称二叉树]]></title>
+        <id>https://ganhan999.github.io/post/101、对称二叉树/</id>
+        <link href="https://ganhan999.github.io/post/101、对称二叉树/">
+        </link>
+        <updated>2020-11-19T09:00:00.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
+<p>给定一个二叉树，检查它是否是镜像对称的。</p>
+<p>例如，二叉树 [1,2,2,3,4,4,3] 是对称的。</p>
+<p>​    1</p>
+<p>/ <br>
+2   2<br>
+/ \ / <br>
+3  4 4  3</p>
+<p>但是下面这个 [1,2,2,null,3,null,3] 则不是镜像对称的:</p>
+<p>​    1</p>
+<p>/ <br>
+2   2<br>
+\   <br>
+3    3</p>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="本体思路">本体思路</h1>
+<p>递归大法<br>
+判断p1的左子树，和p2的右子树是否相等。<br>
+值得一提的是，需要将root也一分为二，这样就可以判断根节点了。<br>
+这是广度优先遍历了！</p>
+<h1 id="我的做法">#我的做法：</h1>
+<pre><code class="language-python">class Solution:
+    def isSymmetric(self, root: TreeNode) -&gt; bool:
+        return self.ismirror(root, root)
+
+    def ismirror(self, p1, p2):
+        if not p1 and not p2:
+            return True
+        if not p1 or not p2:
+            return False
+        return p1.val == p2.val and self.ismirror(p1.right, p2.left) and self.ismirror(p2.right, p1.left)
+</code></pre>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="大神做法1">#大神做法1：</h1>
+<p>不难发现 post_order 就是 pre_order的逆序，其实这也是对称二叉树的一个性质，<br>
+根据这一点就不难写出代码了。<br>
+前序遍历等于后序遍历的倒序，则为镜像！（妙啊）</p>
+<pre><code class="language-Python">class Solution:
+    def isSymmetric(self, root: TreeNode) -&gt; bool:
+        bli = []     # 用来存左子树的前序遍历
+        fli = []     # 用来存右子树的后序遍历
+        if root == None:   # 无根节点
+            return True
+        if root and root.left == None and root.right == None:  # 只有根节点
+            return True
+
+        if root and root.left and root.right:
+            self.pre_order(root.left, bli)
+            self.post_order(root.right, fli)
+            fli.reverse()            # 将后序遍历的列表倒序
+            if bli == fli:
+                return True
+            else:
+                return False
+
+    def pre_order(self,root,li):    # 二叉树的前序遍历
+        if root:
+            li.append(root.val)
+            self.pre_order(root.left,li)
+            self.pre_order(root.right,li)
+        elif root == None:
+            li.append(None)
+
+    def post_order(self,root,li):   # 二叉树的后序遍历
+        if root:
+            self.post_order(root.left,li)
+            self.post_order(root.right,li)
+            li.append(root.val)
+        elif root == None:
+            li.append(None)
+
+</code></pre>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="大神做法2">#大神做法2：</h1>
+<p>迭代方法。<br>
+BFS 使用一个队列，很多题解中的 BFS 都是放入了四次节点，一种更直观的做法是两两一组放入队列中。</p>
+<p>在队列中同时取出两个节点left, right，判断这两个节点的值是否相等，然后把他们的孩子中按照(left.left, right.right) 一组，(left.right, right.left)一组放入队列中。</p>
+<p>BFS做法需要把所有的节点都检查完才能确定返回结果True，除非提前遇到不同的节点值而终止返回False。</p>
+<p>如图所示<br>
+<img src="https://ganhan999.github.io//post-images/1605776416905.gif" alt="" loading="lazy"></p>
+<pre><code class="language-Python">class Solution:
+    def isSymmetric(self, root: TreeNode) -&gt; bool:
+        if not root:
+            return True
+        queue=collections.deque()
+        queue.append((root.left,root.right))#注意这里只传递了一个参数，他们一起组成了迭代器
+        while queue:
+            left,right=queue.popleft()
+            if not left and not right:
+                continue
+            if not left or not right:
+                return False
+            if left.val!=right.val:
+                return False
+            queue.append((left.left,right.right))
+            queue.append((left.right,right.left))
+        return True
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[100、相同的树]]></title>
+        <id>https://ganhan999.github.io/post/100、相同的树/</id>
+        <link href="https://ganhan999.github.io/post/100、相同的树/">
+        </link>
+        <updated>2020-11-18T14:18:00.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
+<ol>
+<li>
+<p>给定两个二叉树，编写一个函数来检验它们是否相同。</p>
+<p>如果两个树在结构上相同，并且节点具有相同的值，则认为它们是相同的。</p>
+<p>示例 1:<br>
+输入:       1         1<br>
+/ \       / <br>
+2   3     2   3</p>
+<pre><code>    [1,2,3],   [1,2,3]
+</code></pre>
+<p>输出: true</p>
+<p>示例 2:<br>
+输入:      1          1<br>
+/           <br>
+2             2</p>
+<pre><code>    [1,2],     [1,null,2]
+</code></pre>
+<p>输出: false</p>
+<p>示例 3:<br>
+输入:       1         1<br>
+/ \       / <br>
+2   1     1   2</p>
+<pre><code>    [1,2,1],   [1,1,2]
+</code></pre>
+<p>输出: false</p>
+</li>
+</ol>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="本体思路">本体思路</h1>
+<p>递归大法好。<br>
+一句话, 先想出口：<br>
+空的话怎么办？<br>
+一个出口怎么办？<br>
+通常情况下怎么处理当前元素, 同时减少问题规模？</p>
+<h1 id="我的做法">#我的做法：</h1>
+<pre><code class="language-python">class Solution:
+    def isSameTree(self, p: TreeNode, q: TreeNode) -&gt; bool:
+        if not p and not q: return True
+        if not p or not q: return False
+        if p.val != q.val: return False
+        return self.isSameTree(p.left, q.left) and self.isSameTree(p.right, q.right)
+</code></pre>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="大神做法">#大神做法：</h1>
+<p>深度优先遍历，把遍历的数字加入数组中。</p>
+<pre><code class="language-Python">class Solution:
+    def isSameTree(self, p: TreeNode, q: TreeNode) -&gt; bool:
+        resp, resq = [], []
+        self.DFS(p, resp)
+        self.DFS(q, resq)
+        return resp == resq
+
+    def DFS(self, tree, res):
+        if not tree:
+            res.append('')
+            return
+        res.append(tree.val)
+        self.DFS(tree.left, res)
+        self.DFS(tree.right, res)
+
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[88、合并两个有序数组]]></title>
         <id>https://ganhan999.github.io/post/88、合并两个有序数组/</id>
@@ -393,236 +569,6 @@ nums2.length == n</p>
 气死了！<br>
 午饭都冷了！<br>
 😡</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[61、加一]]></title>
-        <id>https://ganhan999.github.io/post/61、加一/</id>
-        <link href="https://ganhan999.github.io/post/61、加一/">
-        </link>
-        <updated>2020-11-12T14:41:00.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
-<p>&quot;&quot;&quot;<br>
-给定一个由 整数 组成的 非空 数组所表示的非负整数，在该数的基础上加一。<br>
-最高位数字存放在数组的首位， 数组中每个元素只存储单个数字。<br>
-你可以假设除了整数 0 之外，这个整数不会以零开头。</p>
-<p>示例 1：<br>
-输入：digits = [1,2,3]<br>
-输出：[1,2,4]<br>
-解释：输入数组表示数字 123。</p>
-<p>示例 2：<br>
-输入：digits = [4,3,2,1]<br>
-输出：[4,3,2,2]<br>
-解释：输入数组表示数字 4321。</p>
-<p>示例 3：<br>
-输入：digits = [0]<br>
-输出：[1]</p>
-<p>提示：<br>
-1 &lt;= digits.length &lt;= 100<br>
-0 &lt;= digits[i] &lt;= 9</p>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="本体思路">本体思路</h1>
-<p>转成数字后，加一，再转字符串，注意特殊情况！</p>
-<h1 id="我的做法">#我的做法：</h1>
-<pre><code class="language-python">class Solution:
-    def plusOne(self, digits: List[int]) -&gt; List[int]:
-        lens=len(digits)
-        sum=0
-        sumlist=[]
-        for i in range(lens):
-            sum=10**(lens-i-1)*digits[i]+sum#转为数字
-        sum=sum+1
-        strnum=str(sum)
-        for i in range(len(strnum)):
-            sumlist.append(int(strnum[i]))#再转字符串
-        if lens-len(sumlist)==-1 or lens-len(sumlist)==0:#如果出现0，0，9变0，1，0的情况判断是否前面是不是有多余的0.
-            return sumlist
-        else:
-            anum=lens-len(sumlist)
-            for i in range(anum):
-                sumlist.insert(0,0)
-        return sumlist
-
-</code></pre>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="大神做法">#大神做法：</h1>
-<p>从倒数第一个数字开始，如果数字为9，那么置为0，判断前一个如果不是9，那么就只要加上1就结束了！！<br>
-如果是9呢，那么就继续置为0，以此类推。如果到第一个数字都还是9，那么置为0后，我们需要插入一个1。</p>
-<pre><code class="language-Python">class Solution:
-    def plusOne(self, digits: List[int]) -&gt; List[int]:
-        for i in range(len(digits)-1,-1,-1):
-            if digits[i]!=9:
-                digits[i] += 1
-                return digits
-            else:
-                digits[i] =0
-        digits.insert(0,1)
-        return digits
-</code></pre>
-<pre><code>'''
-下面是join函数的介绍
-
-Python join() 方法用于将序列中的元素以指定的字符连接生成一个新的字符串。
-它只能用在字符串中！！！
-
-语法：
-
-join()方法语法：
-
-‘sep’.join（strseq）
-
-strseq.join(sep)
-
-sep：分隔符，可以为空
-
-strseq：字符串
-
-
-
-
-下面是map函数的介绍
-
-map() 会根据提供的函数对指定序列做映射。
-
-第一个参数 function 以参数序列中的每一个元素调用 function 函数，返回包含每次 function 函数返回值的新列表。
-
-语法：
-
-map() 函数语法：
-
-map(function, iterable, ...)
-
-&gt;&gt;&gt;def square(x) :            # 计算平方数
-...     return x ** 2
-
-&gt;&gt;&gt; map(square, [1,2,3,4,5])   # 计算列表各个元素的平方
-[1, 4, 9, 16, 25]
-&gt;&gt;&gt; map(lambda x: x ** 2, [1, 2, 3, 4, 5])  # 使用 lambda 匿名函数
-[1, 4, 9, 16, 25]
- 
-# 提供了两个列表，对相同位置的列表数据进行相加
-&gt;&gt;&gt; map(lambda x, y: x + y, [1, 3, 5, 7, 9], [2, 4, 6, 8, 10])
-[3, 7, 11, 15, 19]
-
-'''
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Python集合运算汇总]]></title>
-        <id>https://ganhan999.github.io/post/Python集合运算汇总/</id>
-        <link href="https://ganhan999.github.io/post/Python集合运算汇总/">
-        </link>
-        <updated>2020-11-12T13:44:00.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="集合运算">集合运算</h1>
-<p>集合的运算操作包括交集、并集、差集、补集，其中补集不适用于列表。</p>
-<h2 id="交集">交集</h2>
-<h3 id="无重复元素的列表">无重复元素的列表</h3>
-<p>使用set进行交集计算。</p>
-<h4 id="1-使用计算">1. 使用&amp;计算</h4>
-<pre><code class="language-python">lis1,lis2=[1,2],[1]
-
-print(list(set(lis1) &amp; set(lis2)))
-
-输出为：[1]
-12345
-</code></pre>
-<h4 id="2-使用intersection计算">2. 使用intersection计算</h4>
-<pre><code>lis1,lis2=[1,2],[1]
-
-print(list(set(lis1).intersection(lis2)))
-
-输出为：[1]
-12345
-</code></pre>
-<h3 id="含重复元素列表">含重复元素列表</h3>
-<h4 id="1-列表推导式">1. 列表推导式</h4>
-<pre><code class="language-python">lis1,lis2=[1,2,1],[1,2]
-
-print([v1 for v1 in lis1 if v1 in lis2])
-
-输出为：[1, 2, 1]
-12345
-</code></pre>
-<h4 id="2-filter过滤器">2. filter过滤器</h4>
-<pre><code>lis1,lis2=[1,2,1],[1,2]
-
-print(list(filter(lambda v: v in lis2,lis1)))
-
-输出为：[1, 2, 1]
-12345
-</code></pre>
-<h2 id="并集">并集</h2>
-<h3 id="无重复元素列表">无重复元素列表</h3>
-<h4 id="1-使用">1. 使用 |</h4>
-<pre><code class="language-python">lis1,lis2=[1,2],[3]
-
-print(list(set(lis1)|set(lis2)))
-
-输出为：[1, 2, 3]
-12345
-</code></pre>
-<h4 id="2-使用union">2. 使用union</h4>
-<pre><code class="language-python">lis1,lis2=[1,2],[3]
-
-print(list(set(lis1).union(lis2)))
-
-输出为：[1, 2, 3]
-12345
-</code></pre>
-<h3 id="含重复元素列表-2">含重复元素列表</h3>
-<h4 id="1-使用-2">1. 使用+</h4>
-<pre><code class="language-python">lis1,lis2=[1,2,1],[3]
-
-print(lis1+lis2)
-
-输出为：[1, 2, 1, 3]
-12345
-</code></pre>
-<h4 id="2-使用extend">2. 使用extend</h4>
-<pre><code class="language-python">lis1,lis2=[1,2,1],[3]
-lis1.extend(lis2)
-
-print(lis1)
-
-输出为：[1, 2, 1, 3]
-123456
-</code></pre>
-<h2 id="差集">差集</h2>
-<h3 id="无重复元素列表-2">无重复元素列表</h3>
-<h4 id="1-使用-3">1. 使用^</h4>
-<p>此方法与顺序无关，即所得结果是二者在彼此都不存在的元素</p>
-<pre><code>lis1,lis2=[1,2],[3]
-
-print(list(set(lis1)^set(lis2)))
-
-输出为：[1,2,3]
-12345
-</code></pre>
-<h3 id="含重复元素列表-3">含重复元素列表</h3>
-<h4 id="1-使用difference">1. 使用difference</h4>
-<pre><code>lis1,lis2=[1,2,3],[3]
-
-print(list(set(lis1).difference(lis2)))
-
-输出为：[1,2]
-12345
-</code></pre>
-<h4 id="2-列表推导式">2. 列表推导式</h4>
-<pre><code class="language-python">lis1,lis2=[1,2,1],[1,2]
-
-print([v1 for v1 in lis1 if v1 not in lis2])
-
-输出为：[]
-12345
-</code></pre>
-<h4 id="3-filter过滤器">3. filter过滤器</h4>
-<pre><code>lis1,lis2=[1,2,1],[1,2]
-
-print(list(filter(lambda v: v not in lis2,lis1)))
-
-输出为：[]
-</code></pre>
 ]]></content>
     </entry>
 </feed>
