@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ganhan999.github.io/</id>
     <title>Gridea</title>
-    <updated>2020-11-20T11:20:17.566Z</updated>
+    <updated>2020-11-20T16:33:38.046Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ganhan999.github.io/"/>
     <link rel="self" href="https://ganhan999.github.io/atom.xml"/>
@@ -10,6 +10,42 @@
     <logo>https://ganhan999.github.io/images/avatar.png</logo>
     <icon>https://ganhan999.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Gridea</rights>
+    <entry>
+        <title type="html"><![CDATA[树的BFS和DFS]]></title>
+        <id>https://ganhan999.github.io/post/树的BFS和DFS/</id>
+        <link href="https://ganhan999.github.io/post/树的BFS和DFS/">
+        </link>
+        <updated>2020-11-20T16:30:00.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="bfs">BFS</h1>
+<pre><code class="language-Python">class Solution:
+    def tree(self, root: TreeNode) -&gt; bool:
+        li=[]
+        self.BFS(root,li)
+        print(li)
+    def BFS(self,tree,li):
+        que=deque([tree])
+        while que:
+            num=que.popleft()
+            li.append(num.val)
+            if num.left:
+                que.append(num.left)
+            if num.right:
+                que.append(num.right)
+</code></pre>
+<h1 id="dfs前序遍历">DFS(前序遍历)</h1>
+<pre><code class="language-Python">class Solution:
+    def treec(self, root: TreeNode) -&gt; bool:
+        li=[]
+        self.pre(root,li)
+        print(li)
+    def pre(self,tree,li):
+        if tree:
+            li.append(tree.val)
+            self.pre(root.left,li)
+            self.pre(root.right,li)
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[104、二叉树的深度]]></title>
         <id>https://ganhan999.github.io/post/104、二叉树的深度/</id>
@@ -568,53 +604,6 @@ nums2.length == n</p>
         <updated>2020-11-13T14:41:43.000Z</updated>
         <content type="html"><![CDATA[<p>阴差阳错hhhhhh</p>
 <p>希望大家在之后的日子里能想到我 苟富贵勿相忘</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[67、二进制求和]]></title>
-        <id>https://ganhan999.github.io/post/67、二进制求和/</id>
-        <link href="https://ganhan999.github.io/post/67、二进制求和/">
-        </link>
-        <updated>2020-11-13T14:31:00.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
-<p>&quot;&quot;&quot;<br>
-给你两个二进制字符串，返回它们的和（用二进制表示）。<br>
-输入为 非空 字符串且只包含数字 1 和 0。</p>
-<p>示例 1:<br>
-输入: a = &quot;11&quot;, b = &quot;1&quot;<br>
-输出: &quot;100&quot;</p>
-<p>示例 2:<br>
-输入: a = &quot;1010&quot;, b = &quot;1011&quot;<br>
-输出: &quot;10101&quot;</p>
-<p>提示：<br>
-每个字符串仅由字符 '0' 或 '1' 组成。<br>
-1 &lt;= a.length, b.length &lt;= 10^4<br>
-字符串如果不是 &quot;0&quot; ，就都不含前导零</p>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="本体思路">本体思路</h1>
-<p>先换成十进制然后换二进制，最后取一个[2:]，注意bin（）后返回的是一个字符串</p>
-<h1 id="我的做法">#我的做法：</h1>
-<pre><code class="language-python">class Solution:
-    def addBinary(self, a: str, b: str) -&gt; str:
-        anum=int(a,base=2)
-        bnum=int(b,base=2)
-        return (bin(anum+bnum)[2:])
-</code></pre>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="大神做法">#大神做法：</h1>
-<p>非内置函数，利用二进制算法计算。</p>
-<pre><code class="language-Python">class Solution:
-    def addBinary(self, a: str, b: str) -&gt; str:
-        r, p = '', 0
-        d = len(b) - len(a)
-        a = '0' * d + a
-        b = '0' * -d + b
-        for i, j in zip(a[::-1], b[::-1]):#这里是对二进制的掌握程度
-            s = int(i) + int(j) + p
-            r = str(s % 2) + r
-            p = s // 2
-        return '1' + r if p else r#如果最后p还是进位了，那么就往前面加1，否则就不加！
-</code></pre>
 ]]></content>
     </entry>
 </feed>

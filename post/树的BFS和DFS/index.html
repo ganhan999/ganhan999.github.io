@@ -4,7 +4,7 @@
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-<title>体测结束了 | Gridea</title>
+<title>树的BFS和DFS | Gridea</title>
 
 <link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1605890015410">
 
@@ -89,11 +89,11 @@
         <div class="post-detail gt-bg-theme-color-second">
             <article class="gt-post-content">
                 <h2 class="post-title">
-                    体测结束了
+                    树的BFS和DFS
                 </h2>
                 <div class="post-info">
                     <time class="post-time gt-c-content-color-first">
-                        · 2020-11-07 ·
+                        · 2020-11-21 ·
                     </time>
                     
                         <a href="https://ganhan999.github.io/tag/P1Rgvx92_/" class="post-tags">
@@ -102,12 +102,34 @@
                     
                 </div>
                 <div class="post-content">
-                    <p>今天又迎来了一年一度的体测，这也是我在大学生涯中最后一次体测，居然1000米又摸鱼了一回。<br>
-本来以为不累的，午睡睡一觉还是起不来哈哈哈哈（淦）</p>
-<p>今天就要开始学习opencv了，争取早点看完 然后再学python和算法。</p>
-<p>之后就是我的开发大法好了！</p>
-<p>兄弟们冲！<br>
-😋</p>
+                    <h1 id="bfs">BFS</h1>
+<pre><code class="language-Python">class Solution:
+    def tree(self, root: TreeNode) -&gt; bool:
+        li=[]
+        self.BFS(root,li)
+        print(li)
+    def BFS(self,tree,li):
+        que=deque([tree])
+        while que:
+            num=que.popleft()
+            li.append(num.val)
+            if num.left:
+                que.append(num.left)
+            if num.right:
+                que.append(num.right)
+</code></pre>
+<h1 id="dfs前序遍历">DFS(前序遍历)</h1>
+<pre><code class="language-Python">class Solution:
+    def treec(self, root: TreeNode) -&gt; bool:
+        li=[]
+        self.pre(root,li)
+        print(li)
+    def pre(self,tree,li):
+        if tree:
+            li.append(tree.val)
+            self.pre(root.left,li)
+            self.pre(root.right,li)
+</code></pre>
 
                 </div>
             </article>
@@ -116,14 +138,14 @@
         
             <div class="next-post">
                 <div class="next gt-c-content-color-first">下一篇</div>
-                <a href="https://ganhan999.github.io/post/28、 实现 strStr()/" class="post-title gt-a-link">
-                    28、实现 strStr()
+                <a href="https://ganhan999.github.io/post/104、二叉树的深度/" class="post-title gt-a-link">
+                    104、二叉树的深度
                 </a>
             </div>
         
 
         
-            <span id="/post/ti-ce-jie-shu-liao/" class="leancloud_visitors" data-flag-title="体测结束了">
+            <span id="/post/树的BFS和DFS/" class="leancloud_visitors" data-flag-title="树的BFS和DFS">
                 <em class="post-meta-item-text">阅读量 </em>
                 <i class="leancloud-visitors-count">0</i>
             </span>
