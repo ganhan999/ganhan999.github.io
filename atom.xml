@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ganhan999.github.io/</id>
     <title>Gridea</title>
-    <updated>2020-11-19T10:24:24.420Z</updated>
+    <updated>2020-11-20T11:20:17.566Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ganhan999.github.io/"/>
     <link rel="self" href="https://ganhan999.github.io/atom.xml"/>
@@ -10,6 +10,66 @@
     <logo>https://ganhan999.github.io/images/avatar.png</logo>
     <icon>https://ganhan999.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Gridea</rights>
+    <entry>
+        <title type="html"><![CDATA[104、二叉树的深度]]></title>
+        <id>https://ganhan999.github.io/post/104、二叉树的深度/</id>
+        <link href="https://ganhan999.github.io/post/104、二叉树的深度/">
+        </link>
+        <updated>2020-11-20T11:00:00.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
+<p>给定一个二叉树，找出其最大深度。</p>
+<p>二叉树的深度为根节点到最远叶子节点的最长路径上的节点数。</p>
+<p>说明: 叶子节点是指没有子节点的节点。</p>
+<p>示例：<br>
+给定二叉树 [3,9,20,null,null,15,7]，</p>
+<p>​      3</p>
+<p>​    / <br>
+9  20<br>
+​      /   <br>
+​    15   7<br>
+返回它的最大深度 3 。</p>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="本体思路">本体思路</h1>
+<p>递归大法</p>
+<p>就相当于深度优先遍历了<br>
+画图，找到终止条件为空节点记录为0深度，递归本体是父节点的深度等于子节点的深度最大值加一。</p>
+<h1 id="我的做法">#我的做法：</h1>
+<pre><code class="language-python">class Solution:
+    def isSymmetric(self, root: TreeNode) -&gt; bool:
+        return self.ismirror(root, root)
+
+    def ismirror(self, p1, p2):
+        if not p1 and not p2:
+            return True
+        if not p1 or not p2:
+            return False
+        return p1.val == p2.val and self.ismirror(p1.right, p2.left) and self.ismirror(p2.right, p1.left)
+</code></pre>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="大神做法1">#大神做法1：</h1>
+<p>迭代方法。<br>
+广度优先遍历，也就是层次遍历，每一层便加1.</p>
+<pre><code class="language-Python">class Solution:
+    def maxDepth(self, root: TreeNode) -&gt; int:
+        if not root:
+            return 0
+        depth = 0
+        queue = deque([root])
+        while queue:
+            depth += 1
+            # 保存下一层所有节点
+            next_layer = []
+            while queue:
+                node = queue.popleft()
+                if node.left:
+                    next_layer.append(node.left)
+                if node.right:
+                    next_layer.append(node.right)
+            queue = deque(next_layer)
+        return depth
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[101、对称二叉树]]></title>
         <id>https://ganhan999.github.io/post/101、对称二叉树/</id>
@@ -555,20 +615,6 @@ nums2.length == n</p>
             p = s // 2
         return '1' + r if p else r#如果最后p还是进位了，那么就往前面加1，否则就不加！
 </code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[科目一97分 美滋滋]]></title>
-        <id>https://ganhan999.github.io/post/ke-mu-yi-97-fen-mei-zi-zi/</id>
-        <link href="https://ganhan999.github.io/post/ke-mu-yi-97-fen-mei-zi-zi/">
-        </link>
-        <updated>2020-11-12T14:47:35.000Z</updated>
-        <content type="html"><![CDATA[<p>今天看到好多人没过 还有点小紧张<br>
-我后面那个大叔还一直逼逼赖赖<br>
-今天开车司机叔叔也有点让我无语！<br>
-气死了！<br>
-午饭都冷了！<br>
-😡</p>
 ]]></content>
     </entry>
 </feed>

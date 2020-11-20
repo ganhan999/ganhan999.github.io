@@ -4,7 +4,7 @@
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-<title>今天学到了分治和动态规划的初步过程 | Gridea</title>
+<title>104、二叉树的深度 | Gridea</title>
 
 <link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1605871213267">
 
@@ -89,23 +89,71 @@
         <div class="post-detail gt-bg-theme-color-second">
             <article class="gt-post-content">
                 <h2 class="post-title">
-                    今天学到了分治和动态规划的初步过程
+                    104、二叉树的深度
                 </h2>
                 <div class="post-info">
                     <time class="post-time gt-c-content-color-first">
-                        · 2020-11-10 ·
+                        · 2020-11-20 ·
                     </time>
                     
-                        <a href="https://ganhan999.github.io/tag/P1Rgvx92_/" class="post-tags">
-                            # 生活日常
+                        <a href="https://ganhan999.github.io/tag/cKyYTCK2Y/" class="post-tags">
+                            # leetcode
                         </a>
                     
                 </div>
                 <div class="post-content">
-                    <pre><code>   今天学到了分治和动态规划的初步过程，非常的开心，一定要记得多bug。
+                    <h1 id="题目">题目</h1>
+<p>给定一个二叉树，找出其最大深度。</p>
+<p>二叉树的深度为根节点到最远叶子节点的最长路径上的节点数。</p>
+<p>说明: 叶子节点是指没有子节点的节点。</p>
+<p>示例：<br>
+给定二叉树 [3,9,20,null,null,15,7]，</p>
+<p>​      3</p>
+<p>​    / <br>
+9  20<br>
+​      /   <br>
+​    15   7<br>
+返回它的最大深度 3 。</p>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="本体思路">本体思路</h1>
+<p>递归大法</p>
+<p>就相当于深度优先遍历了<br>
+画图，找到终止条件为空节点记录为0深度，递归本体是父节点的深度等于子节点的深度最大值加一。</p>
+<h1 id="我的做法">#我的做法：</h1>
+<pre><code class="language-python">class Solution:
+    def isSymmetric(self, root: TreeNode) -&gt; bool:
+        return self.ismirror(root, root)
+
+    def ismirror(self, p1, p2):
+        if not p1 and not p2:
+            return True
+        if not p1 or not p2:
+            return False
+        return p1.val == p2.val and self.ismirror(p1.right, p2.left) and self.ismirror(p2.right, p1.left)
 </code></pre>
-<p>有些思想其实不难，要多思考就行。<br>
-（退了一个枕头，只亏了3元运费，挺好的）😏</p>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="大神做法1">#大神做法1：</h1>
+<p>迭代方法。<br>
+广度优先遍历，也就是层次遍历，每一层便加1.</p>
+<pre><code class="language-Python">class Solution:
+    def maxDepth(self, root: TreeNode) -&gt; int:
+        if not root:
+            return 0
+        depth = 0
+        queue = deque([root])
+        while queue:
+            depth += 1
+            # 保存下一层所有节点
+            next_layer = []
+            while queue:
+                node = queue.popleft()
+                if node.left:
+                    next_layer.append(node.left)
+                if node.right:
+                    next_layer.append(node.right)
+            queue = deque(next_layer)
+        return depth
+</code></pre>
 
                 </div>
             </article>
@@ -114,14 +162,14 @@
         
             <div class="next-post">
                 <div class="next gt-c-content-color-first">下一篇</div>
-                <a href="https://ganhan999.github.io/post/53、最大子序列/" class="post-title gt-a-link">
-                    53、最大子序列
+                <a href="https://ganhan999.github.io/post/101、对称二叉树/" class="post-title gt-a-link">
+                    101、对称二叉树
                 </a>
             </div>
         
 
         
-            <span id="/post/jin-tian-xue-dao-liao-fen-zhi-he-dong-tai-gui-hua-de-chu-bu-guo-cheng/" class="leancloud_visitors" data-flag-title="今天学到了分治和动态规划的初步过程">
+            <span id="/post/104、二叉树的深度/" class="leancloud_visitors" data-flag-title="104、二叉树的深度">
                 <em class="post-meta-item-text">阅读量 </em>
                 <i class="leancloud-visitors-count">0</i>
             </span>
