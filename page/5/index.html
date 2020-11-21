@@ -4,7 +4,7 @@
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-<title>104、二叉树的深度 | Gridea</title>
+<title>Gridea</title>
 
 <link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1605958298668">
 
@@ -25,11 +25,11 @@
 
 
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css">
 </head>
 <body>
 <div class="main gt-bg-theme-color-first">
-    <nav class="navbar navbar-expand-lg">
+    <div class="main-content">
+        <nav class="navbar navbar-expand-lg">
     <div class="navbar-brand">
         <img class="user-avatar" src="/images/avatar.png" alt="头像">
         <div class="site-name gt-c-content-color-first">
@@ -85,126 +85,51 @@
     </div>
 </nav>
 
-    <div class="post-container">
-        <div class="post-detail gt-bg-theme-color-second">
-            <article class="gt-post-content">
-                <h2 class="post-title">
-                    104、二叉树的深度
-                </h2>
-                <div class="post-info">
-                    <time class="post-time gt-c-content-color-first">
-                        · 2020-11-20 ·
-                    </time>
-                    
-                        <a href="https://ganhan999.github.io/tag/cKyYTCK2Y/" class="post-tags">
-                            # leetcode
-                        </a>
-                    
-                </div>
-                <div class="post-content">
-                    <h1 id="题目">题目</h1>
-<p>给定一个二叉树，找出其最大深度。</p>
-<p>二叉树的深度为根节点到最远叶子节点的最长路径上的节点数。</p>
-<p>说明: 叶子节点是指没有子节点的节点。</p>
-<p>示例：<br>
-给定二叉树 [3,9,20,null,null,15,7]，</p>
-<p>​      3</p>
-<p>​    / <br>
-9  20<br>
-​      /   <br>
-​    15   7<br>
-返回它的最大深度 3 。</p>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="本体思路">本体思路</h1>
-<p>递归大法</p>
-<p>就相当于深度优先遍历了<br>
-画图，找到终止条件为空节点记录为0深度，递归本体是父节点的深度等于子节点的深度最大值加一。</p>
-<h1 id="我的做法">#我的做法：</h1>
-<pre><code class="language-python">class Solution:
-    def isSymmetric(self, root: TreeNode) -&gt; bool:
-        return self.ismirror(root, root)
 
-    def ismirror(self, p1, p2):
-        if not p1 and not p2:
-            return True
-        if not p1 or not p2:
-            return False
-        return p1.val == p2.val and self.ismirror(p1.right, p2.left) and self.ismirror(p2.right, p1.left)
-</code></pre>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="大神做法">#大神做法：</h1>
-<p>迭代方法。<br>
-广度优先遍历，也就是层次遍历，每一层便加1.</p>
-<pre><code class="language-Python">class Solution:
-    def maxDepth(self, root: TreeNode) -&gt; int:
-        if not root:
-            return 0
-        depth = 0
-        queue = deque([root])
-        while queue:
-            depth += 1
-            # 保存下一层所有节点
-            next_layer = []
-            while queue:
-                node = queue.popleft()
-                if node.left:
-                    next_layer.append(node.left)
-                if node.right:
-                    next_layer.append(node.right)
-            queue = deque(next_layer)
-        return depth
-</code></pre>
-
-                </div>
-            </article>
-        </div>
-
+        <div class="post-list-container">
+    <div class="post-inner">
         
-            <div class="next-post">
-                <div class="next gt-c-content-color-first">下一篇</div>
-                <a href="https://ganhan999.github.io/post/101、对称二叉树/" class="post-title gt-a-link">
-                    101、对称二叉树
-                </a>
+            <div class="post gt-bg-theme-color-second">
+                <div class="post-left">
+                    <div>
+                        
+                        <a href="https://ganhan999.github.io/post/hello-gridea/">
+                            <span class="post-title gt-c-content-color-first">Hello Gridea</span>
+                        </a>
+                    </div>
+                    <div class="gt-post-content post-abstract gt-c-content-color-second">
+                        <p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
+✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
+
+                    </div>
+                    <div class="post-info">
+                        <time class="post-time gt-c-content-color-first">
+                            发布于 · 2018-12-12 ·
+                        </time>
+                        
+                            <a href="https://ganhan999.github.io/tag/VBQC9_ipK/" class="post-tag">
+                                # Gridea
+                            </a>
+                        
+                    </div>
+                </div>
+                
+                    <a href="https://ganhan999.github.io/post/hello-gridea/" class="post-feature-image"
+                       style="background-image: url('https://ganhan999.github.io//post-images/gridea.png')">
+                    </a>
+                
             </div>
         
+    </div>
+</div>
 
-        
-            <span id="/post/104、二叉树的深度/" class="leancloud_visitors" data-flag-title="104、二叉树的深度">
-                <em class="post-meta-item-text">阅读量 </em>
-                <i class="leancloud-visitors-count">0</i>
-            </span>
-        
+        <div class="pagination-container">
+    
+        <a href="https://ganhan999.github.io/page/4/" class="prev-page gt-a-link">上一页</a>
+    
+    
+</div>
 
-        
-
-        
-            <script src='https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js'></script>
-
-<style>
-	div#vcomments{
-		width:100%;
-		max-width: 1000px;
-		padding: 2.5%
-	}
-</style>
-
-
-	<div id="vcomments"></div>
-
-<script>
-	new Valine({
-		el: '#vcomments',
-		appId: '',
-		appKey: '',
-		avatar: '',
-		pageSize: 5,
-		recordIp: true,
-		placeholder: 'Just Go Go',
-		visitor: true,
-	});
-</script>
-
-        
 
         <div class="site-footer gt-c-content-color-first">
     <div class="slogan gt-c-content-color-first">温故而知新</div>

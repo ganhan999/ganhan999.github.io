@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ganhan999.github.io/</id>
     <title>Gridea</title>
-    <updated>2020-11-20T16:33:38.046Z</updated>
+    <updated>2020-11-21T11:31:42.148Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ganhan999.github.io/"/>
     <link rel="self" href="https://ganhan999.github.io/atom.xml"/>
@@ -10,6 +10,68 @@
     <logo>https://ganhan999.github.io/images/avatar.png</logo>
     <icon>https://ganhan999.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Gridea</rights>
+    <entry>
+        <title type="html"><![CDATA[107、二叉树的层次遍历 II]]></title>
+        <id>https://ganhan999.github.io/post/107、二叉树的层次遍历 II/</id>
+        <link href="https://ganhan999.github.io/post/107、二叉树的层次遍历 II/">
+        </link>
+        <updated>2020-11-21T11:31:32.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
+<p>给定一个二叉树，找出其最大深度。</p>
+<p>二叉树的深度为根节点到最远叶子节点的最长路径上的节点数。</p>
+<p>说明: 叶子节点是指没有子节点的节点。</p>
+<p>示例：<br>
+给定二叉树 [3,9,20,null,null,15,7]，</p>
+<p>​      3</p>
+<p>​    / <br>
+9  20<br>
+​      /   <br>
+​    15   7<br>
+返回它的最大深度 3 。</p>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="本体思路">本体思路</h1>
+<p>BFS，每一层都放在一个队列当中</p>
+<h1 id="我的做法">#我的做法：</h1>
+<pre><code class="language-python">class Solution:
+    def levelOrderBottom(self, root: TreeNode) -&gt; List[List[int]]:
+        if not root:
+            return []
+        que=deque([root])
+        l=[]
+        while que:
+            nextque=[]
+            l1=[]
+            while que:
+                num=que.popleft()
+                l1.append(num.val)
+                if num.left:
+                    nextque.append(num.left)
+                if num.right:
+                    nextque.append(num.right)
+            l.append(l1)
+            que=deque(nextque)
+        l.reverse()
+        return l
+</code></pre>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="大神做法">#大神做法：</h1>
+<p>深度优先遍历，因为每找到一个左右节点，层数就加一层，记录层数depth，将depth作为下标。</p>
+<pre><code class="language-Python">class Solution:
+    def levelOrderBottom(self, root: TreeNode) -&gt; List[List[int]]:
+        res = []
+        def dfs(root, depth):
+            if not root:
+                return
+            if len(res)&lt;depth+1:#每多一层那么就加一个元素列表
+                res.append([])
+            res[depth].append(root.val)
+            dfs(root.left, depth+1)
+            dfs(root.right, depth+1)
+        dfs(root,0)
+        return res[::-1]
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[树的BFS和DFS]]></title>
         <id>https://ganhan999.github.io/post/树的BFS和DFS/</id>
@@ -82,7 +144,7 @@
         return p1.val == p2.val and self.ismirror(p1.right, p2.left) and self.ismirror(p2.right, p1.left)
 </code></pre>
 <p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="大神做法1">#大神做法1：</h1>
+<h1 id="大神做法">#大神做法：</h1>
 <p>迭代方法。<br>
 广度优先遍历，也就是层次遍历，每一层便加1.</p>
 <pre><code class="language-Python">class Solution:
@@ -594,16 +656,6 @@ nums2.length == n</p>
         return ans + 1 if (ans + 1) ** 2 &lt;= x else ans
 
 </code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[今天送了全班很多一人一个布丁🍮]]></title>
-        <id>https://ganhan999.github.io/post/jin-tian-song-liao-quan-ban-hen-duo-yi-ren-yi-ge-bu-ding/</id>
-        <link href="https://ganhan999.github.io/post/jin-tian-song-liao-quan-ban-hen-duo-yi-ren-yi-ge-bu-ding/">
-        </link>
-        <updated>2020-11-13T14:41:43.000Z</updated>
-        <content type="html"><![CDATA[<p>阴差阳错hhhhhh</p>
-<p>希望大家在之后的日子里能想到我 苟富贵勿相忘</p>
 ]]></content>
     </entry>
 </feed>
