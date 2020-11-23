@@ -4,7 +4,7 @@
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-<title>83、删除排序链表中的重复元素 | Gridea</title>
+<title>108、将有序数组转换为二叉搜索树 | Gridea</title>
 
 <link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1606131949418">
 
@@ -89,11 +89,11 @@
         <div class="post-detail gt-bg-theme-color-second">
             <article class="gt-post-content">
                 <h2 class="post-title">
-                    83、删除排序链表中的重复元素
+                    108、将有序数组转换为二叉搜索树
                 </h2>
                 <div class="post-info">
                     <time class="post-time gt-c-content-color-first">
-                        · 2020-11-16 ·
+                        · 2020-11-22 ·
                     </time>
                     
                         <a href="https://ganhan999.github.io/tag/cKyYTCK2Y/" class="post-tags">
@@ -103,64 +103,34 @@
                 </div>
                 <div class="post-content">
                     <h1 id="题目">题目</h1>
-<p>假设你正在爬楼梯。需要 n 阶你才能到达楼顶。<br>
-每次你可以爬 1 或 2 个台阶。你有多少种不同的方法可以爬到楼顶呢？</p>
-<p>注意：给定 n 是一个正整数。</p>
-<p>示例 1：<br>
-输入： 2<br>
-输出： 2<br>
-解释： 有两种方法可以爬到楼顶。</p>
-<ol>
-<li>1 阶 + 1 阶</li>
-<li>2 阶</li>
-</ol>
-<p>示例 2：<br>
-输入： 3<br>
-输出： 3<br>
-解释： 有三种方法可以爬到楼顶。</p>
-<ol>
-<li>1 阶 + 1 阶 + 1 阶</li>
-<li>1 阶 + 2 阶</li>
-<li>2 阶 + 1 阶</li>
-</ol>
+<p>将一个按照升序排列的有序数组，转换为一棵高度平衡二叉搜索树。<br>
+本题中，一个高度平衡二叉树是指一个二叉树每个节点 的左右两个子树的高度差的绝对值不超过 1。</p>
+<p>示例:<br>
+给定有序数组: [-10,-3,0,5,9],</p>
+<p>一个可能的答案是：[0,-3,9,-10,null,5]，它可以表示下面这个高度平衡二叉搜索树：</p>
+<p>​       0<br>
+​      / \</p>
+<p>-3   9<br>
+/   /<br>
+-10  5</p>
 <p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
 <h1 id="本体思路">本体思路</h1>
-<p>删除链表操作而已。</p>
+<p>DFS，递归，用二分的思想。</p>
 <h1 id="我的做法">#我的做法：</h1>
 <pre><code class="language-python">class Solution:
-    def deleteDuplicates(self, head: ListNode) -&gt; ListNode:
-        node = head#注意这里是引用地址，标记这初始地址，但是next是调用属性，所以操作node实际上就是改变了head链表，head还是一开始的地址，但是node已经不是了
-        while node and node.next:#注意先把node放前面，因为如果node为空，node会出现断路现象，保护后面next条件不报错
-            if node.val == node.next.val:
-                node.next = node.next.next
-            else:
-                node = node.next
-        return head#返回初始地址！所以不能用node
-</code></pre>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="大神做法1">#大神做法1：</h1>
-<p>双指针算法<br>
-建议自己多画画图就知道了，用a来遍历整个链表，用head来改变整个链表。</p>
-<pre><code class="language-Python">class Solution:
-    def deleteDuplicates(self, head: ListNode) -&gt; ListNode:
-        if head is None or head.next is None:
-            return head
-        head_copy = head
-        a = head
-        while a:
-            if a.val == head.val:
-                a = a.next
-                if a.next is None:
-                    if a.val == head.val:
-                        head.next = None
-                    else:
-                        head.next = a
-                    break
-            else:
-                head.next = a
-                head = head.next
+    def sortedArrayToBST(self, nums: List[int]) -&gt; TreeNode:
+        maxlength=len(nums)
+        def DFS(left,right):
+            if left&gt;right:
+                return
+            mid=(left+right)//2
+            root=TreeNode(nums[mid])
+            root.left=DFS(left,mid-1)
+            root.right=DFS(mid+1, right)
+            return root
+        return DFS(0, maxlength-1)
 
-        return head_copy
+
 </code></pre>
 
                 </div>
@@ -170,14 +140,14 @@
         
             <div class="next-post">
                 <div class="next gt-c-content-color-first">下一篇</div>
-                <a href="https://ganhan999.github.io/post/70、爬楼梯/" class="post-title gt-a-link">
-                    70、爬楼梯
+                <a href="https://ganhan999.github.io/post/107、二叉树的层次遍历 II/" class="post-title gt-a-link">
+                    107、二叉树的层次遍历 II
                 </a>
             </div>
         
 
         
-            <span id="/post/83、删除排序链表中的重复元素/" class="leancloud_visitors" data-flag-title="83、删除排序链表中的重复元素">
+            <span id="/post/108、将有序数组转换为二叉搜索树/" class="leancloud_visitors" data-flag-title="108、将有序数组转换为二叉搜索树">
                 <em class="post-meta-item-text">阅读量 </em>
                 <i class="leancloud-visitors-count">0</i>
             </span>

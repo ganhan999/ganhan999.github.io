@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ganhan999.github.io/</id>
     <title>Gridea</title>
-    <updated>2020-11-21T11:31:42.148Z</updated>
+    <updated>2020-11-23T11:45:52.515Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ganhan999.github.io/"/>
     <link rel="self" href="https://ganhan999.github.io/atom.xml"/>
@@ -10,6 +10,142 @@
     <logo>https://ganhan999.github.io/images/avatar.png</logo>
     <icon>https://ganhan999.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Gridea</rights>
+    <entry>
+        <title type="html"><![CDATA[110、平衡二叉树]]></title>
+        <id>https://ganhan999.github.io/post/110、平衡二叉树/</id>
+        <link href="https://ganhan999.github.io/post/110、平衡二叉树/">
+        </link>
+        <updated>2020-11-22T12:31:32.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
+<p>给定一个二叉树，判断它是否是高度平衡的二叉树。<br>
+本题中，一棵高度平衡二叉树定义为：<br>
+一个二叉树每个节点 的左右两个子树的高度差的绝对值不超过 1 。</p>
+<p>示例 1：<br>
+输入：root = [3,9,20,null,null,15,7]<br>
+输出：true</p>
+<p>示例 2：<br>
+输入：root = [1,2,2,3,3,null,null,4,4]<br>
+输出：false</p>
+<p>示例 3：<br>
+输入：root = []<br>
+输出：true</p>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="本体思路">本体思路</h1>
+<p>递归每一个节点的平衡因子，如果绝对值小于2，那么就平衡。<br>
+用到了求最大深度的函数</p>
+<h1 id="我的做法">#我的做法：</h1>
+<pre><code class="language-python">class Solution:
+    def isBalanced(self, root: TreeNode) -&gt; bool:
+        if not root:
+            return True
+        return abs(self.height(root.right)-self.height(root.left))&lt;2 and self.isBalanced(root.left) and self.isBalanced(root.right)
+	# 求高度
+    def height(self, node):
+        if not node:
+            return 0
+        return 1+max(self.height(node.right),self.height(node.left))
+</code></pre>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="大神做法1">#大神做法1：</h1>
+<p>利用字典保存，最大深度的值，可以减少递归次数。</p>
+<pre><code class="language-Python">class Solution:
+    dct = {}
+    def isBalanced(self, root: TreeNode) -&gt; bool:
+        if not root:
+            return True
+
+        def maxDepth(root: TreeNode) -&gt; int:
+            if not root:
+                return 0
+            if root not in self.dct:
+                self.dct[root] = 1 + max(maxDepth(root.left), maxDepth(root.right))
+            return self.dct[root]
+
+        tmp = maxDepth(root.left) - maxDepth(root.right)
+        return abs(tmp)&lt;2  and self.isBalanced(root.left) and self.isBalanced(root.right)
+
+</code></pre>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="大神做法2">#大神做法2：</h1>
+<p>在求取左右子节点时，判断子节点是否失衡，<br>
+如果失衡则无需求根节点的平衡度，向上通知提前退出递归。<br>
+因为-1表示递归提前退出或者失衡.<br>
+如果左子树已经出现了失衡状况，就只会遍历一半！！！<br>
+在算深度的时候，就把平衡的条件给判定了。</p>
+<pre><code class="language-Python">class Solution:
+    def height(self, root):
+        if root is None:
+            return 0
+        left = self.height(root.left)
+        if left &lt; 0: return -1#左子树失衡
+        right = self.height(root.right)
+        if right &lt; 0 : return -1#右子树失衡
+        if abs(left - right) &gt; 1:
+            return -1#当前节点失衡
+        return max(left, right) + 1#平衡，继续递归
+
+    def isBalanced(self, root: TreeNode) -&gt; bool:
+        return self.height(root) &gt;= 0
+</code></pre>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="大神做法3">#大神做法3：</h1>
+<p>自底向上<br>
+通过直接判断左右子树高度，改变res参数，递归仍然会进行完毕</p>
+<pre><code class="language-Python">class Solution:
+    def isBalanced(self, root: TreeNode) -&gt; bool:
+        self.res = True
+        def helper(root):
+            if not root:
+                return 0
+            left = helper(root.left) + 1
+            right = helper(root.right) + 1
+            #print(right, left)
+            if abs(right - left) &gt; 1:
+                self.res = False
+            return max(left, right)
+        helper(root)
+        return self.res
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[108、将有序数组转换为二叉搜索树]]></title>
+        <id>https://ganhan999.github.io/post/108、将有序数组转换为二叉搜索树/</id>
+        <link href="https://ganhan999.github.io/post/108、将有序数组转换为二叉搜索树/">
+        </link>
+        <updated>2020-11-22T11:31:32.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
+<p>将一个按照升序排列的有序数组，转换为一棵高度平衡二叉搜索树。<br>
+本题中，一个高度平衡二叉树是指一个二叉树每个节点 的左右两个子树的高度差的绝对值不超过 1。</p>
+<p>示例:<br>
+给定有序数组: [-10,-3,0,5,9],</p>
+<p>一个可能的答案是：[0,-3,9,-10,null,5]，它可以表示下面这个高度平衡二叉搜索树：</p>
+<p>​       0<br>
+​      / \</p>
+<p>-3   9<br>
+/   /<br>
+-10  5</p>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="本体思路">本体思路</h1>
+<p>DFS，递归，用二分的思想。</p>
+<h1 id="我的做法">#我的做法：</h1>
+<pre><code class="language-python">class Solution:
+    def sortedArrayToBST(self, nums: List[int]) -&gt; TreeNode:
+        maxlength=len(nums)
+        def DFS(left,right):
+            if left&gt;right:
+                return
+            mid=(left+right)//2
+            root=TreeNode(nums[mid])
+            root.left=DFS(left,mid-1)
+            root.right=DFS(mid+1, right)
+            return root
+        return DFS(0, maxlength-1)
+
+
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[107、二叉树的层次遍历 II]]></title>
         <id>https://ganhan999.github.io/post/107、二叉树的层次遍历 II/</id>
@@ -591,70 +727,6 @@ nums2.length == n</p>
         for i in range(3,n+1):
             dp[i] = dp[i-1] + dp[i-2]
         return dp[n]
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[今天面基了百万粉丝up主！！！！！]]></title>
-        <id>https://ganhan999.github.io/post/jin-tian-mian-ji-liao-bai-wan-fen-si-up-zhu/</id>
-        <link href="https://ganhan999.github.io/post/jin-tian-mian-ji-liao-bai-wan-fen-si-up-zhu/">
-        </link>
-        <updated>2020-11-14T13:57:50.000Z</updated>
-        <content type="html"><![CDATA[<p>南昌之光！大胡子魏！<br>
-从1万粉丝到114万粉丝，不用一年就办到了！<br>
-而且我觉得他三观很正！非常喜欢他！<br>
-今天参加了他的慈善拍卖会！<br>
-我也贡献了200元的慈善金买了一幅画，我觉得这幅画很像我以前住的老房子！<br>
-买到就是赚到！<br>
-<img src="https://ganhan999.github.io//post-images/1605362649468.jpg" alt="" loading="lazy"></p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[69、x的平方根]]></title>
-        <id>https://ganhan999.github.io/post/69、x的平方根/</id>
-        <link href="https://ganhan999.github.io/post/69、x的平方根/">
-        </link>
-        <updated>2020-11-14T13:51:00.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
-<p>实现 int sqrt(int x) 函数。<br>
-计算并返回 x 的平方根，其中 x 是非负整数。<br>
-由于返回类型是整数，结果只保留整数的部分，小数部分将被舍去。</p>
-<p>示例 1:<br>
-输入: 4<br>
-输出: 2</p>
-<p>示例 2:<br>
-输入: 8<br>
-输出: 2<br>
-说明: 8 的平方根是 2.82842...,<br>
-由于返回类型是整数，小数部分将被舍去。</p>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="本体思路">本体思路</h1>
-<p>二分法就完事了，比较简单（但是我一开始还是想穷举法，笨啊！）</p>
-<h1 id="我的做法">#我的做法：</h1>
-<pre><code class="language-python">class Solution:
-    def mySqrt(self, x: int) -&gt; int:
-        low=0
-        high=x
-        while low&lt;=high:
-            mid=(low+high)//2
-            if mid**2&lt;=x:
-                ans=mid
-                low=mid+1
-            else:
-                high=mid-1
-        return ans
-
-</code></pre>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="大神做法">#大神做法：</h1>
-<p>√x=e的1/2lnx次方（有点蠢）</p>
-<pre><code class="language-Python">class Solution:
-    def mySqrt(self, x: int) -&gt; int:
-        if x == 0:
-            return 0
-        ans = int(math.exp(0.5 * math.log(x)))
-        return ans + 1 if (ans + 1) ** 2 &lt;= x else ans
-
 </code></pre>
 ]]></content>
     </entry>
