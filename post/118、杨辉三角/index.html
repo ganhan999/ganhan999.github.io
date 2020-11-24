@@ -4,7 +4,7 @@
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-<title>27、移除元素 | Gridea</title>
+<title>118、杨辉三角 | Gridea</title>
 
 <link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1606226257573">
 
@@ -89,11 +89,11 @@
         <div class="post-detail gt-bg-theme-color-second">
             <article class="gt-post-content">
                 <h2 class="post-title">
-                    27、移除元素
+                    118、杨辉三角
                 </h2>
                 <div class="post-info">
                     <time class="post-time gt-c-content-color-first">
-                        · 2020-11-06 ·
+                        · 2020-11-24 ·
                     </time>
                     
                         <a href="https://ganhan999.github.io/tag/cKyYTCK2Y/" class="post-tags">
@@ -103,76 +103,52 @@
                 </div>
                 <div class="post-content">
                     <h1 id="题目">题目</h1>
-<p>&quot;&quot;&quot;<br>
-给你一个数组 nums 和一个值 val，你需要 原地 移除所有数值等于 val 的元素，并返回移除后数组的新长度。<br>
-不要使用额外的数组空间，你必须仅使用 O(1) 额外空间并 原地 修改输入数组。<br>
-元素的顺序可以改变。你不需要考虑数组中超出新长度后面的元素。</p>
-<p>示例 1:<br>
-给定 nums = [3,2,2,3], val = 3,<br>
-函数应该返回新的长度 2, 并且 nums 中的前两个元素均为 2。<br>
-你不需要考虑数组中超出新长度后面的元素。</p>
-<p>示例 2:<br>
-给定 nums = [0,1,2,2,3,0,4,2], val = 2,<br>
-函数应该返回新的长度 5, 并且 nums 中的前五个元素为 0, 1, 3, 0, 4。<br>
-注意这五个元素可为任意顺序。<br>
-你不需要考虑数组中超出新长度后面的元素。</p>
-<p>&quot;&quot;&quot;</p>
+<p>给定一个非负整数 numRows，生成杨辉三角的前 numRows 行。<br>
+示例:</p>
+<p>输入: 5<br>
+输出:<br>
+[<br>
+[1],<br>
+[1,1],<br>
+[1,2,1],<br>
+[1,3,3,1],<br>
+[1,4,6,4,1]<br>
+]</p>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
 <h1 id="本体思路">本体思路</h1>
-<p>如果val在列表中，那么就使用index函数得到他的位置，然后再进行一个一个的pop，比较简单</p>
+<p>在每一层加完后，左右加上元素1</p>
 <h1 id="我的做法">#我的做法：</h1>
 <pre><code class="language-python">class Solution:
-    def removeElement(self, nums: List[int], val: int) -&gt; int:
-        lens=len(nums)
-        i=0
-        if lens==0:
-            return 0
-        while i&lt;=lens-1:
-            if val in nums:
-                inde=nums.index(val)
-                nums.pop(inde)
-                print()
-            else:
-                i=i+1
-        return len(nums)
+    def generate(self, numRows: int) -&gt; List[List[int]]:
+        if numRows==0:
+            return []
+        if numRows==1:
+            return [[1]]
+        if numRows==1:
+            return [[1],[1,1]]
+        li = [[1], [1, 1]]
+        for i in range(3,numRows+1):
+            new=[]
+            for j in range(i-2):
+                new.append(li[i-2][j]+li[i-2][j+1])
+            new.insert(0, 1)
+            new.append(1)
+            li.append(new)
+        return li
+</code></pre>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="大神做法">#大神做法：</h1>
+<p>先生成都是1的一列，再通过代替获得。</p>
+<pre><code class="language-Python">class Solution:
+    def generate(self, numRows: int) -&gt; List[List[int]]:
+        res = []
+        for i in range(numRows):
+            res.append([1] * (i + 1))
+            for j in range(1, i):
+                res[i][j] = res[i - 1][j - 1] + res[i - 1][j]
+        return res
 
 </code></pre>
-<p>&quot;&quot;&quot;</p>
-<h1 id="大神做法1">大神做法1：</h1>
-<p>双指针法：题意可以理解为直接修改前k个数，因此无需删除操作</p>
-<p>&quot;&quot;&quot;</p>
-<pre><code class="language-python">class Solution:
-    def removeElement(self, nums: List[int], val: int) -&gt; int:
-        for i in range(nums.count(val)):
-            nums.remove(val)
-        return len(nums)
-
-
-
-#复现成功！
-</code></pre>
-<h1 id="大神做法2">大神做法2：</h1>
-<p>双指针其实就是两个数，分别代表两个index，表示数组中第几个数的意思。<br>
-比如这里，我们让a代表一个index，b代表一个index<br>
-然后我们让a一直往后移动，相当于nums[a]从数组第一个数遍历到最后一个数。<br>
-当且仅当我们发现nums[a] != val的时候，我们把这个数拷贝到b指向的位置，<br>
-默认b是从0开始的，然后b += 1指向下一个位置。</p>
-<p>&quot;&quot;&quot;</p>
-<pre><code class="language-python">class Solution:
-    def removeElement(self, nums: List[int], val: int) -&gt; int:
-        a = 0
-        b = 0
-
-        while a &lt; len(nums):
-            if nums[a] != val:
-                nums[b] = nums[a]
-                b += 1
-            a += 1
-        return b
-
-
-#复现成功！
-</code></pre>
-<p>&quot;&quot;&quot;</p>
 
                 </div>
             </article>
@@ -181,14 +157,14 @@
         
             <div class="next-post">
                 <div class="next gt-c-content-color-first">下一篇</div>
-                <a href="https://ganhan999.github.io/post/边缘检测算子汇总/" class="post-title gt-a-link">
-                    边缘检测算子汇总
+                <a href="https://ganhan999.github.io/post/112、 路径总和/" class="post-title gt-a-link">
+                    112、 路径总和
                 </a>
             </div>
         
 
         
-            <span id="/post/27、移除元素/" class="leancloud_visitors" data-flag-title="27、移除元素">
+            <span id="/post/118、杨辉三角/" class="leancloud_visitors" data-flag-title="118、杨辉三角">
                 <em class="post-meta-item-text">阅读量 </em>
                 <i class="leancloud-visitors-count">0</i>
             </span>
