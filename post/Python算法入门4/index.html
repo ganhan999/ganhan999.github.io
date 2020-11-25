@@ -4,7 +4,7 @@
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-<title>28、实现 strStr() | Gridea</title>
+<title>Python算法入门 (动态规划) | Gridea</title>
 
 <link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1606277907458">
 
@@ -89,84 +89,224 @@
         <div class="post-detail gt-bg-theme-color-second">
             <article class="gt-post-content">
                 <h2 class="post-title">
-                    28、实现 strStr()
+                    Python算法入门 (动态规划)
                 </h2>
                 <div class="post-info">
                     <time class="post-time gt-c-content-color-first">
-                        · 2020-11-07 ·
+                        · 2020-11-25 ·
                     </time>
                     
-                        <a href="https://ganhan999.github.io/tag/cKyYTCK2Y/" class="post-tags">
-                            # leetcode
+                        <a href="https://ganhan999.github.io/tag/P1Rgvx92_/" class="post-tags">
+                            # 生活日常
                         </a>
                     
                 </div>
                 <div class="post-content">
-                    <h1 id="题目">题目</h1>
-<p>&quot;&quot;&quot;<br>
-实现 strStr() 函数。</p>
-<p>给定一个 haystack 字符串和一个 needle 字符串，在 haystack 字符串中找出<br>
-needle 字符串出现的第一个位置 (从0开始)。如果不存在，则返回 -1。</p>
-<p>示例 1:<br>
-输入: haystack = &quot;hello&quot;, needle = &quot;ll&quot;<br>
-输出: 2</p>
-<p>示例 2:<br>
-输入: haystack = &quot;aaaaa&quot;, needle = &quot;bba&quot;<br>
-输出: -1</p>
-<p>说明:<br>
-当 needle 是空字符串时，我们应当返回什么值呢？这是一个在面试中很好的问题。<br>
-对于本题而言，当 needle 是空字符串时我们应当返回 0 。这与C语言的 strstr() 以及 Java的 indexOf() 定义相符。</p>
-<p>&quot;&quot;&quot;</p>
-<h1 id="本体思路">本体思路</h1>
-<p>利用python中find函数便可以直接找到，子字符串的初始位置。</p>
-<h1 id="我的做法">#我的做法：</h1>
-<pre><code class="language-python">class Solution:
-    def removeElement(self, nums: List[int], val: int) -&gt; int:
-        lens=len(nums)
-        i=0
-        if lens==0:
-            return 0
-        while i&lt;=lens-1:
-            if val in nums:
-                inde=nums.index(val)
-                nums.pop(inde)
-                print()
+                    <h1 id="动态规划">动态规划</h1>
+<p><strong>1、斐波那契数列</strong></p>
+<pre><code class="language-python"># 子问题的重复计算
+def fibnacci(n):
+    if n == 1 or n == 2:
+        return 1
+    else:
+        return fibnacci(n-1) + fibnacci(n-2)
+
+
+# 动态规划（DP）的思想 = 递推式 + 重复子问题
+def fibnacci_no_recurision(n):
+    f = [0,1,1]
+    if n &gt; 2:
+        for i in range(n-2):
+            num = f[-1] + f[-2]
+            f.append(num)
+    return f[n]
+
+print(fibnacci_no_recurision(100))
+</code></pre>
+<p><strong>2、最长公共子序列</strong></p>
+<pre><code class="language-python">def lcs_length(x, y):
+    m = len(x)
+    n = len(y)
+    c = [[0 for _ in range(n+1)] for _ in range(m+1)]
+    for i in range(1, m+1):
+        for j in range(1, n+1):
+            if x[i-1] == y[j-1]:    # i j 位置上的字符匹配的时候，来自于左上方+1
+                c[i][j] = c[i-1][j-1] + 1
             else:
-                i=i+1
-        return len(nums)
+                c[i][j] = max(c[i-1][j], c[i][j-1])
+    return c[m][n]
 
+def lcs(x, y):
+    m = len(x)
+    n = len(y)
+    c = [[0 for _ in range(n + 1)] for _ in range(m + 1)]
+    b = [[0 for _ in range(n + 1)] for _ in range(m + 1)] # 1 左上方 2 上方 3 左方
+    for i in range(1, m+1):
+        for j in range(1, n+1):
+            if x[i-1] == y[j-1]:    # i j 位置上的字符匹配的时候，来自于左上方+1
+                c[i][j] = c[i-1][j-1] + 1
+                b[i][j] = 1
+            elif c[i-1][j] &gt; c[i][j-1]: # 来自于上方
+                c[i][j] = c[i-1][j]
+                b[i][j] = 2
+            else:
+                c[i][j] = c[i][j-1]
+                b[i][j] = 3
+    return c[m][n], b
+
+
+def lcs_trackback(x, y):
+    c, b = lcs(x, y)
+    i = len(x)
+    j = len(y)
+    res = []
+    while i &gt; 0 and j &gt; 0:
+        if b[i][j] == 1:    # 来自左上方=&gt;匹配
+            res.append(x[i-1])
+            i -= 1
+            j -= 1
+        elif b[i][j] == 2:  # 来自于上方=&gt;不匹配
+            i -= 1
+        else: # ==3 来自于左方=&gt;不匹配
+            j -= 1
+    return &quot;&quot;.join(reversed(res))
+
+
+print(lcs_trackback(&quot;ABCBDAB&quot;, &quot;BDCABA&quot;))
 </code></pre>
-<p>&quot;&quot;&quot;</p>
-<h1 id="大神做法1">大神做法1：</h1>
-<p>双指针法：题意可以理解为直接修改前k个数，因此无需删除操作</p>
-<p>&quot;&quot;&quot;</p>
-<pre><code class="language-python">class Solution:
-    def strStr(self, haystack: str, needle: str) -&gt; int:
-        if not needle:
-            return 0
-        return haystack.find(needle)
+<p><strong>3、最大公约数</strong></p>
+<pre><code class="language-python">def gcd(a, b):
+    if b == 0:
+        return a
+    else:
+        return gcd(b, a % b)
 
 
+def gcd2(a, b):
+    while b &gt; 0:
+        r = a % b
+        a = b
+        b = r
+    return a
 
-#复现成功！
+
+print(gcd2(12,16))
 </code></pre>
-<h1 id="大神做法2">大神做法2：</h1>
-<p>利用切片思想，循环len(haystack) - len(needle) + 1次</p>
-<p>&quot;&quot;&quot;</p>
-<pre><code class="language-python">class Solution:
-    def strStr(self, haystack: 'str', needle: 'str') -&gt; 'int':
-        for i in range(0, len(haystack) - len(needle) + 1):
-            if haystack[i:i + len(needle)] == needle:
-                return i
-        return -1
+<p><strong>4、切木头问题</strong></p>
+<pre><code class="language-python">p = [0, 1, 5, 8, 9, 10, 17, 17, 20, 21, 23, 24, 26, 27, 27, 28, 30, 33, 36, 39, 40]
+# p = [0, 1, 5, 8, 9, 10, 17, 17, 20, 24, 30]
 
 
-#复现成功！
+def cut_rod_recurision_1(p, n):
+    if n == 0:
+        return 0
+    else:
+        res = p[n]
+        for i in range(1, n):
+            res = max(res, cut_rod_recurision_1(p, i) + cut_rod_recurision_1(p, n-i))
+        return res
+
+
+def c1(p, n):
+    return cut_rod_recurision_1(p, n)
+
+
+def cut_rod_recurision_2(p, n):
+    if n == 0:
+        return 0
+    else:
+        res = 0
+        for i in range(1, n+1):
+            res = max(res, p[i] + cut_rod_recurision_2(p, n-i))
+        return res
+
+
+def c2(p,n):
+    return cut_rod_recurision_2(p, n)
+
+
+
+def cut_rod_dp(p, n):
+    r = [0]
+    for i in range(1, n+1):
+        res = 0
+        for j in range(1, i+1):
+            res = max(res, p[j] + r[i - j])
+        r.append(res)
+    return r[n]
+
+
+def cut_rod_extend(p, n):
+    r = [0]
+    s = [0]
+    for i in range(1, n+1):
+        res_r = 0 # 价格的最大值
+        res_s = 0 # 价格最大值对应方案的左边不切割部分的长度
+        for j in range(1, i + 1):
+            if p[j] + r[i - j] &gt; res_r:
+                res_r = p[j] + r[i - j]
+                res_s = j
+        r.append(res_r)
+        s.append(res_s)
+    return r[n], s
+
+
+def cut_rod_solution(p, n):
+    r, s = cut_rod_extend(p, n)
+    ans = []
+    while n &gt; 0:
+        ans.append(s[n])
+        n -= s[n]
+    return ans
+
+
+r, s = cut_rod_extend(p,20)
+print(s)
+
+print(cut_rod_dp(p, 20))
+print(cut_rod_solution(p, 20))
 </code></pre>
-<p>&quot;&quot;&quot;</p>
-<p>&quot;&quot;&quot;<br>
-下面是find函数的介绍</p>
-<p>&quot;&quot;&quot;</p>
+<p><strong>5、分数相加</strong></p>
+<pre><code class="language-Python">class Fraction:
+    def __init__(self, a, b):
+        self.a = a
+        self.b = b
+        x = self.gcd(a,b)
+        self.a /= x
+        self.b /= x
+
+    def gcd(self, a, b):
+        while b &gt; 0:
+            r = a % b
+            a = b
+            b = r
+        return a
+
+    def zgs(self, a, b):
+        # 12 16 -&gt; 4
+        # 3*4*4=48
+        x = self.gcd(a, b)
+        return a * b / x
+
+    def __add__(self, other):
+        a = self.a
+        b = self.b
+        c = other.a
+        d = other.b
+        fenmu = self.zgs(b, d)
+        fenzi = a * fenmu / b + c * fenmu / d
+        return Fraction(fenzi, fenmu)
+
+
+
+    def __str__(self):
+        return &quot;%d/%d&quot; % (self.a, self.b)
+
+
+a = Fraction(1,3)
+b = Fraction(1,2)
+print(a+b)
+</code></pre>
 
                 </div>
             </article>
@@ -175,14 +315,14 @@ needle 字符串出现的第一个位置 (从0开始)。如果不存在，则返
         
             <div class="next-post">
                 <div class="next gt-c-content-color-first">下一篇</div>
-                <a href="https://ganhan999.github.io/post/27、移除元素/" class="post-title gt-a-link">
-                    27、移除元素
+                <a href="https://ganhan999.github.io/post/Python算法入门3/" class="post-title gt-a-link">
+                    Python算法入门 (贪心算法)
                 </a>
             </div>
         
 
         
-            <span id="/post/28、 实现 strStr()/" class="leancloud_visitors" data-flag-title="28、实现 strStr()">
+            <span id="/post/Python算法入门4/" class="leancloud_visitors" data-flag-title="Python算法入门 (动态规划)">
                 <em class="post-meta-item-text">阅读量 </em>
                 <i class="leancloud-visitors-count">0</i>
             </span>

@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ganhan999.github.io/</id>
     <title>Gridea</title>
-    <updated>2020-11-25T04:06:44.523Z</updated>
+    <updated>2020-11-25T04:18:30.470Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ganhan999.github.io/"/>
     <link rel="self" href="https://ganhan999.github.io/atom.xml"/>
@@ -10,6 +10,219 @@
     <logo>https://ganhan999.github.io/images/avatar.png</logo>
     <icon>https://ganhan999.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Gridea</rights>
+    <entry>
+        <title type="html"><![CDATA[Python算法入门 (动态规划)]]></title>
+        <id>https://ganhan999.github.io/post/Python算法入门4/</id>
+        <link href="https://ganhan999.github.io/post/Python算法入门4/">
+        </link>
+        <updated>2020-11-25T04:18:25.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="动态规划">动态规划</h1>
+<p><strong>1、斐波那契数列</strong></p>
+<pre><code class="language-python"># 子问题的重复计算
+def fibnacci(n):
+    if n == 1 or n == 2:
+        return 1
+    else:
+        return fibnacci(n-1) + fibnacci(n-2)
+
+
+# 动态规划（DP）的思想 = 递推式 + 重复子问题
+def fibnacci_no_recurision(n):
+    f = [0,1,1]
+    if n &gt; 2:
+        for i in range(n-2):
+            num = f[-1] + f[-2]
+            f.append(num)
+    return f[n]
+
+print(fibnacci_no_recurision(100))
+</code></pre>
+<p><strong>2、最长公共子序列</strong></p>
+<pre><code class="language-python">def lcs_length(x, y):
+    m = len(x)
+    n = len(y)
+    c = [[0 for _ in range(n+1)] for _ in range(m+1)]
+    for i in range(1, m+1):
+        for j in range(1, n+1):
+            if x[i-1] == y[j-1]:    # i j 位置上的字符匹配的时候，来自于左上方+1
+                c[i][j] = c[i-1][j-1] + 1
+            else:
+                c[i][j] = max(c[i-1][j], c[i][j-1])
+    return c[m][n]
+
+def lcs(x, y):
+    m = len(x)
+    n = len(y)
+    c = [[0 for _ in range(n + 1)] for _ in range(m + 1)]
+    b = [[0 for _ in range(n + 1)] for _ in range(m + 1)] # 1 左上方 2 上方 3 左方
+    for i in range(1, m+1):
+        for j in range(1, n+1):
+            if x[i-1] == y[j-1]:    # i j 位置上的字符匹配的时候，来自于左上方+1
+                c[i][j] = c[i-1][j-1] + 1
+                b[i][j] = 1
+            elif c[i-1][j] &gt; c[i][j-1]: # 来自于上方
+                c[i][j] = c[i-1][j]
+                b[i][j] = 2
+            else:
+                c[i][j] = c[i][j-1]
+                b[i][j] = 3
+    return c[m][n], b
+
+
+def lcs_trackback(x, y):
+    c, b = lcs(x, y)
+    i = len(x)
+    j = len(y)
+    res = []
+    while i &gt; 0 and j &gt; 0:
+        if b[i][j] == 1:    # 来自左上方=&gt;匹配
+            res.append(x[i-1])
+            i -= 1
+            j -= 1
+        elif b[i][j] == 2:  # 来自于上方=&gt;不匹配
+            i -= 1
+        else: # ==3 来自于左方=&gt;不匹配
+            j -= 1
+    return &quot;&quot;.join(reversed(res))
+
+
+print(lcs_trackback(&quot;ABCBDAB&quot;, &quot;BDCABA&quot;))
+</code></pre>
+<p><strong>3、最大公约数</strong></p>
+<pre><code class="language-python">def gcd(a, b):
+    if b == 0:
+        return a
+    else:
+        return gcd(b, a % b)
+
+
+def gcd2(a, b):
+    while b &gt; 0:
+        r = a % b
+        a = b
+        b = r
+    return a
+
+
+print(gcd2(12,16))
+</code></pre>
+<p><strong>4、切木头问题</strong></p>
+<pre><code class="language-python">p = [0, 1, 5, 8, 9, 10, 17, 17, 20, 21, 23, 24, 26, 27, 27, 28, 30, 33, 36, 39, 40]
+# p = [0, 1, 5, 8, 9, 10, 17, 17, 20, 24, 30]
+
+
+def cut_rod_recurision_1(p, n):
+    if n == 0:
+        return 0
+    else:
+        res = p[n]
+        for i in range(1, n):
+            res = max(res, cut_rod_recurision_1(p, i) + cut_rod_recurision_1(p, n-i))
+        return res
+
+
+def c1(p, n):
+    return cut_rod_recurision_1(p, n)
+
+
+def cut_rod_recurision_2(p, n):
+    if n == 0:
+        return 0
+    else:
+        res = 0
+        for i in range(1, n+1):
+            res = max(res, p[i] + cut_rod_recurision_2(p, n-i))
+        return res
+
+
+def c2(p,n):
+    return cut_rod_recurision_2(p, n)
+
+
+
+def cut_rod_dp(p, n):
+    r = [0]
+    for i in range(1, n+1):
+        res = 0
+        for j in range(1, i+1):
+            res = max(res, p[j] + r[i - j])
+        r.append(res)
+    return r[n]
+
+
+def cut_rod_extend(p, n):
+    r = [0]
+    s = [0]
+    for i in range(1, n+1):
+        res_r = 0 # 价格的最大值
+        res_s = 0 # 价格最大值对应方案的左边不切割部分的长度
+        for j in range(1, i + 1):
+            if p[j] + r[i - j] &gt; res_r:
+                res_r = p[j] + r[i - j]
+                res_s = j
+        r.append(res_r)
+        s.append(res_s)
+    return r[n], s
+
+
+def cut_rod_solution(p, n):
+    r, s = cut_rod_extend(p, n)
+    ans = []
+    while n &gt; 0:
+        ans.append(s[n])
+        n -= s[n]
+    return ans
+
+
+r, s = cut_rod_extend(p,20)
+print(s)
+
+print(cut_rod_dp(p, 20))
+print(cut_rod_solution(p, 20))
+</code></pre>
+<p><strong>5、分数相加</strong></p>
+<pre><code class="language-Python">class Fraction:
+    def __init__(self, a, b):
+        self.a = a
+        self.b = b
+        x = self.gcd(a,b)
+        self.a /= x
+        self.b /= x
+
+    def gcd(self, a, b):
+        while b &gt; 0:
+            r = a % b
+            a = b
+            b = r
+        return a
+
+    def zgs(self, a, b):
+        # 12 16 -&gt; 4
+        # 3*4*4=48
+        x = self.gcd(a, b)
+        return a * b / x
+
+    def __add__(self, other):
+        a = self.a
+        b = self.b
+        c = other.a
+        d = other.b
+        fenmu = self.zgs(b, d)
+        fenzi = a * fenmu / b + c * fenmu / d
+        return Fraction(fenzi, fenmu)
+
+
+
+    def __str__(self):
+        return &quot;%d/%d&quot; % (self.a, self.b)
+
+
+a = Fraction(1,3)
+b = Fraction(1,2)
+print(a+b)
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Python算法入门 (贪心算法)]]></title>
         <id>https://ganhan999.github.io/post/Python算法入门3/</id>
@@ -1590,68 +1803,6 @@ hanoi(30, 'A', 'B', 'C')
         return DFS(0, maxlength-1)
 
 
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[107、二叉树的层次遍历 II]]></title>
-        <id>https://ganhan999.github.io/post/107、二叉树的层次遍历 II/</id>
-        <link href="https://ganhan999.github.io/post/107、二叉树的层次遍历 II/">
-        </link>
-        <updated>2020-11-21T11:31:32.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
-<p>给定一个二叉树，找出其最大深度。</p>
-<p>二叉树的深度为根节点到最远叶子节点的最长路径上的节点数。</p>
-<p>说明: 叶子节点是指没有子节点的节点。</p>
-<p>示例：<br>
-给定二叉树 [3,9,20,null,null,15,7]，</p>
-<p>​      3</p>
-<p>​    / <br>
-9  20<br>
-​      /   <br>
-​    15   7<br>
-返回它的最大深度 3 。</p>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="本体思路">本体思路</h1>
-<p>BFS，每一层都放在一个队列当中</p>
-<h1 id="我的做法">#我的做法：</h1>
-<pre><code class="language-python">class Solution:
-    def levelOrderBottom(self, root: TreeNode) -&gt; List[List[int]]:
-        if not root:
-            return []
-        que=deque([root])
-        l=[]
-        while que:
-            nextque=[]
-            l1=[]
-            while que:
-                num=que.popleft()
-                l1.append(num.val)
-                if num.left:
-                    nextque.append(num.left)
-                if num.right:
-                    nextque.append(num.right)
-            l.append(l1)
-            que=deque(nextque)
-        l.reverse()
-        return l
-</code></pre>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="大神做法">#大神做法：</h1>
-<p>深度优先遍历，因为每找到一个左右节点，层数就加一层，记录层数depth，将depth作为下标。</p>
-<pre><code class="language-Python">class Solution:
-    def levelOrderBottom(self, root: TreeNode) -&gt; List[List[int]]:
-        res = []
-        def dfs(root, depth):
-            if not root:
-                return
-            if len(res)&lt;depth+1:#每多一层那么就加一个元素列表
-                res.append([])
-            res[depth].append(root.val)
-            dfs(root.left, depth+1)
-            dfs(root.right, depth+1)
-        dfs(root,0)
-        return res[::-1]
 </code></pre>
 ]]></content>
     </entry>
