@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ganhan999.github.io/</id>
     <title>Gridea</title>
-    <updated>2020-11-25T04:24:02.334Z</updated>
+    <updated>2020-11-25T09:15:28.720Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ganhan999.github.io/"/>
     <link rel="self" href="https://ganhan999.github.io/atom.xml"/>
@@ -10,6 +10,60 @@
     <logo>https://ganhan999.github.io/images/avatar.png</logo>
     <icon>https://ganhan999.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Gridea</rights>
+    <entry>
+        <title type="html"><![CDATA[121、买卖股票的最佳时机]]></title>
+        <id>https://ganhan999.github.io/post/121、 买卖股票的最佳时机/</id>
+        <link href="https://ganhan999.github.io/post/121、 买卖股票的最佳时机/">
+        </link>
+        <updated>2020-11-25T09:21:32.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
+<p>给定一个数组，它的第 i 个元素是一支给定股票第 i 天的价格。<br>
+如果你最多只允许完成一笔交易（即买入和卖出一支股票一次），<br>
+设计一个算法来计算你所能获取的最大利润。<br>
+注意：你不能在买入股票前卖出股票。</p>
+<p>示例 1:<br>
+输入: [7,1,5,3,6,4]<br>
+输出: 5<br>
+解释: 在第 2 天（股票价格 = 1）的时候买入，在第 5 天（股票价格 = 6）的时候卖出，最大利润 = 6-1 = 5 。<br>
+注意利润不能是 7-1 = 6, 因为卖出价格需要大于买入价格；同时，你不能在买入前卖出股票。</p>
+<p>示例 2:<br>
+输入: [7,6,4,3,1]<br>
+输出: 0<br>
+解释: 在这种情况下, 没有交易完成, 所以最大利润为 0。</p>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="本体思路">本体思路</h1>
+<p>从第一天开始遍历，如果后一天与当前最小值的差值大于最大差值，那么就记录该差值，否则保持不变。<br>
+记得要随时改变最小值。</p>
+<h1 id="我的做法">#我的做法：</h1>
+<pre><code class="language-python">class Solution:
+    def maxProfit(self, prices: List[int]) -&gt; int:
+        if not prices:
+            return 0
+        minval=prices[0]
+        maxans=0
+        for p in prices:
+            minval=min(minval,p)
+            maxans=max(maxans,p-minval)
+        return maxans	
+</code></pre>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="大神做法">#大神做法：</h1>
+<p>动态规划<br>
+dp[i] 表示前 ii 天的最大利润，因为我们始终要使利润最大化，则：<br>
+dp[i] = max(dp[i-1], prices[i]-minprice)</p>
+<pre><code class="language-Python">class Solution:
+    def maxProfit(self, prices: List[int]) -&gt; int:
+        n = len(prices)
+        if n == 0: return 0  # 边界条件
+        dp = [0] * n
+        minprice = prices[0]
+        for i in range(1,n):
+            minprice=min(prices[i],minprice)
+            dp[i]=max(dp[i-1],prices[i]-minprice)
+        return dp[-1]
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Python算法入门 (动态规划)]]></title>
         <id>https://ganhan999.github.io/post/Python算法入门4/</id>
@@ -1765,44 +1819,6 @@ hanoi(30, 'A', 'B', 'C')
             return max(left, right)
         helper(root)
         return self.res
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[108、将有序数组转换为二叉搜索树]]></title>
-        <id>https://ganhan999.github.io/post/108、将有序数组转换为二叉搜索树/</id>
-        <link href="https://ganhan999.github.io/post/108、将有序数组转换为二叉搜索树/">
-        </link>
-        <updated>2020-11-22T11:31:32.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
-<p>将一个按照升序排列的有序数组，转换为一棵高度平衡二叉搜索树。<br>
-本题中，一个高度平衡二叉树是指一个二叉树每个节点 的左右两个子树的高度差的绝对值不超过 1。</p>
-<p>示例:<br>
-给定有序数组: [-10,-3,0,5,9],</p>
-<p>一个可能的答案是：[0,-3,9,-10,null,5]，它可以表示下面这个高度平衡二叉搜索树：</p>
-<p>​       0<br>
-​      / \</p>
-<p>-3   9<br>
-/   /<br>
--10  5</p>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="本体思路">本体思路</h1>
-<p>DFS，递归，用二分的思想。</p>
-<h1 id="我的做法">#我的做法：</h1>
-<pre><code class="language-python">class Solution:
-    def sortedArrayToBST(self, nums: List[int]) -&gt; TreeNode:
-        maxlength=len(nums)
-        def DFS(left,right):
-            if left&gt;right:
-                return
-            mid=(left+right)//2
-            root=TreeNode(nums[mid])
-            root.left=DFS(left,mid-1)
-            root.right=DFS(mid+1, right)
-            return root
-        return DFS(0, maxlength-1)
-
-
 </code></pre>
 ]]></content>
     </entry>
