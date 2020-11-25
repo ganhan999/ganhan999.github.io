@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ganhan999.github.io/</id>
     <title>Gridea</title>
-    <updated>2020-11-25T03:45:57.643Z</updated>
+    <updated>2020-11-25T04:06:44.523Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ganhan999.github.io/"/>
     <link rel="self" href="https://ganhan999.github.io/atom.xml"/>
@@ -10,6 +10,84 @@
     <logo>https://ganhan999.github.io/images/avatar.png</logo>
     <icon>https://ganhan999.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Gridea</rights>
+    <entry>
+        <title type="html"><![CDATA[Python算法入门 (贪心算法)]]></title>
+        <id>https://ganhan999.github.io/post/Python算法入门3/</id>
+        <link href="https://ganhan999.github.io/post/Python算法入门3/">
+        </link>
+        <updated>2020-11-25T04:06:35.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="贪心算法">贪心算法</h1>
+<p><strong>1、找零问题</strong></p>
+<pre><code class="language-python">t = [100, 50, 20, 5]
+
+def change(t, n):
+    m = [0 for _ in range(len(t))]
+    for i, money in enumerate(t):
+        m[i] = n // money
+        n = n % money   
+    return m, n
+
+print(change(t, 376))
+</code></pre>
+<p><strong>2、背包问题</strong></p>
+<pre><code class="language-python">goods = [(60, 10),(100, 20),(120, 30)]  # 每个商品元组表示(价格, 重量)
+goods.sort(key=lambda x: x[0]/x[1], reverse=True)
+
+def fractional_backpack(goods, w):
+    m = [0 for _ in range(len(goods))]
+    total_v = 0
+    for i, (prize, weight) in enumerate(goods):
+        if w &gt;= weight:
+            m[i] = 1
+            total_v += prize
+            w -= weight
+        else:
+            m[i] = w / weight
+            total_v += m[i] * prize
+            w = 0
+            break
+    return total_v, m
+
+print(fractional_backpack(goods, 50))
+</code></pre>
+<p><strong>3、活动时间安排问题</strong></p>
+<pre><code class="language-python">#-----------------------方法1----------------------------#
+activities = [(1,4), (3,5), (0,6), (5,7), (3,9), (5,9), (6,10), (8,11), (8,12), (2,14), (12,16)]
+# 保证活动是按照结束时间排好序的
+activities.sort(key=lambda x:x[1])
+
+def activity_selection(a):
+    res = [a[0]]
+    for i in range(1, len(a)):
+        if a[i][0] &gt;= res[-1][1]:   # 当前活动的开始时间小于等于最后一个入选活动的结束时间
+            # 不冲突
+            res.append(a[i])
+    return res
+
+print(activity_selection(activities))
+</code></pre>
+<p><strong>4、组成最大数</strong></p>
+<pre><code class="language-python">from functools import cmp_to_key
+
+li = [32, 94, 128, 1286, 6, 71]
+
+def xy_cmp(x, y):
+    if x+y &lt; y+x:
+        return 1
+    elif x+y &gt; y+x:
+        return -1
+    else:
+        return 0
+
+def number_join(li):
+    li = list(map(str, li))
+    li.sort(key=cmp_to_key(xy_cmp))
+    return &quot;&quot;.join(li)
+
+print(number_join(li))
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Python算法入门（数据结构）]]></title>
         <id>https://ganhan999.github.io/post/Python算法入门2/</id>
@@ -1574,42 +1652,6 @@ hanoi(30, 'A', 'B', 'C')
             dfs(root.right, depth+1)
         dfs(root,0)
         return res[::-1]
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[树的BFS和DFS]]></title>
-        <id>https://ganhan999.github.io/post/树的BFS和DFS/</id>
-        <link href="https://ganhan999.github.io/post/树的BFS和DFS/">
-        </link>
-        <updated>2020-11-20T16:30:00.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="bfs">BFS</h1>
-<pre><code class="language-Python">class Solution:
-    def tree(self, root: TreeNode) -&gt; bool:
-        li=[]
-        self.BFS(root,li)
-        print(li)
-    def BFS(self,tree,li):
-        que=deque([tree])
-        while que:
-            num=que.popleft()
-            li.append(num.val)
-            if num.left:
-                que.append(num.left)
-            if num.right:
-                que.append(num.right)
-</code></pre>
-<h1 id="dfs前序遍历">DFS(前序遍历)</h1>
-<pre><code class="language-Python">class Solution:
-    def treec(self, root: TreeNode) -&gt; bool:
-        li=[]
-        self.pre(root,li)
-        print(li)
-    def pre(self,tree,li):
-        if tree:
-            li.append(tree.val)
-            self.pre(root.left,li)
-            self.pre(root.right,li)
 </code></pre>
 ]]></content>
     </entry>
