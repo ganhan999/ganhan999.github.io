@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ganhan999.github.io/</id>
     <title>Gridea</title>
-    <updated>2020-11-26T10:48:33.257Z</updated>
+    <updated>2020-11-26T11:09:32.231Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ganhan999.github.io/"/>
     <link rel="self" href="https://ganhan999.github.io/atom.xml"/>
@@ -34,7 +34,7 @@
 <hr>
 <hr>
 <p>一个!+[]+()表示图片</p>
-<figure data-type="image" tabindex="1"><img src="C:%5CUsers%5CWindows10%5CDocuments%5CGridea%5Cimages%5C004.jpg" alt="图片" loading="lazy"></figure>
+<figure data-type="image" tabindex="1"><img src="https://ganhan999.github.io//post-images/1606388968536.jpg" alt="" loading="lazy"></figure>
 <p>一个[]+()表示超链接</p>
 <p><a href="https://ganhan999.github.io/">点击跳转到我的博客</a></p>
 <p>数字＋.＋空格表示有序列表</p>
