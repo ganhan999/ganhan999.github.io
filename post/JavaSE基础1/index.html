@@ -4,7 +4,7 @@
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-<title>67、二进制求和 | Gridea</title>
+<title>JavaSE基础1 | Gridea</title>
 
 <link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1606387597780">
 
@@ -89,58 +89,162 @@
         <div class="post-detail gt-bg-theme-color-second">
             <article class="gt-post-content">
                 <h2 class="post-title">
-                    67、二进制求和
+                    JavaSE基础1
                 </h2>
                 <div class="post-info">
                     <time class="post-time gt-c-content-color-first">
-                        · 2020-11-13 ·
+                        · 2020-11-26 ·
                     </time>
                     
-                        <a href="https://ganhan999.github.io/tag/cKyYTCK2Y/" class="post-tags">
-                            # leetcode
+                        <a href="https://ganhan999.github.io/tag/2avA5RaAc/" class="post-tags">
+                            # Java
                         </a>
                     
                 </div>
                 <div class="post-content">
-                    <h1 id="题目">题目</h1>
-<p>&quot;&quot;&quot;<br>
-给你两个二进制字符串，返回它们的和（用二进制表示）。<br>
-输入为 非空 字符串且只包含数字 1 和 0。</p>
-<p>示例 1:<br>
-输入: a = &quot;11&quot;, b = &quot;1&quot;<br>
-输出: &quot;100&quot;</p>
-<p>示例 2:<br>
-输入: a = &quot;1010&quot;, b = &quot;1011&quot;<br>
-输出: &quot;10101&quot;</p>
-<p>提示：<br>
-每个字符串仅由字符 '0' 或 '1' 组成。<br>
-1 &lt;= a.length, b.length &lt;= 10^4<br>
-字符串如果不是 &quot;0&quot; ，就都不含前导零</p>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="本体思路">本体思路</h1>
-<p>先换成十进制然后换二进制，最后取一个[2:]，注意bin（）后返回的是一个字符串</p>
-<h1 id="我的做法">#我的做法：</h1>
-<pre><code class="language-python">class Solution:
-    def addBinary(self, a: str, b: str) -&gt; str:
-        anum=int(a,base=2)
-        bnum=int(b,base=2)
-        return (bin(anum+bnum)[2:])
+                    <h1 id="javase基础1">JavaSE基础1</h1>
+<h2 id="1-markdown语法">1、Markdown语法</h2>
+<p>#+语句表示标题，#越多表示标题级别越低</p>
+<h3 id="三级标题">三级标题</h3>
+<p>两个**包夹着一段文字，表示黑体</p>
+<p><strong>黑体</strong></p>
+<p>两个*包夹着一段文字，表示斜体</p>
+<p><em>斜体</em></p>
+<p>两个***包夹着一段文字，表示黑斜体</p>
+<p><em><strong>黑斜体</strong></em></p>
+<p>一个&gt;表示引用</p>
+<blockquote>
+<p>一个&gt;表示引用</p>
+</blockquote>
+<p>三个-或者*表示分割线</p>
+<hr>
+<hr>
+<p>一个!+[]+()表示图片</p>
+<figure data-type="image" tabindex="1"><img src="C:%5CUsers%5CWindows10%5CDocuments%5CGridea%5Cimages%5C004.jpg" alt="图片" loading="lazy"></figure>
+<p>一个[]+()表示超链接</p>
+<p><a href="https://ganhan999.github.io/">点击跳转到我的博客</a></p>
+<p>数字＋.＋空格表示有序列表</p>
+<ol>
+<li>
+<p>A</p>
+</li>
+<li>
+<p>B</p>
+</li>
+</ol>
+<ul>
+<li>
+<p>A</p>
+</li>
+<li>
+<p>B</p>
+</li>
+</ul>
+<p>|||表示表格</p>
+<table>
+<thead>
+<tr>
+<th>名字</th>
+<th>性别</th>
+<th>生日</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>张三</td>
+<td>男</td>
+<td>1991</td>
+</tr>
+</tbody>
+</table>
+<p>用tab上面的三个点`表示代码</p>
+<pre><code class="language-Java">123
 </code></pre>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="大神做法">#大神做法：</h1>
-<p>非内置函数，利用二进制算法计算。</p>
-<pre><code class="language-Python">class Solution:
-    def addBinary(self, a: str, b: str) -&gt; str:
-        r, p = '', 0
-        d = len(b) - len(a)
-        a = '0' * d + a
-        b = '0' * -d + b
-        for i, j in zip(a[::-1], b[::-1]):#这里是对二进制的掌握程度
-            s = int(i) + int(j) + p
-            r = str(s % 2) + r
-            p = s // 2
-        return '1' + r if p else r#如果最后p还是进位了，那么就往前面加1，否则就不加！
+<p><code>Hello</code></p>
+<h1 id="2-电脑常用快捷键">2、电脑常用快捷键</h1>
+<ul>
+<li>win+E 打开我的电脑</li>
+<li>win+R 打开运行界面</li>
+<li>shift+Del 永久删除</li>
+<li>ctrl+shift+esc 任务管理器</li>
+</ul>
+<h1 id="3-dos命令">3、Dos命令</h1>
+<h3 id="打开cmd的方式">打开CMD的方式：</h3>
+<ol>
+<li>开始+系统+命令提示符</li>
+<li>win+R 输入cmd 打开控制台</li>
+<li>在任意的文件夹下，按住shift＋鼠标右键，在此处打开命令行窗口</li>
+<li>资源管理器的地址栏前面加上cmd路径</li>
+</ol>
+<h3 id="常用的dos命令">常用的Dos命令</h3>
+<pre><code class="language-bash">#盘符切换 直接F:
+
+#查看当前目录下的所有文件 dir
+
+#切换目录 cd (change directory)  
+    cd /d 可以跨盘符切换
+    cd .. 返回上一级目录
+    cd 目录名 直接可以进入当前一下的目录
+    
+#清除屏幕 cls(clear screen)
+
+#退出终端 exit
+
+#查看电脑Ip ipconfig
+
+#打开应用  
+    calc  打开计算机
+    mspaint 打开画图工具
+    notepad 打开记事本
+    
+#ping命令
+	ping www.baidu.com
+	
+#文件操作命令	
+    md 创建文件夹
+    cd&gt; 创建文件
+    del 删除文件
+    rd 删除文件夹(remove directory)
+
 </code></pre>
+<h2 id="4-jdk-jre-jvm">4、JDK、JRE、JVM</h2>
+<ul>
+<li>
+<p><strong>JDK:Java Development Kit  (Java 开发者工具)</strong></p>
+</li>
+<li>
+<p><strong>JRE:Java Runtime Environment  (Java运行时环境)(JDK包括JRE)</strong></p>
+</li>
+<li>
+<p><strong>JVM:Java Virtual Machine  (Java虚拟机)</strong></p>
+</li>
+</ul>
+<h2 id="5-hello-world">5、Hello World！</h2>
+<pre><code class="language-Java">public class Hello{
+    public static void main(String[] args){
+        System.out.print(&quot;Hello World!&quot;);
+    }
+}
+#注意String要大写，注意分号，注意“”号
+    
+#cmd 当前目录
+javac Hello.java
+java Hello
+</code></pre>
+<ol>
+<li>
+<p>javac java文件，会生成class文件</p>
+</li>
+<li>
+<p>运行class文件，java class文件</p>
+</li>
+</ol>
+<h2 id="6-编译和解释">6、编译和解释</h2>
+<p><strong>解释就是一句一句翻译</strong></p>
+<p><strong>编译就是全部翻译</strong></p>
+<p><strong>Java是一种两种结合的语言</strong></p>
+<p><strong>先经过编译生成class文件</strong></p>
+<p><strong>再解释</strong></p>
 
                 </div>
             </article>
@@ -149,14 +253,14 @@
         
             <div class="next-post">
                 <div class="next gt-c-content-color-first">下一篇</div>
-                <a href="https://ganhan999.github.io/post/ke-mu-yi-97-fen-mei-zi-zi/" class="post-title gt-a-link">
-                    科目一97分 美滋滋
+                <a href="https://ganhan999.github.io/post/121、 买卖股票的最佳时机/" class="post-title gt-a-link">
+                    121、买卖股票的最佳时机
                 </a>
             </div>
         
 
         
-            <span id="/post/67、二进制求和/" class="leancloud_visitors" data-flag-title="67、二进制求和">
+            <span id="/post/JavaSE基础1/" class="leancloud_visitors" data-flag-title="JavaSE基础1">
                 <em class="post-meta-item-text">阅读量 </em>
                 <i class="leancloud-visitors-count">0</i>
             </span>

@@ -4,7 +4,7 @@
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-<title>67、二进制求和 | Gridea</title>
+<title>Java | Gridea</title>
 
 <link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1606387597780">
 
@@ -25,11 +25,11 @@
 
 
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css">
 </head>
 <body>
 <div class="main gt-bg-theme-color-first">
-    <nav class="navbar navbar-expand-lg">
+    <div class="main-content">
+        <nav class="navbar navbar-expand-lg">
     <div class="navbar-brand">
         <img class="user-avatar" src="/images/avatar.png" alt="头像">
         <div class="site-name gt-c-content-color-first">
@@ -85,113 +85,49 @@
     </div>
 </nav>
 
-    <div class="post-container">
-        <div class="post-detail gt-bg-theme-color-second">
-            <article class="gt-post-content">
-                <h2 class="post-title">
-                    67、二进制求和
-                </h2>
-                <div class="post-info">
-                    <time class="post-time gt-c-content-color-first">
-                        · 2020-11-13 ·
-                    </time>
-                    
-                        <a href="https://ganhan999.github.io/tag/cKyYTCK2Y/" class="post-tags">
-                            # leetcode
-                        </a>
-                    
-                </div>
-                <div class="post-content">
-                    <h1 id="题目">题目</h1>
-<p>&quot;&quot;&quot;<br>
-给你两个二进制字符串，返回它们的和（用二进制表示）。<br>
-输入为 非空 字符串且只包含数字 1 和 0。</p>
-<p>示例 1:<br>
-输入: a = &quot;11&quot;, b = &quot;1&quot;<br>
-输出: &quot;100&quot;</p>
-<p>示例 2:<br>
-输入: a = &quot;1010&quot;, b = &quot;1011&quot;<br>
-输出: &quot;10101&quot;</p>
-<p>提示：<br>
-每个字符串仅由字符 '0' 或 '1' 组成。<br>
-1 &lt;= a.length, b.length &lt;= 10^4<br>
-字符串如果不是 &quot;0&quot; ，就都不含前导零</p>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="本体思路">本体思路</h1>
-<p>先换成十进制然后换二进制，最后取一个[2:]，注意bin（）后返回的是一个字符串</p>
-<h1 id="我的做法">#我的做法：</h1>
-<pre><code class="language-python">class Solution:
-    def addBinary(self, a: str, b: str) -&gt; str:
-        anum=int(a,base=2)
-        bnum=int(b,base=2)
-        return (bin(anum+bnum)[2:])
-</code></pre>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="大神做法">#大神做法：</h1>
-<p>非内置函数，利用二进制算法计算。</p>
-<pre><code class="language-Python">class Solution:
-    def addBinary(self, a: str, b: str) -&gt; str:
-        r, p = '', 0
-        d = len(b) - len(a)
-        a = '0' * d + a
-        b = '0' * -d + b
-        for i, j in zip(a[::-1], b[::-1]):#这里是对二进制的掌握程度
-            s = int(i) + int(j) + p
-            r = str(s % 2) + r
-            p = s // 2
-        return '1' + r if p else r#如果最后p还是进位了，那么就往前面加1，否则就不加！
-</code></pre>
-
-                </div>
-            </article>
+        <div class="current-tag-container">
+            <h2 class="title gt-c-content-color-first">
+                #Java
+            </h2>
         </div>
-
+        <div class="post-list-container">
+    <div class="post-inner">
         
-            <div class="next-post">
-                <div class="next gt-c-content-color-first">下一篇</div>
-                <a href="https://ganhan999.github.io/post/ke-mu-yi-97-fen-mei-zi-zi/" class="post-title gt-a-link">
-                    科目一97分 美滋滋
-                </a>
+            <div class="post gt-bg-theme-color-second">
+                <div class="post-left">
+                    <div>
+                        
+                        <a href="https://ganhan999.github.io/post/JavaSE基础1/">
+                            <span class="post-title gt-c-content-color-first">JavaSE基础1</span>
+                        </a>
+                    </div>
+                    <div class="gt-post-content post-abstract gt-c-content-color-second">
+                        
+                    </div>
+                    <div class="post-info">
+                        <time class="post-time gt-c-content-color-first">
+                            发布于 · 2020-11-26 ·
+                        </time>
+                        
+                            <a href="https://ganhan999.github.io/tag/2avA5RaAc/" class="post-tag">
+                                # Java
+                            </a>
+                        
+                    </div>
+                </div>
+                
+                    <a href="https://ganhan999.github.io/post/JavaSE基础1/" class="post-feature-image"
+                       style="background-image: url('https://ganhan999.github.io//post-images/JavaSE基础1.jpg')">
+                    </a>
+                
             </div>
         
-
-        
-            <span id="/post/67、二进制求和/" class="leancloud_visitors" data-flag-title="67、二进制求和">
-                <em class="post-meta-item-text">阅读量 </em>
-                <i class="leancloud-visitors-count">0</i>
-            </span>
-        
-
-        
-
-        
-            <script src='https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js'></script>
-
-<style>
-	div#vcomments{
-		width:100%;
-		max-width: 1000px;
-		padding: 2.5%
-	}
-</style>
-
-
-	<div id="vcomments"></div>
-
-<script>
-	new Valine({
-		el: '#vcomments',
-		appId: '',
-		appKey: '',
-		avatar: '',
-		pageSize: 5,
-		recordIp: true,
-		placeholder: 'Just Go Go',
-		visitor: true,
-	});
-</script>
-
-        
+    </div>
+</div>
+        <div class="pagination-container">
+    
+    
+</div>
 
         <div class="site-footer gt-c-content-color-first">
     <div class="slogan gt-c-content-color-first">温故而知新</div>
