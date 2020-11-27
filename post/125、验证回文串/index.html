@@ -4,7 +4,7 @@
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-<title>70、爬楼梯 | Gridea</title>
+<title>125、验证回文串 | Gridea</title>
 
 <link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1606480546523">
 
@@ -89,11 +89,11 @@
         <div class="post-detail gt-bg-theme-color-second">
             <article class="gt-post-content">
                 <h2 class="post-title">
-                    70、爬楼梯
+                    125、验证回文串
                 </h2>
                 <div class="post-info">
                     <time class="post-time gt-c-content-color-first">
-                        · 2020-11-15 ·
+                        · 2020-11-27 ·
                     </time>
                     
                         <a href="https://ganhan999.github.io/tag/cKyYTCK2Y/" class="post-tags">
@@ -103,81 +103,35 @@
                 </div>
                 <div class="post-content">
                     <h1 id="题目">题目</h1>
-<p>假设你正在爬楼梯。需要 n 阶你才能到达楼顶。<br>
-每次你可以爬 1 或 2 个台阶。你有多少种不同的方法可以爬到楼顶呢？</p>
-<p>注意：给定 n 是一个正整数。</p>
-<p>示例 1：<br>
-输入： 2<br>
-输出： 2<br>
-解释： 有两种方法可以爬到楼顶。</p>
-<ol>
-<li>1 阶 + 1 阶</li>
-<li>2 阶</li>
-</ol>
-<p>示例 2：<br>
-输入： 3<br>
-输出： 3<br>
-解释： 有三种方法可以爬到楼顶。</p>
-<ol>
-<li>1 阶 + 1 阶 + 1 阶</li>
-<li>1 阶 + 2 阶</li>
-<li>2 阶 + 1 阶</li>
-</ol>
+<p>给定一个字符串，验证它是否是回文串，只考虑字母和数字字符，可以忽略字母的大小写。<br>
+说明：本题中，我们将空字符串定义为有效的回文串。</p>
+<p>示例 1:<br>
+输入: &quot;A man, a plan, a canal: Panama&quot;<br>
+输出: true</p>
+<p>示例 2:<br>
+输入: &quot;race a car&quot;<br>
+输出: false</p>
 <p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
 <h1 id="本体思路">本体思路</h1>
-<p>递归算法！（认真思考需要做执行操作）<br>
-注意缓存装饰器！</p>
+<p>把不是字母和数字的字符全部去掉，然后转大写，再比较反转和原来的字符串是否相等</p>
 <h1 id="我的做法">#我的做法：</h1>
 <pre><code class="language-python">class Solution:
-    @functools.lru_cache(100)  # 缓存装饰器
-    def climbStairs(self, n: int) -&gt; int:
-        if n==1:
-            return 1
-        elif n==2:
-            return 2
-        else:
-            ans=self.climbStairs(n-1)+self.climbStairs(n-2)#记得加上对象self
-        return ans
+    def isPalindrome(self, s: str) -&gt; bool:
+        if not s:
+            return True
+        li=list([val for val in s if val.isalnum()])#去掉除字母和数字以外的字符
+        li=&quot;&quot;.join(li).upper()#转大写
+        return li==li[::-1]
 
 </code></pre>
 <p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="大神做法1">#大神做法1：</h1>
-<p>斐波那契数列算法<br>
-公式如图所示<br>
-<img src="https://ganhan999.github.io//post-images/1605446399091.png" alt="" loading="lazy"></p>
+<h1 id="大神做法">#大神做法：</h1>
+<p>正则表达式</p>
 <pre><code class="language-Python">class Solution:
-    def climbStairs(self, n: int) -&gt; int:
-        res = (((1+5**0.5)/2)**(n+1)-((1-5**0.5)/2)**(n+1))/((5)**0.5)
-        return int(res)
+    def isPalindrome(self, s: str) -&gt; bool:
+        s = re.sub(r'[^a-z0-9]', '', s.strip().lower())
+        return s == s[::-1]
 
-
-</code></pre>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="大神做法2">#大神做法2：</h1>
-<p>动态规划算法1，只存储前两个元素，减少了空间，空间复杂度O(1)</p>
-<pre><code class="language-Python">class Solution:
-    def climbStairs(self, n: int) -&gt; int:
-        f1,f2=1,2
-        if n==1:
-            return f1
-        if n==2:
-            return f2
-        for i in range(n-2):
-            f2,f1=f1+f2,f2
-            print(f1,f2)
-        return f2
-</code></pre>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="大神做法3">#大神做法3：</h1>
-<p>动态规划算法2，新建一个字典或者数组来存储以前的变量，空间复杂度O(n)</p>
-<pre><code class="language-Python">class Solution:
-    def climbStairs(self, n: int) -&gt; int:
-        dp = {}
-        dp[1] = 1
-        dp[2] = 2
-        for i in range(3,n+1):
-            dp[i] = dp[i-1] + dp[i-2]
-        return dp[n]
 </code></pre>
 
                 </div>
@@ -187,14 +141,14 @@
         
             <div class="next-post">
                 <div class="next gt-c-content-color-first">下一篇</div>
-                <a href="https://ganhan999.github.io/post/jin-tian-mian-ji-liao-bai-wan-fen-si-up-zhu/" class="post-title gt-a-link">
-                    今天面基了百万粉丝up主！！！！！
+                <a href="https://ganhan999.github.io/post/JavaSE基础2/" class="post-title gt-a-link">
+                    JavaSE基础2
                 </a>
             </div>
         
 
         
-            <span id="/post/70、爬楼梯/" class="leancloud_visitors" data-flag-title="70、爬楼梯">
+            <span id="/post/125、验证回文串/" class="leancloud_visitors" data-flag-title="125、验证回文串">
                 <em class="post-meta-item-text">阅读量 </em>
                 <i class="leancloud-visitors-count">0</i>
             </span>

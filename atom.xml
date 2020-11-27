@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ganhan999.github.io/</id>
     <title>Gridea</title>
-    <updated>2020-11-27T11:33:02.458Z</updated>
+    <updated>2020-11-27T12:35:49.959Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ganhan999.github.io/"/>
     <link rel="self" href="https://ganhan999.github.io/atom.xml"/>
@@ -10,6 +10,45 @@
     <logo>https://ganhan999.github.io/images/avatar.png</logo>
     <icon>https://ganhan999.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Gridea</rights>
+    <entry>
+        <title type="html"><![CDATA[125、验证回文串]]></title>
+        <id>https://ganhan999.github.io/post/125、验证回文串/</id>
+        <link href="https://ganhan999.github.io/post/125、验证回文串/">
+        </link>
+        <updated>2020-11-27T12:35:40.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
+<p>给定一个字符串，验证它是否是回文串，只考虑字母和数字字符，可以忽略字母的大小写。<br>
+说明：本题中，我们将空字符串定义为有效的回文串。</p>
+<p>示例 1:<br>
+输入: &quot;A man, a plan, a canal: Panama&quot;<br>
+输出: true</p>
+<p>示例 2:<br>
+输入: &quot;race a car&quot;<br>
+输出: false</p>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="本体思路">本体思路</h1>
+<p>把不是字母和数字的字符全部去掉，然后转大写，再比较反转和原来的字符串是否相等</p>
+<h1 id="我的做法">#我的做法：</h1>
+<pre><code class="language-python">class Solution:
+    def isPalindrome(self, s: str) -&gt; bool:
+        if not s:
+            return True
+        li=list([val for val in s if val.isalnum()])#去掉除字母和数字以外的字符
+        li=&quot;&quot;.join(li).upper()#转大写
+        return li==li[::-1]
+
+</code></pre>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="大神做法">#大神做法：</h1>
+<p>正则表达式</p>
+<pre><code class="language-Python">class Solution:
+    def isPalindrome(self, s: str) -&gt; bool:
+        s = re.sub(r'[^a-z0-9]', '', s.strip().lower())
+        return s == s[::-1]
+
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[JavaSE基础2]]></title>
         <id>https://ganhan999.github.io/post/JavaSE基础2/</id>
@@ -316,8 +355,8 @@ for(;){
     </entry>
     <entry>
         <title type="html"><![CDATA[122、买卖股票的最佳时机II]]></title>
-        <id>https://ganhan999.github.io/post/122、 买卖股票的最佳时机II /</id>
-        <link href="https://ganhan999.github.io/post/122、 买卖股票的最佳时机II /">
+        <id>https://ganhan999.github.io/post/122、买卖股票的最佳时机II /</id>
+        <link href="https://ganhan999.github.io/post/122、买卖股票的最佳时机II /">
         </link>
         <updated>2020-11-26T11:43:34.000Z</updated>
         <content type="html"><![CDATA[<h1 id="题目">题目</h1>
@@ -1713,115 +1752,6 @@ maze_path_queue(1, 1, 8, 8)
                 res[i][j] = res[i - 1][j - 1] + res[i - 1][j]
         return res
 
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[112、 路径总和]]></title>
-        <id>https://ganhan999.github.io/post/112、 路径总和/</id>
-        <link href="https://ganhan999.github.io/post/112、 路径总和/">
-        </link>
-        <updated>2020-11-24T11:56:16.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
-<p>给定一个二叉树和一个目标和，判断该树中是否存在根节点到叶子节点的路径，<br>
-这条路径上所有节点值相加等于目标和。</p>
-<p>说明: 叶子节点是指没有子节点的节点。<br>
-示例:<br>
-给定如下二叉树，以及目标和 sum = 22，</p>
-<pre><code>          5
-         / \
-        4   8
-       /   / \
-      11  13  4
-     /  \      \
-    7    2      1
-</code></pre>
-<p>返回 true, 因为存在目标和为 22 的根节点到叶子节点的路径 5-&gt;4-&gt;11-&gt;2。</p>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="本体思路">本体思路</h1>
-<p>DFS,一直向下找到叶子节点，如果到叶子节点时sum == root.value，说明找到了一条符合要求的路径</p>
-<h1 id="我的做法">#我的做法：</h1>
-<pre><code class="language-python">class Solution(object):
-    def hasPathSum(self, root, sum):
-        if not root: return False
-        if not root.left and not root.right:
-            return sum == root.val
-        return self.hasPathSum(root.left, sum - root.val) or self.hasPathSum(root.right, sum - root.val)
-
-</code></pre>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="大神做法1">#大神做法1：</h1>
-<p>回溯<br>
-这里的回溯指 利用 DFS 找出从根节点到叶子节点的所有路径，<br>
-只要有任意一条路径的和等于sum，就返回 True。<br>
-下面的代码并非是严格意义上的回溯法，因为没有重复利用 path 变量。</p>
-<pre><code class="language-Python">class Solution(object):
-    def hasPathSum(self, root, sum):
-        if not root: return False
-        res = []
-        return self.dfs(root, sum, [root.val])
-
-    def dfs(self, root, target, path):
-        if not root: return False#到末节点都还没有成功，那么就是False
-        if sum(path) == target and not root.left and not root.right:#记录了到每一个节点路径长度
-            return True
-        left_flag, right_flag = False, False
-        if root.left:
-            left_flag = self.dfs(root.left, target, path + [root.left.val])
-        if root.right:
-            right_flag = self.dfs(root.right, target, path + [root.right.val])
-        return left_flag or right_flag
-
-</code></pre>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="大神做法2">#大神做法2：</h1>
-<p>BFS使用队列保存遍历到每个节点时的路径和，<br>
-如果该节点恰好是叶子节点，并且路径和正好等于sum，说明找到了解</p>
-<pre><code class="language-Python">class Solution:
-    def hasPathSum(self, root: TreeNode, sum: int) -&gt; bool:
-        if not root:
-            return False
-        que=collections.deque()
-        que.append((root,root.val))
-        while que:
-            node,path=que.popleft()
-            if not node.left and not node.right and path==sum:
-                return True
-            if node.left:
-                que.append((node.left,path+node.left.val))
-            if node.right:
-                que.append((node.right, path + node.right.val))
-        return False
-
-</code></pre>
-<h1 id="大神做法3">#大神做法3：</h1>
-<p>栈<br>
-除了上面的 队列 解法以外，也可以使用 栈，同时保存节点和到这个节点的路径和。<br>
-但是这个解法已经不是 BFS。因为会优先访问 后进来 的节点，导致会把根节点的右子树访问结束之后，<br>
-才访问左子树。</p>
-<p>可能会有朋友好奇很少见到这种写法，为什么代码可行？答案是：栈中同时保存了<br>
-(节点，路径和)，也就是说只要能把所有的节点访问一遍，那么就一定能找到正确的结果。<br>
-无论是用 队列 还是 栈，都是一种 树的遍历 方式，只不过访问顺序有所有不同罢了。</p>
-<pre><code class="language-Python">class Solution(object):
-    def hasPathSum(self, root, sum):
-        &quot;&quot;&quot;
-        :type root: TreeNode
-        :type sum: int
-        :rtype: bool
-        &quot;&quot;&quot;
-        if not root:
-            return False
-        stack = []
-        stack.append((root, root.val))
-        while stack:
-            node, path = stack.pop()
-            if not node.left and not node.right and path == sum:
-                return True
-            if node.left:
-                stack.append((node.left, path + node.left.val))
-            if node.right:
-                stack.append((node.right, path + node.right.val))
-        return False
 </code></pre>
 ]]></content>
     </entry>
