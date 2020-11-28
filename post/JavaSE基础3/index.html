@@ -4,7 +4,7 @@
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-<title>26、删除排序数组中的重复项 | Gridea</title>
+<title>JavaSE基础3 | Gridea</title>
 
 <link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1606563063100">
 
@@ -89,128 +89,131 @@
         <div class="post-detail gt-bg-theme-color-second">
             <article class="gt-post-content">
                 <h2 class="post-title">
-                    26、删除排序数组中的重复项
+                    JavaSE基础3
                 </h2>
                 <div class="post-info">
                     <time class="post-time gt-c-content-color-first">
-                        · 2020-11-05 ·
+                        · 2020-11-28 ·
                     </time>
                     
-                        <a href="https://ganhan999.github.io/tag/cKyYTCK2Y/" class="post-tags">
-                            # leetcode
+                        <a href="https://ganhan999.github.io/tag/2avA5RaAc/" class="post-tags">
+                            # Java
                         </a>
                     
                 </div>
                 <div class="post-content">
-                    <h1 id="题目">题目</h1>
-<p>&quot;&quot;&quot;<br>
-给定一个排序数组，你需要在 原地 删除重复出现的元素，使得每个元素只出现一次，返回移除后数组的新长度。<br>
-不要使用额外的数组空间，你必须在 原地 修改输入数组 并在使用 O(1) 额外空间的条件下完成。</p>
-<p>示例 1:<br>
-给定数组 nums = [1,1,2],<br>
-函数应该返回新的长度 2, 并且原数组 nums 的前两个元素被修改为 1, 2。<br>
-你不需要考虑数组中超出新长度后面的元素。</p>
-<p>示例 2:<br>
-给定 nums = [0,0,1,1,1,2,2,3,3,4],<br>
-函数应该返回新的长度 5, 并且原数组 nums 的前五个元素被修改为 0, 1, 2, 3, 4。<br>
-你不需要考虑数组中超出新长度后面的元素。</p>
-<p>&quot;&quot;&quot;</p>
-<h1 id="本体思路">本体思路</h1>
-<p>因为是有序序列，只需要前一个与后一个比较即可，并不麻烦</p>
-<h1 id="我的做法">#我的做法：</h1>
-<pre><code class="language-python">class Solution:
-    def removeDuplicates(self, nums: List[int]) -&gt; int:
-        i=0
-        if len(nums)==0 or len(nums)==1:
-            return len(nums)
-        else:
-            while(i&lt;len(nums)-1):
-                if nums[i]==nums[i+1]:
-                    nums.pop(i)
-                else:
-                    i=i+1
-        return len(nums)
-
+                    <h1 id="javase基础3">JavaSE基础3</h1>
+<h2 id="1-方法的定义">1、方法的定义</h2>
+<pre><code class="language-bash">修饰符 返回值类型 方法名 （参数类型 参数名）{
+    方法体
+    return 返回值；
+}
 </code></pre>
-<p>&quot;&quot;&quot;</p>
-<h1 id="大神做法">大神做法：</h1>
-<p>双指针法：题意可以理解为直接修改前k个数，因此无需删除操作</p>
-<p>&quot;&quot;&quot;</p>
-<pre><code class="language-python">class Solution:
-    def removeDuplicates(self, nums: List[int]) -&gt; int:
-        a = 0
-        b = 1
-        while b &lt; len(nums):
-            if nums[b] == nums[a]:
-                b += 1
-            else:
-                a += 1
-                nums[a] = nums[b]
-        return a+1
-
-
-#复现成功！
+<p><strong>java属于值传递</strong></p>
+<h1 id="2-方法的重载">2、方法的重载</h1>
+<ul>
+<li>方法名一样</li>
+<li>参数列表不一样（个数、类型、参数排列顺序）</li>
+<li>返回类型可以不同</li>
+<li>仅仅返回类型不同不足以成为重载</li>
+</ul>
+<h1 id="3-可变参数">3、可变参数</h1>
+<p><strong>在指定参数类型后加一个省略号…</strong></p>
+<pre><code class="language-java">public static void printmax(double... numbers){}
 </code></pre>
-<p>python中关于删除list中的某个元素，一般有三种方法:remove、pop、del：</p>
-<pre><code class="language-python">1.remove: 删除单个元素，删除首个符合条件的元素，按值删除
-举例说明:
+<h2 id="4-数组的声明">4、数组的声明</h2>
+<ul>
+<li><strong>dataType[]   arrayRefVar//首选</strong></li>
+<li><strong>dataType   arrayRefVar[] //效果一样</strong></li>
+<li><strong>array.length //获取数组长度</strong></li>
+</ul>
+<pre><code class="language-java">int[] nums;
+</code></pre>
+<h2 id="5-java内存分析">5、Java内存分析</h2>
+<ul>
+<li>堆：存放new的对象和数组，可以被所有的线程共享，不会存放别的对象引用</li>
+<li>栈：存放基本变量类型（包含这个基本类型的具体数值）；引用对象的变量（会存放这个引用在堆里面的具体地址）</li>
+<li>方法区：可以被所有线程共享；包含所有class和static变量</li>
+<li>数组本身就是对象，Java中对象都在堆中，因此数组无论保存原始类型或者其他对象类型，数组对象本身是在堆中。</li>
+</ul>
+<h2 id="6-数组的初始化">6、数组的初始化</h2>
+<pre><code class="language-Java">//静态初始化:创建＋赋值
+int[] a={1,2,3};
 
-&gt;&gt;&gt; str=[1,2,3,4,5,2,6]
-&gt;&gt;&gt; str.remove(2)
-&gt;&gt;&gt; str
-[1, 3, 4, 5, 2, 6]
+//动态初始化:包含默认初始化，默认值都为0
+int[] b=new int[10];
+b[0]=10
+</code></pre>
+<h2 id="7-数组小结">7、数组小结</h2>
+<ul>
+<li>数组是相同数据类型（数据类型可以为任意类型）的有序集合</li>
+<li>数组也是对象，数组元素相当于对象的成员变量</li>
+<li>数组的长度是确定的，不可变。如果越界，则报ArrayIndexOutofBounds</li>
+</ul>
+<h2 id="8-遍历数组">8、遍历数组</h2>
+<p>javadoc命令就是用来生成自己的api文档</p>
+<h2 id="9-流程">9、流程</h2>
+<h4 id="scanner对象">Scanner对象</h4>
+<p>Scannerl类来获取用户的输入</p>
+<p><strong>if语句</strong></p>
+<pre><code class="language-java">for(int array:arrays){
+    System.out.println(array);//无下标
+}
 
- 
+for(int i=0;i&lt;arrays.length;i++){
+    System.out.print(arrays[i]+&quot;&quot;);
+}
 
-2.pop: 删除单个或多个元素，按位删除(根据索引删除)
+public static void printArray(int[] arrays){
+    //形参是数组
+}
+</code></pre>
+<h2 id="9-多维数组">9、多维数组</h2>
+<pre><code class="language-java">int[][] array={{1,2},{3,4}};
+for (int i=0;i&lt;array.length,i++){
+    for (int j=0;j&lt;array[i].length,j++){
+         System.out.println(array[i][j]);
+    }
+}
+</code></pre>
+<h2 id="10-arrays类">10、Arrays类</h2>
+<pre><code class="language-java">import java.util.Arrays
+int[] a={1,2,3};
+System.out.println(Arrays.toString(a));//打印数组Arrays.toString()
+Arrays.sort(a)//排序
+</code></pre>
+<h2 id="11-冒泡排序">11、冒泡排序</h2>
+<pre><code class="language-java">package jichu;
 
-&gt;&gt;&gt; str=[0,1,2,3,4,5,6]
-&gt;&gt;&gt; str.pop(1) #pop删除时会返回被删除的元素
-&gt;&gt;&gt; str
-[0, 2, 3, 4, 5, 6]
+import java.util.Arrays;
 
- 
+public class while1 {
+    public static void main(String[] args) {
+        int[] a={1,2,3,4,1,3,2};
+        int[] sort=sort(a);
+        System.out.println(Arrays.toString(sort));
+    }
+    public static int[] sort(int[] array){
+        int temp=0;
+        for (int i=0;i&lt;array.length;i++){
+            boolean flag=false;
+            for (int j=0;j&lt;array.length-i-1;j++){
+                if(array[j+1]&lt;array[j]){
+                    temp=array[j];
+                    array[j]=array[j+1];
+                    array[j+1]=temp;
+                    flag=true;
+                }
 
-&gt;&gt;&gt; str2=['abc','bcd','dce']
-&gt;&gt;&gt; str2.pop(2)
-'dce'
-&gt;&gt;&gt; str2
-['abc', 'bcd']
+            }
+            if(flag==false){
+                break;
+            }
+        }
+        return array;
+    }
 
- 
-
-3.del：它是根据索引(元素所在位置)来删除
-举例说明:
-
-&gt;&gt;&gt; str=[1,2,3,4,5,2,6]
-&gt;&gt;&gt; del str[1]
-&gt;&gt;&gt; str
-[1, 3, 4, 5, 2, 6]
-
- 
-
-&gt;&gt;&gt; str2=['abc','bcd','dce']
-&gt;&gt;&gt; del str2[1]
-&gt;&gt;&gt; str2
-['abc', 'dce']
-
- 
-
-除此之外，del还可以删除指定范围内的值。
-
-&gt;&gt;&gt; str=[0,1,2,3,4,5,6]
-&gt;&gt;&gt; del str[2:4] #删除从第2个元素开始，到第4个为止的元素(但是不包括尾部元素)
-&gt;&gt;&gt; str
-[0, 1, 4, 5, 6]
-
- 
-
-del 也可以删除整个数据对象(列表、集合等)
-
-&gt;&gt;&gt; str=[0,1,2,3,4,5,6]
-&gt;&gt;&gt; del str
-&gt;&gt;&gt; str #删除后，找不到对象
-   
+}
 </code></pre>
 
                 </div>
@@ -220,14 +223,14 @@ del 也可以删除整个数据对象(列表、集合等)
         
             <div class="next-post">
                 <div class="next gt-c-content-color-first">下一篇</div>
-                <a href="https://ganhan999.github.io/post/21、合并两个有序链表/" class="post-title gt-a-link">
-                    21、合并两个有序列表
+                <a href="https://ganhan999.github.io/post/125、验证回文串/" class="post-title gt-a-link">
+                    125、验证回文串
                 </a>
             </div>
         
 
         
-            <span id="/post/26、删除排序数组中的重复项/" class="leancloud_visitors" data-flag-title="26、删除排序数组中的重复项">
+            <span id="/post/JavaSE基础3/" class="leancloud_visitors" data-flag-title="JavaSE基础3">
                 <em class="post-meta-item-text">阅读量 </em>
                 <i class="leancloud-visitors-count">0</i>
             </span>
