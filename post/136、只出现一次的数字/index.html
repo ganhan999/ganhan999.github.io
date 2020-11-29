@@ -6,7 +6,7 @@
 
 <title>136、只出现一次的数字 | Gridea</title>
 
-<link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1606645050828">
+<link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1606652394138">
 
 <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://ganhan999.github.io//styles/main.css">
@@ -77,7 +77,7 @@
             
         </div>
         <div style="text-align: center">
-            <form id="gridea-search-form" style="position: relative" data-update="1606645050828" action="/search/index.html">
+            <form id="gridea-search-form" style="position: relative" data-update="1606652394138" action="/search/index.html">
                 <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
                 <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
             </form>
@@ -130,7 +130,7 @@
 
 </code></pre>
 <p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<p>#大神做法1：</p>
+<h1 id="大神做法1">#大神做法1：</h1>
 <p>由于目标元素只有一次，其他元素有多次，<br>
 因此，依次删除列表的元素，同一个元素删除两次，报错则为目标值。</p>
 <pre><code class="language-Python">class Solution:
@@ -145,7 +145,7 @@
 
 </code></pre>
 <p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="大神做法1">#大神做法1：</h1>
+<h1 id="大神做法2">#大神做法2：</h1>
 <p>方法三：一个元素出现一次、其他出现多次，那么数组求和，与去重后的和相差的就是目标值。</p>
 <pre><code class="language-python">class Solution:
     def singleNumber(nums):
