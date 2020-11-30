@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ganhan999.github.io/</id>
     <title>Gridea</title>
-    <updated>2020-11-30T12:12:14.818Z</updated>
+    <updated>2020-11-30T12:14:58.727Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ganhan999.github.io/"/>
     <link rel="self" href="https://ganhan999.github.io/atom.xml"/>
@@ -16,8 +16,7 @@
         <link href="https://ganhan999.github.io/post/Java类/">
         </link>
         <updated>2020-11-30T07:18:25.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="java类1">Java类1</h1>
-<h1 id="1-内部类">1、内部类</h1>
+        <content type="html"><![CDATA[<h1 id="1-内部类">1、内部类</h1>
 <p>内部类编译后也会生成独立的字节码文件，也就是class文件</p>
 <p>内部类可以直接访问外部类的私有成员，而不破坏封装</p>
 <p>可以为外部类提供必要的内部功能组件</p>
@@ -832,8 +831,7 @@ Fri Jan 24 10:00:01 CST 2020java
         <link href="https://ganhan999.github.io/post/JavaSE基础4/">
         </link>
         <updated>2020-11-29T10:18:25.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="javase基础4">JavaSE基础4</h1>
-<h1 id="面向对象">面向对象</h1>
+        <content type="html"><![CDATA[<h1 id="面向对象">面向对象</h1>
 <h2 id="1-抛出异常">1、抛出异常</h2>
 <pre><code class="language-java">public static int[] sort(int[] array) throws IOException{
 }
@@ -1451,8 +1449,7 @@ sum2 = reduce(lambda x, y: x+y, [1,2,3,4,5])  # 使用 lambda 匿名函数
         <link href="https://ganhan999.github.io/post/JavaSE基础3/">
         </link>
         <updated>2020-11-28T10:53:59.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="javase基础3">JavaSE基础3</h1>
-<h2 id="1-方法的定义">1、方法的定义</h2>
+        <content type="html"><![CDATA[<h2 id="1-方法的定义">1、方法的定义</h2>
 <pre><code class="language-bash">修饰符 返回值类型 方法名 （参数类型 参数名）{
     方法体
     return 返回值；
@@ -1611,8 +1608,7 @@ public class while1 {
         <link href="https://ganhan999.github.io/post/JavaSE基础2/">
         </link>
         <updated>2020-11-27T11:32:50.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="javase基础2">JavaSE基础2</h1>
-<h2 id="1-注释">1、注释</h2>
+        <content type="html"><![CDATA[<h2 id="1-注释">1、注释</h2>
 <p><strong>单行注释</strong></p>
 <p><strong>多行注释</strong></p>
 <p><strong>文档注释</strong></p>
@@ -1972,8 +1968,7 @@ for(;){
         <link href="https://ganhan999.github.io/post/JavaSE基础1/">
         </link>
         <updated>2020-11-26T11:18:25.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="javase基础1">JavaSE基础1</h1>
-<h2 id="1-markdown语法">1、Markdown语法</h2>
+        <content type="html"><![CDATA[<h2 id="1-markdown语法">1、Markdown语法</h2>
 <p>#+语句表示标题，#越多表示标题级别越低</p>
 <h3 id="三级标题">三级标题</h3>
 <p>两个**包夹着一段文字，表示黑体</p>
