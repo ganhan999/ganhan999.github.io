@@ -4,7 +4,7 @@
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-<title>38、外观数列 | Gridea</title>
+<title>155、最小栈 | Gridea</title>
 
 <link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1606743318544">
 
@@ -89,11 +89,11 @@
         <div class="post-detail gt-bg-theme-color-second">
             <article class="gt-post-content">
                 <h2 class="post-title">
-                    38、外观数列
+                    155、最小栈
                 </h2>
                 <div class="post-info">
                     <time class="post-time gt-c-content-color-first">
-                        · 2020-11-09 ·
+                        · 2020-11-30 ·
                     </time>
                     
                         <a href="https://ganhan999.github.io/tag/cKyYTCK2Y/" class="post-tags">
@@ -103,165 +103,78 @@
                 </div>
                 <div class="post-content">
                     <h1 id="题目">题目</h1>
-<p>给定一个正整数 n ，输出外观数列的第 n 项。<br>
-「外观数列」是一个整数序列，从数字 1 开始，序列中的每一项都是对前一项的描述。<br>
-你可以将其视作是由递归公式定义的数字字符串序列：countAndSay(1) = &quot;1&quot;<br>
-countAndSay(n) 是对 countAndSay(n-1) 的描述，然后转换成另一个数字字符串。<br>
-前五项如下：</p>
-<ol>
-<li>
-<pre><code>1
-</code></pre>
-</li>
-<li>
-<pre><code>11
-</code></pre>
-</li>
-<li>
-<pre><code>21
-</code></pre>
-</li>
-<li>
-<pre><code>1211
-</code></pre>
-</li>
-<li>
-<pre><code>111221
-</code></pre>
-</li>
-</ol>
-<p>第一项是数字 1<br>
-描述前一项，这个数是 1 即 “ 一 个 1 ”，记作 &quot;11&quot;<br>
-描述前一项，这个数是 11 即 “ 二 个 1 ” ，记作 &quot;21&quot;<br>
-描述前一项，这个数是 21 即 “ 一 个 2 + 一 个 1 ” ，记作 &quot;1211&quot;<br>
-描述前一项，这个数是 1211 即 “ 一 个 1 + 一 个 2 + 二 个 1 ” ，记作 &quot;111221&quot;<br>
-要 描述 一个数字字符串，首先要将字符串分割为 最小 数量的组，每个组都由连续的最多<br>
-相同字符 组成。然后对于每个组，先描述字符的数量，然后描述字符，形成一个描述组。<br>
-要将描述转换为数字字符串，先将每组中的字符数量用数字替换，再将所有描述组连接起来。</p>
-<p>示例 1：<br>
-输入：n = 1<br>
-输出：&quot;1&quot;<br>
-解释：这是一个基本样例。</p>
-<p>示例 2：<br>
-输入：n = 4<br>
-输出：&quot;1211&quot;<br>
-解释：<br>
-countAndSay(1) = &quot;1&quot;<br>
-countAndSay(2) = 读 &quot;1&quot; = 一 个 1 = &quot;11&quot;<br>
-countAndSay(3) = 读 &quot;11&quot; = 二 个 1 = &quot;21&quot;<br>
-countAndSay(4) = 读 &quot;21&quot; = 一 个 2 + 一 个 1 = &quot;12&quot; + &quot;11&quot; = &quot;1211&quot;</p>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<p>设计一个支持 push ，pop ，top 操作，并能在常数时间内检索到最小元素的栈。</p>
+<p>push(x) —— 将元素 x 推入栈中。<br>
+pop() —— 删除栈顶的元素。<br>
+top() —— 获取栈顶元素。<br>
+getMin() —— 检索栈中的最小元素。</p>
+<p>示例:</p>
+<p>输入：<br>
+[&quot;MinStack&quot;,&quot;push&quot;,&quot;push&quot;,&quot;push&quot;,&quot;getMin&quot;,&quot;pop&quot;,&quot;top&quot;,&quot;getMin&quot;]<br>
+[[],[-2],[0],[-3],[],[],[],[]]</p>
+<p>输出：<br>
+[null,null,null,null,-3,null,0,-2]</p>
+<p>解释：<br>
+MinStack minStack = new MinStack();<br>
+minStack.push(-2);<br>
+minStack.push(0);<br>
+minStack.push(-3);<br>
+minStack.getMin();   --&gt; 返回 -3.<br>
+minStack.pop();<br>
+minStack.top();      --&gt; 返回 0.<br>
+minStack.getMin();   --&gt; 返回 -2.</p>
 <h1 id="本体思路">本体思路</h1>
-<p>利用递归的思想，如果当后一个元素不等于前一个元素停止计数，以此类推。主要是递归的思想要掌握！</p>
+<p>利用列表，生成栈</p>
 <h1 id="我的做法">#我的做法：</h1>
-<pre><code class="language-python">class Solution:
-    def searchInsert(self, nums: List[int], target: int) -&gt; int:
-        if target in nums:
-            return nums.index(target)
-        else:
-            nums.append(target)
-            nums.sort(reverse=False)
-            return nums.index(target)
+<pre><code class="language-python">class MinStack:
+
+    def __init__(self):
+        &quot;&quot;&quot;
+        initialize your data structure here.
+        &quot;&quot;&quot;
+        self.stack=[]
+
+    def push(self, x: int) -&gt; None:
+        self.stack.append(x)
+
+    def pop(self) -&gt; None:
+        if len(self.stack)&gt;0:
+            self.stack.pop()
 
 
+    def top(self) -&gt; int:
+        if len(self.stack)&gt;0:
+            return self.stack[-1]
+
+    def getMin(self) -&gt; int:
+        return min(self.stack)
 </code></pre>
 <p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="大神做法1">大神做法1：</h1>
-<p>双指针探测</p>
-<p>如图所示<br>
-<img src="https://ganhan999.github.io//post-images/1604929111425.gif" alt="" loading="lazy"></p>
-<pre><code class="language-python">class Solution:
-    def countAndSay(self, n: int) -&gt; str:
-        pre = ''
-        cur = '1'#默认为“1”
-        # 从第 2 项开始
-        for _ in range(1, n):
-            # 这里注意要将 cur 赋值给 pre
-            # 因为当前项，就是下一项的前一项。有点绕，尝试理解下
-            pre = cur
-            # 这里 cur 初始化为空，重新拼接
-            cur = ''
-            # 定义双指针 start，end
-            start = 0
-            end = 0
-            # 开始遍历前一项，开始描述
-            while end &lt; len(pre):
-                # 统计重复元素的次数，出现不同元素时，停止
-                # 记录出现的次数，
-                while end &lt; len(pre) and pre[start] == pre[end]:
-                    end += 1
-                # 元素出现次数与元素进行拼接
-                cur += str(end - start) + pre[start]
-                # 这里更新 start，开始记录下一个元素
-                start = end
-        return cur
-
-
-#复现成功！
-</code></pre>
-<p>&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="大神做法2">大神做法2：</h1>
-<p>递归和迭代简单算法</p>
-<pre><code class="language-python">#递归
-def countAndSay(self, n: int) -&gt; str:
-    if n == 1:
-        return '1'
-    s = self.countAndSay(n - 1)
-
-    i, res = 0, ''
-    for j, c in enumerate(s):
-        if c != s[i]:
-            res += str(j - i) + s[i]#后面使用 j - i 来统计相同元素的个数，这样最后会剩下最后一堆相同的数字。
-            i = j
-    res += str(len(s) - i) + s[-1]  # 所以最后一个元素莫忘统计
-    return res
-
-#迭代
-def countAndSay(self, n: int) -&gt; str:
-    res = '1'#默认为“1”
-    for _ in range(n-1):  # 控制循环次数
-        i, tmp = 0, ''
-        for j, c in enumerate(res):
-            if c != res[i]:
-                tmp += str(j-i) + res[i]
-                i = j
-        res = tmp + str(len(res) - i) + res[-1]
-    return res
-
-#复现成功！
-</code></pre>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;<br>
-Python递归的要点<br>
-1、一定要画图<br>
-2、在最前面写上递归停止的条件<br>
-3、在递归函数后面要写上你相对应的操作，并在最后写上return</p>
-<p>Python迭代的要点<br>
-1、利用while循环将递归变为非递归</p>
-<p>递归和迭代的区别：</p>
-<p>斐波那契数列的实现</p>
-<pre><code>【递归实现】
-
-def fib(x):
-    if x &lt;2:
-        return 0 if x==0 else 1
-    else:
-        return fib(x - 1) + fib(x - 2)
-print(fib(6))
-</code></pre>
-<p>【迭代实现】</p>
-<pre><code>def fib(x):
-    n1 = 1
-    n2 = 1
-    n3 = 1
-    while x-2 &gt; 0:
-       n3 = n2 + n1
-       n1 = n2
-       n2 = n3
-       x -= 1
-   return n3
-
-num = int(input('请输入一个正整数：'))
-print(fib(num))
+<h1 id="大神做法1">#大神做法1：</h1>
+<p>push()方法： 每当push()新值进来时，如果 小于等于 min_stack栈顶值，<br>
+则一起push()到min_stack，即更新了栈顶最小值；</p>
+<p>pop()方法： 判断将pop()出去的元素值是否是min_stack栈顶元素值（即最小值），<br>
+如果是则将min_stack栈顶元素一起pop()，这样可以保证min_stack栈顶元素始终是stack中的最小值。</p>
+<p>getMin()方法： 返回min_stack栈顶即可。</p>
+<p>min_stack作用分析：<br>
+min_stack等价于遍历stack所有元素，把升序的数字都删除掉，留下一个从栈底到栈顶降序的栈。<br>
+相当于给stack中的降序元素做了标记，每当pop()这些降序元素，min_stack会将相应的栈顶元素<br>
+pop()出去，保证其栈顶元素始终是stack中的最小元素。</p>
+<pre><code class="language-Python">class MinStack:
+    def __init__(self):
+        self.stack = []
+        self.min_stack = []
+    def push(self, x: int) -&gt; None:
+        self.stack.append(x)
+        if not self.min_stack or x &lt;= self.min_stack[-1]:
+            self.min_stack.append(x)
+    def pop(self) -&gt; None:
+        if self.stack.pop() == self.min_stack[-1]:
+            self.min_stack.pop()
+    def top(self) -&gt; int:
+        return self.stack[-1]
+    def getMin(self) -&gt; int:
+        return self.min_stack[-1]
 </code></pre>
 
                 </div>
@@ -271,14 +184,14 @@ print(fib(num))
         
             <div class="next-post">
                 <div class="next gt-c-content-color-first">下一篇</div>
-                <a href="https://ganhan999.github.io/post/python-map-han-shu/" class="post-title gt-a-link">
-                    Python map() 函数
+                <a href="https://ganhan999.github.io/post/Java三个修饰符/" class="post-title gt-a-link">
+                    Java三大修饰符
                 </a>
             </div>
         
 
         
-            <span id="/post/38、外观数列/" class="leancloud_visitors" data-flag-title="38、外观数列">
+            <span id="/post/155、最小栈/" class="leancloud_visitors" data-flag-title="155、最小栈">
                 <em class="post-meta-item-text">阅读量 </em>
                 <i class="leancloud-visitors-count">0</i>
             </span>
