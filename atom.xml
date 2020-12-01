@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ganhan999.github.io/</id>
     <title>Gridea</title>
-    <updated>2020-12-01T11:43:42.488Z</updated>
+    <updated>2020-12-01T13:49:40.713Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ganhan999.github.io/"/>
     <link rel="self" href="https://ganhan999.github.io/atom.xml"/>
@@ -10,6 +10,115 @@
     <logo>https://ganhan999.github.io/images/avatar.png</logo>
     <icon>https://ganhan999.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Gridea</rights>
+    <entry>
+        <title type="html"><![CDATA[160、相交链表]]></title>
+        <id>https://ganhan999.github.io/post/160、相交链表/</id>
+        <link href="https://ganhan999.github.io/post/160、相交链表/">
+        </link>
+        <updated>2020-12-01T13:49:20.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
+<p>编写一个程序，找到两个单链表相交的起始节点。</p>
+<p>示例 1：<br>
+输入：intersectVal = 8, listA = [4,1,8,4,5], listB = [5,0,1,8,4,5], skipA = 2, skipB = 3<br>
+输出：Reference of the node with value = 8<br>
+输入解释：相交节点的值为 8 （注意，如果两个链表相交则不能为 0）。从各自的表头开始算起，链表 A 为 [4,1,8,4,5]，链表 B 为 [5,0,1,8,4,5]。在 A 中，相交节点前有 2 个节点；在 B 中，相交节点前有 3 个节点。</p>
+<p>示例 2：<br>
+输入：intersectVal = 2, listA = [0,9,1,2,4], listB = [3,2,4], skipA = 3, skipB = 1<br>
+输出：Reference of the node with value = 2<br>
+输入解释：相交节点的值为 2 （注意，如果两个链表相交则不能为 0）。从各自的表头开始算起，链表 A 为 [0,9,1,2,4]，链表 B 为 [3,2,4]。在 A 中，相交节点前有 3 个节点；在 B 中，相交节点前有 1 个节点。</p>
+<p>示例 3：<br>
+输入：intersectVal = 0, listA = [2,6,4], listB = [1,5], skipA = 3, skipB = 2<br>
+输出：null<br>
+输入解释：从各自的表头开始算起，链表 A 为 [2,6,4]，链表 B 为 [1,5]。由于这两个链表不相交，所以 intersectVal 必须为 0，而 skipA 和 skipB 可以是任意值。<br>
+解释：这两个链表不相交，因此返回 null。</p>
+<p>注意：<br>
+如果两个链表没有交点，返回 null.<br>
+在返回结果后，两个链表仍须保持原有的结构。<br>
+可假定整个链表结构中没有循环。<br>
+程序尽量满足 O(n) 时间复杂度，且仅用 O(1) 内存。.</p>
+<h1 id="本体思路">本体思路</h1>
+<p>将所有A的节点记录在字典中，再用B去查找，如果找到了则返回节点</p>
+<h1 id="我的做法">#我的做法：</h1>
+<pre><code class="language-python">class MinStack:
+    class Solution:
+        def getIntersectionNode(self, headA: ListNode, headB: ListNode) -&gt; ListNode:
+            if headA is None or headB is None:
+                return None
+            m = {}
+            m = self.bianli(headA, m)
+            ans = self.bianli(headB, m)
+            return None if (isinstance(ans, dict)) else ans
+
+        def bianli(self, head, m):
+            while head:
+                if m.get(head):
+                    return head
+                m[head] = 1
+                head = head.next
+            else:
+                return m
+</code></pre>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="大神做法1">#大神做法1：</h1>
+<p>用集合，但不是用字典，思路差不多</p>
+<pre><code class="language-Python">class Solution:
+    def getIntersectionNode(self, headA: ListNode, headB: ListNode) -&gt; ListNode:
+        A = set()
+        cur1 = headA
+        cur2 = headB
+        while cur1:
+            A.add(cur1)
+            cur1 = cur1.next
+        while cur2:
+            if cur2 in A:
+                return cur2
+            cur2 = cur2.next
+        return None
+
+</code></pre>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="大神做法2">#大神做法2：</h1>
+<p>分别遍历两个链表，并记录两链表的长度差n，将出现两种情况，<br>
+(1)让长链表先走n步<br>
+(2)再同时开始走，并对比两个链表的当前节点，节点相等时即为交点<br>
+(3)若没有交点，则在最后的Null处相交</p>
+<pre><code class="language-python">class Solution:
+    def getIntersectionNode(self, headA: ListNode, headB: ListNode) -&gt; ListNode:
+        cur1 = headA
+        cur2 = headB
+        n = 0
+        while cur1:
+            n += 1
+            cur1 = cur1.next
+        while cur2:
+            n -= 1
+            cur2 = cur2.next
+        if cur1 != cur2:
+            return None
+        cur1 = headA if n &gt; 0 else headB
+        cur2 = headB if cur1 == headA else headA
+        n = abs(n)
+        while n:
+            n -= 1
+            cur1 = cur1.next
+        while cur1 != cur2:
+            cur1 = cur1.next
+            cur2 = cur2.next
+        return cur1
+</code></pre>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="大神做法3">#大神做法3：</h1>
+<p>长短链表相互拼接，遇到相同节点跳出循环，该节点即为相交节点</p>
+<pre><code class="language-python">class Solution:
+    def getIntersectionNode(self, L1: ListNode, L2: ListNode) -&gt; ListNode:
+        h1, h2 = L1, L2
+        while h1 is not h2:
+            h1 = h1.next if h1 else L2
+            h2 = h2.next if h2 else L1
+        return h1
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Java集合]]></title>
         <id>https://ganhan999.github.io/post/Java集合/</id>
@@ -3798,45 +3907,6 @@ public class while1 {
     }
 
 }
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[125、验证回文串]]></title>
-        <id>https://ganhan999.github.io/post/125、验证回文串/</id>
-        <link href="https://ganhan999.github.io/post/125、验证回文串/">
-        </link>
-        <updated>2020-11-27T12:35:40.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
-<p>给定一个字符串，验证它是否是回文串，只考虑字母和数字字符，可以忽略字母的大小写。<br>
-说明：本题中，我们将空字符串定义为有效的回文串。</p>
-<p>示例 1:<br>
-输入: &quot;A man, a plan, a canal: Panama&quot;<br>
-输出: true</p>
-<p>示例 2:<br>
-输入: &quot;race a car&quot;<br>
-输出: false</p>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="本体思路">本体思路</h1>
-<p>把不是字母和数字的字符全部去掉，然后转大写，再比较反转和原来的字符串是否相等</p>
-<h1 id="我的做法">#我的做法：</h1>
-<pre><code class="language-python">class Solution:
-    def isPalindrome(self, s: str) -&gt; bool:
-        if not s:
-            return True
-        li=list([val for val in s if val.isalnum()])#去掉除字母和数字以外的字符
-        li=&quot;&quot;.join(li).upper()#转大写
-        return li==li[::-1]
-
-</code></pre>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="大神做法">#大神做法：</h1>
-<p>正则表达式</p>
-<pre><code class="language-Python">class Solution:
-    def isPalindrome(self, s: str) -&gt; bool:
-        s = re.sub(r'[^a-z0-9]', '', s.strip().lower())
-        return s == s[::-1]
-
 </code></pre>
 ]]></content>
     </entry>

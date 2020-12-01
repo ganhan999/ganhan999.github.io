@@ -4,7 +4,7 @@
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-<title>38、外观数列 | Gridea</title>
+<title>160、相交链表 | Gridea</title>
 
 <link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1606830576277">
 
@@ -89,11 +89,11 @@
         <div class="post-detail gt-bg-theme-color-second">
             <article class="gt-post-content">
                 <h2 class="post-title">
-                    38、外观数列
+                    160、相交链表
                 </h2>
                 <div class="post-info">
                     <time class="post-time gt-c-content-color-first">
-                        · 2020-11-09 ·
+                        · 2020-12-01 ·
                     </time>
                     
                         <a href="https://ganhan999.github.io/tag/cKyYTCK2Y/" class="post-tags">
@@ -103,165 +103,105 @@
                 </div>
                 <div class="post-content">
                     <h1 id="题目">题目</h1>
-<p>给定一个正整数 n ，输出外观数列的第 n 项。<br>
-「外观数列」是一个整数序列，从数字 1 开始，序列中的每一项都是对前一项的描述。<br>
-你可以将其视作是由递归公式定义的数字字符串序列：countAndSay(1) = &quot;1&quot;<br>
-countAndSay(n) 是对 countAndSay(n-1) 的描述，然后转换成另一个数字字符串。<br>
-前五项如下：</p>
-<ol>
-<li>
-<pre><code>1
-</code></pre>
-</li>
-<li>
-<pre><code>11
-</code></pre>
-</li>
-<li>
-<pre><code>21
-</code></pre>
-</li>
-<li>
-<pre><code>1211
-</code></pre>
-</li>
-<li>
-<pre><code>111221
-</code></pre>
-</li>
-</ol>
-<p>第一项是数字 1<br>
-描述前一项，这个数是 1 即 “ 一 个 1 ”，记作 &quot;11&quot;<br>
-描述前一项，这个数是 11 即 “ 二 个 1 ” ，记作 &quot;21&quot;<br>
-描述前一项，这个数是 21 即 “ 一 个 2 + 一 个 1 ” ，记作 &quot;1211&quot;<br>
-描述前一项，这个数是 1211 即 “ 一 个 1 + 一 个 2 + 二 个 1 ” ，记作 &quot;111221&quot;<br>
-要 描述 一个数字字符串，首先要将字符串分割为 最小 数量的组，每个组都由连续的最多<br>
-相同字符 组成。然后对于每个组，先描述字符的数量，然后描述字符，形成一个描述组。<br>
-要将描述转换为数字字符串，先将每组中的字符数量用数字替换，再将所有描述组连接起来。</p>
+<p>编写一个程序，找到两个单链表相交的起始节点。</p>
 <p>示例 1：<br>
-输入：n = 1<br>
-输出：&quot;1&quot;<br>
-解释：这是一个基本样例。</p>
+输入：intersectVal = 8, listA = [4,1,8,4,5], listB = [5,0,1,8,4,5], skipA = 2, skipB = 3<br>
+输出：Reference of the node with value = 8<br>
+输入解释：相交节点的值为 8 （注意，如果两个链表相交则不能为 0）。从各自的表头开始算起，链表 A 为 [4,1,8,4,5]，链表 B 为 [5,0,1,8,4,5]。在 A 中，相交节点前有 2 个节点；在 B 中，相交节点前有 3 个节点。</p>
 <p>示例 2：<br>
-输入：n = 4<br>
-输出：&quot;1211&quot;<br>
-解释：<br>
-countAndSay(1) = &quot;1&quot;<br>
-countAndSay(2) = 读 &quot;1&quot; = 一 个 1 = &quot;11&quot;<br>
-countAndSay(3) = 读 &quot;11&quot; = 二 个 1 = &quot;21&quot;<br>
-countAndSay(4) = 读 &quot;21&quot; = 一 个 2 + 一 个 1 = &quot;12&quot; + &quot;11&quot; = &quot;1211&quot;</p>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+输入：intersectVal = 2, listA = [0,9,1,2,4], listB = [3,2,4], skipA = 3, skipB = 1<br>
+输出：Reference of the node with value = 2<br>
+输入解释：相交节点的值为 2 （注意，如果两个链表相交则不能为 0）。从各自的表头开始算起，链表 A 为 [0,9,1,2,4]，链表 B 为 [3,2,4]。在 A 中，相交节点前有 3 个节点；在 B 中，相交节点前有 1 个节点。</p>
+<p>示例 3：<br>
+输入：intersectVal = 0, listA = [2,6,4], listB = [1,5], skipA = 3, skipB = 2<br>
+输出：null<br>
+输入解释：从各自的表头开始算起，链表 A 为 [2,6,4]，链表 B 为 [1,5]。由于这两个链表不相交，所以 intersectVal 必须为 0，而 skipA 和 skipB 可以是任意值。<br>
+解释：这两个链表不相交，因此返回 null。</p>
+<p>注意：<br>
+如果两个链表没有交点，返回 null.<br>
+在返回结果后，两个链表仍须保持原有的结构。<br>
+可假定整个链表结构中没有循环。<br>
+程序尽量满足 O(n) 时间复杂度，且仅用 O(1) 内存。.</p>
 <h1 id="本体思路">本体思路</h1>
-<p>利用递归的思想，如果当后一个元素不等于前一个元素停止计数，以此类推。主要是递归的思想要掌握！</p>
+<p>将所有A的节点记录在字典中，再用B去查找，如果找到了则返回节点</p>
 <h1 id="我的做法">#我的做法：</h1>
-<pre><code class="language-python">class Solution:
-    def searchInsert(self, nums: List[int], target: int) -&gt; int:
-        if target in nums:
-            return nums.index(target)
-        else:
-            nums.append(target)
-            nums.sort(reverse=False)
-            return nums.index(target)
+<pre><code class="language-python">class MinStack:
+    class Solution:
+        def getIntersectionNode(self, headA: ListNode, headB: ListNode) -&gt; ListNode:
+            if headA is None or headB is None:
+                return None
+            m = {}
+            m = self.bianli(headA, m)
+            ans = self.bianli(headB, m)
+            return None if (isinstance(ans, dict)) else ans
 
+        def bianli(self, head, m):
+            while head:
+                if m.get(head):
+                    return head
+                m[head] = 1
+                head = head.next
+            else:
+                return m
+</code></pre>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="大神做法1">#大神做法1：</h1>
+<p>用集合，但不是用字典，思路差不多</p>
+<pre><code class="language-Python">class Solution:
+    def getIntersectionNode(self, headA: ListNode, headB: ListNode) -&gt; ListNode:
+        A = set()
+        cur1 = headA
+        cur2 = headB
+        while cur1:
+            A.add(cur1)
+            cur1 = cur1.next
+        while cur2:
+            if cur2 in A:
+                return cur2
+            cur2 = cur2.next
+        return None
 
 </code></pre>
 <p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="大神做法1">大神做法1：</h1>
-<p>双指针探测</p>
-<p>如图所示<br>
-<img src="https://ganhan999.github.io//post-images/1604929111425.gif" alt="" loading="lazy"></p>
+<h1 id="大神做法2">#大神做法2：</h1>
+<p>分别遍历两个链表，并记录两链表的长度差n，将出现两种情况，<br>
+(1)让长链表先走n步<br>
+(2)再同时开始走，并对比两个链表的当前节点，节点相等时即为交点<br>
+(3)若没有交点，则在最后的Null处相交</p>
 <pre><code class="language-python">class Solution:
-    def countAndSay(self, n: int) -&gt; str:
-        pre = ''
-        cur = '1'#默认为“1”
-        # 从第 2 项开始
-        for _ in range(1, n):
-            # 这里注意要将 cur 赋值给 pre
-            # 因为当前项，就是下一项的前一项。有点绕，尝试理解下
-            pre = cur
-            # 这里 cur 初始化为空，重新拼接
-            cur = ''
-            # 定义双指针 start，end
-            start = 0
-            end = 0
-            # 开始遍历前一项，开始描述
-            while end &lt; len(pre):
-                # 统计重复元素的次数，出现不同元素时，停止
-                # 记录出现的次数，
-                while end &lt; len(pre) and pre[start] == pre[end]:
-                    end += 1
-                # 元素出现次数与元素进行拼接
-                cur += str(end - start) + pre[start]
-                # 这里更新 start，开始记录下一个元素
-                start = end
-        return cur
-
-
-#复现成功！
+    def getIntersectionNode(self, headA: ListNode, headB: ListNode) -&gt; ListNode:
+        cur1 = headA
+        cur2 = headB
+        n = 0
+        while cur1:
+            n += 1
+            cur1 = cur1.next
+        while cur2:
+            n -= 1
+            cur2 = cur2.next
+        if cur1 != cur2:
+            return None
+        cur1 = headA if n &gt; 0 else headB
+        cur2 = headB if cur1 == headA else headA
+        n = abs(n)
+        while n:
+            n -= 1
+            cur1 = cur1.next
+        while cur1 != cur2:
+            cur1 = cur1.next
+            cur2 = cur2.next
+        return cur1
 </code></pre>
-<p>&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="大神做法2">大神做法2：</h1>
-<p>递归和迭代简单算法</p>
-<pre><code class="language-python">#递归
-def countAndSay(self, n: int) -&gt; str:
-    if n == 1:
-        return '1'
-    s = self.countAndSay(n - 1)
-
-    i, res = 0, ''
-    for j, c in enumerate(s):
-        if c != s[i]:
-            res += str(j - i) + s[i]#后面使用 j - i 来统计相同元素的个数，这样最后会剩下最后一堆相同的数字。
-            i = j
-    res += str(len(s) - i) + s[-1]  # 所以最后一个元素莫忘统计
-    return res
-
-#迭代
-def countAndSay(self, n: int) -&gt; str:
-    res = '1'#默认为“1”
-    for _ in range(n-1):  # 控制循环次数
-        i, tmp = 0, ''
-        for j, c in enumerate(res):
-            if c != res[i]:
-                tmp += str(j-i) + res[i]
-                i = j
-        res = tmp + str(len(res) - i) + res[-1]
-    return res
-
-#复现成功！
-</code></pre>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;<br>
-Python递归的要点<br>
-1、一定要画图<br>
-2、在最前面写上递归停止的条件<br>
-3、在递归函数后面要写上你相对应的操作，并在最后写上return</p>
-<p>Python迭代的要点<br>
-1、利用while循环将递归变为非递归</p>
-<p>递归和迭代的区别：</p>
-<p>斐波那契数列的实现</p>
-<pre><code>【递归实现】
-
-def fib(x):
-    if x &lt;2:
-        return 0 if x==0 else 1
-    else:
-        return fib(x - 1) + fib(x - 2)
-print(fib(6))
-</code></pre>
-<p>【迭代实现】</p>
-<pre><code>def fib(x):
-    n1 = 1
-    n2 = 1
-    n3 = 1
-    while x-2 &gt; 0:
-       n3 = n2 + n1
-       n1 = n2
-       n2 = n3
-       x -= 1
-   return n3
-
-num = int(input('请输入一个正整数：'))
-print(fib(num))
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="大神做法3">#大神做法3：</h1>
+<p>长短链表相互拼接，遇到相同节点跳出循环，该节点即为相交节点</p>
+<pre><code class="language-python">class Solution:
+    def getIntersectionNode(self, L1: ListNode, L2: ListNode) -&gt; ListNode:
+        h1, h2 = L1, L2
+        while h1 is not h2:
+            h1 = h1.next if h1 else L2
+            h2 = h2.next if h2 else L1
+        return h1
 </code></pre>
 
                 </div>
@@ -271,14 +211,14 @@ print(fib(num))
         
             <div class="next-post">
                 <div class="next gt-c-content-color-first">下一篇</div>
-                <a href="https://ganhan999.github.io/post/python-map-han-shu/" class="post-title gt-a-link">
-                    Python map() 函数
+                <a href="https://ganhan999.github.io/post/Java集合/" class="post-title gt-a-link">
+                    Java集合
                 </a>
             </div>
         
 
         
-            <span id="/post/38、外观数列/" class="leancloud_visitors" data-flag-title="38、外观数列">
+            <span id="/post/160、相交链表/" class="leancloud_visitors" data-flag-title="160、相交链表">
                 <em class="post-meta-item-text">阅读量 </em>
                 <i class="leancloud-visitors-count">0</i>
             </span>
