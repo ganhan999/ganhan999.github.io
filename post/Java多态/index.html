@@ -4,7 +4,7 @@
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-<title>38、外观数列 | Gridea</title>
+<title>Java多态 | Gridea</title>
 
 <link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1606823017205">
 
@@ -89,180 +89,358 @@
         <div class="post-detail gt-bg-theme-color-second">
             <article class="gt-post-content">
                 <h2 class="post-title">
-                    38、外观数列
+                    Java多态
                 </h2>
                 <div class="post-info">
                     <time class="post-time gt-c-content-color-first">
-                        · 2020-11-09 ·
+                        · 2020-12-01 ·
                     </time>
                     
-                        <a href="https://ganhan999.github.io/tag/cKyYTCK2Y/" class="post-tags">
-                            # leetcode
+                        <a href="https://ganhan999.github.io/tag/2avA5RaAc/" class="post-tags">
+                            # Java
                         </a>
                     
                 </div>
                 <div class="post-content">
-                    <h1 id="题目">题目</h1>
-<p>给定一个正整数 n ，输出外观数列的第 n 项。<br>
-「外观数列」是一个整数序列，从数字 1 开始，序列中的每一项都是对前一项的描述。<br>
-你可以将其视作是由递归公式定义的数字字符串序列：countAndSay(1) = &quot;1&quot;<br>
-countAndSay(n) 是对 countAndSay(n-1) 的描述，然后转换成另一个数字字符串。<br>
-前五项如下：</p>
+                    <h2 id="1多态概述">1.多态概述</h2>
 <ol>
-<li>
-<pre><code>1
-</code></pre>
-</li>
-<li>
-<pre><code>11
-</code></pre>
-</li>
-<li>
-<pre><code>21
-</code></pre>
-</li>
-<li>
-<pre><code>1211
-</code></pre>
-</li>
-<li>
-<pre><code>111221
-</code></pre>
-</li>
+<li><strong>多态</strong>是继封装、继承之后，面向对象的第三大特性。</li>
+<li>多态<strong>现实意义</strong>理解：</li>
 </ol>
-<p>第一项是数字 1<br>
-描述前一项，这个数是 1 即 “ 一 个 1 ”，记作 &quot;11&quot;<br>
-描述前一项，这个数是 11 即 “ 二 个 1 ” ，记作 &quot;21&quot;<br>
-描述前一项，这个数是 21 即 “ 一 个 2 + 一 个 1 ” ，记作 &quot;1211&quot;<br>
-描述前一项，这个数是 1211 即 “ 一 个 1 + 一 个 2 + 二 个 1 ” ，记作 &quot;111221&quot;<br>
-要 描述 一个数字字符串，首先要将字符串分割为 最小 数量的组，每个组都由连续的最多<br>
-相同字符 组成。然后对于每个组，先描述字符的数量，然后描述字符，形成一个描述组。<br>
-要将描述转换为数字字符串，先将每组中的字符数量用数字替换，再将所有描述组连接起来。</p>
-<p>示例 1：<br>
-输入：n = 1<br>
-输出：&quot;1&quot;<br>
-解释：这是一个基本样例。</p>
-<p>示例 2：<br>
-输入：n = 4<br>
-输出：&quot;1211&quot;<br>
-解释：<br>
-countAndSay(1) = &quot;1&quot;<br>
-countAndSay(2) = 读 &quot;1&quot; = 一 个 1 = &quot;11&quot;<br>
-countAndSay(3) = 读 &quot;11&quot; = 二 个 1 = &quot;21&quot;<br>
-countAndSay(4) = 读 &quot;21&quot; = 一 个 2 + 一 个 1 = &quot;12&quot; + &quot;11&quot; = &quot;1211&quot;</p>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="本体思路">本体思路</h1>
-<p>利用递归的思想，如果当后一个元素不等于前一个元素停止计数，以此类推。主要是递归的思想要掌握！</p>
-<h1 id="我的做法">#我的做法：</h1>
-<pre><code class="language-python">class Solution:
-    def searchInsert(self, nums: List[int], target: int) -&gt; int:
-        if target in nums:
-            return nums.index(target)
-        else:
-            nums.append(target)
-            nums.sort(reverse=False)
-            return nums.index(target)
+<ul>
+<li>
+<p>现实事物经常会体现出多种形态，如学生，学生是人的一种，则一个具体的同学张三既是<strong>学生</strong>也是<strong>人</strong>，即出现<strong>两种形态</strong>。</p>
+</li>
+<li>
+<p>Java作为面向对象的语言，同样可以描述一个事物的多种形态。如Student类继承了Person类，一个Student的对象便既是Student，又是Person。</p>
+<p>3.多态体现为<strong>父类引用变量可以指向子类对象</strong>。</p>
+<p>4.前提条件：必须有子父类关系。</p>
+<p><em><strong>*注意：在使用多态后的父类引用变量调用方法时，会调用子类重写后的方法。*</strong></em></p>
+<p>5.多态的定义与使用格式</p>
+</li>
+</ul>
+<p>​          定义格式：父类类型 变量名=new 子类类型();</p>
+<p>6.理解:</p>
+<p>​        多态是同一个行为具有多个不同表现形式或形态的能力。</p>
+<p>​        多态就是同一个接口，使用不同的实例而执行不同操作。</p>
+<h2 id="2多态中成员的特点">2.多态中成员的特点</h2>
+<ol>
+<li>多态成员变量：编译运行看左边</li>
+</ol>
+<p>​     Fu f=new Zi();</p>
+<p>​     System.out.println(f.num);//f是Fu中的值，只能取到父中的值</p>
+<p>2.多态成员方法：编译看左边，运行看右边</p>
+<p>​    Fu f1=new Zi();</p>
+<p>​    System.out.println(f1.show());//f1的门面类型是Fu,但实际类型是Zi,所以调用的是重写后的方法。</p>
+<h2 id="3instanceof关键字">3.instanceof关键字</h2>
+<p>作用：用来判断某个对象是否属于某种数据类型。</p>
+<ul>
+<li>注意： 返回类型为布尔类型</li>
+</ul>
+<p>使用案例：</p>
+<pre><code class="language-java">        Fu f1=new Zi();
 
 
+
+        Fu f2=new Son();
+
+
+
+        if(f1 instanceof Zi){
+
+
+
+            System.out.println(&quot;f1是Zi的类型&quot;);
+
+
+
+        }
+
+
+
+        else{
+
+
+
+            System.out.println(&quot;f1是Son的类型&quot;);
+
+
+
+        }
 </code></pre>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="大神做法1">大神做法1：</h1>
-<p>双指针探测</p>
-<p>如图所示<br>
-<img src="https://ganhan999.github.io//post-images/1604929111425.gif" alt="" loading="lazy"></p>
-<pre><code class="language-python">class Solution:
-    def countAndSay(self, n: int) -&gt; str:
-        pre = ''
-        cur = '1'#默认为“1”
-        # 从第 2 项开始
-        for _ in range(1, n):
-            # 这里注意要将 cur 赋值给 pre
-            # 因为当前项，就是下一项的前一项。有点绕，尝试理解下
-            pre = cur
-            # 这里 cur 初始化为空，重新拼接
-            cur = ''
-            # 定义双指针 start，end
-            start = 0
-            end = 0
-            # 开始遍历前一项，开始描述
-            while end &lt; len(pre):
-                # 统计重复元素的次数，出现不同元素时，停止
-                # 记录出现的次数，
-                while end &lt; len(pre) and pre[start] == pre[end]:
-                    end += 1
-                # 元素出现次数与元素进行拼接
-                cur += str(end - start) + pre[start]
-                # 这里更新 start，开始记录下一个元素
-                start = end
-        return cur
+<h2 id="4多态的转型">4.多态的转型</h2>
+<ul>
+<li>多态的转型分为向上转型和向下转型两种</li>
+<li>向上转型：多态本身就是向上转型过的过程</li>
+</ul>
+<p>​     使用格式：父类类型 变量名=new 子类类型();</p>
+<p>​     适用场景：当不需要面对子类类型时，通过提高扩展性，或者使用父类的功能就能完成相应的操作。</p>
+<ul>
+<li>向下转型：一个已经向上转型的子类对象可以使用强制类型转换的格式，将父类引用类型转为子类引用各类型</li>
+</ul>
+<p>​     使用格式：子类类型 变量名=（子类类型） 父类类型的变量；</p>
+<p>​     适用场景：当要使用子类特有功能时。</p>
+<h2 id="5多态案例">5.多态案例：</h2>
+<p>例1：（<strong>理解多态，可以重点看这个案例</strong>）</p>
+<pre><code class="language-java">package day0524;
 
 
-#复现成功！
+
+ 
+
+
+
+public class demo04 {
+
+
+
+    public static void main(String[] args) {
+
+
+
+        People p=new Stu();
+
+
+
+        p.eat();
+
+
+
+        //调用特有的方法
+
+
+
+        Stu s=(Stu)p;
+
+
+
+        s.study();
+
+
+
+        //((Stu) p).study();
+
+
+
+    }
+
+
+
+}
+
+
+
+class People{
+
+
+
+    public void eat(){
+
+
+
+        System.out.println(&quot;吃饭&quot;);
+
+
+
+    }
+
+
+
+}
+
+
+
+class Stu extends People{
+
+
+
+    @Override
+
+
+
+    public void eat(){
+
+
+
+        System.out.println(&quot;吃水煮肉片&quot;);
+
+
+
+    }
+
+
+
+    public void study(){
+
+
+
+        System.out.println(&quot;好好学习&quot;);
+
+
+
+    }
+
+
+
+}
+
+
+
+class Teachers extends People{
+
+
+
+    @Override
+
+
+
+    public void eat(){
+
+
+
+        System.out.println(&quot;吃樱桃&quot;);
+
+
+
+    }
+
+
+
+    public void teach(){
+
+
+
+        System.out.println(&quot;认真授课&quot;);
+
+
+
+    }
+
+
+
+}
 </code></pre>
-<p>&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="大神做法2">大神做法2：</h1>
-<p>递归和迭代简单算法</p>
-<pre><code class="language-python">#递归
-def countAndSay(self, n: int) -&gt; str:
-    if n == 1:
-        return '1'
-    s = self.countAndSay(n - 1)
+<p>例2：</p>
+<p>请问题目运行结果是什么？</p>
+<pre><code class="language-java">package day0524;
 
-    i, res = 0, ''
-    for j, c in enumerate(s):
-        if c != s[i]:
-            res += str(j - i) + s[i]#后面使用 j - i 来统计相同元素的个数，这样最后会剩下最后一堆相同的数字。
-            i = j
-    res += str(len(s) - i) + s[-1]  # 所以最后一个元素莫忘统计
-    return res
 
-#迭代
-def countAndSay(self, n: int) -&gt; str:
-    res = '1'#默认为“1”
-    for _ in range(n-1):  # 控制循环次数
-        i, tmp = 0, ''
-        for j, c in enumerate(res):
-            if c != res[i]:
-                tmp += str(j-i) + res[i]
-                i = j
-        res = tmp + str(len(res) - i) + res[-1]
-    return res
 
-#复现成功！
+public class demo1 {
+
+
+
+    public static void main(String[] args) {
+
+
+
+        A a=new A();
+
+
+
+        a.show();
+
+
+
+        B b=new B();
+
+
+
+        b.show();
+
+
+
+    }
+
+
+
+}
+
+
+
+class A{
+
+
+
+    public void show(){
+
+
+
+        show2();
+
+
+
+    }
+
+
+
+    public void show2(){
+
+
+
+        System.out.println(&quot;A&quot;);
+
+
+
+    }
+
+
+
+}
+
+
+
+class B extends A{
+
+
+
+    public void show2(){
+
+
+
+        System.out.println(&quot;B&quot;);
+
+
+
+    }
+
+
+
+}
+
+
+
+class C extends B{
+
+
+
+    public void show(){
+
+
+
+        super.show();
+
+
+
+    }
+
+
+
+    public void show2(){
+
+
+
+        System.out.println(&quot;C&quot;);
+
+
+
+    }
+
+
+
+}
 </code></pre>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;<br>
-Python递归的要点<br>
-1、一定要画图<br>
-2、在最前面写上递归停止的条件<br>
-3、在递归函数后面要写上你相对应的操作，并在最后写上return</p>
-<p>Python迭代的要点<br>
-1、利用while循环将递归变为非递归</p>
-<p>递归和迭代的区别：</p>
-<p>斐波那契数列的实现</p>
-<pre><code>【递归实现】
-
-def fib(x):
-    if x &lt;2:
-        return 0 if x==0 else 1
-    else:
-        return fib(x - 1) + fib(x - 2)
-print(fib(6))
-</code></pre>
-<p>【迭代实现】</p>
-<pre><code>def fib(x):
-    n1 = 1
-    n2 = 1
-    n3 = 1
-    while x-2 &gt; 0:
-       n3 = n2 + n1
-       n1 = n2
-       n2 = n3
-       x -= 1
-   return n3
-
-num = int(input('请输入一个正整数：'))
-print(fib(num))
-</code></pre>
+<p>答案：A B</p>
 
                 </div>
             </article>
@@ -271,14 +449,14 @@ print(fib(num))
         
             <div class="next-post">
                 <div class="next gt-c-content-color-first">下一篇</div>
-                <a href="https://ganhan999.github.io/post/python-map-han-shu/" class="post-title gt-a-link">
-                    Python map() 函数
+                <a href="https://ganhan999.github.io/post/155、最小栈/" class="post-title gt-a-link">
+                    155、最小栈
                 </a>
             </div>
         
 
         
-            <span id="/post/38、外观数列/" class="leancloud_visitors" data-flag-title="38、外观数列">
+            <span id="/post/Java多态/" class="leancloud_visitors" data-flag-title="Java多态">
                 <em class="post-meta-item-text">阅读量 </em>
                 <i class="leancloud-visitors-count">0</i>
             </span>
