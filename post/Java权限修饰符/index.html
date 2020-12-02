@@ -4,7 +4,7 @@
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-<title>Python算法入门 (动态规划) | Gridea</title>
+<title>Java权限修饰符 | Gridea</title>
 
 <link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1606876926449">
 
@@ -89,224 +89,107 @@
         <div class="post-detail gt-bg-theme-color-second">
             <article class="gt-post-content">
                 <h2 class="post-title">
-                    Python算法入门 (动态规划)
+                    Java权限修饰符
                 </h2>
                 <div class="post-info">
                     <time class="post-time gt-c-content-color-first">
-                        · 2020-11-25 ·
+                        · 2020-12-02 ·
                     </time>
                     
-                        <a href="https://ganhan999.github.io/tag/vXU8Zkv4u/" class="post-tags">
-                            # Python
+                        <a href="https://ganhan999.github.io/tag/2avA5RaAc/" class="post-tags">
+                            # Java
                         </a>
                     
                 </div>
                 <div class="post-content">
-                    <h1 id="动态规划">动态规划</h1>
-<p><strong>1、斐波那契数列</strong></p>
-<pre><code class="language-python"># 子问题的重复计算
-def fibnacci(n):
-    if n == 1 or n == 2:
-        return 1
-    else:
-        return fibnacci(n-1) + fibnacci(n-2)
-
-
-# 动态规划（DP）的思想 = 递推式 + 重复子问题
-def fibnacci_no_recurision(n):
-    f = [0,1,1]
-    if n &gt; 2:
-        for i in range(n-2):
-            num = f[-1] + f[-2]
-            f.append(num)
-    return f[n]
-
-print(fibnacci_no_recurision(100))
-</code></pre>
-<p><strong>2、最长公共子序列</strong></p>
-<pre><code class="language-python">def lcs_length(x, y):
-    m = len(x)
-    n = len(y)
-    c = [[0 for _ in range(n+1)] for _ in range(m+1)]
-    for i in range(1, m+1):
-        for j in range(1, n+1):
-            if x[i-1] == y[j-1]:    # i j 位置上的字符匹配的时候，来自于左上方+1
-                c[i][j] = c[i-1][j-1] + 1
-            else:
-                c[i][j] = max(c[i-1][j], c[i][j-1])
-    return c[m][n]
-
-def lcs(x, y):
-    m = len(x)
-    n = len(y)
-    c = [[0 for _ in range(n + 1)] for _ in range(m + 1)]
-    b = [[0 for _ in range(n + 1)] for _ in range(m + 1)] # 1 左上方 2 上方 3 左方
-    for i in range(1, m+1):
-        for j in range(1, n+1):
-            if x[i-1] == y[j-1]:    # i j 位置上的字符匹配的时候，来自于左上方+1
-                c[i][j] = c[i-1][j-1] + 1
-                b[i][j] = 1
-            elif c[i-1][j] &gt; c[i][j-1]: # 来自于上方
-                c[i][j] = c[i-1][j]
-                b[i][j] = 2
-            else:
-                c[i][j] = c[i][j-1]
-                b[i][j] = 3
-    return c[m][n], b
-
-
-def lcs_trackback(x, y):
-    c, b = lcs(x, y)
-    i = len(x)
-    j = len(y)
-    res = []
-    while i &gt; 0 and j &gt; 0:
-        if b[i][j] == 1:    # 来自左上方=&gt;匹配
-            res.append(x[i-1])
-            i -= 1
-            j -= 1
-        elif b[i][j] == 2:  # 来自于上方=&gt;不匹配
-            i -= 1
-        else: # ==3 来自于左方=&gt;不匹配
-            j -= 1
-    return &quot;&quot;.join(reversed(res))
-
-
-print(lcs_trackback(&quot;ABCBDAB&quot;, &quot;BDCABA&quot;))
-</code></pre>
-<p><strong>3、最大公约数</strong></p>
-<pre><code class="language-python">def gcd(a, b):
-    if b == 0:
-        return a
-    else:
-        return gcd(b, a % b)
-
-
-def gcd2(a, b):
-    while b &gt; 0:
-        r = a % b
-        a = b
-        b = r
-    return a
-
-
-print(gcd2(12,16))
-</code></pre>
-<p><strong>4、切木头问题</strong></p>
-<pre><code class="language-python">p = [0, 1, 5, 8, 9, 10, 17, 17, 20, 21, 23, 24, 26, 27, 27, 28, 30, 33, 36, 39, 40]
-# p = [0, 1, 5, 8, 9, 10, 17, 17, 20, 24, 30]
-
-
-def cut_rod_recurision_1(p, n):
-    if n == 0:
-        return 0
-    else:
-        res = p[n]
-        for i in range(1, n):
-            res = max(res, cut_rod_recurision_1(p, i) + cut_rod_recurision_1(p, n-i))
-        return res
-
-
-def c1(p, n):
-    return cut_rod_recurision_1(p, n)
-
-
-def cut_rod_recurision_2(p, n):
-    if n == 0:
-        return 0
-    else:
-        res = 0
-        for i in range(1, n+1):
-            res = max(res, p[i] + cut_rod_recurision_2(p, n-i))
-        return res
-
-
-def c2(p,n):
-    return cut_rod_recurision_2(p, n)
-
-
-
-def cut_rod_dp(p, n):
-    r = [0]
-    for i in range(1, n+1):
-        res = 0
-        for j in range(1, i+1):
-            res = max(res, p[j] + r[i - j])
-        r.append(res)
-    return r[n]
-
-
-def cut_rod_extend(p, n):
-    r = [0]
-    s = [0]
-    for i in range(1, n+1):
-        res_r = 0 # 价格的最大值
-        res_s = 0 # 价格最大值对应方案的左边不切割部分的长度
-        for j in range(1, i + 1):
-            if p[j] + r[i - j] &gt; res_r:
-                res_r = p[j] + r[i - j]
-                res_s = j
-        r.append(res_r)
-        s.append(res_s)
-    return r[n], s
-
-
-def cut_rod_solution(p, n):
-    r, s = cut_rod_extend(p, n)
-    ans = []
-    while n &gt; 0:
-        ans.append(s[n])
-        n -= s[n]
-    return ans
-
-
-r, s = cut_rod_extend(p,20)
-print(s)
-
-print(cut_rod_dp(p, 20))
-print(cut_rod_solution(p, 20))
-</code></pre>
-<p><strong>5、分数相加</strong></p>
-<pre><code class="language-Python">class Fraction:
-    def __init__(self, a, b):
-        self.a = a
-        self.b = b
-        x = self.gcd(a,b)
-        self.a /= x
-        self.b /= x
-
-    def gcd(self, a, b):
-        while b &gt; 0:
-            r = a % b
-            a = b
-            b = r
-        return a
-
-    def zgs(self, a, b):
-        # 12 16 -&gt; 4
-        # 3*4*4=48
-        x = self.gcd(a, b)
-        return a * b / x
-
-    def __add__(self, other):
-        a = self.a
-        b = self.b
-        c = other.a
-        d = other.b
-        fenmu = self.zgs(b, d)
-        fenzi = a * fenmu / b + c * fenmu / d
-        return Fraction(fenzi, fenmu)
-
-
-
-    def __str__(self):
-        return &quot;%d/%d&quot; % (self.a, self.b)
-
-
-a = Fraction(1,3)
-b = Fraction(1,2)
-print(a+b)
-</code></pre>
+                    <h2 id="java中有四种权限修饰符">Java中有四种权限修饰符</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left"></th>
+<th style="text-align:left">public</th>
+<th style="text-align:left">protected</th>
+<th style="text-align:left">(default)</th>
+<th style="text-align:left">private</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">同一个类</td>
+<td style="text-align:left">yes</td>
+<td style="text-align:left">yes</td>
+<td style="text-align:left">yes</td>
+<td style="text-align:left">yes</td>
+</tr>
+<tr>
+<td style="text-align:left">同一个包</td>
+<td style="text-align:left">yes</td>
+<td style="text-align:left">yes</td>
+<td style="text-align:left">yes</td>
+<td style="text-align:left">no</td>
+</tr>
+<tr>
+<td style="text-align:left">不同包子类</td>
+<td style="text-align:left">yes</td>
+<td style="text-align:left">yes</td>
+<td style="text-align:left">no</td>
+<td style="text-align:left">no</td>
+</tr>
+<tr>
+<td style="text-align:left">不同包非子类</td>
+<td style="text-align:left">yes</td>
+<td style="text-align:left">no</td>
+<td style="text-align:left">no</td>
+<td style="text-align:left">no</td>
+</tr>
+</tbody>
+</table>
+<p>Warning:(default)并不是关键字&quot;default&quot;,而是根本不写</p>
+<p>知识点补充：</p>
+<p><strong>Java语言4种访问权限修饰符</strong></p>
+<p>Java语言4种访问权限修饰符，但是仅有3个关键字，因为不写访问权限，在Java中被称为默认权限，或同包权限，本文中以(default)代替。下面按照权限从小到大的顺序对4种访问权限分别介绍</p>
+<p><strong>1、默认权限(default)</strong></p>
+<p>类，数据成员，构造方法，方法成员，都能够使用默认权限，即不写任何关键字。默认权限即同包权限，同包权限的元素只能在定义它们的类中，以及同包的类中被调用。</p>
+<p><strong>2、受保护权限(protected)</strong></p>
+<p>protected可以修饰数据成员，构造方法，方法成员，不能修饰类(此处指外部类，不考虑内部类)。被protected修饰的成员，能在定义它们的类中，同包的类中被调用。如果有不同包的类想调用它们，那么这个类必须是定义它们的类的子类。</p>
+<p><strong>3、私有权限(private)</strong></p>
+<p>private可以修饰数据成员，构造方法，方法成员，不能修饰类(此处指外部类，不考虑内部类)。被private修饰的成员，只能在定义它们的类中使用，在其他类中不能调用。</p>
+<p><strong>4、公共权限(public)</strong></p>
+<p>public可以修饰类，数据成员，构造方法，方法成员。被public修饰的成员，可以在任何一个类中被调用，不管同包或不同包，是权限最大的一个修饰符。</p>
+<p>有关Java语言的修饰符，需要注意的问题有如下几个：</p>
+<p>1.并不是每个修饰符都可以修饰类(指外部类)，只有public和default可以。</p>
+<p>2.所有修饰符都可以修饰数据成员，方法成员，构造方法。</p>
+<p>3.为了代码安全起见，修饰符不要尽量使用权限大的，而是适用即可。比如，数据成员，如果没有特殊需要，尽可能用private.</p>
+<p>4.修饰符修饰的是“被访问”的权限。</p>
+<p><strong>private：仅对本类可见</strong></p>
+<p><strong>缺省（不需修饰符）：对本包可见</strong></p>
+<p><strong>protected：对本包及所有子类可见</strong></p>
+<p><strong>public：对所有类可见</strong></p>
+<hr>
+<p><strong>修饰符：</strong></p>
+<p><strong>* 权限修饰符：private，默认的，protected，public</strong><br>
+<strong>* 状态修饰符：static，final</strong><br>
+<strong>* 抽象修饰符：abstract</strong></p>
+<p><strong>类：</strong><br>
+<strong>* 权限修饰符：默认修饰符，public</strong><br>
+<strong>* 状态修饰符：final（最终类不能被继承）</strong><br>
+<strong>* 抽象修饰符：abstract</strong></p>
+<p><strong>成员变量：</strong><br>
+<strong>* 权限修饰符：private，默认的，protected，public</strong><br>
+<strong>* 状态修饰符：static，final</strong></p>
+<p><strong>构造方法：</strong><br>
+<strong>* 权限修饰符：private，默认的，protected，public</strong><br>
+*<strong>私有构造方法的情况：当一个类中所有的方法都是静态的，就可以把构造方法私有</strong></p>
+<p><strong>成员方法：</strong><br>
+<strong>* 权限修饰符：private，默认的，protected，public</strong><br>
+<strong>* 状态修饰符：static，final</strong><br>
+<strong>* 抽象修饰符：abstract</strong></p>
+<p><strong>除此以外的组合规则：</strong><br>
+<strong>* 成员变量：public static final</strong><br>
+<strong>* 成员方法：</strong><br>
+<strong>* public static</strong><br>
+<strong>* public abstract</strong><br>
+<strong>* public final</strong></p>
 
                 </div>
             </article>
@@ -315,14 +198,14 @@ print(a+b)
         
             <div class="next-post">
                 <div class="next gt-c-content-color-first">下一篇</div>
-                <a href="https://ganhan999.github.io/post/Python算法入门3/" class="post-title gt-a-link">
-                    Python算法入门 (贪心算法)
+                <a href="https://ganhan999.github.io/post/160、相交链表/" class="post-title gt-a-link">
+                    160、相交链表
                 </a>
             </div>
         
 
         
-            <span id="/post/Python算法入门4/" class="leancloud_visitors" data-flag-title="Python算法入门 (动态规划)">
+            <span id="/post/Java权限修饰符/" class="leancloud_visitors" data-flag-title="Java权限修饰符">
                 <em class="post-meta-item-text">阅读量 </em>
                 <i class="leancloud-visitors-count">0</i>
             </span>
