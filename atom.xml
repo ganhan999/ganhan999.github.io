@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ganhan999.github.io/</id>
     <title>Gridea</title>
-    <updated>2020-12-02T02:42:09.451Z</updated>
+    <updated>2020-12-02T09:20:54.099Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ganhan999.github.io/"/>
     <link rel="self" href="https://ganhan999.github.io/atom.xml"/>
@@ -10,6 +10,381 @@
     <logo>https://ganhan999.github.io/images/avatar.png</logo>
     <icon>https://ganhan999.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Gridea</rights>
+    <entry>
+        <title type="html"><![CDATA[JavaIO流]]></title>
+        <id>https://ganhan999.github.io/post/JavaIO流/</id>
+        <link href="https://ganhan999.github.io/post/JavaIO流/">
+        </link>
+        <updated>2020-12-02T09:20:45.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="一-file">一、File</h1>
+<h2 id="1创建">1.创建</h2>
+<pre><code class="language-java">package IO;
+
+import java.io.File;
+import java.io.IOException;
+
+public class File01 {
+    public static void main(String[] args) {
+        try {
+            //创建一个文本文件
+            File file = new File(&quot;D:\\hh.txt&quot;);
+            boolean flag=file.createNewFile();//文件已存在 则不会重新建立
+            System.out.println(flag?&quot;创建成功&quot;:&quot;创建失败&quot;);
+            //创建文件夹
+            File file1 = new File(&quot;D:\\文件夹&quot;);
+            boolean flag1 = file1.mkdir();//文件已存在 则不会重新建立
+            System.out.println(flag1?&quot;创建成功&quot;:&quot;创建失败&quot;);
+            //创建多级文件
+            File file2 = new File(&quot;D:\\文件夹啊\\da\\呵呵&quot;);
+            boolean flag2 = file2.mkdirs();//文件已存在 则不会重新建立
+            System.out.println(flag2?&quot;创建成功&quot;:&quot;创建失败&quot;);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+}
+1234567891011121314151617181920212223242526
+</code></pre>
+<h2 id="2删除与查询">2.删除与查询</h2>
+<p>删除 delete()</p>
+<pre><code class="language-java">package IO;
+
+import java.io.File;
+
+public class File02 {
+    public static void main(String[] args) {
+        File file = new File(&quot;D:\\文件夹&quot;);
+        boolean flag = file.delete();
+        System.out.println(flag?&quot;删除成功&quot;: &quot;删除失败&quot;);
+
+    }
+}
+123456789101112
+</code></pre>
+<p>查询</p>
+<pre><code class="language-java">package IO;
+
+import java.io.File;
+import java.io.IOException;
+
+public class FIle03 {
+    public static void main(String[] args) {
+        File file = new File(&quot;D:\\文价夹啊&quot;);
+        boolean flag=file.exists();
+        if(flag){
+            System.out.println(&quot;您的文件已经存在，不需创建&quot;);
+        }else{
+            file.mkdir();
+            System.out.println(&quot;已创建&quot;);
+        }
+        //2.获取文件大小
+        File file1 = new File(&quot;D:\\000.txt&quot;);
+        try {
+            file1.createNewFile();
+             Long size=file1.length();//返回字节数
+            //length  字符串 .length() 获取字符个数
+            //         数组  .length属性 获取数组元素个数
+            //		   集合   .size()方法 size 返回集合元素个数 
+            System.out.println(&quot;size  &quot;+size);
+            //返回文件名
+            String name =file1.getName();
+            System.out.println(name);
+            //获取路径
+            String path = file1.getPath();
+            System.out.println(path);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+1234567891011121314151617181920212223242526272829303132333435
+</code></pre>
+<h2 id="3递归">3.递归</h2>
+<p>isDirectory()判断是否是文件夹</p>
+<p>listFiles() 查询某个文件夹下的所有文件</p>
+<pre><code class="language-java">package IO;
+
+import java.io.File;
+//递归找出文件夹中的所有文件
+public class File04 {
+    public static void showFile(String pathname) {
+        File f1 = new File(pathname);
+        //1.判断文件是否是文件夹
+        boolean flag = f1.isDirectory();
+        //选择文件夹下所有文件
+        if (flag) {
+            File[] files = f1.listFiles();
+            if (files != null) {
+                for (File tempFile : files) {
+                    boolean flag2 = tempFile.isDirectory();
+                    if (flag2) {
+                        showFile(tempFile.getPath());
+                    } else {
+                        String filePath2 = tempFile.getPath();
+                        System.out.println(&quot;普通文件-------------&quot; + filePath2);
+                    }
+                }
+            } else {
+                String filePath = f1.getPath();
+                System.out.println(&quot;普通文件-------------&quot; + filePath);
+            }
+        }else{
+            return;
+        }
+    }
+
+    public static void main(String[] args) {
+        File04.showFile(&quot;G:\\&quot;);
+    }
+}
+
+
+12345678910111213141516171819202122232425262728293031323334353637
+//高级循环 造成的空指针异常  用if判断
+if (files != null) {
+    for (File tempFile : files) {
+//可使用普通循环
+package IO;
+
+import java.io.File;
+//递归找出文件夹中的所有文件
+public class File04 {
+    public static void showFile(String pathname) {
+        File f1 = new File(pathname);
+        //1.判断文件是否是文件夹
+        boolean flag = f1.isDirectory();
+        //选择文件夹下所有文件
+        if (flag) {
+            File[] files = f1.listFiles();
+            for (int i = 0; files!=null &amp;&amp; i &lt; files.length; i++) {
+                    boolean flag2 = files[i].isDirectory();
+                    if (flag2) {
+                        showFile(files[i].getPath());
+                    }else{
+                        String filePath2 = files[i].getPath();
+                        System.out.println(&quot;普通文件-------------&quot; + filePath2);
+                    }
+                }
+            } else {
+                String filePath = f1.getPath();
+                System.out.println(&quot;普通文件-------------&quot; + filePath);
+            }
+
+    }
+
+    public static void main(String[] args) {
+        File04.showFile(&quot;G:\\&quot;);
+    }
+}
+123456789101112131415161718192021222324252627282930313233343536
+</code></pre>
+<h1 id="二-io输入输出流">二、IO：输入输出流</h1>
+<h2 id="1字节流">1.字节流</h2>
+<h3 id="字节输入流">字节输入流</h3>
+<p>InputStream()字节输入流父类</p>
+<p>FileInputStream()</p>
+<p>BurfferedInputStream()</p>
+<pre><code class="language-java">package IO;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+
+public class File05 {
+    public static void main(String[] args) {
+        //1.文件和程序之间
+        try {
+            FileInputStream fls =new FileInputStream(&quot;D:\\000.txt&quot;);
+            //2.读取数据
+            int ch=0;
+                while ( (ch=fls.read()) != -1){
+                    System.out.print((char)ch);
+            }
+            //int ch =fls.read();//返回值为-1 则读取完毕
+           // System.out.println(&quot;ch=&quot;+(char)ch);
+            //关闭
+            fls.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+        /*
+        File file = new File(&quot;D:\\000.txt&quot;);
+        if(file.exists() &amp;&amp; file.length()&gt;0){
+            try {
+                FileInputStream fls =new FileInputStream(file);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+                }*/
+
+        }
+
+}
+
+abc/adjkagfdhkfbk,seahgroiwyroiYwgTEDYUKAä¸­å›½
+    //读中文出现乱码 因为read只能返回一个字符 汉字占多个字符 
+12345678910111213141516171819202122232425262728293031323334353637383940
+</code></pre>
+<h3 id="字节输出流">字节输出流</h3>
+<p>可以读取一切文件</p>
+<p>OutputStream()父类</p>
+<p>FileOutputStream()</p>
+<p>BurfferedOutputStream()</p>
+<pre><code class="language-java">package IO;
+
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+
+public class File6 {
+    public static void main(String[] args) {
+        try {
+            String data =&quot;hello my love&quot;;
+            //输出
+            FileOutputStream fos = new FileOutputStream(&quot;D:\\000.txt&quot;,true);
+            //如果文件不存在 则自动创建 同时 覆盖之前的内容  加true参数  则为追加
+            byte[] tempbyte = data.getBytes();
+            fos.write(tempbyte);
+            //关闭
+            fos.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+123456789101112131415161718192021
+</code></pre>
+<h3 id="复制">复制</h3>
+<pre><code class="language-java">package IO;
+
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+
+public class FIle07 {
+    public static void main(String[] args) {
+        try {
+            FileInputStream fls =new FileInputStream(&quot;D:\\000.txt&quot;);
+            FileOutputStream fos = new FileOutputStream(&quot;D:\\00.txt&quot;);
+            //创建一个输出
+            int ch=0;
+            while ( (ch=fls.read()) != -1){
+                fos.write(ch);
+            }
+            //关闭
+            fls.close();
+            fos.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+    }
+}
+123456789101112131415161718192021222324
+</code></pre>
+<p>FileInputStream,FileOutputStream 效率较慢 故介绍BufferedInputStream, BufferedOutputStream 字节缓冲输入流/字节缓冲输出流</p>
+<p>改写：</p>
+<pre><code class="language-java">package IO;
+
+import java.io.*;
+
+public class Buffer1 {
+    public static void main(String[] args) {
+        //建立连接
+        try {
+            InputStream fis = new FileInputStream(&quot;D:\\000.txt&quot;);
+            BufferedInputStream bis = new BufferedInputStream(fis);
+            FileOutputStream fos = new FileOutputStream(&quot;D:\\001.txt&quot;);
+            BufferedOutputStream bos = new BufferedOutputStream(fos);
+            //一次 1024字节
+            byte[] bar =new byte[1024];
+            int len=0;
+            while((len=bis.read(bar))!=-1) {
+                System.out.println(len);
+                String s = new String(bar);
+                System.out.println(s);
+                bos.write(bar, 0, len);
+            }
+                //关闭
+
+                bis.close();
+                fis.close();
+                bos.close();
+                fos.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+    }
+}
+24 
+hello worldhello my love
+12345678910111213141516171819202122232425262728293031323334353637
+</code></pre>
+<p>对于输入流 先关FileInputStream或BufferedInpytStream都可以</p>
+<p>对于输出流 先关BufferedOutputStream 再关FileOutputStream</p>
+<p>否则报错 Stream closed</p>
+<h2 id="2字符流">2.字符流</h2>
+<p>读取纯文本文件比较方便，帮助我们处理乱码问题</p>
+<p>字符输入流</p>
+<p>reader父类 Filereader Bufferedreader</p>
+<pre><code class="language-java">package IO;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+
+public class File08 {
+    public static void main(String[] args) {
+        try {
+            FileReader fr = new FileReader(&quot;D:\\00.txt&quot;);
+            char[] car = new char[1024];
+            int len=0;
+            while ((len = fr.read(car))!= -1) {
+               String str = new String(car,0,len);
+                System.out.println(str);
+            }
+            fr.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+hello worldhello my love中国//汉字不会乱码
+12345678910111213141516171819202122
+</code></pre>
+<p>Bufferedreader 与Filereader类似</p>
+<p>字符输出流</p>
+<p>Writer 父类 FileWriter BufferedWriter</p>
+<pre><code class="language-java">package IO;
+
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+
+public class File09 {
+    public static void main(String[] args) {
+        try {
+            FileReader fr = new FileReader(&quot;D:\\00.txt&quot;);
+            FileWriter fw = new FileWriter(&quot;D:\\001.txt&quot;,true);
+            char[] car =new char[1024];
+            int len=0;
+            while ((len=fr.read(car))!=-1) {
+                String str = new String(car,0,len);
+                fw.write(str);
+            }
+            fr.close();
+            fw.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Java权限修饰符]]></title>
         <id>https://ganhan999.github.io/post/Java权限修饰符/</id>
@@ -3791,98 +4166,6 @@ public class Test {
     传递的函数为:11
 MyException=&gt;MyException{detail=11}
 ----------------------------------
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[136、只出现一次的数字]]></title>
-        <id>https://ganhan999.github.io/post/136、只出现一次的数字/</id>
-        <link href="https://ganhan999.github.io/post/136、只出现一次的数字/">
-        </link>
-        <updated>2020-11-28T11:31:01.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
-<p>给定一个非空整数数组，除了某个元素只出现一次以外，<br>
-其余每个元素均出现两次。找出那个只出现了一次的元素。</p>
-<p>说明：<br>
-你的算法应该具有线性时间复杂度。 你可以不使用额外空间来实现吗？</p>
-<p>示例 1:<br>
-输入: [2,2,1]<br>
-输出: 1</p>
-<p>示例 2:<br>
-输入: [4,1,2,1,2]<br>
-输出: 4</p>
-<h1 id="本体思路">本体思路</h1>
-<p>先排序，然后相同元素则会相邻。循环一次判断前一个元素是否等于后一个元素，<br>
-间隔一个判断一个即可，如果不相等就是想要的结果</p>
-<h1 id="我的做法">#我的做法：</h1>
-<pre><code class="language-python">class Solution:
-    def singleNumber(nums):
-        if len(nums)==1:   #如果数组长度为1，则直接返回即可
-            return nums[0]
-        nums.sort()     #对数组进行排序，使其相同元素靠在一起
-        for i in range(1,len(nums),2):   #循环数组，验证前后是否相同，由于原始出现两次，因此可跳跃判断
-            if nums[i-1] != nums[i]:
-                return nums[i-1]
-            if (i+2) == len(nums):   #判断单一元素在排序后数组的最后面
-                return nums[-1]
-
-</code></pre>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="大神做法1">#大神做法1：</h1>
-<p>由于目标元素只有一次，其他元素有多次，<br>
-因此，依次删除列表的元素，同一个元素删除两次，报错则为目标值。</p>
-<pre><code class="language-Python">class Solution:
-    def singleNumber(nums):
-        while True:
-            d = nums[0]
-            nums.remove(d)
-            try:
-                nums.remove(d)
-            except:
-                return d
-
-</code></pre>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="大神做法2">#大神做法2：</h1>
-<p>方法三：一个元素出现一次、其他出现多次，那么数组求和，与去重后的和相差的就是目标值。</p>
-<pre><code class="language-python">class Solution:
-    def singleNumber(nums):
-        return sum(set(nums))*2-sum(nums)
-</code></pre>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="大神做法3">#大神做法3</h1>
-<p>0和任何数异或的结果都是这个数本身。<br>
-相同的数异或的结果为0。<br>
-这个数列里面除了一个数只出现了一次，其他数都出现了两次。<br>
-异或运算满足交换律和结合律。<br>
-因此从前往后依次异或即可。最终结果就是那个只出现一次的数。<br>
-比如 1 xor 1 xor 2 xor 3 xor 2 = (1 xor 1) xor (2 xor 2) xor 3 = 0 xor 0 xor 3 = 0 xor 3 = 3</p>
-<pre><code class="language-python">from functools import reduce
-class Solution:
-    def singleNumber(nums):
-        return reduce(lambda x, y: x ^ y, nums)
-</code></pre>
-<pre><code class="language-bash">&quot;&quot;&quot;
-下面是 reduce函数介绍
-reduce() 函数会对参数序列中元素进行累积。
-
-函数将一个数据集合（链表，元组等）中的所有数据进行下列操作：
-用传给 reduce 中的函数 function（有两个参数）先对集合中的第 1、2 个元素进行操作，得到的结果再与第三个数据用 function 函数运算，最后得到一个结果。
-
-注意：Python3.x reduce() 已经被移到 functools 模块里，
-如果我们要使用，需要引入 functools 模块来调用 reduce() 函数：
-
-from functools import reduce
-
-
-from functools import reduce
-
-def add(x, y) :            # 两数相加
-    return x + y
-sum1 = reduce(add, [1,2,3,4,5])   # 计算列表和：1+2+3+4+5
-sum2 = reduce(lambda x, y: x+y, [1,2,3,4,5])  # 使用 lambda 匿名函数
-
-&quot;&quot;&quot;
 </code></pre>
 ]]></content>
     </entry>
