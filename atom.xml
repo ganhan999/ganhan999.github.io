@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ganhan999.github.io/</id>
     <title>Gridea</title>
-    <updated>2020-12-03T13:12:20.027Z</updated>
+    <updated>2020-12-04T10:02:32.697Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ganhan999.github.io/"/>
     <link rel="self" href="https://ganhan999.github.io/atom.xml"/>
@@ -10,6 +10,51 @@
     <logo>https://ganhan999.github.io/images/avatar.png</logo>
     <icon>https://ganhan999.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Gridea</rights>
+    <entry>
+        <title type="html"><![CDATA[169、多数元素]]></title>
+        <id>https://ganhan999.github.io/post/169、多数元素/</id>
+        <link href="https://ganhan999.github.io/post/169、多数元素/">
+        </link>
+        <updated>2020-12-04T09:49:20.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
+<p>给定一个大小为 n 的数组，找到其中的多数元素。多数元素是指在数组中出现次数大于 ⌊ n/2 ⌋ 的元素。</p>
+<p>你可以假设数组是非空的，并且给定的数组总是存在多数元素。</p>
+<p>示例 1:</p>
+<p>输入: [3,2,3]<br>
+输出: 3<br>
+示例 2:</p>
+<p>输入: [2,2,1,1,1,2,2]<br>
+输出: 2</p>
+<h1 id="本体思路">本体思路</h1>
+<p>排序之后，找最中间这个就行了</p>
+<h1 id="我的做法">#我的做法：</h1>
+<pre><code class="language-python">class Solution:
+  def majorityElement(self, nums: List[int]) -&gt; int:
+    nums.sort()
+    return nums[(1+len(nums)//2)-1]
+
+</code></pre>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="大神做法">#大神做法：</h1>
+<p>摩尔投票法，只适合占一半以上的情况</p>
+<p>这就相当于每个“多数元素”和其他元素两两相互抵消，抵消到最后肯定还剩余至少1个“多数元素”。</p>
+<p>无论数组是1 2 1 2 1，亦或是1 2 2 1 1，总能得到正确的候选人。</p>
+<pre><code class="language-Python">class Solution(object):
+    def majorityElement(self, nums: List[int]) -&gt; int:
+        major = 0
+        count = 0
+        for n in nums:
+            if count == 0:
+                major = n
+            if n == major:
+                count = count + 1
+            else:
+                count = count - 1
+        return major
+
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[168、Excel表列名称]]></title>
         <id>https://ganhan999.github.io/post/168、Excel表列名称/</id>
@@ -4461,141 +4506,6 @@ pop()出去，保证其栈顶元素始终是stack中的最小元素。</p>
     def getMin(self) -&gt; int:
         return self.min_stack[-1]
 </code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Java三大修饰符]]></title>
-        <id>https://ganhan999.github.io/post/Java三个修饰符/</id>
-        <link href="https://ganhan999.github.io/post/Java三个修饰符/">
-        </link>
-        <updated>2020-11-30T13:13:53.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="一-abstract">一、abstract</h1>
-<p>具备某种对象的特征，但不完整，例如animal就是一个抽象的概念，现实生活中没有生物叫做动物，所以animal不应该被创建成对象。<br>
-用abstract修饰的类，不能被new出对象，不能独立存在。</p>
-<pre><code class="language-java">abstract class Animal{
-	String breed;
-	int age;
-	String sex;
-	public void eat(){
-	System.out.println(&quot;动物吃&quot;);
-	}
-}
-</code></pre>
-<p>此类不能被new出来</p>
-<h2 id="1抽象类的作用">1.抽象类的作用</h2>
-<ol>
-<li>可被子类继承，提供共性属性和方法。</li>
-<li>可声明为引用，更加自然的使用多态。</li>
-<li>抽象父类，可作为子类的组成部分，依附于子类对象存在，由父类共性+子类独有组成完整的子类对象。</li>
-</ol>
-<h2 id=""></h2>
-<h2 id="2抽象方法">2.抽象方法</h2>
-<p>父类提供的方法很难满足子类不同需求，如不定义，则表示所有动物都不会吃、睡。如定义，略显多余，多数会被子类覆盖。<br>
-也就是抽象方法的定义不具体实现功能，但在子类必须实现其特有的方法，且抽象方法必须在抽象类之中。</p>
-<pre><code class="language-java">public abstract class Animal{
-	String breed;
-	int age;
-	String sex;
-	public abstract void eat();
-}
-
-</code></pre>
-<p>子类中必须重写eat方法，或者子类也是抽象类，可以不重写eat方法。</p>
-<h1 id="二-static">二、static</h1>
-<h2 id="1静态属性">1.静态属性</h2>
-<p>正常的对象的实例属性是单个对象所独有的，不会影响到其他对象。<br>
-用static修饰的属性是静态属性（类属性)，它属性整个类共有的属性。</p>
-<pre><code class="language-java">public class Student{
-	static int count;
-}
-</code></pre>
-<p>在调用时要使用如下方式调用</p>
-<pre><code class="language-java">Student.count;//通过具体的对象也可以访问，但不建议。静态属性在内存中只有一份，且存在与方法区之中
-</code></pre>
-<figure data-type="image" tabindex="1"><img src="https://ganhan999.github.io//post-images/1606742897586.png" alt="" loading="lazy"></figure>
-<h3 id="应用">应用</h3>
-<p>可用来统计这个类的对象被创建多少次。</p>
-<h2 id="2静态方法">2.静态方法</h2>
-<pre><code class="language-java">Arrays.copyOf();
-Arrays.sort();//即类名.静态方法名
-</code></pre>
-<h3 id="静态方法特点">静态方法特点</h3>
-<ol>
-<li>
-<p>静态方法允许直接访问静态成员。</p>
-</li>
-<li>
-<p>静态方法不能直接访问非静态成员。</p>
-</li>
-<li>
-<p>静态方法中不允许使用this或是super关键字</p>
-</li>
-<li>
-<p>静态方法可以继承，不能重写、没有多态。</p>
-</li>
-</ol>
-<h2 id="3静态代码块">3.静态代码块</h2>
-<pre><code class="language-java">class Myclss{
-	static String s=&quot;静态属性&quot;;
-	static{
-	System.out.println(s);
-	}
-	public static void method(){
-	}
-</code></pre>
-<p>类加载时，触发静态代码块的执行（仅一次），在静态属性初始化之后执行<br>
-作用：可谓静态属性赋值，过必要的初始行为。</p>
-<h3 id="类加载">类加载</h3>
-<p>JVM首次使用某个类时，需通过CLASSPATH查找该类的.class文件，从硬盘加载到内存中。<br>
-将.class文件中对类的描述信息加载到内存中，进行保存。<br>
-加载时机：</p>
-<ul>
-<li>创建对象</li>
-<li>创建子类对象(父类也被加载)</li>
-<li>访问静态属性</li>
-<li>调用静态方法</li>
-<li>主动加载：Class.forName(“全限定名”);</li>
-</ul>
-<h1 id="三-final">三、final</h1>
-<h2 id="1概念">1.概念</h2>
-<p>最后的，不可更改的</p>
-<h2 id="2用法">2.用法</h2>
-<p>final可修饰的内容为</p>
-<ol>
-<li>类（最终类）不可被继承
-<ul>
-<li>String、Math、System均为final修饰的类，不可被继承</li>
-</ul>
-</li>
-<li>方法（最终方法）不能被覆盖或重写</li>
-<li>变量（最终变量）常量</li>
-</ol>
-<h3 id="final修饰类和方法">final修饰类和方法</h3>
-<p>可以用来修饰你认为功能实现已经完善的方法，或者最低的类别（不可以在被继承的类），这样子类只可以使用被final修饰的方法，而不能重写。</p>
-<h3 id="final修饰变量">final修饰变量</h3>
-<p>被修饰变量值不能被改变（常量），只能被赋值一次。</p>
-<h4 id="实例常量">实例常量</h4>
-<p>就是给实例变量加上final修饰符，变成常量，被修饰的实例常量不在提供默认值，必须手动赋予初始值。<br>
-赋值的时机：显示初始化，构造方法。<br>
-注意：如果在构造方法中为实例常量赋值，必须保证所有的构造方法都能对其正确赋值。（也就是实例变量如果没赋默认值，就要在所有构造方法中为其赋予正确值。</p>
-<h4 id="静态常量">静态常量</h4>
-<p>为静态变量增加final变成静态常量<br>
-赋值的时机：<br>
-可在初始化时赋值，也可在静态代码块赋值。<br>
-即被final修饰过的变量，必须想办法在本类赋值，要不没有默认值，且只能赋值一次。</p>
-<h3 id="对象常量">对象常量</h3>
-<pre><code class="language-java">final int num=100;
-</code></pre>
-<p>final修饰基本类型时，值不可变</p>
-<pre><code class="language-java">final Student s=new Student();
-</code></pre>
-<p>修饰引用类型时：地址不可以改变，里面的元素可改变，例如数组中的值，但数组对象不可改变。</p>
-<h1 id="4-总结">4、总结</h1>
-<p><strong>三个修饰符</strong></p>
-<p><strong>abstact，final，static</strong></p>
-<p><strong>abstract可放在定义类和方法前，被修饰的类可被继承，不能被new出对象来，抽象方法必须在抽象类中，且如果子类也是抽象类可以不用重写方法，如果子类不是抽象类，必须重写方法。</strong></p>
-<p><strong>final修饰的类和方法，必须是最后一个，不可已被继承，不可以被重写，变量都变成了常量，只可以赋值一次，且必须赋值，赋值之后不可以更改，基本类型常量，值不能变，引用类型的，地址不可以改变。如果同时是静态的，可以在静态代码块赋值。</strong><br>
-<strong>static就理解成类加载后一直在内存中存在，没有final修饰的情况下，如果不赋值是有默认值的。在其他类中可通过类名.方法名/变量名赋值或修改。</strong></p>
 ]]></content>
     </entry>
 </feed>

@@ -4,7 +4,7 @@
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-<title>141、环形链表 | Gridea</title>
+<title>169、多数元素 | Gridea</title>
 
 <link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1607076149785">
 
@@ -89,11 +89,11 @@
         <div class="post-detail gt-bg-theme-color-second">
             <article class="gt-post-content">
                 <h2 class="post-title">
-                    141、环形链表
+                    169、多数元素
                 </h2>
                 <div class="post-info">
                     <time class="post-time gt-c-content-color-first">
-                        · 2020-11-29 ·
+                        · 2020-12-04 ·
                     </time>
                     
                         <a href="https://ganhan999.github.io/tag/cKyYTCK2Y/" class="post-tags">
@@ -103,70 +103,40 @@
                 </div>
                 <div class="post-content">
                     <h1 id="题目">题目</h1>
-<p>给定一个链表，判断链表中是否有环。<br>
-如果链表中有某个节点，可以通过连续跟踪 next 指针再次到达，则链表中存在环。<br>
-为了表示给定链表中的环，我们使用整数 pos 来表示链表尾连接到链表中的位置<br>
-（索引从 0 开始）。 如果 pos 是 -1，则在该链表中没有环。<br>
-注意：pos 不作为参数进行传递，仅仅是为了标识链表的实际情况。<br>
-如果链表中存在环，则返回 true 。 否则，返回 false 。</p>
-<p>进阶：<br>
-你能用 O(1)（即，常量）内存解决此问题吗？</p>
-<p>示例 1：<br>
-输入：head = [3,2,0,-4], pos = 1<br>
-输出：true<br>
-解释：链表中有一个环，其尾部连接到第二个节点。</p>
-<p>示例 2：<br>
-输入：head = [1,2], pos = 0<br>
-输出：true<br>
-解释：链表中有一个环，其尾部连接到第一个节点。</p>
+<p>给定一个大小为 n 的数组，找到其中的多数元素。多数元素是指在数组中出现次数大于 ⌊ n/2 ⌋ 的元素。</p>
+<p>你可以假设数组是非空的，并且给定的数组总是存在多数元素。</p>
+<p>示例 1:</p>
+<p>输入: [3,2,3]<br>
+输出: 3<br>
+示例 2:</p>
+<p>输入: [2,2,1,1,1,2,2]<br>
+输出: 2</p>
 <h1 id="本体思路">本体思路</h1>
-<p>给head一个属性，flag记录被遍历过的元素，如果发现被遍历过一次，那么就表示有回路</p>
+<p>排序之后，找最中间这个就行了</p>
 <h1 id="我的做法">#我的做法：</h1>
 <pre><code class="language-python">class Solution:
-    def hasCycle(self, head: ListNode) -&gt; bool:
-        while head:
-            try:
-                if head.flag==1:
-                    return True
-            except:
-                head.flag=1
-            head=head.next
-        else:
-            return False
+  def majorityElement(self, nums: List[int]) -&gt; int:
+    nums.sort()
+    return nums[(1+len(nums)//2)-1]
 
 </code></pre>
 <p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="大神做法1">#大神做法1：</h1>
-<p>哈希表，和我的方法差不多</p>
-<pre><code class="language-Python">class Solution:
-    def hasCycle(self, head: ListNode) -&gt; bool:
-        # 1. python map
-        m = {}
-        while head:
-            if m.get(head):
-                return True
-            m[head] = 1
-            head = head.next
-        return False
-</code></pre>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="大神做法2">#大神做法2：</h1>
-<p>枚举时添加一个慢一拍的指针，如果有环最终两个指针会相遇，可能会很慢啊</p>
-<pre><code class="language-python">class Solution:
-    def singleNumber(nums):
-        return sum(set(nums))*2-sum(nums)
-</code></pre>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="大神做法3">#大神做法3</h1>
-<p>链表中最多10000个节点，超过10000就是有环</p>
-<pre><code class="language-python">class Solution:
-    def hasCycle(self, head: ListNode) -&gt; bool:
-        # 3. 计数 10000
+<h1 id="大神做法">#大神做法：</h1>
+<p>摩尔投票法，只适合占一半以上的情况</p>
+<p>这就相当于每个“多数元素”和其他元素两两相互抵消，抵消到最后肯定还剩余至少1个“多数元素”。</p>
+<p>无论数组是1 2 1 2 1，亦或是1 2 2 1 1，总能得到正确的候选人。</p>
+<pre><code class="language-Python">class Solution(object):
+    def majorityElement(self, nums: List[int]) -&gt; int:
+        major = 0
         count = 0
-        while head and count &lt;= 10000:
-            count += 1
-            head = head.next
-        return count &gt; 10000
+        for n in nums:
+            if count == 0:
+                major = n
+            if n == major:
+                count = count + 1
+            else:
+                count = count - 1
+        return major
 
 </code></pre>
 
@@ -177,14 +147,14 @@
         
             <div class="next-post">
                 <div class="next gt-c-content-color-first">下一篇</div>
-                <a href="https://ganhan999.github.io/post/JavaSE基础4/" class="post-title gt-a-link">
-                    JavaSE基础4
+                <a href="https://ganhan999.github.io/post/168、Excel表列名称/" class="post-title gt-a-link">
+                    168、Excel表列名称
                 </a>
             </div>
         
 
         
-            <span id="/post/141、环形链表/" class="leancloud_visitors" data-flag-title="141、环形链表">
+            <span id="/post/169、多数元素/" class="leancloud_visitors" data-flag-title="169、多数元素">
                 <em class="post-meta-item-text">阅读量 </em>
                 <i class="leancloud-visitors-count">0</i>
             </span>
