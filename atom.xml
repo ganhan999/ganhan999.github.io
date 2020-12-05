@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ganhan999.github.io/</id>
     <title>Gridea</title>
-    <updated>2020-12-04T10:02:32.697Z</updated>
+    <updated>2020-12-05T10:22:28.586Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ganhan999.github.io/"/>
     <link rel="self" href="https://ganhan999.github.io/atom.xml"/>
@@ -10,6 +10,703 @@
     <logo>https://ganhan999.github.io/images/avatar.png</logo>
     <icon>https://ganhan999.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Gridea</rights>
+    <entry>
+        <title type="html"><![CDATA[171、Excel表列序号]]></title>
+        <id>https://ganhan999.github.io/post/171、Excel表列序号/</id>
+        <link href="https://ganhan999.github.io/post/171、Excel表列序号/">
+        </link>
+        <updated>2020-12-05T11:49:20.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
+<p>给定一个Excel表格中的列名称，返回其相应的列序号。<br>
+例如，<br>
+A -&gt; 1<br>
+B -&gt; 2<br>
+C -&gt; 3<br>
+...<br>
+Z -&gt; 26<br>
+AA -&gt; 27<br>
+AB -&gt; 28<br>
+...</p>
+<p>示例 1:<br>
+输入: &quot;A&quot;<br>
+输出: 1</p>
+<p>示例 2:<br>
+输入: &quot;AB&quot;<br>
+输出: 28</p>
+<p>示例 3:<br>
+输入: &quot;ZY&quot;<br>
+输出: 701</p>
+<h1 id="本体思路">本体思路</h1>
+<p>26进制转10进制</p>
+<h1 id="我的做法">#我的做法：</h1>
+<pre><code class="language-python">class Solution:
+  def titleToNumber(self, s: str) -&gt; int:
+    ans = 0
+    lens = len(s)
+    for i, s in enumerate(s):
+      print(lens-i-1)
+      ans = ans +(ord(s)-ord('A')+1)*26**(lens-i-1)
+    return ans
+
+</code></pre>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="大神做法">#大神做法：</h1>
+<p>ans*26相当于每次都往左边平移一位，给最右边一个位置</p>
+<pre><code class="language-Python">class Solution(object):
+  def titleToNumber(self, s):
+    ans = 0
+    for x in s:
+      ans *= 26
+      ans += ord(x) - ord('A') + 1
+    return ans
+
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Java网络编程]]></title>
+        <id>https://ganhan999.github.io/post/Java 网络编程/</id>
+        <link href="https://ganhan999.github.io/post/Java 网络编程/">
+        </link>
+        <updated>2020-12-05T11:32:50.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="11-概述">1.1、概述</h2>
+<p>信件：</p>
+<p><img src="https://ganhan999.github.io//post-images/1607163626962.png" alt="" loading="lazy"><br>
+打电话：---连接---接了---通话 TCP</p>
+<p>发短信：---发送了就完事了---接收 UDP</p>
+<p><strong>计算机网络</strong>：</p>
+<p>计算机网络是指将<strong>地理位置不同</strong>的具有独立功能的<strong>多台计算机及其外部设备</strong>，通过<strong>通信线路</strong>连接起来，在网络操作系统，网络管理软件及<strong>网络通信协议</strong>的管理和协调下，<strong>实现资源共享和信息传递</strong>的计算机系统。</p>
+<p><strong>网络编程的目的：</strong></p>
+<p>传播交流信息，数据交换，通信。</p>
+<p><strong>想要达到这个效果需要什么：</strong></p>
+<p>1、如何准确地定位网络上的一台主机：（端口），定位到这个计算机的某个资源。</p>
+<p>2、找到了这个主机，如何传输数据呢？</p>
+<p>javaweb：网页编程 B/S</p>
+<p>网络编程：TCP/IP C/S</p>
+<h2 id="12-网络通信的要素">1.2、网络通信的要素</h2>
+<p>如何实现网络上的通信？</p>
+<p><strong>通信双方地址：</strong></p>
+<p>（192.168.1.1）：局域网。。</p>
+<ul>
+<li>ip：</li>
+<li>端口号</li>
+</ul>
+<p><strong>规则：网络通信的协议：</strong></p>
+<p>TCP/IP参考模型：</p>
+<figure data-type="image" tabindex="1"><img src="https://ganhan999.github.io//post-images/1607163632395.png" alt="" loading="lazy"></figure>
+<p>HTTP：超文本传输协议</p>
+<p>FTP:文件上传协议<br>
+<img src="https://ganhan999.github.io//post-images/1607163636175.png" alt="" loading="lazy"></p>
+<p>小结：</p>
+<p>1、网络编程中有两个主要的问题：</p>
+<ul>
+<li>如何准确的定位到网络上的一台或者多台主机</li>
+<li>找到主机之后如何进行通信</li>
+</ul>
+<p>2、网络编程中的要素</p>
+<ul>
+<li>IP和端口号 IP</li>
+<li>网络通信协议 UDP，TCP</li>
+</ul>
+<p>3、万物皆对象</p>
+<h2 id="13-ip">1.3、IP</h2>
+<p>ip地址：inetAddress</p>
+<ul>
+<li>唯一定位一台网络上计算机</li>
+<li>127.0.0.1：本机loaclhost</li>
+<li>Ip地址的分类
+<ul>
+<li>Ipv4/Ipv6
+<ul>
+<li>IPv4 127.00.1,四个字节组成，0-255，42亿~；30亿都在北美，亚洲四亿，2011年就用尽；</li>
+<li>IPV6：128位，8个无符号整数！</li>
+</ul>
+</li>
+<li>公网（互联网）-私网（局域网）
+<ul>
+<li>ABCD类地址</li>
+<li>192.168.xx.xx专门给组织内部使用的</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>域名：记忆IP问题！
+<ul>
+<li>IP：</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-java"> package Second11_16;
+ 
+ import java.net.InetAddress;
+ import java.net.UnknownHostException;
+ 
+ public class TestInetAddres {
+ public static void main(String[] args) {
+     try {
+         //查询网站IP地址
+         InetAddress allByName = InetAddress.getByName(&quot;localhost&quot;);
+         System.out.println(allByName);
+ 
+         //常用方法：
+         System.out.println(allByName.getHostAddress());//IP
+         System.out.println(allByName.getHostName());//名字
+         System.out.println(allByName.getCanonicalHostName());//规范的名字
+     } catch (UnknownHostException e) {
+         e.printStackTrace();
+     }
+ 
+ }
+ }
+ 
+</code></pre>
+<h2 id="14-端口port">1.4、端口(port)</h2>
+<p>端口表示计算机上的一个程序的进程</p>
+<ul>
+<li>
+<p>不同的进程有不同的端口号！用来区分软件！</p>
+</li>
+<li>
+<p>被规定0-65535</p>
+</li>
+<li>
+<p>TCP,UDP：65536*2 tcp:80,udp:80? 单个协议下，端口不能冲突、</p>
+</li>
+<li>
+<p>端口分类：</p>
+<ul>
+<li>
+<p>公有端口0~1023</p>
+<ul>
+<li>HTTP:80</li>
+<li>https:443</li>
+<li>FTP:21</li>
+<li>Telent:23</li>
+</ul>
+</li>
+<li>
+<p>程序注册端口：1024~49151</p>
+<ul>
+<li>Tomcat: 8080</li>
+<li>MySQL: 3306</li>
+<li>Oracle： 1521</li>
+</ul>
+</li>
+<li>
+<p>动态/私有：49152~65535</p>
+<pre><code> 1、netstat -ano #查看所有的端口
+ 2、netstat -ano|findstr &quot;9640&quot; # 查看指定的窗口 其中|是指先干后面的再在前面中找
+ 3、tasklist|findstr &quot;8696&quot; #查看指定端口的进程
+</code></pre>
+</li>
+</ul>
+<pre><code class="language-java"> package Second11_16;
+ 
+ import java.net.InetSocketAddress;
+ 
+ public class TestInetSocketAddres {
+ public static void main(String[] args) {
+     InetSocketAddress inetSocketAddress1 = new InetSocketAddress(&quot;127.0.0.1&quot;, 8080);
+     InetSocketAddress inetSocketAddress2 = new InetSocketAddress(&quot;localhost&quot;, 8080);
+     System.out.println(inetSocketAddress1);
+     System.out.println(inetSocketAddress2);
+ 
+     System.out.println(inetSocketAddress2.getAddress());
+     System.out.println(inetSocketAddress2.getHostName());//地址
+     System.out.println(inetSocketAddress2.getPort());//端口
+ }
+ }
+</code></pre>
+</li>
+</ul>
+<figure data-type="image" tabindex="2"><img src="https://ganhan999.github.io//post-images/1607163719490.png" alt="" loading="lazy"></figure>
+<h2 id="15-通信协议">1.5、通信协议</h2>
+<p>协议：约定，就好比我们现在说的是普通话。</p>
+<p><strong>网络通信协议</strong>：速率，传输码率，代码结构，传输控制。。。。。。</p>
+<p><strong>问题</strong>：非常的复杂</p>
+<p>大事化小：分层！</p>
+<p><strong>TCP/IP协议簇</strong>：<strong>实际上是一层协议</strong></p>
+<p>重要：</p>
+<ul>
+<li>TCP:用户传输协议</li>
+<li>UDP:用户数据报协议</li>
+</ul>
+<p>出名的协议：</p>
+<ul>
+<li>TCP：</li>
+<li>IP：网络互联协议</li>
+</ul>
+<p>ps:应用层：QQ、微信；传输层：通信；网络层：分包；数据链路层：具体的传输：如光纤，海底电缆。。。。。。；</p>
+<p>TCP UDP对比：</p>
+<p>TCP：打电话</p>
+<ul>
+<li>
+<p>连接，稳定</p>
+</li>
+<li>
+<p><code>三次握手、四次挥手</code></p>
+<pre><code class="language-java"> 最少需要三次，才能保证稳定连接！
+ A；你愁啥？
+ B：瞅你咋地？
+ A：干一场！
+ 
+ 
+ A：我要走了
+ B：你真的要走了吗？
+ B：你真的真的要走了吗？
+ A：我真的要走了！  
+</code></pre>
+</li>
+<li>
+<p>客户端、服务端</p>
+</li>
+<li>
+<p>传输完成，释放连接，效率低</p>
+</li>
+</ul>
+<p>UDP：发短信</p>
+<ul>
+<li>不连接，不稳定</li>
+<li>客户端、服务端：没有明确的界限</li>
+<li>不管有没有准备好，都可以发给你。。。</li>
+<li>导弹攻击</li>
+<li>DDOS：洪水攻击！（饱和攻击）</li>
+</ul>
+<h2 id="16-tcp">1.6、TCP</h2>
+<p>有关socket的知识分享：https://www.cnblogs.com/dolphinx/p/3460545.html</p>
+<p><strong>SeverSocket:</strong></p>
+<p>为了使客户能成功地连接到服务器，服务器必须建立一个ServerSocket 对象，该对象通过将客户端地套接字对象和服务器端地一个套接字对象连接起来，从而达到连接的目的。</p>
+<p>客户端:(socket对象)socket(IP地址，端口)</p>
+<p>服务器:(ServerSocket对象)serversocket(端口 )用ServerSocket.accept（）来建立一个和客户端的Socket对象相连接的Socket对象。</p>
+<p>服务器端的输出流/输入流的目的地和客户端的输入流/输出流的源刚好相同。</p>
+<p><strong>进程堵塞</strong></p>
+<p><strong>提升作用域</strong></p>
+<h3 id="文件上传">文件上传</h3>
+<p>服务器端：</p>
+<pre><code class="language-java"> package lesson03;
+ 
+ import java.io.*;
+ import java.net.ServerSocket;
+ import java.net.Socket;
+ 
+ public class TCPserver02 {
+ public static void main(String[] args) throws IOException {
+ 
+     //建立连接，创建服务
+     ServerSocket serverSocket= new ServerSocket(9900);
+     // 监听客户端的连接
+     Socket socket = serverSocket.accept();
+ 
+ 
+     //创立输入流和文件输出流
+     InputStream is = socket.getInputStream();
+     // 文件输出
+     FileOutputStream fos = new FileOutputStream(new File(&quot;JTest3.png&quot;));
+ 
+     //创立缓冲区和写
+     byte[] buff=new byte[1024];
+     int len;
+     while((len=is.read(buff))!=-1){
+         fos.write(buff,0,len);
+     }
+ 
+     //与客户端说我已经收到了
+     OutputStream os =socket.getOutputStream();
+     os.write(&quot;我已接收&quot;.getBytes());
+ 
+     //关闭资源
+     os.close();
+     fos.close();
+     is.close();
+     socket.close();
+     serverSocket.close();
+ }
+ }
+ 
+ /*
+ 1、接收要read，所以要用inputStream
+ 2、要把文件写给大家看，所以要fileoutputstream
+  */
+</code></pre>
+<p>客户端：</p>
+<pre><code class="language-java"> package lesson03;
+ 
+ import java.io.*;
+ import java.net.InetAddress;
+ import java.net.Socket;
+ import java.net.UnknownHostException;
+ 
+ public class TCPclient02 {
+ public static void main(String[] args) throws IOException {
+ 
+     //建立连接
+     Socket socket = new Socket(InetAddress.getByName(&quot;127.0.0.1&quot;),9900);
+ 
+     //建立输出流和文件输入流
+     OutputStream os =socket.getOutputStream();
+     FileInputStream fis = new FileInputStream(new File(&quot;JavaKuangStudy/network programming/src/ImageData/Test.png&quot;));
+ 
+     //缓冲区之后
+     //需要转换格式
+     //写出文件
+     byte[] buff = new byte[1024];//划定空间
+     int len;
+     while((len= fis.read(buff))!=-1){
+         os.write(buff,0,len);
+     }
+ 
+     //确定服务器接收完毕才能断开连接。
+     //发送成功后关闭输出流
+     //通知服务器我已经输出结束了
+     socket.shutdownOutput();
+ 
+     //接收来自服务端的消息，用数组流来输出
+     InputStream is = socket.getInputStream();
+     ByteArrayOutputStream bos = new ByteArrayOutputStream();
+     int len1;
+     byte[] buff1 = new byte[1024];//初始内存空间大小
+     while((len1=is.read(buff1))!=-1){
+         bos.write(buff1,0,len1);
+     }
+     System.out.println(bos.toString());
+ 
+     //关闭资源
+     bos.close();
+     is.close();
+     fis.close();
+     os.close();
+     socket.close();
+ }
+ }
+ /*
+ 1、抛出异常
+ 2、套接字的get输入输出流
+ 3、通知服务器，我已经输出结束了：socket.shutdownOutput();
+ 4、while（（len=is.read(buff)）!=-1）{
+     bos.write(buff,0,len);
+ 5、while和0-长度
+ }
+  */
+</code></pre>
+<p>Tomcat</p>
+<p>调试：consolehandler:GBK</p>
+<p>服务端</p>
+<ul>
+<li>自定义（S）</li>
+<li>Tomcat服务器(S)：Java后台开发用别人的服务器！</li>
+</ul>
+<p>客户端</p>
+<ul>
+<li>自定义（C）</li>
+<li>浏览器(B)</li>
+</ul>
+<h2 id="17-udp">1.7、UDP</h2>
+<p>发短信：不用连接，需要知道对方的地址！</p>
+<h3 id="发送消息">发送消息</h3>
+<p>发送端</p>
+<pre><code class="language-java"> package Udp01;
+ 
+ import java.net.*;
+ //不需要连接服务器
+ public class UdpTest02 {
+ public static void main(String[] args) throws Exception {
+     //建立一个socket
+     DatagramSocket socket=new DatagramSocket();
+ 
+     //建个包
+     InetAddress inetAddress=InetAddress.getByName(&quot;localhost&quot;);
+     byte[] Str= &quot;你好&quot;.getBytes();
+     int port=9999;
+ 
+     //数据，数据的长度起始，要发送给谁
+     DatagramPacket datagramPacket=new DatagramPacket(Str,0,Str.length,inetAddress,port);
+ 
+     //发送包
+     socket.send(datagramPacket);
+ 
+     //关闭流
+     socket.close();
+ }
+ }
+</code></pre>
+<p>接收端：</p>
+<pre><code class="language-java"> package Udp01;
+ 
+ import java.net.DatagramPacket;
+ import java.net.DatagramSocket;
+ import java.net.SocketException;
+ 
+ //还是要等待客户端的链接
+ public class UdpTest01 {
+ public static void main(String[] args) throws Exception {
+     //开放端口
+     DatagramSocket socket=new DatagramSocket(9999);
+ while (true) {
+ 
+     //接收数据包
+     byte[] Strin = new byte[1024];
+ 
+     DatagramPacket datagramPacket = new DatagramPacket(Strin, 0, Strin.length);
+ 
+     //阻塞接收
+     socket.receive(datagramPacket);
+ 
+     System.out.println(new String(datagramPacket.getData(), 0, datagramPacket.getLength()));
+ 
+     //关闭链接 
+     socket.close();
+ }
+ }
+ }
+ 
+</code></pre>
+<h3 id="咨询">咨询</h3>
+<p><strong>循环发送消息</strong></p>
+<p>发送方：</p>
+<pre><code class="language-java">package UDP.Udp02;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
+import java.net.SocketException;
+
+public class UdpSin {
+public static void main(String[] args) throws Exception {
+    DatagramSocket datagramSocket=new DatagramSocket(8888);
+
+    while (true){
+        //准备数据，控制台读取System.in
+        BufferedReader buf=new BufferedReader(new InputStreamReader(System.in));
+
+        //读取控制台输入的一行并把它转化为字符
+        String Buf=buf.readLine();
+    InetAddress inetAddress=InetAddress.getByName(&quot;localhost&quot;);
+    DatagramPacket datagramPacket=new DatagramPacket(Buf.getBytes(),0,Buf.length(),inetAddress,9999 );
+
+    datagramSocket.send(datagramPacket);
+
+    if(Buf.equals(&quot;bye&quot;))	
+        break;
+    }
+    datagramSocket.close();
+}
+}
+/*
+1、BuffReader读取控制台字符时用readLine来读取一行
+ */
+</code></pre>
+<p>接收方：</p>
+<pre><code class="language-java">package UDP.Udp02;
+
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+
+public class UdpSin01 {
+public static void main(String[] args) throws Exception{
+    //建立链接
+    DatagramSocket datagramSocket = new DatagramSocket(9999);
+    byte[] bufin = new byte[1024];
+    while (true) {
+
+        //准备接收包裹
+        DatagramPacket datagramPacket = new DatagramPacket(bufin, 0, bufin.length);
+
+        datagramSocket.receive(datagramPacket);//阻塞时接收包裹
+
+        byte[] data=datagramPacket.getData();
+        String msg=new String(data,0,data.length);
+        System.out.println(msg);
+
+        if(msg.equals(&quot;bye&quot;)){
+            break;
+        }
+
+        datagramSocket.close();
+    }
+}
+}
+/*
+1、创建对象 while之外
+2、接收包裹.getData
+ */
+</code></pre>
+<h3 id="在线咨询两个人都可以发送">在线咨询：两个人都可以发送</h3>
+<p><strong>发送端线程：</strong></p>
+<pre><code class="language-java">package UDP.Run;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
+import java.net.InetSocketAddress;
+
+public class Sent implements Runnable{
+    DatagramSocket datagramSocket;
+    DatagramPacket datagramPacket;
+    private int fromPort;
+    private String toIP;
+    private int Toport;
+    BufferedReader bufferedReader;
+    String buf;
+
+public Sent(int fromPort, String toIP, int Toport) {
+    this.fromPort = fromPort;
+    this.toIP = toIP;
+    this.Toport = Toport;
+    try {
+        this.datagramSocket = new DatagramSocket(fromPort);
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
+
+@Override
+public void run() {
+    while(true){
+        try {
+            bufferedReader=new BufferedReader(new InputStreamReader(System.in));
+            buf=bufferedReader.readLine();
+            byte[] buff=buf.getBytes();
+            datagramPacket= new DatagramPacket(buff,0,buff.length,new InetSocketAddress(this.toIP,this.Toport));
+
+            datagramSocket.send(datagramPacket);
+
+            if (buf.equals(&quot;bye&quot;)){
+                break;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    datagramSocket.close();
+}
+}
+/*今日忘记
+1、IP:String
+2、DatagramSocket(端口)
+2、BuffReader（输入流）；
+3、发送要把String变成数组
+ */
+</code></pre>
+<p><strong>接收端线程：</strong></p>
+<pre><code class="language-java">package UDP.Run;
+
+import java.io.IOException;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.SocketException;
+
+public class Receive implements Runnable{
+    DatagramSocket datagramSocket;
+	DatagramPacket datagramPacket;
+	private String FromID;
+    private int Port;
+
+public Receive(String fromID, int port) {
+    this.FromID = fromID;
+    this.Port = port;
+
+    try {
+        datagramSocket=new DatagramSocket(port);
+    } catch (SocketException e) {
+        e.printStackTrace();
+    }
+}
+
+@Override
+public void run() {
+    while (true) {
+        try {
+            byte[] buff = new byte[1024];
+            datagramPacket = new DatagramPacket(buff, 0, buff.length);
+            datagramSocket.receive(datagramPacket);
+
+            byte[] data=datagramPacket.getData();
+            String msg=new String(data,0,data.length);
+
+            System.out.println(FromID + &quot;:&quot; +msg);
+
+            if (datagramPacket.equals(&quot;bye&quot;)) {
+                break;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    datagramSocket.close();
+}
+}
+//重新定义数组
+</code></pre>
+<p><strong>学生端：</strong></p>
+<pre><code class="language-java">package UDP.Run;
+
+import UDP.Run.Receive;
+import UDP.Run.Sent;
+
+public class Student {
+public static void main(String[] args) {
+    new Thread(new Sent(7754,&quot;localhost&quot;,9999)).start();
+    new Thread(new Receive(&quot;老师：&quot;,7787)).start();
+}
+
+}
+//线程要启动
+</code></pre>
+<p><strong>老师端：</strong></p>
+<pre><code class="language-java">package UDP.Run;
+
+import UDP.Run.Receive;
+import UDP.Run.Sent;
+
+public class Teacher {
+public static void main(String[] args) {
+    new Thread(new Sent(7755,&quot;localhost&quot;,7787)).start();
+    new Thread(new Receive(&quot;学生：&quot;,9999)).start();
+}
+}
+</code></pre>
+<h2 id="18-url">1.8、URL</h2>
+<p>https://www.baidu.com/</p>
+<p>统一资源定位符：定位资源，定位互联网上某一个资源</p>
+<p>DNS域名解析 WWW.baidu</p>
+<pre><code class="language-java">import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
+
+public class Url {
+public static void main(String[] args) throws IOException {
+    URL url=new URL(&quot;https://m801.music.126.net/20201123231609/7a60a829f966abbdfc75ee0756ed0ff9/jdyyaac/obj/w5rDlsOJwrLDjj7CmsOj/4916388353/e2fe/8be5/e1e6/c7614d21f4afc33120723d86e09d330d.m4a&quot;);
+    HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+
+    InputStream in=urlConnection.getInputStream();
+    FileOutputStream Fout=new FileOutputStream(&quot;d.m4a&quot;);
+
+    byte[] buff=new byte[1024];
+    int len;
+    while ((len=in.read(buff))!=-1){
+        Fout.write(buff,0,len);
+    }
+
+    Fout.close();
+    in.close();
+    urlConnection.disconnect();
+}
+
+
+}
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[169、多数元素]]></title>
         <id>https://ganhan999.github.io/post/169、多数元素/</id>
@@ -4077,435 +4774,6 @@ public class Demo01 {
 </code></pre>
 <p>数组特点：大小固定，只能存储相同数据类型的数据</p>
 <p>集合特点：大小可动态扩展，可以存储各种类型的数据</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Java多态]]></title>
-        <id>https://ganhan999.github.io/post/Java多态/</id>
-        <link href="https://ganhan999.github.io/post/Java多态/">
-        </link>
-        <updated>2020-12-01T10:18:25.000Z</updated>
-        <content type="html"><![CDATA[<h2 id="1多态概述">1.多态概述</h2>
-<ol>
-<li><strong>多态</strong>是继封装、继承之后，面向对象的第三大特性。</li>
-<li>多态<strong>现实意义</strong>理解：</li>
-</ol>
-<ul>
-<li>
-<p>现实事物经常会体现出多种形态，如学生，学生是人的一种，则一个具体的同学张三既是<strong>学生</strong>也是<strong>人</strong>，即出现<strong>两种形态</strong>。</p>
-</li>
-<li>
-<p>Java作为面向对象的语言，同样可以描述一个事物的多种形态。如Student类继承了Person类，一个Student的对象便既是Student，又是Person。</p>
-<p>3.多态体现为<strong>父类引用变量可以指向子类对象</strong>。</p>
-<p>4.前提条件：必须有子父类关系。</p>
-<p><em><strong>*注意：在使用多态后的父类引用变量调用方法时，会调用子类重写后的方法。*</strong></em></p>
-<p>5.多态的定义与使用格式</p>
-</li>
-</ul>
-<p>​          定义格式：父类类型 变量名=new 子类类型();</p>
-<p>6.理解:</p>
-<p>​        多态是同一个行为具有多个不同表现形式或形态的能力。</p>
-<p>​        多态就是同一个接口，使用不同的实例而执行不同操作。</p>
-<h2 id="2多态中成员的特点">2.多态中成员的特点</h2>
-<ol>
-<li>多态成员变量：编译运行看左边</li>
-</ol>
-<p>​     Fu f=new Zi();</p>
-<p>​     System.out.println(f.num);//f是Fu中的值，只能取到父中的值</p>
-<p>2.多态成员方法：编译看左边，运行看右边</p>
-<p>​    Fu f1=new Zi();</p>
-<p>​    System.out.println(f1.show());//f1的门面类型是Fu,但实际类型是Zi,所以调用的是重写后的方法。</p>
-<h2 id="3instanceof关键字">3.instanceof关键字</h2>
-<p>作用：用来判断某个对象是否属于某种数据类型。</p>
-<ul>
-<li>注意： 返回类型为布尔类型</li>
-</ul>
-<p>使用案例：</p>
-<pre><code class="language-java">        Fu f1=new Zi();
-
-
-
-        Fu f2=new Son();
-
-
-
-        if(f1 instanceof Zi){
-
-
-
-            System.out.println(&quot;f1是Zi的类型&quot;);
-
-
-
-        }
-
-
-
-        else{
-
-
-
-            System.out.println(&quot;f1是Son的类型&quot;);
-
-
-
-        }
-</code></pre>
-<h2 id="4多态的转型">4.多态的转型</h2>
-<ul>
-<li>多态的转型分为向上转型和向下转型两种</li>
-<li>向上转型：多态本身就是向上转型过的过程</li>
-</ul>
-<p>​     使用格式：父类类型 变量名=new 子类类型();</p>
-<p>​     适用场景：当不需要面对子类类型时，通过提高扩展性，或者使用父类的功能就能完成相应的操作。</p>
-<ul>
-<li>向下转型：一个已经向上转型的子类对象可以使用强制类型转换的格式，将父类引用类型转为子类引用各类型</li>
-</ul>
-<p>​     使用格式：子类类型 变量名=（子类类型） 父类类型的变量；</p>
-<p>​     适用场景：当要使用子类特有功能时。</p>
-<h2 id="5多态案例">5.多态案例：</h2>
-<p>例1：（<strong>理解多态，可以重点看这个案例</strong>）</p>
-<pre><code class="language-java">package day0524;
-
-
-
- 
-
-
-
-public class demo04 {
-
-
-
-    public static void main(String[] args) {
-
-
-
-        People p=new Stu();
-
-
-
-        p.eat();
-
-
-
-        //调用特有的方法
-
-
-
-        Stu s=(Stu)p;
-
-
-
-        s.study();
-
-
-
-        //((Stu) p).study();
-
-
-
-    }
-
-
-
-}
-
-
-
-class People{
-
-
-
-    public void eat(){
-
-
-
-        System.out.println(&quot;吃饭&quot;);
-
-
-
-    }
-
-
-
-}
-
-
-
-class Stu extends People{
-
-
-
-    @Override
-
-
-
-    public void eat(){
-
-
-
-        System.out.println(&quot;吃水煮肉片&quot;);
-
-
-
-    }
-
-
-
-    public void study(){
-
-
-
-        System.out.println(&quot;好好学习&quot;);
-
-
-
-    }
-
-
-
-}
-
-
-
-class Teachers extends People{
-
-
-
-    @Override
-
-
-
-    public void eat(){
-
-
-
-        System.out.println(&quot;吃樱桃&quot;);
-
-
-
-    }
-
-
-
-    public void teach(){
-
-
-
-        System.out.println(&quot;认真授课&quot;);
-
-
-
-    }
-
-
-
-}
-</code></pre>
-<p>例2：</p>
-<p>请问题目运行结果是什么？</p>
-<pre><code class="language-java">package day0524;
-
-
-
-public class demo1 {
-
-
-
-    public static void main(String[] args) {
-
-
-
-        A a=new A();
-
-
-
-        a.show();
-
-
-
-        B b=new B();
-
-
-
-        b.show();
-
-
-
-    }
-
-
-
-}
-
-
-
-class A{
-
-
-
-    public void show(){
-
-
-
-        show2();
-
-
-
-    }
-
-
-
-    public void show2(){
-
-
-
-        System.out.println(&quot;A&quot;);
-
-
-
-    }
-
-
-
-}
-
-
-
-class B extends A{
-
-
-
-    public void show2(){
-
-
-
-        System.out.println(&quot;B&quot;);
-
-
-
-    }
-
-
-
-}
-
-
-
-class C extends B{
-
-
-
-    public void show(){
-
-
-
-        super.show();
-
-
-
-    }
-
-
-
-    public void show2(){
-
-
-
-        System.out.println(&quot;C&quot;);
-
-
-
-    }
-
-
-
-}
-</code></pre>
-<p>答案：A B</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[155、最小栈]]></title>
-        <id>https://ganhan999.github.io/post/155、最小栈/</id>
-        <link href="https://ganhan999.github.io/post/155、最小栈/">
-        </link>
-        <updated>2020-11-30T13:34:58.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
-<p>设计一个支持 push ，pop ，top 操作，并能在常数时间内检索到最小元素的栈。</p>
-<p>push(x) —— 将元素 x 推入栈中。<br>
-pop() —— 删除栈顶的元素。<br>
-top() —— 获取栈顶元素。<br>
-getMin() —— 检索栈中的最小元素。</p>
-<p>示例:</p>
-<p>输入：<br>
-[&quot;MinStack&quot;,&quot;push&quot;,&quot;push&quot;,&quot;push&quot;,&quot;getMin&quot;,&quot;pop&quot;,&quot;top&quot;,&quot;getMin&quot;]<br>
-[[],[-2],[0],[-3],[],[],[],[]]</p>
-<p>输出：<br>
-[null,null,null,null,-3,null,0,-2]</p>
-<p>解释：<br>
-MinStack minStack = new MinStack();<br>
-minStack.push(-2);<br>
-minStack.push(0);<br>
-minStack.push(-3);<br>
-minStack.getMin();   --&gt; 返回 -3.<br>
-minStack.pop();<br>
-minStack.top();      --&gt; 返回 0.<br>
-minStack.getMin();   --&gt; 返回 -2.</p>
-<h1 id="本体思路">本体思路</h1>
-<p>利用列表，生成栈</p>
-<h1 id="我的做法">#我的做法：</h1>
-<pre><code class="language-python">class MinStack:
-
-    def __init__(self):
-        &quot;&quot;&quot;
-        initialize your data structure here.
-        &quot;&quot;&quot;
-        self.stack=[]
-
-    def push(self, x: int) -&gt; None:
-        self.stack.append(x)
-
-    def pop(self) -&gt; None:
-        if len(self.stack)&gt;0:
-            self.stack.pop()
-
-
-    def top(self) -&gt; int:
-        if len(self.stack)&gt;0:
-            return self.stack[-1]
-
-    def getMin(self) -&gt; int:
-        return min(self.stack)
-</code></pre>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="大神做法1">#大神做法1：</h1>
-<p>push()方法： 每当push()新值进来时，如果 小于等于 min_stack栈顶值，<br>
-则一起push()到min_stack，即更新了栈顶最小值；</p>
-<p>pop()方法： 判断将pop()出去的元素值是否是min_stack栈顶元素值（即最小值），<br>
-如果是则将min_stack栈顶元素一起pop()，这样可以保证min_stack栈顶元素始终是stack中的最小值。</p>
-<p>getMin()方法： 返回min_stack栈顶即可。</p>
-<p>min_stack作用分析：<br>
-min_stack等价于遍历stack所有元素，把升序的数字都删除掉，留下一个从栈底到栈顶降序的栈。<br>
-相当于给stack中的降序元素做了标记，每当pop()这些降序元素，min_stack会将相应的栈顶元素<br>
-pop()出去，保证其栈顶元素始终是stack中的最小元素。</p>
-<pre><code class="language-Python">class MinStack:
-    def __init__(self):
-        self.stack = []
-        self.min_stack = []
-    def push(self, x: int) -&gt; None:
-        self.stack.append(x)
-        if not self.min_stack or x &lt;= self.min_stack[-1]:
-            self.min_stack.append(x)
-    def pop(self) -&gt; None:
-        if self.stack.pop() == self.min_stack[-1]:
-            self.min_stack.pop()
-    def top(self) -&gt; int:
-        return self.stack[-1]
-    def getMin(self) -&gt; int:
-        return self.min_stack[-1]
-</code></pre>
 ]]></content>
     </entry>
 </feed>
