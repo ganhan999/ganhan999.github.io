@@ -4,7 +4,7 @@
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-<title>100、相同的树 | Gridea</title>
+<title>172、阶乘后的零 | Gridea</title>
 
 <link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1607255477061">
 
@@ -89,11 +89,11 @@
         <div class="post-detail gt-bg-theme-color-second">
             <article class="gt-post-content">
                 <h2 class="post-title">
-                    100、相同的树
+                    172、阶乘后的零
                 </h2>
                 <div class="post-info">
                     <time class="post-time gt-c-content-color-first">
-                        · 2020-11-18 ·
+                        · 2020-12-06 ·
                     </time>
                     
                         <a href="https://ganhan999.github.io/tag/cKyYTCK2Y/" class="post-tags">
@@ -103,66 +103,61 @@
                 </div>
                 <div class="post-content">
                     <h1 id="题目">题目</h1>
-<ol>
-<li>
-<p>给定两个二叉树，编写一个函数来检验它们是否相同。</p>
-<p>如果两个树在结构上相同，并且节点具有相同的值，则认为它们是相同的。</p>
+<p>给定一个整数 n，返回 n! 结果尾数中零的数量。</p>
 <p>示例 1:<br>
-输入:       1         1<br>
-/ \       / <br>
-2   3     2   3</p>
-<pre><code>    [1,2,3],   [1,2,3]
-</code></pre>
-<p>输出: true</p>
+输入: 3<br>
+输出: 0<br>
+解释: 3! = 6, 尾数中没有零。</p>
 <p>示例 2:<br>
-输入:      1          1<br>
-/           <br>
-2             2</p>
-<pre><code>    [1,2],     [1,null,2]
-</code></pre>
-<p>输出: false</p>
-<p>示例 3:<br>
-输入:       1         1<br>
-/ \       / <br>
-2   1     1   2</p>
-<pre><code>    [1,2,1],   [1,1,2]
-</code></pre>
-<p>输出: false</p>
-</li>
-</ol>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+输入: 5<br>
+输出: 1<br>
+解释: 5! = 120, 尾数中有 1 个零.</p>
 <h1 id="本体思路">本体思路</h1>
-<p>递归大法好。<br>
-一句话, 先想出口：<br>
-空的话怎么办？<br>
-一个出口怎么办？<br>
-通常情况下怎么处理当前元素, 同时减少问题规模？</p>
+<p>先计算阶乘，在计算尾数有多少个0</p>
 <h1 id="我的做法">#我的做法：</h1>
 <pre><code class="language-python">class Solution:
-    def isSameTree(self, p: TreeNode, q: TreeNode) -&gt; bool:
-        if not p and not q: return True
-        if not p or not q: return False
-        if p.val != q.val: return False
-        return self.isSameTree(p.left, q.left) and self.isSameTree(p.right, q.right)
+    def trailingZeroes(self, n: int) -&gt; int:
+       n_factorial = 1
+       for i in range(2, n + 1):
+            n_factorial *= i
+       zero_count = 0
+       while n_factorial % 10 == 0:
+           zero_count += 1
+           n_factorial //= 10
+       return zero_count
+
 </code></pre>
 <p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="大神做法">#大神做法：</h1>
-<p>深度优先遍历，把遍历的数字加入数组中。</p>
+<h1 id="大神做法1">#大神做法1：</h1>
+<p>例如，如果 n=16，我们需要查看 1 到 16 之间所有数字的因子。<br>
+我们只对 2 和 5 有兴趣。包含 55 因子的数字是 {5，10，15}<br>
+包含因子 2 的数字是 {2、4、6、8、10、12、14、16}<br>
+因为只三个完整的对，因此 16! 后有三个零。<br>
+首先，我们可以注意到因子 2 数总是比因子 5 大。<br>
+为什么？因为每四个数字算作额外的因子 2，<br>
+但是只有每 25 个数字算作额外的因子 5。<br>
+因此我们可以删除计算因子 2 的过程</p>
 <pre><code class="language-Python">class Solution:
-    def isSameTree(self, p: TreeNode, q: TreeNode) -&gt; bool:
-        resp, resq = [], []
-        self.DFS(p, resp)
-        self.DFS(q, resq)
-        return resp == resq
-
-    def DFS(self, tree, res):
-        if not tree:
-            res.append('')
-            return
-        res.append(tree.val)
-        self.DFS(tree.left, res)
-        self.DFS(tree.right, res)
-
+    def trailingZeroes(self, n: int) -&gt; int:
+        zero_count = 0
+        for i in range(5, n + 1, 5):
+            current = i
+            while current % 5 == 0:
+              zero_count += 1
+              current //= 5
+        return zero_count
+</code></pre>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="大神做法2">#大神做法2：</h1>
+<p>根据大神做法1，把除以25、除以125、除以625……不能大于n的个数都算出来，相加就行。</p>
+<pre><code class="language-python">class Solution:
+    def trailingZeroes(self, n: int) -&gt; int:
+        zero_count = 0
+        current_multiple = 5
+        while n &gt;= current_multiple:
+            zero_count += n // current_multiple
+            current_multiple *= 5
+        return zero_count
 </code></pre>
 
                 </div>
@@ -172,14 +167,14 @@
         
             <div class="next-post">
                 <div class="next gt-c-content-color-first">下一篇</div>
-                <a href="https://ganhan999.github.io/post/88、合并两个有序数组/" class="post-title gt-a-link">
-                    88、合并两个有序数组
+                <a href="https://ganhan999.github.io/post/Java多线程编程/" class="post-title gt-a-link">
+                    Java多线程编程
                 </a>
             </div>
         
 
         
-            <span id="/post/100、相同的树/" class="leancloud_visitors" data-flag-title="100、相同的树">
+            <span id="/post/172、阶乘后的零/" class="leancloud_visitors" data-flag-title="172、阶乘后的零">
                 <em class="post-meta-item-text">阅读量 </em>
                 <i class="leancloud-visitors-count">0</i>
             </span>

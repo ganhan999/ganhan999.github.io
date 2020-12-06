@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ganhan999.github.io/</id>
     <title>Gridea</title>
-    <updated>2020-12-06T10:07:21.039Z</updated>
+    <updated>2020-12-06T11:51:19.605Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ganhan999.github.io/"/>
     <link rel="self" href="https://ganhan999.github.io/atom.xml"/>
@@ -10,6 +10,71 @@
     <logo>https://ganhan999.github.io/images/avatar.png</logo>
     <icon>https://ganhan999.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Gridea</rights>
+    <entry>
+        <title type="html"><![CDATA[172、阶乘后的零]]></title>
+        <id>https://ganhan999.github.io/post/172、阶乘后的零/</id>
+        <link href="https://ganhan999.github.io/post/172、阶乘后的零/">
+        </link>
+        <updated>2020-12-06T11:51:01.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
+<p>给定一个整数 n，返回 n! 结果尾数中零的数量。</p>
+<p>示例 1:<br>
+输入: 3<br>
+输出: 0<br>
+解释: 3! = 6, 尾数中没有零。</p>
+<p>示例 2:<br>
+输入: 5<br>
+输出: 1<br>
+解释: 5! = 120, 尾数中有 1 个零.</p>
+<h1 id="本体思路">本体思路</h1>
+<p>先计算阶乘，在计算尾数有多少个0</p>
+<h1 id="我的做法">#我的做法：</h1>
+<pre><code class="language-python">class Solution:
+    def trailingZeroes(self, n: int) -&gt; int:
+       n_factorial = 1
+       for i in range(2, n + 1):
+            n_factorial *= i
+       zero_count = 0
+       while n_factorial % 10 == 0:
+           zero_count += 1
+           n_factorial //= 10
+       return zero_count
+
+</code></pre>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="大神做法1">#大神做法1：</h1>
+<p>例如，如果 n=16，我们需要查看 1 到 16 之间所有数字的因子。<br>
+我们只对 2 和 5 有兴趣。包含 55 因子的数字是 {5，10，15}<br>
+包含因子 2 的数字是 {2、4、6、8、10、12、14、16}<br>
+因为只三个完整的对，因此 16! 后有三个零。<br>
+首先，我们可以注意到因子 2 数总是比因子 5 大。<br>
+为什么？因为每四个数字算作额外的因子 2，<br>
+但是只有每 25 个数字算作额外的因子 5。<br>
+因此我们可以删除计算因子 2 的过程</p>
+<pre><code class="language-Python">class Solution:
+    def trailingZeroes(self, n: int) -&gt; int:
+        zero_count = 0
+        for i in range(5, n + 1, 5):
+            current = i
+            while current % 5 == 0:
+              zero_count += 1
+              current //= 5
+        return zero_count
+</code></pre>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="大神做法2">#大神做法2：</h1>
+<p>根据大神做法1，把除以25、除以125、除以625……不能大于n的个数都算出来，相加就行。</p>
+<pre><code class="language-python">class Solution:
+    def trailingZeroes(self, n: int) -&gt; int:
+        zero_count = 0
+        current_multiple = 5
+        while n &gt;= current_multiple:
+            zero_count += n // current_multiple
+            current_multiple *= 5
+        return zero_count
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Java多线程编程]]></title>
         <id>https://ganhan999.github.io/post/Java多线程编程/</id>
@@ -4592,115 +4657,6 @@ public class File09 {
 <strong>* public static</strong><br>
 <strong>* public abstract</strong><br>
 <strong>* public final</strong></p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[160、相交链表]]></title>
-        <id>https://ganhan999.github.io/post/160、相交链表/</id>
-        <link href="https://ganhan999.github.io/post/160、相交链表/">
-        </link>
-        <updated>2020-12-01T13:49:20.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
-<p>编写一个程序，找到两个单链表相交的起始节点。</p>
-<p>示例 1：<br>
-输入：intersectVal = 8, listA = [4,1,8,4,5], listB = [5,0,1,8,4,5], skipA = 2, skipB = 3<br>
-输出：Reference of the node with value = 8<br>
-输入解释：相交节点的值为 8 （注意，如果两个链表相交则不能为 0）。从各自的表头开始算起，链表 A 为 [4,1,8,4,5]，链表 B 为 [5,0,1,8,4,5]。在 A 中，相交节点前有 2 个节点；在 B 中，相交节点前有 3 个节点。</p>
-<p>示例 2：<br>
-输入：intersectVal = 2, listA = [0,9,1,2,4], listB = [3,2,4], skipA = 3, skipB = 1<br>
-输出：Reference of the node with value = 2<br>
-输入解释：相交节点的值为 2 （注意，如果两个链表相交则不能为 0）。从各自的表头开始算起，链表 A 为 [0,9,1,2,4]，链表 B 为 [3,2,4]。在 A 中，相交节点前有 3 个节点；在 B 中，相交节点前有 1 个节点。</p>
-<p>示例 3：<br>
-输入：intersectVal = 0, listA = [2,6,4], listB = [1,5], skipA = 3, skipB = 2<br>
-输出：null<br>
-输入解释：从各自的表头开始算起，链表 A 为 [2,6,4]，链表 B 为 [1,5]。由于这两个链表不相交，所以 intersectVal 必须为 0，而 skipA 和 skipB 可以是任意值。<br>
-解释：这两个链表不相交，因此返回 null。</p>
-<p>注意：<br>
-如果两个链表没有交点，返回 null.<br>
-在返回结果后，两个链表仍须保持原有的结构。<br>
-可假定整个链表结构中没有循环。<br>
-程序尽量满足 O(n) 时间复杂度，且仅用 O(1) 内存。.</p>
-<h1 id="本体思路">本体思路</h1>
-<p>将所有A的节点记录在字典中，再用B去查找，如果找到了则返回节点</p>
-<h1 id="我的做法">#我的做法：</h1>
-<pre><code class="language-python">class MinStack:
-    class Solution:
-        def getIntersectionNode(self, headA: ListNode, headB: ListNode) -&gt; ListNode:
-            if headA is None or headB is None:
-                return None
-            m = {}
-            m = self.bianli(headA, m)
-            ans = self.bianli(headB, m)
-            return None if (isinstance(ans, dict)) else ans
-
-        def bianli(self, head, m):
-            while head:
-                if m.get(head):
-                    return head
-                m[head] = 1
-                head = head.next
-            else:
-                return m
-</code></pre>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="大神做法1">#大神做法1：</h1>
-<p>用集合，但不是用字典，思路差不多</p>
-<pre><code class="language-Python">class Solution:
-    def getIntersectionNode(self, headA: ListNode, headB: ListNode) -&gt; ListNode:
-        A = set()
-        cur1 = headA
-        cur2 = headB
-        while cur1:
-            A.add(cur1)
-            cur1 = cur1.next
-        while cur2:
-            if cur2 in A:
-                return cur2
-            cur2 = cur2.next
-        return None
-
-</code></pre>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="大神做法2">#大神做法2：</h1>
-<p>分别遍历两个链表，并记录两链表的长度差n，将出现两种情况，<br>
-(1)让长链表先走n步<br>
-(2)再同时开始走，并对比两个链表的当前节点，节点相等时即为交点<br>
-(3)若没有交点，则在最后的Null处相交</p>
-<pre><code class="language-python">class Solution:
-    def getIntersectionNode(self, headA: ListNode, headB: ListNode) -&gt; ListNode:
-        cur1 = headA
-        cur2 = headB
-        n = 0
-        while cur1:
-            n += 1
-            cur1 = cur1.next
-        while cur2:
-            n -= 1
-            cur2 = cur2.next
-        if cur1 != cur2:
-            return None
-        cur1 = headA if n &gt; 0 else headB
-        cur2 = headB if cur1 == headA else headA
-        n = abs(n)
-        while n:
-            n -= 1
-            cur1 = cur1.next
-        while cur1 != cur2:
-            cur1 = cur1.next
-            cur2 = cur2.next
-        return cur1
-</code></pre>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="大神做法3">#大神做法3：</h1>
-<p>长短链表相互拼接，遇到相同节点跳出循环，该节点即为相交节点</p>
-<pre><code class="language-python">class Solution:
-    def getIntersectionNode(self, L1: ListNode, L2: ListNode) -&gt; ListNode:
-        h1, h2 = L1, L2
-        while h1 is not h2:
-            h1 = h1.next if h1 else L2
-            h2 = h2.next if h2 else L1
-        return h1
-</code></pre>
 ]]></content>
     </entry>
 </feed>
