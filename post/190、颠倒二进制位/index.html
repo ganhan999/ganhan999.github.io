@@ -6,7 +6,7 @@
 
 <title>190、颠倒二进制位 | Gridea</title>
 
-<link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1607334728119">
+<link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1607338117761">
 
 <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://ganhan999.github.io//styles/main.css">
@@ -77,7 +77,7 @@
             
         </div>
         <div style="text-align: center">
-            <form id="gridea-search-form" style="position: relative" data-update="1607334728119" action="/search/index.html">
+            <form id="gridea-search-form" style="position: relative" data-update="1607338117761" action="/search/index.html">
                 <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
                 <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
             </form>
@@ -128,7 +128,8 @@
 </code></pre>
 <p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
 <h1 id="大神做法1">#大神做法1：</h1>
-<p>首先，我们将原来的 32 位分为 2 个 16 位的块。<br>
+<p><img src="https://ganhan999.github.io//post-images/1607338116456.jpg" alt="" loading="lazy"><br>
+首先，我们将原来的 32 位分为 2 个 16 位的块。<br>
 然后我们将 16 位块分成 2 个 8 位的块。<br>
 然后我们继续将这些块分成更小的块，直到达到 1 位的块。<br>
 在上述每个步骤中，我们将中间结果合并为一个整数，作为下一步的输入。</p>
