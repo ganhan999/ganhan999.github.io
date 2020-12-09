@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ganhan999.github.io/</id>
     <title>Gridea</title>
-    <updated>2020-12-07T10:48:41.283Z</updated>
+    <updated>2020-12-09T10:13:30.245Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ganhan999.github.io/"/>
     <link rel="self" href="https://ganhan999.github.io/atom.xml"/>
@@ -10,6 +10,41 @@
     <logo>https://ganhan999.github.io/images/avatar.png</logo>
     <icon>https://ganhan999.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Gridea</rights>
+    <entry>
+        <title type="html"><![CDATA[中等2. 两数相加]]></title>
+        <id>https://ganhan999.github.io/post/2、两数相加/</id>
+        <link href="https://ganhan999.github.io/post/2、两数相加/">
+        </link>
+        <updated>2020-12-09T10:21:01.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
+<p>给出两个 非空 的链表用来表示两个非负的整数。<br>
+其中，它们各自的位数是按照 逆序 的方式存储的，并且它们的每个节点只能存储一位数字。<br>
+如果，我们将这两个数相加起来，则会返回一个新的链表来表示它们的和。<br>
+您可以假设除了数字 0 之外，这两个数都不会以 0 开头。</p>
+<p>示例：<br>
+输入：(2 -&gt; 4 -&gt; 3) + (5 -&gt; 6 -&gt; 4)<br>
+输出：7 -&gt; 0 -&gt; 8<br>
+原因：342 + 465 = 807</p>
+<h1 id="本体思路">本体思路</h1>
+<p>因为两个数字相加会产生进位，所以使用i来保存进位。<br>
+则当前位的值为(l1.val + l2.val + i) % 10<br>
+则进位值为(l1.val + l2.val + i) / 10<br>
+建立新node，然后将进位传入下一层。</p>
+<h1 id="我的做法">#我的做法：</h1>
+<pre><code class="language-python">class Solution:
+    def addTwoNumbers(self, l1: ListNode, l2: ListNode) -&gt; ListNode:
+        def DFS(l1,l2,i):
+            if not l1 and not l2 and not i:
+               return None
+            s=(l1.val if l1 else 0)+(l2.val if l2 else 0)+i
+            node=ListNode(s%10)
+            node.next=DFS(l1.next if l1 else None,l2.next if l2 else None,s//10)
+            return node
+        return DFS(l1,l2,0)
+
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[190、颠倒二进制位]]></title>
         <id>https://ganhan999.github.io/post/190、颠倒二进制位/</id>
@@ -4952,72 +4987,6 @@ public class Game {
 </code></pre>
 <figure data-type="image" tabindex="18"><img src="https://ganhan999.github.io//post-images/1606993182057.png" alt="" loading="lazy"></figure>
 <p>只是浅显的笔记 为了自己以后复习用</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[167、两数之和 II - 输入有序数组]]></title>
-        <id>https://ganhan999.github.io/post/167、两数之和 II - 输入有序数组/</id>
-        <link href="https://ganhan999.github.io/post/167、两数之和 II - 输入有序数组/">
-        </link>
-        <updated>2020-12-02T11:49:20.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
-<p>给定一个已按照升序排列 的有序数组，找到两个数使得它们相加之和等于目标数。<br>
-函数应该返回这两个下标值 index1 和 index2，其中 index1 必须小于 index2。</p>
-<p>说明:<br>
-返回的下标值（index1 和 index2）不是从零开始的。<br>
-你可以假设每个输入只对应唯一的答案，而且你不可以重复使用相同的元素。<br>
-示例:</p>
-<p>输入: numbers = [2, 7, 11, 15], target = 9<br>
-输出: [1,2]<br>
-解释: 2 与 7 之和等于目标数 9 。因此 index1 = 1, index2 = 2</p>
-<h1 id="本体思路">本体思路</h1>
-<p>参考了大神们的解法，通过哈希来求解，这里通过字典来模拟哈希查询的过程。<br>
-个人理解这种办法相较于方法一其实就是字典记录了 num1 和 num2 的值和位置，而省了再查找 num2 索引的步骤。<br>
-用枚举的方式，构造哈希表</p>
-<h1 id="我的做法">#我的做法：</h1>
-<pre><code class="language-python">class Solution:
-    def twoSum(self, numbers: List[int], target: int) -&gt; List[int]:
-        hashmap={}
-        for i,j in enumerate(numbers):
-            hashmap[j]=i
-        for n,m in enumerate(numbers):
-            number=hashmap.get(target-m)
-            if number is not None and n!=number:
-                return[n+1,number+1]
-</code></pre>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="大神做法1">#大神做法1：</h1>
-<p>二分查找</p>
-<pre><code class="language-Python">class Solution:
-    def twoSum(self, numbers: List[int], target: int) -&gt; List[int]:
-        for i in range(len(numbers)):
-            target1 = target - numbers[i]
-            left , right = i+1 , len(numbers) - 1
-            while left &lt;= right:
-                mid = (left+right)//2
-                if target1 &lt; numbers[mid]:
-                    right = mid - 1
-                elif target1 &gt; numbers[mid]:
-                    left = mid + 1
-                else:
-                    return [i+1,mid+1]
-
-</code></pre>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="大神做法2">#大神做法2：</h1>
-<p>双指针分别指向最左和最右元素，如果两边之和大于target，那么右指针左移，否则左指针右移。</p>
-<pre><code class="language-python">class Solution:
-    def twoSum(self, numbers: List[int], target: int) -&gt; List[int]:
-        left , right = 0 , len(numbers)-1
-        while left &lt;= right:
-            s = numbers[left] + numbers[right]
-            if s == target:
-                return [left+1,right+1]
-            elif s &lt; target:
-                left += 1
-            else:
-                right -= 1
-</code></pre>
 ]]></content>
     </entry>
 </feed>
