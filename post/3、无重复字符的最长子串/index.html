@@ -4,7 +4,7 @@
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-<title>27、移除元素 | Gridea</title>
+<title>中等3. 无重复字符的最长子串 | Gridea</title>
 
 <link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1607612355879">
 
@@ -89,11 +89,11 @@
         <div class="post-detail gt-bg-theme-color-second">
             <article class="gt-post-content">
                 <h2 class="post-title">
-                    27、移除元素
+                    中等3. 无重复字符的最长子串
                 </h2>
                 <div class="post-info">
                     <time class="post-time gt-c-content-color-first">
-                        · 2020-11-06 ·
+                        · 2020-12-10 ·
                     </time>
                     
                         <a href="https://ganhan999.github.io/tag/cKyYTCK2Y/" class="post-tags">
@@ -103,76 +103,86 @@
                 </div>
                 <div class="post-content">
                     <h1 id="题目">题目</h1>
-<p>&quot;&quot;&quot;<br>
-给你一个数组 nums 和一个值 val，你需要 原地 移除所有数值等于 val 的元素，并返回移除后数组的新长度。<br>
-不要使用额外的数组空间，你必须仅使用 O(1) 额外空间并 原地 修改输入数组。<br>
-元素的顺序可以改变。你不需要考虑数组中超出新长度后面的元素。</p>
-<p>示例 1:<br>
-给定 nums = [3,2,2,3], val = 3,<br>
-函数应该返回新的长度 2, 并且 nums 中的前两个元素均为 2。<br>
-你不需要考虑数组中超出新长度后面的元素。</p>
-<p>示例 2:<br>
-给定 nums = [0,1,2,2,3,0,4,2], val = 2,<br>
-函数应该返回新的长度 5, 并且 nums 中的前五个元素为 0, 1, 3, 0, 4。<br>
-注意这五个元素可为任意顺序。<br>
-你不需要考虑数组中超出新长度后面的元素。</p>
-<p>&quot;&quot;&quot;</p>
+<p>给出两个 非空 的链表用来表示两个非负的整数。<br>
+其中，它们各自的位数是按照 逆序 的方式存储的，并且它们的每个节点只能存储一位数字。<br>
+如果，我们将这两个数相加起来，则会返回一个新的链表来表示它们的和。<br>
+您可以假设除了数字 0 之外，这两个数都不会以 0 开头。</p>
+<p>示例：<br>
+输入：(2 -&gt; 4 -&gt; 3) + (5 -&gt; 6 -&gt; 4)<br>
+输出：7 -&gt; 0 -&gt; 8<br>
+原因：342 + 465 = 807</p>
 <h1 id="本体思路">本体思路</h1>
-<p>如果val在列表中，那么就使用index函数得到他的位置，然后再进行一个一个的pop，比较简单</p>
+<p>遍历每一个元素，选出最长子串。</p>
 <h1 id="我的做法">#我的做法：</h1>
 <pre><code class="language-python">class Solution:
-    def removeElement(self, nums: List[int], val: int) -&gt; int:
-        lens=len(nums)
-        i=0
-        if lens==0:
-            return 0
-        while i&lt;=lens-1:
-            if val in nums:
-                inde=nums.index(val)
-                nums.pop(inde)
-                print()
-            else:
-                i=i+1
-        return len(nums)
+    def lengthOfLongestSubstring(self, s: str) -&gt; int:
+        # 哈希集合，记录每个字符是否出现过
+        occ = set()
+        n = len(s)
+        # 右指针，初始值为 -1，相当于我们在字符串的左边界的左侧，还没有开始移动
+        rk, ans = -1, 0
+        for i in range(n):
+            if i != 0:
+                # 左指针向右移动一格，移除一个字符
+                occ.remove(s[i - 1])
+            while rk + 1 &lt; n and s[rk + 1] not in occ:
+                # 不断地移动右指针
+                occ.add(s[rk + 1])
+                rk += 1
+            # 第 i 到 rk 个字符是一个极长的无重复字符子串
+            ans = max(ans, rk - i + 1)
+        return ans
+
 
 </code></pre>
 <p>&quot;&quot;&quot;</p>
 <h1 id="大神做法1">大神做法1：</h1>
-<p>双指针法：题意可以理解为直接修改前k个数，因此无需删除操作</p>
-<p>&quot;&quot;&quot;</p>
+<p>用一个暂时存储匹配的子串来判断子串大小，如果出现重复的字符，找到重复的字符然后向后匹配。</p>
 <pre><code class="language-python">class Solution:
-    def removeElement(self, nums: List[int], val: int) -&gt; int:
-        for i in range(nums.count(val)):
-            nums.remove(val)
-        return len(nums)
-
-
-
-#复现成功！
+    def lengthOfLongestSubstring(self, s: str) -&gt; int:
+        # 使用一个辅助变量来暂时存储匹配的子串
+        ans = ''
+        tep = ''
+        for i in s:
+            # 遍历，若不重复则记录该字符
+            if i not in tep:
+                tep += i
+            # 如果遇到了已经存在的字符，则找到该字符所在位置，删除该字符，并保留该位置之后的子串，并把当前字符加入到最后，完成更新
+            else:
+                tep = tep[tep.index(i)+1:]
+                tep += i
+            # 如果是当前最长的，就替换掉之前存储的最长子串
+            if len(tep) &gt; len(ans):
+                    ans = tep
+        return len(ans)
 </code></pre>
+<p>&quot;&quot;&quot;</p>
 <h1 id="大神做法2">大神做法2：</h1>
-<p>双指针其实就是两个数，分别代表两个index，表示数组中第几个数的意思。<br>
-比如这里，我们让a代表一个index，b代表一个index<br>
-然后我们让a一直往后移动，相当于nums[a]从数组第一个数遍历到最后一个数。<br>
-当且仅当我们发现nums[a] != val的时候，我们把这个数拷贝到b指向的位置，<br>
-默认b是从0开始的，然后b += 1指向下一个位置。</p>
-<p>&quot;&quot;&quot;</p>
+<p>动态规划</p>
+<p>根据例子的思路推广至一般的情况：<br>
+给出一个字符串Si，已知它的最长子串长度为Li，如果在Si的末尾追加一个字符C，<br>
+即Si+1=Si+C，那么Si+1的最长子串是多少？<br>
+很容易想到：<br>
+lengthOfLongestSubString(Si+1)=max(Li,len(C结尾的无重复子串))</p>
 <pre><code class="language-python">class Solution:
-    def removeElement(self, nums: List[int], val: int) -&gt; int:
-        a = 0
-        b = 0
+    def lengthOfLongestSubstring(self, s: str) -&gt; int:
+        if s == '':
+            return 0
+        if len(s) == 1:
+            return 1
 
-        while a &lt; len(nums):
-            if nums[a] != val:
-                nums[b] = nums[a]
-                b += 1
-            a += 1
-        return b
-
-
-#复现成功！
+        def find_left(s, i):
+            tmp_str = s[i]
+            j = i - 1
+            while j &gt;= 0 and s[j] not in tmp_str:
+                tmp_str += s[j]
+                j -= 1
+            return len(tmp_str)
+        length = 0
+        for i in range(0, len(s)):
+            length = max(length, find_left(s, i))
+        return length
 </code></pre>
-<p>&quot;&quot;&quot;</p>
 
                 </div>
             </article>
@@ -181,14 +191,14 @@
         
             <div class="next-post">
                 <div class="next gt-c-content-color-first">下一篇</div>
-                <a href="https://ganhan999.github.io/post/边缘检测算子汇总/" class="post-title gt-a-link">
-                    边缘检测算子汇总
+                <a href="https://ganhan999.github.io/post/2、两数相加/" class="post-title gt-a-link">
+                    中等2. 两数相加
                 </a>
             </div>
         
 
         
-            <span id="/post/27、移除元素/" class="leancloud_visitors" data-flag-title="27、移除元素">
+            <span id="/post/3、无重复字符的最长子串/" class="leancloud_visitors" data-flag-title="中等3. 无重复字符的最长子串">
                 <em class="post-meta-item-text">阅读量 </em>
                 <i class="leancloud-visitors-count">0</i>
             </span>
