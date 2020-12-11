@@ -4,7 +4,7 @@
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-<title>1、两数之和 | Gridea</title>
+<title>中等5. 最长回文子串 | Gridea</title>
 
 <link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1607677384781">
 
@@ -89,11 +89,11 @@
         <div class="post-detail gt-bg-theme-color-second">
             <article class="gt-post-content">
                 <h2 class="post-title">
-                    1、两数之和
+                    中等5. 最长回文子串
                 </h2>
                 <div class="post-info">
                     <time class="post-time gt-c-content-color-first">
-                        · 2020-11-02 ·
+                        · 2020-12-11 ·
                     </time>
                     
                         <a href="https://ganhan999.github.io/tag/cKyYTCK2Y/" class="post-tags">
@@ -104,38 +104,104 @@
                 <div class="post-content">
                     <h1 id="题目">题目</h1>
 <p>&quot;&quot;&quot;<br>
-给定一个整数数组 nums 和一个目标值 target，请你在该数组中找出和为目标值的那两个整数，并返回他们的数组下标。<br>
-你可以假设每种输入只会对应一个答案。但是，数组中同一个元素不能使用两遍。<br>
+动态规划，如果bab是回文，俺么ababa也是，把整个矩阵都填满，首先是对角线，然后慢慢扩散。<br>
 &quot;&quot;&quot;</p>
 <h1 id="我的做法">#我的做法：</h1>
 <pre><code class="language-python">class Solution:
-    def twoSum(self,nums,target):
-        len1=len(nums)
-        for i in range(len1):
-            j=i+1
-            for j in range(j,len1):
-              if nums[i]+nums[j]==target:
-                  return [i,j]
-        return [0,0]
+    def longestPalindrome(self, s: str) -&gt; str:
+        n = len(s)
+        dp = [[False] * n for _ in range(n)]
+        ans = &quot;&quot;
+        # 枚举子串的长度 l+1
+        for l in range(n):
+            # 枚举子串的起始位置 i，这样可以通过 j=i+l 得到子串的结束位置
+            for i in range(n):
+                j = i + l
+                if j &gt;= len(s):
+                    break
+                if l == 0:
+                    dp[i][j] = True
+                elif l == 1:
+                    dp[i][j] = (s[i] == s[j])
+                else:
+                    dp[i][j] = (dp[i + 1][j - 1] and s[i] == s[j])
+                if dp[i][j] and l + 1 &gt; len(ans):
+                    ans = s[i:j+1]
+        return ans
 </code></pre>
 <p>&quot;&quot;&quot;</p>
-<h1 id="大神做法">大神做法：</h1>
-<p>参考了大神们的解法，通过哈希来求解，这里通过字典来模拟哈希查询的过程。<br>
-个人理解这种办法相较于方法一其实就是字典记录了 num1 和 num2 的值和位置，而省了再查找 num2 索引的步骤。<br>
-用枚举的方式，构造哈希表<br>
-&quot;&quot;&quot;</p>
+<h1 id="大神做法1">#大神做法1</h1>
+<p>根据回文子串的定义，枚举所有长度大于等于 22 的子串，依次判断它们是否是回文；<br>
+在具体实现时，可以只针对大于“当前得到的最长回文子串长度”的子串进行“回文验证”；<br>
+在记录最长回文子串的时候，可以只记录“当前子串的起始位置”和“子串长度”，不必做截取。</p>
 <pre><code class="language-python">class Solution:
-    def twoSum(self,nums, target):
-        hashmap={}
-        for i,j in enumerate(nums):
-            hashmap[j]=i
-        for n,m in enumerate(nums):
-            number=hashmap.get(target-m)
-            if number is not None and n!=number:
-                return[n,number]
-        return[0,0]
+    # 暴力匹配（超时）
+    def longestPalindrome(self, s: str) -&gt; str:
+        # 特判
+        size = len(s)
+        if size &lt; 2:
+            return s
 
-#复现成功！
+        max_len = 1
+        res = s[0]
+
+        # 枚举所有长度大于等于 2 的子串
+        for i in range(size - 1):
+            for j in range(i + 1, size):
+                if j - i + 1 &gt; max_len and self.__valid(s, i, j):
+                    max_len = j - i + 1
+                    res = s[i:j + 1]
+        return res
+
+    def __valid(self, s, left, right):
+        # 验证子串 s[left, right] 是否为回文串
+        while left &lt; right:
+            if s[left] != s[right]:
+                return False
+            left += 1
+            right -= 1
+        return True
+</code></pre>
+<p>&quot;&quot;&quot;</p>
+<h1 id="大神做法2">#大神做法2</h1>
+<p>中心扩散法</p>
+<p>我们可以设计一个方法，兼容以上两种情况：</p>
+<p>1、如果传入重合的索引编码，进行中心扩散，此时得到的回文子串的长度是奇数；</p>
+<p>2、如果传入相邻的索引编码，进行中心扩散，此时得到的回文子串的长度是偶数。</p>
+<pre><code class="language-python">class Solution:
+    def longestPalindrome(self, s: str) -&gt; str:
+        size = len(s)
+        if size &lt; 2:
+            return s
+
+        # 至少是 1
+        max_len = 1
+        res = s[0]
+
+        for i in range(size):
+            palindrome_odd, odd_len = self.__center_spread(s, size, i, i)
+            palindrome_even, even_len = self.__center_spread(s, size, i, i + 1)
+
+            # 当前找到的最长回文子串
+            cur_max_sub = palindrome_odd if odd_len &gt;= even_len else palindrome_even
+            if len(cur_max_sub) &gt; max_len:
+                max_len = len(cur_max_sub)
+                res = cur_max_sub
+
+        return res
+
+    def __center_spread(self, s, size, left, right):
+        &quot;&quot;&quot;
+        left = right 的时候，此时回文中心是一个字符，回文串的长度是奇数
+        right = left + 1 的时候，此时回文中心是一个空隙，回文串的长度是偶数
+        &quot;&quot;&quot;
+        i = left
+        j = right
+
+        while i &gt;= 0 and j &lt; size and s[i] == s[j]:
+            i -= 1
+            j += 1
+        return s[i + 1:j], j - i - 1
 </code></pre>
 
                 </div>
@@ -145,14 +211,14 @@
         
             <div class="next-post">
                 <div class="next gt-c-content-color-first">下一篇</div>
-                <a href="https://ganhan999.github.io/post/今天是记录博客的第一天/" class="post-title gt-a-link">
-                    今天是记录博客的第一天
+                <a href="https://ganhan999.github.io/post/3、无重复字符的最长子串/" class="post-title gt-a-link">
+                    中等3. 无重复字符的最长子串
                 </a>
             </div>
         
 
         
-            <span id="/post/1、两数之和/" class="leancloud_visitors" data-flag-title="1、两数之和">
+            <span id="/post/5、最长回文子串/" class="leancloud_visitors" data-flag-title="中等5. 最长回文子串">
                 <em class="post-meta-item-text">阅读量 </em>
                 <i class="leancloud-visitors-count">0</i>
             </span>
