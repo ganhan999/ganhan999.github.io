@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ganhan999.github.io/</id>
     <title>Gridea</title>
-    <updated>2020-12-11T09:08:09.585Z</updated>
+    <updated>2020-12-12T13:20:46.833Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ganhan999.github.io/"/>
     <link rel="self" href="https://ganhan999.github.io/atom.xml"/>
@@ -10,6 +10,123 @@
     <logo>https://ganhan999.github.io/images/avatar.png</logo>
     <icon>https://ganhan999.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Gridea</rights>
+    <entry>
+        <title type="html"><![CDATA[Java JVM]]></title>
+        <id>https://ganhan999.github.io/post/Java JVM/</id>
+        <link href="https://ganhan999.github.io/post/Java JVM/">
+        </link>
+        <updated>2020-12-12T13:14:21.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="面试常见">面试常见：</h2>
+<p>●请你谈谈你对JVM的理解? java8虚拟机和之前的变化更新? ●什么是OOM，什么是栈溢出StackOverFlowError? 怎么分析? ●JVM的常用调优参数有哪些? ●内存快照如何抓取，怎么分析Dump文件？ ●谈谈JVM中，类加载器你的认识</p>
+<h1 id="大致本文学习结构">大致本文学习结构</h1>
+<h2 id="1jvm的位置">1.JVM的位置</h2>
+<figure data-type="image" tabindex="1"><img src="https://ganhan999.github.io//post-images/1607778875060.png" alt="" loading="lazy"></figure>
+<p>图 JVM图解</p>
+<h2 id="2jvm的体系结构">2.JVM的体系结构</h2>
+<p><img src="https://ganhan999.github.io//post-images/1607778879748.png" alt="" loading="lazy"><br>
+图 .java-&gt;.class的变化</p>
+<p>百分之99的JVM调优都是在堆中调优，Java栈、本地方法栈、程序计数器是不会有垃圾存在的。</p>
+<h2 id="3-类加载器">3. 类加载器</h2>
+<p>作用：加载Class文件~<br>
+<img src="https://ganhan999.github.io//post-images/1607778887873.png" alt="" loading="lazy"><br>
+图 类在经过Class Loader之后的变化</p>
+<p>1.虚拟机自带的加载器  2.启动类(根)加载器  3.扩展类加载器  4.应用程序加载器  5.百度:双亲委派机制</p>
+<h2 id="4-双亲委派机制">4. 双亲委派机制</h2>
+<p>//双亲委派机制:安全  // 1. APP–&gt;EXC—B0OT(最终执行)  // B0OT  // EXC  // APP  1.类加载器收到类加载的请求  2.将这个请求向上委托给父类加载器去完成，一 直向上委托，知道启动类加载器  3.启动加载器检查是否能够加载当前这个类，能加载就结束， 使用当前的加载器，否则， 抛出异常，通知子加载器进行加载  4.重复步骤3  Class Not Found异常就是这么来的  Java早期的名字：C+±-  Java = C++:去掉繁琐的东西，指针，内存管理~</p>
+<h2 id="5-沙箱安全机制">5. 沙箱安全机制</h2>
+<p>Java安全模型的核心就是Java沙箱(sandbox) ,  什么是沙箱?沙箱是一个限制程序运行的环境。沙箱机制就是<strong>将Java代码限定在虚拟机(JVM)特定的运行范围中，并且严格限制代码对本地系统资源访问</strong>，通过这样的措施来保证对代码的有效隔离，防止对本地系统造成破坏。  沙箱主要限制系统资源访问，那系统资源包括什么? CPU、内存、文件系统、网络。不同级别的沙箱对这些资源访问的限制也可以不一样。  所有的Java程序运行都可以指定沙箱，可以定制安全策略。  在Java中将执行程序分成本地代码和远程代码两种，本地代码默认视为可信任的，而远程代码则被看作是不受信的。对于授信的本地代码,可以访问一切本地资源。而对于非授信的远程代码在早期的Java实现中，安全依赖于沙箱Sandbox)机制。如下图所示JDK1.0安全模型<br>
+<img src="https://ganhan999.github.io//post-images/1607778895549.png" alt="" loading="lazy"><br>
+图 JDK1.0安全模型</p>
+<p>但如此严格的安全机制也给程序的功能扩展带来障碍，比如当用户希望远程代码访问本地系统的文件时候，就无法实现。因此在后续的Java1.1版本中，针对安全机制做了改进，增加了安全策略，允许用户指定代码对本地资源的访问权限。如下图所示JDK1.1安全模型<br>
+<img src="https://ganhan999.github.io//post-images/1607778903808.png" alt="" loading="lazy"><br>
+图 JDK1.1安全模型</p>
+<p>在Java1.2版本中，再次改进了安全机制，增加了代码签名。不论本地代码或是远程代码，都会按照用户的安全策略设定，由类加载器加载到虚拟机中权限不同的运行空间，来实现差异化的代码执行权限控制。如下图所示<br>
+<img src="https://ganhan999.github.io//post-images/1607778918886.png" alt="" loading="lazy"><br>
+图 JDK1.2安全模型</p>
+<p>当前最新的安全机制实现，则引入了域(Domain)的概念。虚拟机会把所有代码加载到不同的系统域和应用域,系统域部分专门负责与关键资源进行交互，而各个应用域部分则通过系统域的部分代理来对各种需要的资源进行访问。虚拟机中不同的受保护域(Protected Domain),对应不一样的权限(Permission)。存在于不同域中的类文件就具有了当前域的全部权限，如下图所示最新的安全模型(jdk 1.6)</p>
+<p><img src="https://ganhan999.github.io//post-images/1607778988331.png" alt="" loading="lazy"><br>
+图 JDK1.6安全模型</p>
+<h3 id="组成沙箱的基本组件">组成沙箱的基本组件</h3>
+<p>●字节码校验器(bytecode verifier) :确保Java类文件遵循Java语言规范。这样可以帮助Java程序实现内存保护。但并不是所有的类文件都会经过字节码校验，比如核心类。 ●类裝载器(class loader) :其中类装载器在3个方面对Java沙箱起作用   它防止恶意代码去干涉善意的代码;   它守护了被信任的类库边界;   它将代码归入保护域,确定了代码可以进行哪些操作。  虚拟机为不同的类加载器载入的类提供不同的命名空间，命名空间由一系列唯一的名称组成， 每一个被装载的类将有一个名字，这个命名空间是由Java虚拟机为每一个类装载器维护的，它们互相之间甚至不可见。  类装载器采用的机制是双亲委派模式。  1.从最内层JVM自带类加载器开始加载,外层恶意同名类得不到加载从而无法使用;  2.由于严格通过包来区分了访问域,外层恶意的类通过内置代码也无法获得权限访问到内层类，破坏代码就自然无法生效。 ●存取控制器(access controller) :存取控制器可以控制核心API对操作系统的存取权限，而这个控制的策略设定,可以由用户指定。 ●安全管理器(security manager) : 是核心API和操作系统之间的主要接口。实现权限控制，比存取控制器优先级高。 ●安全软件包(security package) : java.security下的类和扩展包下的类，允许用户为自己的应用增加新的安全特性，包括:   安全提供者   消息摘要   数字签名   加密   鉴别</p>
+<h2 id="6native">6.Native</h2>
+<p> native :凡是带了native关键字的，说明java的作用范围达不到了，<strong>回去调用底层c语言的库!</strong>  会进入本地方法栈  调用本地方法本地接口 <strong>JNI</strong> (<strong>Java Native Interface</strong>)  JNI作用:开拓Java的使用，融合不同的编程语言为Java所用!最初: C、C++  Java诞生的时候C、C++横行，想要立足，必须要有调用C、C++的程序  它在内存区域中专门开辟了一块标记区域: Native Method Stack，登记native方法  在最终执行的时候，加载本地方法库中的方法通过JNI  例如：Java程序驱动打印机，管理系统，掌握即可，在企业级应用比较少  private native void start0();  //调用其他接口:Socket. . WebService~. .http~</p>
+<h3 id="native-method-stack">Native Method Stack</h3>
+<p>它的具体做法是Native Method Stack中登记native方法，在( Execution Engine )执行引擎执行的时候加载Native Libraies。[本地库]</p>
+<h3 id="native-interface本地接口">Native Interface本地接口</h3>
+<p>本地接口的作用是融合不同的编程语言为Java所用，它的初衷是融合C/C++程序, Java在诞生的时候是C/C++横行的时候，想要立足，必须有调用C、C++的程序，于是就在内存中专门开辟了块区域处理标记为native的代码，它的具体做法是在Native Method Stack 中登记native方法,在( Execution Engine )执行引擎执行的时候加载Native Libraies。  目前该方法使用的越来越少了，除非是与硬件有关的应用，比如通过Java程序驱动打印机或者Java系统管理生产设备，在企业级应用中已经比较少见。因为现在的异构领域间通信很发达，比如可以使用Socket通信,也可以使用Web Service等等，不多做介绍!</p>
+<h2 id="7pc寄存器">7.PC寄存器</h2>
+<p>程序计数器: Program Counter Register  每个线程都有一个程序计数器，是线程私有的，就是一个指针, 指向方法区中的方法字节码(用来存储指向像一条指令的地址， 也即将要执行的指令代码)，在执行引擎读取下一条指令, 是一个非常小的内存空间，几乎可以忽略不计</p>
+<h2 id="8方法区-method-area">8.方法区 Method Area</h2>
+<p>方法区是被所有线程共享,所有字段和方法字节码，以及一些特殊方法，如构造函数,接口代码也在此定义,简单说，所有定义的方法的信息都保存在该区域,此区域属于共享区间;  <strong>静态变量、常量、类信息(构造方法、接口定义)、运行时的常量池存在方法区中，但是实例变量存在堆内存中，和方法区无关</strong><br>
+<img src="https://ganhan999.github.io//post-images/1607779000215.png" alt="" loading="lazy"><br>
+图 类实例化后</p>
+<h2 id="9栈">9.栈</h2>
+<figure data-type="image" tabindex="2"><img src="https://ganhan999.github.io//post-images/1607779041849.png" alt="" loading="lazy"></figure>
+<p>图 为什么main()先执行，最后结束~</p>
+<p>栈:先进后出 桶:后进先出 队列:先进先出( FIFO : First Input First Output ) 栈:<strong>栈内存,主管程序的运行,生命周期和线程同步</strong>; <strong>线程结束，栈内存也就是释放,对于栈来说,不存在垃圾回收问题</strong> 一旦线程结束，栈就Over! 栈内存中:</p>
+<p><strong>8大基本类型+对象引用+实例的方法</strong></p>
+<p><strong>栈运行原理:栈帧</strong> 栈满了: StackOverflowError</p>
+<figure data-type="image" tabindex="3"><img src="https://ganhan999.github.io//post-images/1607779133172.png" alt="" loading="lazy"></figure>
+<p>图 栈的位置示意图</p>
+<figure data-type="image" tabindex="4"><img src="https://ganhan999.github.io//post-images/1607779142261.png" alt="" loading="lazy"></figure>
+<p>图 栈帧图解 栈底部子帧指向上一个栈的方法 上一个栈的父帧指向栈底部方法</p>
+<h2 id="10三种jvm">10.三种JVM</h2>
+<p>●Sun公司HotSpot Java Hotspot™ 64-Bit Server VM (build 25.181-b13,mixed mode) ●BEA JRockit ●IBM J9VM 我们学习都是: Hotspot</p>
+<h2 id="11堆">11.堆</h2>
+<p>Heap, 一个JVM只有一个堆内存，堆内存的大小是可以调节的。 类加载器读取了类文件后，一般会把什么东西放到堆中? 类, 方法，常量,变量~，保存我们所有引用类型的真实对象; 堆内存中还要细分为三个区域: ●新生区(伊甸园区) Young/New ●养老区old ●永久区Perm<br>
+<img src="https://ganhan999.github.io//post-images/1607779152521.png" alt="" loading="lazy"></p>
+<p>图 堆内存详细划分</p>
+<p>GC垃圾回收,主要是在伊甸园区和养老区~ 假设内存满了,OOM,堆内存不够! java.lang.OutOfMemoryError:Java heap space 永久存储区里存放的都是Java自带的 例如lang包中的类 如果不存在这些，Java就跑不起来了 在JDK8以后，永久存储区改了个名字(元空间)<br>
+<img src="https://ganhan999.github.io//post-images/1607779157682.png" alt="" loading="lazy"><br>
+图 堆内存溢出</p>
+<h2 id="12新生区-老年区">12.新生区、老年区</h2>
+<h3 id="新生区">新生区</h3>
+<p>●类:诞生和成长的地方，甚至死亡; ●伊甸园，所有的对象都是在伊甸园区new出来的! ●幸存者区(0,1)</p>
+<p><img src="https://ganhan999.github.io//post-images/1607779186128.png" alt="" loading="lazy"><br>
+图 重GC和轻GC</p>
+<p><strong>伊甸园满了就触发轻GC，经过轻GC存活下来的就到了幸存者区，幸存者区满之后意味着新生区也满了，则触发重GC，经过重GC之后存活下来的就到了养老区。</strong> 真理:经过研究，99%的对象都是临时对象!|</p>
+<h2 id="13永久区">13.永久区</h2>
+<p><strong>这个区域常驻内存的。用来存放JDK自身携带的Class对象。Interface元数据，存储的是Java运行时的一些环境~</strong> 这个区域不存在垃圾回收，关闭虚拟机就会释放内存 ●jdk1.6之前:永久代,常量池是在方法区; ●jdk1.7:永久代,但是慢慢的退化了，去永久代，常量池在堆中 ●jdk1.8之后:无永久代,常量池在元空间</p>
+<figure data-type="image" tabindex="5"><img src="https://ganhan999.github.io//post-images/1607779193335.png" alt="" loading="lazy"></figure>
+<p>图 JVM探究</p>
+<p>元空间：逻辑上存在，物理上不存在 (因为存储在本地磁盘内) 所以最后并不算在JVM虚拟机内存中</p>
+<h2 id="14堆内存调优">14.堆内存调优</h2>
+<p>测试代码</p>
+<pre><code>public static void main(String[] args) {
+    String s = &quot;&quot;;
+    while (true) {
+        s += &quot;11111111111111111111111111111111111111111111111111111&quot;;
+    }
+}
+123456
+</code></pre>
+<figure data-type="image" tabindex="6"><img src="https://ganhan999.github.io//post-images/1607779201591.png" alt="" loading="lazy"></figure>
+<p>图 虚拟机放入参数</p>
+<figure data-type="image" tabindex="7"><img src="https://ganhan999.github.io//post-images/1607779206848.png" alt="" loading="lazy"></figure>
+<p>图 控制台报错 到最后会报OOM（OutOfMemory）堆内存溢出报错</p>
+<h3 id="在一个项目中突然出现了oom故障那么该如何排除-研究为什么出错~">在一个项目中，突然出现了OOM故障,那么该如何排除 研究为什么出错~</h3>
+<p>●能够看到代码第几行出错:内存快照分析工具，MAT, Jprofiler ●Dubug, 一行行分析代码!</p>
+<h3 id="mat-jprofiler作用">MAT, Jprofiler作用</h3>
+<p>●分析Dump内存文件,快速定位内存泄露; ●获得堆中的数据 ●获得大的对象~</p>
+<h3 id="mat是eclipse集成使用-在这里不学">MAT是eclipse集成使用 在这里不学</h3>
+<h3 id="jprofile使用">Jprofile使用</h3>
+<p>1.在idea中下载jprofile插件 2.联网下载jprofile客户端 3.在idea中VM参数中写参数 -Xms1m -Xmx8m -XX: +HeapDumpOnOutOfMemoryError 4.运行程序后在jprofile客户端中打开找到错误 告诉哪个位置报错 命令参数详解 // -Xms设置初始化内存分配大小/164 // -Xmx设置最大分配内存，默以1/4 // -XX: +PrintGCDetails // 打印GC垃圾回收信息 // -XX: +HeapDumpOnOutOfMemoryError //oom DUMP</p>
+<h2 id="15-gc">15. GC</h2>
+<figure data-type="image" tabindex="8"><img src="https://ganhan999.github.io//post-images/1607779215795.png" alt="" loading="lazy"></figure>
+<p>图 GC的作用区</p>
+<p>JVM在进行GC时，并不是对这三个区域统一回收。 大部分时候，回收都是新生代~ ●新生代 **●幸存区(https://ganhan999.github.io//post-images/1607779221470.png)</p>
+<p>图 JVM内存模型和分区</p>
+<p>●堆里面的分区有哪些? Eden, form, to, 老年区,说说他们的特点! ●GC的算法有哪些? 标记清除法，标记整理,复制算法，引用计数器 ●轻GC和重GC分别在什么时候发生?</p>
+<h3 id="算法">算法：</h3>
+<p>引用计数器： <img src="https://ganhan999.github.io//post-images/1607779228386.png" alt="" loading="lazy"><br>
+图 引用计数法 很少使用了</p>
+<figure data-type="image" tabindex="9"><img src="https://ganhan999.github.io//post-images/1607779233433.png" alt="" loading="lazy"></figure>
+<p>图 复制算法大致图</p>
+<figure data-type="image" tabindex="10"><img src="https://ganhan999.github.io//post-images/1607779238935.png" alt="" loading="lazy"></figure>
+<p>图 复制算法图解</p>
+<p>●好处:没有内存的碎片~ ●坏处:浪费了内存空间~ :多了一半空间永远是空to。假设对象100%存活(极端情况) 复制算法最佳使用场景:对象存活度较低的时候;新生区~ 持续更新~</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Java JUC并发编程]]></title>
         <id>https://ganhan999.github.io/post/Java JUC并发编程/</id>
@@ -5374,650 +5491,6 @@ AB -&gt; 28<br>
       ans += ord(x) - ord('A') + 1
     return ans
 
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Java网络编程]]></title>
-        <id>https://ganhan999.github.io/post/Java 网络编程/</id>
-        <link href="https://ganhan999.github.io/post/Java 网络编程/">
-        </link>
-        <updated>2020-12-05T11:32:50.000Z</updated>
-        <content type="html"><![CDATA[<h2 id="11-概述">1.1、概述</h2>
-<p>信件：</p>
-<p><img src="https://ganhan999.github.io//post-images/1607163626962.png" alt="" loading="lazy"><br>
-打电话：---连接---接了---通话 TCP</p>
-<p>发短信：---发送了就完事了---接收 UDP</p>
-<p><strong>计算机网络</strong>：</p>
-<p>计算机网络是指将<strong>地理位置不同</strong>的具有独立功能的<strong>多台计算机及其外部设备</strong>，通过<strong>通信线路</strong>连接起来，在网络操作系统，网络管理软件及<strong>网络通信协议</strong>的管理和协调下，<strong>实现资源共享和信息传递</strong>的计算机系统。</p>
-<p><strong>网络编程的目的：</strong></p>
-<p>传播交流信息，数据交换，通信。</p>
-<p><strong>想要达到这个效果需要什么：</strong></p>
-<p>1、如何准确地定位网络上的一台主机：（端口），定位到这个计算机的某个资源。</p>
-<p>2、找到了这个主机，如何传输数据呢？</p>
-<p>javaweb：网页编程 B/S</p>
-<p>网络编程：TCP/IP C/S</p>
-<h2 id="12-网络通信的要素">1.2、网络通信的要素</h2>
-<p>如何实现网络上的通信？</p>
-<p><strong>通信双方地址：</strong></p>
-<p>（192.168.1.1）：局域网。。</p>
-<ul>
-<li>ip：</li>
-<li>端口号</li>
-</ul>
-<p><strong>规则：网络通信的协议：</strong></p>
-<p>TCP/IP参考模型：</p>
-<figure data-type="image" tabindex="1"><img src="https://ganhan999.github.io//post-images/1607163632395.png" alt="" loading="lazy"></figure>
-<p>HTTP：超文本传输协议</p>
-<p>FTP:文件上传协议<br>
-<img src="https://ganhan999.github.io//post-images/1607163636175.png" alt="" loading="lazy"></p>
-<p>小结：</p>
-<p>1、网络编程中有两个主要的问题：</p>
-<ul>
-<li>如何准确的定位到网络上的一台或者多台主机</li>
-<li>找到主机之后如何进行通信</li>
-</ul>
-<p>2、网络编程中的要素</p>
-<ul>
-<li>IP和端口号 IP</li>
-<li>网络通信协议 UDP，TCP</li>
-</ul>
-<p>3、万物皆对象</p>
-<h2 id="13-ip">1.3、IP</h2>
-<p>ip地址：inetAddress</p>
-<ul>
-<li>唯一定位一台网络上计算机</li>
-<li>127.0.0.1：本机loaclhost</li>
-<li>Ip地址的分类
-<ul>
-<li>Ipv4/Ipv6
-<ul>
-<li>IPv4 127.00.1,四个字节组成，0-255，42亿~；30亿都在北美，亚洲四亿，2011年就用尽；</li>
-<li>IPV6：128位，8个无符号整数！</li>
-</ul>
-</li>
-<li>公网（互联网）-私网（局域网）
-<ul>
-<li>ABCD类地址</li>
-<li>192.168.xx.xx专门给组织内部使用的</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>域名：记忆IP问题！
-<ul>
-<li>IP：</li>
-</ul>
-</li>
-</ul>
-<pre><code class="language-java"> package Second11_16;
- 
- import java.net.InetAddress;
- import java.net.UnknownHostException;
- 
- public class TestInetAddres {
- public static void main(String[] args) {
-     try {
-         //查询网站IP地址
-         InetAddress allByName = InetAddress.getByName(&quot;localhost&quot;);
-         System.out.println(allByName);
- 
-         //常用方法：
-         System.out.println(allByName.getHostAddress());//IP
-         System.out.println(allByName.getHostName());//名字
-         System.out.println(allByName.getCanonicalHostName());//规范的名字
-     } catch (UnknownHostException e) {
-         e.printStackTrace();
-     }
- 
- }
- }
- 
-</code></pre>
-<h2 id="14-端口port">1.4、端口(port)</h2>
-<p>端口表示计算机上的一个程序的进程</p>
-<ul>
-<li>
-<p>不同的进程有不同的端口号！用来区分软件！</p>
-</li>
-<li>
-<p>被规定0-65535</p>
-</li>
-<li>
-<p>TCP,UDP：65536*2 tcp:80,udp:80? 单个协议下，端口不能冲突、</p>
-</li>
-<li>
-<p>端口分类：</p>
-<ul>
-<li>
-<p>公有端口0~1023</p>
-<ul>
-<li>HTTP:80</li>
-<li>https:443</li>
-<li>FTP:21</li>
-<li>Telent:23</li>
-</ul>
-</li>
-<li>
-<p>程序注册端口：1024~49151</p>
-<ul>
-<li>Tomcat: 8080</li>
-<li>MySQL: 3306</li>
-<li>Oracle： 1521</li>
-</ul>
-</li>
-<li>
-<p>动态/私有：49152~65535</p>
-<pre><code> 1、netstat -ano #查看所有的端口
- 2、netstat -ano|findstr &quot;9640&quot; # 查看指定的窗口 其中|是指先干后面的再在前面中找
- 3、tasklist|findstr &quot;8696&quot; #查看指定端口的进程
-</code></pre>
-</li>
-</ul>
-<pre><code class="language-java"> package Second11_16;
- 
- import java.net.InetSocketAddress;
- 
- public class TestInetSocketAddres {
- public static void main(String[] args) {
-     InetSocketAddress inetSocketAddress1 = new InetSocketAddress(&quot;127.0.0.1&quot;, 8080);
-     InetSocketAddress inetSocketAddress2 = new InetSocketAddress(&quot;localhost&quot;, 8080);
-     System.out.println(inetSocketAddress1);
-     System.out.println(inetSocketAddress2);
- 
-     System.out.println(inetSocketAddress2.getAddress());
-     System.out.println(inetSocketAddress2.getHostName());//地址
-     System.out.println(inetSocketAddress2.getPort());//端口
- }
- }
-</code></pre>
-</li>
-</ul>
-<figure data-type="image" tabindex="2"><img src="https://ganhan999.github.io//post-images/1607163719490.png" alt="" loading="lazy"></figure>
-<h2 id="15-通信协议">1.5、通信协议</h2>
-<p>协议：约定，就好比我们现在说的是普通话。</p>
-<p><strong>网络通信协议</strong>：速率，传输码率，代码结构，传输控制。。。。。。</p>
-<p><strong>问题</strong>：非常的复杂</p>
-<p>大事化小：分层！</p>
-<p><strong>TCP/IP协议簇</strong>：<strong>实际上是一层协议</strong></p>
-<p>重要：</p>
-<ul>
-<li>TCP:用户传输协议</li>
-<li>UDP:用户数据报协议</li>
-</ul>
-<p>出名的协议：</p>
-<ul>
-<li>TCP：</li>
-<li>IP：网络互联协议</li>
-</ul>
-<p>ps:应用层：QQ、微信；传输层：通信；网络层：分包；数据链路层：具体的传输：如光纤，海底电缆。。。。。。；</p>
-<p>TCP UDP对比：</p>
-<p>TCP：打电话</p>
-<ul>
-<li>
-<p>连接，稳定</p>
-</li>
-<li>
-<p><code>三次握手、四次挥手</code></p>
-<pre><code class="language-java"> 最少需要三次，才能保证稳定连接！
- A；你愁啥？
- B：瞅你咋地？
- A：干一场！
- 
- 
- A：我要走了
- B：你真的要走了吗？
- B：你真的真的要走了吗？
- A：我真的要走了！  
-</code></pre>
-</li>
-<li>
-<p>客户端、服务端</p>
-</li>
-<li>
-<p>传输完成，释放连接，效率低</p>
-</li>
-</ul>
-<p>UDP：发短信</p>
-<ul>
-<li>不连接，不稳定</li>
-<li>客户端、服务端：没有明确的界限</li>
-<li>不管有没有准备好，都可以发给你。。。</li>
-<li>导弹攻击</li>
-<li>DDOS：洪水攻击！（饱和攻击）</li>
-</ul>
-<h2 id="16-tcp">1.6、TCP</h2>
-<p>有关socket的知识分享：https://www.cnblogs.com/dolphinx/p/3460545.html</p>
-<p><strong>SeverSocket:</strong></p>
-<p>为了使客户能成功地连接到服务器，服务器必须建立一个ServerSocket 对象，该对象通过将客户端地套接字对象和服务器端地一个套接字对象连接起来，从而达到连接的目的。</p>
-<p>客户端:(socket对象)socket(IP地址，端口)</p>
-<p>服务器:(ServerSocket对象)serversocket(端口 )用ServerSocket.accept（）来建立一个和客户端的Socket对象相连接的Socket对象。</p>
-<p>服务器端的输出流/输入流的目的地和客户端的输入流/输出流的源刚好相同。</p>
-<p><strong>进程堵塞</strong></p>
-<p><strong>提升作用域</strong></p>
-<h3 id="文件上传">文件上传</h3>
-<p>服务器端：</p>
-<pre><code class="language-java"> package lesson03;
- 
- import java.io.*;
- import java.net.ServerSocket;
- import java.net.Socket;
- 
- public class TCPserver02 {
- public static void main(String[] args) throws IOException {
- 
-     //建立连接，创建服务
-     ServerSocket serverSocket= new ServerSocket(9900);
-     // 监听客户端的连接
-     Socket socket = serverSocket.accept();
- 
- 
-     //创立输入流和文件输出流
-     InputStream is = socket.getInputStream();
-     // 文件输出
-     FileOutputStream fos = new FileOutputStream(new File(&quot;JTest3.png&quot;));
- 
-     //创立缓冲区和写
-     byte[] buff=new byte[1024];
-     int len;
-     while((len=is.read(buff))!=-1){
-         fos.write(buff,0,len);
-     }
- 
-     //与客户端说我已经收到了
-     OutputStream os =socket.getOutputStream();
-     os.write(&quot;我已接收&quot;.getBytes());
- 
-     //关闭资源
-     os.close();
-     fos.close();
-     is.close();
-     socket.close();
-     serverSocket.close();
- }
- }
- 
- /*
- 1、接收要read，所以要用inputStream
- 2、要把文件写给大家看，所以要fileoutputstream
-  */
-</code></pre>
-<p>客户端：</p>
-<pre><code class="language-java"> package lesson03;
- 
- import java.io.*;
- import java.net.InetAddress;
- import java.net.Socket;
- import java.net.UnknownHostException;
- 
- public class TCPclient02 {
- public static void main(String[] args) throws IOException {
- 
-     //建立连接
-     Socket socket = new Socket(InetAddress.getByName(&quot;127.0.0.1&quot;),9900);
- 
-     //建立输出流和文件输入流
-     OutputStream os =socket.getOutputStream();
-     FileInputStream fis = new FileInputStream(new File(&quot;JavaKuangStudy/network programming/src/ImageData/Test.png&quot;));
- 
-     //缓冲区之后
-     //需要转换格式
-     //写出文件
-     byte[] buff = new byte[1024];//划定空间
-     int len;
-     while((len= fis.read(buff))!=-1){
-         os.write(buff,0,len);
-     }
- 
-     //确定服务器接收完毕才能断开连接。
-     //发送成功后关闭输出流
-     //通知服务器我已经输出结束了
-     socket.shutdownOutput();
- 
-     //接收来自服务端的消息，用数组流来输出
-     InputStream is = socket.getInputStream();
-     ByteArrayOutputStream bos = new ByteArrayOutputStream();
-     int len1;
-     byte[] buff1 = new byte[1024];//初始内存空间大小
-     while((len1=is.read(buff1))!=-1){
-         bos.write(buff1,0,len1);
-     }
-     System.out.println(bos.toString());
- 
-     //关闭资源
-     bos.close();
-     is.close();
-     fis.close();
-     os.close();
-     socket.close();
- }
- }
- /*
- 1、抛出异常
- 2、套接字的get输入输出流
- 3、通知服务器，我已经输出结束了：socket.shutdownOutput();
- 4、while（（len=is.read(buff)）!=-1）{
-     bos.write(buff,0,len);
- 5、while和0-长度
- }
-  */
-</code></pre>
-<p>Tomcat</p>
-<p>调试：consolehandler:GBK</p>
-<p>服务端</p>
-<ul>
-<li>自定义（S）</li>
-<li>Tomcat服务器(S)：Java后台开发用别人的服务器！</li>
-</ul>
-<p>客户端</p>
-<ul>
-<li>自定义（C）</li>
-<li>浏览器(B)</li>
-</ul>
-<h2 id="17-udp">1.7、UDP</h2>
-<p>发短信：不用连接，需要知道对方的地址！</p>
-<h3 id="发送消息">发送消息</h3>
-<p>发送端</p>
-<pre><code class="language-java"> package Udp01;
- 
- import java.net.*;
- //不需要连接服务器
- public class UdpTest02 {
- public static void main(String[] args) throws Exception {
-     //建立一个socket
-     DatagramSocket socket=new DatagramSocket();
- 
-     //建个包
-     InetAddress inetAddress=InetAddress.getByName(&quot;localhost&quot;);
-     byte[] Str= &quot;你好&quot;.getBytes();
-     int port=9999;
- 
-     //数据，数据的长度起始，要发送给谁
-     DatagramPacket datagramPacket=new DatagramPacket(Str,0,Str.length,inetAddress,port);
- 
-     //发送包
-     socket.send(datagramPacket);
- 
-     //关闭流
-     socket.close();
- }
- }
-</code></pre>
-<p>接收端：</p>
-<pre><code class="language-java"> package Udp01;
- 
- import java.net.DatagramPacket;
- import java.net.DatagramSocket;
- import java.net.SocketException;
- 
- //还是要等待客户端的链接
- public class UdpTest01 {
- public static void main(String[] args) throws Exception {
-     //开放端口
-     DatagramSocket socket=new DatagramSocket(9999);
- while (true) {
- 
-     //接收数据包
-     byte[] Strin = new byte[1024];
- 
-     DatagramPacket datagramPacket = new DatagramPacket(Strin, 0, Strin.length);
- 
-     //阻塞接收
-     socket.receive(datagramPacket);
- 
-     System.out.println(new String(datagramPacket.getData(), 0, datagramPacket.getLength()));
- 
-     //关闭链接 
-     socket.close();
- }
- }
- }
- 
-</code></pre>
-<h3 id="咨询">咨询</h3>
-<p><strong>循环发送消息</strong></p>
-<p>发送方：</p>
-<pre><code class="language-java">package UDP.Udp02;
-
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.DatagramPacket;
-import java.net.DatagramSocket;
-import java.net.InetAddress;
-import java.net.SocketException;
-
-public class UdpSin {
-public static void main(String[] args) throws Exception {
-    DatagramSocket datagramSocket=new DatagramSocket(8888);
-
-    while (true){
-        //准备数据，控制台读取System.in
-        BufferedReader buf=new BufferedReader(new InputStreamReader(System.in));
-
-        //读取控制台输入的一行并把它转化为字符
-        String Buf=buf.readLine();
-    InetAddress inetAddress=InetAddress.getByName(&quot;localhost&quot;);
-    DatagramPacket datagramPacket=new DatagramPacket(Buf.getBytes(),0,Buf.length(),inetAddress,9999 );
-
-    datagramSocket.send(datagramPacket);
-
-    if(Buf.equals(&quot;bye&quot;))	
-        break;
-    }
-    datagramSocket.close();
-}
-}
-/*
-1、BuffReader读取控制台字符时用readLine来读取一行
- */
-</code></pre>
-<p>接收方：</p>
-<pre><code class="language-java">package UDP.Udp02;
-
-import java.net.DatagramPacket;
-import java.net.DatagramSocket;
-
-public class UdpSin01 {
-public static void main(String[] args) throws Exception{
-    //建立链接
-    DatagramSocket datagramSocket = new DatagramSocket(9999);
-    byte[] bufin = new byte[1024];
-    while (true) {
-
-        //准备接收包裹
-        DatagramPacket datagramPacket = new DatagramPacket(bufin, 0, bufin.length);
-
-        datagramSocket.receive(datagramPacket);//阻塞时接收包裹
-
-        byte[] data=datagramPacket.getData();
-        String msg=new String(data,0,data.length);
-        System.out.println(msg);
-
-        if(msg.equals(&quot;bye&quot;)){
-            break;
-        }
-
-        datagramSocket.close();
-    }
-}
-}
-/*
-1、创建对象 while之外
-2、接收包裹.getData
- */
-</code></pre>
-<h3 id="在线咨询两个人都可以发送">在线咨询：两个人都可以发送</h3>
-<p><strong>发送端线程：</strong></p>
-<pre><code class="language-java">package UDP.Run;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.DatagramPacket;
-import java.net.DatagramSocket;
-import java.net.InetAddress;
-import java.net.InetSocketAddress;
-
-public class Sent implements Runnable{
-    DatagramSocket datagramSocket;
-    DatagramPacket datagramPacket;
-    private int fromPort;
-    private String toIP;
-    private int Toport;
-    BufferedReader bufferedReader;
-    String buf;
-
-public Sent(int fromPort, String toIP, int Toport) {
-    this.fromPort = fromPort;
-    this.toIP = toIP;
-    this.Toport = Toport;
-    try {
-        this.datagramSocket = new DatagramSocket(fromPort);
-    } catch (Exception e) {
-        e.printStackTrace();
-    }
-}
-
-@Override
-public void run() {
-    while(true){
-        try {
-            bufferedReader=new BufferedReader(new InputStreamReader(System.in));
-            buf=bufferedReader.readLine();
-            byte[] buff=buf.getBytes();
-            datagramPacket= new DatagramPacket(buff,0,buff.length,new InetSocketAddress(this.toIP,this.Toport));
-
-            datagramSocket.send(datagramPacket);
-
-            if (buf.equals(&quot;bye&quot;)){
-                break;
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-    datagramSocket.close();
-}
-}
-/*今日忘记
-1、IP:String
-2、DatagramSocket(端口)
-2、BuffReader（输入流）；
-3、发送要把String变成数组
- */
-</code></pre>
-<p><strong>接收端线程：</strong></p>
-<pre><code class="language-java">package UDP.Run;
-
-import java.io.IOException;
-import java.net.DatagramPacket;
-import java.net.DatagramSocket;
-import java.net.SocketException;
-
-public class Receive implements Runnable{
-    DatagramSocket datagramSocket;
-	DatagramPacket datagramPacket;
-	private String FromID;
-    private int Port;
-
-public Receive(String fromID, int port) {
-    this.FromID = fromID;
-    this.Port = port;
-
-    try {
-        datagramSocket=new DatagramSocket(port);
-    } catch (SocketException e) {
-        e.printStackTrace();
-    }
-}
-
-@Override
-public void run() {
-    while (true) {
-        try {
-            byte[] buff = new byte[1024];
-            datagramPacket = new DatagramPacket(buff, 0, buff.length);
-            datagramSocket.receive(datagramPacket);
-
-            byte[] data=datagramPacket.getData();
-            String msg=new String(data,0,data.length);
-
-            System.out.println(FromID + &quot;:&quot; +msg);
-
-            if (datagramPacket.equals(&quot;bye&quot;)) {
-                break;
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-    datagramSocket.close();
-}
-}
-//重新定义数组
-</code></pre>
-<p><strong>学生端：</strong></p>
-<pre><code class="language-java">package UDP.Run;
-
-import UDP.Run.Receive;
-import UDP.Run.Sent;
-
-public class Student {
-public static void main(String[] args) {
-    new Thread(new Sent(7754,&quot;localhost&quot;,9999)).start();
-    new Thread(new Receive(&quot;老师：&quot;,7787)).start();
-}
-
-}
-//线程要启动
-</code></pre>
-<p><strong>老师端：</strong></p>
-<pre><code class="language-java">package UDP.Run;
-
-import UDP.Run.Receive;
-import UDP.Run.Sent;
-
-public class Teacher {
-public static void main(String[] args) {
-    new Thread(new Sent(7755,&quot;localhost&quot;,7787)).start();
-    new Thread(new Receive(&quot;学生：&quot;,9999)).start();
-}
-}
-</code></pre>
-<h2 id="18-url">1.8、URL</h2>
-<p>https://www.baidu.com/</p>
-<p>统一资源定位符：定位资源，定位互联网上某一个资源</p>
-<p>DNS域名解析 WWW.baidu</p>
-<pre><code class="language-java">import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
-
-public class Url {
-public static void main(String[] args) throws IOException {
-    URL url=new URL(&quot;https://m801.music.126.net/20201123231609/7a60a829f966abbdfc75ee0756ed0ff9/jdyyaac/obj/w5rDlsOJwrLDjj7CmsOj/4916388353/e2fe/8be5/e1e6/c7614d21f4afc33120723d86e09d330d.m4a&quot;);
-    HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-
-    InputStream in=urlConnection.getInputStream();
-    FileOutputStream Fout=new FileOutputStream(&quot;d.m4a&quot;);
-
-    byte[] buff=new byte[1024];
-    int len;
-    while ((len=in.read(buff))!=-1){
-        Fout.write(buff,0,len);
-    }
-
-    Fout.close();
-    in.close();
-    urlConnection.disconnect();
-}
-
-
-}
 </code></pre>
 ]]></content>
     </entry>
