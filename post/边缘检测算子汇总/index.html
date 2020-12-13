@@ -6,10 +6,10 @@
 
 <title>边缘检测算子汇总 | Gridea</title>
 
-<link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1607781240225">
+<link rel="shortcut icon" href="http://localhost:4000/favicon.ico?v=1607847431720">
 
 <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
-<link rel="stylesheet" href="https://ganhan999.github.io//styles/main.css">
+<link rel="stylesheet" href="http://localhost:4000/styles/main.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css">
 
 <script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets/highlight.min.js"></script>
@@ -77,7 +77,7 @@
             
         </div>
         <div style="text-align: center">
-            <form id="gridea-search-form" style="position: relative" data-update="1607781240225" action="/search/index.html">
+            <form id="gridea-search-form" style="position: relative" data-update="1607847431720" action="/search/index.html">
                 <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
                 <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
             </form>
@@ -96,7 +96,7 @@
                         · 2020-11-06 ·
                     </time>
                     
-                        <a href="https://ganhan999.github.io/tag/6kpimvVf4s/" class="post-tags">
+                        <a href="http://localhost:4000/tag/6kpimvVf4s/" class="post-tags">
                             # 数字图像处理
                         </a>
                     
@@ -110,7 +110,7 @@
 <p><strong>Roberts算子</strong>又称为交叉微分算法，它是基于交叉差分的梯度算法，通过局部差分计算检测边缘线条。常用来处理具有陡峭的低噪声图像，当图像边缘接近于正45度或负45度时，该算法处理效果更理想。其缺点是对边缘的定位不太准确，提取的边缘线条较粗。</p>
 <p>下面给出<strong>Roberts算子</strong>的<strong>模板</strong>，在<strong>像素点P5处</strong> x 和 y 方向上的梯度大小gx和gy</p>
 <p><img src="https://img-blog.csdnimg.cn/20190505104614320.png" alt="img" loading="lazy"><br>
-<img src="https://ganhan999.github.io//post-images/1604651076241.png" alt="" loading="lazy"><br>
+<img src="http://localhost:4000/post-images/1604651076241.png" alt="" loading="lazy"><br>
 opencv代码为：</p>
 <pre><code class="language-python"># -*- coding: utf-8 -*-
 import cv2
@@ -353,14 +353,14 @@ cv2.destroyAllWindows()
 
 </code></pre>
 <p>运行结果如下：<br>
-<img src="https://ganhan999.github.io//post-images/1604651229973.jpg" alt="" loading="lazy"></p>
+<img src="http://localhost:4000/post-images/1604651229973.jpg" alt="" loading="lazy"></p>
 <h2 id="log-算子">LOG 算子</h2>
 <p>OG （ Laplacian of Gaussian ） 边缘检测算子是 David Courtnay Marr 和 Ellen Hildreth 在 1980 年共同提出的，也称为 Marr &amp; Hildreth 算子，它根据图像的信噪比来求检测边缘的最优滤波器。该算法首先对图像做高斯滤波，然后再求其拉普拉斯（ Laplacian ）二阶导数，根据二阶导数的过零点来检测图像的边界，即通过检测滤波结果的零交叉（ Zero crossings ）来获得图像或物体的边缘。</p>
 <p>LOG 算子实际上是把 Gauss 滤波和 Laplacian 滤波结合了起来，先平滑掉噪声，再进行边缘检测。</p>
 <p>LOG 算子与视觉生理中的数学模型相似，因此在图像处理领域中得到了广泛的应用。</p>
 <p>它具有抗干扰能力强，边界定位精度高，边缘连续性好，能有效提取对比度弱的边界等特点。</p>
 <p>常见的 LOG 算子是5 x 5的模板</p>
-<figure data-type="image" tabindex="9"><img src="https://ganhan999.github.io//post-images/1604651236093.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="9"><img src="http://localhost:4000/post-images/1604651236093.png" alt="" loading="lazy"></figure>
 <p>LOG 算子到中心的距离与位置加权系数的关系曲线像墨西哥草帽的剖面，所以 LOG 算子也叫墨西哥草帽滤波器。</p>
 <figure data-type="image" tabindex="10"><img src="https://cdn.geekdigging.com/opencv/13/log_caomao.webp" alt="img" loading="lazy"></figure>
 <p>opencv代码如下：</p>
@@ -397,7 +397,7 @@ plt.show()
 <figure data-type="image" tabindex="11"><img src="https://cdn.geekdigging.com/opencv/13/log_result.png" alt="img" loading="lazy"></figure>
 <h1 id="dog-算子">DOG 算子</h1>
 <p>DoG算子是高斯函数的差分，具体到图像中，就是将图像在不同参数下的高斯滤波结果相减，得到差分图。DoG算子的表达式如下：</p>
-<figure data-type="image" tabindex="12"><img src="https://ganhan999.github.io//post-images/1604651116794.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="12"><img src="http://localhost:4000/post-images/1604651116794.png" alt="" loading="lazy"></figure>
 <p>其中 k−1是个常数，不影响极值点的检测，LoG算子和DoG算子的函数波形对比如下图所示，由于高斯差分的计算更加简单，因此可用DoG算子近似替代LoG算子。</p>
 <img src="https://i.loli.net/2017/12/18/5a3741bdd1528.jpg" alt="LoG-DoG.jpg" style="zoom:200%;" />
 
@@ -408,7 +408,7 @@ plt.show()
         
             <div class="next-post">
                 <div class="next gt-c-content-color-first">下一篇</div>
-                <a href="https://ganhan999.github.io/post/26、删除排序数组中的重复项/" class="post-title gt-a-link">
+                <a href="http://localhost:4000/post/26、删除排序数组中的重复项/" class="post-title gt-a-link">
                     26、删除排序数组中的重复项
                 </a>
             </div>
@@ -482,7 +482,7 @@ plt.show()
     </div>
     <div>
         Theme by <a href="https://imhanjie.com/" target="_blank">imhanjie</a>, Powered by <a
-                href="https://github.com/getgridea/gridea" target="_blank">Gridea | <a href="https://ganhan999.github.io//atom.xml" target="_blank">RSS</a></a>
+                href="https://github.com/getgridea/gridea" target="_blank">Gridea | <a href="http://localhost:4000/atom.xml" target="_blank">RSS</a></a>
     </div>
 </div>
 
