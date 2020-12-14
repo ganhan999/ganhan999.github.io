@@ -4,7 +4,7 @@
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-<title>21、合并两个有序列表 | Gridea</title>
+<title>11、盛最多水的容器 | Gridea</title>
 
 <link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1607947707715">
 
@@ -89,11 +89,11 @@
         <div class="post-detail gt-bg-theme-color-second">
             <article class="gt-post-content">
                 <h2 class="post-title">
-                    21、合并两个有序列表
+                    11、盛最多水的容器
                 </h2>
                 <div class="post-info">
                     <time class="post-time gt-c-content-color-first">
-                        · 2020-11-04 ·
+                        · 2020-12-14 ·
                     </time>
                     
                         <a href="https://ganhan999.github.io/tag/cKyYTCK2Y/" class="post-tags">
@@ -104,171 +104,65 @@
                 <div class="post-content">
                     <h1 id="题目">题目</h1>
 <p>&quot;&quot;&quot;<br>
-将两个升序链表合并为一个新的 升序 链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。<br>
-示例：<br>
-输入：1-&gt;2-&gt;4, 1-&gt;3-&gt;4<br>
-输出：1-&gt;1-&gt;2-&gt;3-&gt;4-&gt;4</p>
-<p>&quot;&quot;&quot;</p>
+给你 n 个非负整数 a1，a2，...，an，每个数代表坐标中的一个点 (i, ai) 。<br>
+在坐标内画 n 条垂直线，垂直线 i 的两个端点分别为 (i, ai) 和 (i, 0) 。找出其中的两条线，使得它们与 x 轴共同构成的容器可以容纳最多的水。<br>
+说明：你不能倾斜容器。</p>
+<p>示例 1：<br>
+输入：[1,8,6,2,5,4,8,3,7]<br>
+输出：49<br>
+解释：图中垂直线代表输入数组 [1,8,6,2,5,4,8,3,7]。在此情况下，容器能够容纳水（表示为蓝色部分）的最大值为 49。</p>
+<p>示例 2：<br>
+输入：height = [1,1]<br>
+输出：1</p>
+<p>示例 3：<br>
+输入：height = [4,3,2,1,4]<br>
+输出：16</p>
+<p>示例 4：<br>
+输入：height = [1,2,1]<br>
+输出：2<br>
+&quot;&quot;&quot;</p>
 <h1 id="本体思路">本体思路</h1>
-<p>创建一个新链表，将小的那个值依次填入新链表的next中，直到一个链表为空后，直接将另外一个链表填入新链表的next中。<br>
-值得一提的是必须需要建立一个哑节点，不然新链表在执行的时候端点会跑到后面去。<br>
-这道题非常类似与归并排序</p>
+<p>暴力法</p>
 <h1 id="我的做法">#我的做法：</h1>
-<pre><code class="language-python"># Definition for singly-linked list.
-class ListNode:
-    def __init__(self, val=0, next=None):
-        self.val = val
-        self.next = next
-class Solution:
-    def mergeTwoLists(self, l1: ListNode, l2: ListNode) -&gt; ListNode:
-        newlist=ListNode(0)#起始值为0，没有任何意义，下一个next才是开始。
-        yajiedian = newlist#哑巴节点
-        while l1 and l2 :
-            if l1.val&lt;=l2.val:
-                newlist.next=l1#可以使用这样更快的方式运行  node.next,l1 = l1,l1.next
-                l1=l1.next
-            else:
-                newlist.next=l2#node.next,l2 = l2,l2.next
-                l2=l2.next
-            newlist=newlist.next
-        if l1:
-            newlist.next=l1
-        else:
-            newlist.next=l2
-        return yajiedian.next
+<pre><code class="language-python">class Solution:
+    def maxArea(self, height: List[int]) -&gt; int:
+        res=0
+        for i in range(len(height)):
+            for j in range(i+1,len(height)):
+                res=max(res,(j-i)*min(height[i],height[j]))
+        return res
 
 </code></pre>
 <p>&quot;&quot;&quot;</p>
-<h1 id="大神做法">大神做法：</h1>
-<p>利用递归，把最小的那个值取出来赋给L1，然后到最后会有一个链表为空，于是把那个链表直接赋给l1</p>
+<h1 id="大神做法">#大神做法</h1>
+<p>双指针法<br>
+首先写下一个测试例子， 8 1 1 1 11 9 13 15 10 12</p>
+<p>观察数据找规律。随便看一个范围比如【11...12】，能否找到比这更好的解？那么我们发现9肯定不能是左边的板，因为9本来就比11矮，还靠12更近，那【9...12】的面积肯定要更小啊，13倒是有可能！</p>
+<p>规律：只有从最左开始升序的数字才可能是左板！【8】 1 1 1 【11】 9 【13】【15】10 12，<br>
+不在【】里的统统不可能是左板。 同理，只有从最右开始升序的数字才可能是右板！<br>
+8 1 1 1 11 13 【15】 10 【12】</p>
+<p>有了第三步的规律，其实离答案已经很近了：<br>
+【8】 1 1 1 【11】 9 【13】【15】 10 12 可能的左板在【】里<br>
+8 1 1 1 11 9 13 【15】 10 【12】 可能的右板在【】里<br>
+我们从最左边开始向右遍历可能的左板(8-&gt;11-&gt;13-&gt;15)，从最右边开始向左遍历可能的右板(12-&gt;15)<br>
+开始是【8...12】，面积是8*9=72</p>
+<p>那接下来到底是从左往右的8-&gt;11呢还是从右往左的12-&gt;15呢？如果是12-&gt;15，<br>
+那明显面积是变小了；而8-&gt;11,面积可能增大！所以我们每次选择较短的板，<br>
+往左（或右）移，记录面积，直到左右碰头为止。</p>
+<p>正确性：按照上面的思路下来，正确性就很明显了。</p>
 <p>&quot;&quot;&quot;</p>
 <pre><code class="language-python">class Solution:
-    def mergeTwoLists(self, l1: ListNode, l2: ListNode) -&gt; ListNode:
-        # 递归
-        if l1 and l2:
-            if l1.val &gt; l2.val:
-                l1, l2 = l2, l1
-            l1.next = self.mergeTwoLists(l1.next, l2)
-        return l1 or l2
-
-#复现成功！
-</code></pre>
-<p>python没有指针哪来的链表？</p>
-<pre><code class="language-python">
-class Node(object):
-    #节点
-    def __init__(self, val):
-        self.val = val#节点的值
-        self.next = None#节点的指针（指向下一个Node）
-        
-在大神做法中，print出来的链表形式是这样的。
-None
-ListNode{val: 4, next: ListNode{val: 4, next: None}}
-ListNode{val: 3, next: ListNode{val: 4, next: ListNode{val: 4, next: None}}}
-ListNode{val: 2, next: ListNode{val: 3, next: ListNode{val: 4, next: ListNode{val: 4, next: None}}}}
-ListNode{val: 1, next: ListNode{val: 2, next: ListNode{val: 3, next: ListNode{val: 4, next: ListNode{val: 4, next: None}}}}}
-ListNode{val: 1, next: ListNode{val: 1, next: ListNode{val: 2, next: ListNode{val: 3, next: ListNode{val: 4, next: ListNode{val: 4, next: None}}}}}}
-</code></pre>
-<figure data-type="image" tabindex="1"><img src="https://ganhan999.github.io//post-images/1604582353766.png" alt="" loading="lazy"></figure>
-<p>python链表介绍</p>
-<pre><code class="language-python">#链表的初始化
-class Node(object):
-    &quot;&quot;&quot;节点&quot;&quot;&quot;
-    def __init__(self, elem):
-        self.elem = elem
-        self.next = None
-        
-#链表封装的一系列操作
-class SingleLinkList(object):
-    &quot;&quot;&quot;单链表&quot;&quot;&quot;
-    def __init__(self, node=None):
-        self.__head = node
-
-    def is_empty(self):
-        &quot;&quot;&quot;链表是否为空&quot;&quot;&quot;
-        return self.__head == None
-
-    def length(self):
-        &quot;&quot;&quot;链表长度&quot;&quot;&quot;
-        # cur游标，用来移动遍历节点
-        cur = self.__head
-        # count记录数量
-        count = 0
-        while cur != None:
-            count += 1
-            cur = cur.next
-        return count
-
-    def travel(self):
-        &quot;&quot;&quot;遍历整个链表&quot;&quot;&quot;
-        cur = self.__head
-        while cur != None:
-            print(cur.elem, end=&quot; &quot;)
-            cur = cur.next
-        print(&quot;&quot;)
-
-    def add(self, item):
-        &quot;&quot;&quot;链表头部添加元素，头插法&quot;&quot;&quot;
-        node = Node(item)
-        node.next = self.__head
-        self.__head = node
-
-    def append(self, item):
-        &quot;&quot;&quot;链表尾部添加元素, 尾插法&quot;&quot;&quot;
-        node = Node(item)
-        if self.is_empty():
-            self.__head = node
-        else:
-            cur = self.__head
-            while cur.next != None:
-                cur = cur.next
-            cur.next = node
-
-    def insert(self, pos, item):
-        &quot;&quot;&quot;指定位置添加元素
-        :param  pos 从0开始
-        &quot;&quot;&quot;
-        if pos &lt;= 0:
-            self.add(item)
-        elif pos &gt; (self.length()-1):
-            self.append(item)
-        else:
-            pre = self.__head
-            count = 0
-            while count &lt; (pos-1):
-                count += 1
-                pre = pre.next
-            # 当循环退出后，pre指向pos-1位置
-            node = Node(item)
-            node.next = pre.next
-            pre.next = node
-
-    def remove(self, item):
-        &quot;&quot;&quot;删除节点&quot;&quot;&quot;
-        cur = self.__head
-        pre = None
-        while cur != None:
-            if cur.elem == item:
-                # 先判断此结点是否是头节点
-                # 头节点
-                if cur == self.__head:
-                    self.__head = cur.next
-                else:
-                    pre.next = cur.next
-                break
+    def maxArea(self, height: List[int]) -&gt; int:
+        i, j, res = 0, len(height) - 1, 0
+        while i &lt; j:
+            if height[i] &lt; height[j]:
+                res = max(res, height[i] * (j - i))
+                i += 1
             else:
-                pre = cur
-                cur = cur.next
+                res = max(res, height[j] * (j - i))
+                j -= 1
+        return res
 
-    def search(self, item):
-        &quot;&quot;&quot;查找节点是否存在&quot;&quot;&quot;
-        cur = self.__head
-        while cur != None:
-            if cur.elem == item:
-                return True
-            else:
-                cur = cur.next
-        return False
 </code></pre>
 
                 </div>
@@ -278,14 +172,14 @@ class SingleLinkList(object):
         
             <div class="next-post">
                 <div class="next gt-c-content-color-first">下一篇</div>
-                <a href="https://ganhan999.github.io/post/20、有效的括号/" class="post-title gt-a-link">
-                    20、有效的括号
+                <a href="https://ganhan999.github.io/post/8、字符串转换整数/" class="post-title gt-a-link">
+                    中等8. 字符串转换整数
                 </a>
             </div>
         
 
         
-            <span id="/post/21、合并两个有序链表/" class="leancloud_visitors" data-flag-title="21、合并两个有序列表">
+            <span id="/post/11、盛最多水的容器/" class="leancloud_visitors" data-flag-title="11、盛最多水的容器">
                 <em class="post-meta-item-text">阅读量 </em>
                 <i class="leancloud-visitors-count">0</i>
             </span>
