@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ganhan999.github.io/</id>
     <title>Gridea</title>
-    <updated>2020-12-14T12:13:28.938Z</updated>
+    <updated>2020-12-15T09:49:53.156Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ganhan999.github.io/"/>
     <link rel="self" href="https://ganhan999.github.io/atom.xml"/>
@@ -10,6 +10,79 @@
     <logo>https://ganhan999.github.io/images/avatar.png</logo>
     <icon>https://ganhan999.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Gridea</rights>
+    <entry>
+        <title type="html"><![CDATA[中等12. 整数转罗马数字]]></title>
+        <id>https://ganhan999.github.io/post/12、整数转罗马数字 /</id>
+        <link href="https://ganhan999.github.io/post/12、整数转罗马数字 /">
+        </link>
+        <updated>2020-12-15T09:49:46.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
+<p>&quot;&quot;&quot;<br>
+罗马数字包含以下七种字符： I， V， X， L，C，D 和 M。<br>
+字符          数值<br>
+I             1<br>
+V             5<br>
+X             10<br>
+L             50<br>
+C             100<br>
+D             500<br>
+M             1000<br>
+例如， 罗马数字 2 写做 II ，即为两个并列的 1。12 写做 XII ，即为 X + II 。<br>
+27 写做  XXVII, 即为 XX + V + II 。<br>
+通常情况下，罗马数字中小的数字在大的数字的右边。但也存在特例，例如 4 不写做 IIII，而是 IV。<br>
+数字 1 在数字 5 的左边，所表示的数等于大数 5 减小数 1 得到的数值 4 。同样地，数字 9 表示为 IX。<br>
+这个特殊的规则只适用于以下六种情况：</p>
+<p>I 可以放在 V (5) 和 X (10) 的左边，来表示 4 和 9。<br>
+X 可以放在 L (50) 和 C (100) 的左边，来表示 40 和 90。<br>
+C 可以放在 D (500) 和 M (1000) 的左边，来表示 400 和 900。<br>
+给定一个整数，将其转为罗马数字。输入确保在 1 到 3999 的范围内。</p>
+<p>示例 1:<br>
+输入: 3<br>
+输出: &quot;III&quot;</p>
+<p>示例 2:<br>
+输入: 4<br>
+输出: &quot;IV&quot;</p>
+<p>示例 3:<br>
+输入: 9<br>
+输出: &quot;IX&quot;</p>
+<p>示例 4:<br>
+输入: 58<br>
+输出: &quot;LVIII&quot;<br>
+解释: L = 50, V = 5, III = 3.</p>
+<p>示例 5:<br>
+输入: 1994<br>
+输出: &quot;MCMXCIV&quot;<br>
+解释: M = 1000, CM = 900, XC = 90, IV = 4.<br>
+&quot;&quot;&quot;</p>
+<h1 id="本体思路">本体思路</h1>
+<p>贪心算法</p>
+<h1 id="我的做法">#我的做法：</h1>
+<pre><code class="language-python">class Solution:
+    def intToRoman(self, num: int) -&gt; str:
+        # 使用哈希表，按照从大到小顺序排列
+        hashmap = {1000:'M', 900:'CM', 500:'D', 400:'CD', 100:'C', 90:'XC', 50:'L', 40:'XL', 10:'X', 9:'IX', 5:'V', 4:'IV', 1:'I'}
+        res = ''
+        for key in hashmap:
+            if num // key != 0:
+                count = num // key  # 比如输入4000，count 为 4
+                res += hashmap[key] * count
+                num %= key
+        return res
+</code></pre>
+<p>&quot;&quot;&quot;</p>
+<h1 id="大神做法">#大神做法</h1>
+<p>暴力算法</p>
+<p>&quot;&quot;&quot;</p>
+<pre><code class="language-python">class Solution:
+    def intToRoman(self, num: int) -&gt; str:
+        M = [&quot;&quot;, &quot;M&quot;, &quot;MM&quot;, &quot;MMM&quot;] # 1000，2000，3000
+        C = [&quot;&quot;, &quot;C&quot;, &quot;CC&quot;, &quot;CCC&quot;, &quot;CD&quot;, &quot;D&quot;, &quot;DC&quot;, &quot;DCC&quot;, &quot;DCCC&quot;, &quot;CM&quot;] # 100~900
+        X = [&quot;&quot;, &quot;X&quot;, &quot;XX&quot;, &quot;XXX&quot;, &quot;XL&quot;, &quot;L&quot;, &quot;LX&quot;, &quot;LXX&quot;, &quot;LXXX&quot;, &quot;XC&quot;] # 10~90
+        I = [&quot;&quot;, &quot;I&quot;, &quot;II&quot;, &quot;III&quot;, &quot;IV&quot;, &quot;V&quot;, &quot;VI&quot;, &quot;VII&quot;, &quot;VIII&quot;, &quot;IX&quot;] # 1~9
+        return M[num//1000] + C[(num%1000)//100] + X[(num%100)//10] + I[num%10]
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Java HTML]]></title>
         <id>https://ganhan999.github.io/post/Java CSS/</id>
@@ -4708,41 +4781,6 @@ lengthOfLongestSubString(Si+1)=max(Li,len(C结尾的无重复子串))</p>
         for i in range(0, len(s)):
             length = max(length, find_left(s, i))
         return length
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[中等2. 两数相加]]></title>
-        <id>https://ganhan999.github.io/post/2、两数相加/</id>
-        <link href="https://ganhan999.github.io/post/2、两数相加/">
-        </link>
-        <updated>2020-12-09T10:21:01.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
-<p>给出两个 非空 的链表用来表示两个非负的整数。<br>
-其中，它们各自的位数是按照 逆序 的方式存储的，并且它们的每个节点只能存储一位数字。<br>
-如果，我们将这两个数相加起来，则会返回一个新的链表来表示它们的和。<br>
-您可以假设除了数字 0 之外，这两个数都不会以 0 开头。</p>
-<p>示例：<br>
-输入：(2 -&gt; 4 -&gt; 3) + (5 -&gt; 6 -&gt; 4)<br>
-输出：7 -&gt; 0 -&gt; 8<br>
-原因：342 + 465 = 807</p>
-<h1 id="本体思路">本体思路</h1>
-<p>因为两个数字相加会产生进位，所以使用i来保存进位。<br>
-则当前位的值为(l1.val + l2.val + i) % 10<br>
-则进位值为(l1.val + l2.val + i) / 10<br>
-建立新node，然后将进位传入下一层。</p>
-<h1 id="我的做法">#我的做法：</h1>
-<pre><code class="language-python">class Solution:
-    def addTwoNumbers(self, l1: ListNode, l2: ListNode) -&gt; ListNode:
-        def DFS(l1,l2,i):
-            if not l1 and not l2 and not i:
-               return None
-            s=(l1.val if l1 else 0)+(l2.val if l2 else 0)+i
-            node=ListNode(s%10)
-            node.next=DFS(l1.next if l1 else None,l2.next if l2 else None,s//10)
-            return node
-        return DFS(l1,l2,0)
-
 </code></pre>
 ]]></content>
     </entry>
