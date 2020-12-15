@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ganhan999.github.io/</id>
     <title>Gridea</title>
-    <updated>2020-12-15T09:49:53.156Z</updated>
+    <updated>2020-12-15T09:50:34.184Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ganhan999.github.io/"/>
     <link rel="self" href="https://ganhan999.github.io/atom.xml"/>
@@ -84,7 +84,7 @@ C 可以放在 D (500) 和 M (1000) 的左边，来表示 400 和 900。<br>
 ]]></content>
     </entry>
     <entry>
-        <title type="html"><![CDATA[Java HTML]]></title>
+        <title type="html"><![CDATA[Java CSS]]></title>
         <id>https://ganhan999.github.io/post/Java CSS/</id>
         <link href="https://ganhan999.github.io/post/Java CSS/">
         </link>
