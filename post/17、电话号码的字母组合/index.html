@@ -4,7 +4,7 @@
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-<title>JavaSE基础1 | Gridea</title>
+<title>中等17. 电话号码的字母组合 | Gridea</title>
 
 <link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1608294232509">
 
@@ -89,161 +89,70 @@
         <div class="post-detail gt-bg-theme-color-second">
             <article class="gt-post-content">
                 <h2 class="post-title">
-                    JavaSE基础1
+                    中等17. 电话号码的字母组合
                 </h2>
                 <div class="post-info">
                     <time class="post-time gt-c-content-color-first">
-                        · 2020-11-26 ·
+                        · 2020-12-18 ·
                     </time>
                     
-                        <a href="https://ganhan999.github.io/tag/2avA5RaAc/" class="post-tags">
-                            # Java
+                        <a href="https://ganhan999.github.io/tag/cKyYTCK2Y/" class="post-tags">
+                            # leetcode
                         </a>
                     
                 </div>
                 <div class="post-content">
-                    <h2 id="1-markdown语法">1、Markdown语法</h2>
-<p>#+语句表示标题，#越多表示标题级别越低</p>
-<h3 id="三级标题">三级标题</h3>
-<p>两个**包夹着一段文字，表示黑体</p>
-<p><strong>黑体</strong></p>
-<p>两个*包夹着一段文字，表示斜体</p>
-<p><em>斜体</em></p>
-<p>两个***包夹着一段文字，表示黑斜体</p>
-<p><em><strong>黑斜体</strong></em></p>
-<p>一个&gt;表示引用</p>
-<blockquote>
-<p>一个&gt;表示引用</p>
-</blockquote>
-<p>三个-或者*表示分割线</p>
-<hr>
-<hr>
-<p>一个!+[]+()表示图片</p>
-<figure data-type="image" tabindex="1"><img src="https://ganhan999.github.io//post-images/1606388968536.jpg" alt="" loading="lazy"></figure>
-<p>一个[]+()表示超链接</p>
-<p><a href="https://ganhan999.github.io/">点击跳转到我的博客</a></p>
-<p>数字＋.＋空格表示有序列表</p>
-<ol>
-<li>
-<p>A</p>
-</li>
-<li>
-<p>B</p>
-</li>
-</ol>
-<ul>
-<li>
-<p>A</p>
-</li>
-<li>
-<p>B</p>
-</li>
-</ul>
-<p>|||表示表格</p>
-<table>
-<thead>
-<tr>
-<th>名字</th>
-<th>性别</th>
-<th>生日</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>张三</td>
-<td>男</td>
-<td>1991</td>
-</tr>
-</tbody>
-</table>
-<p>用tab上面的三个点`表示代码</p>
-<pre><code class="language-Java">123
+                    <h1 id="题目">题目</h1>
+<p>&quot;&quot;&quot;</p>
+<p>给定一个仅包含数字 2-9 的字符串，返回所有它能表示的字母组合。<br>
+给出数字到字母的映射如下（与电话按键相同）。注意 1 不对应任何字母。</p>
+<figure data-type="image" tabindex="1"><img src="https://ganhan999.github.io//post-images/1608294231504.png" alt="" loading="lazy"></figure>
+<p>示例:<br>
+输入：&quot;23&quot;<br>
+输出：[&quot;ad&quot;, &quot;ae&quot;, &quot;af&quot;, &quot;bd&quot;, &quot;be&quot;, &quot;bf&quot;, &quot;cd&quot;, &quot;ce&quot;, &quot;cf&quot;].<br>
+&quot;&quot;&quot;</p>
+<h1 id="本体思路">本体思路</h1>
+<p>深度遍历，例如abc def ghi的组合，先adg adh ……</p>
+<h1 id="我的做法">#我的做法：</h1>
+<pre><code class="language-python">class Solution:
+    def letterCombinations(self, digits: str) -&gt; List[str]:
+        if not digits: return []
+
+        phone = {'2': ['a', 'b', 'c'],
+                 '3': ['d', 'e', 'f'],
+                 '4': ['g', 'h', 'i'],
+                 '5': ['j', 'k', 'l'],
+                 '6': ['m', 'n', 'o'],
+                 '7': ['p', 'q', 'r', 's'],
+                 '8': ['t', 'u', 'v'],
+                 '9': ['w', 'x', 'y', 'z']}
+
+        def backtrack(conbination, nextdigit):
+            if len(nextdigit) == 0:
+                res.append(conbination)
+            else:
+                for letter in phone[nextdigit[0]]:
+                    backtrack(conbination + letter, nextdigit[1:])
+
+        res = []
+        backtrack('', digits)
+        return res
 </code></pre>
-<p><code>Hello</code></p>
-<h1 id="2-电脑常用快捷键">2、电脑常用快捷键</h1>
-<ul>
-<li>win+E 打开我的电脑</li>
-<li>win+R 打开运行界面</li>
-<li>shift+Del 永久删除</li>
-<li>ctrl+shift+esc 任务管理器</li>
-</ul>
-<h1 id="3-dos命令">3、Dos命令</h1>
-<h3 id="打开cmd的方式">打开CMD的方式：</h3>
-<ol>
-<li>开始+系统+命令提示符</li>
-<li>win+R 输入cmd 打开控制台</li>
-<li>在任意的文件夹下，按住shift＋鼠标右键，在此处打开命令行窗口</li>
-<li>资源管理器的地址栏前面加上cmd路径</li>
-</ol>
-<h3 id="常用的dos命令">常用的Dos命令</h3>
-<pre><code class="language-bash">#盘符切换 直接F:
-
-#查看当前目录下的所有文件 dir
-
-#切换目录 cd (change directory)  
-    cd /d 可以跨盘符切换
-    cd .. 返回上一级目录
-    cd 目录名 直接可以进入当前一下的目录
-    
-#清除屏幕 cls(clear screen)
-
-#退出终端 exit
-
-#查看电脑Ip ipconfig
-
-#打开应用  
-    calc  打开计算机
-    mspaint 打开画图工具
-    notepad 打开记事本
-    
-#ping命令
-	ping www.baidu.com
-	
-#文件操作命令	
-    md 创建文件夹
-    cd&gt; 创建文件
-    del 删除文件
-    rd 删除文件夹(remove directory)
-
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="大神做法1">大神做法1：</h1>
+<p>广度遍历，利用队列</p>
+<pre><code class="language-python">class Solution:
+    def letterCombinations(self, digits: str) -&gt; List[str]:
+        if not digits: return []
+        phone = ['abc', 'def', 'ghi', 'jkl', 'mno', 'pqrs', 'tuv', 'wxyz']
+        queue = ['']  # 初始化队列
+        for digit in digits:
+            for _ in range(len(queue)):
+                tmp = queue.pop(0)
+                for letter in phone[ord(digit) - 50]:  # 这里我们不使用 int() 转换字符串，使用ASCII码
+                    queue.append(tmp + letter)
+        return queue
 </code></pre>
-<h2 id="4-jdk-jre-jvm">4、JDK、JRE、JVM</h2>
-<ul>
-<li>
-<p><strong>JDK:Java Development Kit  (Java 开发者工具)</strong></p>
-</li>
-<li>
-<p><strong>JRE:Java Runtime Environment  (Java运行时环境)(JDK包括JRE)</strong></p>
-</li>
-<li>
-<p><strong>JVM:Java Virtual Machine  (Java虚拟机)</strong></p>
-</li>
-</ul>
-<h2 id="5-hello-world">5、Hello World！</h2>
-<pre><code class="language-Java">public class Hello{
-    public static void main(String[] args){
-        System.out.print(&quot;Hello World!&quot;);
-    }
-}
-#注意String要大写，注意分号，注意“”号
-    
-#cmd 当前目录
-javac Hello.java
-java Hello
-</code></pre>
-<ol>
-<li>
-<p>javac java文件，会生成class文件</p>
-</li>
-<li>
-<p>运行class文件，java class文件</p>
-</li>
-</ol>
-<h2 id="6-编译和解释">6、编译和解释</h2>
-<p><strong>解释就是一句一句翻译</strong></p>
-<p><strong>编译就是全部翻译</strong></p>
-<p><strong>Java是一种两种结合的语言</strong></p>
-<p><strong>先经过编译生成class文件</strong></p>
-<p><strong>再解释</strong></p>
 
                 </div>
             </article>
@@ -252,14 +161,14 @@ java Hello
         
             <div class="next-post">
                 <div class="next gt-c-content-color-first">下一篇</div>
-                <a href="https://ganhan999.github.io/post/121、买卖股票的最佳时机/" class="post-title gt-a-link">
-                    121、买卖股票的最佳时机
+                <a href="https://ganhan999.github.io/post/Java JavaScript/" class="post-title gt-a-link">
+                    Java JavaScript
                 </a>
             </div>
         
 
         
-            <span id="/post/JavaSE基础1/" class="leancloud_visitors" data-flag-title="JavaSE基础1">
+            <span id="/post/17、电话号码的字母组合/" class="leancloud_visitors" data-flag-title="中等17. 电话号码的字母组合">
                 <em class="post-meta-item-text">阅读量 </em>
                 <i class="leancloud-visitors-count">0</i>
             </span>
