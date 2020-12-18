@@ -6,7 +6,7 @@
 
 <title>Java JavaScript | Gridea</title>
 
-<link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1608279046229">
+<link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1608281047319">
 
 <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://ganhan999.github.io//styles/main.css">
@@ -77,7 +77,7 @@
             
         </div>
         <div style="text-align: center">
-            <form id="gridea-search-form" style="position: relative" data-update="1608279046229" action="/search/index.html">
+            <form id="gridea-search-form" style="position: relative" data-update="1608281047319" action="/search/index.html">
                 <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
                 <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
             </form>
@@ -184,7 +184,7 @@ Java，JavaScript<br>
 <pre><code class="language-html">&lt;script&gt; 
 	//....
 &lt;script&gt;
-123
+
 </code></pre>
 <p>2、外部引入<br>
 hj.js</p>
@@ -199,7 +199,7 @@ hj.js</p>
 
     &lt;!--不用显示定义type，也默认就是javaScript--&gt;
     &lt;script type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
-1234567
+
 </code></pre>
 <p>测试代码</p>
 <pre><code class="language-html">&lt;!DOCTYPE html&gt;
@@ -226,7 +226,7 @@ hj.js</p>
 &lt;!--这里也可以存放--&gt;
 &lt;/body&gt;
 &lt;/html&gt;
-123456789101112131415161718192021222324
+
 </code></pre>
 <h2 id="22-基本语法入门">2.2、基本语法入门</h2>
 <pre><code class="language-html">&lt;!DOCTYPE html&gt;
@@ -255,7 +255,7 @@ hj.js</p>
 
 &lt;/body&gt;
 &lt;/html&gt;
-1234567891011121314151617181920212223242526
+
 </code></pre>
 <p>浏览器必备调试须知：<br>
 <img src="https://img-blog.csdnimg.cn/20200508101436683.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Bhbl9oMTk5NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" loading="lazy"></p>
@@ -273,7 +273,7 @@ js不区分小树和整数，Number</p>
 -99//负数
 NaN	//not a number
 Infinity // 表示无限大
-123456
+
 </code></pre>
 <p>字符串<br>
 ‘abc’ “abc”</p>
@@ -285,14 +285,14 @@ true，false</p>
 || 一个为真，结果为真
 
 ! 	真即假，假即真
-12345
+
 </code></pre>
 <p>比较运算符 ！！！重要！</p>
 <pre><code class="language-javascript">=
 1，&quot;1&quot;
 == 等于（类型不一样，值一样，也会判断为true）
 === 绝对等于（类型一样，值一样，结果为true）
-1234
+
 </code></pre>
 <p>这是一个JS的缺陷，坚持不要使用 == 比较<br>
 须知：</p>
@@ -319,7 +319,7 @@ Java的数组必须是相同类型的对象~，JS中不需要这样</p>
 var arr = [1,2,3,4,5,'hello',null,true];
 //第二种定义方法
 new Array(1,2,3,4,5,'hello');
-1234
+
 </code></pre>
 <p>取数字下标：如果越界了，就会 报undefined</p>
 <pre><code class="language-javascript">undefined
@@ -337,14 +337,12 @@ var person = {
 	age:3,
 	tags:['js','java','web','...']
 }
-1234567
 </code></pre>
 <p>取对象值</p>
 <pre><code class="language-javascript">person.name
 &gt; &quot;Tom&quot;
 person.age
 &gt; 3
-1234
 </code></pre>
 <h2 id="24-严格检查格式">2.4、严格检查格式</h2>
 <figure data-type="image" tabindex="1"><img src="https://img-blog.csdnimg.cn/20200508105351996.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Bhbl9oMTk5NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" loading="lazy"></figure>
@@ -370,7 +368,7 @@ person.age
 
 &lt;/body&gt;
 &lt;/html&gt;
-12345678910111213141516171819202122
+
 </code></pre>
 <h1 id="3-数据类型">3、数据类型</h1>
 <h2 id="31-字符串">3.1、字符串</h2>
@@ -382,7 +380,6 @@ person.age
 \u4e2d    \u##### Unicode字符
 
 \x41	Ascall字符
-123456
 </code></pre>
 <p>3、多行字符串编写</p>
 <pre><code class="language-javascript">//tab 上面 esc下面
@@ -392,7 +389,7 @@ person.age
             你好呀
             nihao
             `
-1234567
+
 </code></pre>
 <p>4、模板字符串</p>
 <pre><code class="language-javascript">//tab 上面 esc下面
@@ -400,7 +397,6 @@ let name = 'Tom';
 let age = 3;
 var msg = `你好，${name}`
 
-12345
 </code></pre>
 <p>5、字符串长度</p>
 <pre><code class="language-javascript">str.length
@@ -412,14 +408,14 @@ var msg = `你好，${name}`
 <pre><code class="language-javascript">//注意，这里是方法，不是属性了
 student.toUpperCase();
 student.toLowerCase();
-123
+
 </code></pre>
 <p>8、student.indexof(‘t’)<br>
 9、substring，从0开始</p>
 <pre><code class="language-javascript">[)
 student.substring(1)//从第一个字符串截取到最后一个字符串
 student.substring(1,3)//[1,3)
-123
+
 </code></pre>
 <h2 id="32-数组">3.2、数组</h2>
 <p>Array可以包含任意的数据类型</p>
@@ -452,13 +448,12 @@ shift：弹出头部的一个元素
 <pre><code class="language-javascript">(3)[&quot;B&quot;,&quot;C&quot;,&quot;A&quot;]
 arr.sort()
 (3)[&quot;A&quot;,&quot;B&quot;,&quot;C&quot;]
-123
+
 </code></pre>
 <p>7、元素反转reverse()</p>
 <pre><code class="language-javascript">(3)[&quot;A&quot;,&quot;B&quot;,&quot;C&quot;]
 arr.reverse()
 (3)[&quot;C&quot;,&quot;B&quot;,&quot;A&quot;]
-123
 </code></pre>
 <p><strong>8、concat()</strong><br>
 <img src="https://img-blog.csdnimg.cn/20200508153119816.png" alt="在这里插入图片描述" loading="lazy"><br>
@@ -483,7 +478,7 @@ var person = {
 	email:&quot;123456798@QQ.com&quot;,
 	score:66
 }
-123456789101112
+
 </code></pre>
 <p>Js中对象，{…}表示一个对象，建制对描述属性xxx：xxx，多个属性之间用逗号隔开，最后一个属性不加逗号！<br>
 JavaScript中的所有的键都是字符串，值是任意对象！<br>
@@ -714,7 +709,6 @@ javascript、java、c#------面向对象；但是javascript有些区别！</p>
 	var xiaoming = new Student(&quot;xiaoming&quot;);
 	var xiaohong = new XiaoStudent(&quot;xiaohong&quot;,1);
 &lt;/script&gt;
-12345678910111213141516171819202122232425
 </code></pre>
 <p>本质：查看对象原型<br>
 <img src="https://img-blog.csdnimg.cn/20200509211811667.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3Bhbl9oMTk5NQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" loading="lazy"></p>
@@ -841,7 +835,6 @@ www.taobao.com<br>
     
     document.getElementByTagName('head')[0].appendChild(myStyle);
 &lt;/script&gt;
-123456789101112131415161718
 </code></pre>
 <blockquote>
 <p>insertBefore</p>
@@ -851,7 +844,7 @@ var js = document.getElementById('js');
 var list = document.getElementById('list');
 //要包含的节点.insertBefore(newNode,targetNode)
 list.insertBefore(js,ee);
-12345
+
 </code></pre>
 <h1 id="9-操作表单">9、操作表单</h1>
 <blockquote>
@@ -897,7 +890,7 @@ list.insertBefore(js,ee);
         
     &lt;/script&gt;
 &lt;/body&gt;
-123456789101112131415161718192021222324252627
+
 </code></pre>
 <blockquote>
 <p>提交表单。md5加密密码，表单优化</p>
@@ -947,7 +940,7 @@ list.insertBefore(js,ee);
         
     &lt;/body&gt;
 &lt;/html&gt;
-123456789101112131415161718192021222324252627282930313233343536373839404142434445
+
 </code></pre>
 <h1 id="10-jquery">10、jQuery</h1>
 <p>javaScript和jQuery的关系？</p>
@@ -974,7 +967,7 @@ list.insertBefore(js,ee);
         &lt;/script&gt;
     &lt;/body&gt;
 &lt;/html&gt;
-1234567891011121314151617
+
 </code></pre>
 <blockquote>
 <p>选择器</p>
@@ -991,7 +984,7 @@ document.getElementByClassName();
 $('p').click();//标签选择器
 $('#id1').click();//id选择器
 $('.class1').click;//class选择器
-123456789101112
+
 </code></pre>
 <p>文档工具站：http://jquery.cuishifeng.cn/</p>
 <blockquote>
@@ -1005,7 +998,7 @@ mousemove()(jQuery)----移动
 mouseout()(jQuery)
 mouseover()(jQuery)
 mouseup()(jQuery)
-1234567
+
 &lt;!DOCTYPE html&gt;
 &lt;html lang = &quot;en&quot;&gt;
     &lt;head&gt;
@@ -1037,7 +1030,7 @@ mouseup()(jQuery)
         &lt;/script&gt;
     &lt;/body&gt;
 &lt;/html&gt;
-12345678910111213141516171819202122232425262728293031
+
 </code></pre>
 <blockquote>
 <p>操作DOM</p>
@@ -1047,7 +1040,7 @@ mouseup()(jQuery)
 $('#test-ul li[name=python]').text('设置值');//设置值
 $('#test-ul').html();//获得值
 $('#test-ul').html('&lt;strong&gt;123&lt;/strong&gt;');//设置值
-1234
+
 </code></pre>
 <p>CSS的操作</p>
 <pre><code class="language-javascript">$('#test-ul li[name=python]').css({&quot;color&quot;,&quot;red&quot;});
@@ -1062,7 +1055,7 @@ $('#test-ul li[name=python]').hide();
 <pre><code>$(window).width()
 $(window).height()
 $('#test-ul li[name=python]').toggle();
-123
+
 </code></pre>
 <p>未来ajax()；</p>
 <pre><code class="language-javascript">$('#form').ajax()
