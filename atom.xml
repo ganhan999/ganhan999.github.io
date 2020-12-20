@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ganhan999.github.io/</id>
     <title>Gridea</title>
-    <updated>2020-12-18T12:23:56.046Z</updated>
+    <updated>2020-12-20T14:53:13.790Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ganhan999.github.io/"/>
     <link rel="self" href="https://ganhan999.github.io/atom.xml"/>
@@ -10,6 +10,90 @@
     <logo>https://ganhan999.github.io/images/avatar.png</logo>
     <icon>https://ganhan999.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Gridea</rights>
+    <entry>
+        <title type="html"><![CDATA[中等22. 括号生成]]></title>
+        <id>https://ganhan999.github.io/post/22、括号生成/</id>
+        <link href="https://ganhan999.github.io/post/22、括号生成/">
+        </link>
+        <updated>2020-12-20T14:19:12.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
+<p>数字 n 代表生成括号的对数，请你设计一个函数，用于能够生成所有可能的并且 有效的 括号组合。</p>
+<p>示例：<br>
+输入：n = 3<br>
+输出：[<br>
+&quot;((()))&quot;,<br>
+&quot;(()())&quot;,<br>
+&quot;(())()&quot;,<br>
+&quot;()(())&quot;,<br>
+&quot;()()()&quot;<br>
+]</p>
+<h1 id="本体思路">本体思路</h1>
+<p>递归，深度遍历<br>
+如果左括号数量不大于 nn，我们可以放一个左括号。如果右括号数量小于左括号的数量，<br>
+我们可以放一个右括号。</p>
+<p>那么我们在什么情况下添加左括号呢？很明显，最多能添加 n 个左括号，<br>
+在递归调用的时候，在能传递到最底层的共用字符串中先添加 ”(“ ，然后 left-1，递归调用就可以。<br>
+那什么时候添加右括号呢？当左括号个数大于右括号的个数时添加右括号。<br>
+总之，向下搜索要满足两个条件：<br>
+插入数量不超过n<br>
+(可以插入的前提是 ( 的数量大于 ）</p>
+<h1 id="大神做法1">#大神做法1：</h1>
+<pre><code class="language-python">class Solution:
+    def generateParenthesis(self, n: int) -&gt; List[str]:
+        ans = []
+        def backtrack(S, left, right):
+            if len(S) == 2 * n:
+                ans.append(''.join(S))
+                return
+            if left &lt; n:
+                S.append('(')
+                backtrack(S, left+1, right)
+                S.pop()
+            if right &lt; left:
+                S.append(')')
+                backtrack(S, left, right+1)
+                S.pop()
+
+        backtrack([], 0, 0)
+        return ans
+</code></pre>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="大神做法2">大神做法2：</h1>
+<p>当我们清楚所有 i&lt;n 时括号的可能生成排列后，对与 i=n 的情况，我们考虑整个括号排列中最左边的括号。<br>
+它一定是一个左括号，那么它可以和它对应的右括号组成一组完整的括号 &quot;( )&quot;，我们认为这一组是相比 n-1 增加进来的括号。</p>
+<p>那么，剩下 n-1 组括号有可能在哪呢？</p>
+<p>【这里是重点，请着重理解】</p>
+<p>剩下的括号要么在这一组新增的括号内部，要么在这一组新增括号的外部（右侧）。</p>
+<p>既然知道了 i&lt;n 的情况，那我们就可以对所有情况进行遍历：</p>
+<p>&quot;(&quot; + 【i=p时所有括号的排列组合】 + &quot;)&quot; + 【i=q时所有括号的排列组合】</p>
+<p>其中 p + q = n-1，且 p q 均为非负整数。</p>
+<p>事实上，当上述 p 从 0 取到 n-1，q 从 n-1 取到 0 后，所有情况就遍历完了。</p>
+<p>注：上述遍历是没有重复情况出现的，即当 (p1,q1)≠(p2,q2) 时，按上述方式取的括号组合一定不同。</p>
+<pre><code class="language-python">class Solution:
+    def generateParenthesis(self, n: int) -&gt; List[str]:
+        if n == 0:
+            return []
+        total_l = []
+        total_l.append([None])    # 0组括号时记为None
+        total_l.append([&quot;()&quot;])    # 1组括号只有一种情况
+        for i in range(2,n+1):    # 开始计算i组括号时的括号组合
+            l = []
+            for j in range(i):    # 开始遍历 p q ，其中p+q=i-1 , j 作为索引
+                now_list1 = total_l[j]    # p = j 时的括号组合情况
+                now_list2 = total_l[i-1-j]    # q = (i-1) - j 时的括号组合情况
+                for k1 in now_list1:
+                    for k2 in now_list2:
+                        if k1 == None:
+                            k1 = &quot;&quot;
+                        if k2 == None:
+                            k2 = &quot;&quot;
+                        el = &quot;(&quot; + k1 + &quot;)&quot; + k2
+                        l.append(el)    # 把所有可能的情况添加到 l 中
+            total_l.append(l)    # l这个list就是i组括号的所有情况，添加到total_l中，继续求解i=i+1的情况
+        return total_l[n]
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[中等17. 电话号码的字母组合]]></title>
         <id>https://ganhan999.github.io/post/17、电话号码的字母组合/</id>
@@ -2929,71 +3013,6 @@ mainFrame:框架标识名
            name=&quot;diy&quot; 
            pattern=&quot;/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/&quot;&gt;
 &lt;/p&gt;
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[中等6. Z字形变换]]></title>
-        <id>https://ganhan999.github.io/post/6、Z 字形变换/</id>
-        <link href="https://ganhan999.github.io/post/6、Z 字形变换/">
-        </link>
-        <updated>2020-12-12T13:53:58.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
-<p>将一个给定字符串根据给定的行数，以从上往下、从左到右进行 Z 字形排列。<br>
-比如输入字符串为 &quot;LEETCODEISHIRING&quot; 行数为 3 时，排列如下：<br>
-L   C   I   R<br>
-E T O E S I I G<br>
-E   D   H   N<br>
-之后，你的输出需要从左往右逐行读取，产生出一个新的字符串，比如：&quot;LCIRETOESIIGEDHN&quot;。<br>
-请你实现这个将字符串进行指定行数变换的函数：<br>
-string convert(string s, int numRows);</p>
-<p>示例 1:<br>
-输入: s = &quot;LEETCODEISHIRING&quot;, numRows = 3<br>
-输出: &quot;LCIRETOESIIGEDHN&quot;</p>
-<p>示例 2:<br>
-输入: s = &quot;LEETCODEISHIRING&quot;, numRows = 4<br>
-输出: &quot;LDREOEIIECIHNTSG&quot;<br>
-解释:<br>
-L     D     R<br>
-E   O E   I I<br>
-E C   I H   N<br>
-T     S     G</p>
-<p>&quot;&quot;&quot;<br>
-先创建一个二维数组，然后遍历字符串，然后对应的一个个加入数组中，这里的flag是用来改变下标变化趋势的。<br>
-&quot;&quot;&quot;</p>
-<h1 id="我的做法">#我的做法：</h1>
-<pre><code class="language-python">class Solution:
-    def convert(self, s: str, numRows: int) -&gt; str:
-        if numRows &lt; 2: return s
-        res = [&quot;&quot; for _ in range(numRows)]
-        i, flag = 0, -1
-        for c in s:
-            res[i] += c
-            if i == 0 or i == numRows - 1: flag = -flag
-            i += flag
-        return &quot;&quot;.join(res)
-</code></pre>
-<p>&quot;&quot;&quot;</p>
-<h1 id="大神做法1">#大神做法1</h1>
-<p>这道题只是需要相应的字符串，不要求输出，明显难度降低了，<br>
-因为这个图像是有规律的，发现每一满列对于行元素到下一满列对应行的元素距离是固定的，<br>
-为k= (numRows-1)*2，我们便可以以此为基础进行定位，逐行添加字符拼接成字符串。<br>
-时间复杂度实际是遍历一趟字符串s为O（n），空间复杂度O（n）</p>
-<pre><code class="language-python">class Solution:
-    def convert(self, s: str, numRows: int) -&gt; str:
-        if numRows==1:
-            return s
-        ans=&quot;&quot;
-        n=len(s)
-        for i in range(numRows):
-            k=i
-            while k&lt;n:
-                ans+=s[k]
-                k+=2*(numRows-1)
-                if i!=0 and i!=numRows-1 and k-2*i &lt;n:
-                    ans+=s[k-2*i]
-        return ans
-
 </code></pre>
 ]]></content>
     </entry>
