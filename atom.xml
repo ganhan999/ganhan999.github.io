@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ganhan999.github.io/</id>
     <title>Gridea</title>
-    <updated>2020-12-21T10:59:29.634Z</updated>
+    <updated>2020-12-21T11:41:23.824Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ganhan999.github.io/"/>
     <link rel="self" href="https://ganhan999.github.io/atom.xml"/>
@@ -10,6 +10,85 @@
     <logo>https://ganhan999.github.io/images/avatar.png</logo>
     <icon>https://ganhan999.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Gridea</rights>
+    <entry>
+        <title type="html"><![CDATA[中等18. 四数之和]]></title>
+        <id>https://ganhan999.github.io/post/18、四数之和/</id>
+        <link href="https://ganhan999.github.io/post/18、四数之和/">
+        </link>
+        <updated>2020-12-21T12:19:12.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
+<p>&quot;&quot;&quot;</p>
+<p>给你一个包含 n 个整数的数组 nums，<br>
+判断 nums 中是否存在三个元素 a，b，c ，<br>
+使得 a + b + c = 0 ？请你找出所有满足条件且不重复的三元组。<br>
+注意：答案中不可以包含重复的三元组。</p>
+<p>示例：<br>
+给定数组 nums = [-1, 0, 1, 2, -1, -4]，<br>
+满足要求的三元组集合为：<br>
+[<br>
+[-1, 0, 1],<br>
+[-1, -1, 2]<br>
+]<br>
+&quot;&quot;&quot;</p>
+<h1 id="本体思路">本体思路</h1>
+<p>我们仍然可以在 O(N^3)O(N 3) 的时间复杂度内通过增加条件判断使得速度得到很大提升。主要考虑以下几点：</p>
+<p>1、指针依次是 p,k,i,j，如果 nums[p] + 3 * nums[p + 1] &gt; target，<br>
+因为 nums 按升序排列，所以之后的数肯定都大于 target 直接 break；</p>
+<p>2、如果 nums[p] + 3 * nums[-1] &lt; target，那么当前的 nums[p] 加其余三个数一定小于 target，故 p 直接下一位即可，continue；</p>
+<p>k 和 p 判断完全一样，只是将 3 变成了 2，target 变成了 target - nums[p]。</p>
+<p>3、同样地，为了避免结果重复，某个指针遇到相同的数需要直接跳过，这与三数之和是一样的。</p>
+<p>排序后，先固定p，再固定k，然后就是双指针选择i和j</p>
+<h1 id="大神做法">#大神做法：</h1>
+<pre><code class="language-python">class Solution:
+    def fourSum(self, nums: List[int], target: int) -&gt; List[List[int]]:
+        nums.sort()
+        n = len(nums)
+        res = []
+        p = 0 # p, k, i, j
+        while p &lt; n - 3:  # 文中提到的条件1和条件2，可以直接跳过
+            if nums[p] + 3 * nums[p + 1] &gt; target: break
+            if nums[p] + 3 * nums[-1] &lt; target:
+                while p &lt; n - 4 and nums[p] == nums[p + 1]:
+                    p += 1
+                p += 1
+                continue
+            k = p + 1#已经确定p的位置了
+            while k &lt; n - 2:   # k 和 p 的判断是一样的
+                if nums[p] + nums[k] + 2 * nums[k + 1] &gt; target: break
+                if nums[p] + nums[k] + 2 * nums[-1] &lt; target:
+                    while k &lt; n - 3 and nums[k] == nums[k + 1]:
+                        k += 1
+                    k += 1
+                    continue
+                i = k + 1
+                j = n - 1
+                new_target = target - nums[p] - nums[k]
+                while i &lt; j:
+                    if nums[i] + nums[j] &gt; new_target: j -= 1
+                    elif nums[i] + nums[j] &lt; new_target: i += 1
+                    else:
+                        res.append([nums[p],nums[k],nums[i],nums[j]])
+                        i += 1
+                        j -= 1
+                        while i &lt; j and nums[i] == nums[i - 1]: i += 1 # 避免结果重复
+                        while i &lt; j and nums[j] == nums[j + 1]: j -= 1 # 避免结果重复
+                while k &lt; n - 3 and nums[k] == nums[k + 1]: k += 1# 避免结果重复
+                k += 1#p没变，p进入下一个值
+            while p &lt; n - 4 and nums[p] == nums[p + 1]: p += 1# 避免结果重复
+            p += 1#p进入下一个值
+        return res
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[送给所有的做题家]]></title>
+        <id>https://ganhan999.github.io/post/送给所有的做题家/</id>
+        <link href="https://ganhan999.github.io/post/送给所有的做题家/">
+        </link>
+        <updated>2020-12-21T11:37:54.000Z</updated>
+        <content type="html"><![CDATA[<p>你们是当今社会下的产物，你们是未来社会的栋梁，发一分光，发一份热，不被外界所干扰，不为内心所蒙蔽。</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Java MySQL]]></title>
         <id>https://ganhan999.github.io/post/Java MySQL/</id>
@@ -1963,6 +2042,23 @@ MySQL数据库备份方法
 ]]></content>
     </entry>
     <entry>
+        <title type="html"><![CDATA[送给十年后的自己的一份答卷]]></title>
+        <id>https://ganhan999.github.io/post/送给十年后的自己的一份答卷/</id>
+        <link href="https://ganhan999.github.io/post/送给十年后的自己的一份答卷/">
+        </link>
+        <updated>2020-12-19T11:38:25.000Z</updated>
+        <content type="html"><![CDATA[<p>1、你现在有选择的余地嘛？<br>
+2、你现在能保证实现财务自由嘛？<br>
+3、你找到了你的那个她嘛？<br>
+4、你身体还健康嘛？<br>
+5、你父母享福了嘛？<br>
+6、你还在熬夜嘛？<br>
+7、你还在坚持跑步嘛？<br>
+8、你还会和以前的好友偶尔联系嘛？<br>
+9、请与我答复 谢谢<img src="https://ganhan999.github.io//post-images/1608550829657.jpg" alt="" loading="lazy"></p>
+]]></content>
+    </entry>
+    <entry>
         <title type="html"><![CDATA[中等17. 电话号码的字母组合]]></title>
         <id>https://ganhan999.github.io/post/17、电话号码的字母组合/</id>
         <link href="https://ganhan999.github.io/post/17、电话号码的字母组合/">
@@ -3151,805 +3247,6 @@ C 可以放在 D (500) 和 M (1000) 的左边，来表示 400 和 900。<br>
         X = [&quot;&quot;, &quot;X&quot;, &quot;XX&quot;, &quot;XXX&quot;, &quot;XL&quot;, &quot;L&quot;, &quot;LX&quot;, &quot;LXX&quot;, &quot;LXXX&quot;, &quot;XC&quot;] # 10~90
         I = [&quot;&quot;, &quot;I&quot;, &quot;II&quot;, &quot;III&quot;, &quot;IV&quot;, &quot;V&quot;, &quot;VI&quot;, &quot;VII&quot;, &quot;VIII&quot;, &quot;IX&quot;] # 1~9
         return M[num//1000] + C[(num%1000)//100] + X[(num%100)//10] + I[num%10]
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Java CSS]]></title>
-        <id>https://ganhan999.github.io/post/Java CSS/</id>
-        <link href="https://ganhan999.github.io/post/Java CSS/">
-        </link>
-        <updated>2020-12-15T09:18:25.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="1-css的3种导入方式">1、CSS的3种导入方式</h1>
-<pre><code class="language-css">&lt;!DOCTYPE html&gt;
-&lt;html lang=&quot;en&quot;&gt;
-&lt;head&gt;
-    &lt;meta charset=&quot;UTF-8&quot;&gt;
-    &lt;title&gt;Title&lt;/title&gt;
-
-    &lt;!--内部样式--&gt;
-    &lt;style&gt;
-        h1{
-            color: green;
-        }
-    &lt;/style&gt;
-
-    &lt;!--外部样式--&gt;
-    &lt;link rel=&quot;stylesheet&quot; href=&quot;css/style.css&quot; /&gt;
-&lt;/head&gt;
-&lt;body&gt;
-
-&lt;!--优先级：就近原则--&gt;
-&lt;!--行内样式：在标签元素中，编写一个style属性，编写样式即可--&gt;
-&lt;h1 style=&quot;color: red&quot;&gt;这是标签&lt;/h1&gt;
-&lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
-<h1 id="2-选择器">2、选择器</h1>
-<h2 id="21基本选择器">2.1基本选择器</h2>
-<h3 id="211标签选择器">2.1.1标签选择器</h3>
-<p>选择一类标签 标签{}</p>
-<pre><code class="language-css">&lt;!DOCTYPE html&gt;
-&lt;html lang=&quot;en&quot;&gt;
-&lt;head&gt;
-    &lt;meta charset=&quot;UTF-8&quot;&gt;
-    &lt;title&gt;Title&lt;/title&gt;
-    &lt;style&gt;
-        h1{
-            color: aqua;
-        }
-    &lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;h1&gt;标签1&lt;/h1&gt;
-&lt;h1&gt;标签2&lt;/h1&gt;
-&lt;h1&gt;标签3&lt;/h1&gt;
-&lt;h1&gt;标签4&lt;/h1&gt;
-&lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
-<h3 id="212类选择器class">2.1.2类选择器(class)</h3>
-<p>选择所有class一致的标签，跨标签，格式：.类名{}</p>
-<pre><code class="language-css">&lt;!DOCTYPE html&gt;
-&lt;html lang=&quot;en&quot;&gt;
-&lt;head&gt;
-    &lt;meta charset=&quot;UTF-8&quot;&gt;
-    &lt;title&gt;Title&lt;/title&gt;
-
-    &lt;style&gt;
-        /*类选择器的格式 .class的名称{}
-            好处：可以多个标签归类，是同一个class，可以复用
-        */
-        .demo1{
-            color: blue;
-        }
-        .demo2{
-            color: red;
-        }
-        .demo3{
-            color: aqua;
-        }
-    &lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;h1 class =&quot;demo1&quot;&gt;类选择器：demo1&lt;/h1&gt;
-&lt;h1 class=&quot;demo2&quot;&gt;类选择器：demo2&lt;/h1&gt;
-&lt;h1 class=&quot;demo3&quot;&gt;类选择器：demo3&lt;/h1&gt;
-&lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
-<h3 id="213id-选择器">2.1.3id 选择器</h3>
-<p>全局唯一，格式：#id名{}</p>
-<pre><code class="language-css">&lt;!DOCTYPE html&gt;
-&lt;html lang=&quot;en&quot;&gt;
-&lt;head&gt;
-    &lt;meta charset=&quot;UTF-8&quot;&gt;
-    &lt;title&gt;Title&lt;/title&gt;
-    &lt;style&gt;
-        /*id选择器：id必须保证全局唯一
-            #id名称{}
-            不遵循就近原则，优先级是固定的
-            id选择器 &gt; 类选择器  &gt;  标签选择器
-        */
-        #demo1{
-            color: aqua;
-        }
-        .demo2{
-            color: red;
-        }
-        #demo2{
-            color: orange;
-        }
-        h1{
-            color: blue;
-        }
-    &lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-
-&lt;h1 id=&quot;demo1&quot;&gt;id选择器：demo1&lt;/h1&gt;
-&lt;h1 class=&quot;demo2&quot; id = &quot;demo2&quot;&gt;id选择器：demo2&lt;/h1&gt;
-&lt;h1 class=&quot;demo2&quot;&gt;id选择器：demo3&lt;/h1&gt;
-&lt;h1&gt;id选择器：demo4&lt;/h1&gt;
-&lt;h1&gt;id选择器：demo5&lt;/h1&gt;
-&lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
-<p>**注意：**优先级：id &gt; class &gt; 标签</p>
-<h2 id="22层次选择器">2.2层次选择器</h2>
-<h3 id="221后代选择器">2.2.1后代选择器</h3>
-<p>在某个元素的后面</p>
-<pre><code class="language-css">/*后代选择器*/
-&lt;style&gt;
-body p{
-	background:red;
-}
-&lt;/style&gt;
-
-
-</code></pre>
-<h3 id="222子选择器">2.2.2子选择器</h3>
-<p>子类一代</p>
-<pre><code class="language-css">/*子选择器*/
-&lt;style&gt;
-body&gt;p{
-	background:orange;
-}
-&lt;/style&gt;
-</code></pre>
-<h3 id="223相邻的兄弟选择器">2.2.3相邻的兄弟选择器</h3>
-<p>注意：同辈只有一个，相邻（向下）</p>
-<pre><code class="language-css">/*相邻兄弟选择器：只有一个，相邻（向下）*/
-&lt;style&gt;
-.active+p{
-background: red
-}
-&lt;/style&gt;
-
-&lt;body&gt;
-	&lt;p class=&quot;active&quot;&gt;p1&lt;p&gt;
-	&lt;p&gt;p2&lt;/p&gt;
-&lt;/body&gt;
-</code></pre>
-<h3 id="224通用选择器">2.2.4通用选择器</h3>
-<p>注意：当前选中元素的向下的所有兄弟元素</p>
-<pre><code class="language-css">&lt;style&gt;
-/*通用兄弟选择器，当前选中元素的向下的所有兄弟元素*/
-	.active~p{
-	background:red;
-}
-&lt;/style&gt;
-&lt;body&gt;
-	&lt;p class=&quot;active&quot;&gt;p1&lt;p&gt;
-	&lt;p&gt;p2&lt;/p&gt;
-&lt;/body&gt;
-</code></pre>
-<h2 id="23结构伪类选择器">2.3结构伪类选择器</h2>
-<pre><code class="language-html">&lt;!DOCTYPE html&gt;
-&lt;html lang=&quot;en&quot;&gt;
-&lt;head&gt;
-    &lt;meta charset=&quot;UTF-8&quot;&gt;
-    &lt;title&gt;Title&lt;/title&gt;
-    &lt;style&gt;
-        /*ul的第一个子元素*/
-        ul li:first-child{
-            background: aqua;
-        }
-        /*ul的最后一个子元素*/
-        ul li:last-child{
-            background: blue;
-        }
-        /*选中p1：定位到父元素，选择当前的第一个元素
-            选择当前p元素 的父级元素，选中父级元素的第一个，并且是当前元素才生效！
-        */
-        p:nth-child(1){
-            background: orange;
-        }
-        /*选中父元素下的，第2个p元素*/
-        p:nth-of-type(2){
-            background: red;
-        }
-    &lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;p&gt;p1&lt;/p&gt;
-    &lt;p&gt;p2&lt;/p&gt;
-    &lt;p&gt;p3&lt;/p&gt;
-    &lt;p&gt;p4&lt;/p&gt;
-    &lt;ul&gt;
-        &lt;li&gt;l1&lt;/li&gt;
-        &lt;li&gt;
-            &lt;p&gt;p5&lt;/p&gt;
-        &lt;/li&gt;
-        &lt;li&gt;
-            &lt;p&gt;p6&lt;/p&gt;
-        &lt;/li&gt;
-    &lt;/ul&gt;
-    &lt;p&gt;p7&lt;/p&gt;
-&lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
-<h2 id="24属性选择器常用">2.4属性选择器（常用）</h2>
-<p>标签[属性名=属性值(正则)]{}</p>
-<pre><code class="language-html">正则：
-=表示绝对等于
-*=表示包含
-^=表示以...开头
-$=表示以...结尾
-
-&lt;!DOCTYPE html&gt;
-&lt;html lang=&quot;en&quot;&gt;
-&lt;head&gt;
-    &lt;meta charset=&quot;UTF-8&quot;&gt;
-    &lt;title&gt;Title&lt;/title&gt;
-    &lt;style&gt;
-         .demo a{
-            display: block;
-            height: 50px;
-            width: 50px;
-            float:left;
-            border-radius: 10px;
-            background: blue;
-            text-align: center;
-            color: beige;
-            text-decoration: none;
-            margin-right: 5px;
-            font: bold 20px/50px Arial;
-        }
-         /*属性名，属性名=属性值（正则）
-         =表示绝对等于
-         *=表示包含
-         ^=表示以...开头
-         $=表示以...结尾
-         存在id属性的元素  a[]{}
-         */
-        /* a[id]{
-             background: red;
-         }*/
-
-         /*id=first的元素*/
-       /* a[id=first]{
-            background: aqua;
-        }*/
-
-        /*class中有links元素*/
-       /* a[class = &quot;links item2 first2&quot;]{
-            background: orange;
-        }*/
-        /*a[class*=&quot;links&quot;]{
-            background: black ;
-        }*/
-        /*选中href中以http开头的元素*/
-        a[href^=&quot;http&quot;]{
-            background: orange;
-        }
-    &lt;/style&gt;
-
-&lt;/head&gt;
-&lt;body&gt;
-&lt;p class=&quot;demo&quot;&gt;
-    &lt;a href=&quot;http://www.baidu.com&quot; class=&quot;links item first&quot; id=&quot;first&quot;&gt;1&lt;/a&gt;
-    &lt;a href=&quot;/adad/faf&quot; class=&quot;links item2 first2&quot; &gt;2&lt;/a&gt;
-    &lt;a href=&quot;qwe123&quot; class=&quot;links item3 first3&quot; &gt;3&lt;/a&gt;
-    &lt;a href=&quot;eweqe&quot; class=&quot;links item4 first4&quot; &gt;4&lt;/a&gt;
-    &lt;a href=&quot;rrrrr&quot; class=&quot;links item5 first5&quot; &gt;5&lt;/a&gt;
-    &lt;a href=&quot;ttt&quot; class=&quot;links item6 first6&quot; &gt;6&lt;/a&gt;
-    &lt;a href=&quot;yyy&quot; class=&quot;links item7 first7&quot; &gt;7&lt;/a&gt;
-&lt;/p&gt;
-&lt;/body&gt;
-&lt;/html&gt;
-
-</code></pre>
-<figure data-type="image" tabindex="1"><img src="https://ganhan999.github.io//post-images/1607947959260.png" alt="" loading="lazy"></figure>
-<h1 id="3-美化网页元素">3、美化网页元素</h1>
-<h2 id="31为什么要美化网页">3.1为什么要美化网页</h2>
-<ol>
-<li>有效的传递页面信息</li>
-<li>美化网页，页面漂亮才能吸引客户</li>
-<li>凸显页面的主题</li>
-<li>提高用户的体验</li>
-</ol>
-<p>span标签：重点要突出的字，使用span标签套起来</p>
-<pre><code class="language-css">font-family：字体
-font-size：字体大小
-font-weight：字体粗细
-
-&lt;!DOCTYPE html&gt;
-&lt;html lang=&quot;en&quot;&gt;
-&lt;head&gt;
-    &lt;meta charset=&quot;UTF-8&quot;&gt;
-    &lt;title&gt;Title&lt;/title&gt;
-    &lt;style&gt;
-        #study{
-            font-size: 100px;
-        }
-    &lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-学习&lt;span id=&quot;study&quot;&gt;CSS&lt;/span&gt;
-&lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
-<h2 id="32字体样式">3.2字体样式</h2>
-<pre><code class="language-css">font-weight:bolder;/*也可以填px，但数值不能超过900,900相当于bloder*/
-/*常用写法：*/
-font:oblique bloder 12px &quot;楷体&quot;
-</code></pre>
-<h2 id="33文本样式">3.3文本样式</h2>
-<ol>
-<li>颜色–&gt;color</li>
-<li>文本对齐方式–&gt;text-align：center</li>
-<li>首行缩进–&gt;text-indent：2em</li>
-<li>行高–&gt;line-height：300px；</li>
-<li>下划线–&gt;text-decoration</li>
-</ol>
-<pre><code class="language-css">color:red;/*红色*/
-text-align: center;/*居中*/
-text-decoration:underline/*下划线*/
-text-decoration:line-through/*中划线*/
-text-decoration:overline/*上划线*/
-text-decoration:none/*超链接去下划线*/
-</code></pre>
-<p>图片、文字水平对齐</p>
-<pre><code class="language-css">img,span{vetical-align:middle}
-</code></pre>
-<h2 id="34文本阴影和超链接伪类">3.4文本，阴影和超链接伪类</h2>
-<pre><code class="language-css">&lt;style&gt;
-	a{/*超链接有默认的颜色*/
-		text-decoration:none;/*下划线设置为空*/
-		color:#000000;
-	}
-	a:hover{/*鼠标悬浮的状态*/
-		color:orange;
-	}
-	a:active{/*鼠标按住未释放的状态*/
-		color:green
-	}
-	a:visited{/*点击之后的状态*/
-		color:red
-	}
-&lt;/style&gt;
-</code></pre>
-<p>阴影：</p>
-<pre><code class="language-css">/*	第一个参数：表示水平偏移
-	第二个参数：表示垂直偏移
-	第三个参数：表示模糊半径
-	第四个参数：表示颜色
-*/
-text-shadow:5px 5px 5px 颜色
-</code></pre>
-<h2 id="35列表ul-li">3.5列表ul li</h2>
-<pre><code class="language-css">/*list-style{
-	none:去掉原点
-	circle：空心圆
-	decimal：数字
-	square：正方形
-}*/
-ul li{
-	height:30px;
-	list-style:none;
-	text-indent:1em;
-}
-a{
-	text-decoration:none;
-	font-size:14px;
-	color:#000;
-}
-a:hover{
-	color:orange;
-	text-decoration:underline
-}
-/*放在div中，作为导航栏*/
-&lt;div id=&quot;nav&quot;&gt;&lt;/div&gt;
-#nav{
-	width:300px;
-}
-</code></pre>
-<h2 id="36列表ul-li">3.6列表ul li</h2>
-<pre><code class="language-css">/*list-style{
-	none:去掉原点
-	circle：空心圆
-	decimal：数字
-	square：正方形
-}*/
-ul li{
-	height:30px;
-	list-style:none;
-	text-indent:1em;
-}
-a{
-	text-decoration:none;
-	font-size:14px;
-	color:#000;
-}
-a:hover{
-	color:orange;
-	text-decoration:underline
-}
-/*放在div中，作为导航栏*/
-&lt;div id=&quot;nav&quot;&gt;&lt;/div&gt;
-#nav{
-	width:300px;
-}
-</code></pre>
-<h2 id="37背景">3.7背景</h2>
-<ol>
-<li>背景颜色：background</li>
-<li>背景图片</li>
-</ol>
-<pre><code class="language-css">background-image:url(&quot;&quot;);/*默认是全部平铺的*/
-background-repeat:repeat-x/*水平平铺*/
-background-repeat:repeat-y/*垂直平铺*/
-background-repeat:no-repeat/*不平铺*/
-</code></pre>
-<p>综合使用</p>
-<pre><code class="language-css">background:red url(&quot;图片相对路劲&quot;) 270px 10px no-repeat
-background-position：/*定位：背景位置*/
-</code></pre>
-<h1 id="4-盒子模型">4、盒子模型</h1>
-<h2 id="41什么是盒子模型">4.1什么是盒子模型</h2>
-<ol>
-<li>margin：外边距</li>
-<li>padding：内边距</li>
-<li>border：边框</li>
-</ol>
-<h2 id="42边框">4.2边框</h2>
-<p>border：粗细 样式 颜色</p>
-<ol>
-<li>
-<p>边框的粗细</p>
-</li>
-<li>
-<p>边框的样式</p>
-</li>
-<li>
-<p>边框的颜色</p>
-<p>测试代码</p>
-</li>
-</ol>
-<pre><code class="language-css">&lt;!DOCTYPE html&gt;
-&lt;html lang=&quot;en&quot;&gt;
-&lt;head&gt;
-    &lt;meta charset=&quot;UTF-8&quot;&gt;
-    &lt;title&gt;Title&lt;/title&gt;
-    &lt;style&gt;
-        #nav{
-            text-align: center;
-            width: 300px;
-            height: 200px;
-            border:1px solid red;
-        }
-        #user input{
-            border: 2px solid green;
-        }
-    &lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;div id=&quot;nav&quot;&gt;
-    &lt;h1&gt;会员登录&lt;/h1&gt;
-    &lt;form action=&quot;#&quot;&gt;
-        &lt;div id=&quot;user&quot;&gt;
-            &lt;span&gt;用户名：&lt;/span&gt;
-            &lt;input type=&quot;text&quot;&gt;
-        &lt;/div&gt;
-        &lt;div&gt;
-            &lt;span&gt;密码：&lt;/span&gt;
-            &lt;input type=&quot;text&quot;&gt;
-        &lt;/div&gt;
-        &lt;div&gt;
-            &lt;span&gt;邮箱：&lt;/span&gt;
-            &lt;input type=&quot;text&quot;&gt;
-        &lt;/div&gt;
-    &lt;/form&gt;
-&lt;/div&gt;
-&lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
-<h2 id="43外边距-妙用居中">4.3外边距----妙用：居中</h2>
-<p>margin-left/right/top/bottom–&gt;表示四边，可分别设置，也可以同时设置如下</p>
-<pre><code class="language-css">margin:0 0 0 0/*分别表示上、右、下、左；从上开始顺时针*/
-/*例1：居中*/
-margin:0 auto /*auto表示左右自动*/
-/*例2：*/
-margin:4px/*表示上、右、下、左都为4px*/
-/*例3*/
-margin:10px 20px 30px/*表示上为10px，左右为20px，下为30px*/
-</code></pre>
-<p>盒子的计算方式：<br>
-margin+border+padding+内容的大小</p>
-<p>总结：<br>
-body总有一个默认的外边距 margin:0<br>
-常见操作：初始化</p>
-<pre><code class="language-css">margin:0;
-padding:0;
-text-decoration:none;
-</code></pre>
-<h2 id="44圆角边框-border-radius">4.4圆角边框----border-radius</h2>
-<p>border-radius有四个参数（顺时针），左上-&gt;右上-&gt;右下-&gt;左下<br>
-圆圈：圆角=<strong>半径</strong></p>
-<h1 id="5-浮动">5、浮动</h1>
-<h2 id="51标准文档流">5.1标准文档流</h2>
-<figure data-type="image" tabindex="2"><img src="https://ganhan999.github.io//post-images/1607947968049.png" alt="" loading="lazy"></figure>
-<p>块级元素：独占一行 h1~h6 、p、div、 列表…<br>
-行内元素：不独占一行 span、a、img、strong</p>
-<blockquote>
-<p>注： 行内元素可以包含在块级元素中，反之则不可以。</p>
-</blockquote>
-<h2 id="52-display重要">5.2、display（重要）</h2>
-<ul>
-<li>block：块元素</li>
-<li>inline：行内元素</li>
-<li>inline-block：是块元素，但是可以内联，在一行</li>
-</ul>
-<blockquote>
-<p>这也是一种实现行内元素排列的方式，但是我们很多情况用float</p>
-</blockquote>
-<ul>
-<li>none：消失</li>
-</ul>
-<pre><code class="language-css">&lt;!DOCTYPE html&gt;
-&lt;html lang=&quot;en&quot;&gt;
-&lt;head&gt;
-    &lt;meta charset=&quot;UTF-8&quot;&gt;
-    &lt;title&gt;Title&lt;/title&gt;
-    &lt;!--block 块元素
-        inline 行内元素
-        inline-block 是块元素，但是可以内联 ，在一行
-    --&gt;
-    &lt;style&gt;
-        div{
-            width: 100px;
-            height: 100px;
-            border: 1px solid red;
-            display: inline-block;
-        }
-        span{
-            width: 100px;
-            height: 100px;
-            border: 1px solid red;
-            display: inline-block;
-        }
-    &lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;div&gt;div块元素&lt;/div&gt;
-&lt;span&gt;span行内元素&lt;/span&gt;
-&lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
-<h2 id="53floatleftright左右浮动">5.3float：left/right左右浮动</h2>
-<p>clear：both</p>
-<h2 id="54overflow及父级边框塌陷问题">5.4overflow及父级边框塌陷问题</h2>
-<p>clear：<br>
-right：右侧不允许有浮动元素<br>
-left：左侧不允许有浮动元素<br>
-both：两侧不允许有浮动元素<br>
-none：</p>
-<p>解决塌陷问题方案：<br>
-方案一：增加父级元素的高度；<br>
-方案二：增加一个空的div标签，清除浮动</p>
-<pre><code class="language-html">&lt;div class = &quot;clear&quot;&gt;&lt;/div&gt;
-&lt;style&gt;
-	.clear{
-		clear:both;
-		margin:0;
-		padding:0;
-}
-&lt;/style&gt;
-</code></pre>
-<p>方案三：在父级元素中增加一个overflow：hidden</p>
-<pre><code class="language-css">overflow:hidden/*隐藏*/
-overflow：scoll/*滚动*/
-</code></pre>
-<p>方案四：父类添加一个伪类:after</p>
-<pre><code class="language-css">#father:after{
-	content:'';
-	display:block;
-	clear:both;
-}
-</code></pre>
-<p>小结：</p>
-<ol>
-<li>浮动元素增加空div-&gt;简单、代码尽量避免空div</li>
-<li>设置父元素的高度-&gt;简单，元素假设没有了固定的高度，就会超出</li>
-<li>overflow-&gt;简单，下拉的一些场景避免使用</li>
-<li>父类添加一个伪类:after（推荐）-&gt;写法稍微复杂，但是没有副作用，<strong>推荐使用</strong></li>
-</ol>
-<h2 id="55display与float对比">5.5display与float对比</h2>
-<ol>
-<li>display：方向不可以控制</li>
-<li>float：浮动起来的话会脱离标准文档流，所以要解决父级边框塌陷的问题。</li>
-</ol>
-<h1 id="6-定位">6、定位</h1>
-<h2 id="61-相对定位">6.1、相对定位</h2>
-<p>相对定位：positon：relstive；<br>
-相对于原来的位置，进行指定的偏移，相对定位的话，它仍然在标准文档流中，原来的位置会被保留</p>
-<pre><code class="language-css">top:-20px;
-left:20px;
-bottom:-10px;
-right:20px;
-</code></pre>
-<h1 id="7-css总结">7、css总结</h1>
-<figure data-type="image" tabindex="3"><img src="https://ganhan999.github.io//post-images/1607947974498.png" alt="" loading="lazy"></figure>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[11、盛最多水的容器]]></title>
-        <id>https://ganhan999.github.io/post/11、盛最多水的容器/</id>
-        <link href="https://ganhan999.github.io/post/11、盛最多水的容器/">
-        </link>
-        <updated>2020-12-14T12:35:00.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
-<p>&quot;&quot;&quot;<br>
-给你 n 个非负整数 a1，a2，...，an，每个数代表坐标中的一个点 (i, ai) 。<br>
-在坐标内画 n 条垂直线，垂直线 i 的两个端点分别为 (i, ai) 和 (i, 0) 。找出其中的两条线，使得它们与 x 轴共同构成的容器可以容纳最多的水。<br>
-说明：你不能倾斜容器。</p>
-<p>示例 1：<br>
-输入：[1,8,6,2,5,4,8,3,7]<br>
-输出：49<br>
-解释：图中垂直线代表输入数组 [1,8,6,2,5,4,8,3,7]。在此情况下，容器能够容纳水（表示为蓝色部分）的最大值为 49。</p>
-<p>示例 2：<br>
-输入：height = [1,1]<br>
-输出：1</p>
-<p>示例 3：<br>
-输入：height = [4,3,2,1,4]<br>
-输出：16</p>
-<p>示例 4：<br>
-输入：height = [1,2,1]<br>
-输出：2<br>
-&quot;&quot;&quot;</p>
-<h1 id="本体思路">本体思路</h1>
-<p>暴力法</p>
-<h1 id="我的做法">#我的做法：</h1>
-<pre><code class="language-python">class Solution:
-    def maxArea(self, height: List[int]) -&gt; int:
-        res=0
-        for i in range(len(height)):
-            for j in range(i+1,len(height)):
-                res=max(res,(j-i)*min(height[i],height[j]))
-        return res
-
-</code></pre>
-<p>&quot;&quot;&quot;</p>
-<h1 id="大神做法">#大神做法</h1>
-<p>双指针法<br>
-首先写下一个测试例子， 8 1 1 1 11 9 13 15 10 12</p>
-<p>观察数据找规律。随便看一个范围比如【11...12】，能否找到比这更好的解？那么我们发现9肯定不能是左边的板，因为9本来就比11矮，还靠12更近，那【9...12】的面积肯定要更小啊，13倒是有可能！</p>
-<p>规律：只有从最左开始升序的数字才可能是左板！【8】 1 1 1 【11】 9 【13】【15】10 12，<br>
-不在【】里的统统不可能是左板。 同理，只有从最右开始升序的数字才可能是右板！<br>
-8 1 1 1 11 13 【15】 10 【12】</p>
-<p>有了第三步的规律，其实离答案已经很近了：<br>
-【8】 1 1 1 【11】 9 【13】【15】 10 12 可能的左板在【】里<br>
-8 1 1 1 11 9 13 【15】 10 【12】 可能的右板在【】里<br>
-我们从最左边开始向右遍历可能的左板(8-&gt;11-&gt;13-&gt;15)，从最右边开始向左遍历可能的右板(12-&gt;15)<br>
-开始是【8...12】，面积是8*9=72</p>
-<p>那接下来到底是从左往右的8-&gt;11呢还是从右往左的12-&gt;15呢？如果是12-&gt;15，<br>
-那明显面积是变小了；而8-&gt;11,面积可能增大！所以我们每次选择较短的板，<br>
-往左（或右）移，记录面积，直到左右碰头为止。</p>
-<p>正确性：按照上面的思路下来，正确性就很明显了。</p>
-<p>&quot;&quot;&quot;</p>
-<pre><code class="language-python">class Solution:
-    def maxArea(self, height: List[int]) -&gt; int:
-        i, j, res = 0, len(height) - 1, 0
-        while i &lt; j:
-            if height[i] &lt; height[j]:
-                res = max(res, height[i] * (j - i))
-                i += 1
-            else:
-                res = max(res, height[j] * (j - i))
-                j -= 1
-        return res
-
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[中等8. 字符串转换整数]]></title>
-        <id>https://ganhan999.github.io/post/8、字符串转换整数/</id>
-        <link href="https://ganhan999.github.io/post/8、字符串转换整数/">
-        </link>
-        <updated>2020-12-13T10:35:00.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
-<p>&quot;&quot;&quot;<br>
-请你来实现一个 atoi 函数，使其能将字符串转换成整数。</p>
-<p>首先，该函数会根据需要丢弃无用的开头空格字符，直到寻找到第一个非空格的字符为止。接下来的转化规则如下：</p>
-<p>如果第一个非空字符为正或者负号时，则将该符号与之后面尽可能多的连续数字字符组合起来，形成一个有符号整数。<br>
-假如第一个非空字符是数字，则直接将其与之后连续的数字字符组合起来，形成一个整数。<br>
-该字符串在有效的整数部分之后也可能会存在多余的字符，那么这些字符可以被忽略，它们对函数不应该造成影响。<br>
-注意：假如该字符串中的第一个非空格字符不是一个有效整数字符、字符串为空或字符串仅包含空白字符时，则你的函数不需要进行转换，即无法进行有效转换。</p>
-<p>在任何情况下，若函数不能进行有效的转换时，请返回 0 。</p>
-<p>示例 1:<br>
-输入: &quot;42&quot;<br>
-输出: 42</p>
-<p>示例 2:<br>
-输入: &quot;   -42&quot;<br>
-输出: -42<br>
-解释: 第一个非空白字符为 '-', 它是一个负号。<br>
-我们尽可能将负号与后面所有连续出现的数字组合起来，最后得到 -42 。</p>
-<p>示例 3:<br>
-输入: &quot;4193 with words&quot;<br>
-输出: 4193<br>
-解释: 转换截止于数字 '3' ，因为它的下一个字符不为数字。</p>
-<p>示例 4:<br>
-输入: &quot;words and 987&quot;<br>
-输出: 0<br>
-解释: 第一个非空字符是 'w', 但它不是数字或正、负号。<br>
-因此无法执行有效的转换。</p>
-<p>示例 5:<br>
-输入: &quot;-91283472332&quot;<br>
-输出: -2147483648<br>
-解释: 数字 &quot;-91283472332&quot; 超过 32 位有符号整数范围。<br>
-因此返回 INT_MIN (−231) 。<br>
-&quot;&quot;&quot;</p>
-<h1 id="本体思路">本体思路</h1>
-<p>遍历每一个元素，判断是不是正负号或者数字</p>
-<h1 id="我的做法">#我的做法：</h1>
-<pre><code class="language-python">
-class Solution:
-    def myAtoi(self, s: str) -&gt; int:
-        if s==&quot;&quot;:
-            return 0
-        state=1
-        flag=0
-        s1=&quot;&quot;
-        for i in s:
-            if flag==0:
-                if i==&quot;-&quot;:
-                    s1+=i
-                    flag=1
-                elif i==&quot;+&quot;:
-                    s1 += i
-                    flag=1
-                elif i.isnumeric():
-                    s1 += i
-                    flag=1
-                elif i.isspace():
-                    continue
-                else:
-                    return 0
-            else:
-                if i.isnumeric():
-                    s1 += i
-                else:
-                    break
-        if flag==0:
-            return 0
-        if s1[0]==&quot;-&quot;:
-            state=0
-            s1=s1[1:]
-        elif s1[0] == &quot;+&quot;:
-            s1=s1[1:]
-        s1=self.atoi(s1)
-        if state==0:
-            s1=-s1
-        if s1&gt;=-2 ** 31 and s1&lt;=(2 ** 31) - 1:
-            return s1
-        elif s1&lt;-2 ** 31:
-            return  -2 ** 31
-        else:
-            return  (2 ** 31) - 1
-    def atoi(self,s)://字符串转数字
-        s = s[::-1]
-        num = 0
-        for i, v in enumerate(s):
-            offset = ord(v) - ord('0')
-            num += offset * (10 ** i)
-        return num
-</code></pre>
-<p>&quot;&quot;&quot;</p>
-<h1 id="大神做法1">#大神做法1</h1>
-<p>正则表达式</p>
-<p>&quot;&quot;&quot;</p>
-<pre><code class="language-python">class Solution:
-    def myAtoi(self, str: str) -&gt; int:
-        import re
-        mathes=re.match('[ ]*([+-]?\d+)',str)
-        if not mathes:
-            return 0
-        ans=int(mathes.group(1))
-        return min(max(ans,-2**31),2**31-1)
-
-
 </code></pre>
 ]]></content>
     </entry>
