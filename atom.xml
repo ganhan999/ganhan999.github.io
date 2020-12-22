@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ganhan999.github.io/</id>
     <title>Gridea</title>
-    <updated>2020-12-21T11:43:53.583Z</updated>
+    <updated>2020-12-22T13:25:48.541Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ganhan999.github.io/"/>
     <link rel="self" href="https://ganhan999.github.io/atom.xml"/>
@@ -10,6 +10,83 @@
     <logo>https://ganhan999.github.io/images/avatar.png</logo>
     <icon>https://ganhan999.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Gridea</rights>
+    <entry>
+        <title type="html"><![CDATA[中等19. 删除链表的倒数第N个节点]]></title>
+        <id>https://ganhan999.github.io/post/19、删除链表的倒数第N个节点 /</id>
+        <link href="https://ganhan999.github.io/post/19、删除链表的倒数第N个节点 /">
+        </link>
+        <updated>2020-12-22T13:19:12.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
+<p>&quot;&quot;&quot;</p>
+<p>给定一个链表，删除链表的倒数第 n 个节点，并且返回链表的头结点。</p>
+<p>示例：<br>
+给定一个链表: 1-&gt;2-&gt;3-&gt;4-&gt;5, 和 n = 2.<br>
+当删除了倒数第二个节点后，链表变为 1-&gt;2-&gt;3-&gt;5.<br>
+&quot;&quot;&quot;</p>
+<h1 id="本体思路">本体思路</h1>
+<p>一种容易想到的方法是，我们首先从头节点开始对链表进行一次遍历，<br>
+得到链表的长度 LL。随后我们再从头节点开始对链表进行一次遍历，<br>
+当遍历到第 L-n+1L−n+1 个节点时，它就是我们需要删除的节点。</p>
+<h1 id="我的做法">#我的做法：</h1>
+<pre><code class="language-python">class Solution:
+    def removeNthFromEnd(self, head: ListNode, n: int) -&gt; ListNode:
+        def getlength(head):
+            length=0
+            while head:
+                length+=1
+                head=head.next
+            return length
+        dummy=ListNode(0,head)
+        length=getlength(head)
+        cur=dummy
+        for i in range(1,length-n+1):
+            cur=cur.next
+        cur.next=cur.next.next
+</code></pre>
+<p>&quot;&quot;&quot;</p>
+<h1 id="大神做法">大神做法：</h1>
+<p>用栈</p>
+<p>我们也可以在遍历链表的同时将所有节点依次入栈。<br>
+根据栈「先进后出」的原则，我们弹出栈的第 n 个节点就是需要删除的节点，<br>
+并且目前栈顶的节点就是待删除节点的前驱节点。这样一来，删除操作就变得十分方便了。</p>
+<pre><code class="language-python">class Solution:
+    def removeNthFromEnd(self, head: ListNode, n: int) -&gt; ListNode:
+        dummy = ListNode(0, head)
+        stack = list()
+        cur = dummy
+        while cur:
+            stack.append(cur)
+            cur = cur.next
+
+        for i in range(n):
+            stack.pop()
+
+        prev = stack[-1]
+        prev.next = prev.next.next
+        return dummy.next
+</code></pre>
+<p>&quot;&quot;&quot;</p>
+<h1 id="大神做法2">大神做法2：</h1>
+<p>快慢指针<br>
+快指针先走n个节点，然后再通知遍历，这样当快指针到最后的时候，慢指针指向了倒数第n个结点。</p>
+<pre><code class="language-python">class Solution:
+    def removeNthFromEnd(self, head: ListNode, n: int) -&gt; ListNode:
+        dummy = ListNode(0, head)
+        first = head
+        second = dummy
+        for i in range(n):
+            first = first.next
+
+        while first:
+            first = first.next
+            second = second.next
+
+        second.next = second.next.next
+        return dummy.next
+
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[中等18. 四数之和]]></title>
         <id>https://ganhan999.github.io/post/18、四数之和/</id>
@@ -3174,79 +3251,6 @@ $.ajax({url:&quot;test.html&quot;,context:document.body,success:function(){
                 else:
                     L = L + 1
         return res
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[中等12. 整数转罗马数字]]></title>
-        <id>https://ganhan999.github.io/post/12、整数转罗马数字 /</id>
-        <link href="https://ganhan999.github.io/post/12、整数转罗马数字 /">
-        </link>
-        <updated>2020-12-15T09:49:46.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
-<p>&quot;&quot;&quot;<br>
-罗马数字包含以下七种字符： I， V， X， L，C，D 和 M。<br>
-字符          数值<br>
-I             1<br>
-V             5<br>
-X             10<br>
-L             50<br>
-C             100<br>
-D             500<br>
-M             1000<br>
-例如， 罗马数字 2 写做 II ，即为两个并列的 1。12 写做 XII ，即为 X + II 。<br>
-27 写做  XXVII, 即为 XX + V + II 。<br>
-通常情况下，罗马数字中小的数字在大的数字的右边。但也存在特例，例如 4 不写做 IIII，而是 IV。<br>
-数字 1 在数字 5 的左边，所表示的数等于大数 5 减小数 1 得到的数值 4 。同样地，数字 9 表示为 IX。<br>
-这个特殊的规则只适用于以下六种情况：</p>
-<p>I 可以放在 V (5) 和 X (10) 的左边，来表示 4 和 9。<br>
-X 可以放在 L (50) 和 C (100) 的左边，来表示 40 和 90。<br>
-C 可以放在 D (500) 和 M (1000) 的左边，来表示 400 和 900。<br>
-给定一个整数，将其转为罗马数字。输入确保在 1 到 3999 的范围内。</p>
-<p>示例 1:<br>
-输入: 3<br>
-输出: &quot;III&quot;</p>
-<p>示例 2:<br>
-输入: 4<br>
-输出: &quot;IV&quot;</p>
-<p>示例 3:<br>
-输入: 9<br>
-输出: &quot;IX&quot;</p>
-<p>示例 4:<br>
-输入: 58<br>
-输出: &quot;LVIII&quot;<br>
-解释: L = 50, V = 5, III = 3.</p>
-<p>示例 5:<br>
-输入: 1994<br>
-输出: &quot;MCMXCIV&quot;<br>
-解释: M = 1000, CM = 900, XC = 90, IV = 4.<br>
-&quot;&quot;&quot;</p>
-<h1 id="本体思路">本体思路</h1>
-<p>贪心算法</p>
-<h1 id="我的做法">#我的做法：</h1>
-<pre><code class="language-python">class Solution:
-    def intToRoman(self, num: int) -&gt; str:
-        # 使用哈希表，按照从大到小顺序排列
-        hashmap = {1000:'M', 900:'CM', 500:'D', 400:'CD', 100:'C', 90:'XC', 50:'L', 40:'XL', 10:'X', 9:'IX', 5:'V', 4:'IV', 1:'I'}
-        res = ''
-        for key in hashmap:
-            if num // key != 0:
-                count = num // key  # 比如输入4000，count 为 4
-                res += hashmap[key] * count
-                num %= key
-        return res
-</code></pre>
-<p>&quot;&quot;&quot;</p>
-<h1 id="大神做法">#大神做法</h1>
-<p>暴力算法</p>
-<p>&quot;&quot;&quot;</p>
-<pre><code class="language-python">class Solution:
-    def intToRoman(self, num: int) -&gt; str:
-        M = [&quot;&quot;, &quot;M&quot;, &quot;MM&quot;, &quot;MMM&quot;] # 1000，2000，3000
-        C = [&quot;&quot;, &quot;C&quot;, &quot;CC&quot;, &quot;CCC&quot;, &quot;CD&quot;, &quot;D&quot;, &quot;DC&quot;, &quot;DCC&quot;, &quot;DCCC&quot;, &quot;CM&quot;] # 100~900
-        X = [&quot;&quot;, &quot;X&quot;, &quot;XX&quot;, &quot;XXX&quot;, &quot;XL&quot;, &quot;L&quot;, &quot;LX&quot;, &quot;LXX&quot;, &quot;LXXX&quot;, &quot;XC&quot;] # 10~90
-        I = [&quot;&quot;, &quot;I&quot;, &quot;II&quot;, &quot;III&quot;, &quot;IV&quot;, &quot;V&quot;, &quot;VI&quot;, &quot;VII&quot;, &quot;VIII&quot;, &quot;IX&quot;] # 1~9
-        return M[num//1000] + C[(num%1000)//100] + X[(num%100)//10] + I[num%10]
 </code></pre>
 ]]></content>
     </entry>
