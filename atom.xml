@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ganhan999.github.io/</id>
     <title>Gridea</title>
-    <updated>2020-12-23T14:25:29.539Z</updated>
+    <updated>2020-12-25T13:22:51.380Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ganhan999.github.io/"/>
     <link rel="self" href="https://ganhan999.github.io/atom.xml"/>
@@ -10,6 +10,89 @@
     <logo>https://ganhan999.github.io/images/avatar.png</logo>
     <icon>https://ganhan999.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Gridea</rights>
+    <entry>
+        <title type="html"><![CDATA[中等29. 两数相除]]></title>
+        <id>https://ganhan999.github.io/post/29、两数相除/</id>
+        <link href="https://ganhan999.github.io/post/29、两数相除/">
+        </link>
+        <updated>2020-12-25T14:19:12.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
+<p>给定两个整数，被除数 dividend 和除数 divisor。将两数相除，要求不使用乘法、除法和 mod 运算符。</p>
+<p>返回被除数 dividend 除以除数 divisor 得到的商。</p>
+<p>整数除法的结果应当截去（truncate）其小数部分，例如：truncate(8.345) = 8 以及 truncate(-2.7335) = -2</p>
+<p>示例 1:<br>
+输入: dividend = 10, divisor = 3<br>
+输出: 3<br>
+解释: 10/3 = truncate(3.33333..) = truncate(3) = 3</p>
+<p>示例 2:<br>
+输入: dividend = 7, divisor = -3<br>
+输出: -2<br>
+解释: 7/-3 = truncate(-2.33333..) = -2</p>
+<h1 id="本体思路">本体思路</h1>
+<p>题干中说明不能用乘法和除法, 那么我们可以用减法, 被除数最多可以减多少个除数还能保证是非负的即可.</p>
+<h1 id="大神做法1">#大神做法1：</h1>
+<pre><code class="language-python">class Solution:
+    def divide(self, dividend, divisor):
+        sig = True if dividend*divisor &gt; 0 else False  # 判断二者相除是正or负
+        dividend, divisor= abs(dividend), abs(divisor)  # 将被除数和除数都变成正数
+        count = 0  # 用来表示减去了多少个除数，也就是商为多少
+        while divisor &lt;= dividend:  # 当被除数小于除数的时候终止循环
+            dividend -= divisor
+            count += 1
+        res = count if sig == True else -count  # 给结果加上符号
+        return max(min(res, 2**31-1), -2**31)
+
+</code></pre>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="大神做法2">大神做法2：</h1>
+<p>比如 divide(20, 3)：</p>
+<p>先将3不断翻倍，知道超过20，翻1次为2倍得6，翻2次为4倍得12，翻3次为8倍的24<br>
+这时4倍12是我们需要的值<br>
+递归 4 + divide(20-12, 3)<br>
+递归出口为：被除数 &lt; 除数时返回0， 被除数 == 除数时返回1<br>
+需要额外处理被除数和除数不同号</p>
+<p>用翻倍的形式减少时间！！</p>
+<pre><code class="language-python">class Solution:
+	def divide(self, dividend: int, divisor: int) -&gt; int:
+		def recursion(dividend, divisor):
+			if dividend &lt; divisor:
+				return 0
+			if dividend == divisor:
+				return 1
+			nn = 1
+			dd = divisor
+			while True:
+				if dividend &gt; dd:
+					n = nn
+					nn += nn
+					d = dd
+					dd += dd#翻倍
+				elif dividend == dd:
+					return nn
+				else:
+					return n + recursion(dividend - d, divisor)
+
+		if dividend &gt;= 0:
+			if divisor &gt; 0:
+				positive = True
+			else:
+				positive = False
+		else:
+			if divisor &gt; 0:
+				positive = False
+			else:
+				positive = True
+		ans = recursion(abs(dividend), abs(divisor))
+		if positive:
+			if ans &gt; 2 ** 31 - 1:
+				return 2 ** 31 - 1
+			else:
+				return ans
+		else:
+			return -ans
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[中等24. 两两交换链表中的节点]]></title>
         <id>https://ganhan999.github.io/post/24、两两交换链表中的节点/</id>
@@ -3234,50 +3317,6 @@ $.ajax({url:&quot;test.html&quot;,context:document.body,success:function(){
 </blockquote>
 <p>1、如何巩固JS（看jQuery源码，看游戏源码！）</p>
 <p>2、巩固HTML、CSS（扒网站，全部down下来，然后对应修改看效果~）</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[中等16. 最接近的三数之和]]></title>
-        <id>https://ganhan999.github.io/post/16、最接近的三数之和/</id>
-        <link href="https://ganhan999.github.io/post/16、最接近的三数之和/">
-        </link>
-        <updated>2020-12-17T15:19:12.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
-<p>&quot;&quot;&quot;</p>
-<p>给定一个包括 n 个整数的数组 nums 和 一个目标值 target。找出 nums 中的三个整数，使得它们的和与target 最接近。返回这三个数的和。假定每组输入只存在唯一答案。</p>
-<p>示例：<br>
-输入：nums = [-1,2,1,-4], target = 1<br>
-输出：2<br>
-解释：与 target 最接近的和是 2 (-1 + 2 + 1 = 2) 。<br>
-&quot;&quot;&quot;</p>
-<h1 id="本体思路">本体思路</h1>
-<p>和上一题差不多，排序＋双指针法，排序后可以化简为双指针的twosum题</p>
-<h1 id="我的做法">#我的做法：</h1>
-<pre><code class="language-python">class Solution:
-    def threeSumClosest(self, nums: List[int], target: int) -&gt; int:
-        n = len(nums)
-        if (not nums or n &lt; 3):
-            return []
-        nums.sort()
-        d = float('inf')
-        for i in range(n):
-            if (i &gt; 0 and nums[i] == nums[i - 1]):
-                continue
-            L = i + 1
-            R = n - 1
-            while (L &lt; R):
-                x = (nums[i] + nums[L] + nums[R]) - target
-                if (nums[i] + nums[L] + nums[R] == target):
-                    return nums[i] + nums[L] + nums[R]
-                if abs(x)&lt;d:
-                    ans = nums[i] + nums[L] + nums[R]
-                    d=abs(x)
-                if x&gt;0:
-                    R=R-1
-                else:
-                    L = L + 1
-        return ans
-</code></pre>
 ]]></content>
     </entry>
 </feed>
