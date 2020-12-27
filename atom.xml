@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ganhan999.github.io/</id>
     <title>Gridea</title>
-    <updated>2020-12-26T08:56:44.699Z</updated>
+    <updated>2020-12-27T05:23:53.399Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ganhan999.github.io/"/>
     <link rel="self" href="https://ganhan999.github.io/atom.xml"/>
@@ -10,6 +10,166 @@
     <logo>https://ganhan999.github.io/images/avatar.png</logo>
     <icon>https://ganhan999.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Gridea</rights>
+    <entry>
+        <title type="html"><![CDATA[Java Ajax]]></title>
+        <id>https://ganhan999.github.io/post/Java Ajax/</id>
+        <link href="https://ganhan999.github.io/post/Java Ajax/">
+        </link>
+        <updated>2020-12-27T11:18:25.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="ajax">Ajax</h1>
+<p>AjAX=Asynchronous javaScript and XML(异步的javaScript和XML)。</p>
+<p>Ajax不是一种新的编程语言，而是一种用于创建更好更快以及交互性更强的Web应用程序的技术</p>
+<p>C/S</p>
+<p>增加B/S的体验性</p>
+<p>B/S：未来的主流，并且会爆发式的持续增长；</p>
+<p>H5+网页+客户端+手机端</p>
+<p>使用JQuery需要先导入jQuery的js文件；</p>
+<pre><code class="language-html">Copy@Controller
+@RequestMapping(&quot;/ajax&quot;)
+public class AjaxController{
+    //第一种方式，服务器要返回一个字符串，直接使用response
+    @RequestMapping(&quot;/a1&quot;)
+    public void ajax(String name,HttpServletResponse response){
+        if(&quot;admin&quot;.equals(name)){
+            response.getWriter().print(&quot;true&quot;);
+        }else{
+            response.getWriter().print(&quot;false&quot;);
+        }
+    }
+}
+
+@RequestMapping(&quot;/a2&quot;)
+@ResponseBody
+public List&lt;User&gt; ajax2(){
+    List&lt;User&gt; list =new ArrayList&lt;&gt;();
+    User user1 =new User(&quot;豪&quot;,1,&quot;男&quot;);
+    User user2=new User(&quot;豪&quot;,1,&quot;男&quot;);
+    list.add(user1);
+    list.add(user2);
+    return list; //由于加了@ResponseBody注解，他会返回一个字符串
+}
+</code></pre>
+<p>ajax 写法</p>
+<pre><code class="language-html">Copy&lt;script type=&quot;text/javascript&quot;&gt;
+    function a1() {
+        //所有参数：
+        //url:待载入页面的URL地址，Json
+        //data:待发送Key/value参数
+        //success:载入成功时回调函数
+        //data：封装了服务器返回的数据
+        //status：状态
+        $.ajax({
+            url:&quot;${pageContext.request.contextPath}/ajax/a1&quot;,
+            data:{&quot;name&quot;:$(&quot;txtName&quot;).val()},
+            success:function (data,status) {
+                console.log(data)
+                console.log(status)
+            }
+        });
+        //将文本输入的值，
+        $(&quot;txtName&quot;).val();
+        // //发送给服务器，
+        // //接受服务器返回的数据
+    }
+Copy&lt;script&gt;
+    $(function(){
+        $(&quot;#btn&quot;).click(function(){
+            $.post(&quot;${pageContest.request.contextPath}/ajax/a2&quot;,function(data){
+                console.log(data);
+                var html=&quot;&quot;;
+                for(var i=0;i&lt;data.length;i++){
+                    html+=&quot;&lt;tr&gt;&quot;+
+                        &quot;&lt;td&gt;&quot;+data[i].name+&quot;&lt;/td&gt;&quot;+
+                        &quot;&lt;td&gt;&quot;+data[i].age+&quot;&lt;/td&gt;&quot;+
+                        &quot;&lt;td&gt;&quot;+data[i].sex+&quot;&lt;/td&gt;&quot;+
+                        &quot;&lt;/tr&gt;&quot;
+                }
+                $(&quot;#content&quot;).html(html);
+            })
+        })
+})
+&lt;/script&gt;    
+</code></pre>
+<h2 id="第三种">第三种<a href="https://www.cnblogs.com/small-hao/p/13190663.html#3506785055">#</a></h2>
+<pre><code class="language-html">Copy@RequestMapping(&quot;/a3&quot;)
+@ResponseBody
+public String ajax3(String name,String pwd){
+    String msg=&quot;&quot;;
+    if(name!=null){
+        if(&quot;admin&quot;.equals(name)){
+            msg=&quot;ok&quot;;
+        }else{
+            msg=&quot;用户名有误&quot;；
+        }
+    }
+    if(pwd != null){
+        if(&quot;123456&quot;.equals(pwd)){
+            msg=&quot;ok&quot;;
+        }else{
+            msg=&quot;密码输入有误&quot;;
+        }
+            
+    }
+    return msg;
+}
+Copy&lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;Title&lt;/title&gt;
+        &lt;script&gt;
+            function a1(){
+                $.post({
+                    url:&quot;${pageContext.request.contextPath}/ajax/a3&quot;,
+                    data:{&quot;name&quot;:$(&quot;#name&quot;).val()},
+                    success:function(data){
+                        if(data.toString()=='ok'){
+                            //信息核对成功
+                            $('#userInfo').css(&quot;color&quot;,&quot;green&quot;);
+                        }else{
+                            $(&quot;#userInfo&quot;).css(&quot;color&quot;,&quot;red&quot;);
+                        }
+                        $(&quot;#userInfo&quot;).html(data);
+                    }
+                })
+            }
+            function a2(){
+                $.post(&quot;${pageContext.request.contextPath}/ajax/a3&quot;,{&quot;pwd&quot;:$(&quot;pwd&quot;).val()},function(data){
+                    if(data.toString()='ok'){//信息核对成功
+                        $('#pwdInfo').css(&quot;color&quot;,&quot;green&quot;);                     
+                    }else{
+                        $('#pwdInfo').css(&quot;color&quot;,&quot;red&quot;);
+                    }
+                    $(&quot;#pwdInfo&quot;).html(data);
+                })
+            }
+        &lt;/script&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;p&gt;
+            用户名：
+            &lt;input type=&quot;text&quot; id=&quot;name&quot; onblur=&quot;a1()&quot;/&gt;
+            &lt;span id=&quot;userInfo&quot;&gt;&lt;/span&gt;
+        &lt;/p&gt;
+        &lt;p&gt;
+                密码：
+            &lt;input type=&quot;text&quot; id=&quot;pwd&quot; onblur=&quot;a2()&quot;/&gt;
+            &lt;span id=&quot;pwdInfo&quot;&gt;&lt;/span&gt;
+            
+        &lt;/p&gt;   
+        
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p><strong>Ajax 总结：</strong></p>
+<p>使用jQuery需要导入JQuery，使用Vue就导入Vue，两个都用，自己原生态实现</p>
+<p><strong>三步曲：</strong></p>
+<p>1.编写对应处理的Controller,返回消息或者字符串汇总json格式的数据</p>
+<p>2.编写ajax请求</p>
+<p>1.url: Controller 请求</p>
+<p>2.data： 键值对</p>
+<p>3 . SUCCESS: 回调函数</p>
+<p>3.给Ajax绑定事件，点击click，失去焦点onblur,键盘弹起keyup</p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[中等31. 下一个排列]]></title>
         <id>https://ganhan999.github.io/post/31、下一个排列/</id>
@@ -2361,65 +2521,6 @@ MySQL数据库备份方法
 7、你还在坚持跑步嘛？<br>
 8、你还会和以前的好友偶尔联系嘛？<br>
 9、请与我答复 谢谢<img src="https://ganhan999.github.io//post-images/1608550829657.jpg" alt="" loading="lazy"></p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[中等17. 电话号码的字母组合]]></title>
-        <id>https://ganhan999.github.io/post/17、电话号码的字母组合/</id>
-        <link href="https://ganhan999.github.io/post/17、电话号码的字母组合/">
-        </link>
-        <updated>2020-12-18T12:19:12.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
-<p>&quot;&quot;&quot;</p>
-<p>给定一个仅包含数字 2-9 的字符串，返回所有它能表示的字母组合。<br>
-给出数字到字母的映射如下（与电话按键相同）。注意 1 不对应任何字母。</p>
-<figure data-type="image" tabindex="1"><img src="https://ganhan999.github.io//post-images/1608294231504.png" alt="" loading="lazy"></figure>
-<p>示例:<br>
-输入：&quot;23&quot;<br>
-输出：[&quot;ad&quot;, &quot;ae&quot;, &quot;af&quot;, &quot;bd&quot;, &quot;be&quot;, &quot;bf&quot;, &quot;cd&quot;, &quot;ce&quot;, &quot;cf&quot;].<br>
-&quot;&quot;&quot;</p>
-<h1 id="本体思路">本体思路</h1>
-<p>深度遍历，例如abc def ghi的组合，先adg adh ……</p>
-<h1 id="我的做法">#我的做法：</h1>
-<pre><code class="language-python">class Solution:
-    def letterCombinations(self, digits: str) -&gt; List[str]:
-        if not digits: return []
-
-        phone = {'2': ['a', 'b', 'c'],
-                 '3': ['d', 'e', 'f'],
-                 '4': ['g', 'h', 'i'],
-                 '5': ['j', 'k', 'l'],
-                 '6': ['m', 'n', 'o'],
-                 '7': ['p', 'q', 'r', 's'],
-                 '8': ['t', 'u', 'v'],
-                 '9': ['w', 'x', 'y', 'z']}
-
-        def backtrack(conbination, nextdigit):
-            if len(nextdigit) == 0:
-                res.append(conbination)
-            else:
-                for letter in phone[nextdigit[0]]:
-                    backtrack(conbination + letter, nextdigit[1:])
-
-        res = []
-        backtrack('', digits)
-        return res
-</code></pre>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="大神做法1">大神做法1：</h1>
-<p>广度遍历，利用队列</p>
-<pre><code class="language-python">class Solution:
-    def letterCombinations(self, digits: str) -&gt; List[str]:
-        if not digits: return []
-        phone = ['abc', 'def', 'ghi', 'jkl', 'mno', 'pqrs', 'tuv', 'wxyz']
-        queue = ['']  # 初始化队列
-        for digit in digits:
-            for _ in range(len(queue)):
-                tmp = queue.pop(0)
-                for letter in phone[ord(digit) - 50]:  # 这里我们不使用 int() 转换字符串，使用ASCII码
-                    queue.append(tmp + letter)
-        return queue
-</code></pre>
 ]]></content>
     </entry>
 </feed>

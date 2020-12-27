@@ -4,7 +4,7 @@
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-<title>121、买卖股票的最佳时机 | Gridea</title>
+<title>Java | Gridea</title>
 
 <link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1609046627957">
 
@@ -25,11 +25,11 @@
 
 
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css">
 </head>
 <body>
 <div class="main gt-bg-theme-color-first">
-    <nav class="navbar navbar-expand-lg">
+    <div class="main-content">
+        <nav class="navbar navbar-expand-lg">
     <div class="navbar-brand">
         <img class="user-avatar" src="/images/avatar.png" alt="头像">
         <div class="site-name gt-c-content-color-first">
@@ -85,120 +85,51 @@
     </div>
 </nav>
 
-    <div class="post-container">
-        <div class="post-detail gt-bg-theme-color-second">
-            <article class="gt-post-content">
-                <h2 class="post-title">
-                    121、买卖股票的最佳时机
-                </h2>
-                <div class="post-info">
-                    <time class="post-time gt-c-content-color-first">
-                        · 2020-11-25 ·
-                    </time>
-                    
-                        <a href="https://ganhan999.github.io/tag/cKyYTCK2Y/" class="post-tags">
-                            # leetcode
-                        </a>
-                    
-                </div>
-                <div class="post-content">
-                    <h1 id="题目">题目</h1>
-<p>给定一个数组，它的第 i 个元素是一支给定股票第 i 天的价格。<br>
-如果你最多只允许完成一笔交易（即买入和卖出一支股票一次），<br>
-设计一个算法来计算你所能获取的最大利润。<br>
-注意：你不能在买入股票前卖出股票。</p>
-<p>示例 1:<br>
-输入: [7,1,5,3,6,4]<br>
-输出: 5<br>
-解释: 在第 2 天（股票价格 = 1）的时候买入，在第 5 天（股票价格 = 6）的时候卖出，最大利润 = 6-1 = 5 。<br>
-注意利润不能是 7-1 = 6, 因为卖出价格需要大于买入价格；同时，你不能在买入前卖出股票。</p>
-<p>示例 2:<br>
-输入: [7,6,4,3,1]<br>
-输出: 0<br>
-解释: 在这种情况下, 没有交易完成, 所以最大利润为 0。</p>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="本体思路">本体思路</h1>
-<p>从第一天开始遍历，如果后一天与当前最小值的差值大于最大差值，那么就记录该差值，否则保持不变。<br>
-记得要随时改变最小值。</p>
-<h1 id="我的做法">#我的做法：</h1>
-<pre><code class="language-python">class Solution:
-    def maxProfit(self, prices: List[int]) -&gt; int:
-        if not prices:
-            return 0
-        minval=prices[0]
-        maxans=0
-        for p in prices:
-            minval=min(minval,p)
-            maxans=max(maxans,p-minval)
-        return maxans	
-</code></pre>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="大神做法">#大神做法：</h1>
-<p>动态规划<br>
-dp[i] 表示前 ii 天的最大利润，因为我们始终要使利润最大化，则：<br>
-dp[i] = max(dp[i-1], prices[i]-minprice)</p>
-<pre><code class="language-Python">class Solution:
-    def maxProfit(self, prices: List[int]) -&gt; int:
-        n = len(prices)
-        if n == 0: return 0  # 边界条件
-        dp = [0] * n
-        minprice = prices[0]
-        for i in range(1,n):
-            minprice=min(prices[i],minprice)
-            dp[i]=max(dp[i-1],prices[i]-minprice)
-        return dp[-1]
-</code></pre>
-
-                </div>
-            </article>
+        <div class="current-tag-container">
+            <h2 class="title gt-c-content-color-first">
+                #Java
+            </h2>
         </div>
-
+        <div class="post-list-container">
+    <div class="post-inner">
         
-            <div class="next-post">
-                <div class="next gt-c-content-color-first">下一篇</div>
-                <a href="https://ganhan999.github.io/post/Python算法入门4/" class="post-title gt-a-link">
-                    Python算法入门 (动态规划)
-                </a>
+            <div class="post gt-bg-theme-color-second">
+                <div class="post-left">
+                    <div>
+                        
+                        <a href="https://ganhan999.github.io/post/JavaSE基础1/">
+                            <span class="post-title gt-c-content-color-first">JavaSE基础1</span>
+                        </a>
+                    </div>
+                    <div class="gt-post-content post-abstract gt-c-content-color-second">
+                        
+                    </div>
+                    <div class="post-info">
+                        <time class="post-time gt-c-content-color-first">
+                            发布于 · 2020-11-26 ·
+                        </time>
+                        
+                            <a href="https://ganhan999.github.io/tag/2avA5RaAc/" class="post-tag">
+                                # Java
+                            </a>
+                        
+                    </div>
+                </div>
+                
+                    <a href="https://ganhan999.github.io/post/JavaSE基础1/" class="post-feature-image"
+                       style="background-image: url('https://ganhan999.github.io//post-images/JavaSE基础1.jpg')">
+                    </a>
+                
             </div>
         
-
-        
-            <span id="/post/121、买卖股票的最佳时机/" class="leancloud_visitors" data-flag-title="121、买卖股票的最佳时机">
-                <em class="post-meta-item-text">阅读量 </em>
-                <i class="leancloud-visitors-count">0</i>
-            </span>
-        
-
-        
-
-        
-            <script src='https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js'></script>
-
-<style>
-	div#vcomments{
-		width:100%;
-		max-width: 1000px;
-		padding: 2.5%
-	}
-</style>
-
-
-	<div id="vcomments"></div>
-
-<script>
-	new Valine({
-		el: '#vcomments',
-		appId: '',
-		appKey: '',
-		avatar: '',
-		pageSize: 5,
-		recordIp: true,
-		placeholder: 'Just Go Go',
-		visitor: true,
-	});
-</script>
-
-        
+    </div>
+</div>
+        <div class="pagination-container">
+    
+        <a href="https://ganhan999.github.io/tag/2avA5RaAc/page/2/" class="prev-page gt-a-link">上一页</a>
+    
+    
+</div>
 
         <div class="site-footer gt-c-content-color-first">
     <div class="slogan gt-c-content-color-first">温故而知新</div>
