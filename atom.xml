@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ganhan999.github.io/</id>
     <title>Gridea</title>
-    <updated>2020-12-30T10:14:09.498Z</updated>
+    <updated>2020-12-30T11:44:39.566Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ganhan999.github.io/"/>
     <link rel="self" href="https://ganhan999.github.io/atom.xml"/>
@@ -10,6 +10,72 @@
     <logo>https://ganhan999.github.io/images/avatar.png</logo>
     <icon>https://ganhan999.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Gridea</rights>
+    <entry>
+        <title type="html"><![CDATA[中等36. 有效的数独]]></title>
+        <id>https://ganhan999.github.io/post/36、 有效的数独/</id>
+        <link href="https://ganhan999.github.io/post/36、 有效的数独/">
+        </link>
+        <updated>2020-12-30T12:00:12.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
+<p>判断一个 9x9 的数独是否有效。只需要根据以下规则，验证已经填入的数字是否有效即可。</p>
+<p>数字 1-9 在每一行只能出现一次。<br>
+数字 1-9 在每一列只能出现一次。<br>
+数字 1-9 在每一个以粗实线分隔的 3x3 宫内只能出现一次。</p>
+<p>示例 1:<br>
+输入:<br>
+[<br>
+[&quot;5&quot;,&quot;3&quot;,&quot;.&quot;,&quot;.&quot;,&quot;7&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;],<br>
+[&quot;6&quot;,&quot;.&quot;,&quot;.&quot;,&quot;1&quot;,&quot;9&quot;,&quot;5&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;],<br>
+[&quot;.&quot;,&quot;9&quot;,&quot;8&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;6&quot;,&quot;.&quot;],<br>
+[&quot;8&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;6&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;3&quot;],<br>
+[&quot;4&quot;,&quot;.&quot;,&quot;.&quot;,&quot;8&quot;,&quot;.&quot;,&quot;3&quot;,&quot;.&quot;,&quot;.&quot;,&quot;1&quot;],<br>
+[&quot;7&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;2&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;6&quot;],<br>
+[&quot;.&quot;,&quot;6&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;2&quot;,&quot;8&quot;,&quot;.&quot;],<br>
+[&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;4&quot;,&quot;1&quot;,&quot;9&quot;,&quot;.&quot;,&quot;.&quot;,&quot;5&quot;],<br>
+[&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;8&quot;,&quot;.&quot;,&quot;.&quot;,&quot;7&quot;,&quot;9&quot;]<br>
+]<br>
+输出: true</p>
+<p>示例 2:<br>
+输入:<br>
+[<br>
+[&quot;8&quot;,&quot;3&quot;,&quot;.&quot;,&quot;.&quot;,&quot;7&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;],<br>
+[&quot;6&quot;,&quot;.&quot;,&quot;.&quot;,&quot;1&quot;,&quot;9&quot;,&quot;5&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;],<br>
+[&quot;.&quot;,&quot;9&quot;,&quot;8&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;6&quot;,&quot;.&quot;],<br>
+[&quot;8&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;6&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;3&quot;],<br>
+[&quot;4&quot;,&quot;.&quot;,&quot;.&quot;,&quot;8&quot;,&quot;.&quot;,&quot;3&quot;,&quot;.&quot;,&quot;.&quot;,&quot;1&quot;],<br>
+[&quot;7&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;2&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;6&quot;],<br>
+[&quot;.&quot;,&quot;6&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;2&quot;,&quot;8&quot;,&quot;.&quot;],<br>
+[&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;4&quot;,&quot;1&quot;,&quot;9&quot;,&quot;.&quot;,&quot;.&quot;,&quot;5&quot;],<br>
+[&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;8&quot;,&quot;.&quot;,&quot;.&quot;,&quot;7&quot;,&quot;9&quot;]<br>
+]<br>
+输出: false<br>
+解释: 除了第一行的第一个数字从 5 改为 8 以外，空格内其他数字均与 示例1 相同。<br>
+但由于位于左上角的 3x3 宫内有两个 8 存在, 因此这个数独是无效的。</p>
+<h1 id="本体思路">本体思路</h1>
+<p>一个简单的解决方案是遍历该 9 x 9 数独 三 次，以确保：</p>
+<p>行中没有重复的数字。<br>
+列中没有重复的数字。<br>
+3 x 3 子数独内没有重复的数字。<br>
+实际上，所有这一切都可以在一次迭代中完成。</p>
+<h1 id="大神做法1">#大神做法1：</h1>
+<pre><code class="language-python">class Solution:
+    def isValidSudoku(self, board: List[List[str]]) -&gt; bool:
+        row = [{} for _ in range(9)]
+        col = [{} for _ in range(9)]
+        grid = [[{} for _ in range(3)] for _ in range(3)]
+        for i in range(9):
+            for j in range(9):
+                if board[i][j] != '.':
+                    tmp = int(board[i][j])
+                    row[i][tmp] = row[i].get(tmp, 0) + 1#如果已经存在该数字，那么就继续加一，没有就从0开始
+                    col[j][tmp] = col[j].get(tmp, 0) + 1
+                    grid[i//3][j//3][tmp] = grid[i//3][j//3].get(tmp, 0) + 1
+                    if row[i].get(tmp) &gt; 1 or col[j].get(tmp) &gt; 1 or grid[i//3][j//3].get(tmp) &gt; 1:#如果对应的value大于1说明，存在两次，直接退出循环
+                        return False
+        return True
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Java Mybatis]]></title>
         <id>https://ganhan999.github.io/post/Java Mybatis/</id>
@@ -1182,8 +1248,8 @@ public class Blog {
     </entry>
     <entry>
         <title type="html"><![CDATA[中等34. 在排序数组中查找元素的第一个和最后一个位置]]></title>
-        <id>https://ganhan999.github.io/post/34、在排序数组中查找元素的第一个和最后一个位置/</id>
-        <link href="https://ganhan999.github.io/post/34、在排序数组中查找元素的第一个和最后一个位置/">
+        <id>https://ganhan999.github.io/post/34、在排序数组中查找元素的第一个和最后一个位置 - 副本/</id>
+        <link href="https://ganhan999.github.io/post/34、在排序数组中查找元素的第一个和最后一个位置 - 副本/">
         </link>
         <updated>2020-12-29T12:19:12.000Z</updated>
         <content type="html"><![CDATA[<h1 id="题目">题目</h1>
@@ -4734,76 +4800,6 @@ Copy&lt;html&gt;
         second.next = second.next.next
         return dummy.next
 
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[中等18. 四数之和]]></title>
-        <id>https://ganhan999.github.io/post/18、四数之和/</id>
-        <link href="https://ganhan999.github.io/post/18、四数之和/">
-        </link>
-        <updated>2020-12-21T12:19:12.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
-<p>&quot;&quot;&quot;</p>
-<p>给你一个包含 n 个整数的数组 nums，<br>
-判断 nums 中是否存在三个元素 a，b，c ，<br>
-使得 a + b + c = 0 ？请你找出所有满足条件且不重复的三元组。<br>
-注意：答案中不可以包含重复的三元组。</p>
-<p>示例：<br>
-给定数组 nums = [-1, 0, 1, 2, -1, -4]，<br>
-满足要求的三元组集合为：<br>
-[<br>
-[-1, 0, 1],<br>
-[-1, -1, 2]<br>
-]<br>
-&quot;&quot;&quot;</p>
-<h1 id="本体思路">本体思路</h1>
-<p>我们仍然可以在 O(N^3)O(N 3) 的时间复杂度内通过增加条件判断使得速度得到很大提升。主要考虑以下几点：</p>
-<p>1、指针依次是 p,k,i,j，如果 nums[p] + 3 * nums[p + 1] &gt; target，<br>
-因为 nums 按升序排列，所以之后的数肯定都大于 target 直接 break；</p>
-<p>2、如果 nums[p] + 3 * nums[-1] &lt; target，那么当前的 nums[p] 加其余三个数一定小于 target，故 p 直接下一位即可，continue；</p>
-<p>k 和 p 判断完全一样，只是将 3 变成了 2，target 变成了 target - nums[p]。</p>
-<p>3、同样地，为了避免结果重复，某个指针遇到相同的数需要直接跳过，这与三数之和是一样的。</p>
-<p>排序后，先固定p，再固定k，然后就是双指针选择i和j</p>
-<h1 id="大神做法">#大神做法：</h1>
-<pre><code class="language-python">class Solution:
-    def fourSum(self, nums: List[int], target: int) -&gt; List[List[int]]:
-        nums.sort()
-        n = len(nums)
-        res = []
-        p = 0 # p, k, i, j
-        while p &lt; n - 3:  # 文中提到的条件1和条件2，可以直接跳过
-            if nums[p] + 3 * nums[p + 1] &gt; target: break
-            if nums[p] + 3 * nums[-1] &lt; target:
-                while p &lt; n - 4 and nums[p] == nums[p + 1]:
-                    p += 1
-                p += 1
-                continue
-            k = p + 1#已经确定p的位置了
-            while k &lt; n - 2:   # k 和 p 的判断是一样的
-                if nums[p] + nums[k] + 2 * nums[k + 1] &gt; target: break
-                if nums[p] + nums[k] + 2 * nums[-1] &lt; target:
-                    while k &lt; n - 3 and nums[k] == nums[k + 1]:
-                        k += 1
-                    k += 1
-                    continue
-                i = k + 1
-                j = n - 1
-                new_target = target - nums[p] - nums[k]
-                while i &lt; j:
-                    if nums[i] + nums[j] &gt; new_target: j -= 1
-                    elif nums[i] + nums[j] &lt; new_target: i += 1
-                    else:
-                        res.append([nums[p],nums[k],nums[i],nums[j]])
-                        i += 1
-                        j -= 1
-                        while i &lt; j and nums[i] == nums[i - 1]: i += 1 # 避免结果重复
-                        while i &lt; j and nums[j] == nums[j + 1]: j -= 1 # 避免结果重复
-                while k &lt; n - 3 and nums[k] == nums[k + 1]: k += 1# 避免结果重复
-                k += 1#p没变，p进入下一个值
-            while p &lt; n - 4 and nums[p] == nums[p + 1]: p += 1# 避免结果重复
-            p += 1#p进入下一个值
-        return res
 </code></pre>
 ]]></content>
     </entry>
