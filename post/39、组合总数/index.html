@@ -4,7 +4,7 @@
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-<title>中等24. 两两交换链表中的节点 | Gridea</title>
+<title>中等39. 组合总和 | Gridea</title>
 
 <link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1609414687643">
 
@@ -89,11 +89,11 @@
         <div class="post-detail gt-bg-theme-color-second">
             <article class="gt-post-content">
                 <h2 class="post-title">
-                    中等24. 两两交换链表中的节点
+                    中等39. 组合总和
                 </h2>
                 <div class="post-info">
                     <time class="post-time gt-c-content-color-first">
-                        · 2020-12-23 ·
+                        · 2020-11-09 ·
                     </time>
                     
                         <a href="https://ganhan999.github.io/tag/cKyYTCK2Y/" class="post-tags">
@@ -103,76 +103,125 @@
                 </div>
                 <div class="post-content">
                     <h1 id="题目">题目</h1>
-<p>&quot;&quot;&quot;</p>
-<figure data-type="image" tabindex="1"><img src="https://assets.leetcode.com/uploads/2020/10/03/swap_ex1.jpg" alt="img" loading="lazy"></figure>
-<p>给定一个链表，两两交换其中相邻的节点，并返回交换后的链表。</p>
-<p>你不能只是单纯的改变节点内部的值，而是需要实际的进行节点交换。</p>
+<p>给定一个无重复元素的数组 candidates 和一个目标数 target ，找出 candidates 中所有可以使数字和为 target 的组合。<br>
+candidates 中的数字可以无限制重复被选取。</p>
+<p>说明：<br>
+所有数字（包括 target）都是正整数。<br>
+解集不能包含重复的组合。</p>
 <p>示例 1：<br>
-输入：head = [1,2,3,4]<br>
-输出：[2,1,4,3]</p>
+输入：candidates = [2,3,6,7], target = 7,<br>
+所求解集为：<br>
+[<br>
+[7],<br>
+[2,2,3]<br>
+]</p>
 <p>示例 2：<br>
-输入：head = []<br>
-输出：[]</p>
-<p>示例 3：<br>
-输入：head = [1]<br>
-输出：[1]<br>
-&quot;&quot;&quot;</p>
+输入：candidates = [2,3,5], target = 8,<br>
+所求解集为：<br>
+[<br>
+[2,2,2,2],<br>
+[2,3,3],<br>
+[3,5]<br>
+]</p>
+<p>提示：<br>
+1 &lt;= candidates.length &lt;= 30<br>
+1 &lt;= candidates[i] &lt;= 200<br>
+candidate 中的每个元素都是独一无二的。<br>
+1 &lt;= target &lt;= 500</p>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
 <h1 id="本体思路">本体思路</h1>
-<p>我们来一一分析下，假设链表总长是偶数，那么递归函数执行到终止条件时，head 就等于 null。<br>
-如果链表链表总长是偶数，那么递归函数执行到终止条件时，head.next 就等于 null。<br>
-递归函数内，我们要改变 1-&gt;2 的指向，将其改为 2-&gt;1。<br>
-那后面的节点怎么办呢？不用担心，这是由下一层递归函数来解决。下一层递归函数返回后的节点是 4，<br>
-就是4-&gt;3-&gt;...这样的了，也就是后面的节点都已经串联好了。所以我们只需要将 1 节点指向 4 就可以啦。</p>
-<p>递归出口：当前节点或者下一个节点为空，返回<br>
-方法内容：当前节点next，指向当前节点，指针互换<br>
-返回值：返回交换完成的节点</p>
-<h1 id="大神做法1">#大神做法1：</h1>
-<pre><code class="language-python">class Solution(object):
-	def swapPairs(self, head):
-		# 递归的终止条件
-		if not (head and head.next):
-			return head
-		# 假设链表是 1-&gt;2-&gt;3-&gt;4
-		# 这句就先保存节点2
-		tmp = head.next
-		# 继续递归，处理节点3-&gt;4
-		# 当递归结束返回后，就变成了4-&gt;3
-		# 于是head节点就指向了4，变成1-&gt;4-&gt;3
-		head.next = self.swapPairs(tmp.next)
-		# 将2节点指向1
-		tmp.next = head
-		return tmp
+<p>回溯法</p>
+<p>以 target = 7 为 根结点 ，创建一个分支的时 做减法 ；<br>
+每一个箭头表示：从父亲结点的数值减去边上的数值，得到孩子结点的数值。<br>
+边的值就是题目中给出的 candidate 数组的每个元素的值；<br>
+减到 0 或者负数的时候停止，即：结点 0 和负数结点成为叶子结点；<br>
+所有从根结点到结点 0 的路径（只能从上往下，没有回路）就是题目要找的一个结果。</p>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="大神做法1">大神做法1：</h1>
+<pre><code class="language-python">class Solution:
+    def combinationSum(self, candidates: List[int], target: int) -&gt; List[List[int]]:
+
+        def dfs(candidates, begin, size, path, res, target):
+            if target &lt; 0:
+                return
+            if target == 0:
+                res.append(path)
+                return
+
+            for index in range(begin, size):
+                dfs(candidates, index, size, path + [candidates[index]], res, target - candidates[index])
+
+        size = len(candidates)
+        if size == 0:
+            return []
+        path = []
+        res = []
+        dfs(candidates, 0, size, path, res, target)
+        return res
+
+#复现成功！
 </code></pre>
-<p>&quot;&quot;&quot;</p>
+<p>&quot;&quot;&quot;&quot;&quot;</p>
 <h1 id="大神做法2">大神做法2：</h1>
-<p>利用stack<br>
-我们利用一个 stack，然后不断迭代链表，每次取出两个节点放入 stack 中，再从 stack 中拿出两个节点。<br>
-借助 stack 后进先出的特点，放进去的时候是 1,2 。拿出来的时候就是 2，1 两个节点了。<br>
-再把这两个节点串联起来，重复这个逻辑遍历完整个链表，就可以做到两两反转的效果了。<br>
-虽然用到了 stack，但因为只存了两个元素，所以空间复杂度还是 O(1)O(1)，时间复杂度是 O(n)O(n)。</p>
-<pre><code class="language-python">class Solution(object):
-   def swapPairs(self, head):
-      if not (head and head.next):
-         return head
-      p = ListNode(-1)
-      # 用stack保存每次迭代的两个节点
-      # head指向新的p节点，函数结束时返回head.next即可
-      cur,head,stack = head,p,[]
-      while cur and cur.next:
-         # 将两个节点放入stack中
-         _,_ = stack.append(cur),stack.append(cur.next)
-         # 当前节点往前走两步
-         cur = cur.next.next
-         # 从stack中弹出两个节点，然后用p节点指向新弹出的两个节点
-         p.next = stack.pop()
-         p.next.next = stack.pop()
-         p = p.next.next
-      # 注意边界条件，当链表长度是奇数时，cur就不为空
-      if cur:
-         p.next = cur
-      else:
-         p.next = None
-      return head.next
+<p>剪枝提速</p>
+<p>根据上面画树形图的经验，如果 target 减去一个数得到负数，那么减去一个更大的树依然是负数，同样搜索不到结果。基于这个想法，我们可以对输入数组进行排序，添加相关逻辑达到进一步剪枝的目的；<br>
+排序是为了提高搜索速度，对于解决这个问题来说非必要。但是搜索问题一般复杂度较高，能剪枝就尽量剪枝。实际工作中如果遇到两种方案拿捏不准的情况，都试一下。</p>
+<pre><code class="language-python">class Solution:
+    def combinationSum(self, candidates: List[int], target: int) -&gt; List[List[int]]:
+
+        def dfs(candidates, begin, size, path, res, target):
+            if target == 0:
+                res.append(path)
+                return
+
+            for index in range(begin, size):
+                residue = target - candidates[index]
+                if residue &lt; 0:#在循环内判断是否要剪枝
+                    break
+
+                dfs(candidates, index, size, path + [candidates[index]], res, residue)
+
+        size = len(candidates)
+        if size == 0:
+            return []
+        candidates.sort()
+        path = []
+        res = []
+        dfs(candidates, 0, size, path, res, target)
+        return res
+</code></pre>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;<br>
+Python递归的要点<br>
+1、一定要画图<br>
+2、在最前面写上递归停止的条件<br>
+3、在递归函数后面要写上你相对应的操作，并在最后写上return</p>
+<p>Python迭代的要点<br>
+1、利用while循环将递归变为非递归</p>
+<p>递归和迭代的区别：</p>
+<p>斐波那契数列的实现</p>
+<pre><code>【递归实现】
+
+def fib(x):
+    if x &lt;2:
+        return 0 if x==0 else 1
+    else:
+        return fib(x - 1) + fib(x - 2)
+print(fib(6))
+</code></pre>
+<p>【迭代实现】</p>
+<pre><code>def fib(x):
+    n1 = 1
+    n2 = 1
+    n3 = 1
+    while x-2 &gt; 0:
+       n3 = n2 + n1
+       n1 = n2
+       n2 = n3
+       x -= 1
+   return n3
+
+num = int(input('请输入一个正整数：'))
+print(fib(num))
 </code></pre>
 
                 </div>
@@ -182,14 +231,14 @@
         
             <div class="next-post">
                 <div class="next gt-c-content-color-first">下一篇</div>
-                <a href="https://ganhan999.github.io/post/19、删除链表的倒数第N个节点 /" class="post-title gt-a-link">
-                    中等19. 删除链表的倒数第N个节点
+                <a href="https://ganhan999.github.io/post/python-map-han-shu/" class="post-title gt-a-link">
+                    Python map() 函数
                 </a>
             </div>
         
 
         
-            <span id="/post/24、两两交换链表中的节点/" class="leancloud_visitors" data-flag-title="中等24. 两两交换链表中的节点">
+            <span id="/post/39、组合总数/" class="leancloud_visitors" data-flag-title="中等39. 组合总和">
                 <em class="post-meta-item-text">阅读量 </em>
                 <i class="leancloud-visitors-count">0</i>
             </span>
