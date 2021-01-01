@@ -4,7 +4,7 @@
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-<title>Java权限修饰符 | Gridea</title>
+<title>中等40. 组合总和 II | Gridea</title>
 
 <link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1609500482665">
 
@@ -89,107 +89,104 @@
         <div class="post-detail gt-bg-theme-color-second">
             <article class="gt-post-content">
                 <h2 class="post-title">
-                    Java权限修饰符
+                    中等40. 组合总和 II
                 </h2>
                 <div class="post-info">
                     <time class="post-time gt-c-content-color-first">
-                        · 2020-12-02 ·
+                        · 2021-01-01 ·
                     </time>
                     
-                        <a href="https://ganhan999.github.io/tag/2avA5RaAc/" class="post-tags">
-                            # Java
+                        <a href="https://ganhan999.github.io/tag/cKyYTCK2Y/" class="post-tags">
+                            # leetcode
                         </a>
                     
                 </div>
                 <div class="post-content">
-                    <h2 id="java中有四种权限修饰符">Java中有四种权限修饰符</h2>
-<table>
-<thead>
-<tr>
-<th style="text-align:left"></th>
-<th style="text-align:left">public</th>
-<th style="text-align:left">protected</th>
-<th style="text-align:left">(default)</th>
-<th style="text-align:left">private</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">同一个类</td>
-<td style="text-align:left">yes</td>
-<td style="text-align:left">yes</td>
-<td style="text-align:left">yes</td>
-<td style="text-align:left">yes</td>
-</tr>
-<tr>
-<td style="text-align:left">同一个包</td>
-<td style="text-align:left">yes</td>
-<td style="text-align:left">yes</td>
-<td style="text-align:left">yes</td>
-<td style="text-align:left">no</td>
-</tr>
-<tr>
-<td style="text-align:left">不同包子类</td>
-<td style="text-align:left">yes</td>
-<td style="text-align:left">yes</td>
-<td style="text-align:left">no</td>
-<td style="text-align:left">no</td>
-</tr>
-<tr>
-<td style="text-align:left">不同包非子类</td>
-<td style="text-align:left">yes</td>
-<td style="text-align:left">no</td>
-<td style="text-align:left">no</td>
-<td style="text-align:left">no</td>
-</tr>
-</tbody>
-</table>
-<p>Warning:(default)并不是关键字&quot;default&quot;,而是根本不写</p>
-<p>知识点补充：</p>
-<p><strong>Java语言4种访问权限修饰符</strong></p>
-<p>Java语言4种访问权限修饰符，但是仅有3个关键字，因为不写访问权限，在Java中被称为默认权限，或同包权限，本文中以(default)代替。下面按照权限从小到大的顺序对4种访问权限分别介绍</p>
-<p><strong>1、默认权限(default)</strong></p>
-<p>类，数据成员，构造方法，方法成员，都能够使用默认权限，即不写任何关键字。默认权限即同包权限，同包权限的元素只能在定义它们的类中，以及同包的类中被调用。</p>
-<p><strong>2、受保护权限(protected)</strong></p>
-<p>protected可以修饰数据成员，构造方法，方法成员，不能修饰类(此处指外部类，不考虑内部类)。被protected修饰的成员，能在定义它们的类中，同包的类中被调用。如果有不同包的类想调用它们，那么这个类必须是定义它们的类的子类。</p>
-<p><strong>3、私有权限(private)</strong></p>
-<p>private可以修饰数据成员，构造方法，方法成员，不能修饰类(此处指外部类，不考虑内部类)。被private修饰的成员，只能在定义它们的类中使用，在其他类中不能调用。</p>
-<p><strong>4、公共权限(public)</strong></p>
-<p>public可以修饰类，数据成员，构造方法，方法成员。被public修饰的成员，可以在任何一个类中被调用，不管同包或不同包，是权限最大的一个修饰符。</p>
-<p>有关Java语言的修饰符，需要注意的问题有如下几个：</p>
-<p>1.并不是每个修饰符都可以修饰类(指外部类)，只有public和default可以。</p>
-<p>2.所有修饰符都可以修饰数据成员，方法成员，构造方法。</p>
-<p>3.为了代码安全起见，修饰符不要尽量使用权限大的，而是适用即可。比如，数据成员，如果没有特殊需要，尽可能用private.</p>
-<p>4.修饰符修饰的是“被访问”的权限。</p>
-<p><strong>private：仅对本类可见</strong></p>
-<p><strong>缺省（不需修饰符）：对本包可见</strong></p>
-<p><strong>protected：对本包及所有子类可见</strong></p>
-<p><strong>public：对所有类可见</strong></p>
-<hr>
-<p><strong>修饰符：</strong></p>
-<p><strong>* 权限修饰符：private，默认的，protected，public</strong><br>
-<strong>* 状态修饰符：static，final</strong><br>
-<strong>* 抽象修饰符：abstract</strong></p>
-<p><strong>类：</strong><br>
-<strong>* 权限修饰符：默认修饰符，public</strong><br>
-<strong>* 状态修饰符：final（最终类不能被继承）</strong><br>
-<strong>* 抽象修饰符：abstract</strong></p>
-<p><strong>成员变量：</strong><br>
-<strong>* 权限修饰符：private，默认的，protected，public</strong><br>
-<strong>* 状态修饰符：static，final</strong></p>
-<p><strong>构造方法：</strong><br>
-<strong>* 权限修饰符：private，默认的，protected，public</strong><br>
-*<strong>私有构造方法的情况：当一个类中所有的方法都是静态的，就可以把构造方法私有</strong></p>
-<p><strong>成员方法：</strong><br>
-<strong>* 权限修饰符：private，默认的，protected，public</strong><br>
-<strong>* 状态修饰符：static，final</strong><br>
-<strong>* 抽象修饰符：abstract</strong></p>
-<p><strong>除此以外的组合规则：</strong><br>
-<strong>* 成员变量：public static final</strong><br>
-<strong>* 成员方法：</strong><br>
-<strong>* public static</strong><br>
-<strong>* public abstract</strong><br>
-<strong>* public final</strong></p>
+                    <h1 id="题目">题目</h1>
+<p>定一个数组 candidates 和一个目标数 target ，找出 candidates 中所有可以使数字和为 target 的组合。</p>
+<p>candidates 中的每个数字在每个组合中只能使用一次。</p>
+<p>说明：<br>
+所有数字（包括目标数）都是正整数。<br>
+解集不能包含重复的组合。</p>
+<p>示例 1:<br>
+输入: candidates = [10,1,2,7,6,1,5], target = 8,<br>
+所求解集为:<br>
+[<br>
+[1, 7],<br>
+[1, 2, 5],<br>
+[2, 6],<br>
+[1, 1, 6]<br>
+]</p>
+<p>示例 2:<br>
+输入: candidates = [2,5,2,1,2], target = 5,<br>
+所求解集为:<br>
+[<br>
+[1,2,2],<br>
+[5]<br>
+]</p>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="本体思路">本体思路</h1>
+<p>将数组先排序的思路来自于这个问题：去掉一个数组中重复的元素。很容易想到的方案是：先对数组 升序 排序，重复的元素一定不是排好序以后相同的连续数组区域的第 11 个元素。也就是说，剪枝发生在：同一层数值相同的结点第 22、33 ... 个结点，因为数值相同的第 11 个结点已经搜索出了包含了这个数值的全部结果，同一层的其它结点，候选数的个数更少，搜索出的结果一定不会比第 11 个结点更多，并且是第 11 个结点的子集。（说明：这段文字很拗口，大家可以结合具体例子，在纸上写写画画进行理解。）</p>
+<figure data-type="image" tabindex="1"><img src="https://pic.leetcode-cn.com/1599718525-iXEiiy-image.png" alt="image.png" loading="lazy"></figure>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="大神做法1">大神做法1：</h1>
+<pre><code class="language-python">class Solution:
+    def combinationSum2(self, candidates: List[int], target: int) -&gt; List[List[int]]:
+        def dfs(begin, path, residue):
+            if residue == 0:
+                res.append(path[:])
+                return
+
+            for index in range(begin, size):#这里就避免了重复顺序的问题
+                if candidates[index] &gt; residue:
+                    break
+
+                if index &gt; begin and candidates[index - 1] == candidates[index]:#避免同一层的数字前后相同，见后面解析
+                    continue
+
+                dfs(index+1, path + [candidates[index]], residue - candidates[index])#这里index+1是为了每个元素只出现一次
+
+        size = len(candidates)
+        if size == 0:
+            return []
+        path = []
+        candidates.sort()
+        res = []
+        dfs(0, path, target)
+        return res
+#复现成功！
+
+
+
+
+'''
+这个避免重复当思想是在是太重要了。
+这个方法最重要的作用是，可以让同一层级，不出现相同的元素。即
+                  1
+                 / \
+                2   2  这种情况不会发生 但是却允许了不同层级之间的重复即：
+               /     \
+              5       5
+                例2
+                  1
+                 /
+                2      这种情况确是允许的
+               /
+              2  
+                
+为何会有这种神奇的效果呢？
+首先 cur-1 == cur 是用于判定当前元素是否和之前元素相同的语句。这个语句就能砍掉例1。
+可是问题来了，如果把所有当前与之前一个元素相同的都砍掉，那么例二的情况也会消失。 
+因为当第二个2出现的时候，他就和前一个2相同了。
+                
+那么如何保留例2呢？
+那么就用cur &gt; begin 来避免这种情况，你发现例1中的两个2是处在同一个层级上的，
+例2的两个2是处在不同层级上的。
+在一个for循环中，所有被遍历到的数都是属于一个层级的。我们要让一个层级中，
+必须出现且只出现一个2，那么就放过第一个出现重复的2，但不放过后面出现的2。
+第一个出现的2的特点就是 cur == begin. 第二个出现的2 特点是cur &gt; begin.
+'''
+</code></pre>
 
                 </div>
             </article>
@@ -198,14 +195,14 @@
         
             <div class="next-post">
                 <div class="next gt-c-content-color-first">下一篇</div>
-                <a href="https://ganhan999.github.io/post/160、相交链表/" class="post-title gt-a-link">
-                    160、相交链表
+                <a href="https://ganhan999.github.io/post/Java Spring/" class="post-title gt-a-link">
+                    Java Spring5
                 </a>
             </div>
         
 
         
-            <span id="/post/Java权限修饰符/" class="leancloud_visitors" data-flag-title="Java权限修饰符">
+            <span id="/post/40、组合总数II/" class="leancloud_visitors" data-flag-title="中等40. 组合总和 II">
                 <em class="post-meta-item-text">阅读量 </em>
                 <i class="leancloud-visitors-count">0</i>
             </span>

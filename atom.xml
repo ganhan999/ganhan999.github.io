@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ganhan999.github.io/</id>
     <title>Gridea</title>
-    <updated>2021-01-01T06:53:05.946Z</updated>
+    <updated>2021-01-01T11:28:06.478Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ganhan999.github.io/"/>
     <link rel="self" href="https://ganhan999.github.io/atom.xml"/>
@@ -10,6 +10,99 @@
     <logo>https://ganhan999.github.io/images/avatar.png</logo>
     <icon>https://ganhan999.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, Gridea</rights>
+    <entry>
+        <title type="html"><![CDATA[中等40. 组合总和 II]]></title>
+        <id>https://ganhan999.github.io/post/40、组合总数II/</id>
+        <link href="https://ganhan999.github.io/post/40、组合总数II/">
+        </link>
+        <updated>2021-01-01T11:28:00.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
+<p>定一个数组 candidates 和一个目标数 target ，找出 candidates 中所有可以使数字和为 target 的组合。</p>
+<p>candidates 中的每个数字在每个组合中只能使用一次。</p>
+<p>说明：<br>
+所有数字（包括目标数）都是正整数。<br>
+解集不能包含重复的组合。</p>
+<p>示例 1:<br>
+输入: candidates = [10,1,2,7,6,1,5], target = 8,<br>
+所求解集为:<br>
+[<br>
+[1, 7],<br>
+[1, 2, 5],<br>
+[2, 6],<br>
+[1, 1, 6]<br>
+]</p>
+<p>示例 2:<br>
+输入: candidates = [2,5,2,1,2], target = 5,<br>
+所求解集为:<br>
+[<br>
+[1,2,2],<br>
+[5]<br>
+]</p>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="本体思路">本体思路</h1>
+<p>将数组先排序的思路来自于这个问题：去掉一个数组中重复的元素。很容易想到的方案是：先对数组 升序 排序，重复的元素一定不是排好序以后相同的连续数组区域的第 11 个元素。也就是说，剪枝发生在：同一层数值相同的结点第 22、33 ... 个结点，因为数值相同的第 11 个结点已经搜索出了包含了这个数值的全部结果，同一层的其它结点，候选数的个数更少，搜索出的结果一定不会比第 11 个结点更多，并且是第 11 个结点的子集。（说明：这段文字很拗口，大家可以结合具体例子，在纸上写写画画进行理解。）</p>
+<figure data-type="image" tabindex="1"><img src="https://pic.leetcode-cn.com/1599718525-iXEiiy-image.png" alt="image.png" loading="lazy"></figure>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="大神做法1">大神做法1：</h1>
+<pre><code class="language-python">class Solution:
+    def combinationSum2(self, candidates: List[int], target: int) -&gt; List[List[int]]:
+        def dfs(begin, path, residue):
+            if residue == 0:
+                res.append(path[:])
+                return
+
+            for index in range(begin, size):#这里就避免了重复顺序的问题
+                if candidates[index] &gt; residue:
+                    break
+
+                if index &gt; begin and candidates[index - 1] == candidates[index]:#避免同一层的数字前后相同，见后面解析
+                    continue
+
+                dfs(index+1, path + [candidates[index]], residue - candidates[index])#这里index+1是为了每个元素只出现一次
+
+        size = len(candidates)
+        if size == 0:
+            return []
+        path = []
+        candidates.sort()
+        res = []
+        dfs(0, path, target)
+        return res
+#复现成功！
+
+
+
+
+'''
+这个避免重复当思想是在是太重要了。
+这个方法最重要的作用是，可以让同一层级，不出现相同的元素。即
+                  1
+                 / \
+                2   2  这种情况不会发生 但是却允许了不同层级之间的重复即：
+               /     \
+              5       5
+                例2
+                  1
+                 /
+                2      这种情况确是允许的
+               /
+              2  
+                
+为何会有这种神奇的效果呢？
+首先 cur-1 == cur 是用于判定当前元素是否和之前元素相同的语句。这个语句就能砍掉例1。
+可是问题来了，如果把所有当前与之前一个元素相同的都砍掉，那么例二的情况也会消失。 
+因为当第二个2出现的时候，他就和前一个2相同了。
+                
+那么如何保留例2呢？
+那么就用cur &gt; begin 来避免这种情况，你发现例1中的两个2是处在同一个层级上的，
+例2的两个2是处在不同层级上的。
+在一个for循环中，所有被遍历到的数都是属于一个层级的。我们要让一个层级中，
+必须出现且只出现一个2，那么就放过第一个出现重复的2，但不放过后面出现的2。
+第一个出现的2的特点就是 cur == begin. 第二个出现的2 特点是cur &gt; begin.
+'''
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Java Spring5]]></title>
         <id>https://ganhan999.github.io/post/Java Spring/</id>
@@ -2067,39 +2160,6 @@ candidate 中的每个元素都是独一无二的。<br>
         res = []
         dfs(candidates, 0, size, path, res, target)
         return res
-</code></pre>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;<br>
-Python递归的要点<br>
-1、一定要画图<br>
-2、在最前面写上递归停止的条件<br>
-3、在递归函数后面要写上你相对应的操作，并在最后写上return</p>
-<p>Python迭代的要点<br>
-1、利用while循环将递归变为非递归</p>
-<p>递归和迭代的区别：</p>
-<p>斐波那契数列的实现</p>
-<pre><code>【递归实现】
-
-def fib(x):
-    if x &lt;2:
-        return 0 if x==0 else 1
-    else:
-        return fib(x - 1) + fib(x - 2)
-print(fib(6))
-</code></pre>
-<p>【迭代实现】</p>
-<pre><code>def fib(x):
-    n1 = 1
-    n2 = 1
-    n3 = 1
-    while x-2 &gt; 0:
-       n3 = n2 + n1
-       n1 = n2
-       n2 = n3
-       x -= 1
-   return n3
-
-num = int(input('请输入一个正整数：'))
-print(fib(num))
 </code></pre>
 ]]></content>
     </entry>
@@ -6653,89 +6713,6 @@ Copy&lt;html&gt;
             nums[begin], nums[length] = nums[length], nums[begin]
             begin += 1
             length -= 1
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[中等29. 两数相除]]></title>
-        <id>https://ganhan999.github.io/post/29、两数相除/</id>
-        <link href="https://ganhan999.github.io/post/29、两数相除/">
-        </link>
-        <updated>2020-12-25T14:19:12.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
-<p>给定两个整数，被除数 dividend 和除数 divisor。将两数相除，要求不使用乘法、除法和 mod 运算符。</p>
-<p>返回被除数 dividend 除以除数 divisor 得到的商。</p>
-<p>整数除法的结果应当截去（truncate）其小数部分，例如：truncate(8.345) = 8 以及 truncate(-2.7335) = -2</p>
-<p>示例 1:<br>
-输入: dividend = 10, divisor = 3<br>
-输出: 3<br>
-解释: 10/3 = truncate(3.33333..) = truncate(3) = 3</p>
-<p>示例 2:<br>
-输入: dividend = 7, divisor = -3<br>
-输出: -2<br>
-解释: 7/-3 = truncate(-2.33333..) = -2</p>
-<h1 id="本体思路">本体思路</h1>
-<p>题干中说明不能用乘法和除法, 那么我们可以用减法, 被除数最多可以减多少个除数还能保证是非负的即可.</p>
-<h1 id="大神做法1">#大神做法1：</h1>
-<pre><code class="language-python">class Solution:
-    def divide(self, dividend, divisor):
-        sig = True if dividend*divisor &gt; 0 else False  # 判断二者相除是正or负
-        dividend, divisor= abs(dividend), abs(divisor)  # 将被除数和除数都变成正数
-        count = 0  # 用来表示减去了多少个除数，也就是商为多少
-        while divisor &lt;= dividend:  # 当被除数小于除数的时候终止循环
-            dividend -= divisor
-            count += 1
-        res = count if sig == True else -count  # 给结果加上符号
-        return max(min(res, 2**31-1), -2**31)
-
-</code></pre>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="大神做法2">大神做法2：</h1>
-<p>比如 divide(20, 3)：</p>
-<p>先将3不断翻倍，知道超过20，翻1次为2倍得6，翻2次为4倍得12，翻3次为8倍的24<br>
-这时4倍12是我们需要的值<br>
-递归 4 + divide(20-12, 3)<br>
-递归出口为：被除数 &lt; 除数时返回0， 被除数 == 除数时返回1<br>
-需要额外处理被除数和除数不同号</p>
-<p>用翻倍的形式减少时间！！</p>
-<pre><code class="language-python">class Solution:
-	def divide(self, dividend: int, divisor: int) -&gt; int:
-		def recursion(dividend, divisor):
-			if dividend &lt; divisor:
-				return 0
-			if dividend == divisor:
-				return 1
-			nn = 1
-			dd = divisor
-			while True:
-				if dividend &gt; dd:
-					n = nn
-					nn += nn
-					d = dd
-					dd += dd#翻倍
-				elif dividend == dd:
-					return nn
-				else:
-					return n + recursion(dividend - d, divisor)
-
-		if dividend &gt;= 0:
-			if divisor &gt; 0:
-				positive = True
-			else:
-				positive = False
-		else:
-			if divisor &gt; 0:
-				positive = False
-			else:
-				positive = True
-		ans = recursion(abs(dividend), abs(divisor))
-		if positive:
-			if ans &gt; 2 ** 31 - 1:
-				return 2 ** 31 - 1
-			else:
-				return ans
-		else:
-			return -ans
 </code></pre>
 ]]></content>
     </entry>
