@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ganhan999.github.io/</id>
     <title>Gridea</title>
-    <updated>2021-01-02T13:00:42.576Z</updated>
+    <updated>2021-01-02T13:07:03.477Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ganhan999.github.io/"/>
     <link rel="self" href="https://ganhan999.github.io/atom.xml"/>
@@ -18,7 +18,6 @@
         <updated>2021-01-02T12:58:25.000Z</updated>
         <content type="html"><![CDATA[<h1 id="debug-设置">Debug 设置</h1>
 <p>使用<code>File -&gt; Settings -&gt; Build, Execution, Deployment -&gt; Debugger</code>可以打开Debug设置界面，如下图</p>
-<figure data-type="image" tabindex="1"><img src="https://img-blog.csdn.net/20171229143614851?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvY2dsMTI1MTY3MDE2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述" loading="lazy"></figure>
 <p><code>Transport</code>表示设置 Debug 连接方式，默认是 <code>Socket</code>。<code>Shared memory</code> 是 Windows 特有的一个属性，一般在 Windows 系统下建议使用此设置，相对于 <code>Socket</code> 会快点</p>
 <h1 id="debug-常用快捷键">Debug 常用快捷键</h1>
 <table>
@@ -69,40 +68,38 @@
 </table>
 <h1 id="debug-技巧">Debug 技巧</h1>
 <h2 id="debug-时查看对象的几种方法">Debug 时查看对象的几种方法</h2>
-<p><strong>1. 在<code>Variables</code>窗口直接查看</strong></p>
-<figure data-type="image" tabindex="2"><img src="https://img-blog.csdn.net/20171229150731970?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvY2dsMTI1MTY3MDE2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述" loading="lazy"></figure>
-<p><strong>2. 使用快捷键 <code>Alt + F8</code></strong></p>
-<figure data-type="image" tabindex="3"><img src="https://img-blog.csdn.net/20171229151355081?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvY2dsMTI1MTY3MDE2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述" loading="lazy"></figure>
+<p><strong>1. 在<code>Variables</code>窗口直接查看</strong><br>
+<img src="https://ganhan999.github.io//post-images/1609592767565.png" alt="" loading="lazy"></p>
+<p><strong>2. 使用快捷键 <code>Alt + F8</code></strong><br>
+<img src="https://ganhan999.github.io//post-images/1609592771537.png" alt="" loading="lazy"></p>
 <p>这种方法还可以对变量进行一定的加工，比如</p>
-<figure data-type="image" tabindex="4"><img src="https://img-blog.csdn.net/20171229152256411?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvY2dsMTI1MTY3MDE2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述" loading="lazy"></figure>
-<p>或者</p>
-<figure data-type="image" tabindex="5"><img src="https://img-blog.csdn.net/20171229152443965?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvY2dsMTI1MTY3MDE2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述" loading="lazy"></figure>
-<p><strong>3. 拖动对象到 <code>Watches</code>窗口</strong></p>
-<figure data-type="image" tabindex="6"><img src="https://img-blog.csdn.net/20171229152715529?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvY2dsMTI1MTY3MDE2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述" loading="lazy"></figure>
-<p><strong>4. 鼠标悬停在对象上 2 秒左右</strong></p>
-<figure data-type="image" tabindex="7"><img src="https://img-blog.csdn.net/20171229153122847?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvY2dsMTI1MTY3MDE2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述" loading="lazy"></figure>
+<p><img src="https://ganhan999.github.io//post-images/1609592774981.png" alt="" loading="lazy"><br>
+  或者</p>
+<p><img src="https://ganhan999.github.io//post-images/1609592778043.png" alt="" loading="lazy"><br>
+  <strong>3. 拖动对象到 <code>Watches</code>窗口</strong></p>
+<p><img src="https://ganhan999.github.io//post-images/1609592782248.png" alt="" loading="lazy"><br>
+  <strong>4. 鼠标悬停在对象上 2 秒左右</strong></p>
+<figure data-type="image" tabindex="1"><img src="https://ganhan999.github.io//post-images/1609592786771.png" alt="" loading="lazy"></figure>
 <h2 id="快速跳过后面的断点">快速跳过后面的断点</h2>
 <p>当我们需要过掉后面的所有断点的时候，我们不需要去掉这些断点，只需要点击左下角<code>Mute Breakpoints</code>，之后，所有断点变成灰色，然后我们再按快捷键 <code>F9</code> 即可过掉当前和后面所有的断点，如图</p>
-<figure data-type="image" tabindex="8"><img src="https://img-blog.csdn.net/20171229154030452?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvY2dsMTI1MTY3MDE2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述" loading="lazy"></figure>
-<h2 id="设置断点进入条件">设置断点进入条件</h2>
+<p><img src="https://ganhan999.github.io//post-images/1609592790754.png" alt="" loading="lazy">## 设置断点进入条件</p>
 <p><strong>1. 在断点上点击鼠标右键</strong></p>
-<figure data-type="image" tabindex="9"><img src="https://img-blog.csdn.net/20171229170707623?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvY2dsMTI1MTY3MDE2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述" loading="lazy"></figure>
-<p><strong>2. 使用快捷键 <code>Ctrl + Shift + F8</code></strong></p>
-<figure data-type="image" tabindex="10"><img src="https://img-blog.csdn.net/20171229172000468?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvY2dsMTI1MTY3MDE2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述" loading="lazy"></figure>
-<p>断点进入条件在对循环进行调试时会经常用到，常用于观察循环变量满足某一条件时的循环体执行情况</p>
+<p><img src="https://ganhan999.github.io//post-images/1609592793939.png" alt="" loading="lazy"><br>
+  <strong>2. 使用快捷键 <code>Ctrl + Shift + F8</code></strong></p>
+<p><img src="https://ganhan999.github.io//post-images/1609592798272.png" alt="" loading="lazy"><br>
+  断点进入条件在对循环进行调试时会经常用到，常用于观察循环变量满足某一条件时的循环体执行情况</p>
 <h2 id="更复杂的步入条件">更复杂的步入条件</h2>
 <p>可以设置断点在跳过多少次后开始步入，这在循环中也比较常用，比如要查看一个变量循环 3 次后的结果，设置方法如下图</p>
-<figure data-type="image" tabindex="11"><img src="https://img-blog.csdn.net/20171229172730849?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvY2dsMTI1MTY3MDE2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述" loading="lazy"></figure>
-<p>对于某些不重要的断点，只要步入一次就够了，就可以勾选<code>Remnove once hit</code>，让它步入之后自动删除，如下图</p>
-<figure data-type="image" tabindex="12"><img src="https://img-blog.csdn.net/20171229173110821?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvY2dsMTI1MTY3MDE2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述" loading="lazy"></figure>
-<p>对于某些场景的断点，需要其他断点先触发之后再进行触发，可以如下图选择。默认选择的是： None</p>
-<figure data-type="image" tabindex="13"><img src="https://img-blog.csdn.net/20171229173327489?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvY2dsMTI1MTY3MDE2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述" loading="lazy"></figure>
-<h2 id="从方法体中跳出">从方法体中跳出</h2>
+<p><img src="https://ganhan999.github.io//post-images/1609592802047.png" alt="" loading="lazy"><br>
+  对于某些不重要的断点，只要步入一次就够了，就可以勾选<code>Remnove once hit</code>，让它步入之后自动删除，如下图</p>
+<p><img src="https://ganhan999.github.io//post-images/1609592806560.png" alt="" loading="lazy"><br>
+  对于某些场景的断点，需要其他断点先触发之后再进行触发，可以如下图选择。默认选择的是： None</p>
+<p><img src="https://ganhan999.github.io//post-images/1609592810841.png" alt="" loading="lazy">## 从方法体中跳出</p>
 <p>有时候当我们步入方法体之后，还想回退到方法体外。可以点击 <code>Drop Frame</code> 按钮实现，如下图</p>
-<figure data-type="image" tabindex="14"><img src="https://img-blog.csdn.net/20171229173912059?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvY2dsMTI1MTY3MDE2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述" loading="lazy"></figure>
+<figure data-type="image" tabindex="2"><img src="https://ganhan999.github.io//post-images/1609592814869.png" alt="" loading="lazy"></figure>
 <h2 id="其他">其他</h2>
 <p>如下图</p>
-<figure data-type="image" tabindex="15"><img src="https://img-blog.csdn.net/20171229174549907?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvY2dsMTI1MTY3MDE2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述" loading="lazy"></figure>
+<figure data-type="image" tabindex="3"><img src="https://ganhan999.github.io//post-images/1609592818890.png" alt="" loading="lazy"></figure>
 ]]></content>
     </entry>
     <entry>
