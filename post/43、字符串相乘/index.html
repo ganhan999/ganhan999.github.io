@@ -4,7 +4,7 @@
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-<title>今天是记录博客的第一天 | Gridea</title>
+<title>中等43. 字符串相乘 | Gridea</title>
 
 <link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1609588626922">
 
@@ -89,23 +89,106 @@
         <div class="post-detail gt-bg-theme-color-second">
             <article class="gt-post-content">
                 <h2 class="post-title">
-                    今天是记录博客的第一天
+                    中等43. 字符串相乘
                 </h2>
                 <div class="post-info">
                     <time class="post-time gt-c-content-color-first">
-                        · 2020-11-01 ·
+                        · 2021-01-02 ·
                     </time>
                     
-                        <a href="https://ganhan999.github.io/tag/P1Rgvx92_/" class="post-tags">
-                            # 生活日常
+                        <a href="https://ganhan999.github.io/tag/cKyYTCK2Y/" class="post-tags">
+                            # leetcode
                         </a>
                     
                 </div>
                 <div class="post-content">
-                    <p>从今天开始当一个长远打算的人<br>
-但是目前我还是没有想好<br>
-到底是考公、算法、开发、读博当老师？<br>
-纠结的离谱🤡</p>
+                    <h1 id="题目">题目</h1>
+<p>给定两个以字符串形式表示的非负整数 num1 和 num2，返回 num1 和 num2 的乘积，它们的乘积也表示为字符串形式。</p>
+<p>示例 1:<br>
+输入: num1 = &quot;2&quot;, num2 = &quot;3&quot;<br>
+输出: &quot;6&quot;</p>
+<p>示例 2:<br>
+输入: num1 = &quot;123&quot;, num2 = &quot;456&quot;<br>
+输出: &quot;56088&quot;<br>
+说明：</p>
+<p>num1 和 num2 的长度小于110。<br>
+num1 和 num2 只包含数字 0-9。<br>
+num1 和 num2 均不以零开头，除非是数字 0 本身。<br>
+不能使用任何标准库的大数类型（比如 BigInteger）或直接将输入转换为整数来处理。</p>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="本体思路">本体思路</h1>
+<p>做加法，小学竖列式</p>
+<figure data-type="image" tabindex="1"><img src="https://assets.leetcode-cn.com/solution-static/43/sol1.png" alt="fig1" loading="lazy"></figure>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="大神做法1">大神做法1：</h1>
+<pre><code class="language-python">class Solution:
+    def multiply(self, num1: str, num2: str) -&gt; str:
+        if num1 == &quot;0&quot; or num2 == &quot;0&quot;:
+            return &quot;0&quot;
+
+        ans = &quot;0&quot;
+        m, n = len(num1), len(num2)
+        for i in range(n - 1, -1, -1):
+            add = 0
+            y = int(num2[i])
+            curr = [&quot;0&quot;] * (n - i - 1)
+            for j in range(m - 1, -1, -1):
+                product = int(num1[j]) * y + add
+                curr.append(str(product % 10))
+                add = product // 10
+            if add &gt; 0:
+                curr.append(str(add))
+            curr = &quot;&quot;.join(curr[::-1])
+            ans = self.addStrings(ans, curr)
+
+        return ans
+
+    def addStrings(self, num1: str, num2: str) -&gt; str:#字符串累加
+        i, j = len(num1) - 1, len(num2) - 1
+        add = 0
+        ans = list()
+        while i &gt;= 0 or j &gt;= 0 or add != 0:
+            x = int(num1[i]) if i &gt;= 0 else 0
+            y = int(num2[j]) if j &gt;= 0 else 0
+            result = x + y + add
+            ans.append(str(result % 10))
+            add = result // 10
+            i -= 1
+            j -= 1
+        return &quot;&quot;.join(ans[::-1])
+</code></pre>
+<p>&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="大神做法2">大神做法2：</h1>
+<p>先转int，再乘法，再转字符串</p>
+<pre><code class="language-python">class Solution:
+    def multiply(self, num1: str, num2: str) -&gt; str:
+        # 先将字符串倒序
+        from collections import deque
+        dq_1 = deque(num1)
+        dq_2 = deque(num2)
+
+        dq_1.reverse()
+        dq_2.reverse()
+
+        num1 = &quot;&quot;.join(dq_1)
+        num2 = &quot;&quot;.join(dq_2)
+
+        # 根据长度按数字的位数来恢复数值
+        l1 = len(num1)
+        l2 = len(num2)
+
+        number1 = 0
+        number2 = 0
+
+        for i, j in zip(num1, range(l1)):#假设num1=“123&quot;,zip(num1, range(l1))等于[(1, 0), (2, 1), (3, 2)]，这个方法太妙了
+            number1 += int(i) * 10 ** j
+
+        for i, j in zip(num2, range(l2)):
+            number2 += int(i) * 10 ** j
+
+        return str(number1 * number2)
+
+</code></pre>
 
                 </div>
             </article>
@@ -114,14 +197,14 @@
         
             <div class="next-post">
                 <div class="next gt-c-content-color-first">下一篇</div>
-                <a href="https://ganhan999.github.io/post/hello-gridea/" class="post-title gt-a-link">
-                    Hello Gridea
+                <a href="https://ganhan999.github.io/post/40、组合总数II/" class="post-title gt-a-link">
+                    中等40. 组合总和 II
                 </a>
             </div>
         
 
         
-            <span id="/post/今天是记录博客的第一天/" class="leancloud_visitors" data-flag-title="今天是记录博客的第一天">
+            <span id="/post/43、字符串相乘/" class="leancloud_visitors" data-flag-title="中等43. 字符串相乘">
                 <em class="post-meta-item-text">阅读量 </em>
                 <i class="leancloud-visitors-count">0</i>
             </span>
