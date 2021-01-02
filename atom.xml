@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ganhan999.github.io/</id>
     <title>Gridea</title>
-    <updated>2021-01-02T12:08:23.359Z</updated>
+    <updated>2021-01-02T13:00:42.576Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ganhan999.github.io/"/>
     <link rel="self" href="https://ganhan999.github.io/atom.xml"/>
@@ -10,6 +10,101 @@
     <logo>https://ganhan999.github.io/images/avatar.png</logo>
     <icon>https://ganhan999.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, Gridea</rights>
+    <entry>
+        <title type="html"><![CDATA[IDEA Debug 笔记]]></title>
+        <id>https://ganhan999.github.io/post/IDEA Debug 笔记/</id>
+        <link href="https://ganhan999.github.io/post/IDEA Debug 笔记/">
+        </link>
+        <updated>2021-01-02T12:58:25.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="debug-设置">Debug 设置</h1>
+<p>使用<code>File -&gt; Settings -&gt; Build, Execution, Deployment -&gt; Debugger</code>可以打开Debug设置界面，如下图</p>
+<figure data-type="image" tabindex="1"><img src="https://img-blog.csdn.net/20171229143614851?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvY2dsMTI1MTY3MDE2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述" loading="lazy"></figure>
+<p><code>Transport</code>表示设置 Debug 连接方式，默认是 <code>Socket</code>。<code>Shared memory</code> 是 Windows 特有的一个属性，一般在 Windows 系统下建议使用此设置，相对于 <code>Socket</code> 会快点</p>
+<h1 id="debug-常用快捷键">Debug 常用快捷键</h1>
+<table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>介绍</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>F7</td>
+<td>在 Debug 模式下，进入下一步，如果当前行断点是一个方法，则进入当前方法体内，如果该方法体还有方法，则不会进入该内嵌的方法中</td>
+</tr>
+<tr>
+<td>F8</td>
+<td>在 Debug 模式下，进入下一步，如果当前行断点是一个方法，则不进入当前方法体内</td>
+</tr>
+<tr>
+<td>F9</td>
+<td>在 Debug 模式下，恢复程序运行，但是如果该断点下面代码还有断点则停在下一个断点上</td>
+</tr>
+<tr>
+<td>Alt + F8</td>
+<td>在 Debug 的状态下，选中对象，弹出可输入计算表达式调试框，查看该输入内容的调试结果</td>
+</tr>
+<tr>
+<td>Ctrl + F8</td>
+<td>在 Debug 模式下，设置光标当前行为断点，如果当前已经是断点则去掉断点</td>
+</tr>
+<tr>
+<td>Shift + F7</td>
+<td>在 Debug 模式下，智能步入。断点所在行上有多个方法调用，会弹出进入哪个方法</td>
+</tr>
+<tr>
+<td>Shift + F8</td>
+<td>在 Debug 模式下，跳出，表现出来的效果跟 F9 一样</td>
+</tr>
+<tr>
+<td>Ctrl + Shift + F8</td>
+<td>在 Debug 模式下，指定断点进入条件</td>
+</tr>
+<tr>
+<td>Alt + Shift + F7</td>
+<td>在 Debug 模式下，进入下一步，如果当前行断点是一个方法，则进入当前方法体内，如果方法体还有方法，则会进入该内嵌的方法中，依此循环进入</td>
+</tr>
+</tbody>
+</table>
+<h1 id="debug-技巧">Debug 技巧</h1>
+<h2 id="debug-时查看对象的几种方法">Debug 时查看对象的几种方法</h2>
+<p><strong>1. 在<code>Variables</code>窗口直接查看</strong></p>
+<figure data-type="image" tabindex="2"><img src="https://img-blog.csdn.net/20171229150731970?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvY2dsMTI1MTY3MDE2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述" loading="lazy"></figure>
+<p><strong>2. 使用快捷键 <code>Alt + F8</code></strong></p>
+<figure data-type="image" tabindex="3"><img src="https://img-blog.csdn.net/20171229151355081?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvY2dsMTI1MTY3MDE2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述" loading="lazy"></figure>
+<p>这种方法还可以对变量进行一定的加工，比如</p>
+<figure data-type="image" tabindex="4"><img src="https://img-blog.csdn.net/20171229152256411?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvY2dsMTI1MTY3MDE2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述" loading="lazy"></figure>
+<p>或者</p>
+<figure data-type="image" tabindex="5"><img src="https://img-blog.csdn.net/20171229152443965?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvY2dsMTI1MTY3MDE2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述" loading="lazy"></figure>
+<p><strong>3. 拖动对象到 <code>Watches</code>窗口</strong></p>
+<figure data-type="image" tabindex="6"><img src="https://img-blog.csdn.net/20171229152715529?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvY2dsMTI1MTY3MDE2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述" loading="lazy"></figure>
+<p><strong>4. 鼠标悬停在对象上 2 秒左右</strong></p>
+<figure data-type="image" tabindex="7"><img src="https://img-blog.csdn.net/20171229153122847?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvY2dsMTI1MTY3MDE2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述" loading="lazy"></figure>
+<h2 id="快速跳过后面的断点">快速跳过后面的断点</h2>
+<p>当我们需要过掉后面的所有断点的时候，我们不需要去掉这些断点，只需要点击左下角<code>Mute Breakpoints</code>，之后，所有断点变成灰色，然后我们再按快捷键 <code>F9</code> 即可过掉当前和后面所有的断点，如图</p>
+<figure data-type="image" tabindex="8"><img src="https://img-blog.csdn.net/20171229154030452?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvY2dsMTI1MTY3MDE2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述" loading="lazy"></figure>
+<h2 id="设置断点进入条件">设置断点进入条件</h2>
+<p><strong>1. 在断点上点击鼠标右键</strong></p>
+<figure data-type="image" tabindex="9"><img src="https://img-blog.csdn.net/20171229170707623?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvY2dsMTI1MTY3MDE2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述" loading="lazy"></figure>
+<p><strong>2. 使用快捷键 <code>Ctrl + Shift + F8</code></strong></p>
+<figure data-type="image" tabindex="10"><img src="https://img-blog.csdn.net/20171229172000468?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvY2dsMTI1MTY3MDE2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述" loading="lazy"></figure>
+<p>断点进入条件在对循环进行调试时会经常用到，常用于观察循环变量满足某一条件时的循环体执行情况</p>
+<h2 id="更复杂的步入条件">更复杂的步入条件</h2>
+<p>可以设置断点在跳过多少次后开始步入，这在循环中也比较常用，比如要查看一个变量循环 3 次后的结果，设置方法如下图</p>
+<figure data-type="image" tabindex="11"><img src="https://img-blog.csdn.net/20171229172730849?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvY2dsMTI1MTY3MDE2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述" loading="lazy"></figure>
+<p>对于某些不重要的断点，只要步入一次就够了，就可以勾选<code>Remnove once hit</code>，让它步入之后自动删除，如下图</p>
+<figure data-type="image" tabindex="12"><img src="https://img-blog.csdn.net/20171229173110821?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvY2dsMTI1MTY3MDE2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述" loading="lazy"></figure>
+<p>对于某些场景的断点，需要其他断点先触发之后再进行触发，可以如下图选择。默认选择的是： None</p>
+<figure data-type="image" tabindex="13"><img src="https://img-blog.csdn.net/20171229173327489?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvY2dsMTI1MTY3MDE2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述" loading="lazy"></figure>
+<h2 id="从方法体中跳出">从方法体中跳出</h2>
+<p>有时候当我们步入方法体之后，还想回退到方法体外。可以点击 <code>Drop Frame</code> 按钮实现，如下图</p>
+<figure data-type="image" tabindex="14"><img src="https://img-blog.csdn.net/20171229173912059?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvY2dsMTI1MTY3MDE2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述" loading="lazy"></figure>
+<h2 id="其他">其他</h2>
+<p>如下图</p>
+<figure data-type="image" tabindex="15"><img src="https://img-blog.csdn.net/20171229174549907?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvY2dsMTI1MTY3MDE2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述" loading="lazy"></figure>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[中等43. 字符串相乘]]></title>
         <id>https://ganhan999.github.io/post/43、字符串相乘/</id>
@@ -6584,166 +6679,6 @@ https://www.lanzoux.com/iGLJTdusuyf</a></p>
                     r = mid - 1
         return -1
 </code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Java Ajax]]></title>
-        <id>https://ganhan999.github.io/post/Java Ajax/</id>
-        <link href="https://ganhan999.github.io/post/Java Ajax/">
-        </link>
-        <updated>2020-12-27T11:18:25.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="ajax">Ajax</h1>
-<p>AjAX=Asynchronous javaScript and XML(异步的javaScript和XML)。</p>
-<p>Ajax不是一种新的编程语言，而是一种用于创建更好更快以及交互性更强的Web应用程序的技术</p>
-<p>C/S</p>
-<p>增加B/S的体验性</p>
-<p>B/S：未来的主流，并且会爆发式的持续增长；</p>
-<p>H5+网页+客户端+手机端</p>
-<p>使用JQuery需要先导入jQuery的js文件；</p>
-<pre><code class="language-html">Copy@Controller
-@RequestMapping(&quot;/ajax&quot;)
-public class AjaxController{
-    //第一种方式，服务器要返回一个字符串，直接使用response
-    @RequestMapping(&quot;/a1&quot;)
-    public void ajax(String name,HttpServletResponse response){
-        if(&quot;admin&quot;.equals(name)){
-            response.getWriter().print(&quot;true&quot;);
-        }else{
-            response.getWriter().print(&quot;false&quot;);
-        }
-    }
-}
-
-@RequestMapping(&quot;/a2&quot;)
-@ResponseBody
-public List&lt;User&gt; ajax2(){
-    List&lt;User&gt; list =new ArrayList&lt;&gt;();
-    User user1 =new User(&quot;豪&quot;,1,&quot;男&quot;);
-    User user2=new User(&quot;豪&quot;,1,&quot;男&quot;);
-    list.add(user1);
-    list.add(user2);
-    return list; //由于加了@ResponseBody注解，他会返回一个字符串
-}
-</code></pre>
-<p>ajax 写法</p>
-<pre><code class="language-html">Copy&lt;script type=&quot;text/javascript&quot;&gt;
-    function a1() {
-        //所有参数：
-        //url:待载入页面的URL地址，Json
-        //data:待发送Key/value参数
-        //success:载入成功时回调函数
-        //data：封装了服务器返回的数据
-        //status：状态
-        $.ajax({
-            url:&quot;${pageContext.request.contextPath}/ajax/a1&quot;,
-            data:{&quot;name&quot;:$(&quot;txtName&quot;).val()},
-            success:function (data,status) {
-                console.log(data)
-                console.log(status)
-            }
-        });
-        //将文本输入的值，
-        $(&quot;txtName&quot;).val();
-        // //发送给服务器，
-        // //接受服务器返回的数据
-    }
-Copy&lt;script&gt;
-    $(function(){
-        $(&quot;#btn&quot;).click(function(){
-            $.post(&quot;${pageContest.request.contextPath}/ajax/a2&quot;,function(data){
-                console.log(data);
-                var html=&quot;&quot;;
-                for(var i=0;i&lt;data.length;i++){
-                    html+=&quot;&lt;tr&gt;&quot;+
-                        &quot;&lt;td&gt;&quot;+data[i].name+&quot;&lt;/td&gt;&quot;+
-                        &quot;&lt;td&gt;&quot;+data[i].age+&quot;&lt;/td&gt;&quot;+
-                        &quot;&lt;td&gt;&quot;+data[i].sex+&quot;&lt;/td&gt;&quot;+
-                        &quot;&lt;/tr&gt;&quot;
-                }
-                $(&quot;#content&quot;).html(html);
-            })
-        })
-})
-&lt;/script&gt;    
-</code></pre>
-<h2 id="第三种">第三种<a href="https://www.cnblogs.com/small-hao/p/13190663.html#3506785055">#</a></h2>
-<pre><code class="language-html">Copy@RequestMapping(&quot;/a3&quot;)
-@ResponseBody
-public String ajax3(String name,String pwd){
-    String msg=&quot;&quot;;
-    if(name!=null){
-        if(&quot;admin&quot;.equals(name)){
-            msg=&quot;ok&quot;;
-        }else{
-            msg=&quot;用户名有误&quot;；
-        }
-    }
-    if(pwd != null){
-        if(&quot;123456&quot;.equals(pwd)){
-            msg=&quot;ok&quot;;
-        }else{
-            msg=&quot;密码输入有误&quot;;
-        }
-            
-    }
-    return msg;
-}
-Copy&lt;html&gt;
-    &lt;head&gt;
-        &lt;title&gt;Title&lt;/title&gt;
-        &lt;script&gt;
-            function a1(){
-                $.post({
-                    url:&quot;${pageContext.request.contextPath}/ajax/a3&quot;,
-                    data:{&quot;name&quot;:$(&quot;#name&quot;).val()},
-                    success:function(data){
-                        if(data.toString()=='ok'){
-                            //信息核对成功
-                            $('#userInfo').css(&quot;color&quot;,&quot;green&quot;);
-                        }else{
-                            $(&quot;#userInfo&quot;).css(&quot;color&quot;,&quot;red&quot;);
-                        }
-                        $(&quot;#userInfo&quot;).html(data);
-                    }
-                })
-            }
-            function a2(){
-                $.post(&quot;${pageContext.request.contextPath}/ajax/a3&quot;,{&quot;pwd&quot;:$(&quot;pwd&quot;).val()},function(data){
-                    if(data.toString()='ok'){//信息核对成功
-                        $('#pwdInfo').css(&quot;color&quot;,&quot;green&quot;);                     
-                    }else{
-                        $('#pwdInfo').css(&quot;color&quot;,&quot;red&quot;);
-                    }
-                    $(&quot;#pwdInfo&quot;).html(data);
-                })
-            }
-        &lt;/script&gt;
-    &lt;/head&gt;
-    &lt;body&gt;
-        &lt;p&gt;
-            用户名：
-            &lt;input type=&quot;text&quot; id=&quot;name&quot; onblur=&quot;a1()&quot;/&gt;
-            &lt;span id=&quot;userInfo&quot;&gt;&lt;/span&gt;
-        &lt;/p&gt;
-        &lt;p&gt;
-                密码：
-            &lt;input type=&quot;text&quot; id=&quot;pwd&quot; onblur=&quot;a2()&quot;/&gt;
-            &lt;span id=&quot;pwdInfo&quot;&gt;&lt;/span&gt;
-            
-        &lt;/p&gt;   
-        
-    &lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
-<p><strong>Ajax 总结：</strong></p>
-<p>使用jQuery需要导入JQuery，使用Vue就导入Vue，两个都用，自己原生态实现</p>
-<p><strong>三步曲：</strong></p>
-<p>1.编写对应处理的Controller,返回消息或者字符串汇总json格式的数据</p>
-<p>2.编写ajax请求</p>
-<p>1.url: Controller 请求</p>
-<p>2.data： 键值对</p>
-<p>3 . SUCCESS: 回调函数</p>
-<p>3.给Ajax绑定事件，点击click，失去焦点onblur,键盘弹起keyup</p>
 ]]></content>
     </entry>
 </feed>
