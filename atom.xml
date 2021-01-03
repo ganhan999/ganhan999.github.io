@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ganhan999.github.io/</id>
     <title>Gridea</title>
-    <updated>2021-01-02T13:07:03.477Z</updated>
+    <updated>2021-01-03T13:23:04.384Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ganhan999.github.io/"/>
     <link rel="self" href="https://ganhan999.github.io/atom.xml"/>
@@ -10,6 +10,2137 @@
     <logo>https://ganhan999.github.io/images/avatar.png</logo>
     <icon>https://ganhan999.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, Gridea</rights>
+    <entry>
+        <title type="html"><![CDATA[中等46. 全排列]]></title>
+        <id>https://ganhan999.github.io/post/46、全排列/</id>
+        <link href="https://ganhan999.github.io/post/46、全排列/">
+        </link>
+        <updated>2021-01-03T13:28:00.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
+<p>给定一个 没有重复 数字的序列，返回其所有可能的全排列。</p>
+<p>示例:</p>
+<p>输入: [1,2,3]<br>
+输出:<br>
+[<br>
+[1,2,3],<br>
+[1,3,2],<br>
+[2,1,3],<br>
+[2,3,1],<br>
+[3,1,2],<br>
+[3,2,1]<br>
+]</p>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="本体思路">本体思路</h1>
+<p>用回溯的模板做，建立树形结构</p>
+<pre><code class="language-bash">    1               2               3
+
+2       3       1       3       1       2
+3       2       3       1       2       1  
+</code></pre>
+<figure data-type="image" tabindex="1"><img src="https://pic.leetcode-cn.com/1600377894-BuZLhZ-image.png" alt="image.png" loading="lazy"></figure>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="大神做法1">大神做法1：</h1>
+<pre><code class="language-python">class Solution:
+    def permute(self, nums: List[int]) -&gt; List[List[int]]:
+        self.res = []
+        def backtrack(path,nums):
+            if not nums:
+                self.res.append(path[:])
+                return
+            for i in range(len(nums)):
+                path.append(nums[i])
+                backtrack(path, nums[:i]+nums[i+1:])#把除了自己的数字取掉
+                path.pop()
+        backtrack([],nums)
+        return self.res
+</code></pre>
+<p>&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="大神做法2">大神做法2：</h1>
+<p>见缝插针法，依次将每个数插入缝中</p>
+<pre><code class="language-python">class Solution:
+    def permute(self, nums):
+        res = [[nums[0]]]
+        tem = []
+        n = len(nums)
+        for i in range(1,n):
+            for k in res:
+                for j in range(len(k)+1):
+                    k.insert(j,nums[i])#在索引为j的位置插入元素
+                    tem.append(k[:])
+                    k.pop(j)#删除索引为j的元素
+            res=tem
+            tem=[]
+        return res
+</code></pre>
+<p>&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="大神做法3">大神做法3：</h1>
+<p>利用动态维护数组，标记已经填过和待填的数组，这样就不用添加path了，当待填数字为0的时候就表示已经形成了一组有效的数组</p>
+<pre><code class="language-python">class Solution:
+    def permute(self, nums):
+        def backtrack(first=0):
+            # 所有数都填完了
+            if first == n:
+                res.append(nums[:])
+            for i in range(first, n):
+                # 动态维护数组
+                nums[first], nums[i] = nums[i], nums[first]
+                # 继续递归填下一个数
+                backtrack(first + 1)
+                # 撤销操作
+                nums[first], nums[i] = nums[i], nums[first]
+        n = len(nums)
+        res = []
+        backtrack()
+        return res
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Java SpringMVC]]></title>
+        <id>https://ganhan999.github.io/post/Java SpringMVC/</id>
+        <link href="https://ganhan999.github.io/post/Java SpringMVC/">
+        </link>
+        <updated>2021-01-03T11:18:25.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="1-介绍">1 介绍</h1>
+<ul>
+<li><strong>学习视频：https://www.bilibili.com/video/BV1aE41167Tu</strong></li>
+<li>笔记是B站狂神说相关视频的学习笔记</li>
+<li>Spring:IOC和AOP必须掌握</li>
+<li>SpringMVC:执行流程必须掌握</li>
+<li><strong>官网：https://docs.spring.io/spring/docs/current/spring-framework-reference/web.html</strong></li>
+</ul>
+<h2 id="11-什么是mvc">1.1 什么是MVC？</h2>
+<ul>
+<li>Model：数据模型，提供要展示的数据，因此包含数据和行为，可以认为是领域模型或JavaBean组件（包含数据和行为），不过现在一般都分离开来：Value Object（数据Dao） 和 服务层（行为Service）。也就是模型提供了模型数据查询和模型数据的状态更新等功能，包括数据和业务。</li>
+<li>View:负责进行模型的展示，一般就是我们见到的用户界面，客户想看到的东西。</li>
+<li>Controller（调度员）： 接收用户请求，委托给模型进行处理（状态改变），处理完毕后把返回的模型数据返回给视图，由视图负责展示。也就是说控制器做了个调度员的工作。</li>
+<li>最常用的MVC：（Model）Bean +（view） Jsp +（Controller） Servlet</li>
+</ul>
+<p>[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-6GeCrArV-1596422947892)(E:\Java\markdown_notes\photos\image-20200423211601751.png)]</p>
+<h2 id="12-model1时代">1.2 Model1时代</h2>
+<ul>
+<li>分为：视图层V和模型层M；由视图层的view来控制分发数据并展示给用户</li>
+<li>缺点：JSP职责不单一，过重，不便于维护</li>
+</ul>
+<figure data-type="image" tabindex="1"><img src="https://img-blog.csdnimg.cn/20200803104944538.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0NDczMzQ4,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" loading="lazy"></figure>
+<h2 id="13-model2时代mvc延续至今">1.3 Model2时代（MVC延续至今）</h2>
+<ul>
+<li>流程：分为了Contrller,Model,View</li>
+<li>访问流程：</li>
+</ul>
+<ol>
+<li>用户发请求</li>
+<li>Servlet接收请求数据，并调用对应的业务逻辑方法</li>
+<li>业务处理完毕，返回更新后的数据给servlet</li>
+<li>servlet转向到JSP，由JSP来渲染页面</li>
+<li>响应给前端更新后的页面</li>
+</ol>
+<figure data-type="image" tabindex="2"><img src="https://img-blog.csdnimg.cn/20200803105000368.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0NDczMzQ4,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" loading="lazy"></figure>
+<h2 id="14-回顾servlet创建">1.4 回顾Servlet创建</h2>
+<ol>
+<li>创建maven,父工程：pom.xml</li>
+</ol>
+<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot;
+         xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+         xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;
+    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+
+    &lt;groupId&gt;com.ssl&lt;/groupId&gt;
+    &lt;artifactId&gt;SpringMVC&lt;/artifactId&gt;
+    &lt;packaging&gt;pom&lt;/packaging&gt;
+    &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+    &lt;!--父工程导入依赖--&gt;
+    &lt;dependencies&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;junit&lt;/groupId&gt;
+            &lt;artifactId&gt;junit&lt;/artifactId&gt;
+            &lt;version&gt;4.12&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-webmvc&lt;/artifactId&gt;
+            &lt;version&gt;5.2.4.RELEASE&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;javax.servlet&lt;/groupId&gt;
+            &lt;artifactId&gt;servlet-api&lt;/artifactId&gt;
+            &lt;version&gt;2.5&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;javax.servlet.jsp&lt;/groupId&gt;
+            &lt;artifactId&gt;jsp-api&lt;/artifactId&gt;
+            &lt;version&gt;2.2&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;javax.servlet&lt;/groupId&gt;
+            &lt;artifactId&gt;jstl&lt;/artifactId&gt;
+            &lt;version&gt;1.2&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.projectlombok&lt;/groupId&gt;
+            &lt;artifactId&gt;lombok&lt;/artifactId&gt;
+            &lt;version&gt;1.18.12&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;com.fasterxml.jackson.core&lt;/groupId&gt;
+            &lt;artifactId&gt;jackson-databind&lt;/artifactId&gt;
+            &lt;version&gt;2.10.0&lt;/version&gt;
+        &lt;/dependency&gt;
+
+        &lt;dependency&gt;
+            &lt;groupId&gt;com.alibaba&lt;/groupId&gt;
+            &lt;artifactId&gt;fastjson&lt;/artifactId&gt;
+            &lt;version&gt;1.2.62&lt;/version&gt;
+        &lt;/dependency&gt;
+
+    &lt;/dependencies&gt;
+
+    &lt;!--资源过滤器，防止导入资源失败问题，最好在父子pom.xml里都加入一下代码--&gt;
+    &lt;build&gt;
+        &lt;resources&gt;
+            &lt;resource&gt;
+                &lt;directory&gt;src/main/resources&lt;/directory&gt;
+                &lt;includes&gt;
+                    &lt;include&gt;**/*.properties&lt;/include&gt;
+                    &lt;include&gt;**/*.xml&lt;/include&gt;
+                &lt;/includes&gt;
+                &lt;filtering&gt;true&lt;/filtering&gt;
+            &lt;/resource&gt;
+
+            &lt;resource&gt;
+                &lt;directory&gt;src/main/java&lt;/directory&gt;
+                &lt;includes&gt;
+                    &lt;include&gt;**/*.properties&lt;/include&gt;
+                    &lt;include&gt;**/*.xml&lt;/include&gt;
+                &lt;/includes&gt;
+                &lt;filtering&gt;true&lt;/filtering&gt;
+            &lt;/resource&gt;
+        &lt;/resources&gt;
+    &lt;/build&gt;
+
+&lt;/project&gt;
+</code></pre>
+<ol>
+<li>创建子工程，idea右键Add Framwork Support添加web支持</li>
+<li>实现HelloServlet继承HttpServlet接口，并创建/WEB-INF/jsp/test.jsp</li>
+</ol>
+<pre><code class="language-java">public class HelloServlet extends HttpServlet {
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        //1 获得参数
+        //2 调用业务层
+        //3 视图转发或者重定向
+        req.getRequestDispatcher(&quot;/WEB-INF/jsp/test.jsp&quot;).forward(req, resp);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        super.doPost(req, resp);
+    }
+}
+</code></pre>
+<ol>
+<li>web.xml中注册HelloServlet,测试跳转：http://localhost:8080/springmvc_01_servlet//helloServlet</li>
+</ol>
+<figure data-type="image" tabindex="3"><img src="https://img-blog.csdnimg.cn/20200803105019464.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0NDczMzQ4,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" loading="lazy"></figure>
+<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;web-app xmlns=&quot;http://xmlns.jcp.org/xml/ns/javaee&quot;
+         xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+         xsi:schemaLocation=&quot;http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd&quot;
+         version=&quot;4.0&quot;&gt;
+    
+    &lt;servlet&gt;
+        &lt;servlet-name&gt;HelloServlet&lt;/servlet-name&gt;
+        &lt;servlet-class&gt;com.ssl.web.HelloServlet&lt;/servlet-class&gt;
+    &lt;/servlet&gt;
+    &lt;servlet-mapping&gt;
+        &lt;servlet-name&gt;HelloServlet&lt;/servlet-name&gt;
+        &lt;url-pattern&gt;/helloServlet&lt;/url-pattern&gt;
+    &lt;/servlet-mapping&gt;
+&lt;/web-app&gt;
+</code></pre>
+<h1 id="2-第一个springmvc">2 第一个SpringMVC</h1>
+<ul>
+<li>概念：SpringMVC是Spring框架中的一个分支，是基于Java实现MVC的轻量级Web框架</li>
+<li>核心：Spring的web框架围绕<strong>DispatcherServlet</strong> [ 调度Servlet ] 设计的。</li>
+</ul>
+<figure data-type="image" tabindex="4"><img src="https://img-blog.csdnimg.cn/20200803105035193.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0NDczMzQ4,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" loading="lazy"></figure>
+<h2 id="21-执行原理">2.1 执行原理</h2>
+<figure data-type="image" tabindex="5"><img src="https://img-blog.csdnimg.cn/20200803105047852.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0NDczMzQ4,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" loading="lazy"></figure>
+<p><strong>SpringMVC底层工作原理：</strong></p>
+<ol>
+<li>DispatcherServlet表示前置控制器，是整个SpringMVC的控制中心。用户发出请求，DispatcherServlet接收请求并拦截请求。</li>
+<li>假设url为 : http://localhost:8080/SpringMVC/hello</li>
+<li>服务器域名：http://localhost:8080</li>
+<li>web站点：/SpringMVC</li>
+<li>hello表示控制器：/hello</li>
+<li><strong>通过分析，如上url表示为：请求位于服务器localhost:8080上的SpringMVC站点的hello控制器。</strong></li>
+<li>HandlerMapping为处理器映射。DispatcherServlet调用HandlerMapping,HandlerMapping根据请求url查找Handler。</li>
+<li>HandlerExecution表示具体的Handler,其主要作用是根据url查找控制器，如上url被查找控制器为：hello。</li>
+<li>HandlerExecution将解析后的信息传递给DispatcherServlet,如解析控制器映射等。</li>
+<li>HandlerAdapter表示处理器适配器，其按照特定的规则去执行Handler。</li>
+<li>Handler让具体的Controller执行。</li>
+<li>Controller将具体的执行信息返回给HandlerAdapter,如ModelAndView。</li>
+<li>HandlerAdapter将视图逻辑名或模型传递给DispatcherServlet。</li>
+<li>DispatcherServlet调用视图解析器(ViewResolver)来解析HandlerAdapter传递的逻辑视图名。</li>
+<li>视图解析器将解析的逻辑视图名传给DispatcherServlet。</li>
+<li>DispatcherServlet根据视图解析器解析的视图结果，调用具体的视图。</li>
+<li>最终视图呈现给用户。</li>
+</ol>
+<h2 id="22-不使用注解开发">2.2 不使用注解开发</h2>
+<ul>
+<li>了解具体的执行过程=面试谈资。虽然开发中不会这么麻烦的使用，但必须看完-理解-继续学习</li>
+</ul>
+<h3 id="1-配置webxml">1 配置web.xml</h3>
+<ul>
+<li>完成DispatcherServlet，关联resource配置文件<br>
+<img src="https://img-blog.csdnimg.cn/20200803105103912.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0NDczMzQ4,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" loading="lazy"></li>
+</ul>
+<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;web-app xmlns=&quot;http://xmlns.jcp.org/xml/ns/javaee&quot;
+         xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+         xsi:schemaLocation=&quot;http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd&quot;
+         version=&quot;4.0&quot;&gt;
+    &lt;!--配置DispatcherServlet:SpringMVC核心--&gt;
+    &lt;servlet&gt;
+        &lt;servlet-name&gt;SpringMvc&lt;/servlet-name&gt;
+        &lt;servlet-class&gt;org.springframework.web.servlet.DispatcherServlet&lt;/servlet-class&gt;
+        &lt;!--关联一个SpringMvc的resource配置文件--&gt;
+        &lt;init-param&gt;
+            &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;
+            &lt;param-value&gt;classpath:springMvc_servlet.xml&lt;/param-value&gt;
+        &lt;/init-param&gt;
+        &lt;!--启动级别--&gt;
+        &lt;load-on-startup&gt;1&lt;/load-on-startup&gt;
+    &lt;/servlet&gt;
+    &lt;!--匹配所有的请求： / :只匹配请求，不包含所有的.jsp
+                      /*:匹配所有的请求，包括jsp页面
+    --&gt;
+    &lt;servlet-mapping&gt;
+        &lt;servlet-name&gt;SpringMvc&lt;/servlet-name&gt;
+        &lt;url-pattern&gt;/&lt;/url-pattern&gt;
+    &lt;/servlet-mapping&gt;
+&lt;/web-app&gt;
+</code></pre>
+<h3 id="2-配置springmvc_servletxml">2 配置springMvc_servlet.xml</h3>
+<ul>
+<li>获得视图解析器、映射器、适配器，绑定跳转url</li>
+</ul>
+<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+       xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+       xmlns:context=&quot;http://www.springframework.org/schema/context&quot;
+       xmlns:p=&quot;http://www.springframework.org/schema/p&quot;
+       xmlns:c=&quot;http://www.springframework.org/schema/c&quot;
+       xmlns:aop=&quot;http://www.springframework.org/schema/aop&quot;
+       xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        https://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/aop
+        https://www.springframework.org/schema/aop/spring-aop.xsd&quot;&gt;
+
+    &lt;!--处理器映射器HandlerMapping:查找访问的url控制器--&gt;
+    &lt;bean class=&quot;org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping&quot;/&gt;
+    &lt;!--处理器适配器HandlerAdapter：controller将处理好的数据返回给HandlerAdapter--&gt;
+    &lt;bean class=&quot;org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter&quot;/&gt;
+    &lt;!--视图解析器ViewResolver：将后端处理好的数据和视图传给DispatchServlet，DS再交给ViewResolver先解析一遍，确认无误再传给前端
+        必须熟悉，以后还要学模版引擎Thymeleaf/Freemarker...
+        1 获取ModeAndView的数据
+        2 解析ModeAndView的视图名字
+        3 拼接视图名字，找到对应的视图 WEB-INF/jsp/hello.jsp
+    --&gt;
+    &lt;bean class=&quot;org.springframework.web.servlet.view.InternalResourceViewResolver&quot; id=&quot;internalResourceViewResolver&quot;&gt;
+        &lt;property name=&quot;prefix&quot; value=&quot;/WEB-INF/jsp/&quot; /&gt;
+        &lt;property name=&quot;suffix&quot; value=&quot;.jsp&quot; /&gt;
+    &lt;/bean&gt;
+    &lt;!--BeanNameUrlHandlerMapping处理器：绑定跳转的url=页面访问的网址--&gt;
+    &lt;bean id=&quot;/hello&quot; class=&quot;com.ssl.controller.HelloController&quot;/&gt;
+&lt;/beans&gt;
+
+</code></pre>
+<h3 id="3-web-infjsphellojsp">3 /WEB-INF/jsp/hello.jsp</h3>
+<pre><code class="language-html">&lt;%@ page contentType=&quot;text/html;charset=UTF-8&quot; language=&quot;java&quot; %&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;hello&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;%--接受传递的参数--%&gt;
+${msg}
+&lt;/body&gt;
+&lt;/html&gt;
+
+</code></pre>
+<h3 id="4-hellocontroller实现controller">4 HelloController实现Controller</h3>
+<ul>
+<li>访问：http://localhost:8080/springmvc_02_hellomvc/hello</li>
+</ul>
+<pre><code class="language-java">public class HelloController implements Controller {
+    @Override
+    public ModelAndView handleRequest(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception {
+        //1 创建modelAndView
+        ModelAndView mv = new ModelAndView();
+        //2 调用业务层，这里没有，就不写
+        //3 封装对象，放在mv中添加
+        mv.addObject(&quot;msg&quot;, &quot;Hello SpringMvc&quot;);
+        //4 封装要跳转的视图，WEB-INF/jsp/hello.jsp
+        mv.setViewName(&quot;hello&quot;);
+        return mv;
+    }
+}
+</code></pre>
+<h3 id="5-springmvc原理回顾">5 SpringMVC原理回顾</h3>
+<ul>
+<li><strong>反复观看，理解原理！</strong></li>
+</ul>
+<figure data-type="image" tabindex="6"><img src="https://img-blog.csdnimg.cn/20200803105123418.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0NDczMzQ4,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" loading="lazy"></figure>
+<h2 id="23-使用注解开发">2.3 使用注解开发</h2>
+<h3 id="1-webxml">1 web.xml</h3>
+<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;web-app xmlns=&quot;http://xmlns.jcp.org/xml/ns/javaee&quot;
+         xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+         xsi:schemaLocation=&quot;http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd&quot;
+         version=&quot;4.0&quot;&gt;
+  	&lt;!--与前面一样--&gt;
+    &lt;servlet&gt;
+        &lt;servlet-name&gt;springMvc&lt;/servlet-name&gt;
+        &lt;servlet-class&gt;org.springframework.web.servlet.DispatcherServlet&lt;/servlet-class&gt;
+        &lt;init-param&gt;
+            &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;
+            &lt;param-value&gt;classpath:springMvc_servlet.xml&lt;/param-value&gt;
+        &lt;/init-param&gt;
+        &lt;load-on-startup&gt;1&lt;/load-on-startup&gt;
+    &lt;/servlet&gt;
+
+    &lt;servlet-mapping&gt;
+        &lt;servlet-name&gt;springMvc&lt;/servlet-name&gt;
+        &lt;url-pattern&gt;/&lt;/url-pattern&gt;
+    &lt;/servlet-mapping&gt;
+&lt;/web-app&gt;
+</code></pre>
+<h3 id="2-springmvc_servletxml">2 springMvc_servlet.xml</h3>
+<ul>
+<li>注解省略了映射器、适配器，专注于写视图解析器；跳转的Controller也不用配置进Spring</li>
+</ul>
+<figure data-type="image" tabindex="7"><img src="https://img-blog.csdnimg.cn/20200803105137927.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0NDczMzQ4,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" loading="lazy"></figure>
+<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+       xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+       xmlns:context=&quot;http://www.springframework.org/schema/context&quot;
+        xmlns:mvc=&quot;http://www.springframework.org/schema/mvc&quot;
+       xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        https://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd&quot;&gt;
+    &lt;!--自动扫描包，让指定包下的注解生效，由IOC容器统一管理--&gt;
+    &lt;context:component-scan base-package=&quot;com.ssl.controller&quot;/&gt;
+    &lt;!--让SpringMvc不处理静态资源。让.css,.js等不进视图解析器--&gt;
+    &lt;mvc:default-servlet-handler/&gt;
+    &lt;!--注解加载映射器、适配器，不用之前那么麻烦配置了--&gt;
+    &lt;mvc:annotation-driven/&gt;
+    &lt;!--配置视图解析器--&gt;
+    &lt;bean class=&quot;org.springframework.web.servlet.view.InternalResourceViewResolver&quot; id=&quot;internalResourceViewResolver&quot;&gt;
+        &lt;property name=&quot;prefix&quot; value=&quot;/WEB-INF/jsp/&quot; /&gt;
+        &lt;property name=&quot;suffix&quot; value=&quot;.jsp&quot; /&gt;
+    &lt;/bean&gt;
+&lt;/beans&gt;
+</code></pre>
+<h3 id="3-web-infjsphellojsp-2">3 /WEB-INF/jsp/hello.jsp</h3>
+<pre><code class="language-html">&lt;%@ page contentType=&quot;text/html;charset=UTF-8&quot; language=&quot;java&quot; %&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;hello&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+${msg}
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<h3 id="4-hellocontroller">4 HelloController</h3>
+<ul>
+<li>简化了实现的接口，使用@注解配置映射器</li>
+<li>访问：http://localhost:8080/springmvc_03_annotation/hello</li>
+</ul>
+<figure data-type="image" tabindex="8"><img src="https://img-blog.csdnimg.cn/2020080310520552.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0NDczMzQ4,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" loading="lazy"></figure>
+<pre><code class="language-java">@Controller
+public class HelloController {
+    /**
+     * @param model 模型
+     * @return 被视图解析器处理：访问&quot;/WEB-INF/jsp/hello.jsp资源
+     * 访问的url:RequestMapping(&quot;/hello&quot;)
+     */
+    @RequestMapping(&quot;/hello&quot;)
+    public String hello(Model model) {
+        //封装数据
+        model.addAttribute(&quot;msg&quot;, &quot;Hello SpringMvc_annotation&quot;);
+        //被视图解析器处理：访问&quot;/WEB-INF/jsp/hello.jsp资源
+        return &quot;hello&quot;;
+    }
+</code></pre>
+<h1 id="3-controller和restful">3 Controller和RestFul</h1>
+<ol>
+<li>配置web.xml</li>
+</ol>
+<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;web-app xmlns=&quot;http://xmlns.jcp.org/xml/ns/javaee&quot;
+         xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+         xsi:schemaLocation=&quot;http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd&quot;
+         version=&quot;4.0&quot;&gt;
+    &lt;servlet&gt;
+        &lt;servlet-name&gt;springMvc&lt;/servlet-name&gt;
+        &lt;servlet-class&gt;org.springframework.web.servlet.DispatcherServlet&lt;/servlet-class&gt;
+        &lt;init-param&gt;
+            &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;
+            &lt;param-value&gt;classpath:spring_mvc_servlet.xml&lt;/param-value&gt;
+        &lt;/init-param&gt;
+    &lt;/servlet&gt;
+    &lt;servlet-mapping&gt;
+        &lt;servlet-name&gt;springMvc&lt;/servlet-name&gt;
+        &lt;url-pattern&gt;/&lt;/url-pattern&gt;
+    &lt;/servlet-mapping&gt;
+
+   &lt;!-- &lt;filter&gt;
+        &lt;filter-name&gt;encode&lt;/filter-name&gt;
+        &lt;filter-class&gt;com.ssl.filter.EncodeFilter&lt;/filter-class&gt;
+    &lt;/filter&gt;
+    &lt;filter-mapping&gt;
+        &lt;filter-name&gt;encode&lt;/filter-name&gt;
+        &lt;url-pattern&gt;/&lt;/url-pattern&gt;
+    &lt;/filter-mapping&gt;--&gt;
+    &lt;filter&gt;
+        &lt;filter-name&gt;encode&lt;/filter-name&gt;
+        &lt;filter-class&gt;org.springframework.web.filter.CharacterEncodingFilter&lt;/filter-class&gt;
+        &lt;init-param&gt;
+            &lt;param-name&gt;encoding&lt;/param-name&gt;
+            &lt;param-value&gt;utf-8&lt;/param-value&gt;
+        &lt;/init-param&gt;
+    &lt;/filter&gt;
+    &lt;filter-mapping&gt;
+        &lt;filter-name&gt;encode&lt;/filter-name&gt;
+        &lt;url-pattern&gt;/*&lt;/url-pattern&gt;
+    &lt;/filter-mapping&gt;
+&lt;/web-app&gt;
+</code></pre>
+<ol>
+<li>spring_mvc_servlet.xml</li>
+</ol>
+<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+       xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+       xmlns:context=&quot;http://www.springframework.org/schema/context&quot;
+       xmlns:mvc=&quot;http://www.springframework.org/schema/mvc&quot;
+       xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        https://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd&quot;&gt;
+    &lt;!--自动扫描包，让指定包下的注解生效，由IOC容器统一管理--&gt;
+    &lt;context:component-scan base-package=&quot;com.ssl.controller&quot;/&gt;
+    &lt;!--让SpringMvc不处理静态资源。让.css,.js等不进视图解析器--&gt;
+    &lt;mvc:default-servlet-handler/&gt;
+    &lt;!--注解加载映射器、适配器，不用之前那么麻烦配置了--&gt;
+    &lt;mvc:annotation-driven/&gt;
+    &lt;!--以上的是定死的代码，
+        以下是配置视图解析器--&gt;
+    &lt;bean class=&quot;org.springframework.web.servlet.view.InternalResourceViewResolver&quot; id=&quot;internalResourceViewResolver&quot;&gt;
+        &lt;property name=&quot;prefix&quot; value=&quot;/WEB-INF/jsp/&quot; /&gt;
+        &lt;property name=&quot;suffix&quot; value=&quot;.jsp&quot; /&gt;
+    &lt;/bean&gt;
+    &lt;!--不使用注解开发的适配器：/demo1,注意点是id需要配置/--&gt;
+    &lt;bean id=&quot;/demo&quot; class=&quot;com.ssl.controller.ControllerDemo1&quot;/&gt;
+&lt;/beans&gt;
+</code></pre>
+<h2 id="31-controller">3.1 Controller</h2>
+<ul>
+<li>不使用注解，极其不推荐使用，因为：
+<ul>
+<li>配置麻烦：<code>&lt;bean id=&quot;/demo&quot; class=&quot;com.ssl.controller.ControllerDemo1&quot;/&gt;</code>，并且需要 <code>implements Controller</code></li>
+<li>不够灵活，太费力气，浪费时间</li>
+<li>访问：http://localhost:8080/springmvc_04_controller/demo</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-java">public class ControllerDemo1 implements Controller {
+    @Override
+    public ModelAndView handleRequest(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject(&quot;demo1&quot;,&quot;demo1:Controller会返回一个modelAndView&quot;);
+        modelAndView.setViewName(&quot;demo1&quot;);
+        return modelAndView;
+    }
+}
+</code></pre>
+<h2 id="32-controller">3.2 @Controller</h2>
+<ul>
+<li>使用注解开发，@Controller注册进Spring容器，如果返回值是String，并且有具体的页面可以跳转，那么就会被视图解析器解析</li>
+<li>访问：http://localhost:8080/springmvc_04_controller/demo2</li>
+</ul>
+<pre><code class="language-java">@Controller
+public class ControllerDemo2 {
+    @RequestMapping(&quot;/demo2&quot;)
+    public String test1(Model model) {
+        model.addAttribute(&quot;demo2&quot;, &quot;demo2&quot;);
+        return &quot;demo2&quot;;
+    }
+}
+</code></pre>
+<h2 id="33-requestmapping">3.3 @RequestMapping</h2>
+<ul>
+<li>可以在类和方法上配置url访问路径</li>
+<li>访问：http://localhost:8080/springmvc_04_controller/controller/demo3</li>
+</ul>
+<pre><code class="language-java">@Controller
+@RequestMapping(&quot;/controller&quot;)
+public class ControllerDemo3 {
+    @RequestMapping(&quot;/demo3&quot;)
+    public String test1(Model model) {
+        model.addAttribute(&quot;demo3&quot;, &quot;demo3&quot;);
+        return &quot;demo3&quot;;
+    }
+}
+</code></pre>
+<h2 id="34-restful风格">3.4 RestFul风格</h2>
+<ul>
+<li>
+<p>优点：</p>
+<ul>
+<li><strong>最大的优势是安全，看不出源代码的参数和意义</strong></li>
+<li><strong>实现地址复用，使得get和post访问url相同，框架会自动进行类型转换</strong></li>
+<li><strong>高效：支持缓存</strong></li>
+</ul>
+</li>
+<li>
+<p>缺点：</p>
+<ul>
+<li>不像原生的url见名知意，url理解不直观</li>
+</ul>
+</li>
+<li>
+<p>实现方式：</p>
+<ul>
+<li>
+<p>1：url</p>
+<pre><code>@GetMapping(&quot;/addRest/{a}/{b}&quot;)
+</code></pre>
+<p>+ 参数</p>
+<pre><code>@PathVariable int a, @PathVariable int b
+</code></pre>
+<ul>
+<li>访问：http://localhost:8080/springmvc_04_controller/addRest/1/2</li>
+</ul>
+</li>
+<li>
+<p>2：url</p>
+<pre><code>@PostMapping(&quot;/addRest/{a}/{b}&quot;)
+</code></pre>
+<p>+ 参数不变</p>
+<pre><code>@PathVariable int a, @PathVariable int b
+</code></pre>
+<ul>
+<li>使用Postman中的post访问：http://localhost:8080/springmvc_04_controller/addRest/1/2</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-java">@Controller
+public class RestFulController {
+
+    /**
+     * 原生的url：http://localhost:8080/springmvc_04/add?a=1&amp;b=1
+     */
+    @RequestMapping(&quot;/add&quot;)
+    public String getAdd1(int a, int b, Model model) {
+        int result = a + b;
+        model.addAttribute(&quot;add&quot;, &quot;原生的url：结果为&quot; + result);
+        return &quot;add&quot;;
+    }
+
+    /**
+     * RestFul方式一：method = get
+     * RequestMapping(&quot;/addRest/{a}/{b}&quot; method=requestMethod.GET) = @GetMapping()
+     * http://localhost:8080/springmvc_04/addRest/1/1
+     */
+    @GetMapping(&quot;/addRest/{a}/{b}&quot;)
+    public String getAdd2(@PathVariable int a, @PathVariable int b, Model model) {
+        int result = a + b;
+        model.addAttribute(&quot;add&quot;, &quot;Rest的url：结果为&quot; + result);
+        return &quot;addRest&quot;;
+    }
+
+    /**
+     * 复用相同的url
+     * RestFul方式二：method=post，使用RestFul的话，请求的url和GET就一样了
+     */
+    @PostMapping(&quot;/addRest/{a}/{b}&quot;)
+    public String getAdd3(@PathVariable int a, @PathVariable int b, Model model) {
+        int result = a + b;
+        model.addAttribute(&quot;add&quot;, &quot;Rest的url：结果为&quot; + result);
+        return &quot;addRest&quot;;
+    }
+}
+</code></pre>
+<h2 id="35-重定向和转发">3.5 重定向和转发</h2>
+<ul>
+<li>可以使用原生的request转发或者response重定向</li>
+<li>推荐使用SpringMvc的<code>return “forward:xxx”/&quot;redirect:xxx&quot;</code></li>
+</ul>
+<pre><code class="language-java">@Controller
+public class ModelTest1 {
+    //原生的转发：返回值是void，没有经过视图解析器；原生的重定向同样如此，都不走视图解析器，直接重定向
+    @RequestMapping(&quot;/test1&quot;)
+    public void test1(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String id = request.getSession().getId();
+        System.out.println(id);
+        request.getRequestDispatcher(&quot;index.jsp&quot;).forward(request,response);
+    }
+    //SpringMvc转发：测试结果是不走视图解析器，url没变是转发
+    @RequestMapping(&quot;/test2&quot;)
+    public String test2(Model model) {
+        model.addAttribute(&quot;demo1&quot;,&quot;这是test2中的Spring转发&quot;);
+        return &quot;forward:/WEB-INF/jsp/demo1.jsp&quot;;
+    }
+    //SpringMvc重定向：测试结果是不走视图解析器
+    @RequestMapping(&quot;/test3&quot;)
+    public String test3() {
+        System.out.println(&quot;跳转回首页index.jsp&quot;);
+        return &quot;redirect:index.jsp&quot;;
+    }
+}
+</code></pre>
+<h2 id="36-接受请求参数和数据回显">3.6 接受请求参数和数据回显</h2>
+<ul>
+<li>
+<p>前端提交的name和后端映射器接受的形参名一样，则直接接受</p>
+</li>
+<li>
+<p>前端提交的name和后端映射器接受的形参名不用一样，再形参前</p>
+<pre><code>@RequestParam(&quot;xxx&quot;)
+</code></pre>
+<p>更改名称一致</p>
+<ul>
+<li>养成习惯：无论是否一样，都必须加上<code>@RequestParam</code></li>
+</ul>
+</li>
+<li>
+<p>后端参数封装如果成一个pojo，前端传过来的name会自动pojo中的成员属性，不匹配的属性=null/0</p>
+</li>
+<li>
+<p>如何解决中文乱码问题？请看下节！</p>
+</li>
+</ul>
+<pre><code class="language-java">@Controller
+public class UserController {
+    /** http://localhost:8080/springmvc_04/t1?id=1&amp;name=abc&amp;age=18
+     * @param user SpringMvc 会自动封装数据到参数里的pojo，不匹配的属性=null/0
+     */
+    @GetMapping(&quot;/t1&quot;)
+    public String getUser(User user){
+        System.out.println(user);
+        return &quot;test1&quot;;
+    }
+}
+</code></pre>
+<h2 id="37-modelmodelandview等">3.7 Model，ModelAndView等</h2>
+<ul>
+<li>Model：精简版，适合初学者，大多数情况封装参数，设置转发视图层就够用</li>
+<li>ModelMap：继承了LinkedHashMap，有它的方法和特性</li>
+<li>ModelAndView：可以在存储数据的同时，可以进行设置返回的逻辑视图，进行控制展示层的跳转</li>
+<li><strong>怎么学习：用80%的时间学号基础，18%时间研究框架，2%学点英文，剩下不会的看官方文档</strong></li>
+</ul>
+<h1 id="4-乱码问题">4 乱码问题</h1>
+<ul>
+<li>
+<p>方法一：web.xml里面配置的SpringMvc自带的过滤器</p>
+<pre><code>CharacterEncodingFilter
+</code></pre>
+<ul>
+<li><strong><code>&lt;url-pattern&gt;/\*&lt;/url-pattern&gt;</code>：因为要跳转到xxx.jsp页面，所以url是/*(≠/)</strong></li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;web-app xmlns=&quot;http://xmlns.jcp.org/xml/ns/javaee&quot;
+         xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+         xsi:schemaLocation=&quot;http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd&quot;
+         version=&quot;4.0&quot;&gt;
+    &lt;!--配置SpringMVC--&gt;
+    &lt;servlet&gt;
+        &lt;servlet-name&gt;springMvc&lt;/servlet-name&gt;
+        &lt;servlet-class&gt;org.springframework.web.servlet.DispatcherServlet&lt;/servlet-class&gt;
+        &lt;init-param&gt;
+            &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;
+            &lt;param-value&gt;classpath:spring_mvc_servlet.xml&lt;/param-value&gt;
+        &lt;/init-param&gt;
+    &lt;/servlet&gt;
+    &lt;servlet-mapping&gt;
+        &lt;servlet-name&gt;springMvc&lt;/servlet-name&gt;
+        &lt;url-pattern&gt;/&lt;/url-pattern&gt;
+    &lt;/servlet-mapping&gt;
+
+    &lt;!--web容器解决中文乱码问题--&gt;
+    &lt;filter&gt;
+        &lt;filter-name&gt;encode&lt;/filter-name&gt;
+        &lt;filter-class&gt;org.springframework.web.filter.CharacterEncodingFilter&lt;/filter-class&gt;
+        &lt;init-param&gt;
+            &lt;param-name&gt;encoding&lt;/param-name&gt;
+            &lt;param-value&gt;utf-8&lt;/param-value&gt;
+        &lt;/init-param&gt;
+    &lt;/filter&gt;
+    &lt;filter-mapping&gt;
+        &lt;filter-name&gt;encode&lt;/filter-name&gt;
+        &lt;url-pattern&gt;/*&lt;/url-pattern&gt;
+    &lt;/filter-mapping&gt;
+&lt;/web-app&gt;
+</code></pre>
+<ul>
+<li>方法二：一劳永逸，但需要重启Tomcat服务器，修改Tomcat里面的server.xml配置文件：<code>URIEncoding = &quot;UTF-8&quot;</code></li>
+</ul>
+<pre><code class="language-xml">&lt;Connector port=&quot;8080&quot; protocol=&quot;HTTP/1.1&quot;
+           connectionTimeout=&quot;20000&quot;
+           redirectPort=&quot;8443&quot;
+           URIEncoding = &quot;UTF-8&quot;/&gt;
+&lt;!-- A &quot;Connector&quot; using the shared thread pool--&gt;
+</code></pre>
+<h1 id="5-json">5 JSON</h1>
+<h2 id="51-前端初识json">5.1 前端初识Json</h2>
+<ul>
+<li>前端展示两者数据，学会js和json互相转换</li>
+</ul>
+<pre><code class="language-html">&lt;%@ page contentType=&quot;text/html;charset=UTF-8&quot; language=&quot;java&quot; %&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;json&lt;/title&gt;
+    &lt;script type=&quot;text/javascript&quot;&gt;
+        //user是一个js对象
+        var user = {
+            name: &quot;张三&quot;,
+            age: 18,
+            sex: &quot;男&quot;
+        };
+        //后端传的json其实是一个字符串，前端将后端传的json转换成js对象渲染在页面上
+        //jsonUser:模拟后端传的json数据
+        //js转换成json
+        var jsonUser = JSON.stringify(user);
+        console.log(jsonUser);
+        //jsUser：js是一个对象
+        //json转换成js
+        var jsUser = JSON.parse(jsonUser);
+        console.log(jsUser)
+    &lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<h2 id="52-jackson-databind">5.2 Jackson Databind</h2>
+<ul>
+<li><strong>使用 Jackson Databind可以快速生成json数据</strong></li>
+</ul>
+<h3 id="1-导入依赖">1 导入依赖</h3>
+<pre><code class="language-xml">&lt;dependency&gt;
+    &lt;groupId&gt;com.fasterxml.jackson.core&lt;/groupId&gt;
+    &lt;artifactId&gt;jackson-databind&lt;/artifactId&gt;
+    &lt;version&gt;2.10.0&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
+<ul>
+<li><strong>json=一个字符串，所以会有中文乱码问题，需要在springmvc.xml配置</strong></li>
+</ul>
+<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+       xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+       xmlns:context=&quot;http://www.springframework.org/schema/context&quot;
+       xmlns:mvc=&quot;http://www.springframework.org/schema/mvc&quot;
+       xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        https://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd&quot;&gt;
+    &lt;!--自动扫描包，让指定包下的注解生效，由IOC容器统一管理--&gt;
+    &lt;context:component-scan base-package=&quot;com.ssl.controller&quot;/&gt;
+    &lt;!--让SpringMvc不处理静态资源。让.css,.js等不进视图解析器--&gt;
+    &lt;mvc:default-servlet-handler/&gt;
+
+    &lt;!--注解加载映射器、适配器，解决Json数据中文乱码问题--&gt;
+    &lt;mvc:annotation-driven&gt;
+        &lt;mvc:message-converters register-defaults=&quot;true&quot;&gt;
+            &lt;bean class=&quot;org.springframework.http.converter.StringHttpMessageConverter&quot;&gt;
+                &lt;constructor-arg value=&quot;UTF-8&quot;/&gt;
+            &lt;/bean&gt;
+            &lt;bean class=&quot;org.springframework.http.converter.json.MappingJackson2HttpMessageConverter&quot;&gt;
+                &lt;property name=&quot;objectMapper&quot;&gt;
+                    &lt;bean class=&quot;org.springframework.http.converter.json.Jackson2ObjectMapperFactoryBean&quot;&gt;
+                        &lt;property name=&quot;failOnEmptyBeans&quot; value=&quot;false&quot;/&gt;
+                    &lt;/bean&gt;
+                &lt;/property&gt;
+            &lt;/bean&gt;
+        &lt;/mvc:message-converters&gt;
+    &lt;/mvc:annotation-driven&gt;
+
+    &lt;!--配置视图解析器，明确json数据不走数据解析器，直接传给前端--&gt;
+    &lt;bean class=&quot;org.springframework.web.servlet.view.InternalResourceViewResolver&quot; id=&quot;internalResourceViewResolver&quot;&gt;
+        &lt;property name=&quot;prefix&quot; value=&quot;/WEB-INF/jsp/&quot;/&gt;
+        &lt;property name=&quot;suffix&quot; value=&quot;.jsp&quot;/&gt;
+    &lt;/bean&gt;
+&lt;/beans&gt;
+</code></pre>
+<h3 id="2-编写controller">2 编写Controller</h3>
+<ul>
+<li>@RestControoler:该类下所有方法不走视图解析器，返回一个json数据</li>
+<li>@ResponseBody：该方法不走视图解析器，返回一个json数据</li>
+<li>访问：http://localhost:8080/springmvc_05_json/t1，页面显示一个json数据，不经过视图解析器</li>
+<li>回顾日期：<code>new SimpleDateFormat(&quot;yyyy-MM-dd:HH:mm:ss&quot;)</code></li>
+</ul>
+<pre><code class="language-java">@RestController
+public class UserController {
+    /*  概念：前后端分离的项目，后端代码不走视图解析器，后端传给前端的是json数据
+        方法上：注解@ResponseBody指定该方法不走视图解析器，会直接返回一个String=json数据就是一个字符串
+        类上：注解@RestController指定该类下的所有方法都不走视图解析器
+        Json返回一个对象
+     */
+    @RequestMapping(&quot;/t1&quot;)
+    public String json1() throws JsonProcessingException {
+        User user = new User(1, &quot;张三&quot;, 20);
+        ObjectMapper jacksonMapper = new ObjectMapper();
+        String str_user = jacksonMapper.writeValueAsString(user);
+        //user.toString()是自己指定的String但是公司通常是允许的，通常是使用第三方工具来返回String
+        //str_user有中文乱码问题，springMvc可以统一配置
+        return str_user;
+    }
+
+    /**
+     * Json返回一个List
+     */
+    @RequestMapping(&quot;/t2&quot;)
+    public String json2() throws JsonProcessingException {
+        User user1 = new User(1, &quot;张三&quot;, 20);
+        User user2 = new User(2, &quot;张三&quot;, 21);
+        User user3 = new User(3, &quot;张三&quot;, 22);
+        User user4 = new User(4, &quot;张三&quot;, 23);
+        List&lt;User&gt; list = new ArrayList&lt;&gt;();
+        list.add(user1);
+        list.add(user2);
+        list.add(user3);
+        list.add(user4);
+        return new ObjectMapper().writeValueAsString(list);
+    }
+
+    /**
+     *  json返回一个日期格式
+     */
+    @RequestMapping(&quot;/t3&quot;)
+    public String json3() throws JsonProcessingException {
+        //方式一：原始纯java日期转换：推荐使用
+        // String date = new SimpleDateFormat(&quot;yyyy-MM-dd:HH-mm-ss&quot;).format(new Date());
+        ObjectMapper objectMapper = new ObjectMapper();
+        //方式二：使用mapper来制定日期格式，先关闭时间戳表示
+        objectMapper.configure(SerializationFeature.WRITE_DATE_KEYS_AS_TIMESTAMPS, false);
+        objectMapper.setDateFormat(new SimpleDateFormat(&quot;yyyy-MM-dd:HH:mm:ss&quot;));
+        Date date = new Date();
+        return objectMapper.writeValueAsString(date);
+    }
+
+    @Test
+    public void DateTest1() {
+        //传统的java日期格式转换
+        String date = new SimpleDateFormat(&quot;yyyy-MM-dd:HH:mm:ss&quot;).format(new Date());
+        System.out.println(date);
+    }
+}
+</code></pre>
+<h2 id="53-fastjson">5.3 FastJson</h2>
+<ul>
+<li><strong>阿里巴巴官方提供的，实现Json数据的另一个工具，比JackSon Databind更方便</strong></li>
+</ul>
+<h3 id="1-导包">1 导包</h3>
+<pre><code class="language-xml">&lt;dependency&gt;
+    &lt;groupId&gt;com.alibaba&lt;/groupId&gt;
+    &lt;artifactId&gt;fastjson&lt;/artifactId&gt;
+    &lt;version&gt;1.2.62&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
+<h3 id="2-编写controller-2">2 编写Controller</h3>
+<ul>
+<li>比Jackson使用更方便</li>
+</ul>
+<pre><code class="language-java"> @RequestMapping(&quot;/t4&quot;)
+    public String json4() throws JsonProcessingException {
+        User user1 = new User(1, &quot;张三&quot;, 20);
+        User user2 = new User(2, &quot;张三&quot;, 21);
+        User user3 = new User(3, &quot;张三&quot;, 22);
+        User user4 = new User(4, &quot;张三&quot;, 23);
+        List&lt;User&gt; list = new ArrayList&lt;&gt;();
+        list.add(user1);
+        list.add(user2);
+        list.add(user3);
+        list.add(user4);
+        String jsonString = JSON.toJSONString(list);
+        return jsonString;
+    }
+</code></pre>
+<h1 id="6-ssm整合">6 SSM整合</h1>
+<h2 id="61-环境">6.1 环境</h2>
+<ul>
+<li>IDEA+Mysq5.7+Tomca5.7+Maven3.6</li>
+<li>数据库</li>
+</ul>
+<pre><code class="language-sql">create database `ssmbuild`;
+use `ssmbuild`;
+CREATE TABLE `books` (
+  `bookId` int(10) NOT NULL AUTO_INCREMENT COMMENT '书id',
+  `bookName` varchar(100) NOT NULL COMMENT '书名',
+  `bookCounts` int(11) NOT NULL COMMENT '数量',
+  `detail` varchar(200) NOT NULL COMMENT '描述',
+  KEY `bookId` (`bookId`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8
+</code></pre>
+<ul>
+<li>pom.xml</li>
+</ul>
+<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot;
+         xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+         xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;
+    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+
+    &lt;groupId&gt;com.ssl&lt;/groupId&gt;
+    &lt;artifactId&gt;ssmbuild&lt;/artifactId&gt;
+    &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
+    &lt;!--依赖:junit,数据库驱动，连接池，Servlet，jsp，mybatis,mybatis-mvc,Spring,SpringMVC--&gt;
+    &lt;dependencies&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;junit&lt;/groupId&gt;
+            &lt;artifactId&gt;junit&lt;/artifactId&gt;
+            &lt;version&gt;4.12&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;mysql&lt;/groupId&gt;
+            &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;
+            &lt;version&gt;5.1.47&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;com.mchange&lt;/groupId&gt;
+            &lt;artifactId&gt;c3p0&lt;/artifactId&gt;
+            &lt;version&gt;0.9.5.2&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;javax.servlet&lt;/groupId&gt;
+            &lt;artifactId&gt;servlet-api&lt;/artifactId&gt;
+            &lt;version&gt;2.5&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;javax.servlet.jsp&lt;/groupId&gt;
+            &lt;artifactId&gt;jsp-api&lt;/artifactId&gt;
+            &lt;version&gt;2.2&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;javax.servlet&lt;/groupId&gt;
+            &lt;artifactId&gt;jstl&lt;/artifactId&gt;
+            &lt;version&gt;1.2&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.mybatis&lt;/groupId&gt;
+            &lt;artifactId&gt;mybatis&lt;/artifactId&gt;
+            &lt;version&gt;3.5.2&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.mybatis&lt;/groupId&gt;
+            &lt;artifactId&gt;mybatis-spring&lt;/artifactId&gt;
+            &lt;version&gt;2.0.2&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-webmvc&lt;/artifactId&gt;
+            &lt;version&gt;5.2.4.RELEASE&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-jdbc&lt;/artifactId&gt;
+            &lt;version&gt;5.0.5.RELEASE&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.projectlombok&lt;/groupId&gt;
+            &lt;artifactId&gt;lombok&lt;/artifactId&gt;
+            &lt;version&gt;1.18.12&lt;/version&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+
+
+    &lt;!--Maven资源过滤设置--&gt;
+    &lt;build&gt;
+        &lt;resources&gt;
+            &lt;resource&gt;
+                &lt;directory&gt;src/main/resources&lt;/directory&gt;
+                &lt;includes&gt;
+                    &lt;include&gt;**/*.properties&lt;/include&gt;
+                    &lt;include&gt;**/*.xml&lt;/include&gt;
+                &lt;/includes&gt;
+                &lt;filtering&gt;true&lt;/filtering&gt;
+            &lt;/resource&gt;
+
+            &lt;resource&gt;
+                &lt;directory&gt;src/main/java&lt;/directory&gt;
+                &lt;includes&gt;
+                    &lt;include&gt;**/*.properties&lt;/include&gt;
+                    &lt;include&gt;**/*.xml&lt;/include&gt;
+                &lt;/includes&gt;
+                &lt;filtering&gt;true&lt;/filtering&gt;
+            &lt;/resource&gt;
+        &lt;/resources&gt;
+    &lt;/build&gt;
+&lt;/project&gt;
+</code></pre>
+<h2 id="62-开发流程">6.2 开发流程</h2>
+<ul>
+<li>需求分析+设计数据库+业务+传给前端页面</li>
+<li>整体效果：</li>
+</ul>
+<figure data-type="image" tabindex="9"><img src="https://img-blog.csdnimg.cn/20200803105254455.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0NDczMzQ4,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" loading="lazy"></figure>
+<h2 id="63-整合mybatis">6.3 整合Mybatis</h2>
+<ul>
+<li>mybatis-config.xml
+<ul>
+<li>数据库连接交给Spring-dao.xml配置</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
+&lt;!DOCTYPE configuration
+        PUBLIC &quot;-//mybatis.org//DTD Config 3.0//EN&quot;
+        &quot;http://mybatis.org/dtd/mybatis-3-config.dtd&quot;&gt;
+&lt;!--核心配置文件--&gt;
+&lt;configuration&gt;
+    &lt;settings&gt;
+        &lt;setting name=&quot;logImpl&quot; value=&quot;STDOUT_LOGGING&quot;/&gt;
+    &lt;/settings&gt;
+    &lt;!--配置数据源，交给Spring去做--&gt;
+    &lt;!--取别名--&gt;
+    &lt;typeAliases&gt;
+        &lt;!--resultMap:默认类名小写为使用id--&gt;
+        &lt;package name=&quot;com.ssl.pojo&quot;/&gt;
+    &lt;/typeAliases&gt;
+    &lt;mappers&gt;
+        &lt;mapper class=&quot;com.ssl.dao.BookMapper&quot;/&gt;
+    &lt;/mappers&gt;
+&lt;/configuration&gt;
+
+# db.properties配置文件
+driver=com.mysql.jdbc.Driver
+url=jdbc:mysql://localhost:3306/ssmbuild?useSSL=false&amp;amp;useUnicode=true&amp;amp;characterEncoding=utf-8
+username=root
+password=123456
+</code></pre>
+<h2 id="64-整合spring">6.4 整合Spring</h2>
+<ul>
+<li>1 spring-dao.xml
+<ul>
+<li>数据库连接读取db.properties有bug，手动连接jdbcurl和user</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+       xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+       xmlns:context=&quot;http://www.springframework.org/schema/context&quot;
+       xmlns:mvc=&quot;http://www.springframework.org/schema/mvc&quot;
+       xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        https://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd&quot;&gt;
+    &lt;!--1 关联数据库配置文件--&gt;
+    &lt;context:property-placeholder location=&quot;classpath:db.properties&quot;/&gt;
+    &lt;!--2 连接池 这次使用c3p0的连接池.常见的数据库：
+    dbcp:半自动操作，不能自动连接
+    c3p0：自动化操作，并且可以配置到对象中
+    druid,hikari(SpringBoot)--&gt;
+    &lt;bean id=&quot;dataSource&quot; class=&quot;com.mchange.v2.c3p0.ComboPooledDataSource&quot;&gt;
+        &lt;property name=&quot;driverClass&quot; value=&quot;${driver}&quot;/&gt;
+        &lt;property name=&quot;jdbcUrl&quot; value=&quot;${url}&quot;/&gt;
+        &lt;property name=&quot;user&quot; value=&quot;${username}&quot;/&gt;
+        &lt;property name=&quot;password&quot; value=&quot;${password}&quot;/&gt;
+        &lt;!--c3p0的私有属性--&gt;
+        &lt;property name=&quot;maxPoolSize&quot; value=&quot;30&quot;/&gt;
+        &lt;property name=&quot;minPoolSize&quot; value=&quot;10&quot;/&gt;
+        &lt;!--关闭连接后，不自动commit--&gt;
+        &lt;property name=&quot;autoCommitOnClose&quot; value=&quot;false&quot;/&gt;
+        &lt;property name=&quot;checkoutTimeout&quot; value=&quot;10000&quot;/&gt;
+        &lt;property name=&quot;acquireRetryAttempts&quot; value=&quot;2&quot;/&gt;
+     &lt;/bean&gt;
+    &lt;!--3 sqlSessionFactory--&gt;
+    &lt;bean id=&quot;sqlSessionFactory&quot; class=&quot;org.mybatis.spring.SqlSessionFactoryBean&quot;&gt;
+        &lt;!--绑定数据库--&gt;
+        &lt;property name=&quot;dataSource&quot; ref=&quot;dataSource&quot;/&gt;
+        &lt;!--绑定Mybatis的配置文件--&gt;
+        &lt;property name=&quot;configLocation&quot; value=&quot;classpath:mybatis-config.xml&quot;/&gt;
+    &lt;/bean&gt;
+    &lt;!--4 配置dao接口扫描包，动态的实现了dao接口可以注入到Spring容器中,不用写mapperImpl.xml--&gt;
+    &lt;bean class=&quot;org.mybatis.spring.mapper.MapperScannerConfigurer&quot;&gt;
+        &lt;!--注入sqlSessionFactory--&gt;
+        &lt;property name=&quot;sqlSessionFactoryBeanName&quot; value=&quot;sqlSessionFactory&quot;/&gt;
+        &lt;!--扫描要扫描的dao的包--&gt;
+        &lt;property name=&quot;basePackage&quot; value=&quot;com.ssl.dao&quot;/&gt;
+    &lt;/bean&gt;
+&lt;/beans&gt;
+</code></pre>
+<ul>
+<li><strong>2 spring-service.xml</strong></li>
+</ul>
+<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+       xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+       xmlns:context=&quot;http://www.springframework.org/schema/context&quot;
+       xmlns:mvc=&quot;http://www.springframework.org/schema/mvc&quot;
+       xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        https://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd&quot;&gt;
+    &lt;!--1 扫描service下的包--&gt;
+    &lt;context:component-scan base-package=&quot;com.ssl.service&quot;/&gt;
+    &lt;!--2 将我们的所有业务类，注入到Spring,这里使用bean配置，平时是使用注解--&gt;
+    &lt;bean id=&quot;BookServiceImpl&quot; class=&quot;com.ssl.service.BookServiceImpl&quot;&gt;
+        &lt;property name=&quot;bookMapper&quot; ref=&quot;bookMapper&quot;/&gt;
+    &lt;/bean&gt;
+    &lt;!--3  声明式事务配置--&gt;
+    &lt;bean  id=&quot;transactionManager&quot; class=&quot;org.springframework.jdbc.datasource.DataSourceTransactionManager&quot;&gt;
+        &lt;property name=&quot;dataSource&quot; ref=&quot;dataSource&quot;/&gt;
+    &lt;/bean&gt;
+    &lt;!--4 AOP横切事务，这里用不到--&gt;
+&lt;/beans&gt;
+</code></pre>
+<ul>
+<li>3 application.xml
+<ul>
+<li>导入其他配置进spring主配置文件</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+       xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+       xmlns:context=&quot;http://www.springframework.org/schema/context&quot;
+       xmlns:mvc=&quot;http://www.springframework.org/schema/mvc&quot;
+       xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        https://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd&quot;&gt;
+
+    &lt;import resource=&quot;classpath:spring-dao.xml&quot;/&gt;
+    &lt;import resource=&quot;classpath:spring-service.xml&quot;/&gt;
+    &lt;import resource=&quot;classpath:spring-mvc.xml&quot;/&gt;
+&lt;/beans&gt;
+</code></pre>
+<h2 id="65-整合springmvc">6.5 整合SpringMVC</h2>
+<ul>
+<li>增加web项目的支持</li>
+<li><strong>web.xml</strong></li>
+</ul>
+<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;web-app xmlns=&quot;http://xmlns.jcp.org/xml/ns/javaee&quot;
+         xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+         xsi:schemaLocation=&quot;http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd&quot;
+         version=&quot;4.0&quot;&gt;
+    &lt;!--SpringMVC配置--&gt;
+    &lt;!--1 DispatcherServlet--&gt;
+    &lt;servlet&gt;
+        &lt;servlet-name&gt;springMVC&lt;/servlet-name&gt;
+        &lt;servlet-class&gt;org.springframework.web.servlet.DispatcherServlet&lt;/servlet-class&gt;
+        &lt;init-param&gt;
+            &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;
+            &lt;param-value&gt;classpath:application.xml&lt;/param-value&gt;
+        &lt;/init-param&gt;
+        &lt;load-on-startup&gt;1&lt;/load-on-startup&gt;
+    &lt;/servlet&gt;
+    &lt;servlet-mapping&gt;
+        &lt;servlet-name&gt;springMVC&lt;/servlet-name&gt;
+        &lt;url-pattern&gt;/&lt;/url-pattern&gt;
+    &lt;/servlet-mapping&gt;
+    &lt;!--2 乱码过滤--&gt;
+    &lt;filter&gt;
+        &lt;filter-name&gt;encodingFilter&lt;/filter-name&gt;
+        &lt;filter-class&gt;org.springframework.web.filter.CharacterEncodingFilter&lt;/filter-class&gt;
+        &lt;init-param&gt;
+            &lt;param-name&gt;encoding&lt;/param-name&gt;
+            &lt;param-value&gt;utf-8&lt;/param-value&gt;
+        &lt;/init-param&gt;
+    &lt;/filter&gt;
+    &lt;filter-mapping&gt;
+        &lt;filter-name&gt;encodingFilter&lt;/filter-name&gt;
+        &lt;url-pattern&gt;/*&lt;/url-pattern&gt;
+    &lt;/filter-mapping&gt;
+    &lt;!--3 Session过期时间--&gt;
+    &lt;session-config&gt;
+        &lt;session-timeout&gt;15&lt;/session-timeout&gt;
+    &lt;/session-config&gt;
+
+&lt;/web-app&gt;
+</code></pre>
+<ul>
+<li><strong>spring-mvc.xml</strong></li>
+</ul>
+<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+       xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+       xmlns:context=&quot;http://www.springframework.org/schema/context&quot;
+       xmlns:mvc=&quot;http://www.springframework.org/schema/mvc&quot;
+       xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        https://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd&quot;&gt;
+    &lt;!--1 注解驱动--&gt;
+    &lt;mvc:annotation-driven/&gt;
+    &lt;!--2 静态资源过滤--&gt;
+    &lt;mvc:default-servlet-handler/&gt;
+    &lt;!--3 扫描包：Controller--&gt;
+    &lt;context:component-scan base-package=&quot;com.ssl.controller&quot;/&gt;
+    &lt;!--4 视图解析器--&gt;
+    &lt;bean class=&quot;org.springframework.web.servlet.view.InternalResourceViewResolver&quot;&gt;
+        &lt;property name=&quot;prefix&quot; value=&quot;/WEB-INF/jsp/&quot;/&gt;
+        &lt;property name=&quot;suffix&quot; value=&quot;.jsp&quot;/&gt;
+    &lt;/bean&gt;
+&lt;/beans&gt;
+</code></pre>
+<h2 id="66-dao层">6.6 dao层</h2>
+<ul>
+<li>BookMapper接口和BookMapperMapper.xml</li>
+</ul>
+<pre><code class="language-java">public interface BookMapper {
+    //增加一本书
+    int addBook(Books books);
+
+    //删除一本书
+    int deleteBookById(@Param(&quot;bookId&quot;) int id);
+
+    //修改一本书
+    int updateBook(Books books);
+
+    //查询一本书根据id
+    Books queryBookById(@Param(&quot;bookId&quot;)int id);
+
+    //查询全部书
+    List&lt;Books&gt; queryAllBook();
+
+    Books queryBookByName(@Param(&quot;bookName&quot;) String bookName);
+}
+
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
+&lt;!DOCTYPE mapper
+        PUBLIC &quot;-//mybatis.org//DTD Config 3.0//EN&quot;
+        &quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;&gt;
+&lt;!--核心配置文件--&gt;
+&lt;mapper namespace=&quot;com.ssl.dao.BookMapper&quot;&gt;
+    &lt;insert id=&quot;addBook&quot; parameterType=&quot;Books&quot;&gt;
+        insert into ssmbuild.books(bookName, bookCounts, detail)
+        values (#{bookName},#{bookCounts},#{detail});
+    &lt;/insert&gt;
+    &lt;delete id=&quot;deleteBookById&quot; parameterType=&quot;int&quot;&gt;
+        delete from ssmbuild.books where bookId = #{bookId}
+    &lt;/delete&gt;
+    &lt;update id=&quot;updateBook&quot; parameterType=&quot;Books&quot;&gt;
+        update ssmbuild.books set
+        bookName=#{bookName},
+        bookCounts=#{bookCounts},
+        detail=#{detail}
+        where bookId=#{bookId};
+    &lt;/update&gt;
+    &lt;select id=&quot;queryBookById&quot; parameterType=&quot;int&quot; resultType=&quot;Books&quot;&gt;
+        select * from ssmbuild.books where bookId = #{bookId};
+    &lt;/select&gt;
+    &lt;select id=&quot;queryAllBook&quot; resultType=&quot;Books&quot;&gt;
+        select * from ssmbuild.books;
+    &lt;/select&gt;
+
+    &lt;select id=&quot;queryBookByName&quot; parameterType=&quot;String&quot; resultType=&quot;Books&quot;&gt;
+         select * from ssmbuild.books where bookName=#{bookName}
+    &lt;/select&gt;
+&lt;/mapper&gt;
+</code></pre>
+<h2 id="67-service层">6.7 service层</h2>
+<pre><code class="language-java">public interface BookService {
+    //增加一本书
+    int addBook(Books books);
+
+    //删除一本书
+    int deleteBookById(int id);
+
+    //修改一本书
+    int updateBook(Books books);
+
+    //查询一本书根据id
+    Books queryBookById(int id);
+
+    //查询全部书
+    List&lt;Books&gt; queryAllBook();
+
+    Books queryBookByName(String bookName);
+}
+
+public class BookServiceImpl implements BookService {
+    //注入Dao层
+    private BookMapper bookMapper;
+    public void setBookMapper(BookMapper bookMapper) {
+        this.bookMapper = bookMapper;
+    }
+
+    @Override
+    public int addBook(Books books) {
+        return bookMapper.addBook(books);
+    }
+
+    @Override
+    public int deleteBookById(int id) {
+        return bookMapper.deleteBookById(id);
+    }
+
+    @Override
+    public int updateBook(Books books) {
+        return bookMapper.updateBook(books);
+    }
+
+    @Override
+    public Books queryBookById(int id) {
+        return bookMapper.queryBookById(id);
+    }
+
+    @Override
+    public List&lt;Books&gt; queryAllBook() {
+        return bookMapper.queryAllBook();
+    }
+
+    @Override
+    public Books queryBookByName(String bookName) {
+
+        return bookMapper.queryBookByName(bookName);
+    }
+}
+</code></pre>
+<h2 id="68-controller层">6.8 controller层</h2>
+<pre><code class="language-java">@Controller
+@RequestMapping(&quot;/book&quot;)
+public class BookController {
+
+    @Autowired
+    @Qualifier(&quot;BookServiceImpl&quot;)
+    private BookService bookService;
+
+    //查询全部的书籍，并且返回到一个书籍展示页面
+    @RequestMapping(&quot;/allBook&quot;)
+    public String list(Model model) {
+        List&lt;Books&gt; books = bookService.queryAllBook();
+        model.addAttribute(&quot;list&quot;, books);
+        return &quot;allBook&quot;;
+    }
+
+    //跳转到增加书籍页面
+    @RequestMapping(&quot;/toAddBook&quot;)
+    public String toAddBook() {
+        return &quot;addBook&quot;;
+    }
+
+    //添加书籍
+    @RequestMapping(&quot;/addBook&quot;)
+    public String addBook(Books books) {
+        int result = bookService.addBook(books);
+        if (result &gt; 0) {
+            System.out.println(&quot;添加书籍成功&quot;);
+        }
+        return &quot;redirect:/book/allBook&quot;;
+    }
+
+    @RequestMapping(&quot;/toUpdateBook&quot;)
+    public String toUpdate(int bookId, Model model) {
+        Books books = bookService.queryBookById(bookId);
+        model.addAttribute(&quot;book&quot;, books);
+        return &quot;updateBook&quot;;
+    }
+
+    /*
+        没有提交事务操作，更新会失败
+     */
+    @RequestMapping(&quot;/updateBook&quot;)
+    public String updateBook(Books books) {
+        int result = bookService.updateBook(books);
+        if (result &gt; 0) {
+            System.out.println(&quot;修改书籍成功&quot;);
+        }
+        return &quot;redirect:/book/allBook&quot;;
+    }
+
+    /*
+        删除书籍，回顾RestFul风格
+     */
+    @RequestMapping(&quot;/deleteBook/{bookId}&quot;)
+    public String deleteBook(@PathVariable(&quot;bookId&quot;) int bookId) {
+        int result = bookService.deleteBookById(bookId);
+        if (result &gt; 0) {
+            System.out.println(&quot;删除书籍成功&quot;);
+        }
+        return &quot;redirect:/book/allBook&quot;;
+    }
+
+    @RequestMapping(&quot;/queryBook&quot;)
+    public String queryBook(String queryBookName, Model model) {
+        Books books = bookService.queryBookByName(queryBookName);
+        //复用，这样就显示一个
+        List&lt;Books&gt; list = new ArrayList&lt;&gt;();
+        list.add(books);
+        if (books == null) {
+            list= bookService.queryAllBook();
+            model.addAttribute(&quot;errMsg&quot;,&quot;未查任何书籍&quot;);
+        }
+        model.addAttribute(&quot;list&quot;, list);
+        return &quot;allBook&quot;;
+    }
+}
+</code></pre>
+<h2 id="69-前端页面">6.9 前端页面</h2>
+<h5 id="indexxml">index.xml</h5>
+<pre><code class="language-html">&lt;%@ page contentType=&quot;text/html;charset=UTF-8&quot; language=&quot;java&quot; %&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;$Title$&lt;/title&gt;
+    &lt;style&gt;
+        /*消除字体蓝色下划线*/
+        a {
+            text-decoration: none;
+            color: black;
+            font-size: 18px;
+        }
+
+        h3 {
+            width: 180px;
+            height: 38px;
+            margin: 100px auto;
+            text-align: center;
+            line-height: 38px;
+            background: deepskyblue;
+            border-radius: 5px;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h3&gt;
+    &lt;a href=&quot;${pageContext.request.contextPath}/book/allBook&quot;&gt;进入书籍展示页面&lt;/a&gt;
+&lt;/h3&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<h5 id="web-infjspaddbookjsp">WEB-INF/jsp/addBook.jsp</h5>
+<pre><code class="language-html">&lt;%@ page contentType=&quot;text/html;charset=UTF-8&quot; language=&quot;java&quot; %&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Title&lt;/title&gt;
+    &lt;%--BootStrap美化界面--%&gt;
+    &lt;link href=&quot;https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css&quot; rel=&quot;stylesheet&quot;&gt;
+    &lt;div class=&quot;row clearfix&quot;&gt;
+        &lt;%--屏幕分成12列--%&gt;
+        &lt;div class=&quot;col-md-12 column&quot;&gt;
+            &lt;div class=&quot;page-header&quot;&gt;
+                &lt;h1&gt;
+                    &lt;small&gt;新增书籍&lt;/small&gt;
+                &lt;/h1&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;%--BootStrap官网拿&quot;表单&quot;数据  name属性保证pojo属性名称一致 required保证必须提交--%&gt;
+    &lt;form action=&quot;${pageContext.request.contextPath}/book/addBook&quot; method=&quot;post&quot;&gt;
+        &lt;div class=&quot;form-group&quot;&gt;
+            &lt;label for=&quot;bName&quot;&gt;书籍名称:&lt;/label&gt;
+            &lt;input type=&quot;text&quot; name=&quot;bookName&quot; class=&quot;form-control&quot; id=&quot;bName&quot; required&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;form-group&quot;&gt;
+            &lt;label for=&quot;bCount&quot;&gt;书籍数量：&lt;/label&gt;
+            &lt;input type=&quot;text&quot; name=&quot;bookCounts&quot; class=&quot;form-control&quot; id=&quot;bCount&quot; required&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;form-group&quot;&gt;
+            &lt;label for=&quot;bDesc&quot;&gt;书籍描述：&lt;/label&gt;
+            &lt;input type=&quot;text&quot; name=&quot;detail&quot; class=&quot;form-control&quot; id=&quot;bDesc&quot; required&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;form-group&quot;&gt;
+            &lt;input type=&quot;submit&quot; class=&quot;form-control&quot; value=&quot;添加&quot;&gt;
+        &lt;/div&gt;
+
+    &lt;/form&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<h5 id="web-infjspallbookjsp">WEB-INF/jsp/allBook.jsp</h5>
+<pre><code class="language-html">&lt;%@ taglib prefix=&quot;c&quot; uri=&quot;http://java.sun.com/jsp/jstl/core&quot; %&gt;
+&lt;%--
+  Created by IntelliJ IDEA.
+  User: 宋林
+  Date: 2020/3/31
+  Time: 20:50
+  To change this template use File | Settings | File Templates.
+--%&gt;
+&lt;%@ page contentType=&quot;text/html;charset=UTF-8&quot; language=&quot;java&quot; %&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;书籍展示页面&lt;/title&gt;
+    &lt;%--BootStrap美化界面--%&gt;
+    &lt;link href=&quot;https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css&quot; rel=&quot;stylesheet&quot;&gt;
+
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;div class=&quot;container&quot;&gt;
+    &lt;div class=&quot;row clearfix&quot;&gt;
+        &lt;%--屏幕分成12列--%&gt;
+        &lt;div class=&quot;col-md-12 column&quot;&gt;
+            &lt;div class=&quot;page-header&quot;&gt;
+                &lt;h1&gt;
+                    &lt;small&gt; 书籍列表——————————显示所有书籍&lt;/small&gt;
+                &lt;/h1&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;row&quot;&gt;
+            &lt;div class=&quot;col-md-4 column&quot;&gt;
+                &lt;a class=&quot;btn btn-primary&quot; href=&quot;${pageContext.request.contextPath}/book/toAddBook&quot;&gt;新增书籍&lt;/a&gt;
+                &lt;a class=&quot;btn btn-primary&quot; href=&quot;${pageContext.request.contextPath}/book/allBook&quot;&gt;显示全部书籍&lt;/a&gt;
+            &lt;/div&gt;
+
+            &lt;div class=&quot;col-md-4 column&quot;&gt;&lt;/div&gt;
+
+            &lt;div class=&quot;col-md-8 column&quot;&gt;
+                &lt;form action=&quot;${pageContext.request.contextPath}/book/queryBook&quot; method=&quot;post&quot; style=&quot;float: right&quot;&gt;
+                    &lt;%--前端未传任何信息，就显示错误提示信息：未查任何书籍--%&gt;
+                    &lt;span style=&quot;color: red;font-weight: bold&quot;&gt;${errMsg}&lt;/span&gt;
+                    &lt;%--class=&quot;form-inline&quot;保证在同一行--%&gt;
+                    &lt;input type=&quot;text&quot; name=&quot;queryBookName&quot; class=&quot;form-inline&quot; placeholder=&quot;请输入要查询的书籍名称&quot;&gt;
+                    &lt;input type=&quot;submit&quot; value=&quot;查询&quot; class=&quot;btn btn-primary&quot;&gt;
+
+                &lt;/form&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+
+    &lt;/div&gt;
+    &lt;div class=&quot;row clearfix&quot;&gt;
+        &lt;div class=&quot;col-md-12 column&quot;&gt;
+            &lt;table class=&quot;table table-hover table-striped&quot;&gt;
+                &lt;thead&gt;
+                &lt;tr&gt;
+                    &lt;th&gt;书籍编号&lt;/th&gt;
+                    &lt;th&gt;书籍名称&lt;/th&gt;
+                    &lt;th&gt;书籍数量&lt;/th&gt;
+                    &lt;th&gt;书籍详情&lt;/th&gt;
+                    &lt;th&gt;操作&lt;/th&gt;
+                &lt;/tr&gt;
+                &lt;/thead&gt;
+                &lt;%--书籍从数据库中查询出来，从这个list中遍历出来，foreach--%&gt;
+                &lt;tbody&gt;
+                &lt;c:forEach var=&quot;book&quot; items=&quot;${list}&quot;&gt;
+                    &lt;tr&gt;
+                        &lt;td&gt;${book.bookId}&lt;/td&gt;
+                        &lt;td&gt;${book.bookName}&lt;/td&gt;
+                        &lt;td&gt;${book.bookCounts}&lt;/td&gt;
+                        &lt;td&gt;${book.detail}&lt;/td&gt;
+                        &lt;td&gt;
+
+                            &lt;a href=&quot;${pageContext.request.contextPath}/book/toUpdateBook?bookId=${book.bookId}&quot;&gt;修改&lt;/a&gt;
+                            &amp;nbsp; | &amp;nbsp;
+                            &lt;a href=&quot;${pageContext.request.contextPath}/book/deleteBook/${book.bookId}&quot;&gt;删除&lt;/a&gt;
+                        &lt;/td&gt;
+                    &lt;/tr&gt;
+                &lt;/c:forEach&gt;
+                &lt;/tbody&gt;
+            &lt;/table&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<h5 id="web-infjspupdatebookjsp">WEB-INF/jsp/updateBook.jsp</h5>
+<pre><code class="language-html">&lt;%@ page contentType=&quot;text/html;charset=UTF-8&quot; language=&quot;java&quot; %&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Title&lt;/title&gt;
+    &lt;%--BootStrap美化界面--%&gt;
+    &lt;link href=&quot;https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css&quot; rel=&quot;stylesheet&quot;&gt;
+    &lt;div class=&quot;row clearfix&quot;&gt;
+        &lt;%--屏幕分成12列--%&gt;
+        &lt;div class=&quot;col-md-12 column&quot;&gt;
+            &lt;div class=&quot;page-header&quot;&gt;
+                &lt;h1&gt;
+                    &lt;small&gt;修改书籍&lt;/small&gt;
+                &lt;/h1&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;%--BootStrap官网拿&quot;表单&quot;数据  name属性保证pojo属性名称一致 required保证必须提交--%&gt;
+    &lt;form action=&quot;${pageContext.request.contextPath}/book/updateBook&quot; method=&quot;post&quot;&gt;
+        &lt;%--提交失败：没有回显：问题：
+            1. 事务没有提交
+            2. sql执行失败，没有提交BookId，需要前端的隐藏域
+        --%&gt;
+        &lt;%--添加bookId的隐藏域--%&gt;
+        &lt;input type=&quot;hidden&quot; name=&quot;BookId&quot; value=&quot;${book.bookId}&quot;&gt;
+        &lt;div class=&quot;form-group&quot;&gt;
+            &lt;label for=&quot;bName&quot;&gt;书籍名称:&lt;/label&gt;
+            &lt;input type=&quot;text&quot; name=&quot;bookName&quot; class=&quot;form-control&quot; id=&quot;bName&quot; value=&quot;${book.bookName}&quot; required&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;form-group&quot;&gt;
+            &lt;label for=&quot;bCount&quot;&gt;书籍数量：&lt;/label&gt;
+            &lt;input type=&quot;text&quot; name=&quot;bookCounts&quot; class=&quot;form-control&quot; id=&quot;bCount&quot; value=&quot;${book.bookCounts}&quot;required&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;form-group&quot;&gt;
+            &lt;label for=&quot;bDesc&quot;&gt;书籍描述：&lt;/label&gt;
+            &lt;input type=&quot;text&quot; name=&quot;detail&quot; class=&quot;form-control&quot; id=&quot;bDesc&quot; value=&quot;${book.detail}&quot; required&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;form-group&quot;&gt;
+            &lt;input type=&quot;submit&quot; class=&quot;form-control&quot; value=&quot;添加&quot;&gt;
+        &lt;/div&gt;
+
+    &lt;/form&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<h1 id="7-ajax">7 Ajax</h1>
+<h2 id="71-概念">7.1 概念</h2>
+<ul>
+<li>Ajax就是一个异步无刷新请求，无需更新整个页面就异步加载一些数据，交互性更强</li>
+<li>模拟异步请求</li>
+</ul>
+<pre><code class="language-html"> &lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;模拟Ajax异步请求&lt;/title&gt;
+    &lt;script&gt;
+        function go() {
+            var url = document.getElementById(&quot;url&quot;).value;
+            document.getElementById(&quot;iframe1&quot;).src = url;
+        }
+    &lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div&gt;
+    &lt;p&gt;请输入地址：&lt;/p&gt;
+    &lt;p&gt;
+        &lt;input type=&quot;text&quot; id=&quot;url&quot;&gt;
+        &lt;input type=&quot;button&quot; id=&quot;button&quot; value=&quot;提交&quot; onclick=&quot;go()&quot;&gt;
+    &lt;/p&gt;
+&lt;/div&gt;
+&lt;div&gt;
+    &lt;iframe id=&quot;iframe1&quot; style=&quot;width:100%;height: 500px&quot;&gt;
+    &lt;/iframe&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<h2 id="72-使用jq使用ajax">7.2 使用JQ使用Ajax</h2>
+<h3 id="1-初试ajax">1 初试Ajax</h3>
+<pre><code class="language-html">&lt;%@ page contentType=&quot;text/html;charset=UTF-8&quot; language=&quot;java&quot; %&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;$Title$&lt;/title&gt;
+    &lt;%--加载动态的JQ资源--%&gt;
+    &lt;script src=&quot;https://code.jquery.com/jquery-3.4.1.js&quot;&gt;&lt;/script&gt;
+    &lt;script&gt;
+        /*
+        AJax后盾必须懂的东西：
+        url：后端接受的地址
+        data：后端接受到的请求参数，json数据格式=前后端分离时候，后端传的数据便于前端接受就是json数据
+        success:后端接受成功返回的函数
+        error:后盾失败接受返回的函数
+        */
+        function username() {
+            $.post({
+                url: &quot;${pageContext.request.contextPath}/a1&quot;,
+                data: {&quot;name&quot;: $(&quot;#username&quot;).val()},
+                success: function (data, status) {
+                    console.log(&quot;data:&quot; + data);
+                    console.log(&quot;status:&quot; + status);
+                }
+            })
+        }
+
+    &lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;%--实现Ajax异步请求
+    1 绑定单击事件
+    2 单击事件函数使用Jq：$.post({})
+--%&gt;
+用户名:&lt;input type=&quot;text&quot; id=&quot;username&quot; onclick=&quot;username()&quot;&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<h3 id="2-ajax实现异步加载">2 Ajax实现异步加载</h3>
+<pre><code class="language-html">&lt;%@ page contentType=&quot;text/html;charset=UTF-8&quot; language=&quot;java&quot; %&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Ajax&lt;/title&gt;
+
+    &lt;script src=&quot;https://code.jquery.com/jquery-3.4.1.js&quot;&gt;&lt;/script&gt;
+    &lt;script&gt;
+        /*页面加载完*/
+        $(function () {
+            /*绑定btn单击事件*/
+            $(&quot;#btn&quot;).click(function () {
+                /*JQ使用Ajax异步请求*/
+                $.post(&quot;${pageContext.request.contextPath}/a2&quot;, function (data) {
+                    // data接受返回的值
+                    //console.log(data);
+                    var html = &quot;&quot;;
+                    for (let i = 0; i &lt; data.length; i++) {
+                        html += &quot;&lt;tr&gt;&quot; +
+                            &quot;&lt;td&gt;&quot; + data[i].name + &quot;&lt;/td&gt;&quot; +
+                            &quot;&lt;td&gt;&quot; + data[i].age + &quot;&lt;/td&gt;&quot; +
+                            &quot;&lt;td&gt;&quot; + data[i].sex + &quot;&lt;/td&gt;&quot; +
+                            +&quot;&lt;tr&gt;&quot;
+                    }
+                    $(&quot;#content&quot;).html(html);
+                });
+            });
+
+        })
+    &lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;input type=&quot;button&quot; id=&quot;btn&quot; value=&quot;加载数据&quot;&gt;
+&lt;table&gt;
+    &lt;tr&gt;
+        &lt;td&gt;姓名&lt;/td&gt;
+        &lt;td&gt;年龄&lt;/td&gt;
+        &lt;td&gt;性别&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tbody id=&quot;content&quot;&gt;
+
+    &lt;/tbody&gt;
+
+&lt;/table&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<h3 id="3-实现登录验证">3 实现登录验证</h3>
+<pre><code class="language-html">&lt;%@ page contentType=&quot;text/html;charset=UTF-8&quot; language=&quot;java&quot; %&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;login&lt;/title&gt;
+    &lt;script src=&quot;https://code.jquery.com/jquery-3.4.1.js&quot;&gt;&lt;/script&gt;
+    &lt;script&gt;
+        function nameFun() {
+            $.post({
+                url: &quot;${pageContext.request.contextPath}/a3&quot;,
+                data: {&quot;name&quot;: $(&quot;#name&quot;).val()},
+                success: function (data) {
+                    //console.log(data);
+                    if (data.toString() === &quot;用户名成功&quot;) {
+                        $(&quot;#userInfo&quot;).css(&quot;color&quot;, &quot;green&quot;);
+                    } else {
+                        $(&quot;#userInfo&quot;).css(&quot;color&quot;, &quot;red&quot;);
+                    }
+                    $(&quot;#userInfo&quot;).html(data);
+                }
+            })
+        }
+
+        function passwordFun() {
+            $.post({
+                url: &quot;${pageContext.request.contextPath}/a3&quot;,
+                data: {&quot;password&quot;: $(&quot;#password&quot;).val()},
+                success: function (data) {
+                    if (data.toString() === &quot;密码正确&quot;) {
+                        $(&quot;#userPasswordInfo&quot;).css(&quot;color&quot;, &quot;green&quot;);
+                    }else {
+                        $(&quot;#userPasswordInfo&quot;).css(&quot;color&quot;, &quot;red&quot;);
+                    }
+                    $(&quot;#userPasswordInfo&quot;).html(data);
+                }
+            })
+        }
+    &lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;p&gt;
+    用户名:&lt;input type=&quot;text&quot; id=&quot;name&quot; onclick=&quot;nameFun()&quot;&gt;
+    &lt;%--span提示信息--%&gt;
+    &lt;span id=&quot;userInfo&quot;&gt;&lt;/span&gt;
+&lt;/p&gt;
+&lt;p&gt;
+    用户密码:&lt;input type=&quot;password&quot; id=&quot;password&quot; onclick=&quot;passwordFun()&quot;&gt;
+    &lt;span id=&quot;userPasswordInfo&quot;&gt;&lt;/span&gt;
+&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>appliacation.xml添加json乱码问题</p>
+<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+       xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+       xmlns:context=&quot;http://www.springframework.org/schema/context&quot;
+       xmlns:mvc=&quot;http://www.springframework.org/schema/mvc&quot;
+       xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        https://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd&quot;&gt;
+    &lt;!--1 自动扫描包，让指定包下的注解生效，由IOC容器统一管理--&gt;
+    &lt;context:component-scan base-package=&quot;com.ssl.controller&quot;/&gt;
+    &lt;!--2 注解驱动--&gt;
+    &lt;mvc:annotation-driven/&gt;
+    &lt;!--  使用JQ，使用静态资源过滤需要引用，动态就不需要--&gt;
+    &lt;mvc:default-servlet-handler/&gt;
+    &lt;!--注解加载映射器、适配器，解决Json数据中文乱码问题--&gt;
+    &lt;mvc:annotation-driven&gt;
+        &lt;mvc:message-converters register-defaults=&quot;true&quot;&gt;
+            &lt;bean class=&quot;org.springframework.http.converter.StringHttpMessageConverter&quot;&gt;
+                &lt;constructor-arg value=&quot;UTF-8&quot;/&gt;
+            &lt;/bean&gt;
+            &lt;bean class=&quot;org.springframework.http.converter.json.MappingJackson2HttpMessageConverter&quot;&gt;
+                &lt;property name=&quot;objectMapper&quot;&gt;
+                    &lt;bean class=&quot;org.springframework.http.converter.json.Jackson2ObjectMapperFactoryBean&quot;&gt;
+                        &lt;property name=&quot;failOnEmptyBeans&quot; value=&quot;false&quot;/&gt;
+                    &lt;/bean&gt;
+                &lt;/property&gt;
+            &lt;/bean&gt;
+        &lt;/mvc:message-converters&gt;
+    &lt;/mvc:annotation-driven&gt;
+    &lt;!--3 以上的是定死的代码，以下是配置视图解析器--&gt;
+    &lt;bean class=&quot;org.springframework.web.servlet.view.InternalResourceViewResolver&quot; id=&quot;internalResourceViewResolver&quot;&gt;
+        &lt;property name=&quot;prefix&quot; value=&quot;/WEB-INF/jsp/&quot;/&gt;
+        &lt;property name=&quot;suffix&quot; value=&quot;.jsp&quot;/&gt;
+    &lt;/bean&gt;
+&lt;/beans&gt;
+</code></pre>
+<h2 id="73-后端需要的前端知识">7.3 后端需要的前端知识</h2>
+<ul>
+<li>HTML+CSS+Js（超级熟练）</li>
+<li>Js必会？：
+<ul>
+<li>函数闭包？</li>
+<li>DOM
+<ul>
+<li>id,name.tag</li>
+<li>create,remove</li>
+</ul>
+</li>
+<li>BOM：浏览器对象模型
+<ul>
+<li>window</li>
+<li>document</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="8-拦截器">8 拦截器</h1>
+<h2 id="81-概念">8.1 概念</h2>
+<ul>
+<li>数据独立性：Servlet中的是过滤器，而拦截器是SpringMVC框架独有的，独享request和response</li>
+<li>拦截器只会拦截访问的控制器方法，如果访问的是jsp/html/css等式不会拦截的</li>
+<li>拦截器是基于AOP思想的，和AOP实现是一样的，在application.xml中配置</li>
+</ul>
+<pre><code class="language-xml">  &lt;!--拦截器配置--&gt;
+&lt;mvc:interceptors&gt;
+    &lt;mvc:interceptor&gt;
+        &lt;!--
+                /**是拦截之后所有的请求，比如/admin/a1/2131
+            --&gt;
+        &lt;mvc:mapping path=&quot;/**&quot;/&gt;
+        &lt;bean class=&quot;com.ssl.config.MyInterceptor&quot;/&gt;
+    &lt;/mvc:interceptor&gt;
+&lt;/mvc:interceptors&gt;
+</code></pre>
+<h2 id="82-自定义拦截器">8.2 自定义拦截器</h2>
+<ul>
+<li>实现 HandlerInterceptor</li>
+</ul>
+<pre><code class="language-java">public class MyInterceptor implements HandlerInterceptor {
+    @Override
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        //return true：执行下一个拦截器
+        System.out.println(&quot;===========处理前,这里进行拦截处理=================&quot;);
+        return true;
+    }
+
+    @Override
+    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
+        System.out.println(&quot;===========处理后，通常进行日志管理=================&quot;);
+    }
+
+    @Override
+    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
+        System.out.println(&quot;===========清洁中=================&quot;);
+    }
+}
+</code></pre>
+<ul>
+<li>applica.xml配置</li>
+</ul>
+<pre><code class="language-xml">&lt;!--拦截器配置--&gt;
+&lt;mvc:interceptors&gt;
+    &lt;mvc:interceptor&gt;
+        &lt;!--
+                /**是拦截之后所有的请求，比如/admin/a1/2131
+            --&gt;
+        &lt;mvc:mapping path=&quot;/**&quot;/&gt;
+        &lt;bean class=&quot;com.ssl.config.MyInterceptor&quot;/&gt;
+    &lt;/mvc:interceptor&gt;
+&lt;/mvc:interceptors&gt;
+</code></pre>
+<h2 id="83-登录验证判断">8.3 登录验证判断</h2>
+<pre><code class="language-java">public class LoginInterceptor implements HandlerInterceptor {
+    @Override
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        HttpSession session = request.getSession();
+        request.getRequestURL();
+        //URL:http://localhost:8080/springmvc_07_interceptor/user//main
+        System.out.println(&quot;URL:&quot; + request.getRequestURL());
+        //URI:/springmvc_07_interceptor/user//main
+        System.out.println(&quot;URI:&quot; + request.getRequestURI());
+
+        if (session.getAttribute(&quot;username&quot;) == null || session.getAttribute(&quot;password&quot;) == null) {
+            request.getRequestDispatcher(&quot;/WEB-INF/jsp/login.jsp&quot;).forward(request, response);
+        } else if (session.getAttribute(&quot;username&quot;).equals(&quot;admin&quot;) &amp;&amp; session.getAttribute(&quot;password&quot;).equals(&quot;123456&quot;)) {
+            return true;
+        }
+        if (request.getRequestURI().contains(&quot;ogin&quot;)) {
+            return true;
+        }
+        request.getRequestDispatcher(&quot;/WEB-INF/jsp/login.jsp&quot;).forward(request, response);
+        return false;
+    }
+}
+
+@Controller
+@RequestMapping(&quot;/user&quot;)
+public class LoginController {
+
+    @RequestMapping(&quot;/main&quot;)
+    public String main() {
+        //沒登陸就不等進入首頁
+        return &quot;main&quot;;
+    }
+
+    @RequestMapping(&quot;/goLogin&quot;)
+    public String goLogin() {
+        return &quot;login&quot;;
+    }
+
+
+    @RequestMapping(&quot;/login&quot;)
+    public String login(String username, String password, HttpSession session, Model model) {
+        session.setAttribute(&quot;username&quot;, username);
+        session.setAttribute(&quot;password&quot;, password);
+        model.addAttribute(&quot;username&quot;, username);
+        return &quot;main&quot;;
+    }
+
+    @RequestMapping(&quot;/outUser&quot;)
+    public String outUser(HttpSession session) {
+        session.removeAttribute(&quot;username&quot;);
+        session.removeAttribute(&quot;password&quot;);
+        return &quot;main&quot;;
+    }
+}
+</code></pre>
+<h1 id="9-文件上传">9 文件上传</h1>
+<ul>
+<li>前端form添加enctype=“multipart/form-data”,method=“post”</li>
+</ul>
+<pre><code class="language-html">&lt;form enctype=&quot;multipart/form-data&quot; method=&quot;post&quot; action=&quot;&quot;&gt;
+    
+  &lt;/form&gt;
+</code></pre>
+<ul>
+<li>后端pom导包</li>
+</ul>
+<pre><code class="language-xml"> &lt;dependencies&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;commons-fileupload&lt;/groupId&gt;
+            &lt;artifactId&gt;commons-fileupload&lt;/artifactId&gt;
+            &lt;version&gt;1.4&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;!--导入高版本的api--&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;javax.servlet&lt;/groupId&gt;
+            &lt;artifactId&gt;javax.servlet-api&lt;/artifactId&gt;
+            &lt;version&gt;4.0.1&lt;/version&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+</code></pre>
+<ul>
+<li>Spring自带的文件上传,application.xml配置</li>
+</ul>
+<pre><code class="language-xml"> &lt;!--4 文件上传配置--&gt;
+    &lt;bean id=&quot;multipartResolver&quot; class=&quot;org.springframework.web.multipart.commons.CommonsMultipartResolver&quot;&gt;
+        &lt;property name=&quot;defaultEncoding&quot; value=&quot;utf-8&quot;/&gt;
+        &lt;!--最大上传大小：单位是1字节--&gt;
+        &lt;property name=&quot;maxUploadSize&quot; value=&quot;10485760&quot;/&gt;
+        &lt;property name=&quot;maxInMemorySize&quot; value=&quot;40960&quot;/&gt;
+    &lt;/bean&gt;
+
+@RestController
+public class FileController {
+    @RequestMapping(&quot;/upFile&quot;)
+    public String upFile(@RequestParam(&quot;file&quot;) CommonsMultipartFile file, HttpServletRequest request) throws IOException {
+        //设置文件保存路径
+        String path = request.getServletContext().getRealPath(&quot;/upload&quot;);
+        System.out.println(&quot;path:&quot; + path);
+        File realPath = new File(path);
+        if (!realPath.exists()) {
+            realPath.mkdir();
+        }
+        System.out.println(&quot;上传的文件地址：&quot; + realPath);
+        //CommonsMultipartFile的方法写文件，简化
+        file.transferTo(new File(realPath + &quot;/&quot; + file.getOriginalFilename()));
+        return &quot;redirect:/index.jsp&quot;;
+    }
+}
+</code></pre>
+<h1 id="10-文件下载">10 文件下载</h1>
+<ul>
+<li>方式一：写方法下载</li>
+</ul>
+<pre><code class="language-java">  @RequestMapping(value = &quot;/download&quot;)
+    public String downLoad(HttpServletResponse response, HttpServletRequest request) throws IOException {
+        //手动设置，要下载的图片地址
+        String path = request.getServletContext().getRealPath(&quot;/upload&quot;);
+        String fileName = &quot;1.png&quot;;
+        //设置响应头
+        response.reset();//设置页面不缓存，清空buffer
+        response.setCharacterEncoding(&quot;UTF-8&quot;);
+        response.setContentType(&quot;multipart/form-data&quot;);//二进制传输数据
+        response.setHeader(&quot;Content-Disposition&quot;, &quot;attachment;fileName=&quot; + URLEncoder.encode(fileName, &quot;UTF-8&quot;));
+        File file = new File(path, fileName);
+        //读取文件-输入流
+        InputStream input = new FileInputStream(file);
+        //写入文件-输出流
+        OutputStream out = response.getOutputStream();
+        byte[] buff = new byte[1024];
+        int index = 0;
+        while ((index = input.read(buff)) != -1) {
+            out.write(buff,0,index);
+            out.flush();
+        }
+        input.close();
+        out.close();
+        return &quot;redirect:/index.jsp&quot;;
+    }
+</code></pre>
+<ul>
+<li>方式二：标签直接web下静态获取</li>
+</ul>
+<pre><code class="language-html">&lt;a href=&quot;${pageContext.request.contextPath}/static/1.png&quot;&gt;图片下载&lt;/a&gt;b
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[IDEA Debug 笔记]]></title>
         <id>https://ganhan999.github.io/post/IDEA Debug 笔记/</id>
@@ -3653,3028 +5784,6 @@ public class Blog {
         # 由于能走到这里，说明在数组中一定找得到目标元素，因此这里不用再做一次判断  因为左边已经找到了数
         return left
 
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Java Web]]></title>
-        <id>https://ganhan999.github.io/post/Java Web/</id>
-        <link href="https://ganhan999.github.io/post/Java Web/">
-        </link>
-        <updated>2020-12-28T16:18:25.000Z</updated>
-        <content type="html"><![CDATA[<h2 id="1-基本概念">1、基本概念</h2>
-<h3 id="11-前言">1.1、前言</h3>
-<p>web开发：</p>
-<ul>
-<li>web，网页的意思，www.baidu.com·</li>
-<li>静态web
-<ul>
-<li>html,sss</li>
-<li>提供给所有人看的数据始终不会发生变化！</li>
-</ul>
-</li>
-<li>动态web
-<ul>
-<li>淘宝，几乎是所有的网站；</li>
-<li>提供给所有人看的数据始终会发生变化，每个人在不同的时间，不同的地点看到的信息各不相同！</li>
-<li>技术栈：Servlet/ISP，ASP，PHP</li>
-</ul>
-</li>
-</ul>
-<h3 id="12-web应用程序web应用程序">1.2、web应用程序web应用程序：</h3>
-<p>可以提供浏览器访问的程序；</p>
-<ul>
-<li>a.html、b.html.….多个web资源，这些web资源可以被外界访问，对外界提供服务；</li>
-<li>你们能访问到的任何一个页面或者资源，都存在于这个世界的某一个角落的计算机上。</li>
-<li>URL</li>
-<li>这个统一的web资源会被放在同一个文件夹下，web应用程序&gt;Tomcat：服务器</li>
-<li>一个web应用由多部分组成（静态web，动态web)
-<ul>
-<li>html,sss,is</li>
-<li>jsp,servlet</li>
-<li>Java程序</li>
-<li>jar包</li>
-<li>配置文件（Properties)</li>
-</ul>
-</li>
-</ul>
-<p>Web酸用程序编写完毕后，若想提供给外界访问；需费一个服务蔬来统一管理</p>
-<h3 id="13-静态web">1.3、静态web</h3>
-<ul>
-<li>*.htm， *.html这些都是网员的后境、如果服务器上一直存在这些东四，我们就可以直接进行读取、需要网络；</li>
-<li><img src="https://img-blog.csdnimg.cn/20200506174751665.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JlbGxfbG92ZQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" loading="lazy"></li>
-<li>静态web存在的缺点
-<ul>
-<li>Web页面无法动态更新，所有用户看到都是同一个页面
-<ul>
-<li>轮播图，点击特效：伪动态</li>
-<li>JavaScript[实际开发中，它用的最多]</li>
-<li>VBScript</li>
-</ul>
-</li>
-<li>它无法和数据库交互（数据无法持久化，用户无法交互）</li>
-</ul>
-</li>
-</ul>
-<h3 id="14-动态web">1.4、 动态web</h3>
-<p>页面会动态展示，“web页面的展示效果因人而异”<br>
-<img src="https://img-blog.csdnimg.cn/20200506175025436.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JlbGxfbG92ZQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" loading="lazy"><br>
-缺点：</p>
-<ul>
-<li>加入服务器的动态web资源出现了错误，我们需要重新编写我们的后台程序，重新发布；
-<ul>
-<li>停机维护优点：</li>
-</ul>
-</li>
-<li>Web页面可以动态更新，所有用户看到都不是同一个页面</li>
-<li>它可以与数据库交互（数据持久化：注册，商品信息，用户信息………）<br>
-<img src="https://img-blog.csdnimg.cn/20200506175041602.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JlbGxfbG92ZQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" loading="lazy"></li>
-</ul>
-<h2 id="2-web服务器">2、web服务器</h2>
-<h3 id="21-技术讲解">2.1、技术讲解</h3>
-<p><strong>ASP:</strong></p>
-<ul>
-<li>微软：国内最早流行的就是ASP；</li>
-<li>·在HTML中嵌入了VB的脚本，ASP+COM；</li>
-<li>·在ASP开发中，基本一个页面都有几干行的业务代码，页面极其换乱</li>
-<li>·维护成本高！</li>
-<li>C#</li>
-<li>IIS</li>
-</ul>
-<p><strong>php:</strong></p>
-<ul>
-<li>PHP开发速度很快，功能很强大，跨平台，代码很简单（70%，WP）</li>
-<li>·无法承载大访问量的情况（局限性）</li>
-</ul>
-<p><strong>jSP/Servlet:</strong><br>
-B/S；浏览和服务器C/S：客户端和服务器</p>
-<ul>
-<li>sun公司主推的B/S架构</li>
-<li>基于Java语言的（所有的大公司，或者一些开源的组件，都是用Java写的）</li>
-<li>可以承载三高问题带来的影响；</li>
-<li>语法像ASP，ASP-&gt;JSP，加强市场强度；</li>
-</ul>
-<h3 id="22-web服务器">2.2、web服务器</h3>
-<p>服务器是一种被动的操作，用来处理用户的一些请求和给用户一些响应信息；<br>
-<strong>lIS</strong><br>
-微软的；ASP.,Windows中自带的<br>
-<strong>Tomcat</strong></p>
-<p><img src="https://img-blog.csdnimg.cn/20200423183331323.png" alt="在这里插入图片描述" loading="lazy"><br>
-面向百度编程：<br>
-Tomcat是Apache 软件基金会（Apache Software Foundation)的jakarta项目中的一个核心项目，最新的Servlet 和ISP 规范总是能在Tomcat中得到体现，因为Tomcat 技术先进、性能稳定，而且免费，因而深受lava爱好者的喜爱并得到了部分软件开发商的认可，成为目前比较流行的Web应用服务器。</p>
-<p>Tomcat 服务器是一个免费的开放源代码的Web应用服务器，属于轻量级应用服务器，在中小型系统和并发访问用户不是很多的场合下被普遍使用，是开发和调试ISP程序的首选。对于一个Java初学web的人来说，它是最佳的选择</p>
-<p>Tomcat 实际上运行JSP页面和Serlet。Tornct最新版易9.0</p>
-<p><strong>工作3-5年之后，可以尝试手写Tomcat服务器；</strong></p>
-<p>下载tomcat：</p>
-<ol>
-<li>安装or解压</li>
-<li>了解配置文件及目录结构</li>
-<li>这个东西的作用</li>
-</ol>
-<h2 id="3-tomcat">3、Tomcat</h2>
-<h3 id="31安装tomcat-tomcat">3.1安装tomcat tomcat</h3>
-<p>官网：http://tomcat.apache.org/</p>
-<p><img src="https://img-blog.csdnimg.cn/20200423183805916.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JlbGxfbG92ZQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" loading="lazy"><br>
-<img src="https://img-blog.csdnimg.cn/20200423183826267.png" alt="在这里插入图片描述" loading="lazy"></p>
-<h3 id="32-tomcat启动和配置">3.2、Tomcat启动和配置</h3>
-<p>文件夹作用:<br>
-<img src="https://img-blog.csdnimg.cn/20200506175503686.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JlbGxfbG92ZQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" loading="lazy"></p>
-<p><img src="https://img-blog.csdnimg.cn/20200423184021633.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JlbGxfbG92ZQ==,size_16,color_FFFFFF,t_70" alt="img" loading="lazy"><br>
-访问测试：http://localhost:8080/<br>
-可能遇到的问题：</p>
-<ol>
-<li>Java环境变量没有配置</li>
-<li>闪退问题：需要配置兼容性</li>
-<li>乱码问题：配置文件中设置</li>
-</ol>
-<p>可以修改 conf/logging.properties 中的 java.util.logging.ConsoleHandler.encoding = GBK <strong>解决乱码问题</strong></p>
-<h3 id="33-配置">3.3、配置</h3>
-<figure data-type="image" tabindex="2"><img src="https://img-blog.csdnimg.cn/20200506175624200.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JlbGxfbG92ZQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" loading="lazy"></figure>
-<p>可以配置启动的端口号</p>
-<ul>
-<li>tomcat的默认端口号为：8080</li>
-<li>mysql:3306</li>
-<li>http:80</li>
-<li>https：443</li>
-</ul>
-<pre><code class="language-xml">&lt;Connector port=&quot;8081&quot; protocol=&quot;HTTP/1.1&quot;
-      connectionTimeout=&quot;20000&quot;
-      redirectPort=&quot;8443&quot; /&gt;
-123
-</code></pre>
-<p>可以配置主机的名称</p>
-<ul>
-<li>默认的主机名为：localhost-&gt;127.0.0.1</li>
-<li>默认网站应用存放的位置为：webapps</li>
-</ul>
-<pre><code class="language-xml">  &lt;Host name=&quot;www.qinjiang.com&quot;  appBase=&quot;webapps&quot;
-        unpackWARs=&quot;true&quot; autoDeploy=&quot;true&quot;&gt;
-12
-</code></pre>
-<p>高难度面试题：<br>
-请你谈谈网站是如何进行访问的！</p>
-<ol>
-<li>
-<p>输入一个域名；回车</p>
-</li>
-<li>
-<p>检查本机的C:\Windows\System32\drivers\etc\hosts配置文件下有没有这个域名映射；</p>
-<ol>
-<li>
-<p>有：直接返回对应的ip地址，这个地址中，有我们需要访问的web程序，可以直接访问</p>
-<pre><code class="language-php"> 127.0.0.1 www.qinjiang.com
-1
-</code></pre>
-</li>
-<li>
-<p>没有：去DNS服务器找，找到的话就返回，找不到就返回找不到；<br>
-<img src="https://img-blog.csdnimg.cn/20200423184922156.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JlbGxfbG92ZQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" loading="lazy"></p>
-</li>
-</ol>
-</li>
-</ol>
-<p>4.可以配置一下环境变量（可选性）</p>
-<h3 id="34-发布一个web网站">3.4、发布一个web网站</h3>
-<p>不会就先模仿</p>
-<ul>
-<li>将自己写的网站，放到服务器（Tomcat)中指定的web应用的文件夹（webapps)下，就可以访问了</li>
-</ul>
-<p>网站应该有的结构</p>
-<pre><code>--webapps ：Tomcat服务器的web目录
-	-ROOT
-	-kuangstudy ：网站的目录名
-		- WEB-INF
-			-classes : java程序
-			-lib：web应用所依赖的jar包
-			-web.xml ：网站配置文件
-		- index.html 默认的首页
-		- static 
-            -css
-            	-style.css
-            -js
-            -img
-         -.....
-</code></pre>
-<p>HTTP协议：面试<br>
-Maven:构建工具</p>
-<ul>
-<li>Maven安装包</li>
-</ul>
-<p>Servlet入门</p>
-<ul>
-<li>HelloWorld!</li>
-<li>Servlet配置 ·原理</li>
-</ul>
-<h2 id="4-http">4、Http</h2>
-<h3 id="41-什么是httphttp">4.1、什么是HTTPHTTP</h3>
-<p>(超文本传输协议）是一个简单的请求-响应协议，它通常运行在TCP之上。</p>
-<ul>
-<li>文本：html，字符串，…</li>
-<li>超文本：图片，音乐，视频，定位，地图.……</li>
-<li>端口:80</li>
-</ul>
-<p>Https:安全的</p>
-<h3 id="42-两个时代">4.2、两个时代</h3>
-<ul>
-<li>http1.0
-<ul>
-<li>HTTP/1.0：客户端可以与web服务器连接后，只能获得一个web资源，断开连接</li>
-</ul>
-</li>
-<li>http2.0
-<ul>
-<li>HTTP/1.1：客户端可以与web服务器连接后，可以获得多个web资源。</li>
-</ul>
-</li>
-</ul>
-<h3 id="43-http请求">4.3、Http请求</h3>
-<ul>
-<li>客户端–发请求（Request）–服务器</li>
-</ul>
-<p>百度：</p>
-<pre><code class="language-html">Request URL:https://www.baidu.com/   请求地址
-Request Method:GET    get方法/post方法
-Status Code:200 OK    状态码：200
-Remote（远程） Address:14.215.177.39:443
-
-Accept:text/html  
-Accept-Encoding:gzip, deflate, br
-Accept-Language:zh-CN,zh;q=0.9    语言
-Cache-Control:max-age=0
-Connection:keep-alive
-</code></pre>
-<h4 id="1-请求行">1、请求行</h4>
-<ul>
-<li>请求行中的请求方式：GET</li>
-<li>请求方式：Get,Post,HEAD,DELETE,PUT,TRACT.…
-<ul>
-<li>get：请求能够携带的参数比较少，大小有限制，会在浏览器的URL地址栏显示数据内容，不安全，但高效</li>
-<li>post:请求能够携带的参数没有限制，大小没有限制，不会在浏览器的URL地址栏显示数据内容，安全，但不高效。</li>
-</ul>
-</li>
-</ul>
-<h4 id="2-消息头">2、消息头</h4>
-<pre><code>Accept：告诉浏览器，它所支持的数据类型
-Accept-Encoding：支持哪种编码格式  GBK   UTF-8   GB2312  ISO8859-1
-Accept-Language：告诉浏览器，它的语言环境
-Cache-Control：缓存控制
-Connection：告诉浏览器，请求完成是断开还是保持连接
-HOST：主机..../.
-</code></pre>
-<h3 id="44-http响应">4.4、Http响应</h3>
-<ul>
-<li>服务器–响应…….客户端</li>
-</ul>
-<p>百度：</p>
-<pre><code>Cache-Control:private    缓存控制
-Connection:Keep-Alive    连接
-Content-Encoding:gzip    编码
-Content-Type:text/html   类型  
-</code></pre>
-<h4 id="1-响应体">1、响应体</h4>
-<pre><code>Accept：告诉浏览器，它所支持的数据类型
-Accept-Encoding：支持哪种编码格式  GBK   UTF-8   GB2312  ISO8859-1
-Accept-Language：告诉浏览器，它的语言环境
-Cache-Control：缓存控制
-Connection：告诉浏览器，请求完成是断开还是保持连接
-HOST：主机..../.
-Refresh：告诉客户端，多久刷新一次；
-Location：让网页重新定位；
-</code></pre>
-<h4 id="2-响应状态码">2、响应状态码</h4>
-<p>200：请求响应成功200<br>
-3xx:请求重定向·重定向：你重新到我给你新位置去；<br>
-4xx:找不到资源404·资源不存在；<br>
-5xx:服务器代码错误 500 502:网关错误</p>
-<p><strong>常见面试题：</strong><br>
-当你的浏览器中地址栏输入地址并回车的一瞬间到页面能够展示回来，经历了什么？</p>
-<h2 id="5-maven">5、Maven</h2>
-<p><strong>我为什么要学习这个技术？</strong></p>
-<ol>
-<li>在Javaweb开发中，需要使用大量的jar包，我们手动去导入；</li>
-<li>如何能够让一个东西自动帮我导入和配置这个jar包。</li>
-</ol>
-<p>由此，Maven诞生了！</p>
-<h3 id="51-maven项目架构管理工具">5.1 Maven项目架构管理工具</h3>
-<p>我们目前用来就是方便导入jar包的！<br>
-Maven的核心思想：<strong>约定大于配置</strong></p>
-<ul>
-<li>有约束，不要去违反。</li>
-</ul>
-<p>Maven会规定好你该如何去编写我们Java代码，必须要按照这个规范来；</p>
-<h3 id="52下载安装maven">5.2下载安装Maven</h3>
-<p>官网：https://maven.apache.org/<br>
-<img src="https://img-blog.csdnimg.cn/20200506180036622.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JlbGxfbG92ZQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" loading="lazy"></p>
-<p>下载完成后，解压即可；<br>
-小狂神友情建议：电脑上的所有环境都放在一个文件夹下，方便管理；</p>
-<h3 id="53配置环境变量">5.3配置环境变量</h3>
-<p>在我们的系统环境变量中配置如下配置：</p>
-<ul>
-<li>M2_HOME maven目录下的bin目录</li>
-<li>MAVEN_HOME maven的目录</li>
-<li>在系统的path中配置%MAVEN_HOME%\bin<br>
-<img src="https://img-blog.csdnimg.cn/20200423213124579.png" alt="在这里插入图片描述" loading="lazy"><br>
-测试Maven是否安装成功，保证必须配置完毕！</li>
-</ul>
-<h3 id="54阿里云镜像">5.4阿里云镜像</h3>
-<ul>
-<li>镜像：mirrors</li>
-<li>作用：加速我们的下载</li>
-<li>国内建议使用阿里云的镜像</li>
-</ul>
-<pre><code class="language-xml">&lt;mirror&gt;
-    &lt;id&gt;nexus-aliyun&lt;/id&gt;  
-    &lt;mirrorOf&gt;*,!jeecg,!jeecg-snapshots&lt;/mirrorOf&gt;  
-    &lt;name&gt;Nexus aliyun&lt;/name&gt;  
-    &lt;url&gt;http://maven.aliyun.com/nexus/content/groups/public&lt;/url&gt; 
-&lt;/mirror&gt;
-123456
-</code></pre>
-<p><strong>D:Enmvironment\apache-maven-3.6.2conf\ettings.xml</strong><br>
-（狂神老师配置源和仓库的文件位置）</p>
-<h3 id="55本地仓库">5.5本地仓库</h3>
-<p>在本地的仓库，远程仓库； 建立一个本地仓库：localRepository</p>
-<pre><code class="language-php">&lt;localRepository&gt;D:\Environment\apache-maven-3.6.2\maven-repo&lt;/localRepository&gt;
-</code></pre>
-<h3 id="56-~-513笔记-下载地址">5.6 ~ 5.13笔记-下载地址</h3>
-<p>（拒接度盘）下载地址：https://wo-bell.lanzous.com/ibuibxi</p>
-<p>后面的 <strong>5.6 ~ 5.13 + 案例演示</strong> (图)</p>
-<p><strong>后面第 5 剩下部分的笔记建议配合狂神的<br>
-“javaweb-06：IDEA中Maven的操作”、“javaweb-07：解决大家遇到的一些问题”<br>
-仔细（回）看</strong></p>
-<h2 id="6-servlet">6、Servlet</h2>
-<h3 id="61-servlet简介">6.1、Servlet简介</h3>
-<ul>
-<li>Servlet就是sun公司开发动态web的一门技术</li>
-<li>Sun在这些APi中提供一个接口叫做：Servlet，如果你想开发一个Servlet程序，只需要完成两个小步骤：
-<ul>
-<li>编写一个类，实现Serlet接口</li>
-<li>把开发好java类部署到web服务器中。</li>
-</ul>
-</li>
-</ul>
-<p><strong>把实现了Servlet接口的Java程序叫做，Servlet</strong></p>
-<h3 id="62-helloservlet">6.2、HelloServlet</h3>
-<p>Serlvet接口Sun公司有两个默认的实现类：HttpServlet，GenericServled</p>
-<h3 id="62-helloservlet-2">6.2、HelloServlet</h3>
-<ol>
-<li>构建一个普通的Maven项目，等理面的sc目录，以后我们的学习就在这个项目里面建立Moudel；这个空的工程就题Maven主工程；</li>
-<li>关于Maven父子工程的理解；<br>
-父项目中会有</li>
-</ol>
-<pre><code class="language-xml">      &lt;modules&gt;
-          &lt;module&gt;servlet-01&lt;/module&gt;
-      &lt;/modules&gt;
-</code></pre>
-<p>子项目会有</p>
-<pre><code class="language-xml">    &lt;parent&gt;
-        &lt;artifactId&gt;javaweb-02-servlet&lt;/artifactId&gt;
-        &lt;groupId&gt;com.kuang&lt;/groupId&gt;
-        &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;
-    &lt;/parent&gt;
-</code></pre>
-<p>父项目中的java子项目可以直接使用</p>
-<pre><code class="language-java">son extends father
-1
-</code></pre>
-<ol>
-<li>Maven环境优化
-<ol>
-<li>修改web.xml为最新的</li>
-<li>将maven的结构搭建完整<br>
-.</li>
-</ol>
-</li>
-<li>编写一个Servlet程序
-<ol>
-<li>编写一个普通类</li>
-<li>实现Servlet接口，这里我们直接继承HttpServlet</li>
-</ol>
-</li>
-</ol>
-<pre><code class="language-java">     public class HelloServlet extends HttpServlet {
-         
-         //由于get或者post只是请求实现的不同的方式，可以相互调用，业务逻辑都一样；
-         @Override
-         protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-             //ServletOutputStream outputStream = resp.getOutputStream();
-             PrintWriter writer = resp.getWriter(); //响应流
-             writer.print(&quot;Hello,Serlvet&quot;);
-         }
-     
-         @Override
-         protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-             doGet(req, resp);
-         }
-     }
-     
-</code></pre>
-<ol>
-<li>编写Servlet的映射<br>
-为什么需要映射：我们写的是JAVA程序，但是要通过浏览器访问，而浏览器需要连接web服务器，所以我们需<br>
-要再web服务中注册我们写的Servlet，还需给他一个浏览器能够访问的路径；</li>
-</ol>
-<pre><code class="language-xml">      &lt;!--注册Servlet--&gt;
-      &lt;servlet&gt;
-          &lt;servlet-name&gt;hello&lt;/servlet-name&gt;
-          &lt;servlet-class&gt;com.kuang.servlet.HelloServlet&lt;/servlet-class&gt;
-      &lt;/servlet&gt;
-      &lt;!--Servlet的请求路径--&gt;
-      &lt;servlet-mapping&gt;
-          &lt;servlet-name&gt;hello&lt;/servlet-name&gt;
-          &lt;url-pattern&gt;/hello&lt;/url-pattern&gt;
-      &lt;/servlet-mapping&gt;
-</code></pre>
-<ol>
-<li>配置Tomcat<br>
-注意：配置项目发布的路径就可以了<br>
-<img src="https://img-blog.csdnimg.cn/20200426163434449.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JlbGxfbG92ZQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" loading="lazy"><br>
-<img src="https://img-blog.csdnimg.cn/20200426163446264.png" alt="在这里插入图片描述" loading="lazy"></li>
-<li>启动测试，OK！<br>
-<img src="https://img-blog.csdnimg.cn/20200426163526430.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JlbGxfbG92ZQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" loading="lazy"></li>
-</ol>
-<h3 id="63-servlet原理">6.3、Servlet原理</h3>
-<p>Servlet是由Web服务器调用，web服务器在收到浏览器请求之后，会：<br>
-<img src="https://img-blog.csdnimg.cn/20200506180639329.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JlbGxfbG92ZQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" loading="lazy"></p>
-<h3 id="64-mapping问题">6.4、Mapping问题</h3>
-<ol>
-<li>一个Servlet可以指定一个映射路径<br>
-.</li>
-</ol>
-<pre><code class="language-xml">      &lt;servlet-mapping&gt;
-          &lt;servlet-name&gt;hello&lt;/servlet-name&gt;
-          &lt;url-pattern&gt;/hello&lt;/url-pattern&gt;
-      &lt;/servlet-mapping&gt;
-</code></pre>
-<ol>
-<li>一个servlet可以指定多个映射路径</li>
-</ol>
-<pre><code class="language-xml">      &lt;servlet-mapping&gt;
-          &lt;servlet-name&gt;hello&lt;/servlet-name&gt;
-          &lt;url-pattern&gt;/hello&lt;/url-pattern&gt;
-      &lt;/servlet-mapping&gt;
-      &lt;servlet-mapping&gt;
-          &lt;servlet-name&gt;hello&lt;/servlet-name&gt;
-          &lt;url-pattern&gt;/hello2&lt;/url-pattern&gt;
-      &lt;/servlet-mapping&gt;
-      &lt;servlet-mapping&gt;
-          &lt;servlet-name&gt;hello&lt;/servlet-name&gt;
-          &lt;url-pattern&gt;/hello3&lt;/url-pattern&gt;
-      &lt;/servlet-mapping&gt;
-      &lt;servlet-mapping&gt;
-          &lt;servlet-name&gt;hello&lt;/servlet-name&gt;
-          &lt;url-pattern&gt;/hello4&lt;/url-pattern&gt;
-      &lt;/servlet-mapping&gt;
-      &lt;servlet-mapping&gt;
-          &lt;servlet-name&gt;hello&lt;/servlet-name&gt;
-          &lt;url-pattern&gt;/hello5&lt;/url-pattern&gt;
-      &lt;/servlet-mapping&gt;
-</code></pre>
-<ol>
-<li>一个servlet可以指定通用映射路径</li>
-</ol>
-<pre><code class="language-xml">      &lt;servlet-mapping&gt;
-          &lt;servlet-name&gt;hello&lt;/servlet-name&gt;
-          &lt;url-pattern&gt;/hello/*&lt;/url-pattern&gt;
-      &lt;/servlet-mapping&gt;
-</code></pre>
-<ol>
-<li>默认请求路径</li>
-</ol>
-<pre><code class="language-xml">       &lt;!--默认请求路径--&gt;
-       &lt;servlet-mapping&gt;
-           &lt;servlet-name&gt;hello&lt;/servlet-name&gt;
-           &lt;url-pattern&gt;/*&lt;/url-pattern&gt;
-       &lt;/servlet-mapping&gt;
-</code></pre>
-<ol>
-<li>指定一些后缀或者前缀等等…</li>
-</ol>
-<pre><code class="language-xml">  &lt;!--可以自定义后缀实现请求映射
-      注意点，*前面不能加项目映射的路径
-      hello/sajdlkajda.qinjiang
-      --&gt;
-  &lt;servlet-mapping&gt;
-      &lt;servlet-name&gt;hello&lt;/servlet-name&gt;
-      &lt;url-pattern&gt;*.qinjiang&lt;/url-pattern&gt;
-  &lt;/servlet-mapping&gt;
-</code></pre>
-<ol>
-<li>优先级问题<br>
-指定了固有的映射路径优先级最高，如果找不到就会走默认的处理请求；</li>
-</ol>
-<pre><code class="language-xml">  &lt;!--404--&gt;
-  &lt;servlet&gt;
-      &lt;servlet-name&gt;error&lt;/servlet-name&gt;
-      &lt;servlet-class&gt;com.kuang.servlet.ErrorServlet&lt;/servlet-class&gt;
-  &lt;/servlet&gt;
-  &lt;servlet-mapping&gt;
-      &lt;servlet-name&gt;error&lt;/servlet-name&gt;
-      &lt;url-pattern&gt;/*&lt;/url-pattern&gt;
-  &lt;/servlet-mapping&gt;
-</code></pre>
-<h3 id="65-servletcontext">6.5、ServletContext</h3>
-<p>web容器在启动的时候，它会为每个web程序都创建一个对应的ServletContext对象，它代表了当前的web应用；</p>
-<h4 id="1-共享数据">1、共享数据</h4>
-<p>我在这个Servlet中保存的数据，可以在另外一个servlet中拿到；</p>
-<pre><code class="language-java">public class HelloServlet extends HttpServlet {
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        
-        //this.getInitParameter()   初始化参数
-        //this.getServletConfig()   Servlet配置
-        //this.getServletContext()  Servlet上下文
-        ServletContext context = this.getServletContext();
-
-        String username = &quot;秦疆&quot;; //数据
-        context.setAttribute(&quot;username&quot;,username); //将一个数据保存在了ServletContext中，名字为：username 。值 username
-
-    }
-
-}
-
-public class GetServlet extends HttpServlet {
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        ServletContext context = this.getServletContext();
-        String username = (String) context.getAttribute(&quot;username&quot;);
-
-        resp.setContentType(&quot;text/html&quot;);
-        resp.setCharacterEncoding(&quot;utf-8&quot;);
-        resp.getWriter().print(&quot;名字&quot;+username);
-
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        doGet(req, resp);
-    }
-}
-
-    &lt;servlet&gt;
-        &lt;servlet-name&gt;hello&lt;/servlet-name&gt;
-        &lt;servlet-class&gt;com.kuang.servlet.HelloServlet&lt;/servlet-class&gt;
-    &lt;/servlet&gt;
-    &lt;servlet-mapping&gt;
-        &lt;servlet-name&gt;hello&lt;/servlet-name&gt;
-        &lt;url-pattern&gt;/hello&lt;/url-pattern&gt;
-    &lt;/servlet-mapping&gt;
-
-
-    &lt;servlet&gt;
-        &lt;servlet-name&gt;getc&lt;/servlet-name&gt;
-        &lt;servlet-class&gt;com.kuang.servlet.GetServlet&lt;/servlet-class&gt;
-    &lt;/servlet&gt;
-    &lt;servlet-mapping&gt;
-        &lt;servlet-name&gt;getc&lt;/servlet-name&gt;
-        &lt;url-pattern&gt;/getc&lt;/url-pattern&gt;
-    &lt;/servlet-mapping&gt;
-</code></pre>
-<p>测试访问结果；</p>
-<h4 id="2-获取初始化参数">2、获取初始化参数</h4>
-<pre><code class="language-xml">    &lt;!--配置一些web应用初始化参数--&gt;
-    &lt;context-param&gt;
-        &lt;param-name&gt;url&lt;/param-name&gt;
-        &lt;param-value&gt;jdbc:mysql://localhost:3306/mybatis&lt;/param-value&gt;
-    &lt;/context-param&gt;
-12345
-protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-    ServletContext context = this.getServletContext();
-    String url = context.getInitParameter(&quot;url&quot;);
-    resp.getWriter().print(url);
-}
-</code></pre>
-<h4 id="3-请求转发">3、请求转发</h4>
-<pre><code class="language-java">@Override
-protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-    ServletContext context = this.getServletContext();
-    System.out.println(&quot;进入了ServletDemo04&quot;);
-    //RequestDispatcher requestDispatcher = context.getRequestDispatcher(&quot;/gp&quot;); //转发的请求路径
-    //requestDispatcher.forward(req,resp); //调用forward实现请求转发；
-    context.getRequestDispatcher(&quot;/gp&quot;).forward(req,resp);
-}
-</code></pre>
-<p><img src="https://img-blog.csdnimg.cn/20200505153728272.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JlbGxfbG92ZQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" loading="lazy"><br>
-4、读取资源文件<br>
-Properties</p>
-<ul>
-<li>在java目录下新建properties</li>
-<li>在resources目录下新建properties</li>
-</ul>
-<p>发现：都被打包到了同一个路径下：classes，我们俗称这个路径为classpath:<br>
-思路：需要一个文件流</p>
-<pre><code>username=root12312
-password=zxczxczxc
-</code></pre>
-<figure data-type="image" tabindex="3"><img src="https://img-blog.csdnimg.cn/20200505153908944.png" alt="在这里插入图片描述" loading="lazy"></figure>
-<pre><code class="language-java">public class ServletDemo05 extends HttpServlet {
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-        InputStream is = this.getServletContext().getResourceAsStream(&quot;/WEB-INF/classes/com/kuang/servlet/aa.properties&quot;);
-
-        Properties prop = new Properties();
-        prop.load(is);
-        String user = prop.getProperty(&quot;username&quot;);
-        String pwd = prop.getProperty(&quot;password&quot;);
-
-        resp.getWriter().print(user+&quot;:&quot;+pwd);
-
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        doGet(req, resp);
-    }
-}
-
-</code></pre>
-<p>访问测试即可ok;</p>
-<h3 id="66-httpservletresponse">6.6、HttpServletResponse</h3>
-<pre><code>web服务器接收到客户端的http请求，针对这个请求，分别创建一个代表请求的HttpServletRequest
-对象，代表响应的一个HttpServletResponse；
-</code></pre>
-<ul>
-<li>
-<p>如果要获取客户端请求过来的参数：找HttpServletRequest</p>
-</li>
-<li>
-<p>如果要给客户端响应一些信息：找HttpServletResponse</p>
-<h4 id="1-简单分类">1、简单分类</h4>
-</li>
-</ul>
-<p>负责向浏览器发送数据的方法</p>
-<pre><code class="language-java"> servletOutputstream getOutputstream() throws IOException;
-    Printwriter getwriter() throws IOException;
-</code></pre>
-<p>负责向浏览器发送响应头的方法</p>
-<pre><code class="language-java">void setCharacterEncoding(String var1)；
-void setContentLength(int var1)；
-void setContentLengthLong(long var1);
-void setContentType(String var1)；
-void setDateHeader(String varl,long var2)
-void addDateHeader(String var1,long var2)
-void setHeader(String var1,String var2);
-void addHeader(String var1,String var2)；
-void setIntHeader(String var1,int var2);
-void addIntHeader(String varl,int var2);
-</code></pre>
-<p>响应的状态码<br>
-<img src="https://img-blog.csdnimg.cn/20200505155751598.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JlbGxfbG92ZQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" loading="lazy"><br>
-<img src="https://img-blog.csdnimg.cn/20200505155821202.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JlbGxfbG92ZQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" loading="lazy"></p>
-<h4 id="2-下载文件">2、下载文件</h4>
-<ol>
-<li>向浏览器输出消息（一直在讲，就不说了）</li>
-<li>下载文件
-<ol>
-<li>要获取下载文件的路径</li>
-<li>下载的文件名是啥？</li>
-<li>设置想办法让浏览器能够支持下载我们需要的东西</li>
-<li>获取下载文件的输入流</li>
-<li>创建缓冲区</li>
-<li>获取OutputStream对象</li>
-<li>将FileOutputStream流写入到bufer缓冲区</li>
-<li>使用OutputStream将缓冲区中的数据输出到客户端！</li>
-</ol>
-</li>
-</ol>
-<pre><code class="language-java">@Override
-protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-    // 1. 要获取下载文件的路径
-    String realPath = &quot;F:\\班级管理\\西开【19525】\\2、代码\\JavaWeb\\javaweb-02-servlet\\response\\target\\classes\\秦疆.png&quot;;
-    System.out.println(&quot;下载文件的路径：&quot;+realPath);
-    // 2. 下载的文件名是啥？
-    String fileName = realPath.substring(realPath.lastIndexOf(&quot;\\&quot;) + 1);
-    // 3. 设置想办法让浏览器能够支持(Content-Disposition)下载我们需要的东西,中文文件名URLEncoder.encode编码，否则有可能乱码
-    resp.setHeader(&quot;Content-Disposition&quot;,&quot;attachment;filename=&quot;+URLEncoder.encode(fileName,&quot;UTF-8&quot;));
-    // 4. 获取下载文件的输入流
-    FileInputStream in = new FileInputStream(realPath);
-    // 5. 创建缓冲区
-    int len = 0;
-    byte[] buffer = new byte[1024];
-    // 6. 获取OutputStream对象
-    ServletOutputStream out = resp.getOutputStream();
-    // 7. 将FileOutputStream流写入到buffer缓冲区,使用OutputStream将缓冲区中的数据输出到客户端！
-    while ((len=in.read(buffer))&gt;0){
-        out.write(buffer,0,len);
-    }
-
-    in.close();
-    out.close();
-}
-</code></pre>
-<h4 id="3-验证码功能">3、验证码功能</h4>
-<p>验证怎么来的?</p>
-<ul>
-<li>前端实现</li>
-<li>后端实现，需要用到Java的图片类，生产一个图片</li>
-</ul>
-<pre><code class="language-java">package com.kuang.servlet;
-
-import javax.imageio.ImageIO;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.util.Random;
-
-public class ImageServlet extends HttpServlet {
-
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-        //如何让浏览器3秒自动刷新一次;
-        resp.setHeader(&quot;refresh&quot;,&quot;3&quot;);
-        
-        //在内存中创建一个图片
-        BufferedImage image = new BufferedImage(80,20,BufferedImage.TYPE_INT_RGB);
-        //得到图片
-        Graphics2D g = (Graphics2D) image.getGraphics(); //笔
-        //设置图片的背景颜色
-        g.setColor(Color.white);
-        g.fillRect(0,0,80,20);
-        //给图片写数据
-        g.setColor(Color.BLUE);
-        g.setFont(new Font(null,Font.BOLD,20));
-        g.drawString(makeNum(),0,20);
-
-        //告诉浏览器，这个请求用图片的方式打开
-        resp.setContentType(&quot;image/jpeg&quot;);
-        //网站存在缓存，不让浏览器缓存
-        resp.setDateHeader(&quot;expires&quot;,-1);
-        resp.setHeader(&quot;Cache-Control&quot;,&quot;no-cache&quot;);
-        resp.setHeader(&quot;Pragma&quot;,&quot;no-cache&quot;);
-
-        //把图片写给浏览器
-        ImageIO.write(image,&quot;jpg&quot;, resp.getOutputStream());
-
-    }
-
-    //生成随机数
-    private String makeNum(){
-        Random random = new Random();
-        String num = random.nextInt(9999999) + &quot;&quot;;
-        StringBuffer sb = new StringBuffer();
-        for (int i = 0; i &lt; 7-num.length() ; i++) {
-            sb.append(&quot;0&quot;);
-        }
-        num = sb.toString() + num;
-        return num;
-    }
-
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        doGet(req, resp);
-    }
-}
-
-&lt;servlet&gt;
-	&lt;servlet-name&gt;ImageServlet&lt;/servlet-name&gt;
-	&lt;servlet-class&gt;com.kuang.servlet.ImageServlet&lt;/servlet-class&gt;
-&lt;/servlet&gt;
-&lt;servlet-mapping&gt;
-	&lt;servlet-name&gt;Imageservlet&lt;/servlet-name&gt;
-	&lt;url-pattern&gt;/img&lt;/url-pattern&gt;
-&lt;/servlet-mapping&gt;
-</code></pre>
-<p><img src="https://img-blog.csdnimg.cn/20200505163538698.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JlbGxfbG92ZQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" loading="lazy"><br>
-常见场景:</p>
-<ul>
-<li>用户登录</li>
-</ul>
-<pre><code class="language-java"> void sendRedirect(String var1) throws IOException;
-1
-</code></pre>
-<p>测试：</p>
-<pre><code class="language-java">@override
-protected void doGet(HttpservletRequest req, HttpservletResponse resp) throws ServletException, IOException {
-
-    resp. sendRedirect(&quot;/r/img&quot;);//重定向
-    /*
-    resp. setHeader(&quot;Location&quot;,&quot;/r/img&quot;);
-    resp. setstatus (302);
-    */
-}
-</code></pre>
-<p><img src="https://img-blog.csdnimg.cn/20200505163946136.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JlbGxfbG92ZQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" loading="lazy"><br>
-<img src="https://img-blog.csdnimg.cn/20200505163953854.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JlbGxfbG92ZQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" loading="lazy"><br>
-<strong>index.jsp</strong></p>
-<pre><code class="language-html">&lt;html&gt;
-	&lt;body&gt;
-		&lt;h2&gt;Hel1o World!&lt;/h2&gt;
-		
-		《%--这里超交的路径,需要寻找到项目的路径--%&gt;
-		&lt;%--${pageContext. request, contextPath}代表当前的项目--%&gt;
-		&lt;form action=&quot;${pageContext. request.contextPath}/login&quot; method=&quot;get&quot;&gt;
-			用户名: &lt;input type=&quot;text&quot; name=&quot;username&quot;&gt; &lt;br&gt;
-			密码: &lt;input type=&quot;password&quot; name=&quot;password&quot;&gt; &lt;br&gt;
-			&lt;input type=&quot;submit&quot;&gt;
-		&lt;/form&gt;
-	
-	&lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
-<p><strong>RequestTest.java</strong></p>
-<pre><code class="language-java">public class RequestTest extends HttpServlet {
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-    //处理方求
-    String username = req.getParameter( s: &quot;username&quot;);
-    String password  rea.getParameter( s: &quot;password&quot;);
-
-    System.out.println(username+&quot;:&quot;+password);
-
-    resp.sendRedirect(s: &quot;/r/success.jsp&quot;);
-}
-</code></pre>
-<p><strong>重定向页面success.jsp</strong></p>
-<pre><code class="language-html">&lt;%@ page contentType=&quot;text/html; charset=UTF-8&quot; language=&quot;java&quot; %&gt;
-&lt;html&gt;
-    &lt;head&gt;
-	    &lt;title&gt;Title&lt;/title&gt;
-	    &lt;/head&gt;
-    &lt;body&gt;
-    	&lt;h1&gt;success&lt;/h1&gt;
-    &lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
-<p><strong>web.xml配置</strong></p>
-<pre><code class="language-xml">    &lt;servlet&gt;
-    &lt;servlet-name&gt;requset&lt;/servlet-name&gt;
-    &lt;servlet-class&gt;com. kuang. servlet. RequestTest&lt;/servlet-class&gt;
-    &lt;/servlet&gt;
-    &lt;servlet-mapping&gt;
-    &lt;servlet-name&gt;requset&lt;/servlet-name&gt;
-    &lt;url-pattern&gt;/login&lt;/url-pattern&gt;
-    &lt;/servlet-mapping&gt;
-</code></pre>
-<p><strong>导入依赖的jar包</strong></p>
-<pre><code class="language-xml">    &lt;dependencies&gt;
-    &lt;!-- https://mvnrepository. com/artifact/javax. servLet/javax. servlet-opi --&gt;
-    &lt;dependency&gt;
-    &lt;groupld&gt;javax.servlet&lt;/grouptd&gt;
-    &lt;artifactId&gt;javax. servlet-api&lt;/artifactId&gt;
-    &lt;version&gt;4.0.1&lt;/version&gt;
-    &lt;/dependency&gt;
-    &lt;!-- https://mvnrepository.com/artifact/javax. servLet.jsp/javax. servLet.jsp-opi --&gt;
-    &lt;dependency&gt;
-    &lt;groupId&gt;javax.servlet.jsp&lt;/groupld&gt;
-    &lt;artifactId&gt;javax. servlet.jsp-api&lt;/artifactId&gt;
-    &lt;version&gt;2.3.3&lt;/version&gt;
-    &lt;/dependency&gt;
-    &lt;/dependencies&gt;
-    &lt;/project&gt;
-</code></pre>
-<h3 id="67-httpservletrequest">6.7、HttpServletRequest</h3>
-<p>HttpServletRequest代表客户端的请求,用户通过Http协议访问服务器, HTTP请求中的所有信息会被封装到HttpServletRequest,通过这个HttpServletRequest的方法,获得客户端的所有信息;<br>
-<img src="https://img-blog.csdnimg.cn/20200505165609562.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JlbGxfbG92ZQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" loading="lazy"><br>
-<img src="https://img-blog.csdnimg.cn/20200505165618601.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JlbGxfbG92ZQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" loading="lazy"></p>
-<h4 id="获取参数请求转发">获取参数,请求转发</h4>
-<p><img src="https://img-blog.csdnimg.cn/20200505165652729.png" alt="在这里插入图片描述" loading="lazy"><br>
-<strong>自己创建类，且需要继承HttpServlet类</strong></p>
-<pre><code class="language-java">@Override
-protected void doGet(HttpservletRequest req. HttpservletResponse resp) throws ServletException, IOException {
-
-	req. setcharacterEncoding(&quot;utf-8&quot;);
-	resp.setcharacterEncoding(&quot;utf-8&quot;);
-	String username = req.getParameter(&quot;username&quot;);
-	String password = req.getParameter(&quot;password&quot;);
-	String[] hobbys = req.getParameterValues(&quot;hobbys&quot;);
-	System.out.println(&quot;==========&quot;);
-	//后台接收中文乱码问题
-	System. out.println(username);
-	System. out.println(password);
-	System. out.println(Arrays.tostring(hobbys));
-	System. out.println(&quot;============&quot;);
-	system. out.println(req.getContextPath());
-	//通过请求转发
-	//这里的/代表当前的web应用
-	req.getRequestDispatcher(&quot;/success.jsp&quot;).forward(req,resp);
-}
-</code></pre>
-<figure data-type="image" tabindex="4"><img src="https://img-blog.csdnimg.cn/20200505170535748.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JlbGxfbG92ZQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" loading="lazy"></figure>
-<h2 id="7-cookie-session">7、Cookie、Session</h2>
-<h3 id="71-会话">7.1、会话</h3>
-<p><strong>会话</strong>：用户打开一个浏览器，点击了很多超链接，访问多个web资源，关闭浏览器，这个过程可以称之为会话；</p>
-<p><strong>有状态会话</strong>：一个同学来过教室，下次再来教室，我们会知道这个同学，曾经来过，称之为有状态会话；</p>
-<p><strong>你能怎么证明你是西开的学生？</strong></p>
-<p>你 西开</p>
-<ol>
-<li>发票 西开给你发票</li>
-<li>学校登记 西开标记你来过了</li>
-</ol>
-<p><strong>一个网站，怎么证明你来过？</strong></p>
-<p>客户端 服务端</p>
-<ol>
-<li>服务端给客户端一个 信件，客户端下次访问服务端带上信件就可以了； cookie</li>
-<li>服务器登记你来过了，下次你来的时候我来匹配你； seesion</li>
-</ol>
-<h3 id="72-保存会话的两种技术">7.2、保存会话的两种技术</h3>
-<p><strong>cookie</strong></p>
-<ul>
-<li>客户端技术 （响应，请求）</li>
-</ul>
-<p><strong>session</strong></p>
-<ul>
-<li>服务器技术，利用这个技术，可以保存用户的会话信息？ 我们可以把信息或者数据放在Session中！</li>
-</ul>
-<p>常见常见：网站登录之后，你下次不用再登录了，第二次访问直接就上去了！</p>
-<h3 id="73-cookie">7.3、Cookie</h3>
-<figure data-type="image" tabindex="5"><img src="https://img-blog.csdnimg.cn/20200506182559338.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JlbGxfbG92ZQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" loading="lazy"></figure>
-<ol>
-<li>从请求中拿到cookie信息</li>
-<li>服务器响应给客户端cookie</li>
-</ol>
-<pre><code class="language-java">Cookie[] cookies = req.getCookies(); //获得Cookie
-cookie.getName(); //获得cookie中的key
-cookie.getValue(); //获得cookie中的vlaue
-new Cookie(&quot;lastLoginTime&quot;, System.currentTimeMillis()+&quot;&quot;); //新建一个cookie
-cookie.setMaxAge(24*60*60); //设置cookie的有效期
-resp.addCookie(cookie); //响应给客户端一个cookie
-</code></pre>
-<p><strong>cookie：一般会保存在本地的 用户目录下 appdata；</strong></p>
-<p>一个网站cookie是否存在上限！<strong>聊聊细节问题</strong></p>
-<ul>
-<li>一个Cookie只能保存一个信息；</li>
-<li>一个web站点可以给浏览器发送多个cookie，最多存放20个cookie；</li>
-<li>Cookie大小有限制4kb；</li>
-<li>300个cookie浏览器上限</li>
-</ul>
-<p><strong>删除Cookie；</strong></p>
-<ul>
-<li>不设置有效期，关闭浏览器，自动失效；</li>
-<li>设置有效期时间为 0 ；</li>
-</ul>
-<p><strong>编码解码：</strong></p>
-<pre><code class="language-java">URLEncoder.encode(&quot;秦疆&quot;,&quot;utf-8&quot;)
-URLDecoder.decode(cookie.getValue(),&quot;UTF-8&quot;)
-</code></pre>
-<h3 id="74-session重点">7.4、Session（重点）</h3>
-<p><img src="https://img-blog.csdnimg.cn/2020050618262991.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JlbGxfbG92ZQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" loading="lazy"><br>
-什么是Session：</p>
-<ul>
-<li>服务器会给每一个用户（浏览器）创建一个Seesion对象；</li>
-<li>一个Seesion独占一个浏览器，只要浏览器没有关闭，这个Session就存在；</li>
-<li>用户登录之后，整个网站它都可以访问！–&gt; 保存用户的信息；保存购物车的信息……</li>
-</ul>
-<p>…<br>
-…<br>
-…</p>
-<p>Session和cookie的区别：</p>
-<ul>
-<li>Cookie是把用户的数据写给用户的浏览器，浏览器保存 （可以保存多个）</li>
-<li>Session把用户的数据写到用户独占Session中，服务器端保存 （保存重要的信息，减少服务器资源的浪费）</li>
-<li>Session对象由服务创建；</li>
-</ul>
-<p>使用场景：</p>
-<ul>
-<li>保存一个登录用户的信息；</li>
-<li>购物车信息；</li>
-<li>在整个网站中经常会使用的数据，我们将它保存在Session中；</li>
-</ul>
-<p>使用Session：</p>
-<pre><code class="language-java">package com.kuang.servlet;
-
-import com.kuang.pojo.Person;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.*;
-import java.io.IOException;
-
-public class SessionDemo01 extends HttpServlet {
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        
-        //解决乱码问题
-        req.setCharacterEncoding(&quot;UTF-8&quot;);
-        resp.setCharacterEncoding(&quot;UTF-8&quot;);
-        resp.setContentType(&quot;text/html;charset=utf-8&quot;);
-        
-        //得到Session
-        HttpSession session = req.getSession();
-        //给Session中存东西
-        session.setAttribute(&quot;name&quot;,new Person(&quot;秦疆&quot;,1));
-        //获取Session的ID
-        String sessionId = session.getId();
-
-        //判断Session是不是新创建
-        if (session.isNew()){
-            resp.getWriter().write(&quot;session创建成功,ID:&quot;+sessionId);
-        }else {
-            resp.getWriter().write(&quot;session以及在服务器中存在了,ID:&quot;+sessionId);
-        }
-
-        //Session创建的时候做了什么事情；
-//        Cookie cookie = new Cookie(&quot;JSESSIONID&quot;,sessionId);
-//        resp.addCookie(cookie);
-
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        doGet(req, resp);
-    }
-}
-
-//得到Session
-HttpSession session = req.getSession();
-
-Person person = (Person) session.getAttribute(&quot;name&quot;);
-
-System.out.println(person.toString());
-
-HttpSession session = req.getSession();
-session.removeAttribute(&quot;name&quot;);
-//手动注销Session
-session.invalidate();
-</code></pre>
-<p><strong>会话自动过期：web.xml配置</strong></p>
-<pre><code class="language-xml">&lt;!--设置Session默认的失效时间--&gt;
-&lt;session-config&gt;
-    &lt;!--15分钟后Session自动失效，以分钟为单位--&gt;
-    &lt;session-timeout&gt;15&lt;/session-timeout&gt;
-&lt;/session-config&gt;
-</code></pre>
-<figure data-type="image" tabindex="6"><img src="https://img-blog.csdnimg.cn/2020050618301064.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JlbGxfbG92ZQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" loading="lazy"></figure>
-<h2 id="8-jsp">8、JSP</h2>
-<h3 id="81-什么是jsp">8.1、什么是JSP</h3>
-<p>Java Server Pages ： Java服务器端页面，也和Servlet一样，用于动态Web技术！</p>
-<p>最大的特点：</p>
-<ul>
-<li>写JSP就像在写HTML</li>
-<li>区别：
-<ul>
-<li>HTML只给用户提供静态的数据</li>
-<li>JSP页面中可以嵌入JAVA代码，为用户提供动态数据；</li>
-</ul>
-</li>
-</ul>
-<h3 id="82-jsp原理">8.2、JSP原理</h3>
-<p>思路：JSP到底怎么执行的！</p>
-<ul>
-<li>
-<p>代码层面没有任何问题</p>
-</li>
-<li>
-<p>服务器内部工作</p>
-<p>tomcat中有一个work目录；</p>
-<p>IDEA中使用Tomcat的会在IDEA的tomcat中生产一个work目录</p>
-<figure data-type="image" tabindex="7"><img src="https://img-blog.csdnimg.cn/20200506184154282.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JlbGxfbG92ZQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" loading="lazy"></figure>
-<p>我电脑的地址：</p>
-<p><strong>C:\Users\Administrator.IntelliJIdea2018.1\system\tomcat\Unnamed_javaweb-session-cookie\work\Catalina\localhost\ROOT\org\apache\jsp</strong></p>
-<p>发现页面转变成了Java程序！<br>
-<img src="https://img-blog.csdnimg.cn/20200506184204931.png" alt="在这里插入图片描述" loading="lazy"></p>
-</li>
-</ul>
-<p><strong>浏览器向服务器发送请求，不管访问什么资源，其实都是在访问Servlet！</strong></p>
-<p>JSP最终也会被转换成为一个Java类！</p>
-<p><strong>JSP 本质上就是一个Servlet</strong></p>
-<pre><code class="language-java">//初始化
-  public void _jspInit() {
-      
-  }
-//销毁
-  public void _jspDestroy() {
-  }
-//JSPService
-  public void _jspService(.HttpServletRequest request,HttpServletResponse response)
-</code></pre>
-<ol>
-<li>
-<p>判断请求</p>
-</li>
-<li>
-<p>内置一些对象</p>
-<pre><code class="language-java">final javax.servlet.jsp.PageContext pageContext;  //页面上下文
-javax.servlet.http.HttpSession session = null;    //session
-final javax.servlet.ServletContext application;   //applicationContext
-final javax.servlet.ServletConfig config;         //config
-javax.servlet.jsp.JspWriter out = null;           //out
-final java.lang.Object page = this;               //page：当前
-HttpServletRequest request                        //请求
-HttpServletResponse response                      //响应
-</code></pre>
-</li>
-<li>
-<p>输出页面前增加的代码</p>
-<pre><code class="language-java">response.setContentType(&quot;text/html&quot;);       //设置响应的页面类型
-pageContext = _jspxFactory.getPageContext(this, request, response,
-       null, true, 8192, true);
-_jspx_page_context = pageContext;
-application = pageContext.getServletContext();
-config = pageContext.getServletConfig();
-session = pageContext.getSession();
-out = pageContext.getOut();
-_jspx_out = out;
-</code></pre>
-</li>
-<li>
-<p>以上的这些个对象我们可以在JSP页面中直接使用！</p>
-</li>
-</ol>
-<figure data-type="image" tabindex="8"><img src="https://img-blog.csdnimg.cn/20200506183804973.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JlbGxfbG92ZQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" loading="lazy"></figure>
-<p>在JSP页面中；</p>
-<p>只要是 JAVA代码就会原封不动的输出；</p>
-<p>如果是HTML代码，就会被转换为：</p>
-<pre><code class="language-java">out.write(&quot;&lt;html&gt;\r\n&quot;);
-</code></pre>
-<p>这样的格式，输出到前端！</p>
-<h3 id="83-jsp基础语法">8.3、JSP基础语法</h3>
-<p>任何语言都有自己的语法，JAVA中有,。 JSP 作为java技术的一种应用，它拥有一些自己扩充的语法（了解，知道即可！），Java所有语法都支持！</p>
-<h4 id="jsp表达式">JSP表达式</h4>
-<pre><code class="language-java">  &lt;%--JSP表达式
-  作用：用来将程序的输出，输出到客户端
-  &lt;%= 变量或者表达式%&gt;
-  --%&gt;
-  &lt;%= new java.util.Date()%&gt;
-</code></pre>
-<h4 id="jsp脚本片段">jsp脚本片段</h4>
-<pre><code class="language-java">  &lt;%--jsp脚本片段--%&gt;
-  &lt;%
-    int sum = 0;
-    for (int i = 1; i &lt;=100 ; i++) {
-      sum+=i;
-    }
-    out.println(&quot;&lt;h1&gt;Sum=&quot;+sum+&quot;&lt;/h1&gt;&quot;);
-  %&gt;
-</code></pre>
-<p><strong>脚本片段的再实现</strong></p>
-<pre><code class="language-java">  &lt;%
-    int x = 10;
-    out.println(x);
-  %&gt;
-  &lt;p&gt;这是一个JSP文档&lt;/p&gt;
-  &lt;%
-    int y = 2;
-    out.println(y);
-  %&gt;
-
-  &lt;hr&gt;
-
-
-  &lt;%--在代码嵌入HTML元素--%&gt;
-  &lt;%
-    for (int i = 0; i &lt; 5; i++) {
-  %&gt;
-    &lt;h1&gt;Hello,World  &lt;%=i%&gt; &lt;/h1&gt;
-  &lt;%
-    }
-  %&gt;
-</code></pre>
-<h4 id="jsp声明">JSP声明</h4>
-<pre><code class="language-java">  &lt;%!
-    static {
-      System.out.println(&quot;Loading Servlet!&quot;);
-    }
-
-    private int globalVar = 0;
-
-    public void kuang(){
-      System.out.println(&quot;进入了方法Kuang！&quot;);
-    }
-  %&gt;
-</code></pre>
-<p>JSP声明：会被编译到JSP生成Java的类中！其他的，就会被生成到_jspService方法中！</p>
-<p>在JSP，嵌入Java代码即可！</p>
-<pre><code class="language-java">&lt;%%&gt;
-&lt;%=%&gt;
-&lt;%!%&gt;
-
-&lt;%--注释--%&gt;
-</code></pre>
-<p>JSP的注释，不会在客户端显示，HTML就会！</p>
-<h3 id="84-jsp指令">8.4、JSP指令</h3>
-<pre><code class="language-java">&lt;%@page args.... %&gt;
-&lt;%@include file=&quot;&quot;%&gt;
-
-&lt;%--@include会将两个页面合二为一--%&gt;
-
-&lt;%@include file=&quot;common/header.jsp&quot;%&gt;
-&lt;h1&gt;网页主体&lt;/h1&gt;
-
-&lt;%@include file=&quot;common/footer.jsp&quot;%&gt;
-
-&lt;hr&gt;
-
-
-&lt;%--jSP标签
-    jsp:include：拼接页面，本质还是三个
-    --%&gt;
-&lt;jsp:include page=&quot;/common/header.jsp&quot;/&gt;
-&lt;h1&gt;网页主体&lt;/h1&gt;
-&lt;jsp:include page=&quot;/common/footer.jsp&quot;/&gt;
-</code></pre>
-<h3 id="85-9大内置对象">8.5、9大内置对象</h3>
-<ul>
-<li>PageContext 存东西</li>
-<li>Request 存东西</li>
-<li>Response</li>
-<li>Session 存东西</li>
-<li>Application 【SerlvetContext】 存东西</li>
-<li>config 【SerlvetConfig】</li>
-<li>out</li>
-<li>page ，不用了解</li>
-<li>exception</li>
-</ul>
-<pre><code class="language-java">pageContext.setAttribute(&quot;name1&quot;,&quot;秦疆1号&quot;); //保存的数据只在一个页面中有效
-request.setAttribute(&quot;name2&quot;,&quot;秦疆2号&quot;); //保存的数据只在一次请求中有效，请求转发会携带这个数据
-session.setAttribute(&quot;name3&quot;,&quot;秦疆3号&quot;); //保存的数据只在一次会话中有效，从打开浏览器到关闭浏览器
-application.setAttribute(&quot;name4&quot;,&quot;秦疆4号&quot;);  //保存的数据只在服务器中有效，从打开服务器到关闭服务器
-1234
-</code></pre>
-<figure data-type="image" tabindex="9"><img src="https://img-blog.csdnimg.cn/20200507213158259.png" alt="在这里插入图片描述" loading="lazy"></figure>
-<p>request：客户端向服务器发送请求，产生的数据，用户看完就没用了，比如：新闻，用户看完没用的！</p>
-<p>session：客户端向服务器发送请求，产生的数据，用户用完一会还有用，比如：购物车；</p>
-<p>application：客户端向服务器发送请求，产生的数据，一个用户用完了，其他用户还可能使用，比如：聊天数据；</p>
-<h3 id="86-jsp标签-jstl标签-el表达式">8.6、JSP标签、JSTL标签、EL表达式</h3>
-<pre><code class="language-xml">&lt;!-- JSTL表达式的依赖 --&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;javax.servlet.jsp.jstl&lt;/groupId&gt;
-    &lt;artifactId&gt;jstl-api&lt;/artifactId&gt;
-    &lt;version&gt;1.2&lt;/version&gt;
-&lt;/dependency&gt;
-&lt;!-- standard标签库 --&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;taglibs&lt;/groupId&gt;
-    &lt;artifactId&gt;standard&lt;/artifactId&gt;
-    &lt;version&gt;1.1.2&lt;/version&gt;
-&lt;/dependency&gt;
-</code></pre>
-<p>EL表达式： ${ }</p>
-<ul>
-<li><strong>获取数据</strong></li>
-<li><strong>执行运算</strong></li>
-<li><strong>获取web开发的常用对象</strong></li>
-</ul>
-<p><strong>JSP标签</strong></p>
-<pre><code class="language-java">&lt;%--jsp:include--%&gt;
-
-&lt;%--
-http://localhost:8080/jsptag.jsp?name=kuangshen&amp;age=12
---%&gt;
-
-&lt;jsp:forward page=&quot;/jsptag2.jsp&quot;&gt;
-    &lt;jsp:param name=&quot;name&quot; value=&quot;kuangshen&quot;&gt;&lt;/jsp:param&gt;
-    &lt;jsp:param name=&quot;age&quot; value=&quot;12&quot;&gt;&lt;/jsp:param&gt;
-&lt;/jsp:forward&gt;
-</code></pre>
-<p><strong>JSTL表达式</strong></p>
-<p>JSTL标签库的使用就是为了弥补HTML标签的不足；它自定义许多标签，可以供我们使用，标签的功能和Java代码一样！</p>
-<p><strong>格式化标签</strong></p>
-<p><strong>SQL标签</strong></p>
-<p><strong>XML 标签</strong></p>
-<p><strong>核心标签</strong> （掌握部分）</p>
-<figure data-type="image" tabindex="10"><img src="https://img-blog.csdnimg.cn/20200508152235704.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JlbGxfbG92ZQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" loading="lazy"></figure>
-<p><strong>JSTL标签库使用步骤</strong></p>
-<ul>
-<li>引入对应的 taglib</li>
-<li>使用其中的方法</li>
-<li><strong>在Tomcat 也需要引入 jstl的包，否则会报错：JSTL解析错误</strong></li>
-</ul>
-<p><strong>c：if</strong></p>
-<pre><code class="language-java">&lt;head&gt;
-    &lt;title&gt;Title&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-
-
-&lt;h4&gt;if测试&lt;/h4&gt;
-
-&lt;hr&gt;
-
-&lt;form action=&quot;coreif.jsp&quot; method=&quot;get&quot;&gt;
-    &lt;%--
-    EL表达式获取表单中的数据
-    ${param.参数名}
-    --%&gt;
-    &lt;input type=&quot;text&quot; name=&quot;username&quot; value=&quot;${param.username}&quot;&gt;
-    &lt;input type=&quot;submit&quot; value=&quot;登录&quot;&gt;
-&lt;/form&gt;
-
-&lt;%--判断如果提交的用户名是管理员，则登录成功--%&gt;
-&lt;c:if test=&quot;${param.username=='admin'}&quot; var=&quot;isAdmin&quot;&gt;
-    &lt;c:out value=&quot;管理员欢迎您！&quot;/&gt;
-&lt;/c:if&gt;
-
-&lt;%--自闭合标签--%&gt;
-&lt;c:out value=&quot;${isAdmin}&quot;/&gt;
-
-&lt;/body&gt;
-</code></pre>
-<p><strong>c:choose c:when</strong></p>
-<pre><code class="language-java">&lt;body&gt;
-
-&lt;%--定义一个变量score，值为85--%&gt;
-&lt;c:set var=&quot;score&quot; value=&quot;55&quot;/&gt;
-
-&lt;c:choose&gt;
-    &lt;c:when test=&quot;${score&gt;=90}&quot;&gt;
-        你的成绩为优秀
-    &lt;/c:when&gt;
-    &lt;c:when test=&quot;${score&gt;=80}&quot;&gt;
-        你的成绩为一般
-    &lt;/c:when&gt;
-    &lt;c:when test=&quot;${score&gt;=70}&quot;&gt;
-        你的成绩为良好
-    &lt;/c:when&gt;
-    &lt;c:when test=&quot;${score&lt;=60}&quot;&gt;
-        你的成绩为不及格
-    &lt;/c:when&gt;
-&lt;/c:choose&gt;
-
-&lt;/body&gt;
-</code></pre>
-<p><strong>c:forEach</strong></p>
-<pre><code class="language-java">&lt;%
-
-    ArrayList&lt;String&gt; people = new ArrayList&lt;&gt;();
-    people.add(0,&quot;张三&quot;);
-    people.add(1,&quot;李四&quot;);
-    people.add(2,&quot;王五&quot;);
-    people.add(3,&quot;赵六&quot;);
-    people.add(4,&quot;田六&quot;);
-    request.setAttribute(&quot;list&quot;,people);
-%&gt;
-
-
-&lt;%--
-var , 每一次遍历出来的变量
-items, 要遍历的对象
-begin,   哪里开始
-end,     到哪里
-step,   步长
---%&gt;
-&lt;c:forEach var=&quot;people&quot; items=&quot;${list}&quot;&gt;
-    &lt;c:out value=&quot;${people}&quot;/&gt; &lt;br&gt;
-&lt;/c:forEach&gt;
-
-&lt;hr&gt;
-
-&lt;c:forEach var=&quot;people&quot; items=&quot;${list}&quot; begin=&quot;1&quot; end=&quot;3&quot; step=&quot;1&quot; &gt;
-    &lt;c:out value=&quot;${people}&quot;/&gt; &lt;br&gt;
-&lt;/c:forEach&gt;
-</code></pre>
-<h2 id="9-javabean">9、JavaBean</h2>
-<p>实体类</p>
-<p>JavaBean有特定的写法：</p>
-<ul>
-<li>必须要有一个无参构造</li>
-<li>属性必须私有化</li>
-<li>必须有对应的get/set方法；</li>
-</ul>
-<p>一般用来和数据库的字段做映射 ORM；</p>
-<p>ORM ：对象关系映射</p>
-<ul>
-<li>表—&gt;类</li>
-<li>字段–&gt;属性</li>
-<li>行记录----&gt;对象</li>
-</ul>
-<p><strong>people表</strong></p>
-<table>
-<thead>
-<tr>
-<th>id</th>
-<th>name</th>
-<th>age</th>
-<th>address</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1</td>
-<td>秦疆1号</td>
-<td>3</td>
-<td>西安</td>
-</tr>
-<tr>
-<td>2</td>
-<td>秦疆2号</td>
-<td>18</td>
-<td>西安</td>
-</tr>
-<tr>
-<td>3</td>
-<td>秦疆3号</td>
-<td>100</td>
-<td>西安</td>
-</tr>
-</tbody>
-</table>
-<pre><code class="language-java">class People{
-    private int id;
-    private String name;
-    private int id;
-    private String address;
-}
-
-class A{
-    new People(1,&quot;秦疆1号&quot;,3，&quot;西安&quot;);
-    new People(2,&quot;秦疆2号&quot;,3，&quot;西安&quot;);
-    new People(3,&quot;秦疆3号&quot;,3，&quot;西安&quot;);
-}
-</code></pre>
-<ul>
-<li>过滤器</li>
-<li>文件上传</li>
-<li>邮件发送</li>
-<li>JDBC 复习 ： 如何使用JDBC , JDBC crud， jdbc 事务</li>
-</ul>
-<h2 id="10-mvc三层架构">10、MVC三层架构</h2>
-<ul>
-<li>什么是MVC： Model view Controller 模型、视图、控制器</li>
-</ul>
-<h3 id="101-以前的架构">10.1、以前的架构</h3>
-<figure data-type="image" tabindex="11"><img src="https://img-blog.csdnimg.cn/20200508154442187.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JlbGxfbG92ZQ==,size_16,color_FFFFFF,t_70" alt="(img-NGdCSHqw-1588757845418)(JavaWeb.assets/1568423664332.png)" loading="lazy"></figure>
-<p>用户直接访问控制层，控制层就可以直接操作数据库；</p>
-<pre><code class="language-java">servlet--CRUD--&gt;数据库
-弊端：程序十分臃肿，不利于维护  
-servlet的代码中：处理请求、响应、视图跳转、处理JDBC、处理业务代码、处理逻辑代码
-
-架构：没有什么是加一层解决不了的！
-程序猿调用
-↑
-JDBC （实现该接口）
-↑
-Mysql Oracle SqlServer ....（不同厂商）
-</code></pre>
-<h3 id="102-mvc三层架构">10.2、MVC三层架构</h3>
-<figure data-type="image" tabindex="12"><img src="https://img-blog.csdnimg.cn/20200508154512751.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JlbGxfbG92ZQ==,size_16,color_FFFFFF,t_70" alt="[(img-BWDJGUCN-1588757845419)(JavaWeb.assets/1568424227281.png)]" loading="lazy"></figure>
-<p>Model</p>
-<ul>
-<li>业务处理 ：业务逻辑（Service）</li>
-<li>数据持久层：CRUD （Dao - 数据持久化对象）</li>
-</ul>
-<p>View</p>
-<ul>
-<li>展示数据</li>
-<li>提供链接发起Servlet请求 （a，form，img…）</li>
-</ul>
-<p>Controller （Servlet）</p>
-<ul>
-<li>
-<p>接收用户的请求 ：（req：请求参数、Session信息….）</p>
-</li>
-<li>
-<p>交给业务层处理对应的代码</p>
-</li>
-<li>
-<p>控制视图的跳转</p>
-<pre><code class="language-java">登录---&gt;接收用户的登录请求---&gt;处理用户的请求（获取用户登录的参数，username，password）----&gt;交给业务层处理登录业务（判断用户名密码是否正确：事务）---&gt;Dao层查询用户名和密码是否正确--&gt;数据库
-</code></pre>
-</li>
-</ul>
-<h2 id="11-filter-重点">11、Filter （重点）</h2>
-<p>比如 Shiro安全框架技术就是用Filter来实现的</p>
-<p>Filter：过滤器 ，用来过滤网站的数据；</p>
-<ul>
-<li>处理中文乱码</li>
-<li>登录验证….</li>
-</ul>
-<p>（比如用来过滤网上骂人的话，我***我自己 0-0）</p>
-<p><img src="https://img-blog.csdnimg.cn/20200508154536177.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JlbGxfbG92ZQ==,size_16,color_FFFFFF,t_70" alt="(img-QEq74VyV-1588757845420)(JavaWeb.assets/1568424858708.png)" loading="lazy"><br>
-Filter开发步骤：</p>
-<ol>
-<li>导包</li>
-<li>编写过滤器
-<ol>
-<li>导包不要错 <strong>（注意）</strong></li>
-</ol>
-</li>
-</ol>
-<figure data-type="image" tabindex="13"><img src="https://img-blog.csdnimg.cn/20200508154555952.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JlbGxfbG92ZQ==,size_16,color_FFFFFF,t_70" alt="[(img-HHsC3JBD-1588757845420)(JavaWeb.assets/1568425162525.png)]" loading="lazy"></figure>
-<p>实现Filter接口，重写对应的方法即可</p>
-<pre><code>  ```java
-  public class CharacterEncodingFilter implements Filter {
-  
-      //初始化：web服务器启动，就以及初始化了，随时等待过滤对象出现！
-      public void init(FilterConfig filterConfig) throws ServletException {
-          System.out.println(&quot;CharacterEncodingFilter初始化&quot;);
-      }
-  
-      //Chain : 链
-      /*
-      1. 过滤中的所有代码，在过滤特定请求的时候都会执行
-      2. 必须要让过滤器继续同行
-          chain.doFilter(request,response);
-       */
-      public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-          request.setCharacterEncoding(&quot;utf-8&quot;);
-          response.setCharacterEncoding(&quot;utf-8&quot;);
-          response.setContentType(&quot;text/html;charset=UTF-8&quot;);
-  
-          System.out.println(&quot;CharacterEncodingFilter执行前....&quot;);
-          chain.doFilter(request,response); //让我们的请求继续走，如果不写，程序到这里就被拦截停止！
-          System.out.println(&quot;CharacterEncodingFilter执行后....&quot;);
-      }
-  
-      //销毁：web服务器关闭的时候，过滤器会销毁
-      public void destroy() {
-          System.out.println(&quot;CharacterEncodingFilter销毁&quot;);
-      }
-  }
-  
-</code></pre>
-<pre><code>
-1. 在web.xml中配置 Filter
-
-   ```xml
-   &lt;filter&gt;
-       &lt;filter-name&gt;CharacterEncodingFilter&lt;/filter-name&gt;
-       &lt;filter-class&gt;com.kuang.filter.CharacterEncodingFilter&lt;/filter-class&gt;
-   &lt;/filter&gt;
-   &lt;filter-mapping&gt;
-       &lt;filter-name&gt;CharacterEncodingFilter&lt;/filter-name&gt;
-       &lt;!--只要是 /servlet的任何请求，会经过这个过滤器--&gt;
-       &lt;url-pattern&gt;/servlet/*&lt;/url-pattern&gt;
-       &lt;!--&lt;url-pattern&gt;/*&lt;/url-pattern&gt;--&gt;
-       &lt;!-- 别偷懒写个 /* --&gt;
-   &lt;/filter-mapping&gt;
-</code></pre>
-<h2 id="12-监听器">12、监听器</h2>
-<p>实现一个监听器的接口；（有n种监听器）</p>
-<ol>
-<li>
-<p>编写一个监听器</p>
-<p>实现监听器的接口…</p>
-<p>依赖的jar包<img src="https://img-blog.csdnimg.cn/2020050820562995.png" alt="在这里插入图片描述" loading="lazy"></p>
-<pre><code class="language-java">//统计网站在线人数 ： 统计session
-public class OnlineCountListener implements HttpSessionListener {
-
-    //创建session监听： 看你的一举一动
-    //一旦创建Session就会触发一次这个事件！
-    public void sessionCreated(HttpSessionEvent se) {
-        ServletContext ctx = se.getSession().getServletContext();
-
-        System.out.println(se.getSession().getId());
-
-        Integer onlineCount = (Integer) ctx.getAttribute(&quot;OnlineCount&quot;);
-
-        if (onlineCount==null){
-            onlineCount = new Integer(1);
-        }else {
-            int count = onlineCount.intValue();
-            onlineCount = new Integer(count+1);
-        }
-
-        ctx.setAttribute(&quot;OnlineCount&quot;,onlineCount);
-
-    }
-
-    //销毁session监听
-    //一旦销毁Session就会触发一次这个事件！
-    public void sessionDestroyed(HttpSessionEvent se) {
-        ServletContext ctx = se.getSession().getServletContext();
-
-        Integer onlineCount = (Integer) ctx.getAttribute(&quot;OnlineCount&quot;);
-
-        if (onlineCount==null){
-            onlineCount = new Integer(0);
-        }else {
-            int count = onlineCount.intValue();
-            onlineCount = new Integer(count-1);
-        }
-
-        ctx.setAttribute(&quot;OnlineCount&quot;,onlineCount);
-
-    }
-
-
-    /*
-    Session销毁：
-    1. 手动销毁  getSession().invalidate();
-    2. 自动销毁
-     */
-}
-
-</code></pre>
-</li>
-<li>
-<p>web.xml中注册监听器</p>
-<pre><code class="language-xml">&lt;!--注册监听器--&gt;
-&lt;listener&gt;
-    &lt;listener-class&gt;com.kuang.listener.OnlineCountListener&lt;/listener-class&gt;
-&lt;/listener&gt;
-</code></pre>
-</li>
-<li>
-<p>看情况是否使用！</p>
-</li>
-</ol>
-<h2 id="13-过滤器-监听器常见应用">13、过滤器、监听器常见应用</h2>
-<p><strong>监听器：GUI编程中经常使用；</strong></p>
-<pre><code class="language-java">public class TestPanel {
-    public static void main(String[] args) {
-        Frame frame = new Frame(&quot;中秋节快乐&quot;);  //新建一个窗体
-        Panel panel = new Panel(null); //面板
-        frame.setLayout(null); //设置窗体的布局
-
-        frame.setBounds(300,300,500,500);
-        frame.setBackground(new Color(0,0,255)); //设置背景颜色
-
-        panel.setBounds(50,50,300,300);
-        panel.setBackground(new Color(0,255,0)); //设置背景颜色
-
-        frame.add(panel);
-
-        frame.setVisible(true);
-
-        //监听事件，监听关闭事件
-        frame.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                super.windowClosing(e);
-            }
-        });
-
-    }
-}
-</code></pre>
-<p>用户登录之后才能进入主页！用户注销后就不能进入主页了！</p>
-<ol>
-<li>
-<p>用户登录之后，向Sesison中放入用户的数据</p>
-</li>
-<li>
-<p>进入主页的时候要判断用户是否已经登录；要求：在过滤器中实现！</p>
-<pre><code class="language-java">HttpServletRequest request = (HttpServletRequest) req;
-HttpServletResponse response = (HttpServletResponse) resp;
-
-if (request.getSession().getAttribute(Constant.USER_SESSION)==null){
-    response.sendRedirect(&quot;/error.jsp&quot;);
-}
-
-chain.doFilter(request,response);
-</code></pre>
-</li>
-</ol>
-<h2 id="14-jdbc">14、JDBC</h2>
-<p>什么是JDBC ： Java连接数据库！</p>
-<figure data-type="image" tabindex="14"><img src="https://img-blog.csdnimg.cn/20200508154620734.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JlbGxfbG92ZQ==,size_16,color_FFFFFF,t_70" alt="[(img-rZzTXmtn-1588757845422)(JavaWeb.assets/1568439601825.png)]" loading="lazy"></figure>
-<p>需要jar包的支持：</p>
-<ul>
-<li>java.sql</li>
-<li>javax.sql</li>
-<li>mysql-conneter-java… 连接驱动（必须要导入）</li>
-</ul>
-<p><strong>实验环境搭建</strong></p>
-<pre><code class="language-sql">CREATE TABLE users(
-    id INT PRIMARY KEY,
-    `name` VARCHAR(40),
-    `password` VARCHAR(40),
-    email VARCHAR(60),
-    birthday DATE
-);
-
-INSERT INTO users(id,`name`,`password`,email,birthday)
-VALUES(1,'张三','123456','zs@qq.com','2000-01-01');
-INSERT INTO users(id,`name`,`password`,email,birthday)
-VALUES(2,'李四','123456','ls@qq.com','2000-01-01');
-INSERT INTO users(id,`name`,`password`,email,birthday)
-VALUES(3,'王五','123456','ww@qq.com','2000-01-01');
-
-
-SELECT	* FROM users;
-
-</code></pre>
-<p>导入数据库依赖</p>
-<pre><code class="language-xml">&lt;!--mysql的驱动--&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;mysql&lt;/groupId&gt;
-    &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;
-    &lt;version&gt;5.1.47&lt;/version&gt;
-&lt;/dependency&gt;
-</code></pre>
-<p>IDEA中连接数据库：</p>
-<figure data-type="image" tabindex="15"><img src="https://img-blog.csdnimg.cn/20200508154638633.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JlbGxfbG92ZQ==,size_16,color_FFFFFF,t_70" alt="[(img-XErw4ElS-1588757845423)(JavaWeb.assets/1568440926845.png)]" loading="lazy"></figure>
-<p><strong>JDBC 固定步骤：</strong></p>
-<ol>
-<li>加载驱动</li>
-<li>连接数据库,代表数据库</li>
-<li>向数据库发送SQL的对象Statement : CRUD</li>
-<li>编写SQL （根据业务，不同的SQL）</li>
-<li>执行SQL</li>
-<li>关闭连接（先开的后关）</li>
-</ol>
-<pre><code class="language-java">public class TestJdbc {
-    public static void main(String[] args) throws ClassNotFoundException, SQLException {
-        //配置信息
-        //useUnicode=true&amp;characterEncoding=utf-8 解决中文乱码
-        String url=&quot;jdbc:mysql://localhost:3306/jdbc?useUnicode=true&amp;characterEncoding=utf-8&quot;;
-        String username = &quot;root&quot;;
-        String password = &quot;123456&quot;;
-
-        //1.加载驱动
-        Class.forName(&quot;com.mysql.jdbc.Driver&quot;);
-        //2.连接数据库,代表数据库
-        Connection connection = DriverManager.getConnection(url, username, password);
-
-        //3.向数据库发送SQL的对象Statement,PreparedStatement : CRUD
-        Statement statement = connection.createStatement();
-
-        //4.编写SQL
-        String sql = &quot;select * from users&quot;;
-
-        //5.执行查询SQL，返回一个 ResultSet  ： 结果集
-        ResultSet rs = statement.executeQuery(sql);
-
-        while (rs.next()){
-            System.out.println(&quot;id=&quot;+rs.getObject(&quot;id&quot;));
-            System.out.println(&quot;name=&quot;+rs.getObject(&quot;name&quot;));
-            System.out.println(&quot;password=&quot;+rs.getObject(&quot;password&quot;));
-            System.out.println(&quot;email=&quot;+rs.getObject(&quot;email&quot;));
-            System.out.println(&quot;birthday=&quot;+rs.getObject(&quot;birthday&quot;));
-        }
-
-        //6.关闭连接，释放资源（一定要做） 先开后关
-        rs.close();
-        statement.close();
-        connection.close();
-    }
-}
-
-</code></pre>
-<p><strong>预编译SQL</strong></p>
-<pre><code class="language-java">public class TestJDBC2 {
-    public static void main(String[] args) throws Exception {
-        //配置信息
-        //useUnicode=true&amp;characterEncoding=utf-8 解决中文乱码
-        String url=&quot;jdbc:mysql://localhost:3306/jdbc?useUnicode=true&amp;characterEncoding=utf-8&quot;;
-        String username = &quot;root&quot;;
-        String password = &quot;123456&quot;;
-
-        //1.加载驱动
-        Class.forName(&quot;com.mysql.jdbc.Driver&quot;);
-        //2.连接数据库,代表数据库
-        Connection connection = DriverManager.getConnection(url, username, password);
-
-        //3.编写SQL
-        String sql = &quot;insert into  users(id, name, password, email, birthday) values (?,?,?,?,?);&quot;;
-
-        //4.预编译
-        PreparedStatement preparedStatement = connection.prepareStatement(sql);
-
-        preparedStatement.setInt(1,2);//给第一个占位符？ 的值赋值为1；
-        preparedStatement.setString(2,&quot;狂神说Java&quot;);//给第二个占位符？ 的值赋值为狂神说Java；
-        preparedStatement.setString(3,&quot;123456&quot;);//给第三个占位符？ 的值赋值为123456；
-        preparedStatement.setString(4,&quot;24736743@qq.com&quot;);//给第四个占位符？ 的值赋值为1；
-        preparedStatement.setDate(5,new Date(new java.util.Date().getTime()));//给第五个占位符？ 的值赋值为new Date(new java.util.Date().getTime())；
-
-        //5.执行SQL
-        int i = preparedStatement.executeUpdate();
-
-        if (i&gt;0){
-            System.out.println(&quot;插入成功@&quot;);
-        }
-
-        //6.关闭连接，释放资源（一定要做） 先开后关
-        preparedStatement.close();
-        connection.close();
-    }
-}
-
-</code></pre>
-<p><strong>事务</strong></p>
-<p>要么都成功，要么都失败！</p>
-<p>ACID原则：保证数据的安全。</p>
-<pre><code class="language-java">开启事务
-事务提交  commit()
-事务回滚  rollback()
-关闭事务
-
-转账：
-A:1000
-B:1000
-    
-A(900)   --100--&gt;   B(1100) 
-</code></pre>
-<p><strong>Junit单元测试</strong></p>
-<p>依赖</p>
-<pre><code class="language-xml">&lt;!--单元测试--&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;junit&lt;/groupId&gt;
-    &lt;artifactId&gt;junit&lt;/artifactId&gt;
-    &lt;version&gt;4.12&lt;/version&gt;
-&lt;/dependency&gt;
-</code></pre>
-<p>简单使用</p>
-<p>@Test注解只有在方法上有效，只要加了这个注解的方法，就可以直接运行！</p>
-<pre><code class="language-java">@Test
-public void test(){
-    System.out.println(&quot;Hello&quot;);
-}
-</code></pre>
-<figure data-type="image" tabindex="16"><img src="https://img-blog.csdnimg.cn/20200508154657792.png" alt="[(img-OsUubVNQ-1588757845424)(JavaWeb.assets/1568442261610.png)]" loading="lazy"></figure>
-<p>失败的时候是红色：</p>
-<figure data-type="image" tabindex="17"><img src="https://img-blog.csdnimg.cn/20200508154708211.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JlbGxfbG92ZQ==,size_16,color_FFFFFF,t_70" alt="[(img-qv2oTEGI-1588757845425)(JavaWeb.assets/1568442289597.png)]" loading="lazy"></figure>
-<p><strong>搭建一个环境</strong></p>
-<pre><code class="language-sql">CREATE TABLE account(
-   id INT PRIMARY KEY AUTO_INCREMENT,
-   `name` VARCHAR(40),
-   money FLOAT
-);
-
-INSERT INTO account(`name`,money) VALUES('A',1000);
-INSERT INTO account(`name`,money) VALUES('B',1000);
-INSERT INTO account(`name`,money) VALUES('C',1000);
-6789
-    @Test
-    public void test() {
-        //配置信息
-        //useUnicode=true&amp;characterEncoding=utf-8 解决中文乱码
-        String url=&quot;jdbc:mysql://localhost:3306/jdbc?useUnicode=true&amp;characterEncoding=utf-8&quot;;
-        String username = &quot;root&quot;;
-        String password = &quot;123456&quot;;
-
-        Connection connection = null;
-
-        //1.加载驱动
-        try {
-            Class.forName(&quot;com.mysql.jdbc.Driver&quot;);
-            //2.连接数据库,代表数据库
-             connection = DriverManager.getConnection(url, username, password);
-
-            //3.通知数据库开启事务,false 开启
-            connection.setAutoCommit(false);
-
-            String sql = &quot;update account set money = money-100 where name = 'A'&quot;;
-            connection.prepareStatement(sql).executeUpdate();
-
-            //制造错误
-            //int i = 1/0;
-
-            String sql2 = &quot;update account set money = money+100 where name = 'B'&quot;;
-            connection.prepareStatement(sql2).executeUpdate();
-
-            connection.commit();//以上两条SQL都执行成功了，就提交事务！
-            System.out.println(&quot;success&quot;);
-        } catch (Exception e) {
-            try {
-                //如果出现异常，就通知数据库回滚事务
-                connection.rollback();
-            } catch (SQLException e1) {
-                e1.printStackTrace();
-            }
-            e.printStackTrace();
-        }finally {
-            try {
-                connection.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-</code></pre>
-<h2 id="smbms超市管理项目">SMBMS(超市管理项目)</h2>
-<figure data-type="image" tabindex="18"><img src="https://img-blog.csdnimg.cn/20200516122458676.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JlbGxfbG92ZQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" loading="lazy"></figure>
-<p>数据库：<br>
-<img src="https://img-blog.csdnimg.cn/20200516122532275.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JlbGxfbG92ZQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" loading="lazy"><br>
-<strong>项目如何搭建？</strong><br>
-考虑是不是用maven？ jar包，依赖</p>
-<h3 id="搭建项目准备工作">搭建项目准备工作</h3>
-<ol>
-<li>
-<p>搭建一个maven web 项目</p>
-</li>
-<li>
-<p>配置Tomcat</p>
-</li>
-<li>
-<p>测试项目是否能够跑起来</p>
-</li>
-<li>
-<p>导入项目中需要的jar包;<br>
-jsp，Servlet，mysql驱动jstl，stand…</p>
-</li>
-<li>
-<p>构建项目包结构<br>
-<img src="https://img-blog.csdnimg.cn/202005161230352.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JlbGxfbG92ZQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" loading="lazy"></p>
-</li>
-<li>
-<p>编写实体类<br>
-ROM映射:表-类映射</p>
-</li>
-<li>
-<p>编写基础公共类<br>
-1、数据库配置文件（mysql5.xx和8.xx的编写有差异）</p>
-<pre><code class="language-xml">driver=com.mysql.jdbc.Driver
-#在和mysql传递数据的过程中，使用unicode编码格式，并且字符集设置为utf-8
-url=jdbc:mysql://127.0.0.1:3306/smbms?useSSL=false&amp;useUnicode=true&amp;characterEncoding=utf-8
-user=root
-password=root
-12345
-</code></pre>
-<p>2、编写数据库的公共类</p>
-</li>
-</ol>
-<pre><code class="language-java">package dao;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.Properties;
-
-/**
- * 操作数据库的基类--静态类
- * @author Administrator
- *
- */
-public class BaseDao {
-	
-	static{//静态代码块,在类加载的时候执行
-		init();
-	}
-	
-	private static String driver;
-	private static String url;
-	private static String user;
-	private static String password;
-	
-	//初始化连接参数,从配置文件里获得
-	public static void init(){
-		Properties params=new Properties();
-		String configFile = &quot;database.properties&quot;;
-		InputStream is=BaseDao.class.getClassLoader().getResourceAsStream(configFile);
-		try {
-			params.load(is);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		driver=params.getProperty(&quot;driver&quot;);
-		url=params.getProperty(&quot;url&quot;);
-		user=params.getProperty(&quot;user&quot;);
-		password=params.getProperty(&quot;password&quot;);
-
-	}   
-	
-	
-	/**
-	 * 获取数据库连接
-	 * @return
-	 */
-	public static Connection getConnection(){
-		Connection connection = null;
-		try {
-			Class.forName(driver);
-			connection = DriverManager.getConnection(url, user, password);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		return connection;
-	}
-	/**
-	 * 查询操作
-	 * @param connection
-	 * @param pstm
-	 * @param rs
-	 * @param sql
-	 * @param params
-	 * @return
-	 */
-	public static ResultSet execute(Connection connection,PreparedStatement pstm,ResultSet rs,
-			String sql,Object[] params) throws Exception{
-		pstm = connection.prepareStatement(sql);
-		for(int i = 0; i &lt; params.length; i++){
-			pstm.setObject(i+1, params[i]);
-		}
-		rs = pstm.executeQuery();
-		return rs;
-	}
-	/**
-	 * 更新操作
-	 * @param connection
-	 * @param pstm
-	 * @param sql
-	 * @param params
-	 * @return
-	 * @throws Exception
-	 */
-	public static int execute(Connection connection,PreparedStatement pstm,
-			String sql,Object[] params) throws Exception{
-		int updateRows = 0;
-		pstm = connection.prepareStatement(sql);
-		for(int i = 0; i &lt; params.length; i++){
-			pstm.setObject(i+1, params[i]);
-		}
-		updateRows = pstm.executeUpdate();
-		return updateRows;
-	}
-	
-	/**
-	 * 释放资源
-	 * @param connection
-	 * @param pstm
-	 * @param rs
-	 * @return
-	 */
-	public static boolean closeResource(Connection connection,PreparedStatement pstm,ResultSet rs){
-		boolean flag = true;
-		if(rs != null){
-			try {
-				rs.close();
-				rs = null;//GC回收
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				flag = false;
-			}
-		}
-		if(pstm != null){
-			try {
-				pstm.close();
-				pstm = null;//GC回收
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				flag = false;
-			}
-		}
-		if(connection != null){
-			try {
-				connection.close();
-				connection = null;//GC回收
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				flag = false;
-			}
-		}
-		
-		return flag;
-	}
-
-}
-123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121122123124125126127128129130131132133134135136137138139140141142143
-</code></pre>
-<p>. 3、编写字符编码过滤器</p>
-<ol>
-<li>导入静态资源</li>
-</ol>
-<h3 id="登录功能实现">登录功能实现</h3>
-<figure data-type="image" tabindex="19"><img src="https://img-blog.csdnimg.cn/20200516125301633.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JlbGxfbG92ZQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" loading="lazy"></figure>
-<ol>
-<li>编写前端页面</li>
-<li>设置首页<br>
-1.设置欢迎首页</li>
-</ol>
-<pre><code class="language-xml">  &lt;welcome-file-list&gt;
-    &lt;welcome-file&gt;login.jsp&lt;/welcome-file&gt;
-  &lt;/welcome-file-list&gt;
-123
-</code></pre>
-<ol>
-<li>编写dao层登录用户登录的接口</li>
-</ol>
-<pre><code class="language-java">public User getLoginUser(Connection connection, String userCode) throws Exception;
-1
-</code></pre>
-<ol>
-<li>编写dao层接口的实现类</li>
-</ol>
-<pre><code class="language-java">import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-
-import dao.BaseDao;
-import pojo.User;
-
-public class UserDaoImpl implements UserDao{
-	//持久层只做查询数据库的内容
-	public User getLoginUser(Connection connection, String userCode) throws Exception{
-		//准备三个对象
-		PreparedStatement pstm = null;
-		ResultSet rs = null;
-		User user = null;
-		//判断是否连接成功
-		if(null != connection){
-			String sql = &quot;select * from smbms_user where userCode=?&quot;;
-			Object[] params = {userCode};
-			rs = BaseDao.execute(connection, pstm, rs, sql, params);
-			if(rs.next()){
-				user = new User();
-				user.setId(rs.getInt(&quot;id&quot;));
-				user.setUserCode(rs.getString(&quot;userCode&quot;));
-				user.setUserName(rs.getString(&quot;userName&quot;));
-				user.setUserPassword(rs.getString(&quot;userPassword&quot;));
-				user.setGender(rs.getInt(&quot;gender&quot;));
-				user.setBirthday(rs.getDate(&quot;birthday&quot;));
-				user.setPhone(rs.getString(&quot;phone&quot;));
-				user.setAddress(rs.getString(&quot;address&quot;));
-				user.setUserRole(rs.getInt(&quot;userRole&quot;));
-				user.setCreatedBy(rs.getInt(&quot;createdBy&quot;));
-				user.setCreationDate(rs.getTimestamp(&quot;creationDate&quot;));
-				user.setModifyBy(rs.getInt(&quot;modifyBy&quot;));
-				user.setModifyDate(rs.getTimestamp(&quot;modifyDate&quot;));
-			}
-			BaseDao.closeResource(null, pstm, rs);
-		}
-		return user;
-	}	
-}
-12345678910111213141516171819202122232425262728293031323334353637383940
-</code></pre>
-<ol>
-<li>业务层接口</li>
-</ol>
-<pre><code class="language-java">//用户登录
-public User login(String userCode, String userPassword);
-12
-</code></pre>
-<ol>
-<li>业务层实现类</li>
-</ol>
-<pre><code class="language-java">import java.sql.Connection;
-
-//import org.junit.Test;
-
-import dao.BaseDao;
-import dao.user.UserDao;
-import dao.user.UserDaoImpl;
-import pojo.User;
-
-public class UserServiceImpl implements UserService{
-	//业务层都会调用dao层.所以我们要引入Dao层（重点）
-	//只处理对应业务
-	
-	private UserDao userDao;
-	public UserServiceImpl(){
-		userDao = new UserDaoImpl();
-	}
-	
-	public User login(String userCode,String userPassword) {
-		// TODO Auto-generated method stub
-		Connection connection = null;
-		//通过业务层调用对应的具体数据库操作
-		User user = null;
-		try {
-			connection = BaseDao.getConnection();
-			user = userDao.getLoginUser(connection, userCode);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}finally{
-			BaseDao.closeResource(connection, null, null);
-		}
-		return user;
-	}
-	
-	/*@Test
-	public void test() {
-		UserServiceImpl userService = new UserServiceImpl();
-		String userCode = &quot;admin&quot;;
-		String userPassword = &quot;12345678&quot;;
-		User admin = userService.login(userCode, userPassword);
-		System.out.println(admin.getUserPassword());
-
-	}
-	*/
-}
-12345678910111213141516171819202122232425262728293031323334353637383940414243444546
-</code></pre>
-<ol>
-<li>编写Servlet</li>
-</ol>
-<pre><code class="language-java">import java.io.IOException;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import pojo.User;
-import util.Constants;
-import service.user.UserService;
-import service.user.UserServiceImpl;
-
-@SuppressWarnings(&quot;serial&quot;)
-public class LoginServlet extends HttpServlet{
-	//接受用户参数、调用业务层、转发视图
-	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// TODO 自动生成的方法存根
-		
-		System.out.println(&quot;login ============ &quot; );
-		//获取用户名和密码
-		String userCode = req.getParameter(&quot;userCode&quot;);
-		String userPassword = req.getParameter(&quot;userPassword&quot;);
-		//调用service方法，进行用户匹配
-		UserService userService = new UserServiceImpl();
-		User user = userService.login(userCode,userPassword);
-		if(null != user){//登录成功
-			//放入session
-			req.getSession().setAttribute(Constants.USER_SESSION,user);
-			//页面跳转（frame.jsp）
-			resp.sendRedirect(&quot;jsp/frame.jsp&quot;);
-		}else{
-			//页面跳转（login.jsp）带出提示信息--转发
-			req.setAttribute(&quot;error&quot;, &quot;用户名或密码不正确&quot;);
-			req.getRequestDispatcher(&quot;login.jsp&quot;).forward(req,resp);
-		}
-	}
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// TODO 自动生成的方法存根
-		doGet(req, resp);
-	}
-}
-12345678910111213141516171819202122232425262728293031323334353637383940414243
-</code></pre>
-<ol>
-<li>注册Servlet</li>
-</ol>
-<pre><code class="language-xml">&lt;servlet&gt;
-	&lt;servlet-name&gt;LoginServlet&lt;/servlet-name&gt;
-	&lt;servlet-class&gt;com.kuang.servlet.user.LoginServlet&lt;/servlet-class&gt;
-&lt;/servlet&gt;
-&lt;servlet-mapping&gt;
-	&lt;servlet-name&gt;LoginServlet&lt;/servlet-name&gt;
-	&lt;url-pattern&gt;/login.do&lt;/url-pattern&gt;
-&lt;/servlet-mapping&gt;
-12345678
-</code></pre>
-<ol>
-<li>测试访问,保证以上功能可以成功</li>
-</ol>
-<h3 id="登录功能优化">登录功能优化</h3>
-<p>注销功能<br>
-思路：移除session，返回登录页面</p>
-<pre><code class="language-java">public class LogoutServlet extends HttpServlet {
-
-	public void doPOST(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		doGet(request, response);
-	}
-
-	public void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		//清除session
-		request.getSession().removeAttribute(Constants.USER_SESSION);
-		response.sendRedirect(request.getContextPath()+&quot;/login.jsp&quot;);//返回登录页面
-	}
-
-}
-123456789101112131415
-</code></pre>
-<p>注册xml</p>
-<pre><code class="language-xml">&lt;servlet&gt;
-	&lt;servlet-name&gt;LogoutServlet&lt;/servlet-name&gt;
-	&lt;servlet-class&gt;servlet.user.LogoutServlet&lt;/servlet-class&gt;
-&lt;/servlet&gt;
-&lt;servlet-mapping&gt;
-	&lt;servlet-name&gt;LogoutServlet&lt;/servlet-name&gt;
-	&lt;url-pattern&gt;/jsp/logout.do&lt;/url-pattern&gt;
-&lt;/servlet-mapping&gt;
-12345678
-</code></pre>
-<h3 id="登录拦截优化">登录拦截优化</h3>
-<p>编写一个过滤器，并注册</p>
-<pre><code class="language-java">import java.io.IOException;
-
-import javax.servlet.*;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import pojo.User;
-import util.Constants;
-
-public class SysFilter implements Filter{
-	public void init(FilterConfig filterConfig) throws ServletException{
-		
-	}
-
-	@Override
-	public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain)
-			throws IOException, ServletException {
-		// TODO 自动生成的方法存根
-		HttpServletRequest request =  (HttpServletRequest)req;
-		HttpServletResponse response = (HttpServletResponse)resp;
-		
-		//过滤器，从session中获取用户
-		User user = (User)request.getSession().getAttribute(Constants.USER_SESSION);
-		if(user == null){//已经被移除或者注销了，或者未登录
-			response.sendRedirect(&quot;/smbms/error.jsp&quot;);
-		}else {
-			chain.doFilter(req, resp);
-		}
-	}
-
-	@Override
-	public void destroy() {
-		// TODO 自动生成的方法存根
-		
-	}
-}
-123456789101112131415161718192021222324252627282930313233343536
-</code></pre>
-<p>注册xml</p>
-<pre><code class="language-xml">&lt;!-- 用户登录过滤器 --&gt;
-&lt;filter&gt;
-	&lt;filter-name&gt;SysFilter&lt;/filter-name&gt;
-	&lt;filter-class&gt;filter.SysFilter&lt;/filter-class&gt;
-&lt;/filter&gt; 
-&lt;filter-mapping&gt;
-	&lt;filter-name&gt;SysFilter&lt;/filter-name&gt;
-	&lt;url-pattern&gt;/jsp/*&lt;/url-pattern&gt;
-&lt;/filter-mapping&gt;
-123456789
-</code></pre>
-<p>测试，登录，注销，权限，都要保证OK</p>
-<h3 id="密码修改">密码修改</h3>
-<ol>
-<li>导入前端素材</li>
-</ol>
-<pre><code class="language-html">&lt;li&gt;&lt;a href=&quot;${pageContext.request.contextPath }/jsp/pwdmodify.jsp&quot;&gt;密码修改&lt;/a&gt;&lt;/li&gt;
-
-12
-</code></pre>
-<ol>
-<li>写项目，建议从底层向上写<br>
-<img src="https://img-blog.csdnimg.cn/20200516180913135.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JlbGxfbG92ZQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" loading="lazy"></li>
-<li>UserDao接口</li>
-</ol>
-<pre><code class="language-java">//修改当前用户密码
-	public int updatePwd(Connection connection,int id,int password)throws SQLException, Exception;
-12
-</code></pre>
-<ol>
-<li>UserDao接口实现类</li>
-</ol>
-<pre><code class="language-java">@Override//修改当前密码
-	public int updatePwd(Connection connection, int id, int password) throws Exception {
-		// TODO 自动生成的方法存根
-		PreparedStatement pstm = null;
-		int execute =0;
-		if(connection!=null) {
-			String sql = &quot;update smbms_user set = userPassword = ? where id = ?&quot;;
-			Object[] params = {password,id};
-			execute = BaseDao.execute(connection, pstm, sql, params);
-			BaseDao.closeResource(null, pstm, null);
-		}
-		return execute;			
-	}
-12345678910111213
-</code></pre>
-<ol>
-<li>UserService层</li>
-</ol>
-<pre><code class="language-java">public boolean updatePwd(int id,int password)throws SQLException, Exception;
-1
-</code></pre>
-<ol>
-<li>UserService实现类</li>
-</ol>
-<pre><code class="language-java">public boolean updatePwd(int id, int password) throws SQLException, Exception {
-		// TODO 自动生成的方法存根
-		Connection connection = null;
-		boolean flag = false;
-		//修改密码
-		try {
-			connection = BaseDao.getConnection();
-			if(userDao.updatePwd(connection, id, password)&gt;0) {
-				flag = true;
-			}
-		} catch (SQLException e) {
-			// TODO 自动生成的 catch 块
-			e.printStackTrace();
-		} finally {
-			BaseDao.closeResource(connection, null, null);
-			
-		}
-		return flag;
-	}
-12345678910111213141516171819
-</code></pre>
-<ol>
-<li>servlet记得实现复用，要提取出方法！<br>
-在 <strong>dao层</strong> 和 <strong>service层</strong> 自己写映射类和实现类<br>
-下面是 <strong>servlet层</strong> 的主体</li>
-</ol>
-<pre><code class="language-java">public class UserServlet extends HttpServlet {
-	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// TODO 自动生成的方法存根
-		String method = req.getParameter(&quot;method&quot;);
-		if (method != &quot;savepwd&quot; &amp;&amp; method != null) {
-			this.updatePwd(req, resp);
-		}
-		//实现复用~~~~~~
-		// 想添加新的增删改查，直接用if(method != &quot;savepwd&quot; &amp;&amp; method != null);
-	}
-
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// TODO 自动生成的方法存根
-		doGet(req, resp);
-	}
-
-	public void updatePwd(HttpServletRequest req, HttpServletResponse resp) {
-		// 通过session获得用户id
-		Object o = req.getSession().getAttribute(Constants.USER_SESSION);
-		String newpassword = req.getParameter(&quot;newpassword&quot;);
-		boolean flag = false;
-		if (o != null &amp;&amp; newpassword != null) {
-			UserService userService = new UserServiceImpl();
-
-			try {
-				flag = userService.updatePwd(((User) o).getId(), newpassword);
-			} catch (SQLException e) {
-				// TODO 自动生成的 catch 块
-				e.printStackTrace();
-			} catch (Exception e) {
-				// TODO 自动生成的 catch 块
-				e.printStackTrace();
-			}
-			if (flag) {
-				req.setAttribute(&quot;message&quot;, &quot;密码修改成功，请退出，使用新密码登录&quot;);
-				// 密码修改成功,移除session(移除后不能再次修改密码,建议不移除)
-				req.getSession().removeAttribute(Constants.USER_SESSION);
-			} else {
-				// 密码修改失败
-				req.setAttribute(&quot;message&quot;, &quot;密码修改失败&quot;);
-			}
-
-		} else {
-			// 密码修改有问题
-			req.setAttribute(&quot;message&quot;, &quot;新密码有问题&quot;);
-		}
-		try {
-			req.getRequestDispatcher(&quot;/jsp/pwdmodify.jsp&quot;).forward(req, resp);
-		} catch (ServletException e) {
-			// TODO 自动生成的 catch 块
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO 自动生成的 catch 块
-			e.printStackTrace();
-		}
-	}
-}
-1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859
-</code></pre>
-<p>注册xml</p>
-<pre><code class="language-xml">&lt;servlet&gt;
-		&lt;servlet-name&gt;UserServlet&lt;/servlet-name&gt;
-		&lt;servlet-class&gt;servlet.user.UserServlet&lt;/servlet-class&gt;
-	&lt;/servlet&gt;
-	&lt;servlet-mapping&gt;
-		&lt;servlet-name&gt;UserServlet&lt;/servlet-name&gt;
-		&lt;url-pattern&gt;/jsp/user.do&lt;/url-pattern&gt;
-	&lt;/servlet-mapping&gt;
-12345678
-</code></pre>
-<ol>
-<li>测试</li>
-</ol>
-<h3 id="优化密码修改使用ajax">优化密码修改使用Ajax</h3>
-<ol>
-<li>阿里巴巴的fastjson</li>
-</ol>
-<pre><code class="language-xml">&lt;!-- https://mvnrepository.com/artifact/com.alibaba/fastjson --&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;com.alibaba&lt;/groupId&gt;
-    &lt;artifactId&gt;fastjson&lt;/artifactId&gt;
-    &lt;version&gt;1.2.68&lt;/version&gt;
-&lt;/dependency&gt;
-123456
-</code></pre>
-<ol>
-<li>后台代码修改</li>
-</ol>
-<p>导入阿里的包</p>
-<pre><code class="language-xml">&lt;!-- https://mvnrepository.com/artifact/com.alibaba/fastjson --&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;com.alibaba&lt;/groupId&gt;
-    &lt;artifactId&gt;fastjson&lt;/artifactId&gt;
-    &lt;version&gt;1.2.68&lt;/version&gt;
-&lt;/dependency&gt;
-123456
-import java.io.IOException;
-import java.io.PrintWriter;
-//import java.io.Writer;
-import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.Map;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import com.mysql.cj.util.StringUtils;
-import com.mysql.cj.xdevapi.JsonArray;
-
-//import com.mysql.cj.util.StringUtils;
-
-import pojo.User;
-import service.user.UserService;
-import service.user.UserServiceImpl;
-import util.Constants;
-
-@SuppressWarnings(&quot;serial&quot;)
-public class UserServlet extends HttpServlet {
-	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// TODO 自动生成的方法存根
-		String method = req.getParameter(&quot;method&quot;);
-		if (method.equals( &quot;savepwd&quot;) &amp;&amp; method != null) {
-			this.updatePwd(req, resp);
-		}else if (method.equals( &quot;pwdmodify&quot;) &amp;&amp; method != null) {
-			
-		}
-		// 想添加新的增删改查，直接用if(method != &quot;savepwd&quot; &amp;&amp; method != null);
-	}
-
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// TODO 自动生成的方法存根
-		doGet(req, resp);
-	}
-
-	public void updatePwd(HttpServletRequest req, HttpServletResponse resp) {
-		// 通过session获得用户id
-		Object o = req.getSession().getAttribute(Constants.USER_SESSION);
-		String newpassword = req.getParameter(&quot;newpassword&quot;);
-		boolean flag = false;
-		if (o != null &amp;&amp; newpassword != null) {
-			UserService userService = new UserServiceImpl();
-
-			try {
-				flag = userService.updatePwd(((User) o).getId(), newpassword);
-			} catch (SQLException e) {
-				// TODO 自动生成的 catch 块
-				e.printStackTrace();
-			} catch (Exception e) {
-				// TODO 自动生成的 catch 块
-				e.printStackTrace();
-			}
-			if (flag) {
-				req.setAttribute(&quot;message&quot;, &quot;密码修改成功，请退出，使用新密码登录&quot;);
-				// 密码修改成功,移除session(移除后不能再次修改密码,建议不移除)
-				req.getSession().removeAttribute(Constants.USER_SESSION);
-			} else {
-				// 密码修改失败
-				req.setAttribute(&quot;message&quot;, &quot;密码修改失败&quot;);
-			}
-
-		} else {
-			// 密码修改有问题
-			req.setAttribute(&quot;message&quot;, &quot;新密码有问题&quot;);
-		}
-		try {
-			req.getRequestDispatcher(&quot;/jsp/pwdmodify.jsp&quot;).forward(req, resp);
-		} catch (ServletException e) {
-			// TODO 自动生成的 catch 块
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO 自动生成的 catch 块
-			e.printStackTrace();
-		}
-	}
-
-	public void pqdmodify(HttpServletRequest req, HttpServletResponse resp) {
-		// 通过session获得用户id
-		Object o = req.getSession().getAttribute(Constants.USER_SESSION);
-		String oldpassword = req.getParameter(&quot;oldpassword&quot;);
-		
-		Map&lt;String, String&gt; resultMap = new HashMap&lt;String, String&gt;();
-		if(o==null) {//session失效，session过期了
-			resultMap.put(&quot;result&quot;,&quot;seesionerror&quot;);
-		}else if(StringUtils.isNullOrEmpty(oldpassword)){//输入密码为空
-			resultMap.put(&quot;result&quot;,&quot;error&quot;);
-		}else {//
-			String userPassword = ((User)o).getUserPassword();//seesion中的用户密码
-			if(oldpassword.equals(userPassword)) {
-				resultMap.put(&quot;result&quot;,&quot;true&quot;);
-			}else {
-				resultMap.put(&quot;result&quot;,&quot;false&quot;);
-			}
-		}
-		
-		
-		try {
-			resp.setContentType(&quot;application/josn&quot;);
-			PrintWriter writer = resp.getWriter();
-			/*
-			 * resultMap = [&quot;result&quot;,&quot;sessionerror&quot;,&quot;result&quot;,error]
-			 * josn格式={key,value
-			 */
-			//writer.write(JSONArray.toJSONString(resultMap));
-			writer.write(JsonArray.class.toString());
-			writer.flush();
-			writer.close();
-		} catch (IOException e) {
-			// TODO 自动生成的 catch 块
-			e.printStackTrace();
-		}
-	}
-}
-123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120
-</code></pre>
-<ol>
-<li>测试</li>
-</ol>
-<h3 id="用户管理实现">用户管理实现</h3>
-<figure data-type="image" tabindex="20"><img src="https://img-blog.csdnimg.cn/20200517210107269.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JlbGxfbG92ZQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" loading="lazy"></figure>
-<ol>
-<li>导入分页的工具类-PageSupport</li>
-<li>用户列表页面导入-userlist.jsp</li>
-</ol>
-<h4 id="1-获取用户数量">1、获取用户数量</h4>
-<ol>
-<li>UserDao</li>
-</ol>
-<pre><code class="language-java">//根据用户名或者角色查询用户总数
-public int getUserCount(Connection connection,String username ,int userRole)throws SQLException, Exception;
-12
-</code></pre>
-<ol>
-<li>UserDaoImpl</li>
-</ol>
-<pre><code class="language-java">@Override
-	public int getUserCount(Connection connection, String userName, int userRole)
-			throws Exception {
-		// TODO Auto-generated method stub
-		PreparedStatement pstm = null;
-		ResultSet rs = null;
-		int count = 0;
-		if(connection != null){
-			StringBuffer sql = new StringBuffer();
-			sql.append(&quot;select count(1) as count from smbms_user u,smbms_role r where u.userRole = r.id&quot;);
-			List&lt;Object&gt; list = new ArrayList&lt;Object&gt;();
-			if(!StringUtils.isNullOrEmpty(userName)){
-				sql.append(&quot; and u.userName like ?&quot;);
-				list.add(&quot;%&quot;+userName+&quot;%&quot;);
-			}
-			if(userRole &gt; 0){
-				sql.append(&quot; and u.userRole = ?&quot;);
-				list.add(userRole);
-			}
-			Object[] params = list.toArray();
-			System.out.println(&quot;sql ----&gt; &quot; + sql.toString());
-			rs = BaseDao.execute(connection, pstm, rs, sql.toString(), params);
-			if(rs.next()){
-				count = rs.getInt(&quot;count&quot;);
-			}
-			BaseDao.closeResource(null, pstm, rs);
-		}
-		return count;
-	}
-1234567891011121314151617181920212223242526272829
-</code></pre>
-<ol>
-<li>UserService</li>
-</ol>
-<pre><code class="language-java">//查询记录数
-	public int getUserCount(String username, int userRole);
-12
-</code></pre>
-<ol>
-<li>UserServiceImpl</li>
-</ol>
-<pre><code class="language-java">//查询记录数
-	@Override
-	public int getUserCount(String queryUserName, int queryUserRole) {
-		// TODO Auto-generated method stub
-		Connection connection = null;
-		int count = 0;
-		System.out.println(&quot;queryUserName ---- &gt; &quot; + queryUserName);
-		System.out.println(&quot;queryUserRole ---- &gt; &quot; + queryUserRole);
-		try {
-			connection = BaseDao.getConnection();
-			count = userDao.getUserCount(connection, queryUserName,queryUserRole);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}finally{
-			BaseDao.closeResource(connection, null, null);
-		}
-		//System.out.println(&quot;count&quot;+count);
-		return count;
-	}
-1234567891011121314151617181920
-</code></pre>
-<h4 id="2-获取用户列表">2、获取用户列表</h4>
-<p>1.UserDao</p>
-<pre><code class="language-java">//通过条件查询-userList
-	public List&lt;User&gt; getUserList(Connection connection, String userName, int userRole, int currentPageNo, int pageSize)throws Exception;
-12
-</code></pre>
-<ol>
-<li>UserDaoImpl</li>
-</ol>
-<pre><code class="language-java">@Override
-	public List&lt;User&gt; getUserList(Connection connection, String userName,int userRole,int currentPageNo, int pageSize)
-			throws Exception {
-		// TODO Auto-generated method stub
-		PreparedStatement pstm = null;
-		ResultSet rs = null;
-		List&lt;User&gt; userList = new ArrayList&lt;User&gt;();
-		if(connection != null){
-			StringBuffer sql = new StringBuffer();
-			sql.append(&quot;select u.*,r.roleName as userRoleName from smbms_user u,smbms_role r where u.userRole = r.id&quot;);
-			List&lt;Object&gt; list = new ArrayList&lt;Object&gt;();
-			if(!StringUtils.isNullOrEmpty(userName)){
-				sql.append(&quot; and u.userName like ?&quot;);
-				list.add(&quot;%&quot;+userName+&quot;%&quot;);
-			}
-			if(userRole &gt; 0){
-				sql.append(&quot; and u.userRole = ?&quot;);
-				list.add(userRole);
-			}
-			//在数据库中，分页显示 limit startIndex，pageSize；总数
-			//当前页  (当前页-1)*页面大小
-			//0,5	1,0	 01234
-			//5,5	5,0	 56789
-			//10,5	10,0 10~
-			sql.append(&quot; order by creationDate DESC limit ?,?&quot;);
-			currentPageNo = (currentPageNo-1)*pageSize;
-			list.add(currentPageNo);
-			list.add(pageSize);
-			
-			Object[] params = list.toArray();
-			System.out.println(&quot;sql ----&gt; &quot; + sql.toString());
-			
-			rs = BaseDao.execute(connection, pstm, rs, sql.toString(), params);
-			while(rs.next()){
-				User _user = new User();
-				_user.setId(rs.getInt(&quot;id&quot;));
-				_user.setUserCode(rs.getString(&quot;userCode&quot;));
-				_user.setUserName(rs.getString(&quot;userName&quot;));
-				_user.setGender(rs.getInt(&quot;gender&quot;));
-				_user.setBirthday(rs.getDate(&quot;birthday&quot;));
-				_user.setPhone(rs.getString(&quot;phone&quot;));
-				_user.setUserRole(rs.getInt(&quot;userRole&quot;));
-				_user.setUserRoleName(rs.getString(&quot;userRoleName&quot;));
-				userList.add(_user);
-			}
-			BaseDao.closeResource(null, pstm, rs);
-		}
-		return userList;
-	}
-12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849
-</code></pre>
-<ol>
-<li>UserService</li>
-</ol>
-<pre><code class="language-java">//根据条件查询用户列表
-	public List&lt;User&gt; getUserList(String queryUserName, int queryUserRole, int currentPageNo, int pageSize);
-12
-</code></pre>
-<ol>
-<li>UserServiceImpl</li>
-</ol>
-<pre><code class="language-java">@Override
-	public List&lt;User&gt; getUserList(String queryUserName,int queryUserRole,int currentPageNo, int pageSize) {
-		// TODO Auto-generated method stub
-		Connection connection = null;
-		List&lt;User&gt; userList = null;
-		System.out.println(&quot;queryUserName ---- &gt; &quot; + queryUserName);
-		System.out.println(&quot;queryUserRole ---- &gt; &quot; + queryUserRole);
-		System.out.println(&quot;currentPageNo ---- &gt; &quot; + currentPageNo);
-		System.out.println(&quot;pageSize ---- &gt; &quot; + pageSize);
-		try {
-			connection = BaseDao.getConnection();
-			userList = userDao.getUserList(connection, queryUserName,queryUserRole,currentPageNo,pageSize);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block 
-			e.printStackTrace();
-		}finally{
-			BaseDao.closeResource(connection, null, null);
-		}
-		return userList;
-	}
-1234567891011121314151617181920
-</code></pre>
-<h4 id="3-获取角色操作">3、获取角色操作</h4>
-<p>为了我们的职责统一，我们可以把<strong>角色的操作</strong>单独放在一个包中，和pojo类对应。。。</p>
-<ol>
-<li>RoleDao</li>
-</ol>
-<pre><code class="language-java">//获取角色列表
-		public List&lt;Role&gt; getRoleList(Connection connection)throws Exception;
-12
-</code></pre>
-<ol>
-<li>RoleDaoIpml</li>
-</ol>
-<pre><code class="language-java">public class RoleDaoImpl implements RoleDao {
-
-	@Override
-	public List&lt;Role&gt; getRoleList(Connection connection) throws Exception {
-		PreparedStatement pstm = null;
-		ResultSet rs = null;
-		List&lt;Role&gt; roleList = new ArrayList&lt;Role&gt;();
-		if (connection != null) {
-			String sql = &quot;select * from smbms_role&quot;;
-			Object[] params = {};
-			rs = BaseDao.execute(connection, pstm, rs, sql, params);
-			while (rs.next()) {
-				Role _role = new Role();
-				_role.setId(rs.getInt(&quot;id&quot;));
-				_role.setRoleCode(rs.getString(&quot;roleCode&quot;));
-				_role.setRoleName(rs.getString(&quot;roleName&quot;));
-				roleList.add(_role);
-			}
-			BaseDao.closeResource(null, pstm, rs);
-		}
-
-		return roleList;
-	}
-}
-123456789101112131415161718192021222324
-</code></pre>
-<ol>
-<li>RoleService</li>
-</ol>
-<pre><code class="language-java">public interface RoleService {
-	//角色列表查询
-	public List&lt;Role&gt; getRoleList();  
-	
-}
-12345
-</code></pre>
-<ol>
-<li>RoleServiceIpml</li>
-</ol>
-<pre><code class="language-java">public class RoleServiceImpl implements RoleService{
-	
-	private RoleDao roleDao;
-	
-	public RoleServiceImpl(){
-		roleDao = new RoleDaoImpl();
-	}
-	
-	@Override
-	public List&lt;Role&gt; getRoleList() {
-		Connection connection = null;
-		List&lt;Role&gt; roleList = null;
-		try {
-			connection = BaseDao.getConnection();
-			roleList = roleDao.getRoleList(connection);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}finally{
-			BaseDao.closeResource(connection, null, null);
-		}
-		return roleList;
-	}
-	
-}
-123456789101112131415161718192021222324
-</code></pre>
-<h4 id="4-用户显示的servlet">4、用户显示的Servlet</h4>
-<ol>
-<li>获取用户前端的数据（查询）</li>
-<li>判断请求是否需要执行，看参数的值判断</li>
-<li>为了实现分页，需要计算出当前页面和总页面，页面大小…</li>
-<li>用户列表展示</li>
-<li>返回前端</li>
-</ol>
-<pre><code class="language-java">//重点、难点
-	private void query(HttpServletRequest req, HttpServletResponse resp) {
-		// TODO 自动生成的方法存根
-		//查询用户列表
-		//从前端获取数据
-		//查询用户列表
-		String queryUserName = req.getParameter(&quot;queryname&quot;);
-		String temp = req.getParameter(&quot;queryUserRole&quot;);
-		String pageIndex = req.getParameter(&quot;pageIndex&quot;);
-		int queryUserRole = 0;
-		
-		//获取用户列表
-		UserServiceImpl userService = new UserServiceImpl();
-		List&lt;User&gt; userList = null;
-		
-		//第一此请求肯定是走第一页，页面大小固定的
-		//设置页面容量
-    	int pageSize = 5;//把它设置在配置文件里,后面方便修改
-    	//当前页码
-    	int currentPageNo = 1;
-		
-		if(queryUserName == null){
-			queryUserName = &quot;&quot;;
-		}
-		if(temp != null &amp;&amp; !temp.equals(&quot;&quot;)){
-			queryUserRole = Integer.parseInt(temp);
-		}
-		if(pageIndex != null) {
-			currentPageNo = Integer.parseInt(pageIndex);
-		}
-		//获取用户总数（分页	上一页：下一页的情况）
-		//总数量（表）	
-    	int totalCount	= userService.getUserCount(queryUserName,queryUserRole);
-			
-		//总页数支持
-		PageSupport pageSupport = new PageSupport();
-		pageSupport.setCurrentPageNo(currentPageNo);
-		pageSupport.setPageSize(pageSize);
-		pageSupport.setTotalCount(totalCount);
-		
-		int totalPageCount =pageSupport.getTotalPageCount();//总共有几页
-		//(totalCount+pageSize-1/pageSize)取整
-		// pageSupport.getTotalCount()
-		
-		//System.out.println(&quot;totalCount =&quot;+totalCount);
-		//System.out.println(&quot;pageSize =&quot;+pageSize);
-		//System.out.println(&quot;totalPageCount =&quot;+totalPageCount);
-		//控制首页和尾页
-		//如果页面小于 1 就显示第一页的东西
-		if(currentPageNo &lt; 1) {
-			currentPageNo = 1;
-		}else if(currentPageNo &gt; totalPageCount) {//如果页面大于了最后一页就显示最后一页
-			currentPageNo =totalPageCount;
-		}
-		
-		userList = userService.getUserList(queryUserName, queryUserRole, currentPageNo, pageSize);
-		req.setAttribute(&quot;userList&quot;, userList);
-		
-		RoleServiceImpl roleService = new RoleServiceImpl();
-		List&lt;Role&gt; roleList = roleService.getRoleList();
-		req.setAttribute(&quot;roleList&quot;, roleList);
-		req.setAttribute(&quot;totalCount&quot;, totalCount); 
-		req.setAttribute(&quot;currentPageNo&quot;, currentPageNo);
-		req.setAttribute(&quot;totalPageCount&quot;, totalPageCount);
-		req.setAttribute(&quot;queryUserName&quot;, queryUserName);
-		req.setAttribute(&quot;queryUserRole&quot;, queryUserRole);
-		
-		//返回前端
-		try {
-			req.getRequestDispatcher(&quot;userlist.jsp&quot;).forward(req, resp);
-		} catch (ServletException e) {
-			// TODO 自动生成的 catch 块
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO 自动生成的 catch 块
-			e.printStackTrace();
-		}
-
-	}
-12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879
-</code></pre>
-<p>小黄鸭调试法：自言自语</p>
-<p><strong>项目原理流程图：</strong><br>
-<img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9pLmxvbGkubmV0LzIwMjAvMDUvMTkvbUNhOGxCTW9kaXBKd1FoLnBuZw?x-oss-process=image/format,png" alt="项目原理流程图" loading="lazy"><br>
-<em>剩下的手打一遍，然后各种打错排查，，，<br>
-虽然不建议 ，但还是直接导入文件算了，粘贴复制也行0-0</em>（前提是自己先码一遍）</p>
-<h3 id="源码在最后">源码在最后</h3>
-<p>SMBMS项目源码链接：<br>
-<a href="https://www.lanzoux.com/iGLJTdusuyf">Eclipse版（个人手打版，已排错，可运行）<br>
-https://www.lanzoux.com/iGLJTdusuyf</a></p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[中等33. 搜索旋转排序数组]]></title>
-        <id>https://ganhan999.github.io/post/33、搜索旋转排序数组/</id>
-        <link href="https://ganhan999.github.io/post/33、搜索旋转排序数组/">
-        </link>
-        <updated>2020-12-27T14:19:12.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
-<p>升序排列的整数数组 nums 在预先未知的某个点上进行了旋转（例如， [0,1,2,4,5,6,7] 经旋转后可能变为 [4,5,6,7,0,1,2] ）。<br>
-请你在数组中搜索 target ，如果数组中存在这个目标值，则返回它的索引，否则返回 -1 。</p>
-<p>示例 1：<br>
-输入：nums = [4,5,6,7,0,1,2], target = 0<br>
-输出：4</p>
-<p>示例 2：<br>
-输入：nums = [4,5,6,7,0,1,2], target = 3<br>
-输出：-1</p>
-<p>示例 3：<br>
-输入：nums = [1], target = 0<br>
-输出：-1</p>
-<h1 id="本体思路">本体思路</h1>
-<p>题目要求算法时间复杂度必须是 O(\log n)O(logn) 的级别，这提示我们可以使用二分搜索的方法。</p>
-<p>但是数组本身不是有序的，进行旋转后只保证了数组的局部是有序的，这还能进行二分搜索吗？答案是可以的。</p>
-<p>可以发现的是，我们将数组从中间分开成左右两部分的时候，一定有一部分的数组是有序的。<br>
-拿示例来看，我们从 6 这个位置分开以后数组变成了 [4, 5, 6] 和 [7, 0, 1, 2] 两个部分，<br>
-其中左边 [4, 5, 6] 这个部分的数组是有序的，其他也是如此。</p>
-<h1 id="大神做法1">#大神做法1：</h1>
-<pre><code class="language-python">class Solution:
-    def search(self, nums: List[int], target: int) -&gt; int:
-        if not nums:
-            return -1
-        l, r = 0, len(nums) - 1
-        while l &lt;= r:
-            mid = (l + r) // 2
-            if nums[mid] == target:
-                return mid
-            if nums[0] &lt;= nums[mid]:
-                if nums[0] &lt;= target &lt; nums[mid]:
-                    r = mid - 1
-                else:
-                    l = mid + 1
-            else:
-                if nums[mid] &lt; target &lt;= nums[len(nums) - 1]:
-                    l = mid + 1
-                else:
-                    r = mid - 1
-        return -1
 </code></pre>
 ]]></content>
     </entry>
