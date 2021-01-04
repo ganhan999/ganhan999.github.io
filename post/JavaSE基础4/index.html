@@ -6,7 +6,7 @@
 
 <title>JavaSE基础4 | Gridea</title>
 
-<link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1609680174848">
+<link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1609731895175">
 
 <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://ganhan999.github.io//styles/main.css">
@@ -77,7 +77,7 @@
             
         </div>
         <div style="text-align: center">
-            <form id="gridea-search-form" style="position: relative" data-update="1609680174848" action="/search/index.html">
+            <form id="gridea-search-form" style="position: relative" data-update="1609731895175" action="/search/index.html">
                 <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
                 <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
             </form>
@@ -110,8 +110,8 @@
 <hr>
 <h1 id="2-非静态方法和静态方法">2、非静态方法和静态方法</h1>
 <ul>
-<li>如果设置的是非静态方法，可以直接类.方法名</li>
-<li>如果设置的不是非静态方法，则需要实例化对象，使用new</li>
+<li>如果设置的是static静态方法，可以直接类.方法名</li>
+<li>如果设置的是非静态方法，则需要实例化对象，使用new</li>
 <li>static静态方法是和类一起加载的，而非静态方法是类实例化之后才存在的</li>
 </ul>
 <h1 id="3-构造方法构造器">3、构造方法（构造器）</h1>
@@ -168,6 +168,7 @@ return  this.name=name;
 <li><strong>使用super调用父类构造器的语句必须是子类构造器的第一条语句</strong></li>
 </ol>
 <p><strong>如果子类构造器没有显式地调用父类的构造器，则将自动调用父类的默认（没有参数）的构造器。如果父类没有不带参数的构造器，并且在子类的构造器中又没有显式地调用父类的构造器，则java编译器将报告错误</strong></p>
+<p><strong>子类实例化时，默认调用父类的无参构造方法（不管子类的构造器有没有参数，因为子类继承的是父类的属性和方法，只调用父类的无参构造器就可以继承父类的属性和方法，因此不会调用父类的有参构造器），再调用子类的有参/无参构造器。</strong></p>
 <h2 id="7-this-vs-super关键字">7、this  vs  super关键字</h2>
 <ul>
 <li>代表对象不同：this:本身调用者这个对象   super：代表父类对象的应用</li>

@@ -6,7 +6,7 @@
 
 <title>JavaSE基础2 | Gridea</title>
 
-<link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1609680174848">
+<link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1609731895175">
 
 <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://ganhan999.github.io//styles/main.css">
@@ -77,7 +77,7 @@
             
         </div>
         <div style="text-align: center">
-            <form id="gridea-search-form" style="position: relative" data-update="1609680174848" action="/search/index.html">
+            <form id="gridea-search-form" style="position: relative" data-update="1609731895175" action="/search/index.html">
                 <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
                 <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
             </form>
@@ -128,8 +128,6 @@
 <ul>
 <li>所有标识符都应该以字母(A-Z,a-z)，美元符($)，或者下划线(_)开始</li>
 <li>标识符是大小写敏感的</li>
-<li>shift+Del 永久删除</li>
-<li>ctrl+shift+esc 任务管理器</li>
 </ul>
 <h1 id="3-数据类型">3、数据类型</h1>
 <h3 id="强类型语言java是强类型语言">强类型语言（Java是强类型语言）</h3>
@@ -349,26 +347,6 @@ public class switchtext {
             default://可选
                 System.out.println(&quot;没什么&quot;);
         } 
-    }
-}
-package jichu;
-
-import java.util.Scanner;
-
-public class shuru1 {
-    public static void main(String[] args) {
-        Scanner scanner=new Scanner(System.in);
-        int m=0;
-        double sum=0;
-        while (scanner.hasNextDouble()){
-            double x= scanner.nextDouble();
-            m++;
-            sum+=x;
-            System.out.println(&quot;你输入了第&quot;+m+&quot;个数,然后当前结果sum为&quot;+sum);
-        }
-        System.out.println(m+&quot;个数的和为&quot;+sum);
-        System.out.println(m+&quot;个数的平均数为&quot;+(sum/m));
-        scanner.close()
     }
 }
 </code></pre>
