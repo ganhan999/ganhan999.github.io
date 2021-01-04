@@ -4,9 +4,9 @@
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-<title>Java类1 | Gridea</title>
+<title>Java 常用类 | Gridea</title>
 
-<link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1609731895175">
+<link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1609747276295">
 
 <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://ganhan999.github.io//styles/main.css">
@@ -77,7 +77,7 @@
             
         </div>
         <div style="text-align: center">
-            <form id="gridea-search-form" style="position: relative" data-update="1609731895175" action="/search/index.html">
+            <form id="gridea-search-form" style="position: relative" data-update="1609747276295" action="/search/index.html">
                 <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
                 <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
             </form>
@@ -89,7 +89,7 @@
         <div class="post-detail gt-bg-theme-color-second">
             <article class="gt-post-content">
                 <h2 class="post-title">
-                    Java类1
+                    Java 常用类
                 </h2>
                 <div class="post-info">
                     <time class="post-time gt-c-content-color-first">
@@ -795,44 +795,48 @@ Fri Jan 24 10:00:01 CST 2020java
 </code></pre>
 <h2 id="9-system类">9、System类</h2>
 <figure data-type="image" tabindex="3"><img src="https://ganhan999.github.io//post-images/1606738254569.png" alt="" loading="lazy"></figure>
-<pre><code class="language-java">public class Application {
-    public static void main(String[] args) {
-        // Object&gt;String
-        //Object&gt;Person&gt;Student
-        //Object&gt;Person&gt;Teacher
-        //System.out.println( X instanceof Y);//X Y 是否有继承关系
-        Object object = new Student();
-        System.out.println(object instanceof  Student);//object 指向Student 故为True
-        System.out.println(object instanceof  Person);//True
-        System.out.println(object instanceof Object);//True
-        System.out.println(object instanceof Teacher);//False
-        System.out.println(object instanceof  String);//false
-        System.out.println(&quot;=========================&quot;);
+<pre><code class="language-java">package Object01;
 
-        Person object2 = new Student();
-        System.out.println(object2 instanceof  Student);//True
-        System.out.println(object2 instanceof  Person);//True
-        System.out.println(object2 instanceof  Object);//True
-        System.out.println(object2 instanceof  Teacher);//False
-        //System.out.println(object2 instanceof  String); //编译错误
-        // 感觉是obj的指向类型 判断 true or false
-        // obj的类型决定能否比较
-        System.out.println(&quot;=========================&quot;);
-        Person object3 = new Person();
-        System.out.println(object3 instanceof  Student);//False
-        System.out.println(object3 instanceof  Person);//True
-        System.out.println(object3 instanceof Object);//True
-        System.out.println(object3 instanceof Teacher);//False
-        //System.out.println(object3 instanceof  String);  //编译错误
-        System.out.println(&quot;=========================&quot;);
-        Student object4 = new Student();
-        System.out.println(object4 instanceof  Student);//True
-        System.out.println(object4 instanceof  Person);//True
-        System.out.println(object4 instanceof Object);//True
-        //System.out.println(object4 instanceof Teacher);//编译错误
-        //System.out.println(object4 instanceof  String);  //编译错误
+import java.util.Arrays;
+
+public class System1 {
+    public static void main(String[] args) {
+        int[] arr ={10,25,41,13,14,5,34,14};
+        int[] dest =new int[8];
+        System.arraycopy(arr,0,dest,0,arr.length);//五个参数 被copy数组 开始位置 新数组 开始位置 copy长度
+        for (int i : dest) {
+            System.out.print(i+&quot;\t&quot;);
+        }
+        //Arrays.copyOf()  本质使用System.arraycopy() 说明System.arraycopy()效率高
+        //计时
+        System.out.println();
+        int result=0;
+        long start =System.currentTimeMillis();
+        for (int i = 0; i &lt; 1000; i++) {
+            for (int j = 0; j &lt; 1000; j++) {
+                result=i*j;
+            }
+        }
+        System.out.println(result);
+        long end =System.currentTimeMillis();
+        System.out.println(&quot;用时:&quot;+(end-start));
+       //gc回收
+        new Student(&quot;aaa&quot;,18);
+        new Student(&quot;bbb&quot;,18);
+        new Student(&quot;ccc&quot;,18);
+        System.gc();
+        //exit退出jvm  后面不再执行
+        System.exit(0);
+        System.out.println(&quot;到此为止！！！&quot;);
     }
+
 }
+10	25	41	13	14	5	34	14	
+998001
+用时:5
+ccc对象已被删除
+bbb对象已被删除
+aaa对象已被删除
 </code></pre>
 
                 </div>
@@ -849,7 +853,7 @@ Fri Jan 24 10:00:01 CST 2020java
         
 
         
-            <span id="/post/Java类/" class="leancloud_visitors" data-flag-title="Java类1">
+            <span id="/post/Java类/" class="leancloud_visitors" data-flag-title="Java 常用类">
                 <em class="post-meta-item-text">阅读量 </em>
                 <i class="leancloud-visitors-count">0</i>
             </span>
