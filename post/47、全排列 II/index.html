@@ -4,7 +4,7 @@
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-<title>27、移除元素 | Gridea</title>
+<title>中等47. 全排列 II | Gridea</title>
 
 <link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1609766571584">
 
@@ -89,11 +89,11 @@
         <div class="post-detail gt-bg-theme-color-second">
             <article class="gt-post-content">
                 <h2 class="post-title">
-                    27、移除元素
+                    中等47. 全排列 II
                 </h2>
                 <div class="post-info">
                     <time class="post-time gt-c-content-color-first">
-                        · 2020-11-06 ·
+                        · 2021-01-04 ·
                     </time>
                     
                         <a href="https://ganhan999.github.io/tag/cKyYTCK2Y/" class="post-tags">
@@ -103,76 +103,49 @@
                 </div>
                 <div class="post-content">
                     <h1 id="题目">题目</h1>
-<p>&quot;&quot;&quot;<br>
-给你一个数组 nums 和一个值 val，你需要 原地 移除所有数值等于 val 的元素，并返回移除后数组的新长度。<br>
-不要使用额外的数组空间，你必须仅使用 O(1) 额外空间并 原地 修改输入数组。<br>
-元素的顺序可以改变。你不需要考虑数组中超出新长度后面的元素。</p>
-<p>示例 1:<br>
-给定 nums = [3,2,2,3], val = 3,<br>
-函数应该返回新的长度 2, 并且 nums 中的前两个元素均为 2。<br>
-你不需要考虑数组中超出新长度后面的元素。</p>
-<p>示例 2:<br>
-给定 nums = [0,1,2,2,3,0,4,2], val = 2,<br>
-函数应该返回新的长度 5, 并且 nums 中的前五个元素为 0, 1, 3, 0, 4。<br>
-注意这五个元素可为任意顺序。<br>
-你不需要考虑数组中超出新长度后面的元素。</p>
-<p>&quot;&quot;&quot;</p>
+<p>给定一个可包含重复数字的序列 nums ，按任意顺序 返回所有不重复的全排列。</p>
+<p>示例 1：<br>
+输入：nums = [1,1,2]<br>
+输出：<br>
+[[1,1,2],<br>
+[1,2,1],<br>
+[2,1,1]]</p>
+<p>示例 2：<br>
+输入：nums = [1,2,3]<br>
+输出：[[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]</p>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
 <h1 id="本体思路">本体思路</h1>
-<p>如果val在列表中，那么就使用index函数得到他的位置，然后再进行一个一个的pop，比较简单</p>
-<h1 id="我的做法">#我的做法：</h1>
-<pre><code class="language-python">class Solution:
-    def removeElement(self, nums: List[int], val: int) -&gt; int:
-        lens=len(nums)
-        i=0
-        if lens==0:
-            return 0
-        while i&lt;=lens-1:
-            if val in nums:
-                inde=nums.index(val)
-                nums.pop(inde)
-                print()
-            else:
-                i=i+1
-        return len(nums)
-
+<p>如果要比较两个列表是否一样，一个容易想到的办法是对列表分别排序，然后逐个比对。既然要排序，我们就可以 在搜索之前就对候选数组排序，一旦发现某个分支搜索下去可能搜索到重复的元素就停止搜索，这样结果集中不会包含重复列表。</p>
+<pre><code class="language-python">if i &gt; 0 and nums[i] == nums[i - 1] and not used[i - 1]:
+    continue
 </code></pre>
-<p>&quot;&quot;&quot;</p>
+<figure data-type="image" tabindex="1"><img src="https://pic.leetcode-cn.com/1600386643-uhkGmW-image.png" alt="image.png" loading="lazy"></figure>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
 <h1 id="大神做法1">大神做法1：</h1>
-<p>双指针法：题意可以理解为直接修改前k个数，因此无需删除操作</p>
-<p>&quot;&quot;&quot;</p>
 <pre><code class="language-python">class Solution:
-    def removeElement(self, nums: List[int], val: int) -&gt; int:
-        for i in range(nums.count(val)):
-            nums.remove(val)
-        return len(nums)
-
-
-
-#复现成功！
+    def permuteUnique(self, nums: List[int]) -&gt; List[List[int]]:
+        def dfs(nums, size, depth, path, used, res):
+            if depth == size:
+                res.append(path.copy())
+                return
+            for i in range(size):
+                if not used[i]:
+                    if i &gt; 0 and nums[i] == nums[i - 1] and not used[i - 1]:#还没被撤销的节点则可以构成一组完整的结，如果被撤销了那么就是重复的结。
+                        continue
+                    used[i] = True
+                    path.append(nums[i])
+                    dfs(nums, size, depth + 1, path, used, res)
+                    used[i] = False
+                    path.pop()
+        size = len(nums)
+        if size == 0:
+            return []
+        nums.sort()
+        used = [False] * len(nums)
+        res = []
+        dfs(nums, size, 0, [], used, res)
+        return res
 </code></pre>
-<h1 id="大神做法2">大神做法2：</h1>
-<p>双指针其实就是两个数，分别代表两个index，表示数组中第几个数的意思。<br>
-比如这里，我们让a代表一个index，b代表一个index<br>
-然后我们让a一直往后移动，相当于nums[a]从数组第一个数遍历到最后一个数。<br>
-当且仅当我们发现nums[a] != val的时候，我们把这个数拷贝到b指向的位置，<br>
-默认b是从0开始的，然后b += 1指向下一个位置。</p>
-<p>&quot;&quot;&quot;</p>
-<pre><code class="language-python">class Solution:
-    def removeElement(self, nums: List[int], val: int) -&gt; int:
-        a = 0
-        b = 0
-
-        while a &lt; len(nums):
-            if nums[a] != val:
-                nums[b] = nums[a]
-                b += 1
-            a += 1
-        return b
-
-
-#复现成功！
-</code></pre>
-<p>&quot;&quot;&quot;</p>
 
                 </div>
             </article>
@@ -181,14 +154,14 @@
         
             <div class="next-post">
                 <div class="next gt-c-content-color-first">下一篇</div>
-                <a href="https://ganhan999.github.io/post/边缘检测算子汇总/" class="post-title gt-a-link">
-                    边缘检测算子汇总
+                <a href="https://ganhan999.github.io/post/Java 接口和抽象类/" class="post-title gt-a-link">
+                    java接口和抽象类的区别和作用（功能、用途、好处）
                 </a>
             </div>
         
 
         
-            <span id="/post/27、移除元素/" class="leancloud_visitors" data-flag-title="27、移除元素">
+            <span id="/post/47、全排列 II/" class="leancloud_visitors" data-flag-title="中等47. 全排列 II">
                 <em class="post-meta-item-text">阅读量 </em>
                 <i class="leancloud-visitors-count">0</i>
             </span>
