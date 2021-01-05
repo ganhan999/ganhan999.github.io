@@ -4,7 +4,7 @@
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-<title>58、最后一个单词的长度 | Gridea</title>
+<title>中等48. 旋转图像I | Gridea</title>
 
 <link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1609850333481">
 
@@ -89,11 +89,11 @@
         <div class="post-detail gt-bg-theme-color-second">
             <article class="gt-post-content">
                 <h2 class="post-title">
-                    58、最后一个单词的长度
+                    中等48. 旋转图像I
                 </h2>
                 <div class="post-info">
                     <time class="post-time gt-c-content-color-first">
-                        · 2020-11-11 ·
+                        · 2021-01-05 ·
                     </time>
                     
                         <a href="https://ganhan999.github.io/tag/cKyYTCK2Y/" class="post-tags">
@@ -103,49 +103,56 @@
                 </div>
                 <div class="post-content">
                     <h1 id="题目">题目</h1>
-<p>给定一个仅包含大小写字母和空格 ' ' 的字符串 s，返回其最后一个单词的长度。<br>
-如果字符串从左向右滚动显示，那么最后一个单词就是最后出现的单词。<br>
-如果不存在最后一个单词，请返回 0 。<br>
-说明：一个单词是指仅由字母组成、不包含任何空格字符的 最大子字符串。</p>
-<p>示例:<br>
-输入: &quot;Hello World&quot;<br>
-输出: 5</p>
+<p>给定一个 n × n 的二维矩阵表示一个图像。<br>
+将图像顺时针旋转 90 度。<br>
+说明：<br>
+你必须在原地旋转图像，这意味着你需要直接修改输入的二维矩阵。请不要使用另一个矩阵来旋转图像。</p>
+<p>示例 1:<br>
+给定 matrix =<br>
+[<br>
+[1,2,3],<br>
+[4,5,6],<br>
+[7,8,9]<br>
+],</p>
+<p>原地旋转输入矩阵，使其变为:<br>
+[<br>
+[7,4,1],<br>
+[8,5,2],<br>
+[9,6,3]<br>
+]</p>
+<p>示例 2:<br>
+给定 matrix =<br>
+[<br>
+[ 5, 1, 9,11],<br>
+[ 2, 4, 8,10],<br>
+[13, 3, 6, 7],<br>
+[15,14,12,16]<br>
+],</p>
+<p>原地旋转输入矩阵，使其变为:<br>
+[<br>
+[15,13, 2, 5],<br>
+[14, 3, 4, 1],<br>
+[12, 6, 8, 9],<br>
+[16, 7,10,11]<br>
+]</p>
 <p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
 <h1 id="本体思路">本体思路</h1>
-<p>我工作效率低的原因完全是因为有和力扣的题干一样语文为负分的产品经理<br>
-由于有这种情况发生输入:&quot;a &quot;，输出:1<br>
-我们先要把左右测的空格去掉。然后利用rfind函数找到最后一个&quot;&quot;在哪就行了。</p>
-<h1 id="我的做法">#我的做法：</h1>
-<pre><code class="language-python">class Solution:
-    def lengthOfLastWord(self, s: str) -&gt; int:
-        s=s.strip(&quot; &quot;)
-        if &quot; &quot; in s:
-            if set(s)!={&quot; &quot;}:
-                inde=s.rfind(&quot; &quot;)
-                return len(s)-inde-1
-            else:
-                return 0
-        else:
-            return len(s)
-
-</code></pre>
+<p>先水平翻转，再主对角线反转</p>
+<figure data-type="image" tabindex="1"><img src="C:%5CUsers%5CWindows10%5CDocuments%5CGridea%5Cimages%5CQQ%E6%88%AA%E5%9B%BE20210105203337.jpg" alt="QQ截图20210105203337" loading="lazy"></figure>
 <p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="大神做法">#大神做法：</h1>
-<p>为了解决最后一个字符串后面还有空格，倒序查找就行，当没有字符 (len = 0)<br>
-时候，遇到空格就直接跳过。从有字符开始，每次不是空格就加 11，此时 len &gt; 0<br>
-再次遇到空格，直接 return就是结果。要注意原字符串为全都是空格组成的字符串的情况，<br>
-也就是倒序扫描到字符串的开头依旧没更新 len，因此在循环外还需要 return 这种情况</p>
-<pre><code>class Solution:
-    def lengthOfLastWord(self, s: str) -&gt; int:
-        length = 0
-        for i in range(len(s)-1, -1, -1):
-            if length == 0 and s[i] == &quot; &quot;:
-                continue
-            if length != 0 and s[i] == &quot; &quot;:
-                return length
-            if s[i] != &quot; &quot;:
-                length += 1
-        return length
+<h1 id="大神做法1">大神做法1：</h1>
+<pre><code class="language-python">class Solution:
+    class Solution:
+        def rotate(self, matrix: List[List[int]]) -&gt; None:
+            n = len(matrix)
+            # 水平翻转
+            for i in range(n // 2):
+                for j in range(n):
+                    matrix[i][j], matrix[n - i - 1][j] = matrix[n - i - 1][j], matrix[i][j]
+            # 主对角线翻转
+            for i in range(n):
+                for j in range(i):
+                    matrix[i][j], matrix[j][i] = matrix[j][i], matrix[i][j]
 </code></pre>
 
                 </div>
@@ -155,14 +162,14 @@
         
             <div class="next-post">
                 <div class="next gt-c-content-color-first">下一篇</div>
-                <a href="https://ganhan999.github.io/post/jin-tian-xue-dao-liao-fen-zhi-he-dong-tai-gui-hua-de-chu-bu-guo-cheng/" class="post-title gt-a-link">
-                    今天学到了分治和动态规划的初步过程
+                <a href="https://ganhan999.github.io/post/47、全排列 II/" class="post-title gt-a-link">
+                    中等47. 全排列 II
                 </a>
             </div>
         
 
         
-            <span id="/post/58、最后一个单词的长度/" class="leancloud_visitors" data-flag-title="58、最后一个单词的长度">
+            <span id="/post/48、旋转图像/" class="leancloud_visitors" data-flag-title="中等48. 旋转图像I">
                 <em class="post-meta-item-text">阅读量 </em>
                 <i class="leancloud-visitors-count">0</i>
             </span>
