@@ -6,7 +6,7 @@
 
 <title>Java Web | Gridea</title>
 
-<link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1609850333481">
+<link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1609900028572">
 
 <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://ganhan999.github.io//styles/main.css">
@@ -77,7 +77,7 @@
             
         </div>
         <div style="text-align: center">
-            <form id="gridea-search-form" style="position: relative" data-update="1609850333481" action="/search/index.html">
+            <form id="gridea-search-form" style="position: relative" data-update="1609900028572" action="/search/index.html">
                 <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
                 <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
             </form>
@@ -240,7 +240,6 @@ Tomcat是Apache 软件基金会（Apache Software Foundation)的jakarta项目中
 <pre><code class="language-xml">&lt;Connector port=&quot;8081&quot; protocol=&quot;HTTP/1.1&quot;
       connectionTimeout=&quot;20000&quot;
       redirectPort=&quot;8443&quot; /&gt;
-123
 </code></pre>
 <p>可以配置主机的名称</p>
 <ul>
@@ -249,7 +248,6 @@ Tomcat是Apache 软件基金会（Apache Software Foundation)的jakarta项目中
 </ul>
 <pre><code class="language-xml">  &lt;Host name=&quot;www.qinjiang.com&quot;  appBase=&quot;webapps&quot;
         unpackWARs=&quot;true&quot; autoDeploy=&quot;true&quot;&gt;
-12
 </code></pre>
 <p>高难度面试题：<br>
 请你谈谈网站是如何进行访问的！</p>
@@ -263,14 +261,13 @@ Tomcat是Apache 软件基金会（Apache Software Foundation)的jakarta项目中
 <li>
 <p>有：直接返回对应的ip地址，这个地址中，有我们需要访问的web程序，可以直接访问</p>
 <pre><code class="language-php"> 127.0.0.1 www.qinjiang.com
-1
 </code></pre>
+</li>
+</ol>
 </li>
 <li>
 <p>没有：去DNS服务器找，找到的话就返回，找不到就返回找不到；<br>
 <img src="https://img-blog.csdnimg.cn/20200423184922156.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JlbGxfbG92ZQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" loading="lazy"></p>
-</li>
-</ol>
 </li>
 </ol>
 <p>4.可以配置一下环境变量（可选性）</p>
@@ -428,7 +425,6 @@ Maven的核心思想：<strong>约定大于配置</strong></p>
     &lt;name&gt;Nexus aliyun&lt;/name&gt;  
     &lt;url&gt;http://maven.aliyun.com/nexus/content/groups/public&lt;/url&gt; 
 &lt;/mirror&gt;
-123456
 </code></pre>
 <p><strong>D:Enmvironment\apache-maven-3.6.2conf\ettings.xml</strong><br>
 （狂神老师配置源和仓库的文件位置）</p>
@@ -1324,7 +1320,6 @@ _jspx_out = out;
 request.setAttribute(&quot;name2&quot;,&quot;秦疆2号&quot;); //保存的数据只在一次请求中有效，请求转发会携带这个数据
 session.setAttribute(&quot;name3&quot;,&quot;秦疆3号&quot;); //保存的数据只在一次会话中有效，从打开浏览器到关闭浏览器
 application.setAttribute(&quot;name4&quot;,&quot;秦疆4号&quot;);  //保存的数据只在服务器中有效，从打开服务器到关闭服务器
-1234
 </code></pre>
 <figure data-type="image" tabindex="9"><img src="https://img-blog.csdnimg.cn/20200507213158259.png" alt="在这里插入图片描述" loading="lazy"></figure>
 <p>request：客户端向服务器发送请求，产生的数据，用户看完就没用了，比如：新闻，用户看完没用的！</p>
@@ -2153,7 +2148,6 @@ public class BaseDao {
 	}
 
 }
-123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121122123124125126127128129130131132133134135136137138139140141142143
 </code></pre>
 <p>. 3、编写字符编码过滤器</p>
 <ol>
@@ -2169,13 +2163,11 @@ public class BaseDao {
 <pre><code class="language-xml">  &lt;welcome-file-list&gt;
     &lt;welcome-file&gt;login.jsp&lt;/welcome-file&gt;
   &lt;/welcome-file-list&gt;
-123
 </code></pre>
 <ol>
 <li>编写dao层登录用户登录的接口</li>
 </ol>
 <pre><code class="language-java">public User getLoginUser(Connection connection, String userCode) throws Exception;
-1
 </code></pre>
 <ol>
 <li>编写dao层接口的实现类</li>
@@ -2220,14 +2212,12 @@ public class UserDaoImpl implements UserDao{
 		return user;
 	}	
 }
-12345678910111213141516171819202122232425262728293031323334353637383940
 </code></pre>
 <ol>
 <li>业务层接口</li>
 </ol>
 <pre><code class="language-java">//用户登录
 public User login(String userCode, String userPassword);
-12
 </code></pre>
 <ol>
 <li>业务层实现类</li>
@@ -2278,7 +2268,6 @@ public class UserServiceImpl implements UserService{
 	}
 	*/
 }
-12345678910111213141516171819202122232425262728293031323334353637383940414243444546
 </code></pre>
 <ol>
 <li>编写Servlet</li>
@@ -2326,7 +2315,6 @@ public class LoginServlet extends HttpServlet{
 		doGet(req, resp);
 	}
 }
-12345678910111213141516171819202122232425262728293031323334353637383940414243
 </code></pre>
 <ol>
 <li>注册Servlet</li>
@@ -2339,7 +2327,6 @@ public class LoginServlet extends HttpServlet{
 	&lt;servlet-name&gt;LoginServlet&lt;/servlet-name&gt;
 	&lt;url-pattern&gt;/login.do&lt;/url-pattern&gt;
 &lt;/servlet-mapping&gt;
-12345678
 </code></pre>
 <ol>
 <li>测试访问,保证以上功能可以成功</li>
@@ -2362,7 +2349,6 @@ public class LoginServlet extends HttpServlet{
 	}
 
 }
-123456789101112131415
 </code></pre>
 <p>注册xml</p>
 <pre><code class="language-xml">&lt;servlet&gt;
@@ -2413,7 +2399,6 @@ public class SysFilter implements Filter{
 		
 	}
 }
-123456789101112131415161718192021222324252627282930313233343536
 </code></pre>
 <p>注册xml</p>
 <pre><code class="language-xml">&lt;!-- 用户登录过滤器 --&gt;
@@ -2425,7 +2410,6 @@ public class SysFilter implements Filter{
 	&lt;filter-name&gt;SysFilter&lt;/filter-name&gt;
 	&lt;url-pattern&gt;/jsp/*&lt;/url-pattern&gt;
 &lt;/filter-mapping&gt;
-123456789
 </code></pre>
 <p>测试，登录，注销，权限，都要保证OK</p>
 <h3 id="密码修改">密码修改</h3>
@@ -2433,8 +2417,6 @@ public class SysFilter implements Filter{
 <li>导入前端素材</li>
 </ol>
 <pre><code class="language-html">&lt;li&gt;&lt;a href=&quot;${pageContext.request.contextPath }/jsp/pwdmodify.jsp&quot;&gt;密码修改&lt;/a&gt;&lt;/li&gt;
-
-12
 </code></pre>
 <ol>
 <li>写项目，建议从底层向上写<br>
@@ -2443,7 +2425,6 @@ public class SysFilter implements Filter{
 </ol>
 <pre><code class="language-java">//修改当前用户密码
 	public int updatePwd(Connection connection,int id,int password)throws SQLException, Exception;
-12
 </code></pre>
 <ol>
 <li>UserDao接口实现类</li>
@@ -2461,13 +2442,11 @@ public class SysFilter implements Filter{
 		}
 		return execute;			
 	}
-12345678910111213
 </code></pre>
 <ol>
 <li>UserService层</li>
 </ol>
 <pre><code class="language-java">public boolean updatePwd(int id,int password)throws SQLException, Exception;
-1
 </code></pre>
 <ol>
 <li>UserService实现类</li>
@@ -2491,7 +2470,6 @@ public class SysFilter implements Filter{
 		}
 		return flag;
 	}
-12345678910111213141516171819
 </code></pre>
 <ol>
 <li>servlet记得实现复用，要提取出方法！<br>
@@ -2557,7 +2535,6 @@ public class SysFilter implements Filter{
 		}
 	}
 }
-1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859
 </code></pre>
 <p>注册xml</p>
 <pre><code class="language-xml">&lt;servlet&gt;
@@ -2568,7 +2545,6 @@ public class SysFilter implements Filter{
 		&lt;servlet-name&gt;UserServlet&lt;/servlet-name&gt;
 		&lt;url-pattern&gt;/jsp/user.do&lt;/url-pattern&gt;
 	&lt;/servlet-mapping&gt;
-12345678
 </code></pre>
 <ol>
 <li>测试</li>
@@ -2583,7 +2559,6 @@ public class SysFilter implements Filter{
     &lt;artifactId&gt;fastjson&lt;/artifactId&gt;
     &lt;version&gt;1.2.68&lt;/version&gt;
 &lt;/dependency&gt;
-123456
 </code></pre>
 <ol>
 <li>后台代码修改</li>
@@ -2716,7 +2691,6 @@ public class UserServlet extends HttpServlet {
 		}
 	}
 }
-123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120
 </code></pre>
 <ol>
 <li>测试</li>
@@ -2733,7 +2707,6 @@ public class UserServlet extends HttpServlet {
 </ol>
 <pre><code class="language-java">//根据用户名或者角色查询用户总数
 public int getUserCount(Connection connection,String username ,int userRole)throws SQLException, Exception;
-12
 </code></pre>
 <ol>
 <li>UserDaoImpl</li>
@@ -2767,14 +2740,12 @@ public int getUserCount(Connection connection,String username ,int userRole)thro
 		}
 		return count;
 	}
-1234567891011121314151617181920212223242526272829
 </code></pre>
 <ol>
 <li>UserService</li>
 </ol>
 <pre><code class="language-java">//查询记录数
 	public int getUserCount(String username, int userRole);
-12
 </code></pre>
 <ol>
 <li>UserServiceImpl</li>
@@ -2859,14 +2830,12 @@ public int getUserCount(Connection connection,String username ,int userRole)thro
 		}
 		return userList;
 	}
-12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849
 </code></pre>
 <ol>
 <li>UserService</li>
 </ol>
 <pre><code class="language-java">//根据条件查询用户列表
 	public List&lt;User&gt; getUserList(String queryUserName, int queryUserRole, int currentPageNo, int pageSize);
-12
 </code></pre>
 <ol>
 <li>UserServiceImpl</li>
@@ -2891,7 +2860,6 @@ public int getUserCount(Connection connection,String username ,int userRole)thro
 		}
 		return userList;
 	}
-1234567891011121314151617181920
 </code></pre>
 <h4 id="3-获取角色操作">3、获取角色操作</h4>
 <p>为了我们的职责统一，我们可以把<strong>角色的操作</strong>单独放在一个包中，和pojo类对应。。。</p>
@@ -2900,7 +2868,6 @@ public int getUserCount(Connection connection,String username ,int userRole)thro
 </ol>
 <pre><code class="language-java">//获取角色列表
 		public List&lt;Role&gt; getRoleList(Connection connection)throws Exception;
-12
 </code></pre>
 <ol>
 <li>RoleDaoIpml</li>
@@ -2929,7 +2896,6 @@ public int getUserCount(Connection connection,String username ,int userRole)thro
 		return roleList;
 	}
 }
-123456789101112131415161718192021222324
 </code></pre>
 <ol>
 <li>RoleService</li>
@@ -2939,7 +2905,6 @@ public int getUserCount(Connection connection,String username ,int userRole)thro
 	public List&lt;Role&gt; getRoleList();  
 	
 }
-12345
 </code></pre>
 <ol>
 <li>RoleServiceIpml</li>
@@ -2968,7 +2933,6 @@ public int getUserCount(Connection connection,String username ,int userRole)thro
 	}
 	
 }
-123456789101112131415161718192021222324
 </code></pre>
 <h4 id="4-用户显示的servlet">4、用户显示的Servlet</h4>
 <ol>
@@ -3057,7 +3021,6 @@ public int getUserCount(Connection connection,String username ,int userRole)thro
 		}
 
 	}
-12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879
 </code></pre>
 <p>小黄鸭调试法：自言自语</p>
 <p><strong>项目原理流程图：</strong><br>
