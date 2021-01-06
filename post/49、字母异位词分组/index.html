@@ -4,7 +4,7 @@
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-<title>58、最后一个单词的长度 | Gridea</title>
+<title>中等49. 字母异位词分组 | Gridea</title>
 
 <link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1609931201768">
 
@@ -89,11 +89,11 @@
         <div class="post-detail gt-bg-theme-color-second">
             <article class="gt-post-content">
                 <h2 class="post-title">
-                    58、最后一个单词的长度
+                    中等49. 字母异位词分组
                 </h2>
                 <div class="post-info">
                     <time class="post-time gt-c-content-color-first">
-                        · 2020-11-11 ·
+                        · 2021-01-06 ·
                     </time>
                     
                         <a href="https://ganhan999.github.io/tag/cKyYTCK2Y/" class="post-tags">
@@ -103,49 +103,70 @@
                 </div>
                 <div class="post-content">
                     <h1 id="题目">题目</h1>
-<p>给定一个仅包含大小写字母和空格 ' ' 的字符串 s，返回其最后一个单词的长度。<br>
-如果字符串从左向右滚动显示，那么最后一个单词就是最后出现的单词。<br>
-如果不存在最后一个单词，请返回 0 。<br>
-说明：一个单词是指仅由字母组成、不包含任何空格字符的 最大子字符串。</p>
+<p>给定一个字符串数组，将字母异位词组合在一起。字母异位词指字母相同，但排列不同的字符串。</p>
 <p>示例:<br>
-输入: &quot;Hello World&quot;<br>
-输出: 5</p>
+输入: [&quot;eat&quot;, &quot;tea&quot;, &quot;tan&quot;, &quot;ate&quot;, &quot;nat&quot;, &quot;bat&quot;]<br>
+输出:<br>
+[<br>
+[&quot;ate&quot;,&quot;eat&quot;,&quot;tea&quot;],<br>
+[&quot;nat&quot;,&quot;tan&quot;],<br>
+[&quot;bat&quot;]<br>
+]<br>
+说明：</p>
+<p>所有输入均为小写字母。<br>
+不考虑答案输出的顺序。</p>
 <p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
 <h1 id="本体思路">本体思路</h1>
-<p>我工作效率低的原因完全是因为有和力扣的题干一样语文为负分的产品经理<br>
-由于有这种情况发生输入:&quot;a &quot;，输出:1<br>
-我们先要把左右测的空格去掉。然后利用rfind函数找到最后一个&quot;&quot;在哪就行了。</p>
-<h1 id="我的做法">#我的做法：</h1>
-<pre><code class="language-python">class Solution:
-    def lengthOfLastWord(self, s: str) -&gt; int:
-        s=s.strip(&quot; &quot;)
-        if &quot; &quot; in s:
-            if set(s)!={&quot; &quot;}:
-                inde=s.rfind(&quot; &quot;)
-                return len(s)-inde-1
-            else:
-                return 0
-        else:
-            return len(s)
-
-</code></pre>
+<p>直接构造哈希表（字典形式），排序后的字母当作键，原字母当成值</p>
 <p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="大神做法">#大神做法：</h1>
-<p>为了解决最后一个字符串后面还有空格，倒序查找就行，当没有字符 (len = 0)<br>
-时候，遇到空格就直接跳过。从有字符开始，每次不是空格就加 11，此时 len &gt; 0<br>
-再次遇到空格，直接 return就是结果。要注意原字符串为全都是空格组成的字符串的情况，<br>
-也就是倒序扫描到字符串的开头依旧没更新 len，因此在循环外还需要 return 这种情况</p>
+<h1 id="大神做法1">大神做法1：</h1>
+<pre><code class="language-python">class Solution:
+    def groupAnagrams(self, strs: List[str]) -&gt; List[List[str]]:
+        mp = collections.defaultdict(list)
+        for st in strs:
+            key = &quot;&quot;.join(sorted(st))#sorted(&quot;abc&quot;)   ---&gt;['a', 'b', 'c']
+            mp[key].append(st)#如果是普通的字典，那么这里就会报错，如果是defaultdict，默认值就是一个空列表
+        return list(mp.values())
+</code></pre>
+<p>直接构造哈希表（字典形式），将计数的字母表当作键，原字母当成值</p>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="大神做法2">大神做法2：</h1>
 <pre><code>class Solution:
-    def lengthOfLastWord(self, s: str) -&gt; int:
-        length = 0
-        for i in range(len(s)-1, -1, -1):
-            if length == 0 and s[i] == &quot; &quot;:
-                continue
-            if length != 0 and s[i] == &quot; &quot;:
-                return length
-            if s[i] != &quot; &quot;:
-                length += 1
-        return length
+    def groupAnagrams(self, strs: List[str]) -&gt; List[List[str]]:
+        mp = collections.defaultdict(list)
+        for st in strs:
+            counts = [0] * 26
+            for ch in st:
+                counts[ord(ch) - ord(&quot;a&quot;)] += 1
+            # 需要将 list 转换成 tuple 才能进行哈希
+            mp[tuple(counts)].append(st)
+        return list(mp.values())
+</code></pre>
+<p>直接构造哈希表（字典形式），排序后的字母当作键，原字母当成值</p>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="大神做法3">大神做法3：</h1>
+<pre><code>class Solution:
+    prime = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103]
+    def groupAnagrams(self, strs: List[str]) -&gt; List[List[str]]:
+        mp = collections.defaultdict(list)
+        for st in strs:
+            c=1
+            counts = [0] * 26
+            for cc in st:
+                c *= Solution.prime[ord(cc)-97]
+            mp[c].append(st)
+        return list(mp.values())
+</code></pre>
+<h6 id="python中defaultdict用法详解">python中defaultdict用法详解</h6>
+<pre><code class="language-python">'''
+当我使用普通的字典时，用法一般是dict={},添加元素的只需要dict[element] =value即，调用的时候也是如此，
+
+print(dict[element]),但前提是element字典里，如果不在字典里就会报错。
+
+这时defaultdict就能排上用场了，defaultdict的作用是在于，当字典里的key不存在但被查找时，返回的不是keyError而是一个默认值。
+
+作用是当key不存在时，返回的是工厂函数的默认值，比如list对应[ ]，str对应的是空字符串，set对应set( )，int对应0
+'''
 </code></pre>
 
                 </div>
@@ -155,14 +176,14 @@
         
             <div class="next-post">
                 <div class="next gt-c-content-color-first">下一篇</div>
-                <a href="https://ganhan999.github.io/post/jin-tian-xue-dao-liao-fen-zhi-he-dong-tai-gui-hua-de-chu-bu-guo-cheng/" class="post-title gt-a-link">
-                    今天学到了分治和动态规划的初步过程
+                <a href="https://ganhan999.github.io/post/48、旋转图像/" class="post-title gt-a-link">
+                    中等48. 旋转图像I
                 </a>
             </div>
         
 
         
-            <span id="/post/58、最后一个单词的长度/" class="leancloud_visitors" data-flag-title="58、最后一个单词的长度">
+            <span id="/post/49、字母异位词分组/" class="leancloud_visitors" data-flag-title="中等49. 字母异位词分组">
                 <em class="post-meta-item-text">阅读量 </em>
                 <i class="leancloud-visitors-count">0</i>
             </span>
