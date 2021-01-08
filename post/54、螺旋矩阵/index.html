@@ -4,7 +4,7 @@
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-<title>88、合并两个有序数组 | Gridea</title>
+<title>中等54. 螺旋矩阵 | Gridea</title>
 
 <link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1610106251927">
 
@@ -89,11 +89,11 @@
         <div class="post-detail gt-bg-theme-color-second">
             <article class="gt-post-content">
                 <h2 class="post-title">
-                    88、合并两个有序数组
+                    中等54. 螺旋矩阵
                 </h2>
                 <div class="post-info">
                     <time class="post-time gt-c-content-color-first">
-                        · 2020-11-17 ·
+                        · 2021-01-08 ·
                     </time>
                     
                         <a href="https://ganhan999.github.io/tag/cKyYTCK2Y/" class="post-tags">
@@ -103,93 +103,87 @@
                 </div>
                 <div class="post-content">
                     <h1 id="题目">题目</h1>
-<ol>
-<li>
-<p>给你两个有序整数数组 nums1 和 nums2，请你将 nums2 合并到 nums1 中，使 nums1 成为一个有序数组。</p>
-<p>说明：<br>
-初始化 nums1 和 nums2 的元素数量分别为 m 和 n 。<br>
-你可以假设 nums1 有足够的空间（空间大小大于或等于 m + n）来保存 nums2 中的元素。</p>
-<p>示例：<br>
-输入：<br>
-nums1 = [1,2,3,0,0,0], m = 3<br>
-nums2 = [2,5,6],       n = 3<br>
-输出：[1,2,2,3,5,6]</p>
-<p>提示：<br>
--10^9 &lt;= nums1[i], nums2[i] &lt;= 10^9<br>
-nums1.length == m + n<br>
-nums2.length == n</p>
-</li>
-</ol>
+<p>给定一个包含 m x n 个元素的矩阵（m 行, n 列），请按照顺时针螺旋顺序，返回矩阵中的所有元素。</p>
+<p>示例 1:<br>
+输入:<br>
+[<br>
+[ 1, 2, 3 ],<br>
+[ 4, 5, 6 ],<br>
+[ 7, 8, 9 ]<br>
+]<br>
+输出: [1,2,3,6,9,8,7,4,5]</p>
+<p>示例 2:<br>
+输入:<br>
+[<br>
+[1, 2, 3, 4],<br>
+[5, 6, 7, 8],<br>
+[9,10,11,12]<br>
+]<br>
+输出: [1,2,3,4,8,12,11,10,9,5,6,7]</p>
 <p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
 <h1 id="本体思路">本体思路</h1>
-<p>用内置方法sort即可，注意要原地操作，不能改变地址，所以要使用对象类型方法例如pop，append，extend</p>
-<h1 id="我的做法1">#我的做法1：</h1>
+<p>利用余数作为改方向的手段，并且遍历的顺序是右下左上，<br>
+dx = [0, 1, 0, -1]  # 方向：右，下，左，上<br>
+dy = [1, 0, -1, 0]  # 注：与通常平面坐标系 记号 不同<br>
+到了尽头了就变一次</p>
+<h1 id="大神做法1">大神做法1：</h1>
 <pre><code class="language-python">class Solution:
-    def merge(self, nums1: List[int], m: int, nums2: List[int], n: int) -&gt; None:
-        &quot;&quot;&quot;
-        Do not return anything, modify nums1 in-place instead.
-        &quot;&quot;&quot;
-        lens=len(nums1)
-        for i in range(lens-m):
-            nums1.pop(-1)#不能直接切片
-        nums1.extend(nums2)#不能使用nums1+nums2
-        nums1.sort()
-        for i in range(lens-len(nums1)):
-            nums1.append(0)
-</code></pre>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="我的做法2">#我的做法2：</h1>
-<p>从nums2里面来一个，我就pop一个0。</p>
-<pre><code class="language-Python">class Solution:
-    def merge(self, nums1: List[int], m: int, nums2: List[int], n: int) -&gt; None:
-        &quot;&quot;&quot;
-        Do not return anything, modify nums1 in-place instead.
-        &quot;&quot;&quot;
-        a=0
-        popnum=0
-        while nums2 != []:
-           if a&gt;=popnum+m:
-               nums1.insert(a,nums2.pop(0))
-               nums1.pop(-1)
-               a+=1
-           elif nums1[a]&lt;=nums2[0]:
-               a+=1
-           else:
-               nums1.insert(a,nums2.pop(0))
-               nums1.pop(-1)
-               a+=1
-               popnum+=1
-</code></pre>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="大神做法1">#大神做法1：</h1>
-<p>啊！我没有想到直接替换，打扰了。</p>
-<pre><code class="language-Python">class Solution:
-    def merge(self, nums1: List[int], m: int, nums2: List[int], n: int) -&gt; None:
-        for i in range(n):
-            nums1[m+i]=nums2[i]
-        nums1.sort()
+    def spiralOrder(self, matrix: List[List[int]]) -&gt; List[int]:
+        if not matrix: return []
+        x = y = 0  # 矩阵元素位置初始化
+        res = []  # 初始化，存储遍历后的矩阵元素
+        dx = [0, 1, 0, -1]  # 方向：右，下，左，上
+        dy = [1, 0, -1, 0]  # 注：与通常平面坐标系 记号 不同
+        di = 0  # 初始化方向变量
+        visited = set()  # 初始化集合，存储已走过的坐标
+        m, n = len(matrix), len(matrix[0])  # 矩阵的行列
 
-</code></pre>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="大神做法2">#大神做法2：</h1>
-<p>充分利用了原数组的有序性，从后面开始比较，直接插入对应的那个位置。</p>
-<pre><code class="language-Python">class Solution:
-    def merge(self, nums1: List[int], m: int, nums2: List[int], n: int) -&gt; None:
-        &quot;&quot;&quot;
-        Do not return anything, modify nums1 in-place instead.
-        &quot;&quot;&quot;
-        while n:
-            if m == 0:
-                nums1[n-1] = nums2[n-1]
-                n -= 1
-                continue
-            if nums1[m-1] &lt; nums2[n-1]:
-                nums1[m+n-1] = nums2[n-1]
-                n -= 1
+        for i in range(m * n):  #
+            res.append(matrix[x][y])  # 存储遍历矩阵过的元素
+            visited.add((x, y))  # 存储遍历过的坐标
+            tx, ty = x + dx[di], y + dy[di]  # 先记录下一步坐标，用于判断下一步怎么走
+            if 0 &lt;= tx &lt; m and 0 &lt;= ty &lt; n and (tx, ty) not in visited:  # 判断坐标是否需变向，且没有遍历过
+                x, y = tx, ty
             else:
-                nums1[m+n-1] = nums1[m-1]
-                m -= 1
-
+                di = (di + 1) % 4  # 改变方向，右下左上为一圈，防止方向坐标越界
+                x, y = x + dx[di], y + dy[di]  # 下一步坐标
+        return res
+</code></pre>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<p>可以将矩阵看成若干层，首先输出最外层的元素，其次输出次外层的元素，直到输出最内层的元素。<br>
+定义矩阵的第 k 层是到最近边界距离为 k 的所有顶点。<br>
+例如，下图矩阵最外层元素都是第 1 层，次外层元素都是第 2 层，剩下的元素都是第 3 层。</p>
+<h1 id="大神做法2">大神做法2：</h1>
+<pre><code class="language-python">class Solution:
+    def spiralOrder(self, matrix: List[List[int]]) -&gt; List[int]:
+        if not matrix or not matrix[0]:
+            return list()
+        rows, columns = len(matrix), len(matrix[0])
+        order = list()
+        left, right, top, bottom = 0, columns - 1, 0, rows - 1
+        while left &lt;= right and top &lt;= bottom:
+            for column in range(left, right + 1):
+                order.append(matrix[top][column])
+            for row in range(top + 1, bottom + 1):
+                order.append(matrix[row][right])
+            if left &lt; right and top &lt; bottom:
+                for column in range(right - 1, left, -1):
+                    order.append(matrix[bottom][column])
+                for row in range(bottom, top, -1):
+                    order.append(matrix[row][left])
+            left, right, top, bottom = left + 1, right - 1, top + 1, bottom - 1
+        return order
+</code></pre>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<p>利用zip函数，每次都把那一行或者那一列pop出来，然后用zip函数生成新的矩阵<br>
+太妙了大神做法3：</p>
+<pre><code class="language-python">class Solution:
+    def spiralOrder(self, matrix: List[List[int]]) -&gt; List[int]:
+        res = []
+        while matrix:
+            res += matrix.pop(0)
+            matrix = list(zip(*matrix))[::-1]
+        return res
 </code></pre>
 
                 </div>
@@ -199,14 +193,14 @@ nums2.length == n</p>
         
             <div class="next-post">
                 <div class="next gt-c-content-color-first">下一篇</div>
-                <a href="https://ganhan999.github.io/post/83、删除排序链表中的重复元素/" class="post-title gt-a-link">
-                    83、删除排序链表中的重复元素
+                <a href="https://ganhan999.github.io/post/50、Pow(x, n)/" class="post-title gt-a-link">
+                    中等50. Pow(x, n)
                 </a>
             </div>
         
 
         
-            <span id="/post/88、合并两个有序数组/" class="leancloud_visitors" data-flag-title="88、合并两个有序数组">
+            <span id="/post/54、螺旋矩阵/" class="leancloud_visitors" data-flag-title="中等54. 螺旋矩阵">
                 <em class="post-meta-item-text">阅读量 </em>
                 <i class="leancloud-visitors-count">0</i>
             </span>

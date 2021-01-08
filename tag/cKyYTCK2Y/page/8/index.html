@@ -4,7 +4,7 @@
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-<title>83、删除排序链表中的重复元素 | Gridea</title>
+<title>leetcode | Gridea</title>
 
 <link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1610106251927">
 
@@ -25,11 +25,11 @@
 
 
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css">
 </head>
 <body>
 <div class="main gt-bg-theme-color-first">
-    <nav class="navbar navbar-expand-lg">
+    <div class="main-content">
+        <nav class="navbar navbar-expand-lg">
     <div class="navbar-brand">
         <img class="user-avatar" src="/images/avatar.png" alt="头像">
         <div class="site-name gt-c-content-color-first">
@@ -85,134 +85,51 @@
     </div>
 </nav>
 
-    <div class="post-container">
-        <div class="post-detail gt-bg-theme-color-second">
-            <article class="gt-post-content">
-                <h2 class="post-title">
-                    83、删除排序链表中的重复元素
-                </h2>
-                <div class="post-info">
-                    <time class="post-time gt-c-content-color-first">
-                        · 2020-11-16 ·
-                    </time>
-                    
-                        <a href="https://ganhan999.github.io/tag/cKyYTCK2Y/" class="post-tags">
-                            # leetcode
-                        </a>
-                    
-                </div>
-                <div class="post-content">
-                    <h1 id="题目">题目</h1>
-<p>假设你正在爬楼梯。需要 n 阶你才能到达楼顶。<br>
-每次你可以爬 1 或 2 个台阶。你有多少种不同的方法可以爬到楼顶呢？</p>
-<p>注意：给定 n 是一个正整数。</p>
-<p>示例 1：<br>
-输入： 2<br>
-输出： 2<br>
-解释： 有两种方法可以爬到楼顶。</p>
-<ol>
-<li>1 阶 + 1 阶</li>
-<li>2 阶</li>
-</ol>
-<p>示例 2：<br>
-输入： 3<br>
-输出： 3<br>
-解释： 有三种方法可以爬到楼顶。</p>
-<ol>
-<li>1 阶 + 1 阶 + 1 阶</li>
-<li>1 阶 + 2 阶</li>
-<li>2 阶 + 1 阶</li>
-</ol>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="本体思路">本体思路</h1>
-<p>删除链表操作而已。</p>
-<h1 id="我的做法">#我的做法：</h1>
-<pre><code class="language-python">class Solution:
-    def deleteDuplicates(self, head: ListNode) -&gt; ListNode:
-        node = head#注意这里是引用地址，标记这初始地址，但是next是调用属性，所以操作node实际上就是改变了head链表，head还是一开始的地址，但是node已经不是了
-        while node and node.next:#注意先把node放前面，因为如果node为空，node会出现断路现象，保护后面next条件不报错
-            if node.val == node.next.val:
-                node.next = node.next.next
-            else:
-                node = node.next
-        return head#返回初始地址！所以不能用node
-</code></pre>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="大神做法1">#大神做法1：</h1>
-<p>双指针算法<br>
-建议自己多画画图就知道了，用a来遍历整个链表，用head来改变整个链表。</p>
-<pre><code class="language-Python">class Solution:
-    def deleteDuplicates(self, head: ListNode) -&gt; ListNode:
-        if head is None or head.next is None:
-            return head
-        head_copy = head
-        a = head
-        while a:
-            if a.val == head.val:
-                a = a.next
-                if a.next is None:
-                    if a.val == head.val:
-                        head.next = None
-                    else:
-                        head.next = a
-                    break
-            else:
-                head.next = a
-                head = head.next
-
-        return head_copy
-</code></pre>
-
-                </div>
-            </article>
+        <div class="current-tag-container">
+            <h2 class="title gt-c-content-color-first">
+                #leetcode
+            </h2>
         </div>
-
+        <div class="post-list-container">
+    <div class="post-inner">
         
-            <div class="next-post">
-                <div class="next gt-c-content-color-first">下一篇</div>
-                <a href="https://ganhan999.github.io/post/70、爬楼梯/" class="post-title gt-a-link">
-                    70、爬楼梯
-                </a>
+            <div class="post gt-bg-theme-color-second">
+                <div class="post-left">
+                    <div>
+                        
+                        <a href="https://ganhan999.github.io/post/1、两数之和/">
+                            <span class="post-title gt-c-content-color-first">1、两数之和</span>
+                        </a>
+                    </div>
+                    <div class="gt-post-content post-abstract gt-c-content-color-second">
+                        
+                    </div>
+                    <div class="post-info">
+                        <time class="post-time gt-c-content-color-first">
+                            发布于 · 2020-11-02 ·
+                        </time>
+                        
+                            <a href="https://ganhan999.github.io/tag/cKyYTCK2Y/" class="post-tag">
+                                # leetcode
+                            </a>
+                        
+                    </div>
+                </div>
+                
+                    <a href="https://ganhan999.github.io/post/1、两数之和/" class="post-feature-image"
+                       style="background-image: url('https://ganhan999.github.io//post-images/1、两数之和.jpg')">
+                    </a>
+                
             </div>
         
-
-        
-            <span id="/post/83、删除排序链表中的重复元素/" class="leancloud_visitors" data-flag-title="83、删除排序链表中的重复元素">
-                <em class="post-meta-item-text">阅读量 </em>
-                <i class="leancloud-visitors-count">0</i>
-            </span>
-        
-
-        
-
-        
-            <script src='https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js'></script>
-
-<style>
-	div#vcomments{
-		width:100%;
-		max-width: 1000px;
-		padding: 2.5%
-	}
-</style>
-
-
-	<div id="vcomments"></div>
-
-<script>
-	new Valine({
-		el: '#vcomments',
-		appId: '',
-		appKey: '',
-		avatar: '',
-		pageSize: 5,
-		recordIp: true,
-		placeholder: 'Just Go Go',
-		visitor: true,
-	});
-</script>
-
-        
+    </div>
+</div>
+        <div class="pagination-container">
+    
+        <a href="https://ganhan999.github.io/tag/cKyYTCK2Y/page/7/" class="prev-page gt-a-link">上一页</a>
+    
+    
+</div>
 
         <div class="site-footer gt-c-content-color-first">
     <div class="slogan gt-c-content-color-first">温故而知新</div>
