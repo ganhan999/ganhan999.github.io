@@ -4,7 +4,7 @@
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-<title>107、二叉树的层次遍历 II | Gridea</title>
+<title>中等55. 跳跃游戏 | Gridea</title>
 
 <link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1610282521951">
 
@@ -89,11 +89,11 @@
         <div class="post-detail gt-bg-theme-color-second">
             <article class="gt-post-content">
                 <h2 class="post-title">
-                    107、二叉树的层次遍历 II
+                    中等55. 跳跃游戏
                 </h2>
                 <div class="post-info">
                     <time class="post-time gt-c-content-color-first">
-                        · 2020-11-21 ·
+                        · 2021-01-10 ·
                     </time>
                     
                         <a href="https://ganhan999.github.io/tag/cKyYTCK2Y/" class="post-tags">
@@ -103,58 +103,75 @@
                 </div>
                 <div class="post-content">
                     <h1 id="题目">题目</h1>
-<p>给定一个二叉树，找出其最大深度。</p>
-<p>二叉树的深度为根节点到最远叶子节点的最长路径上的节点数。</p>
-<p>说明: 叶子节点是指没有子节点的节点。</p>
-<p>示例：<br>
-给定二叉树 [3,9,20,null,null,15,7]，</p>
-<p>​      3</p>
-<p>​    / <br>
-9  20<br>
-​      /   <br>
-​    15   7<br>
-返回它的最大深度 3 。</p>
+<p>给定一个非负整数数组，你最初位于数组的第一个位置。</p>
+<p>数组中的每个元素代表你在该位置可以跳跃的最大长度。</p>
+<p>判断你是否能够到达最后一个位置。</p>
+<p>示例 1:<br>
+输入: [2,3,1,1,4]<br>
+输出: true<br>
+解释: 我们可以先跳 1 步，从位置 0 到达 位置 1, 然后再从位置 1 跳 3 步到达最后一个位置。</p>
+<p>示例 2:<br>
+输入: [3,2,1,0,4]<br>
+输出: false<br>
+解释: 无论怎样，你总会到达索引为 3 的位置。但该位置的最大跳跃长度是 0 ， 所以你永远不可能到达最后一个位置。</p>
 <p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
 <h1 id="本体思路">本体思路</h1>
-<p>BFS，每一层都放在一个队列当中</p>
-<h1 id="我的做法">#我的做法：</h1>
+<p>如果某一个作为 起跳点 的格子可以跳跃的距离是 3,那么表示后面 3 个格子都可以作为 起跳点。<br>
+可以对每一个能作为 起跳点 的格子都尝试跳一次，把能跳到最远的距离 不断更新。<br>
+如果可以一直跳到最后，就成功了。</p>
+<h1 id="大神做法1">大神做法1：</h1>
 <pre><code class="language-python">class Solution:
-    def levelOrderBottom(self, root: TreeNode) -&gt; List[List[int]]:
-        if not root:
-            return []
-        que=deque([root])
-        l=[]
-        while que:
-            nextque=[]
-            l1=[]
-            while que:
-                num=que.popleft()
-                l1.append(num.val)
-                if num.left:
-                    nextque.append(num.left)
-                if num.right:
-                    nextque.append(num.right)
-            l.append(l1)
-            que=deque(nextque)
-        l.reverse()
-        return l
+    def canJump(self, nums: List[int]) -&gt; bool:
+        max_distance = 1#至少为1
+        length = len(nums)
+        index = 0
+
+        while index+1 &lt;= max_distance:#因为索引肯定要少1的
+            max_distance = max(max_distance, nums[index] + index+1)
+            if max_distance &gt;= length:
+                return True
+            else:
+                index += 1
+        return True if index &gt;= length else False
 </code></pre>
 <p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="大神做法">#大神做法：</h1>
-<p>深度优先遍历，因为每找到一个左右节点，层数就加一层，记录层数depth，将depth作为下标。</p>
-<pre><code class="language-Python">class Solution:
-    def levelOrderBottom(self, root: TreeNode) -&gt; List[List[int]]:
-        res = []
-        def dfs(root, depth):
-            if not root:
-                return
-            if len(res)&lt;depth+1:#每多一层那么就加一个元素列表
-                res.append([])
-            res[depth].append(root.val)
-            dfs(root.left, depth+1)
-            dfs(root.right, depth+1)
-        dfs(root,0)
-        return res[::-1]
+<p>可以将矩阵看成若干层，首先输出最外层的元素，其次输出次外层的元素，直到输出最内层的元素。<br>
+定义矩阵的第 k 层是到最近边界距离为 k 的所有顶点。<br>
+例如，下图矩阵最外层元素都是第 1 层，次外层元素都是第 2 层，剩下的元素都是第 3 层。</p>
+<h1 id="大神做法2">大神做法2：</h1>
+<pre><code class="language-python">class Solution:
+    def spiralOrder(self, matrix: List[List[int]]) -&gt; List[int]:
+        if not matrix or not matrix[0]:
+            return list()
+        rows, columns = len(matrix), len(matrix[0])
+        order = list()
+        left, right, top, bottom = 0, columns - 1, 0, rows - 1
+        while left &lt;= right and top &lt;= bottom:
+            for column in range(left, right + 1):
+                order.append(matrix[top][column])
+            for row in range(top + 1, bottom + 1):
+                order.append(matrix[row][right])
+            if left &lt; right and top &lt; bottom:
+                for column in range(right - 1, left, -1):
+                    order.append(matrix[bottom][column])
+                for row in range(bottom, top, -1):
+                    order.append(matrix[row][left])
+            left, right, top, bottom = left + 1, right - 1, top + 1, bottom - 1
+        return order
+</code></pre>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<p>同上</p>
+<p>贪心算法</p>
+<p>刷新每次最长距离</p>
+<pre><code class="language-python">class Solution:
+    def canJump(self, nums: List[int]) -&gt; bool:
+        n, rightmost = len(nums), 1
+        for i in range(n):
+            if i+1 &lt;= rightmost:
+                rightmost = max(rightmost, i +1 + nums[i])
+                if rightmost &gt;= n :
+                    return True
+        return False
 </code></pre>
 
                 </div>
@@ -164,14 +181,14 @@
         
             <div class="next-post">
                 <div class="next gt-c-content-color-first">下一篇</div>
-                <a href="https://ganhan999.github.io/post/树的BFS和DFS/" class="post-title gt-a-link">
-                    树的BFS和DFS
+                <a href="https://ganhan999.github.io/post/Java Vue/" class="post-title gt-a-link">
+                    Java Vue
                 </a>
             </div>
         
 
         
-            <span id="/post/107、二叉树的层次遍历 II/" class="leancloud_visitors" data-flag-title="107、二叉树的层次遍历 II">
+            <span id="/post/55、跳跃游戏/" class="leancloud_visitors" data-flag-title="中等55. 跳跃游戏">
                 <em class="post-meta-item-text">阅读量 </em>
                 <i class="leancloud-visitors-count">0</i>
             </span>

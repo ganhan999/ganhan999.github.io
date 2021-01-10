@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ganhan999.github.io/</id>
     <title>Gridea</title>
-    <updated>2021-01-08T11:44:16.772Z</updated>
+    <updated>2021-01-10T12:42:06.547Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ganhan999.github.io/"/>
     <link rel="self" href="https://ganhan999.github.io/atom.xml"/>
@@ -10,6 +10,85 @@
     <logo>https://ganhan999.github.io/images/avatar.png</logo>
     <icon>https://ganhan999.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, Gridea</rights>
+    <entry>
+        <title type="html"><![CDATA[中等55. 跳跃游戏]]></title>
+        <id>https://ganhan999.github.io/post/55、跳跃游戏/</id>
+        <link href="https://ganhan999.github.io/post/55、跳跃游戏/">
+        </link>
+        <updated>2021-01-10T11:10:49.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
+<p>给定一个非负整数数组，你最初位于数组的第一个位置。</p>
+<p>数组中的每个元素代表你在该位置可以跳跃的最大长度。</p>
+<p>判断你是否能够到达最后一个位置。</p>
+<p>示例 1:<br>
+输入: [2,3,1,1,4]<br>
+输出: true<br>
+解释: 我们可以先跳 1 步，从位置 0 到达 位置 1, 然后再从位置 1 跳 3 步到达最后一个位置。</p>
+<p>示例 2:<br>
+输入: [3,2,1,0,4]<br>
+输出: false<br>
+解释: 无论怎样，你总会到达索引为 3 的位置。但该位置的最大跳跃长度是 0 ， 所以你永远不可能到达最后一个位置。</p>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="本体思路">本体思路</h1>
+<p>如果某一个作为 起跳点 的格子可以跳跃的距离是 3,那么表示后面 3 个格子都可以作为 起跳点。<br>
+可以对每一个能作为 起跳点 的格子都尝试跳一次，把能跳到最远的距离 不断更新。<br>
+如果可以一直跳到最后，就成功了。</p>
+<h1 id="大神做法1">大神做法1：</h1>
+<pre><code class="language-python">class Solution:
+    def canJump(self, nums: List[int]) -&gt; bool:
+        max_distance = 1#至少为1
+        length = len(nums)
+        index = 0
+
+        while index+1 &lt;= max_distance:#因为索引肯定要少1的
+            max_distance = max(max_distance, nums[index] + index+1)
+            if max_distance &gt;= length:
+                return True
+            else:
+                index += 1
+        return True if index &gt;= length else False
+</code></pre>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<p>可以将矩阵看成若干层，首先输出最外层的元素，其次输出次外层的元素，直到输出最内层的元素。<br>
+定义矩阵的第 k 层是到最近边界距离为 k 的所有顶点。<br>
+例如，下图矩阵最外层元素都是第 1 层，次外层元素都是第 2 层，剩下的元素都是第 3 层。</p>
+<h1 id="大神做法2">大神做法2：</h1>
+<pre><code class="language-python">class Solution:
+    def spiralOrder(self, matrix: List[List[int]]) -&gt; List[int]:
+        if not matrix or not matrix[0]:
+            return list()
+        rows, columns = len(matrix), len(matrix[0])
+        order = list()
+        left, right, top, bottom = 0, columns - 1, 0, rows - 1
+        while left &lt;= right and top &lt;= bottom:
+            for column in range(left, right + 1):
+                order.append(matrix[top][column])
+            for row in range(top + 1, bottom + 1):
+                order.append(matrix[row][right])
+            if left &lt; right and top &lt; bottom:
+                for column in range(right - 1, left, -1):
+                    order.append(matrix[bottom][column])
+                for row in range(bottom, top, -1):
+                    order.append(matrix[row][left])
+            left, right, top, bottom = left + 1, right - 1, top + 1, bottom - 1
+        return order
+</code></pre>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<p>同上</p>
+<p>贪心算法</p>
+<p>刷新每次最长距离</p>
+<pre><code class="language-python">class Solution:
+    def canJump(self, nums: List[int]) -&gt; bool:
+        n, rightmost = len(nums), 1
+        for i in range(n):
+            if i+1 &lt;= rightmost:
+                rightmost = max(rightmost, i +1 + nums[i])
+                if rightmost &gt;= n :
+                    return True
+        return False
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Java Vue]]></title>
         <id>https://ganhan999.github.io/post/Java Vue/</id>
@@ -1644,7 +1723,7 @@ new Vue({
 			router-link：默认会被渲染成一个&lt;a&gt;标签，to属性为指定链接
 			router-view：用于渲染路由匹配到的组件
 		--&gt;
-		&lt;router-link to=&quot;/&quot;&gt;首页&lt;/router-link&gt;
+		&lt;router-link to=&quot;/main&quot;&gt;首页&lt;/router-link&gt;
 		&lt;router-link to=&quot;/content&quot;&gt;内容&lt;/router-link&gt;
 		&lt;router-view&gt;&lt;/router-view&gt;
 	&lt;/div&gt;
@@ -1870,7 +1949,7 @@ new Vue({
 demo<br>
 1、 创建用户信息组件，在 views/user 目录下创建一个名为 Profile.vue 的视图组件；<br>
 Profile.vue</p>
-<pre><code class="language-markup">&lt;template&gt;
+<pre><code class="language-js">&lt;template&gt;
   &lt;h1&gt;个人信息&lt;/h1&gt;
 &lt;/template&gt;
 &lt;script&gt;
@@ -1883,7 +1962,7 @@ Profile.vue</p>
 </code></pre>
 <p>2、在用户列表组件在 views/user 目录下创建一个名为 List.vue 的视图组件；<br>
 List.vue</p>
-<pre><code class="language-markup">&lt;template&gt;
+<pre><code class="language-js">&lt;template&gt;
   &lt;h1&gt;用户列表&lt;/h1&gt;
 &lt;/template&gt;
 &lt;script&gt;
@@ -2021,7 +2100,7 @@ demo<br>
 </code></pre>
 <p>3、在要展示的组件Profile.vue中接收参数 使用 {{$route.params.id}}来接收<br>
 Profile.vue 部分代码</p>
-<pre><code class="language-markup">&lt;template&gt;
+<pre><code class="language-js">&lt;template&gt;
   &lt;!--  所有的元素必须在根节点下--&gt;
   &lt;div&gt;
     &lt;h1&gt;个人信息&lt;/h1&gt;
@@ -2044,7 +2123,7 @@ Profile.vue 部分代码</p>
 </code></pre>
 <p>3、在Profile.vue接收参数为目标组件增加 props 属性<br>
 Profile.vue</p>
-<pre><code class="language-markup">&lt;template&gt;
+<pre><code class="language-js">&lt;template&gt;
   &lt;div&gt;
     个人信息
     {{ id }}
@@ -2096,7 +2175,7 @@ Profile.vue</p>
 <p>404 demo<br>
 1.创建一个NotFound.vue视图组件<br>
 NotFound.vue</p>
-<pre><code class="language-markup">&lt;template&gt;
+<pre><code class="language-javascript">&lt;template&gt;
     &lt;div&gt;
       &lt;h1&gt;404,你的页面走丢了&lt;/h1&gt;
     &lt;/div&gt;
@@ -4780,98 +4859,6 @@ public class FileController {
 </ul>
 <pre><code class="language-html">&lt;a href=&quot;${pageContext.request.contextPath}/static/1.png&quot;&gt;图片下载&lt;/a&gt;b
 </code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[IDEA Debug 笔记]]></title>
-        <id>https://ganhan999.github.io/post/IDEA Debug 笔记/</id>
-        <link href="https://ganhan999.github.io/post/IDEA Debug 笔记/">
-        </link>
-        <updated>2021-01-02T12:58:25.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="debug-设置">Debug 设置</h1>
-<p>使用<code>File -&gt; Settings -&gt; Build, Execution, Deployment -&gt; Debugger</code>可以打开Debug设置界面，如下图</p>
-<p><code>Transport</code>表示设置 Debug 连接方式，默认是 <code>Socket</code>。<code>Shared memory</code> 是 Windows 特有的一个属性，一般在 Windows 系统下建议使用此设置，相对于 <code>Socket</code> 会快点</p>
-<h1 id="debug-常用快捷键">Debug 常用快捷键</h1>
-<table>
-<thead>
-<tr>
-<th>快捷键</th>
-<th>介绍</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>F7</td>
-<td>在 Debug 模式下，进入下一步，如果当前行断点是一个方法，则进入当前方法体内，如果该方法体还有方法，则不会进入该内嵌的方法中</td>
-</tr>
-<tr>
-<td>F8</td>
-<td>在 Debug 模式下，进入下一步，如果当前行断点是一个方法，则不进入当前方法体内</td>
-</tr>
-<tr>
-<td>F9</td>
-<td>在 Debug 模式下，恢复程序运行，但是如果该断点下面代码还有断点则停在下一个断点上</td>
-</tr>
-<tr>
-<td>Alt + F8</td>
-<td>在 Debug 的状态下，选中对象，弹出可输入计算表达式调试框，查看该输入内容的调试结果</td>
-</tr>
-<tr>
-<td>Ctrl + F8</td>
-<td>在 Debug 模式下，设置光标当前行为断点，如果当前已经是断点则去掉断点</td>
-</tr>
-<tr>
-<td>Shift + F7</td>
-<td>在 Debug 模式下，智能步入。断点所在行上有多个方法调用，会弹出进入哪个方法</td>
-</tr>
-<tr>
-<td>Shift + F8</td>
-<td>在 Debug 模式下，跳出，表现出来的效果跟 F9 一样</td>
-</tr>
-<tr>
-<td>Ctrl + Shift + F8</td>
-<td>在 Debug 模式下，指定断点进入条件</td>
-</tr>
-<tr>
-<td>Alt + Shift + F7</td>
-<td>在 Debug 模式下，进入下一步，如果当前行断点是一个方法，则进入当前方法体内，如果方法体还有方法，则会进入该内嵌的方法中，依此循环进入</td>
-</tr>
-</tbody>
-</table>
-<h1 id="debug-技巧">Debug 技巧</h1>
-<h2 id="debug-时查看对象的几种方法">Debug 时查看对象的几种方法</h2>
-<p><strong>1. 在<code>Variables</code>窗口直接查看</strong><br>
-<img src="https://ganhan999.github.io//post-images/1609592767565.png" alt="" loading="lazy"></p>
-<p><strong>2. 使用快捷键 <code>Alt + F8</code></strong><br>
-<img src="https://ganhan999.github.io//post-images/1609592771537.png" alt="" loading="lazy"></p>
-<p>这种方法还可以对变量进行一定的加工，比如</p>
-<p><img src="https://ganhan999.github.io//post-images/1609592774981.png" alt="" loading="lazy"><br>
-  或者</p>
-<p><img src="https://ganhan999.github.io//post-images/1609592778043.png" alt="" loading="lazy"><br>
-  <strong>3. 拖动对象到 <code>Watches</code>窗口</strong></p>
-<p><img src="https://ganhan999.github.io//post-images/1609592782248.png" alt="" loading="lazy"><br>
-  <strong>4. 鼠标悬停在对象上 2 秒左右</strong></p>
-<figure data-type="image" tabindex="1"><img src="https://ganhan999.github.io//post-images/1609592786771.png" alt="" loading="lazy"></figure>
-<h2 id="快速跳过后面的断点">快速跳过后面的断点</h2>
-<p>当我们需要过掉后面的所有断点的时候，我们不需要去掉这些断点，只需要点击左下角<code>Mute Breakpoints</code>，之后，所有断点变成灰色，然后我们再按快捷键 <code>F9</code> 即可过掉当前和后面所有的断点，如图</p>
-<p><img src="https://ganhan999.github.io//post-images/1609592790754.png" alt="" loading="lazy">## 设置断点进入条件</p>
-<p><strong>1. 在断点上点击鼠标右键</strong></p>
-<p><img src="https://ganhan999.github.io//post-images/1609592793939.png" alt="" loading="lazy"><br>
-  <strong>2. 使用快捷键 <code>Ctrl + Shift + F8</code></strong></p>
-<p><img src="https://ganhan999.github.io//post-images/1609592798272.png" alt="" loading="lazy"><br>
-  断点进入条件在对循环进行调试时会经常用到，常用于观察循环变量满足某一条件时的循环体执行情况</p>
-<h2 id="更复杂的步入条件">更复杂的步入条件</h2>
-<p>可以设置断点在跳过多少次后开始步入，这在循环中也比较常用，比如要查看一个变量循环 3 次后的结果，设置方法如下图</p>
-<p><img src="https://ganhan999.github.io//post-images/1609592802047.png" alt="" loading="lazy"><br>
-  对于某些不重要的断点，只要步入一次就够了，就可以勾选<code>Remnove once hit</code>，让它步入之后自动删除，如下图</p>
-<p><img src="https://ganhan999.github.io//post-images/1609592806560.png" alt="" loading="lazy"><br>
-  对于某些场景的断点，需要其他断点先触发之后再进行触发，可以如下图选择。默认选择的是： None</p>
-<p><img src="https://ganhan999.github.io//post-images/1609592810841.png" alt="" loading="lazy">## 从方法体中跳出</p>
-<p>有时候当我们步入方法体之后，还想回退到方法体外。可以点击 <code>Drop Frame</code> 按钮实现，如下图</p>
-<figure data-type="image" tabindex="2"><img src="https://ganhan999.github.io//post-images/1609592814869.png" alt="" loading="lazy"></figure>
-<h2 id="其他">其他</h2>
-<p>如下图</p>
-<figure data-type="image" tabindex="3"><img src="https://ganhan999.github.io//post-images/1609592818890.png" alt="" loading="lazy"></figure>
 ]]></content>
     </entry>
 </feed>
