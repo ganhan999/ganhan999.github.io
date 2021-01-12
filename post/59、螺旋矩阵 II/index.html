@@ -4,7 +4,7 @@
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-<title>70、爬楼梯 | Gridea</title>
+<title>中等59. 螺旋矩阵 II | Gridea</title>
 
 <link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1610449269111">
 
@@ -89,11 +89,11 @@
         <div class="post-detail gt-bg-theme-color-second">
             <article class="gt-post-content">
                 <h2 class="post-title">
-                    70、爬楼梯
+                    中等59. 螺旋矩阵 II
                 </h2>
                 <div class="post-info">
                     <time class="post-time gt-c-content-color-first">
-                        · 2020-11-15 ·
+                        · 2021-01-12 ·
                     </time>
                     
                         <a href="https://ganhan999.github.io/tag/cKyYTCK2Y/" class="post-tags">
@@ -103,81 +103,69 @@
                 </div>
                 <div class="post-content">
                     <h1 id="题目">题目</h1>
-<p>假设你正在爬楼梯。需要 n 阶你才能到达楼顶。<br>
-每次你可以爬 1 或 2 个台阶。你有多少种不同的方法可以爬到楼顶呢？</p>
-<p>注意：给定 n 是一个正整数。</p>
-<p>示例 1：<br>
-输入： 2<br>
-输出： 2<br>
-解释： 有两种方法可以爬到楼顶。</p>
-<ol>
-<li>1 阶 + 1 阶</li>
-<li>2 阶</li>
-</ol>
-<p>示例 2：<br>
-输入： 3<br>
-输出： 3<br>
-解释： 有三种方法可以爬到楼顶。</p>
-<ol>
-<li>1 阶 + 1 阶 + 1 阶</li>
-<li>1 阶 + 2 阶</li>
-<li>2 阶 + 1 阶</li>
-</ol>
+<p>给定一个正整数 n，生成一个包含 1 到 n2 所有元素，且元素按顺时针顺序螺旋排列的正方形矩阵。</p>
+<p>示例:</p>
+<p>输入: 3<br>
+输出:<br>
+[<br>
+[ 1, 2, 3 ],<br>
+[ 8, 9, 4 ],<br>
+[ 7, 6, 5 ]<br>
+]</p>
 <p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
 <h1 id="本体思路">本体思路</h1>
-<p>递归算法！（认真思考需要做执行操作）<br>
-注意缓存装饰器！</p>
-<h1 id="我的做法">#我的做法：</h1>
+<p>利用余数作为改方向的手段，并且遍历的顺序是右下左上，<br>
+dx = [0, 1, 0, -1]  # 方向：右，下，左，上<br>
+dy = [1, 0, -1, 0]  # 注：与通常平面坐标系 记号 不同<br>
+到了尽头了就变一次</p>
+<h1 id="大神做法1">大神做法1：</h1>
 <pre><code class="language-python">class Solution:
-    @functools.lru_cache(100)  # 缓存装饰器
-    def climbStairs(self, n: int) -&gt; int:
-        if n==1:
-            return 1
-        elif n==2:
-            return 2
-        else:
-            ans=self.climbStairs(n-1)+self.climbStairs(n-2)#记得加上对象self
-        return ans
+    def generateMatrix(self, n: int) -&gt; List[List[int]]:
+        list0 = [j for j in range(1,n**2 + 1)]                          # 生成长列表
+        x = y = 0
+        dx = [0,1,0,-1]                                                 # 方向坐标
+        dy = [1,0,-1,0]
+        di = 0
+        visited = set()                                                 # 初始化集合，用于记录已走过坐标
+        list1 = [[None for k in range(n)] for k in range(n)]            # 生成空矩阵
+        for i in range(n**2):
+            list1[x][y] = list0[i]
+            visited.add((x,y))
+            nx,ny = x + dx[di],y+dy[di]                                 # 记录下一步操作
+            if 0&lt;=nx&lt;n and 0&lt;=ny&lt;n and (nx,ny) not in visited:          # 判断是否越界，未曾走过的路
+                x,y = nx,ny
+            else:
+                di = (di+1)%4
+                x,y= x+dx[di],y+dy[di]
+        return list1
 
 </code></pre>
 <p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="大神做法1">#大神做法1：</h1>
-<p>斐波那契数列算法<br>
-公式如图所示<br>
-<img src="https://ganhan999.github.io//post-images/1605446399091.png" alt="" loading="lazy"></p>
-<pre><code class="language-Python">class Solution:
-    def climbStairs(self, n: int) -&gt; int:
-        res = (((1+5**0.5)/2)**(n+1)-((1-5**0.5)/2)**(n+1))/((5)**0.5)
-        return int(res)
-
-
-</code></pre>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="大神做法2">#大神做法2：</h1>
-<p>动态规划算法1，只存储前两个元素，减少了空间，空间复杂度O(1)</p>
-<pre><code class="language-Python">class Solution:
-    def climbStairs(self, n: int) -&gt; int:
-        f1,f2=1,2
-        if n==1:
-            return f1
-        if n==2:
-            return f2
-        for i in range(n-2):
-            f2,f1=f1+f2,f2
-            print(f1,f2)
-        return f2
-</code></pre>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="大神做法3">#大神做法3：</h1>
-<p>动态规划算法2，新建一个字典或者数组来存储以前的变量，空间复杂度O(n)</p>
-<pre><code class="language-Python">class Solution:
-    def climbStairs(self, n: int) -&gt; int:
-        dp = {}
-        dp[1] = 1
-        dp[2] = 2
-        for i in range(3,n+1):
-            dp[i] = dp[i-1] + dp[i-2]
-        return dp[n]
+<p>从外到内</p>
+<h1 id="大神做法2">大神做法2：</h1>
+<pre><code class="language-python">class Solution:
+    def generateMatrix(self, n: int) -&gt; [[int]]:
+        l, r, t, b = 0, n - 1, 0, n - 1
+        mat = [[0 for _ in range(n)] for _ in range(n)]
+        num, tar = 1, n * n
+        while num &lt;= tar:
+            for i in range(l, r + 1): # left to right
+                mat[t][i] = num
+                num += 1
+            t += 1
+            for i in range(t, b + 1): # top to bottom
+                mat[i][r] = num
+                num += 1
+            r -= 1
+            for i in range(r, l - 1, -1): # right to left
+                mat[b][i] = num
+                num += 1
+            b -= 1
+            for i in range(b, t - 1, -1): # bottom to top
+                mat[i][l] = num
+                num += 1
+            l += 1
+        return mat
 </code></pre>
 
                 </div>
@@ -187,14 +175,14 @@
         
             <div class="next-post">
                 <div class="next gt-c-content-color-first">下一篇</div>
-                <a href="https://ganhan999.github.io/post/jin-tian-mian-ji-liao-bai-wan-fen-si-up-zhu/" class="post-title gt-a-link">
-                    今天面基了百万粉丝up主！！！！！
+                <a href="https://ganhan999.github.io/post/56、合并区间/" class="post-title gt-a-link">
+                    中等56. 合并区间
                 </a>
             </div>
         
 
         
-            <span id="/post/70、爬楼梯/" class="leancloud_visitors" data-flag-title="70、爬楼梯">
+            <span id="/post/59、螺旋矩阵 II/" class="leancloud_visitors" data-flag-title="中等59. 螺旋矩阵 II">
                 <em class="post-meta-item-text">阅读量 </em>
                 <i class="leancloud-visitors-count">0</i>
             </span>
