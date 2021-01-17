@@ -4,7 +4,7 @@
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-<title>中等29. 两数相除 | Gridea</title>
+<title>中等73. 矩阵置零 | Gridea</title>
 
 <link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1610885158724">
 
@@ -89,11 +89,11 @@
         <div class="post-detail gt-bg-theme-color-second">
             <article class="gt-post-content">
                 <h2 class="post-title">
-                    中等29. 两数相除
+                    中等73. 矩阵置零
                 </h2>
                 <div class="post-info">
                     <time class="post-time gt-c-content-color-first">
-                        · 2020-12-25 ·
+                        · 2021-01-16 ·
                     </time>
                     
                         <a href="https://ganhan999.github.io/tag/cKyYTCK2Y/" class="post-tags">
@@ -103,79 +103,142 @@
                 </div>
                 <div class="post-content">
                     <h1 id="题目">题目</h1>
-<p>给定两个整数，被除数 dividend 和除数 divisor。将两数相除，要求不使用乘法、除法和 mod 运算符。</p>
-<p>返回被除数 dividend 除以除数 divisor 得到的商。</p>
-<p>整数除法的结果应当截去（truncate）其小数部分，例如：truncate(8.345) = 8 以及 truncate(-2.7335) = -2</p>
+<p>给定一个 m x n 的矩阵，如果一个元素为 0，则将其所在行和列的所有元素都设为 0。请使用原地算法。</p>
 <p>示例 1:<br>
-输入: dividend = 10, divisor = 3<br>
-输出: 3<br>
-解释: 10/3 = truncate(3.33333..) = truncate(3) = 3</p>
+输入:<br>
+[<br>
+[1,1,1],<br>
+[1,0,1],<br>
+[1,1,1]<br>
+]<br>
+输出:<br>
+[<br>
+[1,0,1],<br>
+[0,0,0],<br>
+[1,0,1]<br>
+]</p>
 <p>示例 2:<br>
-输入: dividend = 7, divisor = -3<br>
-输出: -2<br>
-解释: 7/-3 = truncate(-2.33333..) = -2</p>
+输入:<br>
+[<br>
+[0,1,2,0],<br>
+[3,4,5,2],<br>
+[1,3,1,5]<br>
+]<br>
+输出:<br>
+[<br>
+[0,0,0,0],<br>
+[0,4,5,0],<br>
+[0,3,1,0]<br>
+]<br>
+进阶:<br>
+一个直接的解决方案是使用  O(mn) 的额外空间，但这并不是一个好的解决方案。<br>
+一个简单的改进方案是使用 O(m + n) 的额外空间，但这仍然不是最好的解决方案。<br>
+你能想出一个常数空间的解决方案吗？</p>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
 <h1 id="本体思路">本体思路</h1>
-<p>题干中说明不能用乘法和除法, 那么我们可以用减法, 被除数最多可以减多少个除数还能保证是非负的即可.</p>
-<h1 id="大神做法1">#大神做法1：</h1>
-<pre><code class="language-python">class Solution:
-    def divide(self, dividend, divisor):
-        sig = True if dividend*divisor &gt; 0 else False  # 判断二者相除是正or负
-        dividend, divisor= abs(dividend), abs(divisor)  # 将被除数和除数都变成正数
-        count = 0  # 用来表示减去了多少个除数，也就是商为多少
-        while divisor &lt;= dividend:  # 当被除数小于除数的时候终止循环
-            dividend -= divisor
-            count += 1
-        res = count if sig == True else -count  # 给结果加上符号
-        return max(min(res, 2**31-1), -2**31)
+<p>我们扫描一遍原始矩阵，找到所有为零的元素。<br>
+如果我们找到 [i, j] 的元素值为零，我们需要记录下行号 i 和列号 j。<br>
+用两个 sets ，一个记录行信息一个记录列信息。<br>
+最后，我们迭代原始矩阵，对于每个格子检查行 r 和列 c 是否被标记过，如果是就将矩阵格子的值设为 0。</p>
+<p>时间复杂度：O(M×N)，其中 M 和 N 分别对应行数和列数。<br>
+空间复杂度：O(M+N)。</p>
+<h1 id="大神做法1">大神做法1：</h1>
+<pre><code class="language-python">class Solution(object):
+    def setZeroes(self, matrix):
+        &quot;&quot;&quot;
+        :type matrix: List[List[int]]
+        :rtype: void Do not return anything, modify matrix in-place instead.
+        &quot;&quot;&quot;
+        R = len(matrix)
+        C = len(matrix[0])
+        rows, cols = set(), set()
+
+        # Essentially, we mark the rows and columns that are to be made zero
+        for i in range(R):
+            for j in range(C):
+                if matrix[i][j] == 0:
+                    rows.add(i)
+                    cols.add(j)
+
+        # Iterate over the array once again and using the rows and cols sets, update the elements
+        for i in range(R):
+            for j in range(C):
+                if i in rows or j in cols:
+                    matrix[i][j] = 0
 
 </code></pre>
 <p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<p>遍历原始矩阵，如果发现如果某个元素 cell[i][j] 为 0，我们将第 i 行和第 j 列的所有非零元素设成很大的负虚拟值（比如说 -1000000）。注意，正确的虚拟值取值依赖于问题的约束，任何允许值范围外的数字都可以作为虚拟之。<br>
+最后，我们便利整个矩阵将所有等于虚拟值（常量在代码中初始化为 MODIFIED）的元素设为 0。</p>
 <h1 id="大神做法2">大神做法2：</h1>
-<p>比如 divide(20, 3)：</p>
-<p>先将3不断翻倍，知道超过20，翻1次为2倍得6，翻2次为4倍得12，翻3次为8倍的24<br>
-这时4倍12是我们需要的值<br>
-递归 4 + divide(20-12, 3)<br>
-递归出口为：被除数 &lt; 除数时返回0， 被除数 == 除数时返回1<br>
-需要额外处理被除数和除数不同号</p>
-<p>用翻倍的形式减少时间！！</p>
+<pre><code class="language-python">class Solution(object):
+    def setZeroes(self, matrix):
+        &quot;&quot;&quot;
+        :type matrix: List[List[int]]
+        :rtype: void Do not return anything, modify matrix in-place instead.
+        &quot;&quot;&quot;
+        MODIFIED = -1000000
+        R = len(matrix)
+        C = len(matrix[0])
+        for r in range(R):
+            for c in range(C):
+                if matrix[r][c] == 0:
+                    # We modify the elements in place. Note, we only change the non zeros to MODIFIED
+                    for k in range(C):
+                        matrix[r][k] = MODIFIED if matrix[r][k] != 0 else 0
+                    for k in range(R):
+                        matrix[k][c] = MODIFIED if matrix[k][c] != 0 else 0
+        for r in range(R):
+            for c in range(C):
+                # Make a second pass and change all MODIFIED elements to 0 &quot;&quot;&quot;
+                if matrix[r][c] == MODIFIED:
+                    matrix[r][c] = 0
+</code></pre>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<p>遍历整个矩阵，如果 cell[i][j] == 0 就将第 i 行和第 j 列的第一个元素标记。<br>
+第一行和第一列的标记是相同的，都是 cell[0][0]，所以需要一个额外的变量告知第一列是否被标记，<br>
+同时用 cell[0][0] 继续表示第一行的标记。<br>
+然后，从第二行第二列的元素开始遍历，如果第 r 行或者第 c 列被标记了，那么就将 cell[r][c] 设为 0。<br>
+这里第一行和第一列的作用就相当于方法一中的 row_set 和 column_set 。<br>
+然后我们检查是否 cell[0][0] == 0 ，如果是则赋值第一行的元素为零。<br>
+然后检查第一列是否被标记，如果是则赋值第一列的元素为零。</p>
+<h1 id="大神做法3">大神做法3：</h1>
 <pre><code class="language-python">class Solution:
-	def divide(self, dividend: int, divisor: int) -&gt; int:
-		def recursion(dividend, divisor):
-			if dividend &lt; divisor:
-				return 0
-			if dividend == divisor:
-				return 1
-			nn = 1
-			dd = divisor
-			while True:
-				if dividend &gt; dd:
-					n = nn
-					nn += nn
-					d = dd
-					dd += dd#翻倍
-				elif dividend == dd:
-					return nn
-				else:
-					return n + recursion(dividend - d, divisor)
+    def setZeroes(self, matrix: List[List[int]]) -&gt; None:
+        row = len(matrix)
+        col = len(matrix[0])
+        row0_flag = False
+        col0_flag = False
+        # 找第一行是否有0
+        for j in range(col):
+            if matrix[0][j] == 0:
+                row0_flag = True
+                break
+        # 第一列是否有0
+        for i in range(row):
+            if matrix[i][0] == 0:
+                col0_flag = True
+                break
 
-		if dividend &gt;= 0:
-			if divisor &gt; 0:
-				positive = True
-			else:
-				positive = False
-		else:
-			if divisor &gt; 0:
-				positive = False
-			else:
-				positive = True
-		ans = recursion(abs(dividend), abs(divisor))
-		if positive:
-			if ans &gt; 2 ** 31 - 1:
-				return 2 ** 31 - 1
-			else:
-				return ans
-		else:
-			return -ans
+        # 把第一行或者第一列作为 标志位
+        for i in range(1, row):
+            for j in range(1, col):
+                if matrix[i][j] == 0:
+                    matrix[i][0] = matrix[0][j] = 0
+        #print(matrix)
+        # 置0
+        for i in range(1, row):
+            for j in range(1, col):
+                if matrix[i][0] == 0 or matrix[0][j] == 0:
+                    matrix[i][j] = 0
+
+        if row0_flag:
+            for j in range(col):
+                matrix[0][j] = 0
+        if col0_flag:
+            for i in range(row):
+                matrix[i][0] = 0
+
 </code></pre>
 
                 </div>
@@ -185,14 +248,14 @@
         
             <div class="next-post">
                 <div class="next gt-c-content-color-first">下一篇</div>
-                <a href="https://ganhan999.github.io/post/24、两两交换链表中的节点/" class="post-title gt-a-link">
-                    中等24. 两两交换链表中的节点
+                <a href="https://ganhan999.github.io/post/Java SpringCloud/" class="post-title gt-a-link">
+                    Java SpringCloud
                 </a>
             </div>
         
 
         
-            <span id="/post/29、两数相除/" class="leancloud_visitors" data-flag-title="中等29. 两数相除">
+            <span id="/post/73、矩阵置零/" class="leancloud_visitors" data-flag-title="中等73. 矩阵置零">
                 <em class="post-meta-item-text">阅读量 </em>
                 <i class="leancloud-visitors-count">0</i>
             </span>
