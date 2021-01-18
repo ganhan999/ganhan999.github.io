@@ -4,7 +4,7 @@
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-<title>中等29. 两数相除 | Gridea</title>
+<title>中等74. 搜索二维矩阵 | Gridea</title>
 
 <link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1610974636129">
 
@@ -89,11 +89,11 @@
         <div class="post-detail gt-bg-theme-color-second">
             <article class="gt-post-content">
                 <h2 class="post-title">
-                    中等29. 两数相除
+                    中等74. 搜索二维矩阵
                 </h2>
                 <div class="post-info">
                     <time class="post-time gt-c-content-color-first">
-                        · 2020-12-25 ·
+                        · 2021-01-18 ·
                     </time>
                     
                         <a href="https://ganhan999.github.io/tag/cKyYTCK2Y/" class="post-tags">
@@ -103,79 +103,40 @@
                 </div>
                 <div class="post-content">
                     <h1 id="题目">题目</h1>
-<p>给定两个整数，被除数 dividend 和除数 divisor。将两数相除，要求不使用乘法、除法和 mod 运算符。</p>
-<p>返回被除数 dividend 除以除数 divisor 得到的商。</p>
-<p>整数除法的结果应当截去（truncate）其小数部分，例如：truncate(8.345) = 8 以及 truncate(-2.7335) = -2</p>
-<p>示例 1:<br>
-输入: dividend = 10, divisor = 3<br>
-输出: 3<br>
-解释: 10/3 = truncate(3.33333..) = truncate(3) = 3</p>
-<p>示例 2:<br>
-输入: dividend = 7, divisor = -3<br>
-输出: -2<br>
-解释: 7/-3 = truncate(-2.33333..) = -2</p>
-<h1 id="本体思路">本体思路</h1>
-<p>题干中说明不能用乘法和除法, 那么我们可以用减法, 被除数最多可以减多少个除数还能保证是非负的即可.</p>
-<h1 id="大神做法1">#大神做法1：</h1>
-<pre><code class="language-python">class Solution:
-    def divide(self, dividend, divisor):
-        sig = True if dividend*divisor &gt; 0 else False  # 判断二者相除是正or负
-        dividend, divisor= abs(dividend), abs(divisor)  # 将被除数和除数都变成正数
-        count = 0  # 用来表示减去了多少个除数，也就是商为多少
-        while divisor &lt;= dividend:  # 当被除数小于除数的时候终止循环
-            dividend -= divisor
-            count += 1
-        res = count if sig == True else -count  # 给结果加上符号
-        return max(min(res, 2**31-1), -2**31)
-
-</code></pre>
+<p>编写一个高效的算法来判断 m x n 矩阵中，是否存在一个目标值。该矩阵具有如下特性：<br>
+每行中的整数从左到右按升序排列。<br>
+每行的第一个整数大于前一行的最后一个整数。</p>
+<p>示例 1：<br>
+输入：matrix = [[1,3,5,7],[10,11,16,20],[23,30,34,60]], target = 3<br>
+输出：true</p>
+<p>示例 2：<br>
+输入：matrix = [[1,3,5,7],[10,11,16,20],[23,30,34,60]], target = 13<br>
+输出：false</p>
 <p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="大神做法2">大神做法2：</h1>
-<p>比如 divide(20, 3)：</p>
-<p>先将3不断翻倍，知道超过20，翻1次为2倍得6，翻2次为4倍得12，翻3次为8倍的24<br>
-这时4倍12是我们需要的值<br>
-递归 4 + divide(20-12, 3)<br>
-递归出口为：被除数 &lt; 除数时返回0， 被除数 == 除数时返回1<br>
-需要额外处理被除数和除数不同号</p>
-<p>用翻倍的形式减少时间！！</p>
+<h1 id="本体思路">本体思路</h1>
+<p>二分法</p>
+<h1 id="大神做法1">大神做法1：</h1>
 <pre><code class="language-python">class Solution:
-	def divide(self, dividend: int, divisor: int) -&gt; int:
-		def recursion(dividend, divisor):
-			if dividend &lt; divisor:
-				return 0
-			if dividend == divisor:
-				return 1
-			nn = 1
-			dd = divisor
-			while True:
-				if dividend &gt; dd:
-					n = nn
-					nn += nn
-					d = dd
-					dd += dd#翻倍
-				elif dividend == dd:
-					return nn
-				else:
-					return n + recursion(dividend - d, divisor)
+    def searchMatrix(self, matrix: List[List[int]], target: int) -&gt; bool:
+        m = len(matrix)
+        if m == 0:
+            return False
+        n = len(matrix[0])
 
-		if dividend &gt;= 0:
-			if divisor &gt; 0:
-				positive = True
-			else:
-				positive = False
-		else:
-			if divisor &gt; 0:
-				positive = False
-			else:
-				positive = True
-		ans = recursion(abs(dividend), abs(divisor))
-		if positive:
-			if ans &gt; 2 ** 31 - 1:
-				return 2 ** 31 - 1
-			else:
-				return ans
-		else:
-			return -ans
+        # 二分查找
+        left, right = 0, m * n - 1
+        while left &lt;= right:
+            pivot_idx = (left + right) // 2
+            pivot_element = matrix[pivot_idx // n][pivot_idx % n]
+            if target == pivot_element:
+                return True
+            else:
+                if target &lt; pivot_element:
+                    right = pivot_idx - 1
+                else:
+                    left = pivot_idx + 1
+        return False
+
 </code></pre>
 
                 </div>
@@ -185,14 +146,14 @@
         
             <div class="next-post">
                 <div class="next gt-c-content-color-first">下一篇</div>
-                <a href="https://ganhan999.github.io/post/24、两两交换链表中的节点/" class="post-title gt-a-link">
-                    中等24. 两两交换链表中的节点
+                <a href="https://ganhan999.github.io/post/Java Linux/" class="post-title gt-a-link">
+                    Java Linux
                 </a>
             </div>
         
 
         
-            <span id="/post/29、两数相除/" class="leancloud_visitors" data-flag-title="中等29. 两数相除">
+            <span id="/post/74、搜索二维矩阵/" class="leancloud_visitors" data-flag-title="中等74. 搜索二维矩阵">
                 <em class="post-meta-item-text">阅读量 </em>
                 <i class="leancloud-visitors-count">0</i>
             </span>
