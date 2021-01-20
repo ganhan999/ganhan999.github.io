@@ -1,0 +1,798 @@
+<html>
+<head>
+    <meta charset="utf-8"/>
+<meta name="description" content=""/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+<title>Java MyBatisPlus | Gridea</title>
+
+<link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1611130951443">
+
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://ganhan999.github.io//styles/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dockerfile.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dart.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script>
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
+
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css">
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg">
+    <div class="navbar-brand">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            Gridea
+        </div>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
+            
+                <div class="nav-item">
+                    
+                        <a href="/" class="menu gt-a-link">
+                            首页
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/archives" class="menu gt-a-link">
+                            归档
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/tags" class="menu gt-a-link">
+                            标签
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/post/about" class="menu gt-a-link">
+                            关于
+                        </a>
+                    
+                </div>
+            
+        </div>
+        <div style="text-align: center">
+            <form id="gridea-search-form" style="position: relative" data-update="1611130951443" action="/search/index.html">
+                <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+                <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+        </div>
+    </div>
+</nav>
+
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    Java MyBatisPlus
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2021-01-20 ·
+                    </time>
+                    
+                        <a href="https://ganhan999.github.io/tag/2avA5RaAc/" class="post-tags">
+                            # Java
+                        </a>
+                    
+                </div>
+                <div class="post-content">
+                    <h1 id="mybatisplusb站狂神说">MyBatisPlusB站狂神说</h1>
+<p>学习MyBatis-Plus之前要先学MyBatis–&gt;Spring—&gt;SpringMVC</p>
+<p>为什么要学它?MyBatisPlus可以节省我们大量的时间,所有CRUD代码都可以自动完成</p>
+<p>JPA, tk-mapper ,MyBatisPlus</p>
+<p>偷懒用的!</p>
+<blockquote>
+<h2 id="1简介">1.简介</h2>
+</blockquote>
+<p>是什么?</p>
+<p>官网:https://baomidou.com/</p>
+<figure data-type="image" tabindex="1"><img src="https://img-blog.csdnimg.cn/20200930150243845.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNjQ5MjIz,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
+<figure data-type="image" tabindex="2"><img src="https://img-blog.csdnimg.cn/20200930150327276.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNjQ5MjIz,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
+<blockquote>
+<h2 id="2特性">2.特性</h2>
+</blockquote>
+<ul>
+<li><strong>无侵入</strong>：只做增强不做改变，引入它不会对现有工程产生影响，如丝般顺滑</li>
+<li><strong>损耗小</strong>：启动即会自动注入基本 CURD，性能基本无损耗，直接面向对象操作</li>
+<li><strong>强大的 CRUD 操作</strong>：内置通用 Mapper、通用 Service，仅仅通过少量配置即可实现单表大部分 CRUD 操作，更有强大的条件构造器，满足各类使用需求</li>
+<li><strong>支持 Lambda 形式调用</strong>：通过 Lambda 表达式，方便的编写各类查询条件，无需再担心字段写错</li>
+<li><strong>支持主键自动生成</strong>：支持多达 4 种主键策略（内含分布式唯一 ID 生成器 - Sequence），可自由配置，完美解决主键问题</li>
+<li><strong>支持 ActiveRecord 模式</strong>：支持 ActiveRecord 形式调用，实体类只需继承 Model 类即可进行强大的 CRUD 操作</li>
+<li><strong>支持自定义全局通用操作</strong>：支持全局通用方法注入（ Write once, use anywhere ）</li>
+<li><strong>内置代码生成器</strong>：采用代码或者 Maven 插件可快速生成 Mapper 、 Model 、 Service 、 Controller 层代码，支持模板引擎，更有超多自定义配置等您来使用</li>
+<li><strong>内置分页插件</strong>：基于 MyBatis 物理分页，开发者无需关心具体操作，配置好插件之后，写分页等同于普通 List 查询</li>
+<li><strong>分页插件支持多种数据库</strong>：支持 MySQL、MariaDB、Oracle、DB2、H2、HSQL、SQLite、Postgre、SQLServer 等多种数据库</li>
+<li><strong>内置性能分析插件</strong>：可输出 Sql 语句以及其执行时间，建议开发测试时启用该功能，能快速揪出慢查询</li>
+<li><strong>内置全局拦截插件</strong>：提供全表 delete 、 update 操作智能分析阻断，也可自定义拦截规则，预防误操作</li>
+</ul>
+<h2 id="1快速入门">1.快速入门</h2>
+<p>地址:https://baomidou.com/guide/quick-start.html#%E5%88%9D%E5%A7%8B%E5%8C%96%E5%B7%A5%E7%A8%8B</p>
+<p>使用第三方插件:</p>
+<ol>
+<li>导入对应的依赖</li>
+<li>研究依赖如何配置</li>
+<li>代码如何编写</li>
+<li>提高扩展技术能力</li>
+</ol>
+<blockquote>
+<p>步骤</p>
+</blockquote>
+<p>1.创建数据库 <code>mybatis_plus</code></p>
+<p>2.创建数据库</p>
+<p>创建表</p>
+<pre><code class="language-sql">DROP TABLE IF EXISTS user;
+
+CREATE TABLE user
+(
+	id BIGINT(20) NOT NULL COMMENT '主键ID',
+	name VARCHAR(30) NULL DEFAULT NULL COMMENT '姓名',
+	age INT(11) NULL DEFAULT NULL COMMENT '年龄',
+	email VARCHAR(50) NULL DEFAULT NULL COMMENT '邮箱',
+	PRIMARY KEY (id)
+);
+--真实开发环境中,version(乐观锁),deleted(逻辑删除),gmt_create,gmt_modified
+</code></pre>
+<p>插入数据</p>
+<pre><code class="language-sql">DELETE FROM user;
+
+INSERT INTO user (id, name, age, email) VALUES
+(1, 'Jone', 18, 'test1@baomidou.com'),
+(2, 'Jack', 20, 'test2@baomidou.com'),
+(3, 'Tom', 28, 'test3@baomidou.com'),
+(4, 'Sandy', 21, 'test4@baomidou.com'),
+(5, 'Billie', 24, 'test5@baomidou.com');
+</code></pre>
+<figure data-type="image" tabindex="3"><img src="https://img-blog.csdnimg.cn/20200930150344676.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNjQ5MjIz,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
+<p>3.编写项目,初始化项目! 使用SpringBoot初始化!</p>
+<p>4.导入依赖</p>
+<pre><code class="language-xml">&lt;!--mysql--&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;mysql&lt;/groupId&gt;
+    &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;
+&lt;/dependency&gt;
+&lt;!--lombok--&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.projectlombok&lt;/groupId&gt;
+    &lt;artifactId&gt;lombok&lt;/artifactId&gt;
+&lt;/dependency&gt;
+&lt;!--mybatis-plus--&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;com.baomidou&lt;/groupId&gt;
+    &lt;artifactId&gt;mybatis-plus-boot-starter&lt;/artifactId&gt;
+    &lt;version&gt;3.0.5&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
+<p>说明:我们使用mybatis-plus 可以节省我们大量的代码,尽量不要同时导入mybatis和mybatis-plus因为版本有差异!</p>
+<p>5.连接数据库!这一步和mybatis相同!</p>
+<pre><code class="language-properties"># mysql 5 驱动不同  com.mysql.jdbc.Driver
+
+# mysql 8 驱动不同 com.mysql.cj.jdbc.Driver . 需要增加时区的配置 serverTimezone=GMT%2B8
+spring.datasource.username=codeyuaiiao
+spring.datasource.password=3615yuhaijiao
+spring.datasource.url=jdbc:mysql://localhost:3306/mybatis_plus?useSSL=false&amp;useUnicode=true&amp;characterEncoding=utf-8
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+1234567
+</code></pre>
+<p>6.传统的方式pojo-dao(连接mybatis,配置mapper.xml文件)-service-controller</p>
+<p>6.使用了mybatis-plus之后</p>
+<ul>
+<li>
+<p>pojo</p>
+<pre><code class="language-java">@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class User {
+    private Long id;
+    private String name;
+    private Integer age;
+    private String email;
+</code></pre>
+</li>
+<li>
+<p>mapper接口</p>
+<pre><code class="language-java">import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.codeyuaiiao.pojo.User;
+import org.springframework.stereotype.Repository;
+
+//在对应的mapper上面继承基本的类 BaseMapper
+@Repository//代表持久层
+public interface UserMapper extends BaseMapper&lt;User&gt; {
+    //所有CRUD操作都已经编写完成了
+    //你不需要向以前一样配置一大堆文件了!
+}
+
+</code></pre>
+<p>注意点:需要在主启动类<code>MybatisPlusApplication</code>上扫描我们Mapper包下的所有接口</p>
+<p><code>@MapperScan(&quot;com.codeyuaiiao.mapper&quot;)</code></p>
+</li>
+<li>
+<p>测试类中测试</p>
+<pre><code class="language-java">@SpringBootTest
+class MybatisPlusApplicationTests {
+
+    //继承了BaseMapper, 所有的方法都来自己父类
+    //我们也可以编写自己的扩展方法
+    @Autowired
+    private UserMapper userMapper;
+
+    @Test
+    void contextLoads() {
+        //参数是一个Wrapper , 条件构造器,这里我们先不用 --null
+        //查询全部用户
+        List&lt;User&gt; users = userMapper.selectList(null);
+        users.forEach(System.out::println);
+    }
+}
+</code></pre>
+</li>
+<li>
+<p>查询结果:</p>
+</li>
+</ul>
+<figure data-type="image" tabindex="4"><img src="https://img-blog.csdnimg.cn/20200930150413201.png#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
+<blockquote>
+<p>思考问题</p>
+<ol>
+<li>sql谁帮我们写的?—mybatis-plus</li>
+<li>方法谁帮我们写的?—mybatis-pluss</li>
+</ol>
+</blockquote>
+<h2 id="2配置日志">2.配置日志</h2>
+<p>我们所有的sql是不可见的,我们希望知道他是怎么执行的,所以我们必须看日志!</p>
+<pre><code class="language-properties"># 配置日志  (默认控制台输出)
+mybatis-plus.configuration.log-impl=org.apache.ibatis.logging.stdout.StdOutImpl
+</code></pre>
+<figure data-type="image" tabindex="5"><img src="https://img-blog.csdnimg.cn/20200930150425185.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNjQ5MjIz,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
+<p>配置完日志之后你会喜欢上mybatis-plus!</p>
+<h2 id="3crud扩展">3.CRUD扩展</h2>
+<h3 id="1插入数据">1.插入数据</h3>
+<pre><code class="language-java">@Test
+public void testInsert(){
+    User user = new User();
+    user.setName(&quot;codeyuaiiao&quot;);
+    user.setAge(3);
+    user.setEmail(&quot;747557612@qq.com&quot;);
+    int result = userMapper.insert(user);
+    System.out.println(result);
+    System.out.println(user);
+
+}
+</code></pre>
+<figure data-type="image" tabindex="6"><img src="https://img-blog.csdnimg.cn/20200930150437175.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNjQ5MjIz,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
+<blockquote>
+<p>注意点:数据库插入的id默认值为:全局的唯一id</p>
+</blockquote>
+<h3 id="2主键生成策略">2.主键生成策略</h3>
+<blockquote>
+<p>默认 ID_WORKER 全局唯一id</p>
+<p>对应数据库中的主键(uuid.自增id.雪花算法.redis.zookeeper)</p>
+</blockquote>
+<p>分布式系统唯一id生成:https://www.cnblogs.com/haoxinyue/p/5208136.html</p>
+<p><strong>雪花算法</strong>😦<strong>Twitter的snowflake算法</strong>)</p>
+<p>snowflake是Twitter开源的分布式ID生成算法，结果是一个long型的ID。其核心思想是：使用41bit作为毫秒数，10bit作为机器的ID（5个bit是数据中心，5个bit的机器ID），12bit作为毫秒内的流水号（意味着每个节点在每毫秒可以产生 4096 个 ID），最后还有一个符号位，永远是0.可以保证几乎全球唯一</p>
+<blockquote>
+<p>主键自增</p>
+</blockquote>
+<p>我们需要配置主键自增:</p>
+<ol>
+<li>
+<p>实体类字段上<code>@TableId(type = IdType.AUTO)</code></p>
+</li>
+<li>
+<p>数据库字段一定要是<strong>自增</strong>!</p>
+<figure data-type="image" tabindex="7"><img src="https://img-blog.csdnimg.cn/20200930150449191.png#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
+<figure data-type="image" tabindex="8"><img src="https://img-blog.csdnimg.cn/20200930150459128.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNjQ5MjIz,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
+</li>
+</ol>
+<figure data-type="image" tabindex="9"><img src="https://img-blog.csdnimg.cn/20200930150508407.png#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
+<blockquote>
+<p>其余源码解释</p>
+</blockquote>
+<pre><code class="language-java">public enum IdType {
+     
+    AUTO(0),//数据库ID自增  
+    NONE(1),//该类型为未设置主键类型      
+    INPUT(2),//用户输入ID
+      		 //该类型可以通过自己注册自动填充插件进行填充  
+    
+//以下3种类型、只有当插入对象ID 为空，才自动填充。     
+    ID_WORKER(3),//全局唯一ID (idWorker)      
+    UUID(4),//全局唯一ID (UUID)          
+    ID_WORKER_STR(5);//字符串全局唯一ID (idWorker 的字符串表示)    
+</code></pre>
+<h3 id="3更新数据">3.更新数据</h3>
+<blockquote>
+<p>动态sql</p>
+</blockquote>
+<p>注意:updateById()参数是 一个对象!</p>
+<pre><code class="language-java">//测试更新
+@Test
+public void testUpdate(){
+    User user = new User();
+    user.setId(2L);
+    user.setName(&quot;阿峧不是山交&quot;);
+    //        注意:updateById()参数是 一个对象!
+    int i = userMapper.updateById(user);
+    System.out.println(i);
+
+}
+</code></pre>
+<figure data-type="image" tabindex="10"><img src="https://img-blog.csdnimg.cn/20200930150523190.png#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
+<figure data-type="image" tabindex="11"><img src="https://img-blog.csdnimg.cn/20200930150543666.png#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
+<p>所有的sql都是动态帮你配置的</p>
+<h3 id="4自动填充">4.自动填充</h3>
+<p>创建时间 . 修改时间! 这些个操作都是自动化完成的,我们不希望手动更新!</p>
+<p>阿里巴巴开发手册:所有的数据库表:gmt_create .gmt_modified几乎所有的表都要配置上!而且需要自动化!</p>
+<blockquote>
+<p>方式一:数据库级别</p>
+</blockquote>
+<p>1.在表中新增字段 create_time , update_time</p>
+<figure data-type="image" tabindex="12"><img src="https://img-blog.csdnimg.cn/20200930150615744.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNjQ5MjIz,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
+<p>2.再次测试插入方法,我们需要先把实体类同步</p>
+<pre><code class="language-java">private Data creatTime;
+private Data updateTime;
+</code></pre>
+<p>再次更新查看结果即可</p>
+<figure data-type="image" tabindex="13"><img src="https://img-blog.csdnimg.cn/20200930150634402.png#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
+<blockquote>
+<p>方式二:代码级别</p>
+</blockquote>
+<p>1.删除数据库默认值</p>
+<figure data-type="image" tabindex="14"><img src="https://img-blog.csdnimg.cn/20200930150644351.png#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
+<p>2.实体类字段属性上添加注解</p>
+<pre><code class="language-java">//记住用util包下的Date!!
+//字段添加填充内容
+@TableField(fill = FieldFill.INSERT)
+private Data creatTime;
+
+@TableField(fill = FieldFill.INSERT_UPDATE)
+private Data updateTime;
+</code></pre>
+<p>3.编写处理器来处理这个注解</p>
+<pre><code class="language-java">package com.codeyuaiiao.handler;
+
+import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.reflection.MetaObject;
+import org.springframework.stereotype.Component;
+
+import java.util.Date;
+
+@Slf4j
+@Component //把处理器加到IOC容器中
+public class MyMetaObjectHandler implements MetaObjectHandler {
+
+    //插入时的填充策略
+    @Override
+    public void insertFill(MetaObject metaObject) {
+        log.info(&quot;Start insert fill.... &quot;);
+        this.setFieldValByName(&quot;createTime&quot;,new Date(),metaObject);
+        this.setFieldValByName(&quot;updateTime&quot;,new Date(),metaObject);
+    }
+
+    //更新时的填充策略
+    @Override
+    public void updateFill(MetaObject metaObject) {
+        log.info(&quot;Start update fill.... &quot;);
+        this.setFieldValByName(&quot;updateTime&quot;,new Date(),metaObject);
+    }
+}
+</code></pre>
+<p>3.编写处理器来处理这个注解即可!</p>
+<pre><code class="language-java">package com.codeyuaiiao.handler;
+
+import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.reflection.MetaObject;
+import org.springframework.stereotype.Component;
+
+import java.util.Date;
+
+@Slf4j
+@Component //把处理器加到IOC容器中
+public class MyMetaObjectHandler implements MetaObjectHandler {
+
+    //插入时的填充策略
+    @Override
+    public void insertFill(MetaObject metaObject) {
+        log.info(&quot;Start insert fill.... &quot;);
+        this.setFieldValByName(&quot;createTime&quot;,new Date(),metaObject);
+        this.setFieldValByName(&quot;updateTime&quot;,new Date(),metaObject);
+    }
+
+    //更新时的填充策略
+    @Override
+    public void updateFill(MetaObject metaObject) {
+        log.info(&quot;Start update fill.... &quot;);
+        this.setFieldValByName(&quot;updateTime&quot;,new Date(),metaObject);
+    }
+}
+</code></pre>
+<p>4.测试插入</p>
+<p>5测试更新,观察时间即可!</p>
+<h3 id="5乐观锁悲观锁">5.乐观锁&amp;悲观锁</h3>
+<blockquote>
+<p>乐观锁: 顾名思义十分乐观,他总是认为不会出现问题,无论干什么都不去上锁!如果出现了问题,再次更新值测试</p>
+<p>悲观锁;顾名思义十分悲观,他总是认为出现问题,无论干什么都会上锁!再去操作!</p>
+</blockquote>
+<p>我们这里主要讲解 乐观锁机制!</p>
+<p>乐观锁实现方式:</p>
+<ul>
+<li>取出记录时,获取当前version</li>
+<li>更新时,带上这个version</li>
+<li>执行更新时,set version = newVersion where version = oldVersion</li>
+<li>如果version不对,就更新失败</li>
+</ul>
+<h3 id="6查询操作">6.查询操作</h3>
+<pre><code class="language-java">//测试查询
+@Test
+public void testSelectById(){
+    User user = userMapper.selectById(1L);
+    System.out.println(user);
+}
+
+//测试批量查询
+public void testSelectBatchId(){
+    List&lt;User&gt; users = userMapper.selectBatchIds(Arrays.asList(1, 2, 3));
+    users.forEach(System.out::println);
+}
+
+//按条件查询之--使用Map操作
+@Test
+public void testSelectBatchIds(){
+    HashMap&lt;String, Object&gt; map = new HashMap&lt;&gt;();
+    map.put(&quot;name&quot;,&quot;阿峧说java&quot;);
+    map.put(&quot;age&quot;,&quot;18&quot;);
+
+    List&lt;User&gt; users = userMapper.selectByMap(map);
+    users.forEach(System.out::println);
+}
+</code></pre>
+<p>我们在工作中会遇见逻辑删除</p>
+<h3 id="7逻辑删除">7.逻辑删除</h3>
+<blockquote>
+<p>物理删除:从数据库中直接移除</p>
+<p>逻辑删除: 在数据库中没有被移除,而是通过一个变量来让他失效! deleted=0=&gt;deleted=1</p>
+</blockquote>
+<p>管理员可以查看被删除的记录!防止数据的丢失,类似于回收站!</p>
+<p>测试:</p>
+<p>1.在数据表中增加一个deleted字段</p>
+<figure data-type="image" tabindex="15"><img src="https://img-blog.csdnimg.cn/20200930150703144.png#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
+<p>2.实体类中增加属性</p>
+<pre><code class="language-java">//逻辑删除
+@TableLogic
+private Integer deleted;
+</code></pre>
+<p>3.配置</p>
+<pre><code class="language-java">//注册逻辑删除
+@Bean
+public ISqlInjector sqlInjector(){
+    return new LogicSqlInjector();
+}
+</code></pre>
+<p>配置</p>
+<pre><code class="language-properties"># 配置逻辑删除
+mybatis-plus.global-config.db-config.logic-delete-value=1
+mybatis-plus.global-config.db-config.logic-not-delete-value=0
+</code></pre>
+<blockquote>
+<p>走的是更新操作,不是删除操作</p>
+<figure data-type="image" tabindex="16"><img src="https://img-blog.csdnimg.cn/2020093015071649.png#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
+</blockquote>
+<blockquote>
+<p>查询的时候会自动过滤删除的数据</p>
+<figure data-type="image" tabindex="17"><img src="https://img-blog.csdnimg.cn/20200930150728942.png#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
+</blockquote>
+<p>以上的所有CRUD操作及其扩展,我们都必须精通掌握!会大大提好你的工作和写项目的效率</p>
+<h2 id="4性能分析插件">4.性能分析插件</h2>
+<p>我们在平时的开发中,会遇到一些慢sql.</p>
+<p>MP也提供了性能分析插件,如果超过这个时间就停止运行!</p>
+<p>1.导入插件</p>
+<pre><code class="language-java">@Bean
+    @Profile({&quot;dev&quot;,&quot;test&quot;}) //设置dev 和 test环境开启
+    public PerformanceInterceptor performanceInterceptor(){
+        PerformanceInterceptor performanceInterceptor = new PerformanceInterceptor();
+        performanceInterceptor.setMaxTime(1);
+        performanceInterceptor.setFormat(true);
+        return performanceInterceptor;
+    }
+</code></pre>
+<p>[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-7kbdevy0-1601449207282)(MyBatisPlusB站狂神说.assets/image-20200930133715010.png)]</p>
+<p>记住在SpringBoot中配置环境为 dev或者test环境</p>
+<p>application.properties中添加设置开发环境</p>
+<pre><code class="language-properties">#设置开发环境
+spring.profiles.active=dev
+</code></pre>
+<p>2.测试查询</p>
+<pre><code class="language-java">@Test
+    public void testSelectBatchId(){
+        List&lt;User&gt; users = userMapper.selectBatchIds(Arrays.asList(1, 2, 3));
+        users.forEach(System.out::println);
+    }
+</code></pre>
+<figure data-type="image" tabindex="18"><img src="https://img-blog.csdnimg.cn/20200930150745143.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzNjQ5MjIz,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
+<h2 id="5条件构造器">5.条件构造器</h2>
+<pre><code class="language-java">package com.kuang;
+
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.kuang.mapper.UserMapper;
+import com.kuang.pojo.User;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.List;
+import java.util.Map;
+
+@SpringBootTest
+public class WrapperTest {
+
+    @Autowired
+    private UserMapper userMapper;
+
+    @Test
+    void contextLoads() {
+        // 查询name不为空的用户，并且邮箱不为空的用户，年龄大于等于12
+        QueryWrapper&lt;User&gt; wrapper = new QueryWrapper&lt;&gt;();
+        wrapper
+                .isNotNull(&quot;name&quot;)
+                .isNotNull(&quot;email&quot;)
+                .ge(&quot;age&quot;,12);
+        userMapper.selectList(wrapper).forEach(System.out::println); // 和我们刚才学习的map对比一下
+    }
+
+    @Test
+    void test2(){
+        // 查询名字狂神说
+        QueryWrapper&lt;User&gt; wrapper = new QueryWrapper&lt;&gt;();
+        wrapper.eq(&quot;name&quot;,&quot;狂神说&quot;);
+        User user = userMapper.selectOne(wrapper); // 查询一个数据，出现多个结果使用List 或者 Map
+        System.out.println(user);
+    }
+
+    @Test
+    void test3(){
+        // 查询年龄在 20 ~ 30 岁之间的用户
+        QueryWrapper&lt;User&gt; wrapper = new QueryWrapper&lt;&gt;();
+        wrapper.between(&quot;age&quot;,20,30); // 区间
+        Integer count = userMapper.selectCount(wrapper);// 查询结果数
+        System.out.println(count);
+    }
+
+    // 模糊查询
+    @Test
+    void test4(){
+        // 查询年龄在 20 ~ 30 岁之间的用户
+        QueryWrapper&lt;User&gt; wrapper = new QueryWrapper&lt;&gt;();
+        // 左和右  t%
+        wrapper
+                .notLike(&quot;name&quot;,&quot;e&quot;)
+                .likeRight(&quot;email&quot;,&quot;t&quot;);
+
+        List&lt;Map&lt;String, Object&gt;&gt; maps = userMapper.selectMaps(wrapper);
+        maps.forEach(System.out::println);
+    }
+
+    // 模糊查询
+    @Test
+    void test5(){
+
+        QueryWrapper&lt;User&gt; wrapper = new QueryWrapper&lt;&gt;();
+        // id 在子查询中查出来
+        wrapper.inSql(&quot;id&quot;,&quot;select id from user where id&lt;3&quot;);
+
+        List&lt;Object&gt; objects = userMapper.selectObjs(wrapper);
+        objects.forEach(System.out::println);
+    }
+
+    //测试六
+    @Test
+    void test6(){
+        QueryWrapper&lt;User&gt; wrapper = new QueryWrapper&lt;&gt;();
+        // 通过id进行排序
+        wrapper.orderByAsc(&quot;id&quot;);
+
+        List&lt;User&gt; users = userMapper.selectList(wrapper);
+        users.forEach(System.out::println);
+    }
+
+}
+</code></pre>
+<h2 id="6代码自动生成非常nb">6.代码自动生成**非常NB</h2>
+<p>dao、pojo、service、controller都给我自己去编写完成！</p>
+<p>AutoGenerator 是 MyBatis-Plus 的代码生成器，通过 AutoGenerator 可以快速生成 Entity、</p>
+<p>Mapper、Mapper XML、Service、Controller 等各个模块的代码，极大的提升了开发效率。</p>
+<p>只需要改实体类名字 和包名 还有 数据库配置即可</p>
+<p>测试:</p>
+<pre><code class="language-java">import com.baomidou.mybatisplus.annotation.DbType; import com.baomidou.mybatisplus.annotation.FieldFill; import com.baomidou.mybatisplus.annotation.IdType; import com.baomidou.mybatisplus.annotation.TableField; import com.baomidou.mybatisplus.generator.AutoGenerator; import com.baomidou.mybatisplus.generator.config.DataSourceConfig; import com.baomidou.mybatisplus.generator.config.GlobalConfig; import com.baomidou.mybatisplus.generator.config.PackageConfig; import com.baomidou.mybatisplus.generator.config.StrategyConfig; import com.baomidou.mybatisplus.generator.config.po.TableFill; import com.baomidou.mybatisplus.generator.config.rules.DateType; import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy; import java.util.ArrayList; 
+
+// 代码自动生成器 
+public class KuangCode {
+public static void main(String[] args) {
+    // 需要构建一个 代码自动生成器 对象 
+    AutoGenerator mpg = new AutoGenerator(); 
+    
+    // 配置策略 
+    // 1、全局配置 
+    GlobalConfig gc = new GlobalConfig();
+    String projectPath = System.getProperty(&quot;user.dir&quot;); 
+    gc.setOutputDir(projectPath+&quot;/src/main/java&quot;);
+    gc.setAuthor(&quot;狂神说&quot;); gc.setOpen(false);
+    gc.setFileOverride(false);
+    
+    // 是否覆盖
+    gc.setServiceName(&quot;%sService&quot;);
+    
+    // 去Service的I前缀
+    gc.setIdType(IdType.ID_WORKER);
+    gc.setDateType(DateType.ONLY_DATE);
+    gc.setSwagger2(true);
+    mpg.setGlobalConfig(gc);
+    
+    //2、设置数据源
+    DataSourceConfig dsc = new DataSourceConfig();
+    dsc.setUrl(&quot;jdbc:mysql://localhost:3306/kuang_community? useSSL=false&amp;useUnicode=true&amp;characterEncoding=utf-8&amp;serverTimezone=GMT%2B8&quot;);
+    dsc.setDriverName(&quot;com.mysql.cj.jdbc.Driver&quot;);
+    dsc.setUsername(&quot;root&quot;);
+    dsc.setPassword(&quot;123456&quot;);
+    dsc.setDbType(DbType.MYSQL); mpg.setDataSource(dsc);
+    
+    //3、包的配置
+    PackageConfig pc = new PackageConfig();
+    //只需要改实体类名字 和包名 还有 数据库配置即可
+    pc.setModuleName(&quot;blog&quot;); pc.setParent(&quot;com.kuang&quot;);
+    pc.setEntity(&quot;entity&quot;); pc.setMapper(&quot;mapper&quot;);
+    pc.setService(&quot;service&quot;); pc.setController(&quot;controller&quot;);
+    mpg.setPackageInfo(pc);
+    
+    //4、策略配置
+    StrategyConfig strategy = new StrategyConfig();
+  strategy.setInclude(&quot;blog_tags&quot;,&quot;course&quot;,&quot;links&quot;,&quot;sys_settings&quot;,&quot;user_record&quot;,&quot; user_say&quot;);
+    
+    // 设置要映射的表名
+    strategy.setNaming(NamingStrategy.underline_to_camel);
+    strategy.setColumnNaming(NamingStrategy.underline_to_camel);
+    strategy.setEntityLombokModel(true);
+    
+    // 自动lombok；
+    strategy.setLogicDeleteFieldName(&quot;deleted&quot;); 
+    
+    // 自动填充配置
+    TableFill gmtCreate = new TableFill(&quot;gmt_create&quot;, FieldFill.INSERT);
+    TableFill gmtModified = new TableFill(&quot;gmt_modified&quot;, FieldFill.INSERT_UPDATE);
+    ArrayList&lt;TableFill&gt; tableFills = new ArrayList&lt;&gt;();
+    tableFills.add(gmtCreate); tableFills.add(gmtModified);
+    strategy.setTableFillList(tableFills);
+    
+    // 乐观锁
+    strategy.setVersionFieldName(&quot;version&quot;);
+    strategy.setRestControllerStyle(true);
+    strategy.setControllerMappingHyphenStyle(true);
+    
+    // localhost:8080/hello_id_2 
+    mpg.setStrategy(strategy);
+    mpg.execute(); //执行 
+	}
+}
+</code></pre>
+<p>大家可以给B站狂神说点一波关注!</p>
+
+                </div>
+            </article>
+        </div>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://ganhan999.github.io/post/Git/" class="post-title gt-a-link">
+                    Git
+                </a>
+            </div>
+        
+
+        
+            <span id="/post/Java MyBatisPlus/" class="leancloud_visitors" data-flag-title="Java MyBatisPlus">
+                <em class="post-meta-item-text">阅读量 </em>
+                <i class="leancloud-visitors-count">0</i>
+            </span>
+        
+
+        
+
+        
+            <script src='https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js'></script>
+
+<style>
+	div#vcomments{
+		width:100%;
+		max-width: 1000px;
+		padding: 2.5%
+	}
+</style>
+
+
+	<div id="vcomments"></div>
+
+<script>
+	new Valine({
+		el: '#vcomments',
+		appId: '',
+		appKey: '',
+		avatar: '',
+		pageSize: 5,
+		recordIp: true,
+		placeholder: 'Just Go Go',
+		visitor: true,
+	});
+</script>
+
+        
+
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first">温故而知新</div>
+    <div class="social-container">
+        
+            
+                <a href="https://github.com/ganhan999/ganhan999.github.io" target="_blank">
+                    <i class="fab fa-github gt-c-content-color-first"></i>
+                </a>
+            
+        
+            
+        
+            
+        
+            
+                <a href="https://www.zhihu.com/people/gan-mou-36" target="_blank">
+                    <i class="fab fa-zhihu gt-c-content-color-first"></i>
+                </a>
+            
+        
+            
+        
+            
+        
+    </div>
+    <div class="footer-info">
+        Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+    </div>
+    <div>
+        Theme by <a href="https://imhanjie.com/" target="_blank">imhanjie</a>, Powered by <a
+                href="https://github.com/getgridea/gridea" target="_blank">Gridea | <a href="https://ganhan999.github.io//atom.xml" target="_blank">RSS</a></a>
+    </div>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+    </div>
+</div>
+</body>
+</html>
