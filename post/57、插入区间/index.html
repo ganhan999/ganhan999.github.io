@@ -4,7 +4,7 @@
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-<title>JavaSE基础3 | Gridea</title>
+<title>中等56. 合并区间 | Gridea</title>
 
 <link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1611142519074">
 
@@ -89,131 +89,56 @@
         <div class="post-detail gt-bg-theme-color-second">
             <article class="gt-post-content">
                 <h2 class="post-title">
-                    JavaSE基础3
+                    中等56. 合并区间
                 </h2>
                 <div class="post-info">
                     <time class="post-time gt-c-content-color-first">
-                        · 2020-11-28 ·
+                        · 2021-01-20 ·
                     </time>
                     
-                        <a href="https://ganhan999.github.io/tag/2avA5RaAc/" class="post-tags">
-                            # Java
+                        <a href="https://ganhan999.github.io/tag/cKyYTCK2Y/" class="post-tags">
+                            # leetcode
                         </a>
                     
                 </div>
                 <div class="post-content">
-                    <h2 id="1-方法的定义">1、方法的定义</h2>
-<pre><code class="language-bash">修饰符 返回值类型 方法名 （参数类型 参数名）{
-    方法体
-    return 返回值；
-}
-</code></pre>
-<p><strong>java属于值传递</strong></p>
-<h1 id="2-方法的重载">2、方法的重载</h1>
-<ul>
-<li>方法名一样</li>
-<li>参数列表不一样（个数、类型、参数排列顺序）</li>
-<li>返回类型可以不同</li>
-<li>仅仅返回类型不同不足以成为重载</li>
-</ul>
-<h1 id="3-可变参数">3、可变参数</h1>
-<p><strong>在指定参数类型后加一个省略号…</strong></p>
-<pre><code class="language-java">public static void printmax(double... numbers){}
-</code></pre>
-<h2 id="4-数组的声明">4、数组的声明</h2>
-<ul>
-<li><strong>dataType[]   arrayRefVar//首选</strong></li>
-<li><strong>dataType   arrayRefVar[] //效果一样</strong></li>
-<li><strong>array.length //获取数组长度</strong></li>
-</ul>
-<pre><code class="language-java">int[] nums;
-</code></pre>
-<h2 id="5-java内存分析">5、Java内存分析</h2>
-<ul>
-<li>堆：存放new的对象和数组，可以被所有的线程共享，不会存放别的对象引用</li>
-<li>栈：存放基本变量类型（包含这个基本类型的具体数值）；引用对象的变量（会存放这个引用在堆里面的具体地址）</li>
-<li>方法区：可以被所有线程共享；包含所有class和static变量</li>
-<li>数组本身就是对象，Java中对象都在堆中，因此数组无论保存原始类型或者其他对象类型，数组对象本身是在堆中。</li>
-</ul>
-<h2 id="6-数组的初始化">6、数组的初始化</h2>
-<pre><code class="language-Java">//静态初始化:创建＋赋值
-int[] a={1,2,3};
+                    <h1 id="题目">题目</h1>
+<p>给出一个无重叠的 ，按照区间起始端点排序的区间列表。<br>
+在列表中插入一个新的区间，你需要确保列表中的区间仍然有序且不重叠（如果有必要的话，可以合并区间）。</p>
+<p>示例 1：<br>
+输入：intervals = [[1,3],[6,9]], newInterval = [2,5]<br>
+输出：[[1,5],[6,9]]</p>
+<p>示例 2：<br>
+输入：intervals = [[1,2],[3,5],[6,7],[8,10],[12,16]], newInterval = [4,8]<br>
+输出：[[1,2],[3,10],[12,16]]<br>
+解释：这是因为新的区间 [4,8] 与 [3,5],[6,7],[8,10] 重叠。</p>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="本体思路">本体思路</h1>
+<p>依次合并区间，直到它完全在某两个区间之内，添加到区间内</p>
+<h1 id="大神做法1">大神做法1：</h1>
+<pre><code class="language-python">class Solution:
+    def insert(self, intervals: List[List[int]], newInterval: List[int]) -&gt; List[List[int]]:
+        left, right = newInterval
+        placed = False
+        ans = list()
+        for li, ri in intervals:
+            if li &gt; right:
+                # 在插入区间的右侧且无交集
+                if not placed:#第一次在区间内就加入，之后就不进行语句内操作
+                    ans.append([left, right])
+                    placed = True
+                ans.append([li, ri])
+            elif ri &lt; left:
+                # 在插入区间的左侧且无交集
+                ans.append([li, ri])
+            else:
+                # 与插入区间有交集，计算它们的并集
+                left = min(left, li)
+                right = max(right, ri)
 
-//动态初始化:包含默认初始化，默认值都为0
-int[] b=new int[10];
-b[0]=10
-</code></pre>
-<h2 id="7-数组小结">7、数组小结</h2>
-<ul>
-<li>数组是相同数据类型（数据类型可以为任意类型）的有序集合</li>
-<li>数组也是对象，数组元素相当于对象的成员变量</li>
-<li>数组的长度是确定的，不可变。如果越界，则报ArrayIndexOutofBounds</li>
-</ul>
-<h2 id="8-遍历数组">8、遍历数组</h2>
-<p>1.for循环，最常见</p>
-<p>2.利用foreach</p>
-<p>3.利用jdk自带的方法 --&gt; java.util.Arrays.toString()</p>
-<figure data-type="image" tabindex="1"><img src="https://img2018.cnblogs.com/blog/1548389/201908/1548389-20190817173553680-963115541.png" alt="img" loading="lazy"></figure>
-<h2 id="9-流程">9、流程</h2>
-<p><strong>if语句</strong></p>
-<pre><code class="language-java">for(int array:arrays){
-    System.out.println(array);//无下标
-}
-
-for(int i=0;i&lt;arrays.length;i++){
-    System.out.print(arrays[i]+&quot;&quot;);
-}
-
-public static void printArray(int[] arrays){
-    //形参是数组
-}
-</code></pre>
-<h2 id="10-多维数组">10、多维数组</h2>
-<pre><code class="language-java">int[][] array={{1,2},{3,4}};
-for (int i=0;i&lt;array.length,i++){
-    for (int j=0;j&lt;array[i].length,j++){
-         System.out.println(array[i][j]);
-    }
-}
-</code></pre>
-<h2 id="11-arrays类">11、Arrays类</h2>
-<pre><code class="language-java">import java.util.Arrays
-int[] a={1,2,3};
-System.out.println(Arrays.toString(a));//打印数组Arrays.toString()
-Arrays.sort(a)//排序
-</code></pre>
-<h2 id="12-冒泡排序">12、冒泡排序</h2>
-<pre><code class="language-java">package jichu;
-
-import java.util.Arrays;
-
-public class while1 {
-    public static void main(String[] args) {
-        int[] a={1,2,3,4,1,3,2};
-        int[] sort=sort(a);
-        System.out.println(Arrays.toString(sort));
-    }
-    public static int[] sort(int[] array){
-        int temp=0;
-        for (int i=0;i&lt;array.length;i++){
-            boolean flag=false;
-            for (int j=0;j&lt;array.length-i-1;j++){
-                if(array[j+1]&lt;array[j]){
-                    temp=array[j];
-                    array[j]=array[j+1];
-                    array[j+1]=temp;
-                    flag=true;
-                }
-
-            }
-            if(flag==false){
-                break;
-            }
-        }
-        return array;
-    }
-
-}
+        if not placed:# 没找到就填到最后
+            ans.append([left, right])
+        return ans
 </code></pre>
 
                 </div>
@@ -223,14 +148,14 @@ public class while1 {
         
             <div class="next-post">
                 <div class="next gt-c-content-color-first">下一篇</div>
-                <a href="https://ganhan999.github.io/post/125、验证回文串/" class="post-title gt-a-link">
-                    125、验证回文串
+                <a href="https://ganhan999.github.io/post/Git/" class="post-title gt-a-link">
+                    Git
                 </a>
             </div>
         
 
         
-            <span id="/post/JavaSE基础3/" class="leancloud_visitors" data-flag-title="JavaSE基础3">
+            <span id="/post/57、插入区间/" class="leancloud_visitors" data-flag-title="中等56. 合并区间">
                 <em class="post-meta-item-text">阅读量 </em>
                 <i class="leancloud-visitors-count">0</i>
             </span>

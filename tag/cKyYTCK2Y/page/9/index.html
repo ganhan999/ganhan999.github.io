@@ -4,7 +4,7 @@
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-<title>比特图像分层 | Gridea</title>
+<title>leetcode | Gridea</title>
 
 <link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1611142519074">
 
@@ -25,11 +25,11 @@
 
 
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css">
 </head>
 <body>
 <div class="main gt-bg-theme-color-first">
-    <nav class="navbar navbar-expand-lg">
+    <div class="main-content">
+        <nav class="navbar navbar-expand-lg">
     <div class="navbar-brand">
         <img class="user-avatar" src="/images/avatar.png" alt="头像">
         <div class="site-name gt-c-content-color-first">
@@ -85,107 +85,51 @@
     </div>
 </nav>
 
-    <div class="post-container">
-        <div class="post-detail gt-bg-theme-color-second">
-            <article class="gt-post-content">
-                <h2 class="post-title">
-                    比特图像分层
-                </h2>
-                <div class="post-info">
-                    <time class="post-time gt-c-content-color-first">
-                        · 2020-11-02 ·
-                    </time>
-                    
-                        <a href="https://ganhan999.github.io/tag/6kpimvVf4s/" class="post-tags">
-                            # 数字图像处理
-                        </a>
-                    
-                </div>
-                <div class="post-content">
-                    <p>常见的256级灰度图片中，每个像素灰度值由8个比特组成，分别将这8个比特分离，形成8幅新的图片，称为比特图像分层。</p>
-<p>举个🌰：</p>
-<p>有一副四个像素（2*2）的图像，像素值分别为1，2，3，4：<br>
-<img src="https://ganhan999.github.io//post-images/1604302386613.gif" alt="" loading="lazy"></p>
-<p>这些值转换为二进制为（扩充为8位）：1（00000001）2（00000010）3（00000011）4（00000100）</p>
-<p>则这幅图像的8个比特层图像为：<br>
-<img src="https://ganhan999.github.io//post-images/1604302400912.gif" alt="" loading="lazy"></p>
-<p>实例：<br>
-<img src="https://ganhan999.github.io//post-images/1604303058038.png" alt="" loading="lazy"><br>
-读取图片数据：</p>
-<pre><code class="language-python">import cv2
-import numpy as np
-import matplotlib.pyplot as plt
-
-#更改为需要的图片路径
-img = cv2.imread(r'1.png',0)
-h,w = img.shape[0],img.shape[1]
-
-#处理过程
-new_img = np.zeros((h,w,8))
-for i in range(h):
-    for j in range(w):
-        n = str(np.binary_repr(img[i,j],8))
-        for k in range(8):
-            new_img[i,j,k] = n[k]
-
-#依次显示
-for i in range(8):
-    cv2.imshow('image',new_img[:,:,i])
-    cv2.waitKey(0)
-</code></pre>
-<p>结果如下(比特层数递增，最后一张是原图)：<br>
-<img src="https://ganhan999.github.io//post-images/1604302544079.jpg" alt="" loading="lazy"></p>
-
-                </div>
-            </article>
+        <div class="current-tag-container">
+            <h2 class="title gt-c-content-color-first">
+                #leetcode
+            </h2>
         </div>
-
+        <div class="post-list-container">
+    <div class="post-inner">
         
-            <div class="next-post">
-                <div class="next gt-c-content-color-first">下一篇</div>
-                <a href="https://ganhan999.github.io/post/13、罗马数字转整数/" class="post-title gt-a-link">
-                    13、罗马数字转整数
-                </a>
+            <div class="post gt-bg-theme-color-second">
+                <div class="post-left">
+                    <div>
+                        
+                        <a href="https://ganhan999.github.io/post/1、两数之和/">
+                            <span class="post-title gt-c-content-color-first">1、两数之和</span>
+                        </a>
+                    </div>
+                    <div class="gt-post-content post-abstract gt-c-content-color-second">
+                        
+                    </div>
+                    <div class="post-info">
+                        <time class="post-time gt-c-content-color-first">
+                            发布于 · 2020-11-02 ·
+                        </time>
+                        
+                            <a href="https://ganhan999.github.io/tag/cKyYTCK2Y/" class="post-tag">
+                                # leetcode
+                            </a>
+                        
+                    </div>
+                </div>
+                
+                    <a href="https://ganhan999.github.io/post/1、两数之和/" class="post-feature-image"
+                       style="background-image: url('https://ganhan999.github.io//post-images/1、两数之和.jpg')">
+                    </a>
+                
             </div>
         
-
-        
-            <span id="/post/比特平面分层/" class="leancloud_visitors" data-flag-title="比特图像分层">
-                <em class="post-meta-item-text">阅读量 </em>
-                <i class="leancloud-visitors-count">0</i>
-            </span>
-        
-
-        
-
-        
-            <script src='https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js'></script>
-
-<style>
-	div#vcomments{
-		width:100%;
-		max-width: 1000px;
-		padding: 2.5%
-	}
-</style>
-
-
-	<div id="vcomments"></div>
-
-<script>
-	new Valine({
-		el: '#vcomments',
-		appId: '',
-		appKey: '',
-		avatar: '',
-		pageSize: 5,
-		recordIp: true,
-		placeholder: 'Just Go Go',
-		visitor: true,
-	});
-</script>
-
-        
+    </div>
+</div>
+        <div class="pagination-container">
+    
+        <a href="https://ganhan999.github.io/tag/cKyYTCK2Y/page/8/" class="prev-page gt-a-link">上一页</a>
+    
+    
+</div>
 
         <div class="site-footer gt-c-content-color-first">
     <div class="slogan gt-c-content-color-first">温故而知新</div>
