@@ -6,7 +6,7 @@
 
 <title>Java Linux | Gridea</title>
 
-<link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1611318555145">
+<link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1611486846523">
 
 <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://ganhan999.github.io//styles/main.css">
@@ -77,7 +77,7 @@
             
         </div>
         <div style="text-align: center">
-            <form id="gridea-search-form" style="position: relative" data-update="1611318555145" action="/search/index.html">
+            <form id="gridea-search-form" style="position: relative" data-update="1611486846523" action="/search/index.html">
                 <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
                 <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
             </form>
@@ -141,14 +141,12 @@ shutdown -r now #系统立马重启
 shutdown -r +10 #系统十分钟后重启
 reboot #就是重启，等同于shutdown -r now
 halt #关闭系统，等同于shutdown -h now和poweroff
-12345678910
 </code></pre>
 <p>最后总结：不管是重启还是关闭系统，首先要运行sync命令，把内存中的数据写到磁盘中，执行命令之后没有返回消息则表明运行成功</p>
 <h2 id="系统目录">系统目录</h2>
 <p>1、一切皆文件<br>
 2、根目录/ ,所有的文件都挂载在这个节点下</p>
 <pre><code class="language-bash">ls / #查看当前下的目录
-1
 </code></pre>
 <figure data-type="image" tabindex="1"><img src="https://img-blog.csdnimg.cn/20200630084025462.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L29rRm9ycmVzdDI3,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
 <p>图 树状目录结构</p>
@@ -185,7 +183,6 @@ halt #关闭系统，等同于shutdown -h now和poweroff
 cd..:#返回上一级目录
 cd ~:#回到当前的用户目录
 pwd :#显示当前用户所在的目录
-123456
 </code></pre>
 <figure data-type="image" tabindex="2"><img src="https://img-blog.csdnimg.cn/20200630084914110.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L29rRm9ycmVzdDI3,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
 <p>图 pwd展示</p>
@@ -193,31 +190,25 @@ pwd :#显示当前用户所在的目录
 <p>在Linux中Is可能是最常常被使用的!</p>
 <pre><code class="language-bash">-a:#参数: all ,查看全部的文件,包括隐藏文件
 -l:#参数列出所有的文件,包含文件的属性和权限,没有隐藏文件
-12
 </code></pre>
 <p>所有Linux可以组合使用!</p>
 <pre><code class="language-bash">ls -al 查看全部的文件包括隐藏文件的属性和权限
-1
 </code></pre>
 <h2 id="mkdir-创建一个目录">mkdir 创建一个目录</h2>
 <pre><code class="language-bash">mkdir -p test2/test3/test4 # 用-p递归创建层级目录
-1
 </code></pre>
 <h2 id="rmdir-删除目录">rmdir 删除目录</h2>
 <pre><code class="language-bash">rmdir -p test2/test3/test4 #递归删除文件
-1
 </code></pre>
 <p>rmdir仅能删除空的目录,如果下面存在文件,需要先删除文件,递归删除多个目录-p参数即可</p>
 <h2 id="cp复制文件或者目录">cp(复制文件或者目录)</h2>
 <pre><code class="language-bash">cp install.sh cqhstudy #将当前目录下的install.sh 复制到cqhstudy文件夹中
-1
 </code></pre>
 <h2 id="rm-移除文件或者目录">rm 移除文件或者目录</h2>
 <pre><code class="language-bash">-f #忽略不存在的文件,不会出现警告,强制删除!
 -r #递归删除目录!
 -i #互动,删除询问是否删除
 rm -rf install.sh/#删除系统中的install.sh
-1234
 </code></pre>
 <h2 id="mv-移动文件或者目录重命名文件">mv 移动文件或者目录|重命名文件</h2>
 <pre><code class="language-bash">-f #强制
@@ -225,7 +216,6 @@ rm -rf install.sh/#删除系统中的install.sh
 12
 mv install.sh cqhstudy #移动文件
 mv cqhstudy cqhstudy2 #重命名文件夹名
-12
 </code></pre>
 <h1 id="基本属性">基本属性</h1>
 <p>Linux系统是一种典型的多用户系统,不同的用户处于不同的地位,拥有不同的权限。为了保护系统的安全性, Linux系统对不同的用户访问同一文件(包括目录文件)的权限做了不同的规定。<br>
@@ -265,11 +255,9 @@ mv cqhstudy cqhstudy2 #重命名文件夹名
 2、chown :更改文件属主,也可以同时更改文件属组</p>
 <pre><code class="language-bash">chown [-R] 属主名文件名
 chown [-R] 属主名:属组名文件名
-12
 </code></pre>
 <p>3、chmod :更改文件9个属性</p>
 <pre><code class="language-bash">chmod [-R] xyz 文件或目录
-1
 </code></pre>
 <p>Linux文件属性有两种设置方法,一种是数字（常用的是数字）, 一种是符号。<br>
 Linux文件的基本权限就有九个,分别是owner/group/others三种身份各有自己的read/write/execute权限。<br>
@@ -299,13 +287,11 @@ chomd 777 文件赋予所有用户可读可执行!<br>
 你可以使用man 命令来查看各个命令的使用文档,如: man [命令]。</p>
 <h2 id="网络配置目录">网络配置目录:</h2>
 <pre><code class="language-bash">cd /etc/ sysconfig/network-scripts
-1
 </code></pre>
 <figure data-type="image" tabindex="3"><img src="https://img-blog.csdnimg.cn/20200630092521193.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L29rRm9ycmVzdDI3,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
 <p>图 网络基础配置</p>
 <pre><code class="language-bash">ping #用来查看网络是否连通
 ifconfig #查看网络 和Windows的ipconfig是一样的
-12
 </code></pre>
 <p>2020/6/30</p>
 <h1 id="硬链接和软链接">硬链接和软链接</h1>
@@ -390,12 +376,10 @@ cqh:x:1002:1002::/home/cqh:/bin/bash
 </code></pre>
 <h2 id="删除用户-userdel">删除用户 userdel</h2>
 <pre><code class="language-bash">userdel -r cqh #删除用户的时候把它的目录也删除掉
-1
 </code></pre>
 <h2 id="修改用户-usermod">修改用户 usermod</h2>
 <p>对应修改的内容 修改那个用户</p>
 <pre><code class="language-bash">[root@cqh home]usermode -d /home/233 cqh
-1
 </code></pre>
 <p>修改完毕后查看配置文件 将cqh用户下的目录修改为233</p>
 <h2 id="切换用户">切换用户</h2>
@@ -414,20 +398,17 @@ $表示普通用户，#表示超级用户,也就是root用户</p>
 <pre><code class="language-bash">passwd username 
 new password #新密码
 re password #修改密码
-123
 </code></pre>
 <p>普通用户</p>
 <pre><code class="language-bash">passwd
 (current)UNIX password:
 new password: #密码不能过于简单
 re password:
-1234
 </code></pre>
 <p>锁定账户<br>
 root ,比如张三辞职了!冻结这个账号, 一旦冻结,这个人就登录不上系统了!</p>
 <pre><code class="language-bash">passwd -l cqh #锁定之后这个用户就不能再登录了
 passwd -d cqh #把密码清空 这样也能防止用户登录
-12
 </code></pre>
 <figure data-type="image" tabindex="5"><img src="https://img-blog.csdnimg.cn/20200702092430346.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L29rRm9ycmVzdDI3,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
 <p>效果图 2020/7/2</p>
@@ -438,23 +419,19 @@ passwd -d cqh #把密码清空 这样也能防止用户登录
 <h2 id="创建一个用户组-groupadd">创建一个用户组 groupadd</h2>
 <pre><code class="language-bash">[root@cqh ~]group add cqh
 [root@cqh ~]cat /etc/group
-12
 </code></pre>
 <p>创建完用户组后可以得到一一个组的id ,这个id是可以指定的! -g 520， 若果不指定就是自增1</p>
 <h2 id="删除用户组-groupdel">删除用户组 groupdel</h2>
 <pre><code class="language-bash">[root@cqh ~]groupdel cqh
 [root@cqh ~]cat /etc/group
-12
 </code></pre>
 <h2 id="修改用户组的权限和名字-groupmod-g-n">修改用户组的权限和名字 groupmod -g-n</h2>
 <pre><code class="language-bash">cqh:x:1003
 [root@cqh ~]group -g 666 -n newcqh cqh #修改cqh用户组id为666 重命名为newcqh 
-12
 </code></pre>
 <h2 id="用户切换用户组">用户切换用户组</h2>
 <pre><code class="language-bash">#当前登录用户 cqh
 $ newgrp root #切换为root
-12
 </code></pre>
 <h2 id="拓展-用户账户文件的查看了解即可-etcpasswd">拓展 用户账户文件的查看(了解即可) /etc/passwd</h2>
 <p>用户名:口令(登录密码，我们不可见) :用户标识号:组标识号:注释性描述:主目录:登录She11<br>
@@ -492,7 +469,6 @@ ps- xx：<br>
 ps-aux|grep mysql  查看mysql相关进程
 # | 在Linux中这个叫管道符   A|B
 # grep 查找文件中符合条件的字符串
-1234
 </code></pre>
 <p>对于我们来说,这里目前只需要记住一个命令即可ps -xx|grep进程名字!过滤进程信息!<br>
 ps-ef ：可以查看到父进程的信息</p>
@@ -501,13 +477,11 @@ ps-ef ：可以查看到父进程的信息</p>
 #pstree -pu
 #-p 显示父id
 #-u 显示用户组
-12345
 </code></pre>
 <figure data-type="image" tabindex="8"><img src="https://img-blog.csdnimg.cn/20200706084738377.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L29rRm9ycmVzdDI3,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
 <p>进程树效果图</p>
 <p>结束进程：杀掉进程 等价于Windows结束任务</p>
 <pre><code class="language-bash">kill -9 pid
-1
 </code></pre>
 <p>表示强制结束该进程</p>
 <h1 id="环境安装">环境安装</h1>
@@ -524,7 +498,6 @@ rpm -qa|grep jdk 查看JDK版本信息
 rpm -e --nodeps jdk_ 卸载
 #卸载完毕后可安装JDK
 rpm -ivk rpm包 
-123456
 </code></pre>
 <figure data-type="image" tabindex="9"><img src="https://img-blog.csdnimg.cn/20200706085220973.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L29rRm9ycmVzdDI3,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
 <p>图 java-version命令</p>
@@ -532,7 +505,6 @@ rpm -ivk rpm包
 <p>图 安装中</p>
 <p>配置环境变量: /etc/profile 在文件的最后面增加java的配置和window安装环境变量一样!</p>
 <pre><code class="language-bash">vim /etc/profile
-1
 </code></pre>
 <p>这个环境变量有问题 狂神老师敲的是有问题的</p>
 <pre><code class="language-bash">JAVA_HOME=/usr/java/jdk-14.0.1
@@ -540,11 +512,9 @@ JRE_HOME=$JAVA_HOME/jre
 PATH=$PATH:$JAVA_HOME/bin:$JRE_HOME/bin
 CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar:$JRE_HOME/lib
 export JAVA_HOME JRE_HOME PATH CLASSPATH
-12345
 </code></pre>
 <p>让这个配置文件生效!</p>
 <pre><code class="language-bash">source /etc/profile
-1
 </code></pre>
 <p>狂神老师用的是阿里云，自带网络了，此处给用虚拟机的同学使用。虚拟机联网教程：<a href="https://blog.csdn.net/u012049667/article/details/81171003">虚拟机和主机联网教程</a><br>
  配置完后在Linux防火墙中开启相应端口 使用java -jar发布 如果你的项目在云服务器上，就可以在公网上进行发布查看了</p>
@@ -554,7 +524,6 @@ firewall-cmd --zone=public --add-port=9000/tcp --permanent
 systemctl restart firewalld.service
 #查看所有开启的端口，如果是阿里云 需要配置安全组规则
 firewall-cmd --list-ports
-123456
 </code></pre>
 <figure data-type="image" tabindex="11"><img src="https://img-blog.csdnimg.cn/20200707090238431.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L29rRm9ycmVzdDI3,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
 <p>命令运行效果</p>
@@ -569,13 +538,11 @@ firewall-cmd --list-ports
 ./startup.sh
 #停止
 ./shutdown.sh
-1234
 </code></pre>
 <figure data-type="image" tabindex="13"><img src="https://img-blog.csdnimg.cn/20200707090700195.png#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
 <p>启动效果</p>
 <pre><code class="language-bash">#开启端口
 firewall-cmd --zone=public --add-port=8080/tcp –permanent
-12
 </code></pre>
 <p>命令含义:<br>
  --zone 作用域<br>
@@ -587,14 +554,12 @@ firewall-cmd --zone=public --add-port=8080/tcp –permanent
 <p>1.检测CentOS 7</p>
 <pre><code class="language-bash">[root@localhost ~] cat /etc/redhat-release 
 CentOS Linux release 7.3.1611 (Core)
-12
 </code></pre>
 <p>2.安装我们的准备环境</p>
 <pre><code class="language-bash">yum -y install 包名
 #yum install 安装命令 -y  所有的提示都为y
 yum -y install gcc
 yum -y install gcc-c++
-1234
 </code></pre>
 <p>3.卸载以前的docker</p>
 <pre><code class="language-bash">yum remove docker \
@@ -605,33 +570,26 @@ yum -y install gcc-c++
                   docker-latest-logrotate \
                   docker-logrotate \
                   docker-engine
-12345678
 </code></pre>
 <p>4.下载环境</p>
 <pre><code class="language-bash">yum install -y yum-utils \device-mapper-persistent-data \lvm2
-1
 </code></pre>
 <p>5.使用国内阿里云镜像</p>
 <pre><code class="language-bash">yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
-1
 </code></pre>
 <p>6.更新yum软件包安装</p>
 <pre><code class="language-bash">yum makecache fast
-1
 </code></pre>
 <p>7.安装docker ce</p>
 <pre><code class="language-bash">yum -y install docker-ce docker-ce-Cli containerd.io
-1
 </code></pre>
 <p>8.启动docker</p>
 <pre><code class="language-bash">systemctl start docker
-1
 </code></pre>
 <p>9.测试</p>
 <pre><code class="language-bash">docker version
 docker run hello-world
 docker images
-123
 </code></pre>
 <figure data-type="image" tabindex="14"><img src="https://img-blog.csdnimg.cn/20200707105511664.png#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
 <p>图 运行效果</p>
