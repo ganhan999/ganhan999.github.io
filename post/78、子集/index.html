@@ -4,7 +4,7 @@
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-<title>中等12. 整数转罗马数字 | Gridea</title>
+<title>中等78. 子集 | Gridea</title>
 
 <link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1611664036118">
 
@@ -89,11 +89,11 @@
         <div class="post-detail gt-bg-theme-color-second">
             <article class="gt-post-content">
                 <h2 class="post-title">
-                    中等12. 整数转罗马数字
+                    中等78. 子集
                 </h2>
                 <div class="post-info">
                     <time class="post-time gt-c-content-color-first">
-                        · 2020-12-15 ·
+                        · 2021-01-26 ·
                     </time>
                     
                         <a href="https://ganhan999.github.io/tag/cKyYTCK2Y/" class="post-tags">
@@ -103,69 +103,76 @@
                 </div>
                 <div class="post-content">
                     <h1 id="题目">题目</h1>
-<p>&quot;&quot;&quot;<br>
-罗马数字包含以下七种字符： I， V， X， L，C，D 和 M。<br>
-字符          数值<br>
-I             1<br>
-V             5<br>
-X             10<br>
-L             50<br>
-C             100<br>
-D             500<br>
-M             1000<br>
-例如， 罗马数字 2 写做 II ，即为两个并列的 1。12 写做 XII ，即为 X + II 。<br>
-27 写做  XXVII, 即为 XX + V + II 。<br>
-通常情况下，罗马数字中小的数字在大的数字的右边。但也存在特例，例如 4 不写做 IIII，而是 IV。<br>
-数字 1 在数字 5 的左边，所表示的数等于大数 5 减小数 1 得到的数值 4 。同样地，数字 9 表示为 IX。<br>
-这个特殊的规则只适用于以下六种情况：</p>
-<p>I 可以放在 V (5) 和 X (10) 的左边，来表示 4 和 9。<br>
-X 可以放在 L (50) 和 C (100) 的左边，来表示 40 和 90。<br>
-C 可以放在 D (500) 和 M (1000) 的左边，来表示 400 和 900。<br>
-给定一个整数，将其转为罗马数字。输入确保在 1 到 3999 的范围内。</p>
-<p>示例 1:<br>
-输入: 3<br>
-输出: &quot;III&quot;</p>
-<p>示例 2:<br>
-输入: 4<br>
-输出: &quot;IV&quot;</p>
-<p>示例 3:<br>
-输入: 9<br>
-输出: &quot;IX&quot;</p>
-<p>示例 4:<br>
-输入: 58<br>
-输出: &quot;LVIII&quot;<br>
-解释: L = 50, V = 5, III = 3.</p>
-<p>示例 5:<br>
-输入: 1994<br>
-输出: &quot;MCMXCIV&quot;<br>
-解释: M = 1000, CM = 900, XC = 90, IV = 4.<br>
-&quot;&quot;&quot;</p>
+<p>给你一个整数数组 nums ，数组中的元素 互不相同 。返回该数组所有可能的子集（幂集）。<br>
+解集 不能 包含重复的子集。你可以按 任意顺序 返回解集。</p>
+<p>示例 1：<br>
+输入：nums = [1,2,3]<br>
+输出：[[],[1],[2],[1,2],[3],[1,3],[2,3],[1,2,3]]</p>
+<p>示例 2：<br>
+输入：nums = [0]<br>
+输出：[[],[0]]</p>
+<p>提示：<br>
+1 &lt;= nums.length &lt;= 10<br>
+-10 &lt;= nums[i] &lt;= 10<br>
+nums 中的所有元素 互不相同</p>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
 <h1 id="本体思路">本体思路</h1>
-<p>贪心算法</p>
-<h1 id="我的做法">#我的做法：</h1>
+<p>库函数</p>
+<h1 id="大神做法1">大神做法1：</h1>
 <pre><code class="language-python">class Solution:
-    def intToRoman(self, num: int) -&gt; str:
-        # 使用哈希表，按照从大到小顺序排列
-        hashmap = {1000:'M', 900:'CM', 500:'D', 400:'CD', 100:'C', 90:'XC', 50:'L', 40:'XL', 10:'X', 9:'IX', 5:'V', 4:'IV', 1:'I'}
-        res = ''
-        for key in hashmap:
-            if num // key != 0:
-                count = num // key  # 比如输入4000，count 为 4
-                res += hashmap[key] * count
-                num %= key
+    def subsets(self, nums: List[int]) -&gt; List[List[int]]:
+        res = []
+        for i in range(len(nums)+1):
+            for tmp in itertools.combinations(nums, i):
+                res.append(tmp)
         return res
 </code></pre>
-<p>&quot;&quot;&quot;</p>
-<h1 id="大神做法">#大神做法</h1>
-<p>暴力算法</p>
-<p>&quot;&quot;&quot;</p>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<p>迭代</p>
+<h1 id="大神做法2">大神做法2：</h1>
 <pre><code class="language-python">class Solution:
-    def intToRoman(self, num: int) -&gt; str:
-        M = [&quot;&quot;, &quot;M&quot;, &quot;MM&quot;, &quot;MMM&quot;] # 1000，2000，3000
-        C = [&quot;&quot;, &quot;C&quot;, &quot;CC&quot;, &quot;CCC&quot;, &quot;CD&quot;, &quot;D&quot;, &quot;DC&quot;, &quot;DCC&quot;, &quot;DCCC&quot;, &quot;CM&quot;] # 100~900
-        X = [&quot;&quot;, &quot;X&quot;, &quot;XX&quot;, &quot;XXX&quot;, &quot;XL&quot;, &quot;L&quot;, &quot;LX&quot;, &quot;LXX&quot;, &quot;LXXX&quot;, &quot;XC&quot;] # 10~90
-        I = [&quot;&quot;, &quot;I&quot;, &quot;II&quot;, &quot;III&quot;, &quot;IV&quot;, &quot;V&quot;, &quot;VI&quot;, &quot;VII&quot;, &quot;VIII&quot;, &quot;IX&quot;] # 1~9
-        return M[num//1000] + C[(num%1000)//100] + X[(num%100)//10] + I[num%10]
+    def subsets(self, nums: List[int]) -&gt; List[List[int]]:
+        res=[[]]
+        for num in nums:
+            res=res+[[num]+i for i in res]
+        return res
+</code></pre>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<p>回溯</p>
+<h1 id="大神做法3">大神做法3：</h1>
+<pre><code class="language-python">class Solution:
+    def subsets(self, nums: List[int]) -&gt; List[List[int]]:
+        ans = []
+        # 存储符合要求的子集
+        tmp = []
+        n = len(nums)
+        def helper(idx):
+            # 先添加子集
+            ans.append(tmp[:])
+            for i in range(idx, n):
+                tmp.append(nums[i])
+                # 避免重复，每次递归，从下一个索引开始
+                helper(i + 1)
+                # 回溯
+                tmp.pop()
+        helper(0)
+        return ans
+</code></pre>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<p>位运算，那一位是1就把那一位对应的值加进去</p>
+<h1 id="大神做法4">大神做法4：</h1>
+<pre><code class="language-python">class Solution:
+    def subsets(self, nums: List[int]) -&gt; List[List[int]]:
+        size = len(nums)
+        n = 1 &lt;&lt; size
+        res = []
+        for i in range(n):
+            cur = []
+            for j in range(size):
+                if i &gt;&gt; j &amp; 1:
+                    cur.append(nums[j])
+            res.append(cur)
+        return res
 </code></pre>
 
                 </div>
@@ -175,14 +182,14 @@ C 可以放在 D (500) 和 M (1000) 的左边，来表示 400 和 900。<br>
         
             <div class="next-post">
                 <div class="next gt-c-content-color-first">下一篇</div>
-                <a href="https://ganhan999.github.io/post/Java CSS/" class="post-title gt-a-link">
-                    Java CSS
+                <a href="https://ganhan999.github.io/post/Java Docker/" class="post-title gt-a-link">
+                    Java Docker
                 </a>
             </div>
         
 
         
-            <span id="/post/12、整数转罗马数字 /" class="leancloud_visitors" data-flag-title="中等12. 整数转罗马数字">
+            <span id="/post/78、子集/" class="leancloud_visitors" data-flag-title="中等78. 子集">
                 <em class="post-meta-item-text">阅读量 </em>
                 <i class="leancloud-visitors-count">0</i>
             </span>
