@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ganhan999.github.io/</id>
     <title>Gridea</title>
-    <updated>2021-01-26T12:27:22.050Z</updated>
+    <updated>2021-01-27T11:26:53.232Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ganhan999.github.io/"/>
     <link rel="self" href="https://ganhan999.github.io/atom.xml"/>
@@ -10,6 +10,959 @@
     <logo>https://ganhan999.github.io/images/avatar.png</logo>
     <icon>https://ganhan999.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, Gridea</rights>
+    <entry>
+        <title type="html"><![CDATA[中等79.单词搜索]]></title>
+        <id>https://ganhan999.github.io/post/79、单词搜索/</id>
+        <link href="https://ganhan999.github.io/post/79、单词搜索/">
+        </link>
+        <updated>2021-01-27T12:29:35.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
+<p>给定一个二维网格和一个单词，找出该单词是否存在于网格中。<br>
+单词必须按照字母顺序，通过相邻的单元格内的字母构成，其中“相邻”单元格是那些水平相邻或垂直相邻的单元格。<br>
+同一个单元格内的字母不允许被重复使用。</p>
+<p>示例:<br>
+board =<br>
+[<br>
+['A','B','C','E'],<br>
+['S','F','C','S'],<br>
+['A','D','E','E']<br>
+]</p>
+<p>给定 word = &quot;ABCCED&quot;, 返回 true<br>
+给定 word = &quot;SEE&quot;, 返回 true<br>
+给定 word = &quot;ABCB&quot;, 返回 false</p>
+<p>提示：<br>
+board 和 word 中只包含大写和小写英文字母。<br>
+1 &lt;= board.length &lt;= 200<br>
+1 &lt;= board[i].length &lt;= 200<br>
+1 &lt;= word.length &lt;= 10^3<br>
+通过次数134,541提交次数305,651</p>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="本体思路">本体思路</h1>
+<p>回溯</p>
+<h1 id="大神做法1">大神做法1：</h1>
+<pre><code class="language-python">class Solution:
+    def exist(self, board: List[List[str]], word: str) -&gt; bool:
+        m = len(board)
+        n = len(board[0])
+        visited = [[False] * n for _ in range(m)]
+        rows = [-1, 0, 1, 0]
+        cols = [0, 1, 0, -1]
+        def dfs(x, y, idx):
+            &quot;&quot;&quot;搜索单词
+            Args:
+                x: 行索引
+                y: 列索引
+                idx: 单词对应的字母索引
+            &quot;&quot;&quot;
+            if board[x][y] != word[idx]:
+                return False
+            if idx == len(word) - 1:
+                return True
+            # 先标记
+            visited[x][y] = True
+            # 找到符合的字母时开始向四个方向扩散搜索
+            for i in range(4):
+                nx = x + rows[i]
+                ny = y + cols[i]
+                if 0 &lt;= nx &lt; m and 0 &lt;= ny &lt; n and not visited[nx][ny] and dfs(nx, ny, idx + 1):#判断下一个字母是否匹配后面的字符串
+                    return True
+            # 扩散未搜索对应的字母，释放标记
+            # 继续往其他方位搜索
+            visited[x][y] = False#后面四个方向完全匹配不到就返回False，且把该元素置为False，相当于回溯
+            return False
+        for x in range(m):
+            for y in range(n):
+                if dfs(x, y, 0):
+                    return True
+        return False
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Java POI和EasyExcel]]></title>
+        <id>https://ganhan999.github.io/post/Java POI和EasyExcel/</id>
+        <link href="https://ganhan999.github.io/post/Java POI和EasyExcel/">
+        </link>
+        <updated>2021-01-27T11:18:25.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="跟着狂神聊聊poi和easyexcel">跟着狂神聊聊POI和EasyExcel</h1>
+<h2 id="poi和easyexcel讲解">POI和easyExcel讲解</h2>
+<h3 id="常用信息">常用信息</h3>
+<ol>
+<li>将用户信息导出为excel表格</li>
+<li>讲Excel表中的信息录入到网站数据库，大大减小网站数据的录入量！</li>
+</ol>
+<p>开发中经常会涉及到excel的处理，如导出Excel到数据库中！<br>
+操作Excel目前比较流行的就是Apache POI和阿里巴巴的easyExcel</p>
+<h3 id="apache-poi">Apache POI</h3>
+<p>Apache POI官网: <code>https://poi.apache.org/</code></p>
+<p><img src="https://img-blog.csdnimg.cn/20201127202918819.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NhaWVuZW5lbg==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"><br>
+easyExcel</p>
+<p>easyExcel官网地址: <code>https://github.com/alibaba/easyexcel</code></p>
+<p><img src="https://img-blog.csdnimg.cn/20201127202959370.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NhaWVuZW5lbg==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"><br>
+EasyExcel是阿里巴巴开源的一个excel处理框架，以使用简单，节约内存著称。<br>
+EasyExcel能大量减少占用内存的主要原因是在解析Excel时没有将文件数据一次性全部加载到内存中，而是从一个磁盘上一行行读取数据，逐个解析。<br>
+下图是EasyExcel和POI在解析Excel时的对比图(时间与空间的相互取舍)。</p>
+<figure data-type="image" tabindex="1"><img src="https://img-blog.csdnimg.cn/20201127203049787.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NhaWVuZW5lbg==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
+<p>官方文档: <code>https://www.yuque.com/easyexcel/doc/easyexcel</code></p>
+<h3 id="poi-excel操作">POI-Excel操作</h3>
+<h4 id="poi-excel写">POI-Excel写</h4>
+<blockquote>
+<p>创建项目</p>
+</blockquote>
+<ol>
+<li>创建一个普通空项目,然后新建一个model的maven项目</li>
+<li>引入pom依赖</li>
+</ol>
+<pre><code class="language-xml">&lt;!--导入依赖--&gt;
+&lt;dependencies&gt;
+	&lt;!--xLs(03)--&gt;
+	&lt;dependency&gt;
+		&lt;groupId&gt;org.apache.poi&lt;/groupId&gt;
+		&lt;artifactId&gt;poi&lt;/artifactId&gt;
+		&lt;version &gt;3.9&lt;/version&gt;
+	&lt;/dependency&gt;
+	&lt;!--xLsx(07)--&gt;
+	 &lt;dependency&gt;
+        &lt;groupId&gt;org.apache.poi&lt;/groupId&gt;
+        &lt;artifactId&gt;poi-ooxml&lt;/artifactId&gt;
+        &lt;version&gt;3.9&lt;/version&gt;
+     &lt;/dependency&gt;
+	&lt;!--日期格式化工具--&gt;
+	&lt;dependency&gt;
+		&lt;groupId&gt;joda-time&lt;/groupId&gt;
+		&lt;artifactId&gt;joda-time&lt;/artifactId&gt;
+		&lt;version&gt;2.10.1&lt;/version&gt;
+	&lt;/dependency&gt;
+	&lt;!--test--&gt;
+	&lt;dependency&gt;
+		&lt;groupId&gt;junit&lt;/groupId&gt;
+		&lt;artifactId&gt;junit&lt;/artifactId&gt;
+		&lt;version&gt;4.12&lt;/version&gt;
+	&lt;/dependency&gt;
+&lt;/dependencies&gt;
+</code></pre>
+<h4 id="0307版本的写就是对象不同方法是一样的">03|07版本的写，就是对象不同，方法是一样的</h4>
+<p>区别：03版最多65536行，07行数没有限制</p>
+<figure data-type="image" tabindex="2"><img src="https://img-blog.csdnimg.cn/20201127203244822.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NhaWVuZW5lbg==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
+<ul>
+<li>工作薄</li>
+<li>工作表</li>
+<li>行</li>
+<li>单元格</li>
+</ul>
+<h4 id="03版本">03版本</h4>
+<pre><code class="language-java">package com.kuang;
+
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.joda.time.DateTime;
+import org.junit.Test;
+
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Date;
+
+public class ExcelWriteTest {
+
+    String PATH=&quot;ExcelCreate\\&quot;;
+
+    @Test
+    public void testWrite03() throws IOException {
+        //1,创建一个工作簿
+        Workbook workbook = new HSSFWorkbook();
+        //2,创建一个工作表
+        Sheet sheet = workbook.createSheet(&quot;03统计表&quot;);
+        //3，创建一行（1，1）
+        Row row1 = sheet.createRow(0);
+        //4，创建一个单元格
+        Cell cell11 = row1.createCell(0);
+        cell11.setCellValue(&quot;新增观众&quot;);
+        //（1，2）
+        Cell cell12 = row1.createCell(1);
+        cell12.setCellValue(666);
+        //第二行（2，1）
+        Row row2 = sheet.createRow(1);
+        Cell cell21 = row2.createCell(0);
+        cell21.setCellValue(&quot;时间记录&quot;);
+        //（2，2）
+        Cell cell22 = row2.createCell(1);
+        cell22.setCellValue(new DateTime().toString(&quot;yyyy-MM-dd HH:mm:ss&quot;));
+
+        //生成一张表（IO流）03版本使用xls结尾！
+        FileOutputStream fileOutputStream = new FileOutputStream(PATH + &quot;03版本测试.xls&quot;);
+        //输出
+        workbook.write(fileOutputStream);
+
+        //关闭流
+        fileOutputStream.close();
+
+        System.out.println(&quot;03生成成功&quot;);
+
+    }
+}
+</code></pre>
+<blockquote>
+<p>运行结果</p>
+</blockquote>
+<figure data-type="image" tabindex="3"><img src="https://img-blog.csdnimg.cn/20201127203409654.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NhaWVuZW5lbg==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
+<h4 id="07版和03不同的就这两处">07版(和03不同的就这两处)</h4>
+<pre><code class="language-java">Workbook workbook = new XSSFWorkbook();
+
+//生成一张表（IO流）07版本使用xlsx结尾！
+FileOutputStream fos = new FileOutputStream(PATH+&quot;07版本Excel测试.xlsx&quot;)
+</code></pre>
+<ul>
+<li>注意对象的一个区别,文件后缀!</li>
+</ul>
+<h4 id="大文件写hssf">大文件写HSSF</h4>
+<p>缺点：最多只能处理65536行，否则会报异常</p>
+<pre><code class="language-java">java.lang.IllegalArgumentException:Invalid row number (65536) outside allowable range (0.. 65535)
+</code></pre>
+<p>优点：过程中写入缓存，不操作磁盘，最后一次性写入磁盘，速度快</p>
+<pre><code class="language-java">    @Test
+    public void testwrite03BigData() throws IOException {
+        //时间
+        long begin = System.currentTimeMillis();
+        //创建一个薄
+        Workbook workbook = new HSSFWorkbook();
+        //创建表
+        Sheet sheet = workbook.createSheet();
+        //写入数据
+        for (int rowNum = 0; rowNum &lt; 65536; rowNum++) {
+            Row row = sheet.createRow(rowNum);
+            for (int cellNum = 0; cellNum &lt; 10; cellNum++) {
+                Cell cell = row.createCell(cellNum);
+                cell.setCellValue(cellNum);
+            }
+        }
+        FileOutputStream fos = new FileOutputStream(PATH + &quot;03版本Excel大量数据测试.xls&quot;);
+        workbook.write(fos);
+        fos.close();
+        System.out.println(&quot;over&quot;);
+        long end = System.currentTimeMillis();
+        System.out.println((double) (end - begin) / 1000);
+    }
+</code></pre>
+<blockquote>
+<p>运行结果</p>
+</blockquote>
+<pre><code class="language-java">over
+3.057
+</code></pre>
+<h4 id="大文件写xssf">大文件写XSSF</h4>
+<p>缺点：写数据时速度非常慢，非常耗内存，也会发生内存溢出，如100万条数据<br>
+优点：可以写较大的数据量，如20万条数据</p>
+<pre><code class="language-java">Workbook workbook = new XSSFWorkbook();
+Fileoutputstream ops = new Fileoutputstream(PATH +&quot;07版本Excel大量数据测试.xlsx&quot;);
+</code></pre>
+<h4 id="大文件写sxssf">大文件写SXSSF</h4>
+<p>优点：可以写非常大量的数据库，如100万条甚至更多条，写数据速度快，占用更少的内存<br>
+注意：</p>
+<ul>
+<li>过程中会产生临时文件，需要清理临时文件</li>
+<li>默认由100条记录被保存在内存中，如果超出这数量，则最前面的数据被写入临时文件</li>
+<li>如果想自定义内存中数据的数量，可以使用new SXSSFWorkbook（数量）</li>
+</ul>
+<pre><code class="language-java">Workbook workbook = new SXSSFWorkbook();
+Fileoutputstream ops = new Fileoutputstream(PATH +&quot;07版本Excel大量数据测试.xlsx&quot;);
+    @Test
+    public void testwrite07_S_BigData() throws IOException {
+        //时间
+        long begin = System.currentTimeMillis();
+        //创建一个薄
+        Workbook workbook = new SXSSFWorkbook(100);
+        //创建表
+        Sheet sheet = workbook.createSheet();
+        //写入数据
+        for (int rowNum = 0; rowNum &lt; 65536; rowNum++) {
+            Row row = sheet.createRow(rowNum);
+            for (int cellNum = 0; cellNum &lt; 10; cellNum++) {
+                Cell cell = row.createCell(cellNum);
+                cell.setCellValue(cellNum);
+            }
+        }
+        FileOutputStream fos = new FileOutputStream(PATH + &quot;07_S_版本Excel大量数据测试.xlsx&quot;);
+        workbook.write(fos);
+        fos.close();
+        //清除临时缓存
+        ((SXSSFWorkbook)workbook).dispose();
+        System.out.println(&quot;over&quot;);
+        long end = System.currentTimeMillis();
+        System.out.println((double) (end - begin) / 1000);
+    }
+</code></pre>
+<p>SXSSWorkbook 来自官方解释：实现：BigGridDemo策略的流式XSSFWorkbook版本。这允许写入非常大的文件而不会耗尽内存，因为任何时候只有可配置的行部分被保存在内存中。</p>
+<p>SXSSWorkbook 来自官方解释：实现：BigGridDemo策略的流式XSSFWorkbook版本。这允许写入非常大的文件而不会耗尽内存，因为任何时候只有可配置的行部分被保存在内存中。</p>
+<h3 id="poi-excel读">POI-Excel读</h3>
+<h4 id="03类型">03类型</h4>
+<pre><code class="language-java">package com.kuang;
+
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.junit.Test;
+
+import java.io.FileInputStream;
+
+public class ExcelReadTest {
+
+    String PATH = &quot;ExcelCreate\\&quot;;
+
+    @Test
+    public void testRead03() throws Exception {
+        //获取文件流
+        FileInputStream fis = new FileInputStream(PATH + &quot;03版本测试.xls&quot;);
+        //1、创建一个工作簿。使用 exceL能操作的这边他都可以操作！
+        Workbook workbook = new HSSFWorkbook(fis);
+        //2、得到表
+        Sheet sheet = workbook.getSheetAt(0);
+        //3、得到行
+        Row row = sheet.getRow(0);
+        //4、得到列
+        Cell cell = row.getCell(1);
+
+        //读取值的时候，一定要注意类型！
+        //getStringCellValue 字符串类型
+        System.out.println(cell.getNumericCellValue());
+        fis.close();
+    }
+}
+</code></pre>
+<h4 id="07类型">07类型</h4>
+<pre><code class="language-java">    @Test
+    public void testRead07() throws Exception {
+        //获取文件流
+        FileInputStream fis = new FileInputStream(PATH + &quot;07版本测试.xlsx&quot;);
+        //1、创建一个工作簿。使用 exceL能操作的这边他都可以操作！
+        Workbook workbook = new XSSFWorkbook(fis);
+        //2、得到表
+        Sheet sheet = workbook.getSheetAt(0);
+        //3、得到行
+        Row row = sheet.getRow(0);
+        //4、得到列
+        Cell cell = row.getCell(0);
+
+        //读取值的时候，一定要注意类型！
+        //getStringCellValue 字符串类型
+        System.out.println(cell.getStringCellValue());
+        fis.close();
+    }
+</code></pre>
+<p>注意获取值的类型即可</p>
+<h4 id="读取不同的数据类型">读取不同的数据类型</h4>
+<pre><code class="language-java">    @Test
+    public void testCellType() throws Exception {
+
+        //获取文件流
+        FileInputStream fis = new FileInputStream(PATH +&quot;课题信息表20190701.xlsx&quot;);
+
+        //创建一个工作簿。使用 excel能操作的这边他都可以操作
+        Workbook workbook = new XSSFWorkbook(fis);
+        Sheet sheet = workbook.getSheetAt(0);
+
+        //获取标题内容
+        Row rowTitle = sheet.getRow(0);
+        if (rowTitle != null) {
+            //得到一行有多少列有数据
+            int cellCount = rowTitle.getPhysicalNumberOfCells();
+            for (int cellNum = 0; cellNum &lt; cellCount; cellNum++) {
+                Cell cell = rowTitle.getCell(cellNum);
+                if (cell != null) {
+                    int cellType = cell.getCellType();
+                    String cellValue = cell.getStringCellValue();
+                    System.out.print(cellValue + &quot;|&quot;);
+                }
+            }
+            System.out.println();
+        }
+
+        //获取表中的内容
+        //获取表中有多少行有数据
+        int rowCount = sheet.getPhysicalNumberOfRows();
+        for (int rowNum = 1; rowNum &lt; rowCount; rowNum++) {
+            Row rowData = sheet.getRow(rowNum);
+            if (rowData != null) {
+                //读取列
+                int cellCount = rowTitle.getPhysicalNumberOfCells();
+                for (int cellNum = 0; cellNum &lt; cellCount; cellNum++) {
+                    System.out.println(&quot;[&quot; + (rowNum + 1) + &quot;-&quot; + (cellNum + 1) + &quot;]&quot;);
+
+                    Cell cell = rowData.getCell(cellNum);
+                    //匹配列的数据类型
+                    if (cell != null) {
+                        int cellType = cell.getCellType();
+                        String cellValue = &quot;&quot;;
+
+                        switch (cellType) {
+                            case HSSFCell.CELL_TYPE_STRING://字符
+                                System.out.print(&quot;【 String】&quot;);
+                                cellValue = cell.getStringCellValue();
+                                break;
+                            case HSSFCell.CELL_TYPE_BOOLEAN://布尔
+                                System.out.print(&quot;【 BOOLEAN】&quot;);
+                                cellValue = String.valueOf(cell.getBooleanCellValue());
+                                break;
+                            case HSSFCell.CELL_TYPE_BLANK://空
+                                System.out.print(&quot;【 BLANK】&quot;);
+                                break;
+                            case HSSFCell.CELL_TYPE_NUMERIC://数字(日期、普通数字)
+                                System.out.print(&quot;【 NUMERIC】&quot;);
+                                if (HSSFDateUtil.isCellDateFormatted(cell)) {// 日期
+                                    System.out.print(&quot;--【日期】&quot;);
+                                    Date date = cell.getDateCellValue();
+                                    cellValue = new DateTime(date).toString(&quot;yyyy-MM-dd&quot;);
+                                } else {
+                                    //不是日期格式，防止数字过长！
+                                    System.out.print(&quot;--【转换为字符串输出】&quot;);
+                                    cell.setCellType(HSSFCell.CELL_TYPE_STRING);
+                                    cellValue = cell.toString();
+                                }
+                                break;
+                            case HSSFCell.CELL_TYPE_ERROR://错误
+                                System.out.print(&quot;【 数据类型错误】&quot;);
+                                break;
+                        }
+                        System.out.println(cellValue);
+                    }
+                }
+            }
+        }
+        //关闭流
+        fis.close();
+    }
+</code></pre>
+<h4 id="计算公式">计算公式</h4>
+<pre><code class="language-java">    @Test
+    public void testFormula() throws Exception {
+        FileInputStream fis = new FileInputStream(PATH+&quot;公式.xls&quot;);
+        //创建一个工作簿。使用 excel能操作的这边他都可以操作
+        Workbook workbook = new HSSFWorkbook(fis);
+        Sheet sheet = workbook.getSheetAt(0);
+
+        Row row = sheet.getRow(4);
+        Cell cell = row.getCell(0);
+
+        //拿到计算公司 evaL
+        FormulaEvaluator FormulaEvaluator = new HSSFFormulaEvaluator((HSSFWorkbook) workbook);
+
+        //输出单元格的内容
+        int cellType = cell.getCellType();
+        switch (cellType) {
+            case Cell.CELL_TYPE_FORMULA://公式
+                String formula = cell.getCellFormula();
+                System.out.println(formula);
+
+                //计算
+                CellValue evaluate = FormulaEvaluator.evaluate(cell);
+                String cellValue = evaluate.formatAsString();
+                System.out.println(cellValue);
+                break;
+        }
+    }
+</code></pre>
+<blockquote>
+<p>运行结果</p>
+</blockquote>
+<pre><code class="language-java">SUM(A2:A4)
+600.0
+</code></pre>
+<h3 id="easyexcel操作">EasyExcel操作</h3>
+<h4 id="easyexcel写入操作">EasyExcel写入操作：</h4>
+<ul>
+<li>官方API <code>https://www.yuque.com/easyexcel/doc/read</code></li>
+</ul>
+<blockquote>
+<p>导入依赖</p>
+</blockquote>
+<pre><code class="language-xml">	&lt;!--easyexcel--&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;com.alibaba&lt;/groupId&gt;
+            &lt;artifactId&gt;easyexcel&lt;/artifactId&gt;
+            &lt;version &gt;2.2.0-beta2&lt;/version&gt;
+        &lt;/dependency&gt;
+</code></pre>
+<p>由于easyexcel依赖中包含POI相关依赖,有可能发生冲突,所以注释掉</p>
+<pre><code class="language-xml">    &lt;!--导入依赖--&gt;
+    &lt;dependencies&gt;
+        &lt;!--fastjson--&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;com.alibaba&lt;/groupId&gt;
+            &lt;artifactId&gt;fastjson&lt;/artifactId&gt;
+            &lt;version &gt;1.2.62&lt;/version&gt;
+        &lt;/dependency&gt;
+
+        &lt;!--easyexcel--&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;com.alibaba&lt;/groupId&gt;
+            &lt;artifactId&gt;easyexcel&lt;/artifactId&gt;
+            &lt;version &gt;2.2.0-beta2&lt;/version&gt;
+        &lt;/dependency&gt;
+    &lt;!--lombok--&gt;
+	&lt;dependency&gt;
+		&lt;groupId&gt;org.projectlombok&lt;/groupId&gt;
+		&lt;artifactId&gt;lombok&lt;/artifactId&gt;
+		&lt;version &gt;1.18.12&lt;/version&gt;
+	&lt;/dependency&gt;
+
+&lt;!--        &amp;lt;!&amp;ndash;xLs(03)&amp;ndash;&amp;gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.apache.poi&lt;/groupId&gt;
+            &lt;artifactId&gt;poi&lt;/artifactId&gt;
+            &lt;version&gt;3.9&lt;/version&gt;
+        &lt;/dependency&gt;
+        &amp;lt;!&amp;ndash;xLsx(07)&amp;ndash;&amp;gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.apache.poi&lt;/groupId&gt;
+            &lt;artifactId&gt;poi-ooxml&lt;/artifactId&gt;
+            &lt;version&gt;3.9&lt;/version&gt;
+        &lt;/dependency&gt;--&gt;
+        &lt;!--日期格式化工具--&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;joda-time&lt;/groupId&gt;
+            &lt;artifactId&gt;joda-time&lt;/artifactId&gt;
+            &lt;version&gt;2.10.1&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;!--test--&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;junit&lt;/groupId&gt;
+            &lt;artifactId&gt;junit&lt;/artifactId&gt;
+            &lt;version&gt;4.12&lt;/version&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+</code></pre>
+<blockquote>
+<p>实体类</p>
+</blockquote>
+<pre><code class="language-java">package com.kuang.easy;
+
+import com.alibaba.excel.annotation.ExcelIgnore;
+import com.alibaba.excel.annotation.ExcelProperty;
+import lombok.Data;
+
+import java.util.Date;
+
+@Data
+public class DemoData {
+    @ExcelProperty(&quot;字符串标题&quot;)
+    private String string;
+    @ExcelProperty(&quot;日期标题&quot;)
+    private Date date;
+    @ExcelProperty(&quot;数字标题&quot;)
+    private Double doubleData;
+    //忽略这个字段
+    @ExcelIgnore
+    private String ignore;
+}
+</code></pre>
+<blockquote>
+<p>测试</p>
+</blockquote>
+<pre><code class="language-java">package com.kuang.easy;
+
+import com.alibaba.excel.EasyExcel;
+import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+public class EasyTest {
+    String PATH = &quot;ExcelCreate\\&quot;;
+
+    //模拟写入数据
+    private List&lt;DemoData&gt; data() {
+        java.util.List&lt;DemoData&gt; list = new ArrayList&lt;DemoData&gt;();
+        for (int i = 0; i &lt; 10; i++) {
+            DemoData data = new DemoData();
+            data.setString(&quot;字符串&quot; + i);
+            data.setDate(new Date());
+            data.setDoubleData(0.56);
+            list.add(data);
+        }
+        return list;
+    }
+
+    //根据ist写 excel
+    @Test
+    public void simplewrite() {
+        String fileName = PATH + &quot;EasyTest.xlsx&quot;;
+        //这里需要指定写用哪个 class去写，然后写到第一个 sheet，名字为模板然后文件流会自动关闭
+        //write(fileName,格式类)
+        //sheet（表名）
+        //doWrite（数据）
+        EasyExcel.write(fileName, DemoData.class).sheet(&quot;模板&quot;).doWrite(data());
+    }
+}
+</code></pre>
+<figure data-type="image" tabindex="4"><img src="https://img-blog.csdnimg.cn/20201127204724664.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NhaWVuZW5lbg==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
+<h4 id="easyexcel读取操作">EasyExcel读取操作：</h4>
+<blockquote>
+<p>对象</p>
+</blockquote>
+<pre><code class="language-java">@Data
+public class DemoData {
+    private String string;
+    private Date date;
+    private Double doubleData;
+}
+</code></pre>
+<blockquote>
+<p>监听器</p>
+</blockquote>
+<pre><code class="language-java">// 有个很重要的点 DemoDataListener 不能被spring管理，要每次读取excel都要new,然后里面用到spring可以构造方法传进去
+public class DemoDataListener extends AnalysisEventListener&lt;DemoData&gt; {
+    private static final Logger LOGGER = LoggerFactory.getLogger(DemoDataListener.class);
+    /**
+     * 每隔5条存储数据库，实际使用中可以3000条，然后清理list ，方便内存回收
+     */
+    private static final int BATCH_COUNT = 5;
+    List&lt;DemoData&gt; list = new ArrayList&lt;DemoData&gt;();
+    /**
+     * 假设这个是一个DAO，当然有业务逻辑这个也可以是一个service。当然如果不用存储这个对象没用。
+     */
+    private DemoDAO demoDAO;
+    public DemoDataListener() {
+        // 这里是demo，所以随便new一个。实际使用如果到了spring,请使用下面的有参构造函数
+        demoDAO = new DemoDAO();
+    }
+    /**
+     * 如果使用了spring,请使用这个构造方法。每次创建Listener的时候需要把spring管理的类传进来
+     *
+     * @param demoDAO
+     */
+    public DemoDataListener(DemoDAO demoDAO) {
+        this.demoDAO = demoDAO;
+    }
+    /**
+     * 这个每一条数据解析都会来调用
+     *
+     * @param data
+     *            one row value. Is is same as {@link AnalysisContext#readRowHolder()}
+     * @param context
+     */
+    @Override
+    public void invoke(DemoData data, AnalysisContext context) {
+        LOGGER.info(&quot;解析到一条数据:{}&quot;, JSON.toJSONString(data));
+        list.add(data);
+        // 达到BATCH_COUNT了，需要去存储一次数据库，防止数据几万条数据在内存，容易OOM
+        if (list.size() &gt;= BATCH_COUNT) {
+            saveData();
+            // 存储完成清理 list
+            list.clear();
+        }
+    }
+    /**
+     * 所有数据解析完成了 都会来调用
+     *
+     * @param context
+     */
+    @Override
+    public void doAfterAllAnalysed(AnalysisContext context) {
+        // 这里也要保存数据，确保最后遗留的数据也存储到数据库
+        saveData();
+        LOGGER.info(&quot;所有数据解析完成！&quot;);
+    }
+    /**
+     * 加上存储数据库
+     */
+    private void saveData() {
+        LOGGER.info(&quot;{}条数据，开始存储数据库！&quot;, list.size());
+        demoDAO.save(list);
+        LOGGER.info(&quot;存储数据库成功！&quot;);
+    }
+}
+</code></pre>
+<blockquote>
+<p>持久层</p>
+</blockquote>
+<pre><code class="language-java">/**
+ * 假设这个是你的DAO存储。当然还要这个类让spring管理，当然你不用需要存储，也不需要这个类。
+ **/
+public class DemoDAO {
+    public void save(List&lt;DemoData&gt; list) {
+        // 如果是mybatis,尽量别直接调用多次insert,自己写一个mapper里面新增一个方法batchInsert,所有数据一次性插入
+    }
+}
+</code></pre>
+<blockquote>
+<p>代码</p>
+</blockquote>
+<pre><code class="language-java">/**
+ * 最简单的读
+ * &lt;p&gt;1. 创建excel对应的实体对象 参照{@link DemoData}
+ * &lt;p&gt;2. 由于默认一行行的读取excel，所以需要创建excel一行一行的回调监听器，参照{@link DemoDataListener}
+ * &lt;p&gt;3. 直接读即可
+ */
+@Test
+public void simpleRead() {
+    // 有个很重要的点 DemoDataListener 不能被spring管理，要每次读取excel都要new,然后里面用到spring可以构造方法传进去
+    // 写法1：
+    String fileName = TestFileUtil.getPath() + &quot;demo&quot; + File.separator + &quot;demo.xlsx&quot;;
+    // 这里 需要指定读用哪个class去读，然后读取第一个sheet 文件流会自动关闭
+    EasyExcel.read(fileName, DemoData.class, new DemoDataListener()).sheet().doRead();
+    // 写法2：
+    fileName = TestFileUtil.getPath() + &quot;demo&quot; + File.separator + &quot;demo.xlsx&quot;;
+    ExcelReader excelReader = null;
+    try {
+        excelReader = EasyExcel.read(fileName, DemoData.class, new DemoDataListener()).build();
+        ReadSheet readSheet = EasyExcel.readSheet(0).build();
+        excelReader.read(readSheet);
+    } finally {
+        if (excelReader != null) {
+            // 这里千万别忘记关闭，读的时候会创建临时文件，到时磁盘会崩的
+            excelReader.finish();
+        }
+    }
+}
+</code></pre>
+<h4 id="固定套路">固定套路：</h4>
+<ol>
+<li>写入，固定类格式进行写入</li>
+<li>读取，根据监听器设置的规则进行读取！</li>
+</ol>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Java 阿里云验证码]]></title>
+        <id>https://ganhan999.github.io/post/Java 阿里云验证码/</id>
+        <link href="https://ganhan999.github.io/post/Java 阿里云验证码/">
+        </link>
+        <updated>2021-01-27T07:18:25.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="1-了解阿里云用户权限操作">1. 了解阿里云用户权限操作</h1>
+<p><img src="https://img-blog.csdnimg.cn/20201028083934789.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDQ0OTgzOA==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"><br>
+需要通过个人账户获得 授权码（id、密码），再通过这些信息获得服务</p>
+<p>阿里云网址 ： https://www.aliyun.com/</p>
+<ol>
+<li>登录 / 注册 阿里云</li>
+<li>点击 AccessKey 管理<br>
+<img src="https://img-blog.csdnimg.cn/20201028085848904.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDQ0OTgzOA==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"><br>
+<img src="https://img-blog.csdnimg.cn/20201028085956160.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDQ0OTgzOA==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></li>
+<li>创建一个用户<br>
+<img src="https://img-blog.csdnimg.cn/2020102809044050.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDQ0OTgzOA==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"><br>
+<img src="https://img-blog.csdnimg.cn/20201028091316586.png#pic_center" alt="在这里插入图片描述" loading="lazy"></li>
+<li>为新建的用户添加权限<br>
+<img src="https://img-blog.csdnimg.cn/20201028090656193.png#pic_center" alt="在这里插入图片描述" loading="lazy"><br>
+<img src="https://img-blog.csdnimg.cn/20201028090922585.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDQ0OTgzOA==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></li>
+</ol>
+<h1 id="2-开通阿里云短信服务">2. 开通阿里云短信服务</h1>
+<ol>
+<li>进入短信服务后台<br>
+<img src="https://img-blog.csdnimg.cn/20201028091458574.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDQ0OTgzOA==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></li>
+<li>了解计费规则<br>
+<img src="https://img-blog.csdnimg.cn/20201028091842126.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDQ0OTgzOA==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></li>
+</ol>
+<h1 id="3-添加短信模板">3. 添加短信模板</h1>
+<p><img src="https://img-blog.csdnimg.cn/20201028092025853.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDQ0OTgzOA==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"><br>
+<img src="https://img-blog.csdnimg.cn/2020102809234880.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDQ0OTgzOA==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></p>
+<ul>
+<li>看到每条短信是需要短信费用的，所以如果需要使用该功能，需要充点钱备用。</li>
+</ul>
+<h1 id="4-添加签名">4. 添加签名</h1>
+<p><img src="https://img-blog.csdnimg.cn/2020102809252395.png#pic_center" alt="在这里插入图片描述" loading="lazy"><br>
+<img src="https://img-blog.csdnimg.cn/20201028092635541.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDQ0OTgzOA==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></p>
+<h1 id="5-编写测试代码">5. 编写测试代码</h1>
+<ul>
+<li>可以查看 API Demo ，修改即可<br>
+<img src="https://img-blog.csdnimg.cn/20201028093155106.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDQ0OTgzOA==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"><br>
+<img src="https://img-blog.csdnimg.cn/20201028093205138.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDQ0OTgzOA==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></li>
+</ul>
+<ol>
+<li>
+<p>新建一个 Spring-boot 项目 sms-verification</p>
+</li>
+<li>
+<p>引入依赖</p>
+<pre><code class="language-xml">	&lt;!--aliyun--&gt;
+	&lt;dependency&gt;
+		&lt;groupId&gt;com.aliyun&lt;/groupId&gt;
+		&lt;artifactId&gt;aliyun-java-sdk-core&lt;/artifactId&gt;
+		&lt;version&gt;4.5.3&lt;/version&gt;
+	&lt;/dependency&gt;
+	&lt;!--fastjson--&gt;
+	&lt;dependency&gt;
+		&lt;groupId&gt;com.alibaba&lt;/groupId&gt;
+		&lt;artifactId&gt;fastjson&lt;/artifactId&gt;
+		&lt;version&gt;1.2.73&lt;/version&gt;
+	&lt;/dependency&gt;
+	&lt;!--redis--&gt;
+	&lt;dependency&gt;
+		&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+		&lt;artifactId&gt;spring-boot-starter-data-redis&lt;/artifactId&gt;
+	&lt;/dependency&gt;
+</code></pre>
+</li>
+<li>
+<p>编写一个测试类，就把刚刚的 API Demo 复制过来进行修改</p>
+<pre><code class="language-java">// 注意这里所有的包都是 aliyuncs 包下的
+@Test
+void contextLoads() {
+	// 这里的 AccessKey ID 、 Secret就是 阿里云用户对于的值，复制过来即可
+	DefaultProfile profile = DefaultProfile.getProfile(&quot;cn-hangzhou&quot;, &quot;&lt;accessKeyId&gt;&quot;, &quot;&lt;accessSecret&gt;&quot;);
+	IAcsClient client = new DefaultAcsClient(profile);
+
+	// 构建请求
+	CommonRequest request = new CommonRequest();
+	request.setSysMethod(MethodType.POST);
+	request.setSysDomain(&quot;dysmsapi.aliyuncs.com&quot;);
+	request.setSysVersion(&quot;2017-05-25&quot;);
+	request.setSysAction(&quot;SendSms&quot;);
+	// 上面不需要改
+	// 自定义参数 ：
+	// 手机号，这里 Value 就填用户的手机号，实际应用须要从表单获取
+	request.putQueryParameter(&quot;PhoneNumbers&quot;, &quot;138XXXXXXXX&quot;);
+	// 签名，这里的 Value 就是在阿里云上申请的 签名
+	request.putQueryParameter(&quot;SignName&quot;, &quot;XXXX&quot;);
+	// 模板，这里的 Value 就是在阿里云上申请的模板的 模版CODE 值
+	request.putQueryParameter(&quot;TemplateCode&quot;, &quot;XXXX&quot;);
+	// 验证码，真实应用需要自动构建验证码
+	HashMap&lt;String, Object&gt; map = new HashMap&lt;&gt;();
+	map.put(&quot;code&quot;, 112233);
+	request.putQueryParameter(&quot;TemplateParam&quot;, JSONObject.toJSONString(map));
+
+	try {
+		CommonResponse response = client.getCommonResponse(request);
+		System.out.println(response.getData());
+	} catch (ServerException e) {
+		e.printStackTrace();
+	} catch (ClientException e) {
+		e.printStackTrace();
+	}
+}
+</code></pre>
+</li>
+<li>
+<p>最后就可以得到短信了</p>
+</li>
+</ol>
+<ul>
+<li>
+<p>注意：</p>
+<p>如果上面自定义的参数名写错，不会成功</p>
+<p>如果 模板、签名 没有通过审核会报错</p>
+</li>
+</ul>
+<h1 id="6-模板">6. 模板</h1>
+<ol>
+<li>
+<p>新建几个文件夹</p>
+<figure data-type="image" tabindex="1"><img src="https://img-blog.csdnimg.cn/20201028104347538.png#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
+</li>
+<li>
+<p>编写接口 SendSmsService</p>
+<pre><code class="language-java">public interface SendSmsService {
+    /**
+     * 用于发送短信
+     * @param phoneNumber ：手机号
+     * @param templateCode ：模板编号
+     * @param code ：验证码
+     * @return 是否发送成功
+     */
+    public boolean send(String phoneNumber, String templateCode, Map&lt;String, Object&gt; code);
+}
+</code></pre>
+</li>
+<li>
+<p>编写实现类 SendSmsServiceImpl</p>
+<pre><code class="language-java">public class SendSmsServiceImpl implements SendSmsService {
+    @Override
+    public boolean send(String phoneNumber, String templateCode, Map&lt;String, Object&gt; code) {
+        DefaultProfile profile = DefaultProfile.getProfile(&quot;cn-hangzhou&quot;, &quot;&lt;accessKeyId&gt;&quot;, &quot;&lt;accessSecret&gt;&quot;);
+        IAcsClient client = new DefaultAcsClient(profile);
+
+        // 构建请求
+        CommonRequest request = new CommonRequest();
+        request.setSysMethod(MethodType.POST);
+        request.setSysDomain(&quot;dysmsapi.aliyuncs.com&quot;);
+        request.setSysVersion(&quot;2017-05-25&quot;);
+        request.setSysAction(&quot;SendSms&quot;);
+        // 上面不需要改
+        // 自定义参数 ：
+        // 手机号，这里 Value 就填用户的手机号，实际应用须要从表单获取
+        request.putQueryParameter(&quot;PhoneNumbers&quot;, phoneNumber);
+        // 签名，这里的 Value 就是在阿里云上申请的 签名
+        request.putQueryParameter(&quot;SignName&quot;, &quot;XXXX&quot;);
+        // 模板，这里的 Value 就是在阿里云上申请的模板的 模版CODE 值
+        request.putQueryParameter(&quot;TemplateCode&quot;, templateCode);
+        // 验证码，真实应用需要自动构建验证码
+        request.putQueryParameter(&quot;TemplateParam&quot;, JSONObject.toJSONString(code));
+
+        try {
+            CommonResponse response = client.getCommonResponse(request);
+            System.out.println(response.getData());
+            // 自带的判断是否成功的方法
+            return response.getHttpResponse().isSuccess();
+        } catch (ServerException e) {
+            e.printStackTrace();
+        } catch (ClientException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+}
+</code></pre>
+</li>
+<li>
+<p>编写配置文件，连接 Redis ：application.yml</p>
+<pre><code class="language-yaml">server:
+  port: 8088
+# 配置 Redis
+spring:
+  redis:
+    host: 192.168.142.120
+    port: 6379
+    password: 123456
+</code></pre>
+</li>
+<li>
+<p>编写调用接口 ====</p>
+<pre><code class="language-java">@RestController
+@CrossOrigin // 跨域的支持
+public class SmsApiController {
+    @Autowired
+    private SendSmsService sendSmsService;
+
+    @Autowired
+    private RedisTemplate redisTemplate;
+
+    @GetMapping(&quot;send/{phone}&quot;)
+    public String sendSms(@PathVariable(&quot;phone&quot;) String phoneNumber){
+        // 调用发送发放（模拟真实业务，整合 Redis）
+
+        // 判断当前手机号是否存储在 Redis 中
+        // 如果没有则发送短信
+        // 如果有表示上一个验证码还未过期，不用发送
+        String code = (String) redisTemplate.opsForValue().get(phoneNumber);
+        if (!StringUtils.isEmpty(code)){
+            return &quot;[手机号: &quot;+phoneNumber + &quot;],[验证码: &quot; + code +&quot;],还未过期&quot;;
+        }
+
+        // 生成验证码
+        code = UUID.randomUUID().toString().substring(0,6);
+        HashMap&lt;String, Object&gt; map = new HashMap&lt;&gt;();
+        map.put(&quot;code&quot;,code);
+
+        sendSmsService.send(phoneNumber,&quot;XXXX&quot;,map);
+
+		// 如果发送成功，就放入 Redis
+        if (isSend){
+            redisTemplate.opsForValue().set(phoneNumber,code,5, TimeUnit.MINUTES);
+            return &quot;[手机号: &quot;+phoneNumber + &quot;],[验证码: &quot; + code +&quot;],发送成功&quot;;
+        }else {
+            return &quot;[手机号: &quot;+phoneNumber + &quot;],[验证码: &quot; + code +&quot;],发送失败&quot;;
+        }
+    }
+    
+}
+</code></pre>
+</li>
+</ol>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[中等78. 子集]]></title>
         <id>https://ganhan999.github.io/post/78、子集/</id>
@@ -5773,526 +6726,6 @@ public static void main(String[] args) {
 }
 </code></pre>
 <p>大家可以给B站狂神说点一波关注!</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[中等56. 合并区间]]></title>
-        <id>https://ganhan999.github.io/post/57、插入区间/</id>
-        <link href="https://ganhan999.github.io/post/57、插入区间/">
-        </link>
-        <updated>2021-01-20T11:10:49.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
-<p>给出一个无重叠的 ，按照区间起始端点排序的区间列表。<br>
-在列表中插入一个新的区间，你需要确保列表中的区间仍然有序且不重叠（如果有必要的话，可以合并区间）。</p>
-<p>示例 1：<br>
-输入：intervals = [[1,3],[6,9]], newInterval = [2,5]<br>
-输出：[[1,5],[6,9]]</p>
-<p>示例 2：<br>
-输入：intervals = [[1,2],[3,5],[6,7],[8,10],[12,16]], newInterval = [4,8]<br>
-输出：[[1,2],[3,10],[12,16]]<br>
-解释：这是因为新的区间 [4,8] 与 [3,5],[6,7],[8,10] 重叠。</p>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="本体思路">本体思路</h1>
-<p>依次合并区间，直到它完全在某两个区间之内，添加到区间内</p>
-<h1 id="大神做法1">大神做法1：</h1>
-<pre><code class="language-python">class Solution:
-    def insert(self, intervals: List[List[int]], newInterval: List[int]) -&gt; List[List[int]]:
-        left, right = newInterval
-        placed = False
-        ans = list()
-        for li, ri in intervals:
-            if li &gt; right:
-                # 在插入区间的右侧且无交集
-                if not placed:#第一次在区间内就加入，之后就不进行语句内操作
-                    ans.append([left, right])
-                    placed = True
-                ans.append([li, ri])
-            elif ri &lt; left:
-                # 在插入区间的左侧且无交集
-                ans.append([li, ri])
-            else:
-                # 与插入区间有交集，计算它们的并集
-                left = min(left, li)
-                right = max(right, ri)
-
-        if not placed:# 没找到就填到最后
-            ans.append([left, right])
-        return ans
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Git]]></title>
-        <id>https://ganhan999.github.io/post/Git/</id>
-        <link href="https://ganhan999.github.io/post/Git/">
-        </link>
-        <updated>2021-01-18T15:18:25.000Z</updated>
-        <content type="html"><![CDATA[<p>狂神聊Git</p>
-<p>学习git之前，我们需要先明白一个概念</p>
-<p><strong>版本控制！</strong></p>
-<p>版本控制</p>
-<h2 id="什么是版本控制">什么是版本控制</h2>
-<p>版本控制（Revision control）是一种在开发的过程中用于管理我们对文件、目录或工程等内容的修改历史，方便查看更改历史记录，备份以便恢复以前的版本的软件工程技术。</p>
-<ul>
-<li>实现跨区域多人协同开发</li>
-<li>追踪和记载一个或者多个文件的历史记录</li>
-<li>组织和保护你的源代码和文档</li>
-<li>统计工作量</li>
-<li>并行开发、提高开发效率</li>
-<li>跟踪记录整个软件的开发过程</li>
-<li>减轻开发人员的负担，节省时间，同时降低人为错误</li>
-</ul>
-<p>简单说就是用于管理多人协同开发项目的技术。</p>
-<p>没有进行版本控制或者版本控制本身缺乏正确的流程管理，在软件开发过程中将会引入很多问题，如软件代码的一致性、软件内容的冗余、软件过程的事物性、软件开发过程中的并发性、软件源代码的安全性，以及软件的整合等问题。</p>
-<p>无论是工作还是学习，或者是自己做笔记，都经历过这样一个阶段！我们就迫切需要一个版本控制工具！</p>
-<figure data-type="image" tabindex="1"><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy91SkRBVUtyR0M3S3N1OFVsSVR3TWxiWDNrTUd0WjlwMEM0cWVMeE1nb1RnOUIxNTRpYmFoc1VhaWJpYVY3RGdIOUdURlFaajNLeWhmNWZ4cmo2RzJVNUhGZy82NDA?x-oss-process=image/format,png" alt="img" loading="lazy"></figure>
-<p>多人开发就必须要使用版本控制！</p>
-<h2 id="常见的版本控制工具">常见的版本控制工具</h2>
-<p>我们学习的东西，一定是当下最流行的！</p>
-<p>主流的版本控制器有如下这些：</p>
-<ul>
-<li><strong>Git</strong></li>
-<li><strong>SVN</strong>（Subversion）</li>
-<li><strong>CVS</strong>（Concurrent Versions System）</li>
-<li><strong>VSS</strong>（Micorosoft Visual SourceSafe）</li>
-<li><strong>TFS</strong>（Team Foundation Server）</li>
-<li>Visual Studio Online</li>
-</ul>
-<p>版本控制产品非常的多（Perforce、Rational ClearCase、RCS（GNU Revision Control System）、Serena Dimention、SVK、BitKeeper、Monotone、Bazaar、Mercurial、SourceGear Vault），现在影响力最大且使用最广泛的是Git与SVN</p>
-<h2 id="版本控制分类">版本控制分类</h2>
-<p><strong>1、本地版本控制</strong></p>
-<p>记录文件每次的更新，可以对每个版本做一个快照，或是记录补丁文件，适合个人用，如RCS。</p>
-<figure data-type="image" tabindex="2"><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy91SkRBVUtyR0M3S3N1OFVsSVR3TWxiWDNrTUd0WjlwMERnM2ZIcmJQcWJORU9NTzlHVGpGaFZhdWtNWld4NTRpY1M3ZVMyeDhBN0JFdTBWQjlpYndFaHpRLzY0MA?x-oss-process=image/format,png" alt="img" loading="lazy"></figure>
-<p><strong>2、集中版本控制  SVN</strong></p>
-<p>所有的版本数据都保存在服务器上，协同开发者从服务器上同步更新或上传自己的修改</p>
-<figure data-type="image" tabindex="3"><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy91SkRBVUtyR0M3S3N1OFVsSVR3TWxiWDNrTUd0WjlwMDBWNHVMYWlieHRaSTlSTHBxN3RrU2RsV2lhRjkyQVZlWjBpYjlEaWNxQmtTMnBvbzV1OHNFVTJtQ1EvNjQw?x-oss-process=image/format,png" alt="img" loading="lazy"></figure>
-<p>所有的版本数据都存在服务器上，用户的本地只有自己以前所同步的版本，如果不连网的话，用户就看不到历史版本，也无法切换版本验证问题，或在不同分支工作。而且，所有数据都保存在单一的服务器上，有很大的风险这个服务器会损坏，这样就会丢失所有的数据，当然可以定期备份。代表产品：SVN、CVS、VSS</p>
-<p><strong>3、分布式版本控制 Git</strong></p>
-<p>每个人都拥有全部的代码！安全隐患！</p>
-<p>所有版本信息仓库全部同步到本地的每个用户，这样就可以在本地查看所有版本历史，可以离线在本地提交，只需在连网时push到相应的服务器或其他用户那里。由于每个用户那里保存的都是所有的版本数据，只要有一个用户的设备没有问题就可以恢复所有的数据，但这增加了本地存储空间的占用。</p>
-<p>不会因为服务器损坏或者网络问题，造成不能工作的情况！</p>
-<figure data-type="image" tabindex="4"><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy91SkRBVUtyR0M3S3N1OFVsSVR3TWxiWDNrTUd0WjlwMGV2OFE3cVhqc1RmZVN3RmV4ZEE0dEdqRkFpYVZFS1F6QUhkR2NJTlhJTEtmbEkyY2ZrOUJpYXdRLzY0MA?x-oss-process=image/format,png" alt="img" loading="lazy"></figure>
-<h2 id="git与svn的主要区别">Git与SVN的主要区别</h2>
-<p>SVN是集中式版本控制系统，版本库是集中放在中央服务器的，而工作的时候，用的都是自己的电脑，所以首先要从中央服务器得到最新的版本，然后工作，完成工作后，需要把自己做完的活推送到中央服务器。集中式版本控制系统是必须联网才能工作，对网络带宽要求较高。</p>
-<figure data-type="image" tabindex="5"><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy91SkRBVUtyR0M3S3N1OFVsSVR3TWxiWDNrTUd0WjlwMHF0RUlEcjJORzZyT0dnMVVnRHU1YzNmZlJSOFA3RkQ1RDhCUExVRVhwMGhRb0w3cWZwM0k2Zy82NDA?x-oss-process=image/format,png" alt="img" loading="lazy"></figure>
-<p>Git是分布式版本控制系统，没有中央服务器，每个人的电脑就是一个完整的版本库，工作的时候不需要联网了，因为版本都在自己电脑上。协同的方法是这样的：比如说自己在电脑上改了文件A，其他人也在电脑上改了文件A，这时，你们两之间只需把各自的修改推送给对方，就可以互相看到对方的修改了。Git可以直接看到更新了哪些代码和文件！</p>
-<p><strong>Git是目前世界上最先进的分布式版本控制系统。</strong></p>
-<p>聊聊Git的历史</p>
-<p>同生活中的许多伟大事物一样，Git 诞生于一个极富纷争大举创新的年代。</p>
-<p>Linux 内核开源项目有着为数众广的参与者。绝大多数的 Linux 内核维护工作都花在了提交补丁和保存归档的繁琐事务上(1991－2002年间)。到 2002 年，整个项目组开始启用一个专有的分布式版本控制系统 BitKeeper 来管理和维护代码。</p>
-<p>Linux社区中存在很多的大佬！破解研究 BitKeeper ！</p>
-<p>到了 2005 年，开发 BitKeeper 的商业公司同 Linux 内核开源社区的合作关系结束，他们收回了 Linux 内核社区免费使用 BitKeeper 的权力。这就迫使 Linux 开源社区(特别是 Linux 的缔造者 Linus Torvalds)基于使用 BitKeeper 时的经验教训，开发出自己的版本系统。（2周左右！） 也就是后来的 Git！</p>
-<p><strong>Git是目前世界上最先进的分布式版本控制系统。</strong></p>
-<p>Git是免费、开源的，最初Git是为辅助 Linux 内核开发的，来替代 BitKeeper！</p>
-<figure data-type="image" tabindex="6"><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy91SkRBVUtyR0M3S3N1OFVsSVR3TWxiWDNrTUd0WjlwMFhHTGJ5RkRVaWNjQ3NpYjRMOVZrZzduZUpWV3VwZlNjYnJqZDd6bTdhcEM4ZVlUemdRenROQW5BLzY0MA?x-oss-process=image/format,png" alt="img" loading="lazy"></figure>
-<p>Linux和Git之父李纳斯·托沃兹（Linus Benedic Torvalds）1969、芬兰</p>
-<p>Git环境配置</p>
-<h2 id="软件下载">软件下载</h2>
-<p>打开 [git官网] https://git-scm.com/，下载git对应操作系统的版本。</p>
-<p>所有东西下载慢的话就可以去找镜像！</p>
-<p>官网下载太慢，我们可以使用淘宝镜像下载：http://npm.taobao.org/mirrors/git-for-windows/</p>
-<figure data-type="image" tabindex="7"><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy91SkRBVUtyR0M3S3N1OFVsSVR3TWxiWDNrTUd0WjlwMElYa3RzZUJSN2xwdlZGNGJpYkZ3aWFpYm5HeGtEbTB3WWljUElpYVp4Y1VlMkt1aWJBSGo4M01pYVdGU1EvNjQw?x-oss-process=image/format,png" alt="img" loading="lazy"></figure>
-<p>下载对应的版本即可安装！</p>
-<p>安装：无脑下一步即可！安装完毕就可以使用了！</p>
-<h2 id="启动git">启动Git</h2>
-<p>安装成功后在开始菜单中会有Git项，菜单下有3个程序：任意文件夹下右键也可以看到对应的程序！</p>
-<figure data-type="image" tabindex="8"><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy91SkRBVUtyR0M3S3N1OFVsSVR3TWxiWDNrTUd0WjlwMGphaWFBZnIycEFmV3RGWDU3a0dZcVIzU2xOeERsQVpEa0NVNklPQjFZQWljS3hIaWI1eUdidjl6US82NDA?x-oss-process=image/format,png" alt="img" loading="lazy"></figure>
-<p>**Git Bash：**Unix与Linux风格的命令行，使用最多，推荐最多</p>
-<p>**Git CMD：**Windows风格的命令行</p>
-<p><strong>Git GUI</strong>：图形界面的Git，不建议初学者使用，尽量先熟悉常用命令</p>
-<h2 id="常用的linux命令">常用的Linux命令</h2>
-<p>平时一定要多使用这些基础的命令！</p>
-<p>1）、cd : 改变目录。</p>
-<p>2）、cd . . 回退到上一个目录，直接cd进入默认目录</p>
-<p>3）、pwd : 显示当前所在的目录路径。</p>
-<p>4）、ls(ll):  都是列出当前目录中的所有文件，只不过ll(两个ll)列出的内容更为详细。</p>
-<p>5）、touch : 新建一个文件 如 touch index.js 就会在当前目录下新建一个index.js文件。</p>
-<p>6）、rm:  删除一个文件, rm index.js 就会把index.js文件删除。</p>
-<p>7）、mkdir:  新建一个目录,就是新建一个文件夹。</p>
-<p>8）、rm -r :  删除一个文件夹, rm -r src 删除src目录</p>
-<pre><code class="language-php">rm -rf /  切勿在Linux中尝试！删除电脑中全部文件！
-</code></pre>
-<p>9）、mv 移动文件, mv index.html src index.html 是我们要移动的文件, src 是目标文件夹,当然, 这样写,必须保证文件和目标文件夹在同一目录下。</p>
-<p>10）、reset 重新初始化终端/清屏。</p>
-<p>11）、clear 清屏。</p>
-<p>12）、history 查看命令历史。</p>
-<p>13）、help 帮助。</p>
-<p>14）、exit 退出。</p>
-<p>15）、#表示注释</p>
-<h2 id="git配置">Git配置</h2>
-<p>所有的配置文件，其实都保存在本地！</p>
-<p>查看配置 git config -l</p>
-<figure data-type="image" tabindex="9"><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy91SkRBVUtyR0M3S3N1OFVsSVR3TWxiWDNrTUd0WjlwMEdKQU5pYnM4NkR3WXFvQURkZ1p5U0dpYm1hZlI4cDFYQnE2WkczdDBKMndTZzlpY3JJVlZRbzZkUS82NDA?x-oss-process=image/format,png" alt="img" loading="lazy"></figure>
-<p>查看不同级别的配置文件：</p>
-<pre><code class="language-php">#查看系统config
-
-
-
-git config --system --list
-
-
-
-　　
-
-
-
-#查看当前用户（global）配置
-
-
-
-git config --global  --list
-</code></pre>
-<p><strong>Git相关的配置文件：</strong></p>
-<p>1）、Git\etc\gitconfig  ：Git 安装目录下的 gitconfig   --system 系统级</p>
-<p>2）、C:\Users\Administrator\ .gitconfig   只适用于当前登录用户的配置  --global 全局</p>
-<figure data-type="image" tabindex="10"><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy91SkRBVUtyR0M3S3N1OFVsSVR3TWxiWDNrTUd0WjlwMGhjSlMwcnhqM3FvQ1Z2ZkRLaDNXeHdRSmxTVjNQMTVFSVp1ZWpyYU93WExkaWM2TkNCOFg4b1EvNjQw?x-oss-process=image/format,png" alt="img" loading="lazy"></figure>
-<p>这里可以直接编辑配置文件，通过命令设置后会响应到这里。</p>
-<h2 id="设置用户名与邮箱用户标识必要">设置用户名与邮箱（用户标识，必要）</h2>
-<p>当你安装Git后首先要做的事情是设置你的用户名称和e-mail地址。这是非常重要的，因为每次Git提交都会使用该信息。它被永远的嵌入到了你的提交中：</p>
-<pre><code class="language-cs">git config --global user.name &quot;kuangshen&quot;  #名称
-
-
-
-git config --global user.email 24736743@qq.com   #邮箱
-</code></pre>
-<p>只需要做一次这个设置，如果你传递了--global 选项，因为Git将总是会使用该信息来处理你在系统中所做的一切操作。如果你希望在一个特定的项目中使用不同的名称或e-mail地址，你可以在该项目中运行该命令而不要--global选项。总之--global为全局配置，不加为某个项目的特定配置。</p>
-<figure data-type="image" tabindex="11"><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy91SkRBVUtyR0M3S3N1OFVsSVR3TWxiWDNrTUd0WjlwMHpRWlkzN3ExaWFHMG43NDQ1WDhZZ1BWdlpINUFxeUd2VDRSZ21veUljWmxKV2lhTGN4eURnU2RRLzY0MA?x-oss-process=image/format,png" alt="img" loading="lazy"></figure>
-<p>Git基本理论（重要）</p>
-<h2 id="三个区域">三个区域</h2>
-<p>Git本地有三个工作区域：工作目录（Working Directory）、暂存区(Stage/Index)、资源库(Repository或Git Directory)。如果在加上远程的git仓库(Remote Directory)就可以分为四个工作区域。文件在这四个区域之间的转换关系如下：</p>
-<figure data-type="image" tabindex="12"><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy91SkRBVUtyR0M3S3N1OFVsSVR3TWxiWDNrTUd0WjlwME5KNEw5T1BJOWlhMU1taWJwdkRkNmNTZGRCZHZybGJkRXR5RU9yaDRDS25XVmlieWZDSGEzbHpYdy82NDA?x-oss-process=image/format,png" alt="img" loading="lazy"></figure>
-<ul>
-<li>Workspace：工作区，就是你平时存放项目代码的地方</li>
-<li>Index / Stage：暂存区，用于临时存放你的改动，事实上它只是一个文件，保存即将提交到文件列表信息</li>
-<li>Repository：仓库区（或本地仓库），就是安全存放数据的位置，这里面有你提交到所有版本的数据。其中HEAD指向最新放入仓库的版本</li>
-<li>Remote：远程仓库，托管代码的服务器，可以简单的认为是你项目组中的一台电脑用于远程数据交换</li>
-</ul>
-<p>本地的三个区域确切的说应该是git仓库中HEAD指向的版本：</p>
-<figure data-type="image" tabindex="13"><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy91SkRBVUtyR0M3S3N1OFVsSVR3TWxiWDNrTUd0WjlwMGljejZYMmFpYklnVVd6SHh0d1g4a2ljUENLcERyc2lhUHpaazA0T2xJMmJ6bHlkemljQnVYVEp2TEVRLzY0MA?x-oss-process=image/format,png" alt="img" loading="lazy"></figure>
-<ul>
-<li>Directory：使用Git管理的一个目录，也就是一个仓库，包含我们的工作空间和Git的管理空间。</li>
-<li>WorkSpace：需要通过Git进行版本控制的目录和文件，这些目录和文件组成了工作空间。</li>
-<li>.git：存放Git管理信息的目录，初始化仓库的时候自动创建。</li>
-<li>Index/Stage：暂存区，或者叫待提交更新区，在提交进入repo之前，我们可以把所有的更新放在暂存区。</li>
-<li>Local Repo：本地仓库，一个存放在本地的版本库；HEAD会只是当前的开发分支（branch）。</li>
-<li>Stash：隐藏，是一个工作状态保存栈，用于保存/恢复WorkSpace中的临时状态。</li>
-</ul>
-<h2 id="工作流程">工作流程</h2>
-<p>git的工作流程一般是这样的：</p>
-<p>１、在工作目录中添加、修改文件；</p>
-<p>２、将需要进行版本管理的文件放入暂存区域；</p>
-<p>３、将暂存区域的文件提交到git仓库。</p>
-<p>因此，git管理的文件有三种状态：已修改（modified）,已暂存（staged）,已提交(committed)</p>
-<figure data-type="image" tabindex="14"><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy91SkRBVUtyR0M3S3N1OFVsSVR3TWxiWDNrTUd0WjlwMDlpYU9obDBkQUNmTHJNd05iRHp1Y0dRMzBzM0huc2lhY3pmY1I2ZEM5T2VoaWN1d2liS3VIalJsemcvNjQw?x-oss-process=image/format,png" alt="img" loading="lazy"></figure>
-<p>Git项目搭建</p>
-<h2 id="创建工作目录与常用指令">创建工作目录与常用指令</h2>
-<p>工作目录（WorkSpace)一般就是你希望Git帮助你管理的文件夹，可以是你项目的目录，也可以是一个空目录，建议不要有中文。</p>
-<p>日常使用只要记住下图6个命令：</p>
-<figure data-type="image" tabindex="15"><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy91SkRBVUtyR0M3S3N1OFVsSVR3TWxiWDNrTUd0WjlwMEFJSTZZVm9vVXppYnBpYnpKbm9PSEhYVXNMM2Y5RHFBNGhvclVpYmZjcEVaODhPeWYyZ1FRTlI2dy82NDA?x-oss-process=image/format,png" alt="img" loading="lazy"></figure>
-<h2 id="本地仓库搭建">本地仓库搭建</h2>
-<p>创建本地仓库的方法有两种：一种是创建全新的仓库，另一种是克隆远程仓库。</p>
-<p>1、创建全新的仓库，需要用GIT管理的项目的根目录执行：</p>
-<pre><code class="language-shell"># 在当前目录新建一个Git代码库
-
-
-
-$ git init
-</code></pre>
-<p>2、执行后可以看到，仅仅在项目目录多出了一个.git目录，关于版本等的所有信息都在这个目录里面。</p>
-<h2 id="克隆远程仓库">克隆远程仓库</h2>
-<p>1、另一种方式是克隆远程目录，由于是将远程服务器上的仓库完全镜像一份至本地！</p>
-<pre><code class="language-shell"># 克隆一个项目和它的整个代码历史(版本信息)
-
-
-
-$ git clone [url]  # https://gitee.com/kuangstudy/openclass.git
-</code></pre>
-<p>2、去 gitee 或者 github 上克隆一个测试！</p>
-<p>Git文件操作</p>
-<h2 id="文件的四种状态">文件的四种状态</h2>
-<p>版本控制就是对文件的版本控制，要对文件进行修改、提交等操作，首先要知道文件当前在什么状态，不然可能会提交了现在还不想提交的文件，或者要提交的文件没提交上。</p>
-<ul>
-<li>Untracked: 未跟踪, 此文件在文件夹中, 但并没有加入到git库, 不参与版本控制. 通过git add 状态变为Staged.</li>
-<li>Unmodify: 文件已经入库, 未修改, 即版本库中的文件快照内容与文件夹中完全一致. 这种类型的文件有两种去处, 如果它被修改, 而变为Modified. 如果使用git rm移出版本库, 则成为Untracked文件</li>
-<li>Modified: 文件已修改, 仅仅是修改, 并没有进行其他的操作. 这个文件也有两个去处, 通过git add可进入暂存staged状态, 使用git checkout 则丢弃修改过, 返回到unmodify状态, 这个git checkout即从库中取出文件, 覆盖当前修改 !</li>
-<li>Staged: 暂存状态. 执行git commit则将修改同步到库中, 这时库中的文件和本地文件又变为一致, 文件为Unmodify状态. 执行git reset HEAD filename取消暂存, 文件状态为Modified</li>
-</ul>
-<h2 id="查看文件状态">查看文件状态</h2>
-<p>上面说文件有4种状态，通过如下命令可以查看到文件的状态：</p>
-<pre><code class="language-properties">#查看指定文件状态
-
-
-
-git status [filename]
-
-
-
-
-
-
-
- 
-
-
-
-#查看所有文件状态
-
-
-
-git status
-
-
-
-
-
-
-
- 
-
-
-
-# git add .                  添加所有文件到暂存区
-
-
-
-# git commit -m &quot;消息内容&quot;    提交暂存区中的内容到本地仓库 -m 提交信息
-</code></pre>
-<h2 id="忽略文件">忽略文件</h2>
-<p>有些时候我们不想把某些文件纳入版本控制中，比如数据库文件，临时文件，设计文件等</p>
-<p>在主目录下建立&quot;.gitignore&quot;文件，此文件有如下规则：</p>
-<ol>
-<li>忽略文件中的空行或以井号（#）开始的行将会被忽略。</li>
-<li>可以使用Linux通配符。例如：星号（*）代表任意多个字符，问号（？）代表一个字符，方括号（[abc]）代表可选字符范围，大括号（{string1,string2,...}）代表可选的字符串等。</li>
-<li>如果名称的最前面有一个感叹号（!），表示例外规则，将不被忽略。</li>
-<li>如果名称的最前面是一个路径分隔符（/），表示要忽略的文件在此目录下，而子目录中的文件不忽略。</li>
-<li>如果名称的最后面是一个路径分隔符（/），表示要忽略的是此目录下该名称的子目录，而非文件（默认文件或目录都忽略）。</li>
-</ol>
-<pre><code class="language-bash">#为注释
-
-
-
-*.txt        #忽略所有 .txt结尾的文件,这样的话上传就不会被选中！
-
-
-
-!lib.txt     #但lib.txt除外
-
-
-
-/temp        #仅忽略项目根目录下的TODO文件,不包括其它目录temp
-
-
-
-build/       #忽略build/目录下的所有文件
-
-
-
-doc/*.txt    #会忽略 doc/notes.txt 但不包括 doc/server/arch.txt
-</code></pre>
-<p>使用码云</p>
-<h2 id="github-是有墙的比较慢在国内的话我们一般使用-gitee-公司中有时候会搭建自己的gitlab服务器">github 是有墙的，比较慢，在国内的话，我们一般使用 gitee ，公司中有时候会搭建自己的gitlab服务器</h2>
-<p>这个其实可以作为大家未来找工作的一个重要信息！</p>
-<p>1、注册登录码云，完善个人信息</p>
-<figure data-type="image" tabindex="16"><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy91SkRBVUtyR0M3S3N1OFVsSVR3TWxiWDNrTUd0WjlwMGViQXFodGVza0c0R0h3RDAxYlg0bFhZbXhsbU1HbjhQUnFuNGFDWGZhUWRwM1NuYkJIZGlidFEvNjQw?x-oss-process=image/format,png" alt="img" loading="lazy"></figure>
-<p>2、设置本机绑定SSH公钥，实现免密码登录！（免密码登录，这一步挺重要的，码云是远程仓库，我们是平时工作在本地仓库！)</p>
-<pre><code class="language-apache"># 进入 C:\Users\Administrator\.ssh 目录
-
-
-
-# 生成公钥
-
-
-
-ssh-keygen
-</code></pre>
-<figure data-type="image" tabindex="17"><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy91SkRBVUtyR0M3S3N1OFVsSVR3TWxiWDNrTUd0WjlwMFlsSzRpYlEwRU1zM0xtUm1kaWFocG1hOHNzVFFlZGtoeVNoTmtpYlR5RkJ2YVpXaWNpY1RmTmljV1FJQS82NDA?x-oss-process=image/format,png" alt="img" loading="lazy"></figure>
-<p>3、将公钥信息public key 添加到码云账户中即可！</p>
-<figure data-type="image" tabindex="18"><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy91SkRBVUtyR0M3S3N1OFVsSVR3TWxiWDNrTUd0WjlwMEk1Wmljcm00UEVibm94OUw1d2pDUHRQeWJDeXJLSTFKT2tSV0NZSVk1enNYNEZ2STc3TFhYbVEvNjQw?x-oss-process=image/format,png" alt="img" loading="lazy"></figure>
-<p>4、使用码云创建一个自己的仓库！</p>
-<figure data-type="image" tabindex="19"><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy91SkRBVUtyR0M3S3N1OFVsSVR3TWxiWDNrTUd0WjlwMEZTSXdKYjlnNlFicDk5alk2MDV4ZFBmaDNONGwyckdwRDQ0ZDZOQ2NkaWJhbmtCVUw2MHVPRGcvNjQw?x-oss-process=image/format,png" alt="img" loading="lazy"></figure>
-<p>许可证：开源是否可以随意转载，开源但是不能商业使用，不能转载，...  限制！</p>
-<figure data-type="image" tabindex="20"><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy91SkRBVUtyR0M3S3N1OFVsSVR3TWxiWDNrTUd0WjlwMFM5NlhmR29nTldWcVJBZXhleWJUN0RYZHlRaGZjWUoxb0VBZ2FIMVJpYlJVMFdaRTBlY3pkeHcvNjQw?x-oss-process=image/format,png" alt="img" loading="lazy"></figure>
-<p>克隆到本地！</p>
-<figure data-type="image" tabindex="21"><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy91SkRBVUtyR0M3S3N1OFVsSVR3TWxiWDNrTUd0WjlwMFB5S2ZHRmQ4VUhTR0lSYlZMa1hINWljUXNneGg2SzJSUGliWWVVRVI1NFV6dU5WQVlzZ3hYY2ZBLzY0MA?x-oss-process=image/format,png" alt="img" loading="lazy"></figure>
-<p>IDEA中集成Git</p>
-<p>1、新建项目，绑定git。</p>
-<figure data-type="image" tabindex="22"><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy91SkRBVUtyR0M3S3N1OFVsSVR3TWxiWDNrTUd0WjlwMEQ4TFBHdTJTTktYRDAxSU1xRGFTa0JlUDhpYnR2bmFzQllpYVJleXVaV0FsMEVqRWliOElZZjdjUS82NDA?x-oss-process=image/format,png" alt="img" loading="lazy"></figure>
-<p>注意观察idea中的变化</p>
-<figure data-type="image" tabindex="23"><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy91SkRBVUtyR0M3S3N1OFVsSVR3TWxiWDNrTUd0WjlwMENzOTNCaWFPaWExU2RrOGljZEg3dlF6UGZ6SWp1b1ROWXF1S3pZdHJFZTVta2xoZzJiN0tPWXNvdy82NDA?x-oss-process=image/format,png" alt="img" loading="lazy"></figure>
-<p>2、修改文件，使用IDEA操作git。</p>
-<ul>
-<li>添加到暂存区</li>
-<li>commit 提交</li>
-<li>push到远程仓库</li>
-</ul>
-<p>3、提交测试</p>
-<figure data-type="image" tabindex="24"><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy91SkRBVUtyR0M3S3N1OFVsSVR3TWxiWDNrTUd0WjlwMHRFUklzemRnTFZsVVdhbXlSYXBmTjc0YVI4WGVHRlYyT1lXaWFlUjlDa1lsZm9CZWZSaDJBSUEvNjQw?x-oss-process=image/format,png" alt="img" loading="lazy"></figure>
-<p>这些都是单个人的操作！</p>
-<p>学习的方式最重要！学会学习！我上课的更多时候都是在教大家去学习一种理念和思想（学习方式）</p>
-<p>有道无术、术尚可求。有术无道、止于术！</p>
-<p>真正的教学，授人以渔！</p>
-<h2 id="说明git分支">说明：GIT分支</h2>
-<p>分支在GIT中相对较难，分支就是科幻电影里面的平行宇宙，如果两个平行宇宙互不干扰，那对现在的你也没啥影响。不过，在某个时间点，两个平行宇宙合并了，我们就需要处理一些问题了！</p>
-<figure data-type="image" tabindex="25"><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy91SkRBVUtyR0M3S3N1OFVsSVR3TWxiWDNrTUd0WjlwMEJPR3phRzRRVGM0SlhPMGhTbHdjTnR1ak56QXZ4ZWliU3JhakxZTENUNm90Tm5IRFY5eFlXd0EvNjQw?x-oss-process=image/format,png" alt="img" loading="lazy"></figure>
-<figure data-type="image" tabindex="26"><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy91SkRBVUtyR0M3S3N1OFVsSVR3TWxiWDNrTUd0WjlwMEF5bjg3d294ZmVwT2hTbFVqNEZRVEZVc2lhNGljMGo2YVF5NFR6MzJQUnVKMEhTVmVHZVV6VVJBLzY0MA?x-oss-process=image/format,png" alt="img" loading="lazy"></figure>
-<p>git分支中常用指令：</p>
-<pre><code class="language-shell"># 列出所有本地分支
-
-
-
-git branch
-
-
-
-
-
-
-
- 
-
-
-
-# 列出所有远程分支
-
-
-
-git branch -r
-
-
-
-
-
-
-
- 
-
-
-
-# 新建一个分支，但依然停留在当前分支
-
-
-
-git branch [branch-name]
-
-
-
-
-
-
-
- 
-
-
-
-# 新建一个分支，并切换到该分支
-
-
-
-git checkout -b [branch]
-
-
-
-
-
-
-
- 
-
-
-
-# 合并指定分支到当前分支
-
-
-
-$ git merge [branch]
-
-
-
-
-
-
-
- 
-
-
-
-# 删除分支
-
-
-
-$ git branch -d [branch-name]
-
-
-
-
-
-
-
- 
-
-
-
-# 删除远程分支
-
-
-
-$ git push origin --delete [branch-name]
-
-
-
-$ git branch -dr [remote/branch]
-</code></pre>
-<p>IDEA中操作</p>
-<figure data-type="image" tabindex="27"><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy91SkRBVUtyR0M3S3N1OFVsSVR3TWxiWDNrTUd0WjlwMHdITklZZVRIQzhhSEdBU29EeVpPNjRRaWNzbHFpYU1iMU9KMVoxTFBvaWMzTEJHeURJWUJhN1hYdy82NDA?x-oss-process=image/format,png" alt="img" loading="lazy"></figure>
-<p>如果同一个文件在合并分支时都被修改了则会引起冲突：解决的办法是我们可以修改冲突文件后重新提交！选择要保留他的代码还是你的代码！</p>
-<p>master主分支应该非常稳定，用来发布新版本，一般情况下不允许在上面工作，工作一般情况下在新建的dev分支上工作，工作完后，比如上要发布，或者说dev分支代码稳定后可以合并到主分支master上来。</p>
-<p>作业练习：找一个小伙伴，一起搭建一个远程仓库，来练习Git！</p>
-<p>1、不要把Git想的很难，工作中多练习使用就自然而然的会了！</p>
-<p>2、Git的学习也十分多，看完我的Git教程之后，可以多去思考，总结到自己博客！</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[中等74. 搜索二维矩阵]]></title>
-        <id>https://ganhan999.github.io/post/74、搜索二维矩阵/</id>
-        <link href="https://ganhan999.github.io/post/74、搜索二维矩阵/">
-        </link>
-        <updated>2021-01-18T13:06:40.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
-<p>编写一个高效的算法来判断 m x n 矩阵中，是否存在一个目标值。该矩阵具有如下特性：<br>
-每行中的整数从左到右按升序排列。<br>
-每行的第一个整数大于前一行的最后一个整数。</p>
-<p>示例 1：<br>
-输入：matrix = [[1,3,5,7],[10,11,16,20],[23,30,34,60]], target = 3<br>
-输出：true</p>
-<p>示例 2：<br>
-输入：matrix = [[1,3,5,7],[10,11,16,20],[23,30,34,60]], target = 13<br>
-输出：false</p>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="本体思路">本体思路</h1>
-<p>二分法</p>
-<h1 id="大神做法1">大神做法1：</h1>
-<pre><code class="language-python">class Solution:
-    def searchMatrix(self, matrix: List[List[int]], target: int) -&gt; bool:
-        m = len(matrix)
-        if m == 0:
-            return False
-        n = len(matrix[0])
-
-        # 二分查找
-        left, right = 0, m * n - 1
-        while left &lt;= right:
-            pivot_idx = (left + right) // 2
-            pivot_element = matrix[pivot_idx // n][pivot_idx % n]
-            if target == pivot_element:
-                return True
-            else:
-                if target &lt; pivot_element:
-                    right = pivot_idx - 1
-                else:
-                    left = pivot_idx + 1
-        return False
-
-</code></pre>
 ]]></content>
     </entry>
 </feed>
