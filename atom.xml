@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ganhan999.github.io/</id>
     <title>Gridea</title>
-    <updated>2021-01-31T12:44:47.477Z</updated>
+    <updated>2021-01-31T12:45:26.234Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ganhan999.github.io/"/>
     <link rel="self" href="https://ganhan999.github.io/atom.xml"/>
@@ -10,6 +10,45 @@
     <logo>https://ganhan999.github.io/images/avatar.png</logo>
     <icon>https://ganhan999.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, Gridea</rights>
+    <entry>
+        <title type="html"><![CDATA[中等86. 分隔链表]]></title>
+        <id>https://ganhan999.github.io/post/86、分隔链表/</id>
+        <link href="https://ganhan999.github.io/post/86、分隔链表/">
+        </link>
+        <updated>2021-01-31T12:29:35.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
+<p>给你一个链表和一个特定值 x ，请你对链表进行分隔，使得所有小于 x 的节点都出现在大于或等于 x 的节点之前。<br>
+你应当保留两个分区中每个节点的初始相对位置。</p>
+<p>示例：<br>
+输入：head = 1-&gt;4-&gt;3-&gt;2-&gt;5-&gt;2, x = 3<br>
+输出：1-&gt;2-&gt;2-&gt;4-&gt;3-&gt;5</p>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="本体思路">本体思路</h1>
+<p>本体本质就是将链表分为：<br>
+1.小于 x 部分的链表按照原始顺序 记为 p<br>
+2.大于等于 x 部分的链表按照原始顺序 记为 q<br>
+3.拼接两个链表，p --&gt; q</p>
+<pre><code class="language-python">class Solution:
+    def partition(self, head: ListNode, x: int) -&gt; ListNode:
+        p=less=ListNode(0)
+        q=more=ListNode(0)
+
+        while head:
+            if head.val&lt;x:#把所有小于x的排成一个链表
+                less.next=head
+                less=less.next
+            else:#把所有大于等于x的排成一个链表
+                more.next=head
+                more=more.next
+            head=head.next
+
+        more.next=None
+        less.next=q.next#两个链表合成一起
+        return p.next
+
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Java Mongodb]]></title>
         <id>https://ganhan999.github.io/post/Java Mongodb/</id>
@@ -698,45 +737,6 @@ StuModel.find({},&quot;name age -_id&quot;,{skip: 3, limit: 1}, function(err, do
                     cur=cur.next
             pre.next=cur
         return thead.next
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[中等86. 分隔链表]]></title>
-        <id>https://ganhan999.github.io/post/86、分隔链表/</id>
-        <link href="https://ganhan999.github.io/post/86、分隔链表/">
-        </link>
-        <updated>2021-01-30T04:29:35.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
-<p>给你一个链表和一个特定值 x ，请你对链表进行分隔，使得所有小于 x 的节点都出现在大于或等于 x 的节点之前。<br>
-你应当保留两个分区中每个节点的初始相对位置。</p>
-<p>示例：<br>
-输入：head = 1-&gt;4-&gt;3-&gt;2-&gt;5-&gt;2, x = 3<br>
-输出：1-&gt;2-&gt;2-&gt;4-&gt;3-&gt;5</p>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="本体思路">本体思路</h1>
-<p>本体本质就是将链表分为：<br>
-1.小于 x 部分的链表按照原始顺序 记为 p<br>
-2.大于等于 x 部分的链表按照原始顺序 记为 q<br>
-3.拼接两个链表，p --&gt; q</p>
-<pre><code class="language-python">class Solution:
-    def partition(self, head: ListNode, x: int) -&gt; ListNode:
-        p=less=ListNode(0)
-        q=more=ListNode(0)
-
-        while head:
-            if head.val&lt;x:#把所有小于x的排成一个链表
-                less.next=head
-                less=less.next
-            else:#把所有大于等于x的排成一个链表
-                more.next=head
-                more=more.next
-            head=head.next
-
-        more.next=None
-        less.next=q.next#两个链表合成一起
-        return p.next
-
 </code></pre>
 ]]></content>
     </entry>
