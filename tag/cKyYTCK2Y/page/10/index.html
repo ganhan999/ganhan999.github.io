@@ -4,7 +4,7 @@
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-<title>107、二叉树的层次遍历 II | Gridea</title>
+<title>leetcode | Gridea</title>
 
 <link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1612241602779">
 
@@ -25,11 +25,11 @@
 
 
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css">
 </head>
 <body>
 <div class="main gt-bg-theme-color-first">
-    <nav class="navbar navbar-expand-lg">
+    <div class="main-content">
+        <nav class="navbar navbar-expand-lg">
     <div class="navbar-brand">
         <img class="user-avatar" src="/images/avatar.png" alt="头像">
         <div class="site-name gt-c-content-color-first">
@@ -85,128 +85,51 @@
     </div>
 </nav>
 
-    <div class="post-container">
-        <div class="post-detail gt-bg-theme-color-second">
-            <article class="gt-post-content">
-                <h2 class="post-title">
-                    107、二叉树的层次遍历 II
-                </h2>
-                <div class="post-info">
-                    <time class="post-time gt-c-content-color-first">
-                        · 2020-11-21 ·
-                    </time>
-                    
-                        <a href="https://ganhan999.github.io/tag/cKyYTCK2Y/" class="post-tags">
-                            # leetcode
-                        </a>
-                    
-                </div>
-                <div class="post-content">
-                    <h1 id="题目">题目</h1>
-<p>给定一个二叉树，找出其最大深度。</p>
-<p>二叉树的深度为根节点到最远叶子节点的最长路径上的节点数。</p>
-<p>说明: 叶子节点是指没有子节点的节点。</p>
-<p>示例：<br>
-给定二叉树 [3,9,20,null,null,15,7]，</p>
-<p>​      3</p>
-<p>​    / <br>
-9  20<br>
-​      /   <br>
-​    15   7<br>
-返回它的最大深度 3 。</p>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="本体思路">本体思路</h1>
-<p>BFS，每一层都放在一个队列当中</p>
-<h1 id="我的做法">#我的做法：</h1>
-<pre><code class="language-python">class Solution:
-    def levelOrderBottom(self, root: TreeNode) -&gt; List[List[int]]:
-        if not root:
-            return []
-        que=deque([root])
-        l=[]
-        while que:
-            nextque=[]
-            l1=[]
-            while que:
-                num=que.popleft()
-                l1.append(num.val)
-                if num.left:
-                    nextque.append(num.left)
-                if num.right:
-                    nextque.append(num.right)
-            l.append(l1)
-            que=deque(nextque)
-        l.reverse()
-        return l
-</code></pre>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="大神做法">#大神做法：</h1>
-<p>深度优先遍历，因为每找到一个左右节点，层数就加一层，记录层数depth，将depth作为下标。</p>
-<pre><code class="language-Python">class Solution:
-    def levelOrderBottom(self, root: TreeNode) -&gt; List[List[int]]:
-        res = []
-        def dfs(root, depth):
-            if not root:
-                return
-            if len(res)&lt;depth+1:#每多一层那么就加一个元素列表
-                res.append([])
-            res[depth].append(root.val)
-            dfs(root.left, depth+1)
-            dfs(root.right, depth+1)
-        dfs(root,0)
-        return res[::-1]
-</code></pre>
-
-                </div>
-            </article>
+        <div class="current-tag-container">
+            <h2 class="title gt-c-content-color-first">
+                #leetcode
+            </h2>
         </div>
-
+        <div class="post-list-container">
+    <div class="post-inner">
         
-            <div class="next-post">
-                <div class="next gt-c-content-color-first">下一篇</div>
-                <a href="https://ganhan999.github.io/post/树的BFS和DFS/" class="post-title gt-a-link">
-                    树的BFS和DFS
-                </a>
+            <div class="post gt-bg-theme-color-second">
+                <div class="post-left">
+                    <div>
+                        
+                        <a href="https://ganhan999.github.io/post/1、两数之和/">
+                            <span class="post-title gt-c-content-color-first">1、两数之和</span>
+                        </a>
+                    </div>
+                    <div class="gt-post-content post-abstract gt-c-content-color-second">
+                        
+                    </div>
+                    <div class="post-info">
+                        <time class="post-time gt-c-content-color-first">
+                            发布于 · 2020-11-02 ·
+                        </time>
+                        
+                            <a href="https://ganhan999.github.io/tag/cKyYTCK2Y/" class="post-tag">
+                                # leetcode
+                            </a>
+                        
+                    </div>
+                </div>
+                
+                    <a href="https://ganhan999.github.io/post/1、两数之和/" class="post-feature-image"
+                       style="background-image: url('https://ganhan999.github.io//post-images/1、两数之和.jpg')">
+                    </a>
+                
             </div>
         
-
-        
-            <span id="/post/107、二叉树的层次遍历 II/" class="leancloud_visitors" data-flag-title="107、二叉树的层次遍历 II">
-                <em class="post-meta-item-text">阅读量 </em>
-                <i class="leancloud-visitors-count">0</i>
-            </span>
-        
-
-        
-
-        
-            <script src='https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js'></script>
-
-<style>
-	div#vcomments{
-		width:100%;
-		max-width: 1000px;
-		padding: 2.5%
-	}
-</style>
-
-
-	<div id="vcomments"></div>
-
-<script>
-	new Valine({
-		el: '#vcomments',
-		appId: '',
-		appKey: '',
-		avatar: '',
-		pageSize: 5,
-		recordIp: true,
-		placeholder: 'Just Go Go',
-		visitor: true,
-	});
-</script>
-
-        
+    </div>
+</div>
+        <div class="pagination-container">
+    
+        <a href="https://ganhan999.github.io/tag/cKyYTCK2Y/page/9/" class="prev-page gt-a-link">上一页</a>
+    
+    
+</div>
 
         <div class="site-footer gt-c-content-color-first">
     <div class="slogan gt-c-content-color-first">温故而知新</div>

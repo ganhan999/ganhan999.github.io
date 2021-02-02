@@ -4,7 +4,7 @@
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-<title>107、二叉树的层次遍历 II | Gridea</title>
+<title>中等90. 子集 II | Gridea</title>
 
 <link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1612241602779">
 
@@ -89,11 +89,11 @@
         <div class="post-detail gt-bg-theme-color-second">
             <article class="gt-post-content">
                 <h2 class="post-title">
-                    107、二叉树的层次遍历 II
+                    中等90. 子集 II
                 </h2>
                 <div class="post-info">
                     <time class="post-time gt-c-content-color-first">
-                        · 2020-11-21 ·
+                        · 2021-02-02 ·
                     </time>
                     
                         <a href="https://ganhan999.github.io/tag/cKyYTCK2Y/" class="post-tags">
@@ -103,58 +103,48 @@
                 </div>
                 <div class="post-content">
                     <h1 id="题目">题目</h1>
-<p>给定一个二叉树，找出其最大深度。</p>
-<p>二叉树的深度为根节点到最远叶子节点的最长路径上的节点数。</p>
-<p>说明: 叶子节点是指没有子节点的节点。</p>
-<p>示例：<br>
-给定二叉树 [3,9,20,null,null,15,7]，</p>
-<p>​      3</p>
-<p>​    / <br>
-9  20<br>
-​      /   <br>
-​    15   7<br>
-返回它的最大深度 3 。</p>
+<p>给定一个可能包含重复元素的整数数组 nums，返回该数组所有可能的子集（幂集）。<br>
+说明：解集不能包含重复的子集。</p>
+<p>示例:<br>
+输入: [1,2,2]<br>
+输出:<br>
+[<br>
+[2],<br>
+[1],<br>
+[1,2,2],<br>
+[2,2],<br>
+[1,2],<br>
+[]<br>
+]</p>
 <p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
 <h1 id="本体思路">本体思路</h1>
-<p>BFS，每一层都放在一个队列当中</p>
-<h1 id="我的做法">#我的做法：</h1>
+<p>迭代</p>
+<h1 id="大神做法1">大神做法1：</h1>
 <pre><code class="language-python">class Solution:
-    def levelOrderBottom(self, root: TreeNode) -&gt; List[List[int]]:
-        if not root:
-            return []
-        que=deque([root])
-        l=[]
-        while que:
-            nextque=[]
-            l1=[]
-            while que:
-                num=que.popleft()
-                l1.append(num.val)
-                if num.left:
-                    nextque.append(num.left)
-                if num.right:
-                    nextque.append(num.right)
-            l.append(l1)
-            que=deque(nextque)
-        l.reverse()
-        return l
+    def subsetsWithDup(self, nums: List[int]) -&gt; List[List[int]]:
+        ans = [[]]
+        for num in nums:
+            ans += [ sorted([num] + i) for i in ans if sorted([num] + i) not in ans]
+        return ans
 </code></pre>
 <p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="大神做法">#大神做法：</h1>
-<p>深度优先遍历，因为每找到一个左右节点，层数就加一层，记录层数depth，将depth作为下标。</p>
-<pre><code class="language-Python">class Solution:
-    def levelOrderBottom(self, root: TreeNode) -&gt; List[List[int]]:
+<p>回溯</p>
+<h1 id="大神做法2">大神做法2：</h1>
+<pre><code class="language-python">class Solution:
+    def subsetsWithDup(self, nums: List[int]) -&gt; List[List[int]]:
+        nums = sorted(nums)
+        n = len(nums)
         res = []
-        def dfs(root, depth):
-            if not root:
-                return
-            if len(res)&lt;depth+1:#每多一层那么就加一个元素列表
-                res.append([])
-            res[depth].append(root.val)
-            dfs(root.left, depth+1)
-            dfs(root.right, depth+1)
-        dfs(root,0)
-        return res[::-1]
+        def back_func(start=0, temp=[]):
+            res.append(temp[:])
+            for i in range(start, n):
+                if i &gt; start and nums[i] == nums[i-1]:
+                    continue
+                temp.append(nums[i])
+                back_func(i+1, temp)
+                temp.pop()
+        back_func()
+        return res
 </code></pre>
 
                 </div>
@@ -164,14 +154,14 @@
         
             <div class="next-post">
                 <div class="next gt-c-content-color-first">下一篇</div>
-                <a href="https://ganhan999.github.io/post/树的BFS和DFS/" class="post-title gt-a-link">
-                    树的BFS和DFS
+                <a href="https://ganhan999.github.io/post/89、格雷编码/" class="post-title gt-a-link">
+                    中等89. 格雷编码
                 </a>
             </div>
         
 
         
-            <span id="/post/107、二叉树的层次遍历 II/" class="leancloud_visitors" data-flag-title="107、二叉树的层次遍历 II">
+            <span id="/post/90、子集 II/" class="leancloud_visitors" data-flag-title="中等90. 子集 II">
                 <em class="post-meta-item-text">阅读量 </em>
                 <i class="leancloud-visitors-count">0</i>
             </span>
