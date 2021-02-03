@@ -4,7 +4,7 @@
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-<title>中等19. 删除链表的倒数第N个节点 | Gridea</title>
+<title>中等92. 反转链表 II | Gridea</title>
 
 <link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1612351902728">
 
@@ -89,11 +89,11 @@
         <div class="post-detail gt-bg-theme-color-second">
             <article class="gt-post-content">
                 <h2 class="post-title">
-                    中等19. 删除链表的倒数第N个节点
+                    中等92. 反转链表 II
                 </h2>
                 <div class="post-info">
                     <time class="post-time gt-c-content-color-first">
-                        · 2020-12-22 ·
+                        · 2021-02-03 ·
                     </time>
                     
                         <a href="https://ganhan999.github.io/tag/cKyYTCK2Y/" class="post-tags">
@@ -103,73 +103,65 @@
                 </div>
                 <div class="post-content">
                     <h1 id="题目">题目</h1>
-<p>&quot;&quot;&quot;</p>
-<p>给定一个链表，删除链表的倒数第 n 个节点，并且返回链表的头结点。</p>
-<p>示例：<br>
-给定一个链表: 1-&gt;2-&gt;3-&gt;4-&gt;5, 和 n = 2.<br>
-当删除了倒数第二个节点后，链表变为 1-&gt;2-&gt;3-&gt;5.<br>
-&quot;&quot;&quot;</p>
+<p>反转从位置 m 到 n 的链表。请使用一趟扫描完成反转。</p>
+<p>说明:<br>
+1 ≤ m ≤ n ≤ 链表长度。</p>
+<p>示例:<br>
+输入: 1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL, m = 2, n = 4<br>
+输出: 1-&gt;4-&gt;3-&gt;2-&gt;5-&gt;NULL</p>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
 <h1 id="本体思路">本体思路</h1>
-<p>一种容易想到的方法是，我们首先从头节点开始对链表进行一次遍历，<br>
-得到链表的长度 LL。随后我们再从头节点开始对链表进行一次遍历，<br>
-当遍历到第 L-n+1L−n+1 个节点时，它就是我们需要删除的节点。</p>
-<h1 id="我的做法">#我的做法：</h1>
+<p>用三个指针,进行插入操作</p>
+<p>例如:</p>
+<p>1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL, m = 2, n = 4</p>
+<p>将节点3插入节点1和节点2之间</p>
+<p>变成: 1-&gt;3-&gt;2-&gt;4-&gt;5-&gt;NULL</p>
+<p>再将节点4插入节点1和节点3之间</p>
+<p>变成:1-&gt;4-&gt;3-&gt;2-&gt;5-&gt;NULL</p>
+<p>实现翻转的效果!</p>
+<h1 id="大神做法1">大神做法1：</h1>
 <pre><code class="language-python">class Solution:
-    def removeNthFromEnd(self, head: ListNode, n: int) -&gt; ListNode:
-        def getlength(head):
-            length=0
-            while head:
-                length+=1
-                head=head.next
-            return length
-        dummy=ListNode(0,head)
-        length=getlength(head)
-        cur=dummy
-        for i in range(1,length-n+1):
-            cur=cur.next
-        cur.next=cur.next.next
-</code></pre>
-<p>&quot;&quot;&quot;</p>
-<h1 id="大神做法">大神做法：</h1>
-<p>用栈</p>
-<p>我们也可以在遍历链表的同时将所有节点依次入栈。<br>
-根据栈「先进后出」的原则，我们弹出栈的第 n 个节点就是需要删除的节点，<br>
-并且目前栈顶的节点就是待删除节点的前驱节点。这样一来，删除操作就变得十分方便了。</p>
-<pre><code class="language-python">class Solution:
-    def removeNthFromEnd(self, head: ListNode, n: int) -&gt; ListNode:
-        dummy = ListNode(0, head)
-        stack = list()
-        cur = dummy
-        while cur:
-            stack.append(cur)
-            cur = cur.next
-
-        for i in range(n):
-            stack.pop()
-
-        prev = stack[-1]
-        prev.next = prev.next.next
+    def reverseBetween(self, head: ListNode, m: int, n: int) -&gt; ListNode:
+        dummy = ListNode(-1)
+        dummy.next = head
+        pre = dummy
+         # 找到翻转链表部分的前一个节点, 1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL, m = 2, n = 4 指的是 节点值为1
+        for _ in range(m - 1):
+            pre = pre.next
+        # 用 pre, start, tail三指针实现插入操作
+        # tail 是插入pre,与pre.next的节点
+        start = pre.next
+        tail = start.next
+        for _ in range(n - m):
+            start.next = tail.next
+            tail.next = pre.next
+            pre.next = tail
+            tail = start.next
         return dummy.next
 </code></pre>
-<p>&quot;&quot;&quot;</p>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<p>找到要翻转部分的链表,将其翻转,再与原链表拼接;</p>
 <h1 id="大神做法2">大神做法2：</h1>
-<p>快慢指针<br>
-快指针先走n个节点，然后再通知遍历，这样当快指针到最后的时候，慢指针指向了倒数第n个结点。</p>
 <pre><code class="language-python">class Solution:
-    def removeNthFromEnd(self, head: ListNode, n: int) -&gt; ListNode:
-        dummy = ListNode(0, head)
-        first = head
-        second = dummy
-        for i in range(n):
-            first = first.next
-
-        while first:
-            first = first.next
-            second = second.next
-
-        second.next = second.next.next
+    def reverseBetween(self, head: ListNode, m: int, n: int) -&gt; ListNode:
+        dummy = ListNode(-1)
+        dummy.next = head
+        pre = dummy
+        # 找到翻转链表部分的前一个节点, 1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL, m = 2, n = 4 指的是 节点值为1
+        for _ in range(m-1):
+            pre = pre.next
+        # 用双指针,进行链表翻转
+        node = None
+        cur = pre.next
+        for _ in range(n-m+1):
+            tmp = cur.next
+            cur.next = node
+            node = cur#node是头节点
+            cur = tmp#cur是原链表的下一个节点
+        # 将翻转部分 和 原链表拼接
+        pre.next.next = cur
+        pre.next = node
         return dummy.next
-
 </code></pre>
 
                 </div>
@@ -179,14 +171,14 @@
         
             <div class="next-post">
                 <div class="next gt-c-content-color-first">下一篇</div>
-                <a href="https://ganhan999.github.io/post/18、四数之和/" class="post-title gt-a-link">
-                    中等18. 四数之和
+                <a href="https://ganhan999.github.io/post/90、子集 II/" class="post-title gt-a-link">
+                    中等90. 子集 II
                 </a>
             </div>
         
 
         
-            <span id="/post/19、删除链表的倒数第N个节点 /" class="leancloud_visitors" data-flag-title="中等19. 删除链表的倒数第N个节点">
+            <span id="/post/92、反转链表 II/" class="leancloud_visitors" data-flag-title="中等92. 反转链表 II">
                 <em class="post-meta-item-text">阅读量 </em>
                 <i class="leancloud-visitors-count">0</i>
             </span>
