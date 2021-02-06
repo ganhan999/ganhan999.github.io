@@ -4,7 +4,7 @@
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-<title>13、罗马数字转整数 | Gridea</title>
+<title>234、回文链表 | Gridea</title>
 
 <link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1612627878389">
 
@@ -89,11 +89,11 @@
         <div class="post-detail gt-bg-theme-color-second">
             <article class="gt-post-content">
                 <h2 class="post-title">
-                    13、罗马数字转整数
+                    234、回文链表
                 </h2>
                 <div class="post-info">
                     <time class="post-time gt-c-content-color-first">
-                        · 2020-11-02 ·
+                        · 2021-02-07 ·
                     </time>
                     
                         <a href="https://ganhan999.github.io/tag/cKyYTCK2Y/" class="post-tags">
@@ -103,63 +103,55 @@
                 </div>
                 <div class="post-content">
                     <h1 id="题目">题目</h1>
-<p>&quot;&quot;&quot;</p>
-<p>罗马数字包含以下七种字符: I， V， X， L，C，D 和 M。</p>
-<p>字符          数值<br>
-I             1<br>
-V             5<br>
-X             10<br>
-L             50<br>
-C             100<br>
-D             500<br>
-M             1000<br>
-例如， 罗马数字 2 写做 II ，即为两个并列的 1。12 写做 XII ，即为 X + II 。 27 写做  XXVII, 即为 XX + V + II 。</p>
-<p>通常情况下，罗马数字中小的数字在大的数字的右边。但也存在特例，例如 4 不写做 IIII，而是 IV。数字 1 在数字 5 的左边，所表示的数等于大数 5 减小数 1 得到的数值 4 。同样地，数字 9 表示为 IX。这个特殊的规则只适用于以下六种情况：</p>
-<p>I 可以放在 V (5) 和 X (10) 的左边，来表示 4 和 9。<br>
-X 可以放在 L (50) 和 C (100) 的左边，来表示 40 和 90。<br>
-C 可以放在 D (500) 和 M (1000) 的左边，来表示 400 和 900。<br>
-给定一个罗马数字，将其转换成整数。输入确保在 1 到 3999 的范围内。<br>
-&quot;&quot;&quot;</p>
+<p>请判断一个链表是否为回文链表。</p>
+<p>示例 1:<br>
+输入: 1-&gt;2<br>
+输出: false</p>
+<p>示例 2:<br>
+输入: 1-&gt;2-&gt;2-&gt;1<br>
+输出: true</p>
 <h1 id="本体思路">本体思路</h1>
-<p>这题懂了就非常简单。首先建立一个HashMap来映射符号和值，然后对字符串从左到右来，<br>
-如果当前字符代表的值不小于其右边，就加上该值；否则就减去该值。<br>
-以此类推到最左边的数，最终得到的结果即是答案</p>
+<p>链表转列表</p>
 <h1 id="我的做法">#我的做法：</h1>
 <pre><code class="language-python">class Solution:
-    def romanToInt(self, s: str) -&gt; int:
-        a = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000,&quot;0&quot;:0}
-        lens = len(s)
-        print('lens=',lens)
-        sum = 0
-        s=s+&quot;0&quot;
-        print(s)
-        if lens == 1:
-            return sum + a[s[0]]
-        for i in range(lens):
-            if a[s[i]] &lt; a[s[i+1]] :
-                sum = sum - a[s[i]]#前面比后面大 就取负数
-            else :
-                sum=sum+a[s[i]]
-        return sum
+    def isPalindrome(self, head: ListNode) -&gt; bool:
+        vals = []
+        current_node = head
+        while current_node is not None:
+            vals.append(current_node.val)
+            current_node = current_node.next
+        return vals == vals[::-1]
 </code></pre>
-<p>&quot;&quot;&quot;</p>
-<h1 id="大神做法">大神做法：</h1>
-<p>if i&lt;lens-1 and a[s[i]] &lt; a[s[i+1]]:#把i&lt;lens-1放前面，可以导致后面的断路！<br>
-&quot;&quot;&quot;</p>
-<pre><code class="language-python">class Solution:
-    def romanToInt(self, s: str) -&gt; int:
-        a = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
-        lens = len(s)
-        print('lens=',lens)
-        sum = 0
-        for i in range(lens):
-            if i&lt;lens-1 and a[s[i]] &lt; a[s[i+1]]:#把i&lt;lens-1放前面，可以导致后面的断路！
-                sum = sum - a[s[i]]
-            else :
-                sum=sum+a[s[i]]
-        return sum
-
-#复现成功！
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="大神做法1">#大神做法1：</h1>
+<p>整个流程可以分为以下五个步骤：</p>
+<p>找到前半部分链表的尾节点。<br>
+反转后半部分链表。<br>
+判断是否回文。<br>
+恢复链表。<br>
+返回结果。</p>
+<pre><code class="language-Python">class Solution:
+    def isPalindrome(self, head: ListNode) -&gt; bool:
+        if not head:
+            return True
+        fast = slow = head
+        while fast.next and fast.next.next:
+            fast = fast.next.next
+            slow = slow.next
+        pre = None
+        cur = slow.next
+        slow.next = None
+        while cur:#反转链表
+            tmp = cur.next
+            cur.next = pre
+            pre = cur #pre指向前一个指针
+            cur = tmp
+        while pre:
+            if head.val != pre.val:
+                return False
+            head = head.next
+            pre = pre.next
+        return True
 </code></pre>
 
                 </div>
@@ -169,14 +161,14 @@ C 可以放在 D (500) 和 M (1000) 的左边，来表示 400 和 900。<br>
         
             <div class="next-post">
                 <div class="next gt-c-content-color-first">下一篇</div>
-                <a href="https://ganhan999.github.io/post/9、回文数/" class="post-title gt-a-link">
-                    9、回文数
+                <a href="https://ganhan999.github.io/post/96、不同的二叉搜索树/" class="post-title gt-a-link">
+                    中等96. 不同的二叉搜索树
                 </a>
             </div>
         
 
         
-            <span id="/post/13、罗马数字转整数/" class="leancloud_visitors" data-flag-title="13、罗马数字转整数">
+            <span id="/post/234、回文链表/" class="leancloud_visitors" data-flag-title="234、回文链表">
                 <em class="post-meta-item-text">阅读量 </em>
                 <i class="leancloud-visitors-count">0</i>
             </span>
