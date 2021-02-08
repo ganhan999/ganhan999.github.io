@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ganhan999.github.io/</id>
     <title>Gridea</title>
-    <updated>2021-02-06T16:19:14.205Z</updated>
+    <updated>2021-02-08T12:59:23.179Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ganhan999.github.io/"/>
     <link rel="self" href="https://ganhan999.github.io/atom.xml"/>
@@ -10,6 +10,80 @@
     <logo>https://ganhan999.github.io/images/avatar.png</logo>
     <icon>https://ganhan999.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, Gridea</rights>
+    <entry>
+        <title type="html"><![CDATA[中等98. 验证二叉搜索树]]></title>
+        <id>https://ganhan999.github.io/post/98、验证二叉搜索树/</id>
+        <link href="https://ganhan999.github.io/post/98、验证二叉搜索树/">
+        </link>
+        <updated>2021-02-08T11:29:35.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
+<p>给定一个二叉树，判断其是否是一个有效的二叉搜索树。<br>
+假设一个二叉搜索树具有如下特征：<br>
+节点的左子树只包含小于当前节点的数。<br>
+节点的右子树只包含大于当前节点的数。<br>
+所有左子树和右子树自身必须也是二叉搜索树。</p>
+<p>示例 1:<br>
+输入:<br>
+2<br>
+/ <br>
+1   3<br>
+输出: true</p>
+<p>示例 2:<br>
+输入:<br>
+5<br>
+/ <br>
+1   4<br>
+/ <br>
+3   6<br>
+输出: false<br>
+解释: 输入为: [5,1,4,null,null,3,6]。<br>
+根节点的值为 5 ，但是其右子节点值为 4 。</p>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="本体思路">本体思路</h1>
+<p>中序遍历后应该是递增序列</p>
+<h1 id="大神做法1">大神做法1：</h1>
+<pre><code class="language-python">class Solution:
+    def isValidBST(self, root: TreeNode) -&gt; bool:
+        stack, inorder = [], float('-inf')
+
+        while stack or root:
+            while root:
+                stack.append(root)
+                root = root.left
+            root = stack.pop()
+            # 如果中序遍历得到的节点的值小于等于前一个 inorder，说明不是二叉搜索树
+            if root.val &lt;= inorder:
+                return False
+            inorder = root.val
+            root = root.right
+        return True
+</code></pre>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<p>从上往下递归</p>
+<h1 id="大神做法2">大神做法2：</h1>
+<pre><code class="language-python">class Solution:
+    def isValidBST(self, root: TreeNode) -&gt; bool:
+        return self.dg(root,-(2**32),2**32) #这里我直接粗暴地将最小值和最大值设置为一个足够小（大）的数，你可以设置你认为的最优解
+    def dg(self,root,min_v,max_v):
+    # 参数：root：当前节点，min_v：允许最小值（下界），max_v：允许最大值（上界）
+
+        if root == None: # 如果当前节点为空，证明已经递归到叶子节点，返回True
+            return True
+
+        if root.val &lt; max_v and root.val &gt; min_v : # 如果当前节点值符合规定，继续进行之后的递归
+            pass
+        else: # 如果不符合规定，之间返回 False
+            return False
+
+        if self.dg(root.left,min_v,root.val) == False: # 对左子树进行递归，此时最大值应该为当前节点值
+            return False
+        if self.dg(root.right,root.val,max_v) == False:# 对右子树进行递归，此时最小值应该为当前节点值
+            return False
+
+        return True # 如果成功避开所有坑，恭喜，这个当前节点下的子树是一个二叉搜索树
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[234、回文链表]]></title>
         <id>https://ganhan999.github.io/post/234、回文链表/</id>
@@ -1094,42 +1168,6 @@ StuModel.find({},&quot;name age -_id&quot;,{skip: 3, limit: 1}, function(err, do
 </ul>
 </li>
 </ul>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[中等82. 删除排序链表中的重复元素 II]]></title>
-        <id>https://ganhan999.github.io/post/82、 删除排序链表中的重复元素 II - 副本/</id>
-        <link href="https://ganhan999.github.io/post/82、 删除排序链表中的重复元素 II - 副本/">
-        </link>
-        <updated>2021-01-30T04:29:35.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
-<p>给定一个排序链表，删除所有含有重复数字的节点，只保留原始链表中 没有重复出现 的数字。</p>
-<p>示例 1:<br>
-输入: 1-&gt;2-&gt;3-&gt;3-&gt;4-&gt;4-&gt;5<br>
-输出: 1-&gt;2-&gt;5</p>
-<p>示例 2:<br>
-输入: 1-&gt;1-&gt;1-&gt;2-&gt;3<br>
-输出: 2-&gt;3</p>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="本体思路">本体思路</h1>
-<p>直接按照规律循环解题。<br>
-但避免开头就出现重复数字，因此还是先加空头</p>
-<figure data-type="image" tabindex="1"><img src="https://pic.leetcode-cn.com/c10b4b3a0333de9d112bdfc042083f6d748b1d6133e934b17dd1996a6cda4884-IMG_20191006_222542.jpg" alt="IMG_20191006_222542.jpg" loading="lazy"></figure>
-<pre><code class="language-python">class Solution:#感谢各位的更好思路或改进办法
-    def deleteDuplicates(self, head: ListNode) -&gt; ListNode:
-        thead = ListNode('a')
-        thead.next = head
-        pre,cur = None,thead
-        while cur:
-            pre=cur
-            cur=cur.next
-            while cur and cur.next and cur.next.val == cur.val:
-                t=cur.val
-                while cur and cur.val==t:
-                    cur=cur.next
-            pre.next=cur
-        return thead.next
-</code></pre>
 ]]></content>
     </entry>
 </feed>
