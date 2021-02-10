@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ganhan999.github.io/</id>
     <title>Gridea</title>
-    <updated>2021-02-10T04:15:15.949Z</updated>
+    <updated>2021-02-10T04:57:18.825Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ganhan999.github.io/"/>
     <link rel="self" href="https://ganhan999.github.io/atom.xml"/>
@@ -10,6 +10,115 @@
     <logo>https://ganhan999.github.io/images/avatar.png</logo>
     <icon>https://ganhan999.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, Gridea</rights>
+    <entry>
+        <title type="html"><![CDATA[中等146. LRU 缓存机制]]></title>
+        <id>https://ganhan999.github.io/post/146、LRU 缓存机制/</id>
+        <link href="https://ganhan999.github.io/post/146、LRU 缓存机制/">
+        </link>
+        <updated>2021-02-10T04:29:35.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
+<p>运用你所掌握的数据结构，设计和实现一个  LRU (最近最少使用) 缓存机制 。<br>
+实现 LRUCache 类：</p>
+<p>LRUCache(int capacity) 以正整数作为容量 capacity 初始化 LRU 缓存<br>
+int get(int key) 如果关键字 key 存在于缓存中，则返回关键字的值，否则返回 -1 。<br>
+void put(int key, int value) 如果关键字已经存在，则变更其数据值；如果关键字不存在，<br>
+则插入该组「关键字-值」。当缓存容量达到上限时，它应该在写入新数据之前删除最久未使用的数据值，从而为新的数据值留出空间。</p>
+<p>进阶：你是否可以在 O(1) 时间复杂度内完成这两种操作？</p>
+<p>示例：<br>
+输入<br>
+[&quot;LRUCache&quot;, &quot;put&quot;, &quot;put&quot;, &quot;get&quot;, &quot;put&quot;, &quot;get&quot;, &quot;put&quot;, &quot;get&quot;, &quot;get&quot;, &quot;get&quot;]<br>
+[[2], [1, 1], [2, 2], [1], [3, 3], [2], [4, 4], [1], [3], [4]]</p>
+<p>输出<br>
+[null, null, null, 1, null, -1, null, -1, 3, 4]</p>
+<p>解释<br>
+LRUCache lRUCache = new LRUCache(2);<br>
+lRUCache.put(1, 1); // 缓存是 {1=1}<br>
+lRUCache.put(2, 2); // 缓存是 {1=1, 2=2}<br>
+lRUCache.get(1);    // 返回 1<br>
+lRUCache.put(3, 3); // 该操作会使得关键字 2 作废，缓存是 {1=1, 3=3}<br>
+lRUCache.get(2);    // 返回 -1 (未找到)<br>
+lRUCache.put(4, 4); // 该操作会使得关键字 1 作废，缓存是 {4=4, 3=3}<br>
+lRUCache.get(1);    // 返回 -1 (未找到)<br>
+lRUCache.get(3);    // 返回 3<br>
+lRUCache.get(4);    // 返回 4</p>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="本体思路">本体思路</h1>
+<p>首先建立key：value键值对，把键值对放入hashmap中，也就是python的字典。<br>
+然后再用双向链表的方式进行操作，链表中存储的是hashmap中的value</p>
+<h1 id="大神做法1">大神做法1：</h1>
+<pre><code class="language-python">class ListNode:
+    def __init__(self, key=None, value=None):
+        self.key = key
+        self.value = value
+        self.prev = None
+        self.next = None
+
+
+class LRUCache:
+    def __init__(self, capacity: int):
+        self.capacity = capacity
+        self.hashmap = {}
+        # 新建两个节点 head 和 tail
+        self.head = ListNode()
+        self.tail = ListNode()
+        # 初始化链表为 head &lt;-&gt; tail
+        self.head.next = self.tail
+        self.tail.prev = self.head
+
+    # 因为get与put操作都可能需要将双向链表中的某个节点移到末尾，所以定义一个方法
+    def move_node_to_tail(self, key):
+            # 先将哈希表key指向的节点拎出来，为了简洁起名node
+            #      hashmap[key]                               hashmap[key]
+            #           |                                          |
+            #           V              --&gt;                         V
+            # prev &lt;-&gt; node &lt;-&gt; next         pre &lt;-&gt; next   ...   node
+            node = self.hashmap[key]
+            node.prev.next = node.next
+            node.next.prev = node.prev
+            # 之后将node插入到尾节点前
+            #                 hashmap[key]                 hashmap[key]
+            #                      |                            |
+            #                      V        --&gt;                 V
+            # prev &lt;-&gt; tail  ...  node                prev &lt;-&gt; node &lt;-&gt; tail
+            node.prev = self.tail.prev
+            node.next = self.tail
+            self.tail.prev.next = node
+            self.tail.prev = node
+
+    def get(self, key: int) -&gt; int:
+        if key in self.hashmap:
+            # 如果已经在链表中了久把它移到末尾（变成最新访问的）
+            self.move_node_to_tail(key)
+        res = self.hashmap.get(key, -1)
+        if res == -1:
+            return res
+        else:
+            return res.value
+
+    def put(self, key: int, value: int) -&gt; None:
+        if key in self.hashmap:
+            # 如果key本身已经在哈希表中了就不需要在链表中加入新的节点
+            # 但是需要更新字典该值对应节点的value
+            self.hashmap[key].value = value
+            # 之后将该节点移到末尾
+            self.move_node_to_tail(key)
+        else:
+            if len(self.hashmap) == self.capacity:
+                # 去掉哈希表对应项
+                self.hashmap.pop(self.head.next.key)
+                # 去掉最久没有被访问过的节点，即头节点之后的节点
+                self.head.next = self.head.next.next
+                self.head.next.prev = self.head
+            # 如果不在的话就插入到尾节点前
+            new = ListNode(key, value)
+            self.hashmap[key] = new
+            new.prev = self.tail.prev
+            new.next = self.tail
+            self.tail.prev.next = new
+            self.tail.prev = new
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[中等142. 环形链表 II]]></title>
         <id>https://ganhan999.github.io/post/142、环形链表 II/</id>
@@ -535,45 +644,6 @@ https://leetcode-cn.com/problems/gray-code/solution/gray-code-jing-xiang-fan-she
                 res.append(head+res[j])#这里就相当于在最前面加了一个1，前面的不变，后面加一倍
             head &lt;&lt;= 1
         return res
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[中等86. 分隔链表]]></title>
-        <id>https://ganhan999.github.io/post/86、分隔链表/</id>
-        <link href="https://ganhan999.github.io/post/86、分隔链表/">
-        </link>
-        <updated>2021-01-31T12:29:35.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
-<p>给你一个链表和一个特定值 x ，请你对链表进行分隔，使得所有小于 x 的节点都出现在大于或等于 x 的节点之前。<br>
-你应当保留两个分区中每个节点的初始相对位置。</p>
-<p>示例：<br>
-输入：head = 1-&gt;4-&gt;3-&gt;2-&gt;5-&gt;2, x = 3<br>
-输出：1-&gt;2-&gt;2-&gt;4-&gt;3-&gt;5</p>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="本体思路">本体思路</h1>
-<p>本体本质就是将链表分为：<br>
-1.小于 x 部分的链表按照原始顺序 记为 p<br>
-2.大于等于 x 部分的链表按照原始顺序 记为 q<br>
-3.拼接两个链表，p --&gt; q</p>
-<pre><code class="language-python">class Solution:
-    def partition(self, head: ListNode, x: int) -&gt; ListNode:
-        p=less=ListNode(0)
-        q=more=ListNode(0)
-
-        while head:
-            if head.val&lt;x:#把所有小于x的排成一个链表
-                less.next=head
-                less=less.next
-            else:#把所有大于等于x的排成一个链表
-                more.next=head
-                more=more.next
-            head=head.next
-
-        more.next=None
-        less.next=q.next#两个链表合成一起
-        return p.next
-
 </code></pre>
 ]]></content>
     </entry>
