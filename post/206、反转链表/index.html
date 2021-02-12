@@ -4,7 +4,7 @@
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-<title>21、合并两个有序列表 | Gridea</title>
+<title>206、反转链表 | Gridea</title>
 
 <link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1613096755873">
 
@@ -89,11 +89,11 @@
         <div class="post-detail gt-bg-theme-color-second">
             <article class="gt-post-content">
                 <h2 class="post-title">
-                    21、合并两个有序列表
+                    206、反转链表
                 </h2>
                 <div class="post-info">
                     <time class="post-time gt-c-content-color-first">
-                        · 2020-11-04 ·
+                        · 2021-02-12 ·
                     </time>
                     
                         <a href="https://ganhan999.github.io/tag/cKyYTCK2Y/" class="post-tags">
@@ -103,172 +103,37 @@
                 </div>
                 <div class="post-content">
                     <h1 id="题目">题目</h1>
-<p>&quot;&quot;&quot;<br>
-将两个升序链表合并为一个新的 升序 链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。<br>
-示例：<br>
-输入：1-&gt;2-&gt;4, 1-&gt;3-&gt;4<br>
-输出：1-&gt;1-&gt;2-&gt;3-&gt;4-&gt;4</p>
-<p>&quot;&quot;&quot;</p>
+<p>反转一个单链表。</p>
+<p>示例:<br>
+输入: 1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL<br>
+输出: 5-&gt;4-&gt;3-&gt;2-&gt;1-&gt;NULL</p>
+<p>进阶:<br>
+你可以迭代或递归地反转链表。你能否用两种方法解决这道题？</p>
 <h1 id="本体思路">本体思路</h1>
-<p>创建一个新链表，将小的那个值依次填入新链表的next中，直到一个链表为空后，直接将另外一个链表填入新链表的next中。<br>
-值得一提的是必须需要建立一个哑节点，不然新链表在执行的时候端点会跑到后面去。<br>
-这道题非常类似与归并排序</p>
+<p>迭代</p>
 <h1 id="我的做法">#我的做法：</h1>
-<pre><code class="language-python"># Definition for singly-linked list.
-class ListNode:
-    def __init__(self, val=0, next=None):
-        self.val = val
-        self.next = next
-class Solution:
-    def mergeTwoLists(self, l1: ListNode, l2: ListNode) -&gt; ListNode:
-        newlist=ListNode(0)#起始值为0，没有任何意义，下一个next才是开始。
-        yajiedian = newlist#哑巴节点
-        while l1 and l2 :
-            if l1.val&lt;=l2.val:
-                newlist.next=l1#可以使用这样更快的方式运行  node.next,l1 = l1,l1.next
-                l1=l1.next
-            else:
-                newlist.next=l2#node.next,l2 = l2,l2.next
-                l2=l2.next
-            newlist=newlist.next
-        if l1:
-            newlist.next=l1
-        else:
-            newlist.next=l2
-        return yajiedian.next
-
-</code></pre>
-<p>&quot;&quot;&quot;</p>
-<h1 id="大神做法">大神做法：</h1>
-<p>利用递归，把最小的那个值取出来赋给L1，然后到最后会有一个链表为空，于是把那个链表直接赋给l1</p>
-<p>&quot;&quot;&quot;</p>
 <pre><code class="language-python">class Solution:
-    def mergeTwoLists(self, l1: ListNode, l2: ListNode) -&gt; ListNode:
-        # 递归
-        if l1 and l2:
-            if l1.val &gt; l2.val:
-                l1, l2 = l2, l1
-            l1.next = self.mergeTwoLists(l1.next, l2)
-        return l1 or l2
-
-#复现成功！
-</code></pre>
-<p>python没有指针哪来的链表？</p>
-<pre><code class="language-python">
-class Node(object):
-    #节点
-    def __init__(self, val):
-        self.val = val#节点的值
-        self.next = None#节点的指针（指向下一个Node）
-        
-在大神做法中，print出来的链表形式是这样的。
-None
-ListNode{val: 4, next: ListNode{val: 4, next: None}}
-ListNode{val: 3, next: ListNode{val: 4, next: ListNode{val: 4, next: None}}}
-ListNode{val: 2, next: ListNode{val: 3, next: ListNode{val: 4, next: ListNode{val: 4, next: None}}}}
-ListNode{val: 1, next: ListNode{val: 2, next: ListNode{val: 3, next: ListNode{val: 4, next: ListNode{val: 4, next: None}}}}}
-ListNode{val: 1, next: ListNode{val: 1, next: ListNode{val: 2, next: ListNode{val: 3, next: ListNode{val: 4, next: ListNode{val: 4, next: None}}}}}}
-</code></pre>
-<figure data-type="image" tabindex="1"><img src="https://ganhan999.github.io//post-images/1604582353766.png" alt="" loading="lazy"></figure>
-<p>python链表介绍</p>
-<pre><code class="language-python">#链表的初始化
-class Node(object):
-    &quot;&quot;&quot;节点&quot;&quot;&quot;
-    def __init__(self, elem):
-        self.elem = elem
-        self.next = None
-        
-#链表封装的一系列操作
-class SingleLinkList(object):
-    &quot;&quot;&quot;单链表&quot;&quot;&quot;
-    def __init__(self, node=None):
-        self.__head = node
-
-    def is_empty(self):
-        &quot;&quot;&quot;链表是否为空&quot;&quot;&quot;
-        return self.__head == None
-
-    def length(self):
-        &quot;&quot;&quot;链表长度&quot;&quot;&quot;
-        # cur游标，用来移动遍历节点
-        cur = self.__head
-        # count记录数量
-        count = 0
-        while cur != None:
-            count += 1
-            cur = cur.next
-        return count
-
-    def travel(self):
-        &quot;&quot;&quot;遍历整个链表&quot;&quot;&quot;
-        cur = self.__head
-        while cur != None:
-            print(cur.elem, end=&quot; &quot;)
-            cur = cur.next
-        print(&quot;&quot;)
-
-    def add(self, item):
-        &quot;&quot;&quot;链表头部添加元素，头插法&quot;&quot;&quot;
-        node = Node(item)
-        node.next = self.__head
-        self.__head = node
-
-    def append(self, item):
-        &quot;&quot;&quot;链表尾部添加元素, 尾插法&quot;&quot;&quot;
-        node = Node(item)
-        if self.is_empty():
-            self.__head = node
-        else:
-            cur = self.__head
-            while cur.next != None:
-                cur = cur.next
-            cur.next = node
-
-    def insert(self, pos, item):
-        &quot;&quot;&quot;指定位置添加元素
-        :param  pos 从0开始
-        &quot;&quot;&quot;
-        if pos &lt;= 0:
-            self.add(item)
-        elif pos &gt; (self.length()-1):
-            self.append(item)
-        else:
-            pre = self.__head
-            count = 0
-            while count &lt; (pos-1):
-                count += 1
-                pre = pre.next
-            # 当循环退出后，pre指向pos-1位置
-            node = Node(item)
-            node.next = pre.next
-            pre.next = node
-
-    def remove(self, item):
-        &quot;&quot;&quot;删除节点&quot;&quot;&quot;
-        cur = self.__head
+    def reverseList(self, head: ListNode) -&gt; ListNode:
         pre = None
-        while cur != None:
-            if cur.elem == item:
-                # 先判断此结点是否是头节点
-                # 头节点
-                if cur == self.__head:
-                    self.__head = cur.next
-                else:
-                    pre.next = cur.next
-                break
-            else:
-                pre = cur
-                cur = cur.next
-
-    def search(self, item):
-        &quot;&quot;&quot;查找节点是否存在&quot;&quot;&quot;
-        cur = self.__head
-        while cur != None:
-            if cur.elem == item:
-                return True
-            else:
-                cur = cur.next
-        return False
+        cur = head
+        while cur:
+            temp = cur.next   # 先把原来cur.next位置存起来
+            cur.next = pre
+            pre = cur
+            cur = temp
+        return pre
+</code></pre>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<p>递归</p>
+<h1 id="大神做法1">#大神做法1：</h1>
+<pre><code class="language-Python">class Solution:
+    def reverseList(self, head: ListNode) -&gt; ListNode:
+        if not head or head.next == None:
+            return head
+        res = self.reverseList(head.next)
+        head.next.next = head
+        head.next = None
+        return res
 </code></pre>
 
                 </div>
@@ -278,14 +143,14 @@ class SingleLinkList(object):
         
             <div class="next-post">
                 <div class="next gt-c-content-color-first">下一篇</div>
-                <a href="https://ganhan999.github.io/post/20、有效的括号/" class="post-title gt-a-link">
-                    20、有效的括号
+                <a href="https://ganhan999.github.io/post/148、 排序链表/" class="post-title gt-a-link">
+                    中等148. 排序链表
                 </a>
             </div>
         
 
         
-            <span id="/post/21、合并两个有序链表/" class="leancloud_visitors" data-flag-title="21、合并两个有序列表">
+            <span id="/post/206、反转链表/" class="leancloud_visitors" data-flag-title="206、反转链表">
                 <em class="post-meta-item-text">阅读量 </em>
                 <i class="leancloud-visitors-count">0</i>
             </span>

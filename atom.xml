@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ganhan999.github.io/</id>
     <title>Gridea</title>
-    <updated>2021-02-11T05:12:07.290Z</updated>
+    <updated>2021-02-12T02:26:04.165Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ganhan999.github.io/"/>
     <link rel="self" href="https://ganhan999.github.io/atom.xml"/>
@@ -10,6 +10,47 @@
     <logo>https://ganhan999.github.io/images/avatar.png</logo>
     <icon>https://ganhan999.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, Gridea</rights>
+    <entry>
+        <title type="html"><![CDATA[206、反转链表]]></title>
+        <id>https://ganhan999.github.io/post/206、反转链表/</id>
+        <link href="https://ganhan999.github.io/post/206、反转链表/">
+        </link>
+        <updated>2021-02-12T03:11:01.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
+<p>反转一个单链表。</p>
+<p>示例:<br>
+输入: 1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL<br>
+输出: 5-&gt;4-&gt;3-&gt;2-&gt;1-&gt;NULL</p>
+<p>进阶:<br>
+你可以迭代或递归地反转链表。你能否用两种方法解决这道题？</p>
+<h1 id="本体思路">本体思路</h1>
+<p>迭代</p>
+<h1 id="我的做法">#我的做法：</h1>
+<pre><code class="language-python">class Solution:
+    def reverseList(self, head: ListNode) -&gt; ListNode:
+        pre = None
+        cur = head
+        while cur:
+            temp = cur.next   # 先把原来cur.next位置存起来
+            cur.next = pre
+            pre = cur
+            cur = temp
+        return pre
+</code></pre>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<p>递归</p>
+<h1 id="大神做法1">#大神做法1：</h1>
+<pre><code class="language-Python">class Solution:
+    def reverseList(self, head: ListNode) -&gt; ListNode:
+        if not head or head.next == None:
+            return head
+        res = self.reverseList(head.next)
+        head.next.next = head
+        head.next = None
+        return res
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[中等148. 排序链表]]></title>
         <id>https://ganhan999.github.io/post/148、 排序链表/</id>
@@ -657,58 +698,6 @@ class LRUCache:
         pre.next.next = cur
         pre.next = node
         return dummy.next
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[中等90. 子集 II]]></title>
-        <id>https://ganhan999.github.io/post/90、子集 II/</id>
-        <link href="https://ganhan999.github.io/post/90、子集 II/">
-        </link>
-        <updated>2021-02-02T04:29:35.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
-<p>给定一个可能包含重复元素的整数数组 nums，返回该数组所有可能的子集（幂集）。<br>
-说明：解集不能包含重复的子集。</p>
-<p>示例:<br>
-输入: [1,2,2]<br>
-输出:<br>
-[<br>
-[2],<br>
-[1],<br>
-[1,2,2],<br>
-[2,2],<br>
-[1,2],<br>
-[]<br>
-]</p>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="本体思路">本体思路</h1>
-<p>迭代</p>
-<h1 id="大神做法1">大神做法1：</h1>
-<pre><code class="language-python">class Solution:
-    def subsetsWithDup(self, nums: List[int]) -&gt; List[List[int]]:
-        ans = [[]]
-        for num in nums:
-            ans += [ sorted([num] + i) for i in ans if sorted([num] + i) not in ans]
-        return ans
-</code></pre>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<p>回溯</p>
-<h1 id="大神做法2">大神做法2：</h1>
-<pre><code class="language-python">class Solution:
-    def subsetsWithDup(self, nums: List[int]) -&gt; List[List[int]]:
-        nums = sorted(nums)
-        n = len(nums)
-        res = []
-        def back_func(start=0, temp=[]):
-            res.append(temp[:])
-            for i in range(start, n):
-                if i &gt; start and nums[i] == nums[i-1]:
-                    continue
-                temp.append(nums[i])
-                back_func(i+1, temp)
-                temp.pop()
-        back_func()
-        return res
 </code></pre>
 ]]></content>
     </entry>
