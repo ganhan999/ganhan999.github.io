@@ -4,7 +4,7 @@
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-<title>100、相同的树 | Gridea</title>
+<title>217、存在重复元素 | Gridea</title>
 
 <link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1613297728737">
 
@@ -89,11 +89,11 @@
         <div class="post-detail gt-bg-theme-color-second">
             <article class="gt-post-content">
                 <h2 class="post-title">
-                    100、相同的树
+                    217、存在重复元素
                 </h2>
                 <div class="post-info">
                     <time class="post-time gt-c-content-color-first">
-                        · 2020-11-18 ·
+                        · 2021-02-14 ·
                     </time>
                     
                         <a href="https://ganhan999.github.io/tag/cKyYTCK2Y/" class="post-tags">
@@ -103,66 +103,39 @@
                 </div>
                 <div class="post-content">
                     <h1 id="题目">题目</h1>
-<ol>
-<li>
-<p>给定两个二叉树，编写一个函数来检验它们是否相同。</p>
-<p>如果两个树在结构上相同，并且节点具有相同的值，则认为它们是相同的。</p>
+<p>给定一个整数数组，判断是否存在重复元素。</p>
+<p>如果存在一值在数组中出现至少两次，函数返回 true 。如果数组中每个元素都不相同，则返回 false 。</p>
 <p>示例 1:<br>
-输入:       1         1<br>
-/ \       / <br>
-2   3     2   3</p>
-<pre><code>    [1,2,3],   [1,2,3]
-</code></pre>
-<p>输出: true</p>
+输入: [1,2,3,1]<br>
+输出: true</p>
 <p>示例 2:<br>
-输入:      1          1<br>
-/           <br>
-2             2</p>
-<pre><code>    [1,2],     [1,null,2]
-</code></pre>
-<p>输出: false</p>
+输入: [1,2,3,4]<br>
+输出: false</p>
 <p>示例 3:<br>
-输入:       1         1<br>
-/ \       / <br>
-2   1     1   2</p>
-<pre><code>    [1,2,1],   [1,1,2]
-</code></pre>
-<p>输出: false</p>
-</li>
-</ol>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+输入: [1,1,1,3,3,4,3,2,4,2]<br>
+输出: true</p>
 <h1 id="本体思路">本体思路</h1>
-<p>递归大法好。<br>
-一句话, 先想出口：<br>
-空的话怎么办？<br>
-一个出口怎么办？<br>
-通常情况下怎么处理当前元素, 同时减少问题规模？</p>
+<p>反证法，假设不存在有一个值是重复两次的，那么列表和集合的个数应该相同</p>
 <h1 id="我的做法">#我的做法：</h1>
 <pre><code class="language-python">class Solution:
-    def isSameTree(self, p: TreeNode, q: TreeNode) -&gt; bool:
-        if not p and not q: return True
-        if not p or not q: return False
-        if p.val != q.val: return False
-        return self.isSameTree(p.left, q.left) and self.isSameTree(p.right, q.right)
+    def containsDuplicate(self, nums: List[int]) -&gt; bool:
+        len1=len(nums)
+        set1=set(nums)
+        len2=len(set1)
+        return True if len1!=len2 else False
 </code></pre>
 <p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="大神做法">#大神做法：</h1>
-<p>深度优先遍历，把遍历的数字加入数组中。</p>
+<h1 id="大神做法1">#大神做法1：</h1>
+<p>排序后，然后判断前后元素是否相等</p>
 <pre><code class="language-Python">class Solution:
-    def isSameTree(self, p: TreeNode, q: TreeNode) -&gt; bool:
-        resp, resq = [], []
-        self.DFS(p, resp)
-        self.DFS(q, resq)
-        return resp == resq
-
-    def DFS(self, tree, res):
-        if not tree:
-            res.append('')
-            return
-        res.append(tree.val)
-        self.DFS(tree.left, res)
-        self.DFS(tree.right, res)
-
+    def containsDuplicate(self, nums: List[int]) -&gt; bool:
+        # 先对数组排序
+        nums.sort()
+        # 遍历数组，比较前后元素值
+        for i in range(len(nums)-1):
+            if nums[i] == nums[i+1]:
+                return True
+        return False
 </code></pre>
 
                 </div>
@@ -172,14 +145,14 @@
         
             <div class="next-post">
                 <div class="next gt-c-content-color-first">下一篇</div>
-                <a href="https://ganhan999.github.io/post/88、合并两个有序数组/" class="post-title gt-a-link">
-                    88、合并两个有序数组
+                <a href="https://ganhan999.github.io/post/215、数组中的第K个最大元素/" class="post-title gt-a-link">
+                    中等215. 数组中的第K个最大元素
                 </a>
             </div>
         
 
         
-            <span id="/post/100、相同的树/" class="leancloud_visitors" data-flag-title="100、相同的树">
+            <span id="/post/217、存在重复元素/" class="leancloud_visitors" data-flag-title="217、存在重复元素">
                 <em class="post-meta-item-text">阅读量 </em>
                 <i class="leancloud-visitors-count">0</i>
             </span>
