@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ganhan999.github.io/</id>
     <title>Gridea</title>
-    <updated>2021-02-15T01:56:00.525Z</updated>
+    <updated>2021-02-18T12:52:11.292Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ganhan999.github.io/"/>
     <link rel="self" href="https://ganhan999.github.io/atom.xml"/>
@@ -10,6 +10,55 @@
     <logo>https://ganhan999.github.io/images/avatar.png</logo>
     <icon>https://ganhan999.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, Gridea</rights>
+    <entry>
+        <title type="html"><![CDATA[231、2的幂]]></title>
+        <id>https://ganhan999.github.io/post/231、2的幂/</id>
+        <link href="https://ganhan999.github.io/post/231、2的幂/">
+        </link>
+        <updated>2021-02-18T13:29:35.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
+<p>给定一个整数，编写一个函数来判断它是否是 2 的幂次方。</p>
+<p>示例 1:<br>
+输入: 1<br>
+输出: true<br>
+解释: 20 = 1</p>
+<p>示例 2:<br>
+输入: 16<br>
+输出: true<br>
+解释: 24 = 16</p>
+<p>示例 3:<br>
+输入: 218<br>
+输出: false</p>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="本体思路">本体思路</h1>
+<p>一直除二，除到是奇数或者为1为止</p>
+<h1 id="大神做法1">大神做法1：</h1>
+<pre><code class="language-python">class Solution(object):
+    def isPowerOfTwo(self, n):
+        if n == 0:
+            return False
+        while n % 2 == 0:
+            n /= 2
+        return n == 1
+</code></pre>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<p>恒有 n &amp; (n - 1) == 0和n&gt;0的条件就是二的幂<br>
+这里n二进制最高位为1，其他为0<br>
+n-1则相反</p>
+<h1 id="大神做法2">大神做法2：</h1>
+<pre><code class="language-python">class Solution:
+    def isPowerOfTwo(self, n: int) -&gt; bool:
+        return n &gt; 0 and n &amp; (n - 1) == 0
+</code></pre>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<p>数1的个数</p>
+<h1 id="大神做法3">大神做法3：</h1>
+<pre><code class="language-python">class Solution:
+    def isPowerOfTwo(self, n: int) -&gt; bool:
+        return n&gt;=0 and bin(n).count('1') == 1
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[中等230. 二叉搜索树中第K小的元素]]></title>
         <id>https://ganhan999.github.io/post/230、二叉搜索树中第K小的元素/</id>
@@ -682,45 +731,6 @@ class LRUCache:
             head = head.next
             pre = pre.next
         return True
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[中等96. 不同的二叉搜索树]]></title>
-        <id>https://ganhan999.github.io/post/96、不同的二叉搜索树/</id>
-        <link href="https://ganhan999.github.io/post/96、不同的二叉搜索树/">
-        </link>
-        <updated>2021-02-06T12:29:35.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
-<p>给定一个整数 n，求以 1 ... n 为节点组成的二叉搜索树有多少种？</p>
-<p>示例:<br>
-输入: 3<br>
-输出: 5<br>
-解释:<br>
-给定 n = 3, 一共有 5 种不同结构的二叉搜索树:</p>
-<p>1         3     3      2      1<br>
-\       /     /      / \      <br>
-3     2     1      1   3      2<br>
-/     /       \                 <br>
-2     1         2                 3</p>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="本体思路">本体思路</h1>
-<p>动态规划</p>
-<figure data-type="image" tabindex="1"><img src="C:%5CUsers%5CWindows10%5CDocuments%5CGridea%5Cimages%5Cimage-20210206184849684.png" alt="image-20210206184849684" loading="lazy"></figure>
-<h1 id="大神做法1">大神做法1：</h1>
-<pre><code class="language-python">class Solution:
-    def numTrees(self, n):
-        &quot;&quot;&quot;
-        :type n: int
-        :rtype: int
-        &quot;&quot;&quot;
-        G = [0]*(n+1)
-        G[0], G[1] = 1, 1
-
-        for i in range(2, n+1):
-            for j in range(1, i+1):
-                G[i] += G[j-1] * G[i-j]
-        return G[n]
 </code></pre>
 ]]></content>
     </entry>
