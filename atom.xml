@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ganhan999.github.io/</id>
     <title>Gridea</title>
-    <updated>2021-02-19T14:33:27.230Z</updated>
+    <updated>2021-02-20T11:37:34.458Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ganhan999.github.io/"/>
     <link rel="self" href="https://ganhan999.github.io/atom.xml"/>
@@ -10,6 +10,126 @@
     <logo>https://ganhan999.github.io/images/avatar.png</logo>
     <icon>https://ganhan999.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, Gridea</rights>
+    <entry>
+        <title type="html"><![CDATA[中等236. 二叉树的最近公共祖先]]></title>
+        <id>https://ganhan999.github.io/post/236、二叉树的最近公共祖先/</id>
+        <link href="https://ganhan999.github.io/post/236、二叉树的最近公共祖先/">
+        </link>
+        <updated>2021-02-20T12:29:35.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
+<p>给定一个二叉树, 找到该树中两个指定节点的最近公共祖先。</p>
+<p>百度百科中最近公共祖先的定义为：“对于有根树 T 的两个节点 p、q，最近公共祖先表示为一个节点 x，<br>
+满足 x 是 p、q 的祖先且 x 的深度尽可能大（一个节点也可以是它自己的祖先）。”</p>
+<p>示例 1：<br>
+输入：root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 1<br>
+输出：3<br>
+解释：节点 5 和节点 1 的最近公共祖先是节点 3 。</p>
+<p>示例 2：<br>
+输入：root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 4<br>
+输出：5<br>
+解释：节点 5 和节点 4 的最近公共祖先是节点 5 。因为根据定义最近公共祖先节点可以为节点本身。</p>
+<p>示例 3：<br>
+输入：root = [1,2], p = 1, q = 2<br>
+输出：1</p>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="本体思路">本体思路</h1>
+<p>递归<br>
+把符合条件的搬到父节点</p>
+<h1 id="大神做法1">大神做法1：</h1>
+<pre><code class="language-python">class Solution:
+    def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -&gt; 'TreeNode':
+        if not root:#如果是空那么就返回空
+            return None
+        # 边界条件，如果匹配到left或right就直接返回停止递归
+        if root.val == p.val or root.val == q.val:
+            return root
+        # 这两行代码可以无脑先写好！
+        # 因为是DFS算法，这个模板可以无脑套用，写上之后可能你思路就清晰很多
+        left = self.lowestCommonAncestor(root.left, p, q)
+        right = self.lowestCommonAncestor(root.right, p, q)
+        # 如果既在左子树找到，又在右子树找到，那么毫无疑问当前root就是公共节点
+        if left and right:
+            return root
+        # 只有左子树有，那么直接返回左子树匹配到的第一个节点
+        if left:
+            return left
+        if right:
+            return right
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[235、二叉搜索树的最近公共祖先]]></title>
+        <id>https://ganhan999.github.io/post/235、二叉搜索树的最近公共祖先/</id>
+        <link href="https://ganhan999.github.io/post/235、二叉搜索树的最近公共祖先/">
+        </link>
+        <updated>2021-02-19T14:29:35.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
+<p>给定一个二叉搜索树, 找到该树中两个指定节点的最近公共祖先。<br>
+百度百科中最近公共祖先的定义为：“对于有根树 T 的两个结点 p、q，最<br>
+近公共祖先表示为一个结点 x，满足 x 是 p、q 的祖先且 x 的深度尽可能大（一个节点也可以是它自己的祖先）。”<br>
+例如，给定如下二叉搜索树:  root = [6,2,8,0,4,7,9,null,null,3,5]</p>
+<p>示例 1:<br>
+输入: root = [6,2,8,0,4,7,9,null,null,3,5], p = 2, q = 8<br>
+输出: 6<br>
+解释: 节点 2 和节点 8 的最近公共祖先是 6。</p>
+<p>示例 2:<br>
+输入: root = [6,2,8,0,4,7,9,null,null,3,5], p = 2, q = 4<br>
+输出: 2<br>
+解释: 节点 2 和节点 4 的最近公共祖先是 2, 因为根据定义最近公共祖先节点可以为节点本身。</p>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="本体思路">本体思路</h1>
+<p>两次遍历</p>
+<p>找到两个节点<br>
+分别记录他们的路径<br>
+找到分岔点</p>
+<h1 id="大神做法1">大神做法1：</h1>
+<pre><code class="language-python">class Solution:
+    def lowestCommonAncestor(self, root: TreeNode, p: TreeNode, q: TreeNode) -&gt; TreeNode:
+        def getPath(root: TreeNode, target: TreeNode) -&gt; List[TreeNode]:
+            path = list()
+            node = root
+            while node != target:
+                path.append(node)
+                if target.val &lt; node.val:
+                    node = node.left
+                else:
+                    node = node.right
+            path.append(node)
+            return path
+
+        path_p = getPath(root, p)
+        path_q = getPath(root, q)
+        ancestor = None
+        for u, v in zip(path_p, path_q):
+            if u == v:
+                ancestor = u
+            else:
+                break
+
+        return ancestor
+</code></pre>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<p>一次遍历</p>
+<p>我们从根节点开始遍历；<br>
+如果当前节点的值大于 p 和 q 的值，说明 p 和 q 应该在当前节点的左子树，因此将当前节点移动到它的左子节点；<br>
+如果当前节点的值小于 p 和 q 的值，说明 p 和 q 应该在当前节点的右子树，因此将当前节点移动到它的右子节点；<br>
+如果当前节点的值不满足上述两条要求，那么说明当前节点就是「分岔点」。此时，p 和 q 要么在当前节点的不同的子树中，要么其中一个就是当前节点。</p>
+<h1 id="大神做法2">大神做法2：</h1>
+<pre><code class="language-python">class Solution:
+    def lowestCommonAncestor(self, root: TreeNode, p: TreeNode, q: TreeNode) -&gt; TreeNode:
+        ancestor = root
+        while True:
+            if p.val &lt; ancestor.val and q.val &lt; ancestor.val:
+                ancestor = ancestor.left
+            elif p.val &gt; ancestor.val and q.val &gt; ancestor.val:
+                ancestor = ancestor.right
+            else:
+                break
+        return ancestor
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[231、2的幂]]></title>
         <id>https://ganhan999.github.io/post/231、2的幂/</id>
@@ -598,139 +718,6 @@ class LRUCache:
             head = head.next
         return None
 
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[中等98. 验证二叉搜索树]]></title>
-        <id>https://ganhan999.github.io/post/98、验证二叉搜索树/</id>
-        <link href="https://ganhan999.github.io/post/98、验证二叉搜索树/">
-        </link>
-        <updated>2021-02-08T11:29:35.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
-<p>给定一个二叉树，判断其是否是一个有效的二叉搜索树。<br>
-假设一个二叉搜索树具有如下特征：<br>
-节点的左子树只包含小于当前节点的数。<br>
-节点的右子树只包含大于当前节点的数。<br>
-所有左子树和右子树自身必须也是二叉搜索树。</p>
-<p>示例 1:<br>
-输入:<br>
-2<br>
-/ <br>
-1   3<br>
-输出: true</p>
-<p>示例 2:<br>
-输入:<br>
-5<br>
-/ <br>
-1   4<br>
-/ <br>
-3   6<br>
-输出: false<br>
-解释: 输入为: [5,1,4,null,null,3,6]。<br>
-根节点的值为 5 ，但是其右子节点值为 4 。</p>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="本体思路">本体思路</h1>
-<p>中序遍历后应该是递增序列</p>
-<h1 id="大神做法1">大神做法1：</h1>
-<pre><code class="language-python">class Solution:
-    def isValidBST(self, root: TreeNode) -&gt; bool:
-        stack, inorder = [], float('-inf')
-
-        while stack or root:
-            while root:
-                stack.append(root)
-                root = root.left
-            root = stack.pop()
-            # 如果中序遍历得到的节点的值小于等于前一个 inorder，说明不是二叉搜索树
-            if root.val &lt;= inorder:
-                return False
-            inorder = root.val
-            root = root.right
-        return True
-</code></pre>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<p>从上往下递归</p>
-<h1 id="大神做法2">大神做法2：</h1>
-<pre><code class="language-python">class Solution:
-    def isValidBST(self, root: TreeNode) -&gt; bool:
-        return self.dg(root,-(2**32),2**32) #这里我直接粗暴地将最小值和最大值设置为一个足够小（大）的数，你可以设置你认为的最优解
-    def dg(self,root,min_v,max_v):
-    # 参数：root：当前节点，min_v：允许最小值（下界），max_v：允许最大值（上界）
-
-        if root == None: # 如果当前节点为空，证明已经递归到叶子节点，返回True
-            return True
-
-        if root.val &lt; max_v and root.val &gt; min_v : # 如果当前节点值符合规定，继续进行之后的递归
-            pass
-        else: # 如果不符合规定，之间返回 False
-            return False
-
-        if self.dg(root.left,min_v,root.val) == False: # 对左子树进行递归，此时最大值应该为当前节点值
-            return False
-        if self.dg(root.right,root.val,max_v) == False:# 对右子树进行递归，此时最小值应该为当前节点值
-            return False
-
-        return True # 如果成功避开所有坑，恭喜，这个当前节点下的子树是一个二叉搜索树
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[234、回文链表]]></title>
-        <id>https://ganhan999.github.io/post/234、回文链表/</id>
-        <link href="https://ganhan999.github.io/post/234、回文链表/">
-        </link>
-        <updated>2021-02-06T16:11:01.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
-<p>请判断一个链表是否为回文链表。</p>
-<p>示例 1:<br>
-输入: 1-&gt;2<br>
-输出: false</p>
-<p>示例 2:<br>
-输入: 1-&gt;2-&gt;2-&gt;1<br>
-输出: true</p>
-<h1 id="本体思路">本体思路</h1>
-<p>链表转列表</p>
-<h1 id="我的做法">#我的做法：</h1>
-<pre><code class="language-python">class Solution:
-    def isPalindrome(self, head: ListNode) -&gt; bool:
-        vals = []
-        current_node = head
-        while current_node is not None:
-            vals.append(current_node.val)
-            current_node = current_node.next
-        return vals == vals[::-1]
-</code></pre>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="大神做法1">#大神做法1：</h1>
-<p>整个流程可以分为以下五个步骤：</p>
-<p>找到前半部分链表的尾节点。<br>
-反转后半部分链表。<br>
-判断是否回文。<br>
-恢复链表。<br>
-返回结果。</p>
-<pre><code class="language-Python">class Solution:
-    def isPalindrome(self, head: ListNode) -&gt; bool:
-        if not head:
-            return True
-        fast = slow = head
-        while fast.next and fast.next.next:
-            fast = fast.next.next
-            slow = slow.next
-        pre = None
-        cur = slow.next
-        slow.next = None
-        while cur:#反转链表
-            tmp = cur.next
-            cur.next = pre
-            pre = cur #pre指向前一个指针
-            cur = tmp
-        while pre:
-            if head.val != pre.val:
-                return False
-            head = head.next
-            pre = pre.next
-        return True
 </code></pre>
 ]]></content>
     </entry>

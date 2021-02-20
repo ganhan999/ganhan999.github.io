@@ -4,7 +4,7 @@
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-<title>中等24. 两两交换链表中的节点 | Gridea</title>
+<title>中等236. 二叉树的最近公共祖先 | Gridea</title>
 
 <link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1613821031726">
 
@@ -89,11 +89,11 @@
         <div class="post-detail gt-bg-theme-color-second">
             <article class="gt-post-content">
                 <h2 class="post-title">
-                    中等24. 两两交换链表中的节点
+                    中等236. 二叉树的最近公共祖先
                 </h2>
                 <div class="post-info">
                     <time class="post-time gt-c-content-color-first">
-                        · 2020-12-23 ·
+                        · 2021-02-20 ·
                     </time>
                     
                         <a href="https://ganhan999.github.io/tag/cKyYTCK2Y/" class="post-tags">
@@ -103,76 +103,44 @@
                 </div>
                 <div class="post-content">
                     <h1 id="题目">题目</h1>
-<p>&quot;&quot;&quot;</p>
-<figure data-type="image" tabindex="1"><img src="https://assets.leetcode.com/uploads/2020/10/03/swap_ex1.jpg" alt="img" loading="lazy"></figure>
-<p>给定一个链表，两两交换其中相邻的节点，并返回交换后的链表。</p>
-<p>你不能只是单纯的改变节点内部的值，而是需要实际的进行节点交换。</p>
+<p>给定一个二叉树, 找到该树中两个指定节点的最近公共祖先。</p>
+<p>百度百科中最近公共祖先的定义为：“对于有根树 T 的两个节点 p、q，最近公共祖先表示为一个节点 x，<br>
+满足 x 是 p、q 的祖先且 x 的深度尽可能大（一个节点也可以是它自己的祖先）。”</p>
 <p>示例 1：<br>
-输入：head = [1,2,3,4]<br>
-输出：[2,1,4,3]</p>
+输入：root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 1<br>
+输出：3<br>
+解释：节点 5 和节点 1 的最近公共祖先是节点 3 。</p>
 <p>示例 2：<br>
-输入：head = []<br>
-输出：[]</p>
+输入：root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 4<br>
+输出：5<br>
+解释：节点 5 和节点 4 的最近公共祖先是节点 5 。因为根据定义最近公共祖先节点可以为节点本身。</p>
 <p>示例 3：<br>
-输入：head = [1]<br>
-输出：[1]<br>
-&quot;&quot;&quot;</p>
+输入：root = [1,2], p = 1, q = 2<br>
+输出：1</p>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
 <h1 id="本体思路">本体思路</h1>
-<p>我们来一一分析下，假设链表总长是偶数，那么递归函数执行到终止条件时，head 就等于 null。<br>
-如果链表链表总长是偶数，那么递归函数执行到终止条件时，head.next 就等于 null。<br>
-递归函数内，我们要改变 1-&gt;2 的指向，将其改为 2-&gt;1。<br>
-那后面的节点怎么办呢？不用担心，这是由下一层递归函数来解决。下一层递归函数返回后的节点是 4，<br>
-就是4-&gt;3-&gt;...这样的了，也就是后面的节点都已经串联好了。所以我们只需要将 1 节点指向 4 就可以啦。</p>
-<p>递归出口：当前节点或者下一个节点为空，返回<br>
-方法内容：当前节点next，指向当前节点，指针互换<br>
-返回值：返回交换完成的节点</p>
-<h1 id="大神做法1">#大神做法1：</h1>
-<pre><code class="language-python">class Solution(object):
-	def swapPairs(self, head):
-		# 递归的终止条件
-		if not (head and head.next):
-			return head
-		# 假设链表是 1-&gt;2-&gt;3-&gt;4
-		# 这句就先保存节点2
-		tmp = head.next
-		# 继续递归，处理节点3-&gt;4
-		# 当递归结束返回后，就变成了4-&gt;3
-		# 于是head节点就指向了4，变成1-&gt;4-&gt;3
-		head.next = self.swapPairs(tmp.next)
-		# 将2节点指向1
-		tmp.next = head
-		return tmp
-</code></pre>
-<p>&quot;&quot;&quot;</p>
-<h1 id="大神做法2">大神做法2：</h1>
-<p>利用stack<br>
-我们利用一个 stack，然后不断迭代链表，每次取出两个节点放入 stack 中，再从 stack 中拿出两个节点。<br>
-借助 stack 后进先出的特点，放进去的时候是 1,2 。拿出来的时候就是 2，1 两个节点了。<br>
-再把这两个节点串联起来，重复这个逻辑遍历完整个链表，就可以做到两两反转的效果了。<br>
-虽然用到了 stack，但因为只存了两个元素，所以空间复杂度还是 O(1)O(1)，时间复杂度是 O(n)O(n)。</p>
-<pre><code class="language-python">class Solution(object):
-   def swapPairs(self, head):
-      if not (head and head.next):
-         return head
-      p = ListNode(-1)
-      # 用stack保存每次迭代的两个节点
-      # head指向新的p节点，函数结束时返回head.next即可
-      cur,head,stack = head,p,[]
-      while cur and cur.next:
-         # 将两个节点放入stack中
-         _,_ = stack.append(cur),stack.append(cur.next)
-         # 当前节点往前走两步
-         cur = cur.next.next
-         # 从stack中弹出两个节点，然后用p节点指向新弹出的两个节点
-         p.next = stack.pop()
-         p.next.next = stack.pop()
-         p = p.next.next
-      # 注意边界条件，当链表长度是奇数时，cur就不为空
-      if cur:
-         p.next = cur
-      else:
-         p.next = None
-      return head.next
+<p>递归<br>
+把符合条件的搬到父节点</p>
+<h1 id="大神做法1">大神做法1：</h1>
+<pre><code class="language-python">class Solution:
+    def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -&gt; 'TreeNode':
+        if not root:#如果是空那么就返回空
+            return None
+        # 边界条件，如果匹配到left或right就直接返回停止递归
+        if root.val == p.val or root.val == q.val:
+            return root
+        # 这两行代码可以无脑先写好！
+        # 因为是DFS算法，这个模板可以无脑套用，写上之后可能你思路就清晰很多
+        left = self.lowestCommonAncestor(root.left, p, q)
+        right = self.lowestCommonAncestor(root.right, p, q)
+        # 如果既在左子树找到，又在右子树找到，那么毫无疑问当前root就是公共节点
+        if left and right:
+            return root
+        # 只有左子树有，那么直接返回左子树匹配到的第一个节点
+        if left:
+            return left
+        if right:
+            return right
 </code></pre>
 
                 </div>
@@ -182,14 +150,14 @@
         
             <div class="next-post">
                 <div class="next gt-c-content-color-first">下一篇</div>
-                <a href="https://ganhan999.github.io/post/19、删除链表的倒数第N个节点 /" class="post-title gt-a-link">
-                    中等19. 删除链表的倒数第N个节点
+                <a href="https://ganhan999.github.io/post/235、二叉搜索树的最近公共祖先/" class="post-title gt-a-link">
+                    235、二叉搜索树的最近公共祖先
                 </a>
             </div>
         
 
         
-            <span id="/post/24、两两交换链表中的节点/" class="leancloud_visitors" data-flag-title="中等24. 两两交换链表中的节点">
+            <span id="/post/236、二叉树的最近公共祖先/" class="leancloud_visitors" data-flag-title="中等236. 二叉树的最近公共祖先">
                 <em class="post-meta-item-text">阅读量 </em>
                 <i class="leancloud-visitors-count">0</i>
             </span>
