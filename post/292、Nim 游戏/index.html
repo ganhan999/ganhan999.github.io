@@ -4,7 +4,7 @@
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-<title>中等39. 组合总和 | Gridea</title>
+<title>292、Nim 游戏 | Gridea</title>
 
 <link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1613986852242">
 
@@ -89,11 +89,11 @@
         <div class="post-detail gt-bg-theme-color-second">
             <article class="gt-post-content">
                 <h2 class="post-title">
-                    中等39. 组合总和
+                    292、Nim 游戏
                 </h2>
                 <div class="post-info">
                     <time class="post-time gt-c-content-color-first">
-                        · 2020-12-31 ·
+                        · 2021-02-22 ·
                     </time>
                     
                         <a href="https://ganhan999.github.io/tag/cKyYTCK2Y/" class="post-tags">
@@ -103,92 +103,34 @@
                 </div>
                 <div class="post-content">
                     <h1 id="题目">题目</h1>
-<p>给定一个无重复元素的数组 candidates 和一个目标数 target ，找出 candidates 中所有可以使数字和为 target 的组合。<br>
-candidates 中的数字可以无限制重复被选取。</p>
-<p>说明：<br>
-所有数字（包括 target）都是正整数。<br>
-解集不能包含重复的组合。</p>
-<p>示例 1：<br>
-输入：candidates = [2,3,6,7], target = 7,<br>
-所求解集为：<br>
-[<br>
-[7],<br>
-[2,2,3]<br>
-]</p>
+<p>你和你的朋友，两个人一起玩 Nim 游戏：</p>
+<p>桌子上有一堆石头。<br>
+你们轮流进行自己的回合，你作为先手。<br>
+每一回合，轮到的人拿掉 1 - 3 块石头。<br>
+拿掉最后一块石头的人就是获胜者。<br>
+假设你们每一步都是最优解。请编写一个函数，来判断你是否可以在给定石头数量为 n 的情况下赢得游戏。<br>
+如果可以赢，返回 true；否则，返回 false 。</p>
+<p>示例 1：</p>
+<p>输入：n = 4<br>
+输出：false<br>
+解释：如果堆中有 4 块石头，那么你永远不会赢得比赛；<br>
+因为无论你拿走 1 块、2 块 还是 3 块石头，最后一块石头总是会被你的朋友拿走。</p>
 <p>示例 2：<br>
-输入：candidates = [2,3,5], target = 8,<br>
-所求解集为：<br>
-[<br>
-[2,2,2,2],<br>
-[2,3,3],<br>
-[3,5]<br>
-]</p>
-<p>提示：<br>
-1 &lt;= candidates.length &lt;= 30<br>
-1 &lt;= candidates[i] &lt;= 200<br>
-candidate 中的每个元素都是独一无二的。<br>
-1 &lt;= target &lt;= 500</p>
+输入：n = 1<br>
+输出：true</p>
+<p>示例 3：<br>
+输入：n = 2<br>
+输出：true</p>
 <p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
 <h1 id="本体思路">本体思路</h1>
-<p>回溯法</p>
-<p>以 target = 7 为 根结点 ，创建一个分支的时 做减法 ；<br>
-每一个箭头表示：从父亲结点的数值减去边上的数值，得到孩子结点的数值。<br>
-边的值就是题目中给出的 candidate 数组的每个元素的值；<br>
-减到 0 或者负数的时候停止，即：结点 0 和负数结点成为叶子结点；<br>
-所有从根结点到结点 0 的路径（只能从上往下，没有回路）就是题目要找的一个结果。</p>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<p>让我们考虑一些小例子。显而易见的是，如果石头堆中只有一块、两块、或是三块石头，<br>
+那么在你的回合，你就可以把全部石子拿走，从而在游戏中取胜。而如果就像题目描述那样，<br>
+堆中恰好有四块石头，你就会失败。因为在这种情况下不管你取走多少石头，总会为你的对手留下几块，<br>
+使得他可以在游戏中打败你。因此，要想获胜，在你的回合中，必须避免石头堆中的石子数为 4 的情况。</p>
 <h1 id="大神做法1">大神做法1：</h1>
 <pre><code class="language-python">class Solution:
-    def combinationSum(self, candidates: List[int], target: int) -&gt; List[List[int]]:
-
-        def dfs(candidates, begin, size, path, res, target):
-            if target &lt; 0:
-                return
-            if target == 0:
-                res.append(path)
-                return
-
-            for index in range(begin, size):
-                dfs(candidates, index, size, path + [candidates[index]], res, target - candidates[index])
-
-        size = len(candidates)
-        if size == 0:
-            return []
-        path = []
-        res = []
-        dfs(candidates, 0, size, path, res, target)
-        return res
-
-#复现成功！
-</code></pre>
-<p>&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="大神做法2">大神做法2：</h1>
-<p>剪枝提速</p>
-<p>根据上面画树形图的经验，如果 target 减去一个数得到负数，那么减去一个更大的树依然是负数，同样搜索不到结果。基于这个想法，我们可以对输入数组进行排序，添加相关逻辑达到进一步剪枝的目的；<br>
-排序是为了提高搜索速度，对于解决这个问题来说非必要。但是搜索问题一般复杂度较高，能剪枝就尽量剪枝。实际工作中如果遇到两种方案拿捏不准的情况，都试一下。</p>
-<pre><code class="language-python">class Solution:
-    def combinationSum(self, candidates: List[int], target: int) -&gt; List[List[int]]:
-
-        def dfs(candidates, begin, size, path, res, target):
-            if target == 0:
-                res.append(path)
-                return
-
-            for index in range(begin, size):
-                residue = target - candidates[index]
-                if residue &lt; 0:#在循环内判断是否要剪枝
-                    break
-
-                dfs(candidates, index, size, path + [candidates[index]], res, residue)
-
-        size = len(candidates)
-        if size == 0:
-            return []
-        candidates.sort()
-        path = []
-        res = []
-        dfs(candidates, 0, size, path, res, target)
-        return res
+    def canWinNim(self, n: int) -&gt; bool:
+        return bool(n%4)
 </code></pre>
 
                 </div>
@@ -198,14 +140,14 @@ candidate 中的每个元素都是独一无二的。<br>
         
             <div class="next-post">
                 <div class="next gt-c-content-color-first">下一篇</div>
-                <a href="https://ganhan999.github.io/post/36、 有效的数独/" class="post-title gt-a-link">
-                    中等36. 有效的数独
+                <a href="https://ganhan999.github.io/post/237、 删除链表中的节点/" class="post-title gt-a-link">
+                    237、 删除链表中的节点
                 </a>
             </div>
         
 
         
-            <span id="/post/39、组合总数/" class="leancloud_visitors" data-flag-title="中等39. 组合总和">
+            <span id="/post/292、Nim 游戏/" class="leancloud_visitors" data-flag-title="292、Nim 游戏">
                 <em class="post-meta-item-text">阅读量 </em>
                 <i class="leancloud-visitors-count">0</i>
             </span>
