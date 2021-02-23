@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ganhan999.github.io/</id>
     <title>Gridea</title>
-    <updated>2021-02-22T09:43:55.955Z</updated>
+    <updated>2021-02-23T08:31:17.310Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ganhan999.github.io/"/>
     <link rel="self" href="https://ganhan999.github.io/atom.xml"/>
@@ -10,6 +10,87 @@
     <logo>https://ganhan999.github.io/images/avatar.png</logo>
     <icon>https://ganhan999.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, Gridea</rights>
+    <entry>
+        <title type="html"><![CDATA[557、反转字符串中的单词 III]]></title>
+        <id>https://ganhan999.github.io/post/557、反转字符串中的单词 III/</id>
+        <link href="https://ganhan999.github.io/post/557、反转字符串中的单词 III/">
+        </link>
+        <updated>2021-02-23T09:29:35.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
+<p>给定一个字符串，你需要反转字符串中每个单词的字符顺序，同时仍保留空格和单词的初始顺序。</p>
+<p>示例：<br>
+输入：&quot;Let's take LeetCode contest&quot;<br>
+输出：&quot;s'teL ekat edoCteeL tsetnoc&quot;</p>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="本体思路">本体思路</h1>
+<p>切片再翻转再合并</p>
+<h1 id="大神做法1">大神做法1：</h1>
+<pre><code class="language-python">class Solution(object):
+    def reverseWords(self, s):
+        return &quot; &quot;.join(word[::-1] for word in s.split(&quot; &quot;))
+</code></pre>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<p>先反转单词列表 再反转字符串</p>
+<p>以字符串 “I love drag queen” 为例：</p>
+<p>s.split(&quot; &quot;)<br>
+将字符串分割成单词列表:<br>
+['I', 'love', 'drag', 'queen']</p>
+<p>s.split(&quot; &quot;)[::-1]<br>
+将单词列表反转:<br>
+['queen', 'drag', 'love', 'I']</p>
+<p>&quot; &quot;.join(s.split(&quot; &quot;)[::-1])<br>
+将单词列表转换为字符串，以空格分隔:<br>
+&quot;queen drag love I&quot;</p>
+<p>&quot; &quot;.join(s.split(&quot; &quot;)[::-1])[::-1]<br>
+将字符串反转：<br>
+”I evol gard neeuq“</p>
+<h1 id="大神做法2">大神做法2：</h1>
+<pre><code class="language-python">class Solution(object):
+    def reverseWords(self, s):
+        return &quot; &quot;.join(s.split(&quot; &quot;)[::-1])[::-1]
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[344、反转字符串]]></title>
+        <id>https://ganhan999.github.io/post/344、反转字符串/</id>
+        <link href="https://ganhan999.github.io/post/344、反转字符串/">
+        </link>
+        <updated>2021-02-23T08:29:35.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
+<p>编写一个函数，其作用是将输入的字符串反转过来。输入字符串以字符数组 char[] 的形式给出。<br>
+不要给另外的数组分配额外的空间，你必须原地修改输入数组、使用 O(1) 的额外空间解决这一问题。<br>
+你可以假设数组中的所有字符都是 ASCII 码表中的可打印字符。</p>
+<p>示例 1：<br>
+输入：[&quot;h&quot;,&quot;e&quot;,&quot;l&quot;,&quot;l&quot;,&quot;o&quot;]<br>
+输出：[&quot;o&quot;,&quot;l&quot;,&quot;l&quot;,&quot;e&quot;,&quot;h&quot;]</p>
+<p>示例 2：<br>
+输入：[&quot;H&quot;,&quot;a&quot;,&quot;n&quot;,&quot;n&quot;,&quot;a&quot;,&quot;h&quot;]<br>
+输出：[&quot;h&quot;,&quot;a&quot;,&quot;n&quot;,&quot;n&quot;,&quot;a&quot;,&quot;H&quot;]</p>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="本体思路">本体思路</h1>
+<p>库函数</p>
+<h1 id="大神做法1">大神做法1：</h1>
+<pre><code class="language-python">class Solution:
+    def reverseString(self, s: List[str]) -&gt; None:
+        s[:]=s[::-1]
+</code></pre>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<p>双指针</p>
+<h1 id="大神做法2">大神做法2：</h1>
+<pre><code class="language-python">class Solution:
+    def reverseString(self, s: List[str]) -&gt; None:
+        &quot;&quot;&quot;
+        Do not return anything, modify s in-place instead.
+        &quot;&quot;&quot;
+        l,r=0,len(s)-1
+        while l&lt;r:
+            s[l],s[r]=s[r],s[l]
+            l+=1
+            r-=1
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[中等238. 除自身以外数组的乘积]]></title>
         <id>https://ganhan999.github.io/post/238、除自身以外数组的乘积/</id>
@@ -412,153 +493,6 @@ n-1则相反</p>
             if nums[i] == nums[i+1]:
                 return True
         return False
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[中等215. 数组中的第K个最大元素]]></title>
-        <id>https://ganhan999.github.io/post/215、数组中的第K个最大元素/</id>
-        <link href="https://ganhan999.github.io/post/215、数组中的第K个最大元素/">
-        </link>
-        <updated>2021-02-13T04:29:35.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
-<p>在未排序的数组中找到第 k 个最大的元素。请注意，你需要找的是数组排序后的第 k 个最大的元素，而不是第 k 个不同的元素。</p>
-<p>示例 1:<br>
-输入: [3,2,1,5,6,4] 和 k = 2<br>
-输出: 5</p>
-<p>示例 2:<br>
-输入: [3,2,3,1,2,4,5,5,6] 和 k = 4<br>
-输出: 4</p>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="本体思路">本体思路</h1>
-<p>排序</p>
-<h1 id="大神做法1">大神做法1：</h1>
-<pre><code class="language-python">class Solution:
-    def findKthLargest(self, nums: List[int], k: int) -&gt; int:
-        return sorted(nums, reverse = True)[k - 1]
-</code></pre>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<p>堆排序，库函数</p>
-<h1 id="大神做法2">大神做法2：</h1>
-<pre><code class="language-python">class Solution:
-    def findKthLargest(self, nums: List[int], k: int) -&gt; int:
-        return heapq.nlargest(k, nums)[-1]
-</code></pre>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<p>堆排序，库函数</p>
-<h1 id="大神做法3">大神做法3：</h1>
-<pre><code class="language-python">class Solution:
-    def findKthLargest(self, nums: List[int], k: int) -&gt; int:
-        '''
-        寻找第k个大的元素第一想法是构建小顶堆
-        '''
-
-        def shift_up(new_idx):
-            new_val = minheap[new_idx]  # 临时存储需要上浮的元素
-            # 向上寻找父结点进行比较，决定是否上浮
-            while new_idx &gt; 0 and minheap[(new_idx - 1) // 2] &gt; new_val:
-                minheap[new_idx] = minheap[(new_idx - 1) // 2]  # 父结点下沉
-                new_idx = (new_idx - 1) // 2  # 子结点坐标上移
-            minheap[new_idx] = new_val  # 完成结点上浮
-
-        def shift_down(start, end):
-            start_val = minheap[start]  # 临时存储头节点
-            # 向下寻找双子结点进行比较，决定是否下沉
-            while start * 2 + 1 &lt;= end:
-                child = start * 2 + 1  # 设置左子节点
-                # 比较左右子节点的大小，对于小顶堆来说，需要找出最小子结点
-                if child + 1 &lt;= end and minheap[child] &gt; minheap[child + 1]:
-                    child += 1
-                if minheap[child] &lt; start_val:
-                    minheap[start] = minheap[child]  # 子结点上浮
-                    start = child
-                else:
-                    break
-            minheap[start] = start_val  # 完成结点下沉
-
-        # 上浮式建堆
-        minheap = []
-        for i in range(min(len(nums), k)):
-            minheap.append(nums[i])
-            shift_up(i)
-
-        # 下沉式维护
-        for num in nums[k:]:
-            if num &gt; minheap[0]:
-                minheap[0] = num
-                shift_down(0, k - 1)
-
-        return minheap[0]
-</code></pre>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<p>快速排序＋选择</p>
-<h1 id="大神做法4">大神做法4：</h1>
-<pre><code class="language-python">class Solution:
-    def findKthLargest(self, nums: List[int], k: int) -&gt; int:
-        def partition( left, right):
-            tmp = nums[left]
-            while left &lt; right:
-                while left &lt; right and nums[right] &lt;= tmp:#注意是找大的，所以要从大到小排序
-                    right = right - 1
-                nums[left] = nums[right]
-                while left &lt; right and nums[left] &gt;= tmp:
-                    left = left + 1
-                nums[right] = nums[left]
-            nums[left] = tmp
-            mid = left
-            return mid
-
-        left = 0
-        right = len(nums) - 1
-        while 1:
-            idx = partition(left, right)
-            if idx == k - 1:
-                return nums[idx]
-            if idx &lt; k - 1:
-                left = idx + 1
-            if idx &gt; k - 1:
-                right = idx - 1
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[206、反转链表]]></title>
-        <id>https://ganhan999.github.io/post/206、反转链表/</id>
-        <link href="https://ganhan999.github.io/post/206、反转链表/">
-        </link>
-        <updated>2021-02-12T03:11:01.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
-<p>反转一个单链表。</p>
-<p>示例:<br>
-输入: 1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL<br>
-输出: 5-&gt;4-&gt;3-&gt;2-&gt;1-&gt;NULL</p>
-<p>进阶:<br>
-你可以迭代或递归地反转链表。你能否用两种方法解决这道题？</p>
-<h1 id="本体思路">本体思路</h1>
-<p>迭代</p>
-<h1 id="我的做法">#我的做法：</h1>
-<pre><code class="language-python">class Solution:
-    def reverseList(self, head: ListNode) -&gt; ListNode:
-        pre = None
-        cur = head
-        while cur:
-            temp = cur.next   # 先把原来cur.next位置存起来
-            cur.next = pre
-            pre = cur
-            cur = temp
-        return pre
-</code></pre>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<p>递归</p>
-<h1 id="大神做法1">#大神做法1：</h1>
-<pre><code class="language-Python">class Solution:
-    def reverseList(self, head: ListNode) -&gt; ListNode:
-        if not head or head.next == None:
-            return head
-        res = self.reverseList(head.next)
-        head.next.next = head
-        head.next = None
-        return res
 </code></pre>
 ]]></content>
     </entry>
