@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ganhan999.github.io/</id>
     <title>Gridea</title>
-    <updated>2021-02-25T12:06:12.864Z</updated>
+    <updated>2021-02-26T03:34:43.238Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ganhan999.github.io/"/>
     <link rel="self" href="https://ganhan999.github.io/atom.xml"/>
@@ -10,6 +10,122 @@
     <logo>https://ganhan999.github.io/images/avatar.png</logo>
     <icon>https://ganhan999.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, Gridea</rights>
+    <entry>
+        <title type="html"><![CDATA[205、同构字符串]]></title>
+        <id>https://ganhan999.github.io/post/205、同构字符串/</id>
+        <link href="https://ganhan999.github.io/post/205、同构字符串/">
+        </link>
+        <updated>2021-02-26T03:39:35.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
+<p>给定两个字符串 s 和 t，判断它们是否是同构的。<br>
+如果 s 中的字符可以按某种映射关系替换得到 t ，那么这两个字符串是同构的。<br>
+每个出现的字符都应当映射到另一个字符，同时不改变字符的顺序。不同字符不能映射到同一个字符上，<br>
+相同字符只能映射到同一个字符上，字符可以映射到自己本身。</p>
+<p>示例 1:<br>
+输入：s = &quot;egg&quot;, t = &quot;add&quot;<br>
+输出：true</p>
+<p>示例 2：<br>
+输入：s = &quot;foo&quot;, t = &quot;bar&quot;<br>
+输出：false</p>
+<p>示例 3：<br>
+输入：s = &quot;paper&quot;, t = &quot;title&quot;<br>
+输出：true</p>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="本体思路">本体思路</h1>
+<p>双哈希表比较法<br>
+先把两个哈希表写出来<br>
+然后比较值是不是一样的</p>
+<h1 id="大神做法1">大神做法1：</h1>
+<pre><code class="language-python">class Solution:
+    def isIsomorphic(self, s: str, t: str) -&gt; bool:
+        if s == &quot;&quot; and t == &quot;&quot;:
+            return True
+
+        if s == &quot;&quot; or t == &quot;&quot;:
+            return False
+
+        hashmap_s = {}
+        hashmap_t = {}
+
+        # 对s中的字符进行录入，值为各个字符出现的下标
+        for i, n in zip(s, range(len(s))):
+            if i not in hashmap_s:
+                hashmap_s[i] = [n]
+            else:
+                hashmap_s[i].append(n)
+
+        # 对t中的字符进行录入，值为各个字符出现的下标
+        for i, n in zip(t, range(len(t))):
+            if i not in hashmap_t:
+                hashmap_t[i] = [n]
+            else:
+                hashmap_t[i].append(n)
+
+        # 对比两个哈希表值是否相同
+        for value in hashmap_s.values():
+            if value not in hashmap_t.values():
+                return False
+
+        return True
+</code></pre>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<p>双哈希表<br>
+互相映射</p>
+<h1 id="大神做法2">大神做法2：</h1>
+<pre><code class="language-python">class Solution:
+    def isIsomorphic(self, s: str, t: str) -&gt; bool:
+        a2b, b2a = {}, {}
+        n = len(s)
+        for i in range(n):
+            a, b = s[i], t[i]
+            if (a in a2b and a2b[a] != b) or (b in b2a and b2a[b] != a):#是否互相映射
+                return False
+            a2b[a] = b
+            b2a[b] = a
+        return True
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[219、存在重复元素 II]]></title>
+        <id>https://ganhan999.github.io/post/219、存在重复元素 II/</id>
+        <link href="https://ganhan999.github.io/post/219、存在重复元素 II/">
+        </link>
+        <updated>2021-02-26T03:39:35.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
+<p>给定两个字符串 s 和 t，判断它们是否是同构的。<br>
+如果 s 中的字符可以按某种映射关系替换得到 t ，那么这两个字符串是同构的。<br>
+每个出现的字符都应当映射到另一个字符，同时不改变字符的顺序。不同字符不能映射到同一个字符上，<br>
+相同字符只能映射到同一个字符上，字符可以映射到自己本身。</p>
+<p>示例 1:<br>
+输入：s = &quot;egg&quot;, t = &quot;add&quot;<br>
+输出：true</p>
+<p>示例 2：<br>
+输入：s = &quot;foo&quot;, t = &quot;bar&quot;<br>
+输出：false</p>
+<p>示例 3：<br>
+输入：s = &quot;paper&quot;, t = &quot;title&quot;<br>
+输出：true</p>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="本体思路">本体思路</h1>
+<p>哈希表<br>
+键为数字，值为下标</p>
+<h1 id="大神做法1">大神做法1：</h1>
+<pre><code class="language-python">class Solution:
+    def containsNearbyDuplicate(self, nums: List[int], k: int) -&gt; bool:
+        # 创建哈希表
+        hash_map = {}
+        # 遍历一次数组
+        for idx, n in enumerate(nums):
+            if n not in hash_map or (idx - hash_map[n]) &gt; k:  # 情况1 &amp; 情况2
+                hash_map[n] = idx
+            else:  # 情况3
+                return True
+        else:
+            return False
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[204、计数质数]]></title>
         <id>https://ganhan999.github.io/post/204、计数质数/</id>
@@ -458,83 +574,6 @@
 <pre><code class="language-python">class Solution:
     def canWinNim(self, n: int) -&gt; bool:
         return bool(n%4)
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[237、 删除链表中的节点]]></title>
-        <id>https://ganhan999.github.io/post/237、 删除链表中的节点/</id>
-        <link href="https://ganhan999.github.io/post/237、 删除链表中的节点/">
-        </link>
-        <updated>2021-02-21T10:29:35.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
-<p>请编写一个函数，使其可以删除某个链表中给定的（非末尾）节点。传入函数的唯一参数为 要被删除的节点 。<br>
-现有一个链表 -- head = [4,5,1,9]，它可以表示为:</p>
-<p>示例 1：<br>
-输入：head = [4,5,1,9], node = 5<br>
-输出：[4,1,9]<br>
-解释：给定你链表中值为 5 的第二个节点，那么在调用了你的函数之后，该链表应变为 4 -&gt; 1 -&gt; 9.</p>
-<p>示例 2：<br>
-输入：head = [4,5,1,9], node = 1<br>
-输出：[4,5,9]<br>
-解释：给定你链表中值为 1 的第三个节点，那么在调用了你的函数之后，该链表应变为 4 -&gt; 5 -&gt; 9.</p>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="本体思路">本体思路</h1>
-<p>用下一个节点的值替代被删除节点的值，然后节点其实并未被删除，被删除的是node的下一个节点<br>
-因为没有传头节点</p>
-<h1 id="大神做法1">大神做法1：</h1>
-<pre><code class="language-python">class Solution:
-    def deleteNode(self, node):
-        node.val=node.next.val
-        node.next=node.next.next
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[中等236. 二叉树的最近公共祖先]]></title>
-        <id>https://ganhan999.github.io/post/236、二叉树的最近公共祖先/</id>
-        <link href="https://ganhan999.github.io/post/236、二叉树的最近公共祖先/">
-        </link>
-        <updated>2021-02-20T12:29:35.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
-<p>给定一个二叉树, 找到该树中两个指定节点的最近公共祖先。</p>
-<p>百度百科中最近公共祖先的定义为：“对于有根树 T 的两个节点 p、q，最近公共祖先表示为一个节点 x，<br>
-满足 x 是 p、q 的祖先且 x 的深度尽可能大（一个节点也可以是它自己的祖先）。”</p>
-<p>示例 1：<br>
-输入：root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 1<br>
-输出：3<br>
-解释：节点 5 和节点 1 的最近公共祖先是节点 3 。</p>
-<p>示例 2：<br>
-输入：root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 4<br>
-输出：5<br>
-解释：节点 5 和节点 4 的最近公共祖先是节点 5 。因为根据定义最近公共祖先节点可以为节点本身。</p>
-<p>示例 3：<br>
-输入：root = [1,2], p = 1, q = 2<br>
-输出：1</p>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="本体思路">本体思路</h1>
-<p>递归<br>
-把符合条件的搬到父节点</p>
-<h1 id="大神做法1">大神做法1：</h1>
-<pre><code class="language-python">class Solution:
-    def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -&gt; 'TreeNode':
-        if not root:#如果是空那么就返回空
-            return None
-        # 边界条件，如果匹配到left或right就直接返回停止递归
-        if root.val == p.val or root.val == q.val:
-            return root
-        # 这两行代码可以无脑先写好！
-        # 因为是DFS算法，这个模板可以无脑套用，写上之后可能你思路就清晰很多
-        left = self.lowestCommonAncestor(root.left, p, q)
-        right = self.lowestCommonAncestor(root.right, p, q)
-        # 如果既在左子树找到，又在右子树找到，那么毫无疑问当前root就是公共节点
-        if left and right:
-            return root
-        # 只有左子树有，那么直接返回左子树匹配到的第一个节点
-        if left:
-            return left
-        if right:
-            return right
 </code></pre>
 ]]></content>
     </entry>
