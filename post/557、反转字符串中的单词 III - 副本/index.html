@@ -4,7 +4,7 @@
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-<title>中等39. 组合总和 | Gridea</title>
+<title>225、用队列实现栈 | Gridea</title>
 
 <link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1614426860879">
 
@@ -89,11 +89,11 @@
         <div class="post-detail gt-bg-theme-color-second">
             <article class="gt-post-content">
                 <h2 class="post-title">
-                    中等39. 组合总和
+                    225、用队列实现栈
                 </h2>
                 <div class="post-info">
                     <time class="post-time gt-c-content-color-first">
-                        · 2020-12-31 ·
+                        · 2021-02-27 ·
                     </time>
                     
                         <a href="https://ganhan999.github.io/tag/cKyYTCK2Y/" class="post-tags">
@@ -103,92 +103,110 @@
                 </div>
                 <div class="post-content">
                     <h1 id="题目">题目</h1>
-<p>给定一个无重复元素的数组 candidates 和一个目标数 target ，找出 candidates 中所有可以使数字和为 target 的组合。<br>
-candidates 中的数字可以无限制重复被选取。</p>
-<p>说明：<br>
-所有数字（包括 target）都是正整数。<br>
-解集不能包含重复的组合。</p>
-<p>示例 1：<br>
-输入：candidates = [2,3,6,7], target = 7,<br>
-所求解集为：<br>
-[<br>
-[7],<br>
-[2,2,3]<br>
-]</p>
-<p>示例 2：<br>
-输入：candidates = [2,3,5], target = 8,<br>
-所求解集为：<br>
-[<br>
-[2,2,2,2],<br>
-[2,3,3],<br>
-[3,5]<br>
-]</p>
-<p>提示：<br>
-1 &lt;= candidates.length &lt;= 30<br>
-1 &lt;= candidates[i] &lt;= 200<br>
-candidate 中的每个元素都是独一无二的。<br>
-1 &lt;= target &lt;= 500</p>
+<p>请你仅使用两个队列实现一个后入先出（LIFO）的栈，并支持普通队列的全部四种操作（push、top、pop 和 empty）。</p>
+<p>实现 MyStack 类：</p>
+<p>void push(int x) 将元素 x 压入栈顶。<br>
+int pop() 移除并返回栈顶元素。<br>
+int top() 返回栈顶元素。<br>
+boolean empty() 如果栈是空的，返回 true ；否则，返回 false 。</p>
+<p>注意：<br>
+你只能使用队列的基本操作 —— 也就是 push to back、peek/pop from front、size 和 is empty 这些操作。<br>
+你所使用的语言也许不支持队列。 你可以使用 list （列表）或者 deque（双端队列）来模拟一个队列 ,<br>
+只要是标准的队列操作即可。</p>
+<p>示例：<br>
+输入：<br>
+[&quot;MyStack&quot;, &quot;push&quot;, &quot;push&quot;, &quot;top&quot;, &quot;pop&quot;, &quot;empty&quot;]<br>
+[[], [1], [2], [], [], []]</p>
+<p>输出：<br>
+[null, null, null, 2, 2, false]</p>
+<p>解释：<br>
+MyStack myStack = new MyStack();<br>
+myStack.push(1);<br>
+myStack.push(2);<br>
+myStack.top(); // 返回 2<br>
+myStack.pop(); // 返回 2<br>
+myStack.empty(); // 返回 False</p>
 <p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
 <h1 id="本体思路">本体思路</h1>
-<p>回溯法</p>
-<p>以 target = 7 为 根结点 ，创建一个分支的时 做减法 ；<br>
-每一个箭头表示：从父亲结点的数值减去边上的数值，得到孩子结点的数值。<br>
-边的值就是题目中给出的 candidate 数组的每个元素的值；<br>
-减到 0 或者负数的时候停止，即：结点 0 和负数结点成为叶子结点；<br>
-所有从根结点到结点 0 的路径（只能从上往下，没有回路）就是题目要找的一个结果。</p>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<p>单列表</p>
 <h1 id="大神做法1">大神做法1：</h1>
-<pre><code class="language-python">class Solution:
-    def combinationSum(self, candidates: List[int], target: int) -&gt; List[List[int]]:
+<pre><code class="language-python">class MyStack:
 
-        def dfs(candidates, begin, size, path, res, target):
-            if target &lt; 0:
-                return
-            if target == 0:
-                res.append(path)
-                return
+    def __init__(self):
+        &quot;&quot;&quot;
+        Initialize your data structure here.
+        &quot;&quot;&quot;
+        self.q = []
 
-            for index in range(begin, size):
-                dfs(candidates, index, size, path + [candidates[index]], res, target - candidates[index])
+    def push(self, x: int) -&gt; None:
+        &quot;&quot;&quot;
+        Push element x onto stack.
+        &quot;&quot;&quot;
+        self.q.append(x)
+        q_length = len(self.q)
+        while q_length &gt; 1:
+            self.q.append(self.q.pop(0)) #反转前n-1个元素，栈顶元素始终保留在队首
+            q_length -= 1
 
-        size = len(candidates)
-        if size == 0:
-            return []
-        path = []
-        res = []
-        dfs(candidates, 0, size, path, res, target)
-        return res
+    def pop(self) -&gt; int:
+        &quot;&quot;&quot;
+        Removes the element on top of the stack and returns that element.
+        &quot;&quot;&quot;
+        return self.q.pop(0)
 
-#复现成功！
+    def top(self) -&gt; int:
+        &quot;&quot;&quot;
+        Get the top element.
+        &quot;&quot;&quot;
+        return self.q[0]
+
+
+    def empty(self) -&gt; bool:
+        &quot;&quot;&quot;
+        Returns whether the stack is empty.
+        &quot;&quot;&quot;
+        return not bool(self.q)
 </code></pre>
-<p>&quot;&quot;&quot;&quot;&quot;</p>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<p>双队列</p>
 <h1 id="大神做法2">大神做法2：</h1>
-<p>剪枝提速</p>
-<p>根据上面画树形图的经验，如果 target 减去一个数得到负数，那么减去一个更大的树依然是负数，同样搜索不到结果。基于这个想法，我们可以对输入数组进行排序，添加相关逻辑达到进一步剪枝的目的；<br>
-排序是为了提高搜索速度，对于解决这个问题来说非必要。但是搜索问题一般复杂度较高，能剪枝就尽量剪枝。实际工作中如果遇到两种方案拿捏不准的情况，都试一下。</p>
-<pre><code class="language-python">class Solution:
-    def combinationSum(self, candidates: List[int], target: int) -&gt; List[List[int]]:
-
-        def dfs(candidates, begin, size, path, res, target):
-            if target == 0:
-                res.append(path)
-                return
-
-            for index in range(begin, size):
-                residue = target - candidates[index]
-                if residue &lt; 0:#在循环内判断是否要剪枝
-                    break
-
-                dfs(candidates, index, size, path + [candidates[index]], res, residue)
-
-        size = len(candidates)
-        if size == 0:
-            return []
-        candidates.sort()
-        path = []
-        res = []
-        dfs(candidates, 0, size, path, res, target)
-        return res
+<pre><code class="language-python">from collections import deque
+class MyStack:
+    def __init__(self):
+        &quot;&quot;&quot;
+        Initialize your data structure here.
+        &quot;&quot;&quot;
+        self.data = deque()
+        self.help = deque()
+    def push(self, x: int) -&gt; None:
+        &quot;&quot;&quot;
+        Push element x onto stack.
+        &quot;&quot;&quot;
+        self.data.append(x)
+    def pop(self) -&gt; int:#两个队列互相交换
+        &quot;&quot;&quot;
+        Removes the element on top of the stack and returns that element.
+        &quot;&quot;&quot;
+        while len(self.data) &gt; 1:
+            self.help.append(self.data.popleft())
+        tmp = self.data.popleft()
+        self.help,self.data = self.data,self.help
+        return tmp
+    def top(self) -&gt; int:#同上 但是这里把顶元素加上了
+        &quot;&quot;&quot;
+        Get the top element.
+        &quot;&quot;&quot;
+        while len(self.data) != 1:#得到顶元素
+            self.help.append(self.data.popleft())
+        tmp = self.data.popleft()
+        self.help.append(tmp)#加上顶元素
+        self.help,self.data = self.data,self.help
+        return tmp
+    def empty(self) -&gt; bool:
+        &quot;&quot;&quot;
+        Returns whether the stack is empty.
+        &quot;&quot;&quot;
+        return not bool(self.data)
 </code></pre>
 
                 </div>
@@ -198,14 +216,14 @@ candidate 中的每个元素都是独一无二的。<br>
         
             <div class="next-post">
                 <div class="next gt-c-content-color-first">下一篇</div>
-                <a href="https://ganhan999.github.io/post/36、 有效的数独/" class="post-title gt-a-link">
-                    中等36. 有效的数独
+                <a href="https://ganhan999.github.io/post/205、同构字符串/" class="post-title gt-a-link">
+                    205、同构字符串
                 </a>
             </div>
         
 
         
-            <span id="/post/39、组合总数/" class="leancloud_visitors" data-flag-title="中等39. 组合总和">
+            <span id="/post/557、反转字符串中的单词 III - 副本/" class="leancloud_visitors" data-flag-title="225、用队列实现栈">
                 <em class="post-meta-item-text">阅读量 </em>
                 <i class="leancloud-visitors-count">0</i>
             </span>
