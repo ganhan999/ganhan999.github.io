@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ganhan999.github.io/</id>
     <title>Gridea</title>
-    <updated>2021-02-27T11:55:03.487Z</updated>
+    <updated>2021-02-28T11:25:16.238Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ganhan999.github.io/"/>
     <link rel="self" href="https://ganhan999.github.io/atom.xml"/>
@@ -10,6 +10,30 @@
     <logo>https://ganhan999.github.io/images/avatar.png</logo>
     <icon>https://ganhan999.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, Gridea</rights>
+    <entry>
+        <title type="html"><![CDATA[226、翻转二叉树]]></title>
+        <id>https://ganhan999.github.io/post/226、翻转二叉树/</id>
+        <link href="https://ganhan999.github.io/post/226、翻转二叉树/">
+        </link>
+        <updated>2021-02-28T11:29:35.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
+<p>递归</p>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="本体思路">本体思路</h1>
+<p>切片再翻转再合并</p>
+<h1 id="大神做法1">大神做法1：</h1>
+<pre><code class="language-python">class Solution:
+    def invertTree(self, root: TreeNode) -&gt; TreeNode:
+        if not root:
+            return root
+
+        left = self.invertTree(root.left)
+        right = self.invertTree(root.right)
+        root.left, root.right = right, left
+        return root
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[225、用队列实现栈]]></title>
         <id>https://ganhan999.github.io/post/557、反转字符串中的单词 III - 副本/</id>
@@ -581,75 +605,6 @@ class MyStack:
             res+=n&amp;1
             n&gt;&gt;=1
         return res
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[中等238. 除自身以外数组的乘积]]></title>
-        <id>https://ganhan999.github.io/post/238、除自身以外数组的乘积/</id>
-        <link href="https://ganhan999.github.io/post/238、除自身以外数组的乘积/">
-        </link>
-        <updated>2021-02-22T12:29:35.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
-<p>给你一个长度为 n 的整数数组 nums，其中 n &gt; 1，返回输出数组 output ，<br>
-其中 output[i] 等于 nums 中除 nums[i] 之外其余各元素的乘积。</p>
-<p>示例:<br>
-输入: [1,2,3,4]<br>
-输出: [24,12,8,6]</p>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="本体思路">本体思路</h1>
-<p>前缀*后缀</p>
-<h1 id="大神做法1">大神做法1：</h1>
-<pre><code class="language-python">class Solution:
-    def productExceptSelf(self, nums: List[int]) -&gt; List[int]:
-        length = len(nums)
-
-        # L 和 R 分别表示左右两侧的乘积列表
-        L, R, answer = [0] * length, [0] * length, [0] * length
-
-        # L[i] 为索引 i 左侧所有元素的乘积
-        # 对于索引为 '0' 的元素，因为左侧没有元素，所以 L[0] = 1
-        L[0] = 1
-        for i in range(1, length):
-            L[i] = nums[i - 1] * L[i - 1]
-
-        # R[i] 为索引 i 右侧所有元素的乘积
-        # 对于索引为 'length-1' 的元素，因为右侧没有元素，所以 R[length-1] = 1
-        R[length - 1] = 1
-        for i in reversed(range(length - 1)):
-            R[i] = nums[i + 1] * R[i + 1]
-
-        # 对于索引 i，除 nums[i] 之外其余各元素的乘积就是左侧所有元素的乘积乘以右侧所有元素的乘积
-        for i in range(length):
-            answer[i] = L[i] * R[i]
-
-        return answer
-</code></pre>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="大神做法2">#大神做法2：</h1>
-<p>前缀*后缀<br>
-降低空间复杂度</p>
-<pre><code class="language-Python">class Solution:
-    def productExceptSelf(self, nums: List[int]) -&gt; List[int]:
-        length = len(nums)
-        answer = [0] * length
-
-        # answer[i] 表示索引 i 左侧所有元素的乘积
-        # 因为索引为 '0' 的元素左侧没有元素， 所以 answer[0] = 1
-        answer[0] = 1
-        for i in range(1, length):
-            answer[i] = nums[i - 1] * answer[i - 1]
-
-        # R 为右侧所有元素的乘积
-        # 刚开始右边没有元素，所以 R = 1
-        R = 1;
-        for i in reversed(range(length)):
-            # 对于索引 i，左边的乘积为 answer[i]，右边的乘积为 R
-            answer[i] = answer[i] * R
-            # R 需要包含右边所有的乘积，所以计算下一个结果时需要将当前值乘到 R 上
-            R *= nums[i]
-
-        return answer
 </code></pre>
 ]]></content>
     </entry>
