@@ -4,7 +4,7 @@
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-<title>中等215. 数组中的第K个最大元素 | Gridea</title>
+<title>228、汇总区间 | Gridea</title>
 
 <link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1614597840862">
 
@@ -89,11 +89,11 @@
         <div class="post-detail gt-bg-theme-color-second">
             <article class="gt-post-content">
                 <h2 class="post-title">
-                    中等215. 数组中的第K个最大元素
+                    228、汇总区间
                 </h2>
                 <div class="post-info">
                     <time class="post-time gt-c-content-color-first">
-                        · 2021-02-13 ·
+                        · 2021-03-01 ·
                     </time>
                     
                         <a href="https://ganhan999.github.io/tag/cKyYTCK2Y/" class="post-tags">
@@ -103,102 +103,65 @@
                 </div>
                 <div class="post-content">
                     <h1 id="题目">题目</h1>
-<p>在未排序的数组中找到第 k 个最大的元素。请注意，你需要找的是数组排序后的第 k 个最大的元素，而不是第 k 个不同的元素。</p>
-<p>示例 1:<br>
-输入: [3,2,1,5,6,4] 和 k = 2<br>
-输出: 5</p>
-<p>示例 2:<br>
-输入: [3,2,3,1,2,4,5,5,6] 和 k = 4<br>
-输出: 4</p>
+<p>给定一个无重复元素的有序整数数组 nums 。</p>
+<p>返回 恰好覆盖数组中所有数字 的 最小有序 区间范围列表。也就是说，nums 的每个元素都恰好被某个区间范围所覆盖，并且不存在属于某个范围但不属于 nums 的数字 x 。</p>
+<p>列表中的每个区间范围 [a,b] 应该按如下格式输出：</p>
+<p>&quot;a-&gt;b&quot; ，如果 a != b<br>
+&quot;a&quot; ，如果 a == b</p>
+<p>示例 1：<br>
+输入：nums = [0,1,2,4,5,7]<br>
+输出：[&quot;0-&gt;2&quot;,&quot;4-&gt;5&quot;,&quot;7&quot;]<br>
+解释：区间范围是：<br>
+[0,2] --&gt; &quot;0-&gt;2&quot;<br>
+[4,5] --&gt; &quot;4-&gt;5&quot;<br>
+[7,7] --&gt; &quot;7&quot;</p>
+<p>示例 2：<br>
+输入：nums = [0,2,3,4,6,8,9]<br>
+输出：[&quot;0&quot;,&quot;2-&gt;4&quot;,&quot;6&quot;,&quot;8-&gt;9&quot;]<br>
+解释：区间范围是：<br>
+[0,0] --&gt; &quot;0&quot;<br>
+[2,4] --&gt; &quot;2-&gt;4&quot;<br>
+[6,6] --&gt; &quot;6&quot;<br>
+[8,9] --&gt; &quot;8-&gt;9&quot;</p>
+<p>示例 3：<br>
+输入：nums = []<br>
+输出：[]</p>
+<p>示例 4：<br>
+输入：nums = [-1]<br>
+输出：[&quot;-1&quot;]</p>
+<p>示例 5：<br>
+输入：nums = [0]<br>
+输出：[&quot;0&quot;]</p>
 <p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
 <h1 id="本体思路">本体思路</h1>
-<p>排序</p>
+<p>双指针<br>
+一个指向区间最后一个，一个指向区间第一个<br>
+一当发现不符合，把前面指针指向后面指针</p>
 <h1 id="大神做法1">大神做法1：</h1>
 <pre><code class="language-python">class Solution:
-    def findKthLargest(self, nums: List[int], k: int) -&gt; int:
-        return sorted(nums, reverse = True)[k - 1]
-</code></pre>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<p>堆排序，库函数</p>
-<h1 id="大神做法2">大神做法2：</h1>
-<pre><code class="language-python">class Solution:
-    def findKthLargest(self, nums: List[int], k: int) -&gt; int:
-        return heapq.nlargest(k, nums)[-1]
-</code></pre>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<p>堆排序，库函数</p>
-<h1 id="大神做法3">大神做法3：</h1>
-<pre><code class="language-python">class Solution:
-    def findKthLargest(self, nums: List[int], k: int) -&gt; int:
-        '''
-        寻找第k个大的元素第一想法是构建小顶堆
-        '''
-
-        def shift_up(new_idx):
-            new_val = minheap[new_idx]  # 临时存储需要上浮的元素
-            # 向上寻找父结点进行比较，决定是否上浮
-            while new_idx &gt; 0 and minheap[(new_idx - 1) // 2] &gt; new_val:
-                minheap[new_idx] = minheap[(new_idx - 1) // 2]  # 父结点下沉
-                new_idx = (new_idx - 1) // 2  # 子结点坐标上移
-            minheap[new_idx] = new_val  # 完成结点上浮
-
-        def shift_down(start, end):
-            start_val = minheap[start]  # 临时存储头节点
-            # 向下寻找双子结点进行比较，决定是否下沉
-            while start * 2 + 1 &lt;= end:
-                child = start * 2 + 1  # 设置左子节点
-                # 比较左右子节点的大小，对于小顶堆来说，需要找出最小子结点
-                if child + 1 &lt;= end and minheap[child] &gt; minheap[child + 1]:
-                    child += 1
-                if minheap[child] &lt; start_val:
-                    minheap[start] = minheap[child]  # 子结点上浮
-                    start = child
-                else:
-                    break
-            minheap[start] = start_val  # 完成结点下沉
-
-        # 上浮式建堆
-        minheap = []
-        for i in range(min(len(nums), k)):
-            minheap.append(nums[i])
-            shift_up(i)
-
-        # 下沉式维护
-        for num in nums[k:]:
-            if num &gt; minheap[0]:
-                minheap[0] = num
-                shift_down(0, k - 1)
-
-        return minheap[0]
-</code></pre>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<p>快速排序＋选择</p>
-<h1 id="大神做法4">大神做法4：</h1>
-<pre><code class="language-python">class Solution:
-    def findKthLargest(self, nums: List[int], k: int) -&gt; int:
-        def partition( left, right):
-            tmp = nums[left]
-            while left &lt; right:
-                while left &lt; right and nums[right] &lt;= tmp:#注意是找大的，所以要从大到小排序
-                    right = right - 1
-                nums[left] = nums[right]
-                while left &lt; right and nums[left] &gt;= tmp:
-                    left = left + 1
-                nums[right] = nums[left]
-            nums[left] = tmp
-            mid = left
-            return mid
-
+    def summaryRanges(self, nums: List[int]) -&gt; List[str]:
+        n = len(nums)
+        # 初始化双指针均指向数组头部
         left = 0
-        right = len(nums) - 1
-        while 1:
-            idx = partition(left, right)
-            if idx == k - 1:
-                return nums[idx]
-            if idx &lt; k - 1:
-                left = idx + 1
-            if idx &gt; k - 1:
-                right = idx - 1
+        right = 0
+        ans = []
+        # 开始遍历
+        while right &lt; n:
+            # 数组有序
+            # 先限定边界，查找间隔大于 1 的部分
+            while right &lt; n - 1 and nums[right] + 1 == nums[right + 1]:
+                right += 1
+            # 找到间隔之后，将前面连续部分按照规定格式添加到结果列表中
+            tmp = [str(nums[left])]
+            if nums[left] != nums[right]:
+                tmp.append('-&gt;')
+                tmp.append(str(nums[right]))
+            ans.append(''.join(tmp))
+            # 维护更新 right 和 left
+            right += 1
+            left = right
+        return ans
+
 </code></pre>
 
                 </div>
@@ -208,14 +171,14 @@
         
             <div class="next-post">
                 <div class="next gt-c-content-color-first">下一篇</div>
-                <a href="https://ganhan999.github.io/post/206、反转链表/" class="post-title gt-a-link">
-                    206、反转链表
+                <a href="https://ganhan999.github.io/post/226、翻转二叉树/" class="post-title gt-a-link">
+                    226、翻转二叉树
                 </a>
             </div>
         
 
         
-            <span id="/post/215、数组中的第K个最大元素/" class="leancloud_visitors" data-flag-title="中等215. 数组中的第K个最大元素">
+            <span id="/post/228、汇总区间/" class="leancloud_visitors" data-flag-title="228、汇总区间">
                 <em class="post-meta-item-text">阅读量 </em>
                 <i class="leancloud-visitors-count">0</i>
             </span>
