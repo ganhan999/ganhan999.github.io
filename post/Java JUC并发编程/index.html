@@ -6,10 +6,10 @@
 
 <title>Java JUC并发编程 | Gridea</title>
 
-<link rel="shortcut icon" href="http://localhost:4000/favicon.ico?v=1614683718452">
+<link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1614683869702">
 
 <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
-<link rel="stylesheet" href="http://localhost:4000/styles/main.css">
+<link rel="stylesheet" href="https://ganhan999.github.io//styles/main.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css">
 
 <script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets/highlight.min.js"></script>
@@ -77,7 +77,7 @@
             
         </div>
         <div style="text-align: center">
-            <form id="gridea-search-form" style="position: relative" data-update="1614683718452" action="/search/index.html">
+            <form id="gridea-search-form" style="position: relative" data-update="1614683869702" action="/search/index.html">
                 <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
                 <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
             </form>
@@ -96,7 +96,7 @@
                         · 2020-12-11 ·
                     </time>
                     
-                        <a href="http://localhost:4000/tag/2avA5RaAc/" class="post-tags">
+                        <a href="https://ganhan999.github.io/tag/2avA5RaAc/" class="post-tags">
                             # Java
                         </a>
                     
@@ -259,7 +259,7 @@ class Ticket {
 }
 </code></pre>
 <h3 id="2lock">2）Lock</h3>
-<p><img src="http://localhost:4000/post-images/1607650819475.png" alt="" loading="lazy"><br>
+<p><img src="https://ganhan999.github.io//post-images/1607650819475.png" alt="" loading="lazy"><br>
 <strong>公平锁：</strong> 十分公平，必须先来后到~；</p>
 <p><strong>非公平锁：</strong> 十分不公平，可以插队；<strong>(默认为非公平锁)</strong></p>
 <pre><code class="language-java">package com.marchsoft.juctest;
@@ -391,8 +391,8 @@ class Data {
 </code></pre>
 <h3 id="2存在问题虚假唤醒">2）存在问题（虚假唤醒）</h3>
 <p><strong>问题，如果有四个线程</strong>，会出现虚假唤醒<br>
-<img src="http://localhost:4000/post-images/1607651545171.png" alt="" loading="lazy"><br>
-<img src="http://localhost:4000/post-images/1607650837273.png" alt="" loading="lazy"></p>
+<img src="https://ganhan999.github.io//post-images/1607651545171.png" alt="" loading="lazy"><br>
+<img src="https://ganhan999.github.io//post-images/1607650837273.png" alt="" loading="lazy"></p>
 <p>解决方式 ，<strong>if 改为while即可，防止虚假唤醒</strong></p>
 <blockquote>
 <p>结论：就是用if判断的话，唤醒后线程会从wait之后的代码开始运行，但是不会重新判断if条件，直接继续运行if代码块之后的代码，而如果使用while的话，也会从wait之后的代码运行，但是唤醒后会重新判断循环条件，如果不成立再执行while代码块之后的代码块，成立的话继续wait。</p>
@@ -479,7 +479,7 @@ class Data {
 }
 </code></pre>
 <h3 id="3lock版">3）Lock版</h3>
-<figure data-type="image" tabindex="1"><img src="http://localhost:4000/post-images/1607651558541.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="1"><img src="https://ganhan999.github.io//post-images/1607651558541.png" alt="" loading="lazy"></figure>
 <pre><code class="language-java">package com.marchsoft.juctest;
 
 import java.util.concurrent.locks.Condition;
@@ -961,9 +961,9 @@ public class ListTest {
 <p><strong>CopyOnWriteArrayList</strong>比<strong>Vector</strong>厉害在哪里？</p>
 </blockquote>
 <p><strong>Vector</strong>底层是使用<strong>synchronized</strong>关键字来实现的：效率特别低下。</p>
-<figure data-type="image" tabindex="2"><img src="http://localhost:4000/post-images/1607651614788.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="2"><img src="https://ganhan999.github.io//post-images/1607651614788.png" alt="" loading="lazy"></figure>
 <p><strong>CopyOnWriteArrayList</strong>使用的是Lock锁，效率会更加高效！</p>
-<figure data-type="image" tabindex="3"><img src="http://localhost:4000/post-images/1607651623059.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="3"><img src="https://ganhan999.github.io//post-images/1607651623059.png" alt="" loading="lazy"></figure>
 <h3 id="2set-不安全">2）set 不安全</h3>
 <p><strong>Set和List同理可得:</strong> 多线程情况下，普通的Set集合是线程不安全的；</p>
 <p>解决方案还是两种：</p>
@@ -991,10 +991,10 @@ public class ListTest {
 </code></pre>
 <p><strong>HashSet底层是什么？</strong></p>
 <p>hashSet底层就是一个<strong>HashMap</strong>；</p>
-<figure data-type="image" tabindex="4"><img src="http://localhost:4000/post-images/1607651662007.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="4"><img src="https://ganhan999.github.io//post-images/1607651662007.png" alt="" loading="lazy"></figure>
 <h3 id="3map不安全">3）Map不安全</h3>
 <p>默认<strong>加载因子是0.75</strong>,默认的<strong>初始容量是16</strong></p>
-<figure data-type="image" tabindex="5"><img src="http://localhost:4000/post-images/1607651666937.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="5"><img src="https://ganhan999.github.io//post-images/1607651666937.png" alt="" loading="lazy"></figure>
 <p>同样的HashMap基础类也存在<strong>并发修改异常</strong>！</p>
 <pre><code class="language-java">public class MapTest {
     public static void main(String[] args) {
@@ -1071,7 +1071,7 @@ class MyThread1 implements Callable&lt;Integer&gt; {
 </ul>
 <p>await 等待计数器归零，就唤醒，再继续向下运行</p>
 <h3 id="2cyclickbarrier">2）CyclickBarrier</h3>
-<figure data-type="image" tabindex="6"><img src="http://localhost:4000/post-images/1607651753153.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="6"><img src="https://ganhan999.github.io//post-images/1607651753153.png" alt="" loading="lazy"></figure>
 <p>其实</p>
 <pre><code class="language-java">public class CyclicBarrierDemo {
     public static void main(String[] args) {
@@ -1215,7 +1215,7 @@ Process finished with exit code 0
 <p>所以如果我们不加锁的情况，多线程的读写会造成数据不可靠的问题。</p>
 <p>我们也可以采用<strong>synchronized</strong>这种重量锁和轻量锁 <strong>lock</strong>去保证数据的可靠。</p>
 <p>但是这次我们采用更细粒度的锁：<strong>ReadWriteLock</strong> 读写锁来保证<br>
-<img src="http://localhost:4000/post-images/1607651717429.png" alt="" loading="lazy"></p>
+<img src="https://ganhan999.github.io//post-images/1607651717429.png" alt="" loading="lazy"></p>
 <pre><code class="language-java">public class ReadWriteLockDemo {
     public static void main(String[] args) {
         MyCache2 myCache = new MyCache2();
@@ -1297,15 +1297,15 @@ class MyCache2 {
 Process finished with exit code 0
 </code></pre>
 <h2 id="10-阻塞队列">10. 阻塞队列</h2>
-<p><img src="http://localhost:4000/post-images/1607652061395.png" alt="" loading="lazy"><br>
-<img src="http://localhost:4000/post-images/1607652078817.png" alt="" loading="lazy"></p>
+<p><img src="https://ganhan999.github.io//post-images/1607652061395.png" alt="" loading="lazy"><br>
+<img src="https://ganhan999.github.io//post-images/1607652078817.png" alt="" loading="lazy"></p>
 <h3 id="1blockqueue">1）BlockQueue</h3>
 <p>是Collection的一个子类</p>
 <p>什么情况下我们会使用阻塞队列</p>
 <blockquote>
 <p>多线程并发处理、线程池</p>
 </blockquote>
-<figure data-type="image" tabindex="7"><img src="http://localhost:4000/post-images/1607651994683.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="7"><img src="https://ganhan999.github.io//post-images/1607651994683.png" alt="" loading="lazy"></figure>
 <p>BlockingQueue 有四组api</p>
 <table>
 <thead>
@@ -1551,7 +1551,7 @@ public class Demo01 {
     this.handler = handler;
 }
 </code></pre>
-<figure data-type="image" tabindex="8"><img src="http://localhost:4000/post-images/1607652138743.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="8"><img src="https://ganhan999.github.io//post-images/1607652138743.png" alt="" loading="lazy"></figure>
 <p>阿里巴巴的Java操作手册中明确说明：对于Integer.MAX_VALUE初始值较大，所以一般情况我们要使用底层的<strong>ThreadPoolExecutor</strong>来创建线程池。</p>
 <pre><code class="language-java">public class PollDemo {
     public static void main(String[] args) {
@@ -1606,9 +1606,9 @@ public class Demo01 {
 <h2 id="12-四大函数式接口">12. 四大函数式接口</h2>
 <p>新时代的程序员：<strong>lambda表达式、链式编程、函数式接口、Stream流式计算</strong></p>
 <p>函数式接口：只有一个方法的接口<br>
-<img src="http://localhost:4000/post-images/1607652155646.png" alt="" loading="lazy"></p>
+<img src="https://ganhan999.github.io//post-images/1607652155646.png" alt="" loading="lazy"></p>
 <h3 id="1function-函数型接口">1）Function 函数型接口</h3>
-<figure data-type="image" tabindex="9"><img src="http://localhost:4000/post-images/1607652160660.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="9"><img src="https://ganhan999.github.io//post-images/1607652160660.png" alt="" loading="lazy"></figure>
 <pre><code class="language-java">public class FunctionDemo {
     public static void main(String[] args) {
         Function&lt;String, String&gt; function = (str) -&gt; {return str;};
@@ -1617,7 +1617,7 @@ public class Demo01 {
 }
 </code></pre>
 <h3 id="2predicate-断定型接口">2）Predicate 断定型接口</h3>
-<figure data-type="image" tabindex="10"><img src="http://localhost:4000/post-images/1607652166530.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="10"><img src="https://ganhan999.github.io//post-images/1607652166530.png" alt="" loading="lazy"></figure>
 <pre><code class="language-java">public class PredicateDemo {
     public static void main(String[] args) {
         Predicate&lt;String&gt; predicate = (str) -&gt; {return str.isEmpty();};
@@ -1629,7 +1629,7 @@ public class Demo01 {
 }
 </code></pre>
 <h3 id="3suppier-供给型接口">3）Suppier 供给型接口</h3>
-<figure data-type="image" tabindex="11"><img src="http://localhost:4000/post-images/1607652174930.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="11"><img src="https://ganhan999.github.io//post-images/1607652174930.png" alt="" loading="lazy"></figure>
 <pre><code class="language-java">/**
  * 供给型接口，只返回，不输入
  */
@@ -1642,7 +1642,7 @@ public class Demo4 {
 
 </code></pre>
 <h3 id="4consummer-消费型接口">4）Consummer 消费型接口</h3>
-<figure data-type="image" tabindex="12"><img src="http://localhost:4000/post-images/1607652179906.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="12"><img src="https://ganhan999.github.io//post-images/1607652179906.png" alt="" loading="lazy"></figure>
 <pre><code class="language-java">/**
  * 消费型接口 没有返回值！只有输入！
  */
@@ -1693,10 +1693,10 @@ public class StreamDemo {
 <h2 id="14-forkjoin">14. ForkJoin</h2>
 <p>ForkJoin 在JDK1.7，并行执行任务！提高效率~。在大数据量速率会更快！</p>
 <p>大数据中：<strong>MapReduce 核心思想-&gt;把大任务拆分为小任务！</strong></p>
-<figure data-type="image" tabindex="13"><img src="http://localhost:4000/post-images/1607652187342.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="13"><img src="https://ganhan999.github.io//post-images/1607652187342.png" alt="" loading="lazy"></figure>
 <h3 id="1forkjoin-特点-工作窃取">1）ForkJoin 特点： 工作窃取！</h3>
 <p>实现原理是：<strong>双端队列</strong>！从上面和下面都可以去拿到任务进行执行！</p>
-<figure data-type="image" tabindex="14"><img src="http://localhost:4000/post-images/1607652197084.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="14"><img src="https://ganhan999.github.io//post-images/1607652197084.png" alt="" loading="lazy"></figure>
 <h3 id="2如何使用forkjoin">2）如何使用ForkJoin?</h3>
 <ul>
 <li>
@@ -1829,15 +1829,15 @@ public class ForkJoinTest {
 }
 
 </code></pre>
-<figure data-type="image" tabindex="15"><img src="http://localhost:4000/post-images/1607652211199.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="15"><img src="https://ganhan999.github.io//post-images/1607652211199.png" alt="" loading="lazy"></figure>
 <p><strong>.parallel().reduce(0, Long::sum)使用一个并行流去计算整个计算，提高效率。</strong></p>
-<figure data-type="image" tabindex="16"><img src="http://localhost:4000/post-images/1607652216426.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="16"><img src="https://ganhan999.github.io//post-images/1607652216426.png" alt="" loading="lazy"></figure>
 <h2 id="15-异步回调">15. 异步回调</h2>
 <blockquote>
 <p>Future 设计的初衷：对将来的某个事件结果进行建模！</p>
 </blockquote>
 <p>其实就是前端 --&gt; 发送ajax异步请求给后端</p>
-<p><img src="http://localhost:4000/post-images/1607652291764.png" alt="" loading="lazy"><br>
+<p><img src="https://ganhan999.github.io//post-images/1607652291764.png" alt="" loading="lazy"><br>
 但是我们平时都使用<strong>CompletableFuture</strong></p>
 <h4 id="1没有返回值的runasync异步回调">（1）没有返回值的runAsync异步回调</h4>
 <pre><code class="language-java">public static void main(String[] args) throws ExecutionException, InterruptedException 
@@ -1933,8 +1933,8 @@ System.out.println(completableFuture.whenComplete((t, u) -&gt; {
 </li>
 <li>
 <p><strong>unlock（解锁）</strong>：作用于主内存的变量，它把一个处于锁定状态的变量释放出来，释放后的变量才可以被其他线程锁定；<br>
-<img src="http://localhost:4000/post-images/1607651252203.png" alt="" loading="lazy"><br>
-<img src="http://localhost:4000/post-images/1607651261771.png" alt="" loading="lazy"></p>
+<img src="https://ganhan999.github.io//post-images/1607651252203.png" alt="" loading="lazy"><br>
+<img src="https://ganhan999.github.io//post-images/1607651261771.png" alt="" loading="lazy"></p>
 <p><strong>JMM对这8种操作给了相应的规定</strong>：</p>
 <ul>
 <li>不允许read和load、store和write操作之一单独出现。即使用了read必须load，使用了store必须write</li>
@@ -1948,7 +1948,7 @@ System.out.println(completableFuture.whenComplete((t, u) -&gt; {
 </ul>
 </li>
 </ul>
-<figure data-type="image" tabindex="17"><img src="http://localhost:4000/post-images/1607651270053.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="17"><img src="https://ganhan999.github.io//post-images/1607651270053.png" alt="" loading="lazy"></figure>
 <p>遇到问题：<strong>程序不知道主存中的值已经被修改过了！；</strong></p>
 <h2 id="17-volatile">17. volatile</h2>
 <h3 id="1保证可见性">1）保证可见性</h3>
@@ -2024,9 +2024,9 @@ public class VDemo02 {
 }
 </code></pre>
 <p><strong>如果不加lock和synchronized ，怎么样保证原子性？</strong></p>
-<figure data-type="image" tabindex="18"><img src="http://localhost:4000/post-images/1607651277935.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="18"><img src="https://ganhan999.github.io//post-images/1607651277935.png" alt="" loading="lazy"></figure>
 <p><strong>使用原子类</strong></p>
-<figure data-type="image" tabindex="19"><img src="http://localhost:4000/post-images/1607651283329.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="19"><img src="https://ganhan999.github.io//post-images/1607651283329.png" alt="" loading="lazy"></figure>
 <pre><code class="language-java">public class VDemo02 {
 
     private static volatile AtomicInteger number = new AtomicInteger();
@@ -2120,7 +2120,7 @@ y=x*x;   //4
 <p>内存屏障：CPU指令。作用：</p>
 <p>1、保证特定的操作的执行顺序；</p>
 <p>2、可以保证某些变量的内存可见性（利用这些特性，就可以保证volatile实现的可见性）</p>
-<figure data-type="image" tabindex="20"><img src="http://localhost:4000/post-images/1607651292826.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="20"><img src="https://ganhan999.github.io//post-images/1607651292826.png" alt="" loading="lazy"></figure>
 <h3 id="4总结">4）总结</h3>
 <ul>
 <li><strong>volatile可以保证可见性；</strong></li>
@@ -2260,7 +2260,7 @@ class Test{
 
 </code></pre>
 <p>使用枚举，我们就可以防止反射破坏了。</p>
-<figure data-type="image" tabindex="21"><img src="http://localhost:4000/post-images/1607651303652.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="21"><img src="https://ganhan999.github.io//post-images/1607651303652.png" alt="" loading="lazy"></figure>
 <p>枚举类型的最终反编译源码：</p>
 <pre><code class="language-java">public final class EnumSingle extends Enum
 {
@@ -2322,7 +2322,7 @@ class Test{
 
 </code></pre>
 <p>Unsafe 类</p>
-<p><img src="http://localhost:4000/post-images/1607651316714.png" alt="" loading="lazy">!</p>
+<p><img src="https://ganhan999.github.io//post-images/1607651316714.png" alt="" loading="lazy">!</p>
 <h3 id="2总结">2）总结</h3>
 <p>CAS：比较当前工作内存中的值 和 主内存中的值，如果这个值是期望的，那么则执行操作！如果不是就一直循环，使用的是自旋锁。</p>
 <p><strong>缺点：</strong></p>
@@ -2334,7 +2334,7 @@ class Test{
 <blockquote>
 <p>CAS：ABA问题？(狸猫换太子)</p>
 </blockquote>
-<figure data-type="image" tabindex="22"><img src="http://localhost:4000/post-images/1607652402164.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="22"><img src="https://ganhan999.github.io//post-images/1607652402164.png" alt="" loading="lazy"></figure>
 <p>线程1：期望值是1，要变成2；</p>
 <p>线程2：两个操作：</p>
 <ul>
@@ -2372,7 +2372,7 @@ class Test{
 </blockquote>
 <p>带版本号的 原子操作！</p>
 <p><strong>Integer 使用了对象缓存机制，默认范围是-128~127，推荐使用静态工厂方法valueOf获取对象实例，而不是new，因为valueOf使用缓存，而new一定会创建新的对象分配新的内存空间。</strong></p>
-<p><img src="http://localhost:4000/post-images/1607652423940.png" alt="" loading="lazy"><br>
+<p><img src="https://ganhan999.github.io//post-images/1607652423940.png" alt="" loading="lazy"><br>
 <strong>带版本号的原子操作</strong></p>
 <pre><code class="language-java">package com.marchsoft.lockdemo;
 
@@ -2463,7 +2463,7 @@ public ReentrantLock(boolean fair) {
 }
 </code></pre>
 <h3 id="2可重入锁">2）可重入锁</h3>
-<figure data-type="image" tabindex="23"><img src="http://localhost:4000/post-images/1607652441152.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="23"><img src="https://ganhan999.github.io//post-images/1607652441152.png" alt="" loading="lazy"></figure>
 <ol>
 <li>Synchonized 锁</li>
 </ol>
@@ -2622,7 +2622,7 @@ public class TestSpinLock {
 <p>运行结果：</p>
 <p><strong>t2进程必须等待t1进程Unlock后，才能Unlock，在这之前进行自旋等待。。。。</strong></p>
 <h3 id="4死锁">4）死锁</h3>
-<figure data-type="image" tabindex="24"><img src="http://localhost:4000/post-images/1607651379322.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="24"><img src="https://ganhan999.github.io//post-images/1607651379322.png" alt="" loading="lazy"></figure>
 <pre><code class="language-java">package com.ogj.lock;
 
 import java.util.concurrent.TimeUnit;
@@ -2666,11 +2666,11 @@ class MyThread implements Runnable{
 <p>如何解开死锁</p>
 <p><strong>1、使用jps定位进程号，jdk的bin目录下： 有一个jps</strong></p>
 <p>命令：<code>jps -l</code></p>
-<figure data-type="image" tabindex="25"><img src="http://localhost:4000/post-images/1607651436373.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="25"><img src="https://ganhan999.github.io//post-images/1607651436373.png" alt="" loading="lazy"></figure>
 <p><strong>2、使用<code>jstack</code> 进程进程号 找到死锁信息</strong></p>
-<figure data-type="image" tabindex="26"><img src="http://localhost:4000/post-images/1607651442523.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="26"><img src="https://ganhan999.github.io//post-images/1607651442523.png" alt="" loading="lazy"></figure>
 <p><strong>一般情况信息在最后：</strong></p>
-<figure data-type="image" tabindex="27"><img src="http://localhost:4000/post-images/1607651447853.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="27"><img src="https://ganhan999.github.io//post-images/1607651447853.png" alt="" loading="lazy"></figure>
 
                 </div>
             </article>
@@ -2679,7 +2679,7 @@ class MyThread implements Runnable{
         
             <div class="next-post">
                 <div class="next gt-c-content-color-first">下一篇</div>
-                <a href="http://localhost:4000/post/5、最长回文子串/" class="post-title gt-a-link">
+                <a href="https://ganhan999.github.io/post/5、最长回文子串/" class="post-title gt-a-link">
                     中等5. 最长回文子串
                 </a>
             </div>
@@ -2753,7 +2753,7 @@ class MyThread implements Runnable{
     </div>
     <div>
         Theme by <a href="https://imhanjie.com/" target="_blank">imhanjie</a>, Powered by <a
-                href="https://github.com/getgridea/gridea" target="_blank">Gridea | <a href="http://localhost:4000/atom.xml" target="_blank">RSS</a></a>
+                href="https://github.com/getgridea/gridea" target="_blank">Gridea | <a href="https://ganhan999.github.io//atom.xml" target="_blank">RSS</a></a>
     </div>
 </div>
 
