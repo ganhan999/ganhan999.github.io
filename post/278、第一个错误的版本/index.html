@@ -4,7 +4,7 @@
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-<title>110、平衡二叉树 | Gridea</title>
+<title>278、第一个错误的版本 | Gridea</title>
 
 <link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1614912192134">
 
@@ -89,11 +89,11 @@
         <div class="post-detail gt-bg-theme-color-second">
             <article class="gt-post-content">
                 <h2 class="post-title">
-                    110、平衡二叉树
+                    278、第一个错误的版本
                 </h2>
                 <div class="post-info">
                     <time class="post-time gt-c-content-color-first">
-                        · 2020-11-22 ·
+                        · 2021-03-05 ·
                     </time>
                     
                         <a href="https://ganhan999.github.io/tag/cKyYTCK2Y/" class="post-tags">
@@ -103,94 +103,33 @@
                 </div>
                 <div class="post-content">
                     <h1 id="题目">题目</h1>
-<p>给定一个二叉树，判断它是否是高度平衡的二叉树。<br>
-本题中，一棵高度平衡二叉树定义为：<br>
-一个二叉树每个节点 的左右两个子树的高度差的绝对值不超过 1 。</p>
-<p>示例 1：<br>
-输入：root = [3,9,20,null,null,15,7]<br>
-输出：true</p>
-<p>示例 2：<br>
-输入：root = [1,2,2,3,3,null,null,4,4]<br>
-输出：false</p>
-<p>示例 3：<br>
-输入：root = []<br>
-输出：true</p>
+<p>你是产品经理，目前正在带领一个团队开发新的产品。不幸的是，你的产品的最新版本没有通过质量检测。由于每个版本都是基于之前的版本开发的，所以错误的版本之后的所有版本都是错的。</p>
+<p>假设你有 n 个版本 [1, 2, ..., n]，你想找出导致之后所有版本出错的第一个错误的版本。</p>
+<p>你可以通过调用 bool isBadVersion(version) 接口来判断版本号 version 是否在单元测试中出错。实现一个函数来查找第一个错误的版本。你应该尽量减少对调用 API 的次数。</p>
+<p>示例:<br>
+给定 n = 5，并且 version = 4 是第一个错误的版本。<br>
+调用 isBadVersion(3) -&gt; false<br>
+调用 isBadVersion(5) -&gt; true<br>
+调用 isBadVersion(4) -&gt; true<br>
+所以，4 是第一个错误的版本。</p>
 <p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
 <h1 id="本体思路">本体思路</h1>
-<p>递归每一个节点的平衡因子，如果绝对值小于2，那么就平衡。<br>
-用到了求最大深度的函数</p>
-<h1 id="我的做法">#我的做法：</h1>
+<p>用二分查找找到第一个True</p>
+<h1 id="大神做法1">大神做法1：</h1>
 <pre><code class="language-python">class Solution:
-    def isBalanced(self, root: TreeNode) -&gt; bool:
-        if not root:
-            return True
-        return abs(self.height(root.right)-self.height(root.left))&lt;2 and self.isBalanced(root.left) and self.isBalanced(root.right)
-	# 求高度
-    def height(self, node):
-        if not node:
-            return 0
-        return 1+max(self.height(node.right),self.height(node.left))
-</code></pre>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="大神做法1">#大神做法1：</h1>
-<p>利用字典保存，最大深度的值，可以减少递归次数。</p>
-<pre><code class="language-Python">class Solution:
-    dct = {}
-    def isBalanced(self, root: TreeNode) -&gt; bool:
-        if not root:
-            return True
-
-        def maxDepth(root: TreeNode) -&gt; int:
-            if not root:
-                return 0
-            if root not in self.dct:
-                self.dct[root] = 1 + max(maxDepth(root.left), maxDepth(root.right))
-            return self.dct[root]
-
-        tmp = maxDepth(root.left) - maxDepth(root.right)
-        return abs(tmp)&lt;2  and self.isBalanced(root.left) and self.isBalanced(root.right)
-
-</code></pre>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="大神做法2">#大神做法2：</h1>
-<p>在求取左右子节点时，判断子节点是否失衡，<br>
-如果失衡则无需求根节点的平衡度，向上通知提前退出递归。<br>
-因为-1表示递归提前退出或者失衡.<br>
-如果左子树已经出现了失衡状况，就只会遍历一半！！！<br>
-在算深度的时候，就把平衡的条件给判定了。</p>
-<pre><code class="language-Python">class Solution:
-    def height(self, root):
-        if root is None:
-            return 0
-        left = self.height(root.left)
-        if left &lt; 0: return -1#左子树失衡
-        right = self.height(root.right)
-        if right &lt; 0 : return -1#右子树失衡
-        if abs(left - right) &gt; 1:
-            return -1#当前节点失衡
-        return max(left, right) + 1#平衡，继续递归
-
-    def isBalanced(self, root: TreeNode) -&gt; bool:
-        return self.height(root) &gt;= 0
-</code></pre>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="大神做法3">#大神做法3：</h1>
-<p>自底向上<br>
-通过直接判断左右子树高度，改变res参数，递归仍然会进行完毕</p>
-<pre><code class="language-Python">class Solution:
-    def isBalanced(self, root: TreeNode) -&gt; bool:
-        self.res = True
-        def helper(root):
-            if not root:
-                return 0
-            left = helper(root.left) + 1
-            right = helper(root.right) + 1
-            #print(right, left)
-            if abs(right - left) &gt; 1:
-                self.res = False
-            return max(left, right)
-        helper(root)
-        return self.res
+    def firstBadVersion(self, n):
+        &quot;&quot;&quot;
+        :type n: int
+        :rtype: int
+        &quot;&quot;&quot;
+        left, right = 1, n
+        while left &lt; right:
+            mid = left + (right - left) // 2
+            if isBadVersion(mid):#如果是True，那么右边界就停在这，而不是mid-1
+                right = mid
+            else:
+                left = mid + 1
+        return left
 </code></pre>
 
                 </div>
@@ -200,14 +139,14 @@
         
             <div class="next-post">
                 <div class="next gt-c-content-color-first">下一篇</div>
-                <a href="https://ganhan999.github.io/post/108、将有序数组转换为二叉搜索树/" class="post-title gt-a-link">
-                    108、将有序数组转换为二叉搜索树
+                <a href="https://ganhan999.github.io/post/268、丢失的数字/" class="post-title gt-a-link">
+                    268、丢失的数字
                 </a>
             </div>
         
 
         
-            <span id="/post/110、平衡二叉树/" class="leancloud_visitors" data-flag-title="110、平衡二叉树">
+            <span id="/post/278、第一个错误的版本/" class="leancloud_visitors" data-flag-title="278、第一个错误的版本">
                 <em class="post-meta-item-text">阅读量 </em>
                 <i class="leancloud-visitors-count">0</i>
             </span>
