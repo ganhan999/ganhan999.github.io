@@ -1,0 +1,271 @@
+<html>
+<head>
+    <meta charset="utf-8"/>
+<meta name="description" content=""/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+<title>Python集合运算汇总 | Gridea</title>
+
+<link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1615809991680">
+
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://ganhan999.github.io//styles/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dockerfile.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dart.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script>
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
+
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css">
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg">
+    <div class="navbar-brand">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            Gridea
+        </div>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
+            
+                <div class="nav-item">
+                    
+                        <a href="/" class="menu gt-a-link">
+                            首页
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/archives" class="menu gt-a-link">
+                            归档
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/tags" class="menu gt-a-link">
+                            标签
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/post/about" class="menu gt-a-link">
+                            关于
+                        </a>
+                    
+                </div>
+            
+        </div>
+        <div style="text-align: center">
+            <form id="gridea-search-form" style="position: relative" data-update="1615809991680" action="/search/index.html">
+                <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+                <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+        </div>
+    </div>
+</nav>
+
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    Python集合运算汇总
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2020-11-12 ·
+                    </time>
+                    
+                        <a href="https://ganhan999.github.io/tag/2UGIvmMaOp/" class="post-tags">
+                            # Python
+                        </a>
+                    
+                </div>
+                <div class="post-content">
+                    <h1 id="集合运算">集合运算</h1>
+<p>集合的运算操作包括交集、并集、差集、补集，其中补集不适用于列表。</p>
+<h2 id="交集">交集</h2>
+<h3 id="无重复元素的列表">无重复元素的列表</h3>
+<p>使用set进行交集计算。</p>
+<h4 id="1-使用计算">1. 使用&amp;计算</h4>
+<pre><code class="language-python">lis1,lis2=[1,2],[1]
+
+print(list(set(lis1) &amp; set(lis2)))
+
+输出为：[1]
+12345
+</code></pre>
+<h4 id="2-使用intersection计算">2. 使用intersection计算</h4>
+<pre><code>lis1,lis2=[1,2],[1]
+
+print(list(set(lis1).intersection(lis2)))
+
+输出为：[1]
+12345
+</code></pre>
+<h3 id="含重复元素列表">含重复元素列表</h3>
+<h4 id="1-列表推导式">1. 列表推导式</h4>
+<pre><code class="language-python">lis1,lis2=[1,2,1],[1,2]
+
+print([v1 for v1 in lis1 if v1 in lis2])
+
+输出为：[1, 2, 1]
+12345
+</code></pre>
+<h4 id="2-filter过滤器">2. filter过滤器</h4>
+<pre><code>lis1,lis2=[1,2,1],[1,2]
+
+print(list(filter(lambda v: v in lis2,lis1)))
+
+输出为：[1, 2, 1]
+12345
+</code></pre>
+<h2 id="并集">并集</h2>
+<h3 id="无重复元素列表">无重复元素列表</h3>
+<h4 id="1-使用">1. 使用 |</h4>
+<pre><code class="language-python">lis1,lis2=[1,2],[3]
+
+print(list(set(lis1)|set(lis2)))
+
+输出为：[1, 2, 3]
+12345
+</code></pre>
+<h4 id="2-使用union">2. 使用union</h4>
+<pre><code class="language-python">lis1,lis2=[1,2],[3]
+
+print(list(set(lis1).union(lis2)))
+
+输出为：[1, 2, 3]
+12345
+</code></pre>
+<h3 id="含重复元素列表-2">含重复元素列表</h3>
+<h4 id="1-使用-2">1. 使用+</h4>
+<pre><code class="language-python">lis1,lis2=[1,2,1],[3]
+
+print(lis1+lis2)
+
+输出为：[1, 2, 1, 3]
+12345
+</code></pre>
+<h4 id="2-使用extend">2. 使用extend</h4>
+<pre><code class="language-python">lis1,lis2=[1,2,1],[3]
+lis1.extend(lis2)
+
+print(lis1)
+
+输出为：[1, 2, 1, 3]
+123456
+</code></pre>
+<h2 id="差集">差集</h2>
+<h3 id="无重复元素列表-2">无重复元素列表</h3>
+<h4 id="1-使用-3">1. 使用^</h4>
+<p>此方法与顺序无关，即所得结果是二者在彼此都不存在的元素</p>
+<pre><code>lis1,lis2=[1,2],[3]
+
+print(list(set(lis1)^set(lis2)))
+
+输出为：[1,2,3]
+12345
+</code></pre>
+<h3 id="含重复元素列表-3">含重复元素列表</h3>
+<h4 id="1-使用difference">1. 使用difference</h4>
+<pre><code>lis1,lis2=[1,2,3],[3]
+
+print(list(set(lis1).difference(lis2)))
+
+输出为：[1,2]
+12345
+</code></pre>
+<h4 id="2-列表推导式">2. 列表推导式</h4>
+<pre><code class="language-python">lis1,lis2=[1,2,1],[1,2]
+
+print([v1 for v1 in lis1 if v1 not in lis2])
+
+输出为：[]
+12345
+</code></pre>
+<h4 id="3-filter过滤器">3. filter过滤器</h4>
+<pre><code>lis1,lis2=[1,2,1],[1,2]
+
+print(list(filter(lambda v: v not in lis2,lis1)))
+
+输出为：[]
+</code></pre>
+
+                </div>
+            </article>
+        </div>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://ganhan999.github.io/post/Python字典函数汇总/" class="post-title gt-a-link">
+                    Python字典函数总结
+                </a>
+            </div>
+        
+
+        
+
+        
+
+        
+
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first">温故而知新</div>
+    <div class="social-container">
+        
+            
+        
+            
+        
+            
+        
+            
+                <a href="https://www.zhihu.com/hot" target="_blank">
+                    <i class="fab fa-zhihu gt-c-content-color-first"></i>
+                </a>
+            
+        
+            
+        
+            
+        
+    </div>
+    <div class="footer-info">
+        Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+    </div>
+    <div>
+        Theme by <a href="https://imhanjie.com/" target="_blank">imhanjie</a>, Powered by <a
+                href="https://github.com/getgridea/gridea" target="_blank">Gridea | <a href="https://ganhan999.github.io//atom.xml" target="_blank">RSS</a></a>
+    </div>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+    </div>
+</div>
+</body>
+</html>

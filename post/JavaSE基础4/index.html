@@ -1,0 +1,681 @@
+<html>
+<head>
+    <meta charset="utf-8"/>
+<meta name="description" content=""/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+<title>JavaSE基础4 | Gridea</title>
+
+<link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1615809991680">
+
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://ganhan999.github.io//styles/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dockerfile.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dart.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script>
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
+
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css">
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg">
+    <div class="navbar-brand">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            Gridea
+        </div>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
+            
+                <div class="nav-item">
+                    
+                        <a href="/" class="menu gt-a-link">
+                            首页
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/archives" class="menu gt-a-link">
+                            归档
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/tags" class="menu gt-a-link">
+                            标签
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/post/about" class="menu gt-a-link">
+                            关于
+                        </a>
+                    
+                </div>
+            
+        </div>
+        <div style="text-align: center">
+            <form id="gridea-search-form" style="position: relative" data-update="1615809991680" action="/search/index.html">
+                <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+                <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+        </div>
+    </div>
+</nav>
+
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    JavaSE基础4
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2020-11-29 ·
+                    </time>
+                    
+                        <a href="https://ganhan999.github.io/tag/pVOKe1jE1_/" class="post-tags">
+                            # Java
+                        </a>
+                    
+                </div>
+                <div class="post-content">
+                    <h1 id="面向对象">面向对象</h1>
+<h2 id="1-抛出异常">1、抛出异常</h2>
+<pre><code class="language-java">public static int[] sort(int[] array) throws IOException{
+}
+</code></pre>
+<hr>
+<h1 id="2-非静态方法和静态方法">2、非静态方法和静态方法</h1>
+<ul>
+<li>如果设置的是static静态方法，可以直接类.方法名</li>
+<li>如果设置的是非静态方法，则需要实例化对象，使用new</li>
+<li>static静态方法是和类一起加载的，而非静态方法是类实例化之后才存在的</li>
+</ul>
+<h1 id="3-构造方法构造器">3、构造方法（构造器）</h1>
+<ul>
+<li><strong>一个类即使什么都不写，也会存在一个方法</strong></li>
+<li><strong>构造器和类名要相同，没有返回值，也不能使用void</strong></li>
+<li><strong>作用：实例化初始值</strong></li>
+<li><strong>使用new关键字，本质是在调用构造器</strong></li>
+<li><strong>默认有一个无参构造器</strong></li>
+<li><strong>alt＋insert可以快捷生成构造器</strong></li>
+</ul>
+<h2 id="4-封装">4、封装</h2>
+<ul>
+<li>
+<p><strong>高内聚，低耦合</strong>*</p>
+</li>
+<li>
+<p><strong>public/private 公有属性和私有属性（相等于python中的__name)</strong></p>
+</li>
+<li>
+<p><strong>属性私有,利用get/set方法操作私有属性</strong></p>
+</li>
+</ul>
+<pre><code class="language-java">public String getName()
+{
+return  this.name;
+}
+
+public void setName(String name)
+{
+return  this.name=name;
+}
+</code></pre>
+<h2 id="5-继承"><strong>5、继承</strong></h2>
+<ul>
+<li><strong>extends关键词</strong></li>
+<li><strong>public、protexted、default、private</strong></li>
+<li><strong>ctrl+H打开继承树</strong></li>
+<li><strong>私有的东西无法被继承</strong></li>
+<li><strong>默认执行父类的无参构造（隐藏代码，super（））</strong></li>
+<li><strong>调用父亲的构造器，必须要在子类构造器的第一行</strong></li>
+<li><strong>this同理</strong></li>
+</ul>
+<h2 id="6-super关键字">6、<strong>super关键字</strong></h2>
+<ol>
+<li><strong>只能指代父类对象</strong></li>
+<li><strong>指代父类的构造方法，只能放在首行</strong></li>
+<li><strong>super和this不能同时调用构造行数</strong></li>
+<li><strong>super必须只能出现在子类的方法或者构造方法中</strong></li>
+</ol>
+<p><strong>注意</strong></p>
+<ol>
+<li><strong>子类必须通过super关键字调用父类有参数的构造函数</strong></li>
+<li><strong>使用super调用父类构造器的语句必须是子类构造器的第一条语句</strong></li>
+</ol>
+<p><strong>如果子类构造器没有显式地调用父类的构造器，则将自动调用父类的默认（没有参数）的构造器。如果父类没有不带参数的构造器，并且在子类的构造器中又没有显式地调用父类的构造器，则java编译器将报告错误</strong></p>
+<p><strong>子类实例化时，默认调用父类的无参构造方法（不管子类的构造器有没有参数，因为子类继承的是父类的属性和方法，只调用父类的无参构造器就可以继承父类的属性和方法，因此不会调用父类的有参构造器），再调用子类的有参/无参构造器。</strong></p>
+<h2 id="7-this-vs-super关键字">7、this  vs  super关键字</h2>
+<ul>
+<li>代表对象不同：this:本身调用者这个对象   super：代表父类对象的应用</li>
+<li>前提不用:  this:没有继承也能使用    super：只能在继承条件下才能使用</li>
+<li>构造方法不同 this（）；本类的构造     super（）；父类的构造</li>
+<li></li>
+</ul>
+<h2 id="8-方法重写">8、方法重写</h2>
+<pre><code class="language-java">B b =new A()//父类的引用指向了字类  这里B是A的父类   如果是静态方法，那么方法的调用只和左边的类型有关，这里指的是B
+    		//					  如果是非静态方法，那么子类重写了父类的方法，重写只和非静态方法有关
+    		//重写的关键词一定要是public
+</code></pre>
+<ul>
+<li>
+<p><strong>重写：需要有继承关系，字类重写父类的方法</strong></p>
+</li>
+<li>
+<p><strong>方法名必须相同</strong></p>
+</li>
+<li>
+<p><strong>参数列表必须相同</strong></p>
+</li>
+<li>
+<p><strong>修饰符范围，子类可以比父类大但不能大  public&gt;protected&gt;default&gt;private</strong></p>
+</li>
+<li>
+<p><strong>抛出的异常，子类可以比父类小但不能小</strong></p>
+</li>
+<li>
+<p><strong>重写，子类的方法和父类必须要一致，方法体不同</strong></p>
+</li>
+<li>
+<p><strong>为什么需要重写？</strong></p>
+</li>
+<li>
+<p><strong>父类的功能，子类不一定需要，或者不一定满足</strong></p>
+</li>
+<li>
+<p><strong>ALt+Insert：override</strong></p>
+</li>
+</ul>
+<h2 id="9-多态">9、多态</h2>
+<pre><code class="language-java">Student s1=new Student();//能调用自己的或者父类的
+Person s2=new Student();//可以指向子类，但是不能调用子类独有的方法
+Object s3=new Student();
+</code></pre>
+<p><strong>多态注意事项</strong></p>
+<ol>
+<li><strong>多态是方法的多态，属性没有多态</strong></li>
+<li><strong>父类和子类，有联系，类型转换异常！ClassCastException</strong></li>
+<li><strong>存在条件：继承关系，方法需要重写，父类的引用指向子类对象。</strong></li>
+</ol>
+<p><strong>比如：Parent parent = new Child();类型是Parent，指向Child对象，当使用多态方式调用方法时，首先检查父类中是否有 X() 方法，如果没有则编译错误；如果有，再去调用子类的 X() 方法</strong></p>
+<p><strong>static、final、private方法均不能被重写，所以就没有多态</strong></p>
+<h2 id="9-instanceof-关键字">9、instanceof 关键字</h2>
+<pre><code class="language-java">public class Application {
+    public static void main(String[] args) {
+        // Object&gt;String
+        //Object&gt;Person&gt;Student
+        //Object&gt;Person&gt;Teacher
+        //System.out.println( X instanceof Y);//X Y 是否有继承关系
+        Object object = new Student();
+        System.out.println(object instanceof  Student);//object 指向Student 故为True
+        System.out.println(object instanceof  Person);//True
+        System.out.println(object instanceof Object);//True
+        System.out.println(object instanceof Teacher);//False
+        System.out.println(object instanceof  String);//false
+        System.out.println(&quot;=========================&quot;);
+
+        Person object2 = new Student();
+        System.out.println(object2 instanceof  Student);//True
+        System.out.println(object2 instanceof  Person);//True
+        System.out.println(object2 instanceof  Object);//True
+        System.out.println(object2 instanceof  Teacher);//False
+        //System.out.println(object2 instanceof  String); //编译错误
+        // 感觉是obj的指向类型 判断 true or false
+        // obj的类型决定能否比较
+        System.out.println(&quot;=========================&quot;);
+        Person object3 = new Person();
+        System.out.println(object3 instanceof  Student);//False
+        System.out.println(object3 instanceof  Person);//True
+        System.out.println(object3 instanceof Object);//True
+        System.out.println(object3 instanceof Teacher);//False
+        //System.out.println(object3 instanceof  String);  //编译错误
+        System.out.println(&quot;=========================&quot;);
+        Student object4 = new Student();
+        System.out.println(object4 instanceof  Student);//True
+        System.out.println(object4 instanceof  Person);//True
+        System.out.println(object4 instanceof Object);//True
+        //System.out.println(object4 instanceof Teacher);//编译错误
+        //System.out.println(object4 instanceof  String);  //编译错误
+    }
+}
+</code></pre>
+<h2 id="10-类型转换">10、类型转换</h2>
+<ol>
+<li>父类引用 指向子类的对象</li>
+<li>子类转化为父类 向上转型 ，可能会丢失自己的一些方法</li>
+<li>类转化为子类 向下转型 需强型转换</li>
+<li>方便代码使用</li>
+</ol>
+<pre><code class="language-java"> //类型之间的转化： 父  子
+//高             低
+Person obj =new Student();
+//obj.go();编译报错 无法使用
+//student 将这个obj转化为Student 则go可以使用
+//父类Person 转化为子类 Student
+Student student =(Student) obj;
+student.go();
+
+((Student)obj).go();
+</code></pre>
+<h2 id="11-代码块执行顺序">11、代码块执行顺序</h2>
+<pre><code class="language-java">public class ap {
+    {
+        System.out.println(&quot;匿名代码块&quot;);//2       赋初值
+    }
+    static {
+        System.out.println(&quot;静态代码块&quot;);//1      只执行一次
+    }
+    public ap(){
+        System.out.println(&quot;构造方法&quot;);//3
+    }
+
+    public static void main(String[] args) {
+        ap A = new ap();
+        System.out.println(&quot;======&quot;);
+        ap B = new ap();
+    }
+}
+
+/*
+输出为:
+静态代码块
+匿名代码块
+构造方法
+======
+匿名代码块
+构造方法
+
+静态代码块只执行一次
+/
+</code></pre>
+<h2 id="12-static关键字补充">12、static关键字补充</h2>
+<pre><code class="language-java">//静态导入包
+import static java.lang.Math.random
+    
+//final 修饰的类不能被继承  断子绝孙
+</code></pre>
+<h2 id="13-抽象类">13、抽象类</h2>
+<pre><code class="language-java">package Demo05;
+
+//抽象类： 类 extends: 单继承~  （接口可以多继承）
+public abstract class Action {
+    //约束 有人帮我们实现
+    //抽象方法 只有方法名字 没有方法的实现
+    public abstract  void doSomeThing();
+    //约束 不能new产生 必须通过子类来实现它
+    //抽象类中可以写普通方法
+    //抽象方法必须在抽象类中
+    public  void say(){
+        System.out.println(&quot;say&quot;);
+    }
+    //抽象的抽象 约束
+    //思考题？  不能 new 存在构造器吗   以及 存在的意义  抽象出来 提高开发效率
+}
+
+
+
+package Demo05;
+
+//抽象类的所有方法 继承了他的子类 都必须重写它的抽象方法，除非这个类也是抽象类，就让子子类重写
+public class A1  extends  Action{
+    @Override
+    public void doSomeThing() {
+    }
+}
+
+
+
+package Demo05;
+
+public abstract class Action {
+    public Action() {
+    }
+
+    public abstract void doSomeThing();
+
+    public void say() {
+        System.out.println(&quot;say&quot;);
+    }
+}
+//说明有 构造器
+</code></pre>
+<ol>
+<li>不能new抽象类，只能靠子类实现它：约束</li>
+<li>抽象类可以写普通方法</li>
+<li>抽象方法必须在抽象类中</li>
+<li>抽象类有构造器</li>
+</ol>
+<h1 id="14-接口">14、接口</h1>
+<p>普通类：只有具体实现 抽象类：具体实现和规范 接口：只有规范！自己无法写方法</p>
+<p>面向接口编程 实现约束和实现分离</p>
+<p>接口本质是契约 interface关键字</p>
+<pre><code>package Demo02;
+
+public interface UserService {
+    //可以常量 public static final
+    int AGE =99;
+    //接口中的所有定义都是抽象的 public abstract
+    void add(String name);
+    void delete(String name);
+    void update(String name);
+    void query(String name);
+
+}
+
+package Demo02;
+
+public interface TimeService {
+    void timer();
+}
+
+package Demo02;
+
+//抽象类： expends
+//类 可以实现接口 implements 接口
+//实现接口的类 就需要重写类中的方法  alt+enter
+public class UserServiceImp  implements  UserService,TimeService{
+
+    @Override
+    public void add(String name) {
+
+    }
+
+    @Override
+    public void delete(String name) {
+
+    }
+
+    @Override
+    public void update(String name) {
+
+    }
+
+    @Override
+    public void query(String name) {
+
+    }
+
+    @Override
+    public void timer() {
+
+    }
+}
+</code></pre>
+<p>作用：</p>
+<p>1.约束</p>
+<p>2.定义一些方法 让不同人来实现</p>
+<p>3.public abstract</p>
+<p>4.public static final</p>
+<p>5.接口不能被使用 接口中没有构造方法</p>
+<p>6.implement可以实现多个接口</p>
+<p>7.必须重写接口的方法</p>
+<h1 id="15-内部类">15、内部类</h1>
+<pre><code class="language-java">//成员内部类
+
+package Demo3;
+
+public class Outer {
+    private int id;
+    public  void out(){
+        System.out.println(&quot;这是外部类的方法&quot;);
+    }
+    public class Inner{
+        public void in(){
+            System.out.println(&quot;这是内部类的方法&quot;);
+        }
+        //获得外部类的私有属性
+        public void getId(){
+            System.out.println(id);
+        }
+    }
+ }
+    
+    
+package Demo3;
+
+public class Application {
+    public static void main(String[] args) {
+        Outer outer = new Outer();
+        //通过外部类来实例化 内部类
+        Outer.Inner inner= outer.new Inner();
+        inner.in();
+        inner.getId();
+    }
+}
+-----------
+这是内部类的方法
+0
+-----------
+
+
+
+//局部内部类:定义在内部类方法中 故应用范围仅在此方法中
+package D1;
+
+public class Outer02 {
+    private String name = &quot;张三&quot;;
+    private  static int age = 10;
+    public void show(){
+        String address = &quot;南京&quot;;
+        class Inner{
+            private  String tel = &quot;18888888888&quot;;
+            private   String email = &quot;zhangsan@163.com&quot;;
+            public void show2(){
+                System.out.println(name);//Outer.this.name
+                System.out.println(age);//Outer.age
+
+                System.out.println(tel);//this.tel
+                System.out.println(email);
+                //访问方法中的变量 只能访问常量 jdk1.7之前 需要加上final 1.8之后默认
+                System.out.println(address);
+
+            }
+        }
+        //address = &quot;深圳&quot;; 此处若修改 Inner类中将无法使用 address 因为 address不为常量了
+        Inner inner = new Inner();
+        inner.show2();
+    }
+}
+package D1;
+
+public class Test02 {
+    public static void main(String[] args) {
+        Outer02 outer02 = new Outer02();
+        outer02.show();
+
+    }
+}
+--------
+张三
+10
+18888888888
+zhangsan@163.com
+南京
+--------
+
+
+//匿名内部类 ： 必须继承一个接口或者父类
+public static void main(String[] args){
+    Usb usb = new Usb{
+        @override
+        public void show(){
+            System.out.println(&quot;匿名内部类&quot;)；
+        }
+    }
+    usb.show();
+}
+</code></pre>
+<h1 id="16-异常">16、异常</h1>
+<p>检查性异常：用户错误或问题引发的异常 编译时不能简单忽略的</p>
+<p>运行时异常 ：可能被程序员避免的异常 运行时异常出现 编译时被忽略</p>
+<p>错误Error：脱离程序员控制问题，在代码中通常被忽略</p>
+<p>异常关键字：try、catch、finally、throw、throws</p>
+<pre><code class="language-java">package Demo07;
+
+public class Test {
+    public static void main(String[] args) {
+        int a=1;
+        int b=0;
+
+        try{//try 监控区域
+            if(b==0)
+            {//throw
+                throw new ArithmeticException();//主动抛出异常
+            }
+        }catch(Error e){//捕获异常的参数从小到大 
+            System.out.println(&quot;Error&quot;);
+        } catch(Exception e){//捕获异常
+            System.out.println(&quot;Exception&quot;);
+        }catch(Throwable t){
+            System.out.println(&quot;Throwable&quot;);
+        } finally{//处理善后工作  可以没有
+            System.out.println(&quot;finally&quot;);
+        }
+    }
+  
+
+}
+Exception
+finally
+    
+//ctrl+alt+t可以弹出生成代码
+</code></pre>
+<h1 id="17-自定义异常">17、自定义异常</h1>
+<p><strong>自定义异常类 继承 Exception</strong></p>
+<ol>
+<li>
+<p><strong>创建自定义异常类</strong></p>
+</li>
+<li>
+<p><strong>在方法中通过throw关键字抛出异常</strong></p>
+</li>
+<li>
+<p><strong>用 try-catch语句捕获并处理 否则在方法声明处用throws抛出异常</strong></p>
+</li>
+<li>
+<p><strong>在出现异常的方法的调用者中捕获并处理异常</strong></p>
+</li>
+</ol>
+<pre><code class="language-java">package Demo07;
+
+public class MyException  extends Exception{
+    //传递数字&gt;10;
+    private int detail;
+    public MyException(int a){
+        this.detail=a;
+    }
+    //toString:异常打印信息
+    public  String toString(){
+        return  &quot;MyException{&quot;+&quot;detail=&quot;+detail+&quot;}&quot;;
+    }
+
+}
+
+public class Test {
+    //可能存在异常的方法
+    static  void test(int a) throws MyException {
+        System.out.println(&quot;传递的函数为:&quot; + a);
+        if (a &gt; 10) {
+            throw new MyException(a);//抛出
+        }
+        System.out.println(&quot;ok&quot;);
+    }
+
+    public static void main(String[] args) {
+        try {
+            test(11);
+
+        } catch (MyException e) {
+            System.out.println(&quot;MyException=&gt;&quot;+e);
+        }
+    }
+    
+    
+    
+---------------------------------
+    传递的函数为:11
+MyException=&gt;MyException{detail=11}
+----------------------------------
+</code></pre>
+
+                </div>
+            </article>
+        </div>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://ganhan999.github.io/post/136、只出现一次的数字/" class="post-title gt-a-link">
+                    136、只出现一次的数字
+                </a>
+            </div>
+        
+
+        
+
+        
+
+        
+
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first">温故而知新</div>
+    <div class="social-container">
+        
+            
+        
+            
+        
+            
+        
+            
+                <a href="https://www.zhihu.com/hot" target="_blank">
+                    <i class="fab fa-zhihu gt-c-content-color-first"></i>
+                </a>
+            
+        
+            
+        
+            
+        
+    </div>
+    <div class="footer-info">
+        Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+    </div>
+    <div>
+        Theme by <a href="https://imhanjie.com/" target="_blank">imhanjie</a>, Powered by <a
+                href="https://github.com/getgridea/gridea" target="_blank">Gridea | <a href="https://ganhan999.github.io//atom.xml" target="_blank">RSS</a></a>
+    </div>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+    </div>
+</div>
+</body>
+</html>

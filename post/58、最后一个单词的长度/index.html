@@ -1,0 +1,207 @@
+<html>
+<head>
+    <meta charset="utf-8"/>
+<meta name="description" content=""/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+<title>58、最后一个单词的长度 | Gridea</title>
+
+<link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1615809991680">
+
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://ganhan999.github.io//styles/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dockerfile.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dart.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script>
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
+
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css">
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg">
+    <div class="navbar-brand">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            Gridea
+        </div>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
+            
+                <div class="nav-item">
+                    
+                        <a href="/" class="menu gt-a-link">
+                            首页
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/archives" class="menu gt-a-link">
+                            归档
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/tags" class="menu gt-a-link">
+                            标签
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/post/about" class="menu gt-a-link">
+                            关于
+                        </a>
+                    
+                </div>
+            
+        </div>
+        <div style="text-align: center">
+            <form id="gridea-search-form" style="position: relative" data-update="1615809991680" action="/search/index.html">
+                <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+                <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+        </div>
+    </div>
+</nav>
+
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    58、最后一个单词的长度
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2020-11-11 ·
+                    </time>
+                    
+                        <a href="https://ganhan999.github.io/tag/RJ1fLvr_t/" class="post-tags">
+                            # leetcode
+                        </a>
+                    
+                </div>
+                <div class="post-content">
+                    <h1 id="题目">题目</h1>
+<p>给定一个仅包含大小写字母和空格 ' ' 的字符串 s，返回其最后一个单词的长度。<br>
+如果字符串从左向右滚动显示，那么最后一个单词就是最后出现的单词。<br>
+如果不存在最后一个单词，请返回 0 。<br>
+说明：一个单词是指仅由字母组成、不包含任何空格字符的 最大子字符串。</p>
+<p>示例:<br>
+输入: &quot;Hello World&quot;<br>
+输出: 5</p>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="本体思路">本体思路</h1>
+<p>我工作效率低的原因完全是因为有和力扣的题干一样语文为负分的产品经理<br>
+由于有这种情况发生输入:&quot;a &quot;，输出:1<br>
+我们先要把左右测的空格去掉。然后利用rfind函数找到最后一个&quot;&quot;在哪就行了。</p>
+<h1 id="我的做法">#我的做法：</h1>
+<pre><code class="language-python">class Solution:
+    def lengthOfLastWord(self, s: str) -&gt; int:
+        s=s.strip(&quot; &quot;)
+        if &quot; &quot; in s:
+            if set(s)!={&quot; &quot;}:
+                inde=s.rfind(&quot; &quot;)
+                return len(s)-inde-1
+            else:
+                return 0
+        else:
+            return len(s)
+
+</code></pre>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="大神做法">#大神做法：</h1>
+<p>为了解决最后一个字符串后面还有空格，倒序查找就行，当没有字符 (len = 0)<br>
+时候，遇到空格就直接跳过。从有字符开始，每次不是空格就加 11，此时 len &gt; 0<br>
+再次遇到空格，直接 return就是结果。要注意原字符串为全都是空格组成的字符串的情况，<br>
+也就是倒序扫描到字符串的开头依旧没更新 len，因此在循环外还需要 return 这种情况</p>
+<pre><code>class Solution:
+    def lengthOfLastWord(self, s: str) -&gt; int:
+        length = 0
+        for i in range(len(s)-1, -1, -1):
+            if length == 0 and s[i] == &quot; &quot;:
+                continue
+            if length != 0 and s[i] == &quot; &quot;:
+                return length
+            if s[i] != &quot; &quot;:
+                length += 1
+        return length
+</code></pre>
+
+                </div>
+            </article>
+        </div>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://ganhan999.github.io/post/jin-tian-xue-dao-liao-fen-zhi-he-dong-tai-gui-hua-de-chu-bu-guo-cheng/" class="post-title gt-a-link">
+                    今天学到了分治和动态规划的初步过程
+                </a>
+            </div>
+        
+
+        
+
+        
+
+        
+
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first">温故而知新</div>
+    <div class="social-container">
+        
+            
+        
+            
+        
+            
+        
+            
+                <a href="https://www.zhihu.com/hot" target="_blank">
+                    <i class="fab fa-zhihu gt-c-content-color-first"></i>
+                </a>
+            
+        
+            
+        
+            
+        
+    </div>
+    <div class="footer-info">
+        Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+    </div>
+    <div>
+        Theme by <a href="https://imhanjie.com/" target="_blank">imhanjie</a>, Powered by <a
+                href="https://github.com/getgridea/gridea" target="_blank">Gridea | <a href="https://ganhan999.github.io//atom.xml" target="_blank">RSS</a></a>
+    </div>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+    </div>
+</div>
+</body>
+</html>

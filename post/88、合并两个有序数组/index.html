@@ -1,0 +1,251 @@
+<html>
+<head>
+    <meta charset="utf-8"/>
+<meta name="description" content=""/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+<title>88、合并两个有序数组 | Gridea</title>
+
+<link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1615809991680">
+
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://ganhan999.github.io//styles/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dockerfile.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dart.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script>
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
+
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css">
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg">
+    <div class="navbar-brand">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            Gridea
+        </div>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
+            
+                <div class="nav-item">
+                    
+                        <a href="/" class="menu gt-a-link">
+                            首页
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/archives" class="menu gt-a-link">
+                            归档
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/tags" class="menu gt-a-link">
+                            标签
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/post/about" class="menu gt-a-link">
+                            关于
+                        </a>
+                    
+                </div>
+            
+        </div>
+        <div style="text-align: center">
+            <form id="gridea-search-form" style="position: relative" data-update="1615809991680" action="/search/index.html">
+                <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+                <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+        </div>
+    </div>
+</nav>
+
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    88、合并两个有序数组
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2020-11-17 ·
+                    </time>
+                    
+                        <a href="https://ganhan999.github.io/tag/RJ1fLvr_t/" class="post-tags">
+                            # leetcode
+                        </a>
+                    
+                </div>
+                <div class="post-content">
+                    <h1 id="题目">题目</h1>
+<ol>
+<li>
+<p>给你两个有序整数数组 nums1 和 nums2，请你将 nums2 合并到 nums1 中，使 nums1 成为一个有序数组。</p>
+<p>说明：<br>
+初始化 nums1 和 nums2 的元素数量分别为 m 和 n 。<br>
+你可以假设 nums1 有足够的空间（空间大小大于或等于 m + n）来保存 nums2 中的元素。</p>
+<p>示例：<br>
+输入：<br>
+nums1 = [1,2,3,0,0,0], m = 3<br>
+nums2 = [2,5,6],       n = 3<br>
+输出：[1,2,2,3,5,6]</p>
+<p>提示：<br>
+-10^9 &lt;= nums1[i], nums2[i] &lt;= 10^9<br>
+nums1.length == m + n<br>
+nums2.length == n</p>
+</li>
+</ol>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="本体思路">本体思路</h1>
+<p>用内置方法sort即可，注意要原地操作，不能改变地址，所以要使用对象类型方法例如pop，append，extend</p>
+<h1 id="我的做法1">#我的做法1：</h1>
+<pre><code class="language-python">class Solution:
+    def merge(self, nums1: List[int], m: int, nums2: List[int], n: int) -&gt; None:
+        &quot;&quot;&quot;
+        Do not return anything, modify nums1 in-place instead.
+        &quot;&quot;&quot;
+        lens=len(nums1)
+        for i in range(lens-m):
+            nums1.pop(-1)#不能直接切片
+        nums1.extend(nums2)#不能使用nums1+nums2
+        nums1.sort()
+        for i in range(lens-len(nums1)):
+            nums1.append(0)
+</code></pre>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="我的做法2">#我的做法2：</h1>
+<p>从nums2里面来一个，我就pop一个0。</p>
+<pre><code class="language-Python">class Solution:
+    def merge(self, nums1: List[int], m: int, nums2: List[int], n: int) -&gt; None:
+        &quot;&quot;&quot;
+        Do not return anything, modify nums1 in-place instead.
+        &quot;&quot;&quot;
+        a=0
+        popnum=0
+        while nums2 != []:
+           if a&gt;=popnum+m:
+               nums1.insert(a,nums2.pop(0))
+               nums1.pop(-1)
+               a+=1
+           elif nums1[a]&lt;=nums2[0]:
+               a+=1
+           else:
+               nums1.insert(a,nums2.pop(0))
+               nums1.pop(-1)
+               a+=1
+               popnum+=1
+</code></pre>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="大神做法1">#大神做法1：</h1>
+<p>啊！我没有想到直接替换，打扰了。</p>
+<pre><code class="language-Python">class Solution:
+    def merge(self, nums1: List[int], m: int, nums2: List[int], n: int) -&gt; None:
+        for i in range(n):
+            nums1[m+i]=nums2[i]
+        nums1.sort()
+
+</code></pre>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="大神做法2">#大神做法2：</h1>
+<p>充分利用了原数组的有序性，从后面开始比较，直接插入对应的那个位置。</p>
+<pre><code class="language-Python">class Solution:
+    def merge(self, nums1: List[int], m: int, nums2: List[int], n: int) -&gt; None:
+        &quot;&quot;&quot;
+        Do not return anything, modify nums1 in-place instead.
+        &quot;&quot;&quot;
+        while n:
+            if m == 0:
+                nums1[n-1] = nums2[n-1]
+                n -= 1
+                continue
+            if nums1[m-1] &lt; nums2[n-1]:
+                nums1[m+n-1] = nums2[n-1]
+                n -= 1
+            else:
+                nums1[m+n-1] = nums1[m-1]
+                m -= 1
+
+</code></pre>
+
+                </div>
+            </article>
+        </div>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://ganhan999.github.io/post/83、删除排序链表中的重复元素/" class="post-title gt-a-link">
+                    83、删除排序链表中的重复元素
+                </a>
+            </div>
+        
+
+        
+
+        
+
+        
+
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first">温故而知新</div>
+    <div class="social-container">
+        
+            
+        
+            
+        
+            
+        
+            
+                <a href="https://www.zhihu.com/hot" target="_blank">
+                    <i class="fab fa-zhihu gt-c-content-color-first"></i>
+                </a>
+            
+        
+            
+        
+            
+        
+    </div>
+    <div class="footer-info">
+        Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+    </div>
+    <div>
+        Theme by <a href="https://imhanjie.com/" target="_blank">imhanjie</a>, Powered by <a
+                href="https://github.com/getgridea/gridea" target="_blank">Gridea | <a href="https://ganhan999.github.io//atom.xml" target="_blank">RSS</a></a>
+    </div>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,1814 @@
+<html>
+<head>
+    <meta charset="utf-8"/>
+<meta name="description" content=""/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+<title>Java集合 | Gridea</title>
+
+<link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1615809991680">
+
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://ganhan999.github.io//styles/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dockerfile.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dart.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script>
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
+
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css">
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg">
+    <div class="navbar-brand">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            Gridea
+        </div>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
+            
+                <div class="nav-item">
+                    
+                        <a href="/" class="menu gt-a-link">
+                            首页
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/archives" class="menu gt-a-link">
+                            归档
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/tags" class="menu gt-a-link">
+                            标签
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/post/about" class="menu gt-a-link">
+                            关于
+                        </a>
+                    
+                </div>
+            
+        </div>
+        <div style="text-align: center">
+            <form id="gridea-search-form" style="position: relative" data-update="1615809991680" action="/search/index.html">
+                <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+                <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+        </div>
+    </div>
+</nav>
+
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    Java集合
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2020-12-01 ·
+                    </time>
+                    
+                        <a href="https://ganhan999.github.io/tag/pVOKe1jE1_/" class="post-tags">
+                            # Java
+                        </a>
+                    
+                </div>
+                <div class="post-content">
+                    <h1 id="集合">集合</h1>
+<h2 id="一-集合概念">一、集合概念</h2>
+<ul>
+<li>概念：对象的容器，定义了对多个对象进行操作的常用方法 可实现数组的功能</li>
+<li>和数组的区别：
+<ul>
+<li>数组长度固定 集合不固定</li>
+<li>数组可以存储基本类型和引用类型 集合只能存放引用类型</li>
+</ul>
+</li>
+</ul>
+<h3 id="collection体系">Collection体系</h3>
+<figure data-type="image" tabindex="1"><img src="https://ganhan999.github.io//post-images/1606822813979.png" alt="" loading="lazy"></figure>
+<h4 id="父接口">父接口</h4>
+<ul>
+<li>特点： 代表一组任意类型的对象，无序、无下标、不能重复</li>
+<li>方法：
+<ul>
+<li>boolean add(Object obj） //添加一个对象</li>
+<li>boolean addAll(Collection c)//将一个集合中的所有对象添加到此集合中</li>
+<li>void clear()//清空此集合中的所有对象</li>
+<li>boolean contains(Object o)//检查此集合是否包含o对象</li>
+<li>boolean equals(Object o)//判断此对象 是否与指定对象 相等</li>
+<li>boolean isEmpty()//判断此集合是否为空</li>
+<li>boolean remove (Object o) //在此集合中移除o对象</li>
+<li>int size()//返回此集合中的元素个数</li>
+<li>Object[] toArray()//将此集合转为数组</li>
+<li>Iterator iterator()//迭代</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-java">package Collection;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+
+public class Demo01 {
+    public static void main(String[] args) {
+        Collection collection =new ArrayList();
+        //添加元素
+        collection.add(&quot;香蕉&quot;);
+        collection.add(&quot;橘子&quot;);
+        collection.add(&quot;火龙果&quot;);
+        //打印集合元素及个数
+        System.out.println(&quot;元素个数为:&quot;+collection.size());
+        System.out.println(collection);
+        //遍历
+        //1.增强for  Collection不能使用下标
+        System.out.println(&quot;====================&quot;);
+        for(Object object:collection){
+            System.out.println(object);
+        }
+        //2.迭代器  专门用来遍历集合
+        System.out.println(&quot;======迭代器=======&quot;);
+        Iterator it =collection.iterator();
+        while(it.hasNext()){//hasNext()判断下一个元素是否存在
+            String str = (String)it.next();//next()返回下一个元素
+            System.out.println(str);
+            //collection.remove(str);//遍历时不能用remove方法移除
+            //it.remove();//可用迭代器remove移除
+
+        }
+        //判断
+        System.out.println(collection.isEmpty());
+        System.out.println(collection.contains(&quot;西瓜&quot;));
+        //移除元素
+        collection.remove(&quot;橘子&quot;);
+        System.out.println(&quot;元素个数为:&quot;+collection.size());
+        System.out.println(collection);
+        //清空
+        collection.clear();
+        System.out.println(&quot;元素个数为:&quot;+collection.size());
+        System.out.println(collection);
+    }
+}
+元素个数为:3
+[香蕉, 橘子, 火龙果]
+====================
+香蕉
+橘子
+火龙果
+======迭代器=======
+香蕉
+橘子
+火龙果
+false
+false
+元素个数为:2
+[香蕉, 火龙果]
+元素个数为:0
+[]
+
+package Collection;
+
+public class Student {
+    private String name;
+    private int age;
+
+    public Student(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return &quot;Student{&quot; +
+                &quot;name='&quot; + name + '\'' +
+                &quot;, age=&quot; + age +
+                '}';
+    }
+}
+
+package Collection;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+
+public class Demo02 {
+    public static void main(String[] args) {
+        //新建Collection对象
+        Collection collection = new ArrayList();
+        Student s1 = new Student(&quot;陈壹&quot;,21);
+        Student s2 = new Student(&quot;陈贰&quot;,22);
+        Student s3 = new Student(&quot;陈叁&quot;,21);
+        //添加数据
+        collection.add(s1);
+        collection.add(s2);
+        collection.add(s3);
+        collection.add(s3);
+        System.out.println(&quot;元素个数为:&quot;+collection.size());
+        System.out.println(collection.toString());
+        //删除
+        //collection.remove(new Student(&quot;陈壹&quot;,21));new 对象不会删除原来列表
+        collection.remove(s3);//没有移除全部s3 删除一个
+
+        System.out.println(&quot;元素个数为:&quot;+collection.size());
+        System.out.println(collection.toString());
+        //遍历
+        //1.增强for
+        for(Object object : collection){
+            Student s = (Student)object;
+            System.out.println(s.toString());
+        }
+        //2.迭代器
+        Iterator iterator= collection.iterator();
+        while(iterator.hasNext()){
+            Student s = (Student)iterator.next();
+            iterator.remove();
+            System.out.println(s.toString());
+        }
+        System.out.println(collection.toString());//remove 删除完毕
+        //判断
+        System.out.println(collection.contains(s1));
+        System.out.println(collection.isEmpty());
+    }
+}
+元素个数为:4
+[Student{name='陈壹', age=21}, Student{name='陈贰', age=22}, Student{name='陈叁', age=21}, Student{name='陈叁', age=21}]
+元素个数为:3
+[Student{name='陈壹', age=21}, Student{name='陈贰', age=22}, Student{name='陈叁', age=21}]
+Student{name='陈壹', age=21}
+Student{name='陈贰', age=22}
+Student{name='陈叁', age=21}
+Student{name='陈壹', age=21}
+Student{name='陈贰', age=22}
+Student{name='陈叁', age=21}
+[]
+false
+true
+
+</code></pre>
+<h4 id="list">List</h4>
+<ul>
+<li>特点：有序 有下标 元素可以重复</li>
+<li>方法
+<ul>
+<li>void add(int index , Object o)//在index处插入对象o</li>
+<li>boolean addAll(int index,Collection c)//将一个集合中的元素添加到index处</li>
+<li>Object get(int index)//返回集合中指定位置的元素</li>
+<li>LIst subList (int fromIndex ,int toIndex)//返回fromIndex 到toIndex的元素</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-java">package List;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
+
+public class List01 {
+    public static void main(String[] args) {
+        //创建集合
+        List list =new ArrayList&lt;&gt;();
+        //1.添加元素
+        list.add(&quot;小米&quot;);
+        list.add(&quot;三星&quot;);
+        list.add(&quot;苹果&quot;);
+        list.add(&quot;华为&quot;);
+        System.out.println(&quot;元素个数为:&quot;+list.size());
+        System.out.println(list.toString());
+        //2.删除元素
+        //list.remove(&quot;三星&quot;);
+        list.remove(0);
+        System.out.println(&quot;元素个数为:&quot;+list.size());
+        System.out.println(list.toString());
+        //3.遍历
+        //1.for循环
+        System.out.println(&quot;=========1.for=========&quot;);
+        for (int i = 0; i &lt; list.size(); i++) {
+            System.out.println(list.get(i));
+        }
+        //2.增强for
+        System.out.println(&quot;==========增强for=====&quot;);
+        for (Object object: list){
+            System.out.println(object);
+        }
+        //迭代器
+        System.out.println(&quot;==========迭代器======&quot;);
+        Iterator it=list.iterator();
+        while (it.hasNext()){
+            String s = (String)it.next();
+            System.out.println(s.toString());
+        }
+        //list迭代器 可以前向 后向 遍历 可以增改
+        System.out.println(&quot;=========list迭代器======&quot;);
+        ListIterator lit =list.listIterator();
+        System.out.println(&quot;=====从前往后========&quot;);
+        while(lit.hasNext()){
+            System.out.println(lit.nextIndex()+&quot;:&quot;+lit.next());
+        }
+        System.out.println(&quot;======从后往前====&quot;);
+        while(lit.hasPrevious()){
+            System.out.println(lit.previousIndex()+&quot;:&quot;+lit.previous());
+
+        }
+    }
+}
+元素个数为:4
+[小米, 三星, 苹果, 华为]
+元素个数为:3
+[三星, 苹果, 华为]
+=========1.for=========
+三星
+苹果
+华为
+==========增强for=====
+三星
+苹果
+华为
+==========迭代器======
+三星
+苹果
+华为
+=========list迭代器======
+=====从前往后========
+0:三星
+1:苹果
+2:华为
+======从后往前====
+2:华为
+1:苹果
+0:三星
+
+package List;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class  List02 {
+    public static void main(String[] args) {
+        List list =new ArrayList&lt;&gt;();
+        //添加数字
+        list.add(10);
+        list.add(20);
+        list.add(30);
+        list.add(40);
+        list.add(50);
+        list.add(60);
+        list.add(70);
+        System.out.println(&quot;列表元素为:&quot;+list.size());
+        System.out.println(list.toString());
+        //删除元素
+        list.remove(6);
+        System.out.println(&quot;列表元素为:&quot;+list.size());
+        System.out.println(list.toString());
+        //通过元素值移除元素 二种方法
+        list.remove((Object)60);
+        System.out.println(&quot;列表元素为:&quot;+list.size());
+        System.out.println(list.toString());
+        list.remove(new Integer(50));//Collection类中 Student 不能通过new Student 删除 为什么？？？？  因为 对equals定义不同 Student 是通过地址判断 需重写成判断name age 才可以这样删除
+        System.out.println(&quot;列表元素为:&quot;+list.size());
+        System.out.println(list.toString());
+        //补充  subList  含头不含尾
+        System.out.println(list.subList(1,3));
+
+    }
+}
+列表元素为:7
+[10, 20, 30, 40, 50, 60, 70]
+列表元素为:6
+[10, 20, 30, 40, 50, 60]
+列表元素为:5
+[10, 20, 30, 40, 50]
+列表元素为:4
+[10, 20, 30, 40]
+[20, 30]
+
+</code></pre>
+<h5 id="list-实现类">List 实现类</h5>
+<ul>
+<li>ArrayList:
+<ul>
+<li>数组结构实现 查询快 增删慢</li>
+<li>运行效率快 线程不安全</li>
+</ul>
+</li>
+<li>Vector(了解):
+<ul>
+<li>数组结构实现 查询快 增删慢</li>
+<li>运行效率慢 线程安全</li>
+</ul>
+</li>
+<li>LinkedList:
+<ul>
+<li>链表结构实现 增删快 查询慢</li>
+</ul>
+</li>
+</ul>
+<p>Arraylist: 储存结构-- 数组</p>
+<pre><code class="language-java">package Collection;
+
+import java.util.Objects;
+
+public class Student {
+    private String name;
+    private int age;
+
+    public Student(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return &quot;Student{&quot; +
+                &quot;name='&quot; + name + '\'' +
+                &quot;, age=&quot; + age +
+                '}';
+    }
+
+    @Override
+    /*public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Student student = (Student) o;
+        return age == student.age &amp;&amp;
+                Objects.equals(name, student.name);
+
+     */
+    public boolean equals(Object o) {
+        if(this==o){
+            return true;
+        }
+        if(this==null){
+            return false;
+        }
+        if(o instanceof  Student){
+            Student s = (Student)o;
+            if (this.name.equals(s.getName()) &amp;&amp; this.age==s.getAge()){
+                return true;
+            }
+        }
+        return  false;
+    }
+}
+
+package Arraylist;
+
+import Collection.Student;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.ListIterator;
+
+public class Demo01 {
+    public static void main(String[] args) {
+        ///创建集合
+        ArrayList&lt;Object&gt; arrayList = new ArrayList&lt;&gt;();
+        //添加元素
+        Student s1 = new Student(&quot;刘德华&quot;,59);
+        Student s2 = new Student(&quot;郭富城&quot;,55);
+        Student s3 = new Student(&quot;黎明&quot;,54);
+        Student s4 = new Student(&quot;张学友&quot;,59);
+        arrayList.add(s1);
+        arrayList.add(s2);
+        arrayList.add(s3);
+        arrayList.add(s4);
+        arrayList.add(s4);
+        System.out.println(&quot;元素个数为:&quot;+arrayList.size());
+        System.out.println(arrayList.toString());
+        //删除元素
+        arrayList.remove(new Student(&quot;张学友&quot;,59));//重写equals方法  可以删除
+        System.out.println(&quot;元素个数为:&quot;+arrayList.size());
+        System.out.println(arrayList.toString());
+        //遍历元素
+        //1.增强for
+        System.out.println(&quot;==========增强for===========&quot;);
+        for (Object object:arrayList) {
+            Student s =(Student)object;
+            System.out.println(s.toString());
+        }
+        //2.下标 for
+        System.out.println(&quot;========普通for==============&quot;);
+        for (int i = 0; i &lt; arrayList.size(); i++) {
+            System.out.println(arrayList.get(i));
+        }
+        //3.迭代器
+        // Iterator 迭代器
+        System.out.println(&quot;==============Iteraor迭代器===========&quot;);
+        Iterator it =arrayList.iterator();
+        while(it.hasNext()){
+            Student s =(Student)it.next();
+            System.out.println(s.toString());
+        }
+        //ListIterator 迭代器
+        System.out.println(&quot;==============ListIterator 前向迭代器===========&quot;);
+        ListIterator lit = arrayList.listIterator();
+        while(lit.hasNext()){
+            Student s =(Student)lit.next();
+            System.out.println(s.toString());
+        }
+        System.out.println(&quot;==============ListIterator 后向迭代器===========&quot;);
+        while(lit.hasPrevious()){
+            Student s =(Student)lit.previous();
+            System.out.println(s.toString());
+        }
+        //判断
+        System.out.println(arrayList.contains(s1));
+        System.out.println(arrayList.contains(new Student(&quot;郭富城&quot;,55)));//重写 equals
+
+    }
+}
+元素个数为:5
+[Student{name='刘德华', age=59}, Student{name='郭富城', age=55}, Student{name='黎明', age=54}, Student{name='张学友', age=59}, Student{name='张学友', age=59}]
+元素个数为:4
+[Student{name='刘德华', age=59}, Student{name='郭富城', age=55}, Student{name='黎明', age=54}, Student{name='张学友', age=59}]
+==========增强for===========
+Student{name='刘德华', age=59}
+Student{name='郭富城', age=55}
+Student{name='黎明', age=54}
+Student{name='张学友', age=59}
+========普通for==============
+Student{name='刘德华', age=59}
+Student{name='郭富城', age=55}
+Student{name='黎明', age=54}
+Student{name='张学友', age=59}
+==============Iteraor迭代器===========
+Student{name='刘德华', age=59}
+Student{name='郭富城', age=55}
+Student{name='黎明', age=54}
+Student{name='张学友', age=59}
+==============ListIterator 前向迭代器===========
+Student{name='刘德华', age=59}
+Student{name='郭富城', age=55}
+Student{name='黎明', age=54}
+Student{name='张学友', age=59}
+==============ListIterator 后向迭代器===========
+Student{name='张学友', age=59}
+Student{name='黎明', age=54}
+Student{name='郭富城', age=55}
+Student{name='刘德华', age=59}
+true
+true
+
+</code></pre>
+<p>源码分析</p>
+<p>默认容量： DEFAULT_CAPACITY = 10 注意：如果没有向集合中添加元素 默认为0 添加任意元素 则为10 到达极限是 扩容为原来的1.5倍</p>
+<p>存放元素的数组 elementData</p>
+<p>实际元素个数 size</p>
+<p>add()方法：</p>
+<p>源码</p>
+<pre><code class="language-java">public boolean add(E e) {
+    ensureCapacityInternal(size + 1);  // Increments modCount!!
+    elementData[size++] = e;
+    return true;
+}
+
+private static int calculateCapacity(Object[] elementData, int minCapacity) {
+        if (elementData == DEFAULTCAPACITY_EMPTY_ELEMENTDATA) {
+            return Math.max(DEFAULT_CAPACITY, minCapacity);
+        }
+        return minCapacity;
+    }
+
+    private void ensureCapacityInternal(int minCapacity) {
+        ensureExplicitCapacity(calculateCapacity(elementData, minCapacity));
+    }
+    private void ensureExplicitCapacity(int minCapacity) {
+        modCount++;
+
+        // overflow-conscious code
+        if (minCapacity - elementData.length &gt; 0)
+            grow(minCapacity);
+    }
+
+private void grow(int minCapacity) {
+        // overflow-conscious code
+        int oldCapacity = elementData.length;
+        int newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1);
+        if (newCapacity - minCapacity &lt; 0)
+            newCapacity = minCapacity;
+        if (newCapacity - MAX_ARRAY_SIZE &gt; 0)
+            newCapacity = hugeCapacity(minCapacity);
+        // minCapacity is usually close to size, so this is a win:
+        elementData = Arrays.copyOf(elementData, newCapacity);
+    }
+
+
+</code></pre>
+<p>Vector: 数组</p>
+<pre><code class="language-java">package Vector;
+
+import java.util.Enumeration;
+import java.util.Vector;
+
+public class Demo0 {
+    public static void main(String[] args) {
+        //创建集合
+        Vector&lt;Object&gt; vector = new Vector&lt;&gt;();
+        //添加元素
+        vector.add(&quot;香蕉&quot;);
+        vector.add(&quot;橘子&quot;);
+        vector.add(&quot;芒果&quot;);
+        vector.add(&quot;西瓜&quot;);
+        System.out.println(&quot;元素个数为:&quot;+vector.size());
+        System.out.println(vector.toString());
+        //遍历元素  枚举法  增强for等也可以
+        Enumeration elements = vector.elements();
+        while(elements.hasMoreElements()){
+            String s = (String) elements.nextElement();
+            System.out.println(s);
+        }
+        //判断
+        System.out.println(vector.contains(&quot;西瓜&quot;));
+        System.out.println(vector.isEmpty());
+        //其他方法
+        System.out.println(vector.firstElement());
+        System.out.println(vector.lastElement());
+        System.out.println(vector.elementAt(0));
+        //删除元素
+        vector.remove(0);
+        System.out.println(vector.toString());
+        vector.remove(&quot;西瓜&quot;);
+        System.out.println(vector.toString());
+        vector.clear();
+        System.out.println(vector.toString());
+
+    }
+}
+元素个数为:4
+[香蕉, 橘子, 芒果, 西瓜]
+香蕉
+橘子
+芒果
+西瓜
+true
+false
+香蕉
+西瓜
+香蕉
+[橘子, 芒果, 西瓜]
+[橘子, 芒果]
+[]
+
+</code></pre>
+<p>LinkedList:</p>
+<pre><code class="language-java">package LinkerList;
+
+import Collection.Student;
+
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.ListIterator;
+
+public class Demo00 {
+    public static void main(String[] args) {
+        //创建集合
+        LinkedList linkedlist = new LinkedList&lt;&gt;();
+        //添加元素
+        Student s1 = new Student(&quot;刘德华&quot;,59);
+        Student s2 = new Student(&quot;郭富城&quot;,55);
+        Student s3 = new Student(&quot;黎明&quot;,54);
+        Student s4 = new Student(&quot;张学友&quot;,59);
+        linkedlist.add(s1);
+        linkedlist.add(s2);
+        linkedlist.add(s3);
+        linkedlist.add(s4);
+        System.out.println(&quot;元素个数:&quot;+linkedlist.size());
+        System.out.println(linkedlist.toString());
+        //遍历
+        //2.1for
+        System.out.println(&quot;=========for============&quot;);
+        for (int i = 0; i &lt; linkedlist.size(); i++) {
+            System.out.println(linkedlist.get(i));
+        }
+        //2.2增强for
+        System.out.println(&quot;=======增强for============&quot;);
+        for (Object obj : linkedlist){
+            Student s =(Student) obj;
+            System.out.println(s.toString());
+        }
+        //2.3迭代器
+        System.out.println(&quot;==========迭代器==========&quot;);
+        Iterator it = linkedlist.iterator();
+        while(it.hasNext()){
+            Student s =(Student)it.next();
+            System.out.println(s.toString());
+        }
+        //2.4LiseIterator 迭代器
+        System.out.println(&quot;========LiseIterator 迭代器=============&quot;);
+        ListIterator lit = linkedlist.listIterator();
+        while(lit.hasNext()) {
+            Student s = (Student) lit.next();
+            System.out.println(s.toString());
+        }
+        //判断
+        System.out.println(linkedlist.contains(s1));
+        System.out.println(linkedlist.isEmpty());
+        //获取
+        linkedlist.get(0);
+        //删除
+        linkedlist.remove(0);
+        System.out.println(linkedlist.toString());
+        linkedlist.remove(new Student(&quot;郭富城&quot;,55));
+        System.out.println(linkedlist.toString());
+        linkedlist.clear();
+        System.out.println(linkedlist.toString());
+    }
+}
+元素个数:4
+[Student{name='刘德华', age=59}, Student{name='郭富城', age=55}, Student{name='黎明', age=54}, Student{name='张学友', age=59}]
+=========for============
+Student{name='刘德华', age=59}
+Student{name='郭富城', age=55}
+Student{name='黎明', age=54}
+Student{name='张学友', age=59}
+=======增强for============
+Student{name='刘德华', age=59}
+Student{name='郭富城', age=55}
+Student{name='黎明', age=54}
+Student{name='张学友', age=59}
+==========迭代器==========
+Student{name='刘德华', age=59}
+Student{name='郭富城', age=55}
+Student{name='黎明', age=54}
+Student{name='张学友', age=59}
+========LiseIterator 迭代器=============
+Student{name='刘德华', age=59}
+Student{name='郭富城', age=55}
+Student{name='黎明', age=54}
+Student{name='张学友', age=59}
+true
+false
+[Student{name='郭富城', age=55}, Student{name='黎明', age=54}, Student{name='张学友', age=59}]
+[Student{name='黎明', age=54}, Student{name='张学友', age=59}]
+[]
+</code></pre>
+<figure data-type="image" tabindex="2"><img src="https://ganhan999.github.io//post-images/1606822965335.png" alt="" loading="lazy"></figure>
+<h3 id="泛型-参数化类型">泛型 参数化类型</h3>
+<p>&lt;T。。。&gt;类型占位符 表示一种引用类型</p>
+<ul>
+<li>好处
+<ul>
+<li>提高代码的重用性</li>
+<li>防止类型转换异常，提高代码安全性</li>
+</ul>
+</li>
+</ul>
+<h5 id="泛型类">泛型类</h5>
+<p>语法 ： 类名后加&lt;T,E,K…&gt; T类型占位符 是一种引用类型 可以编写多个</p>
+<pre><code class="language-java">package Mygeneric;
+
+public class Mygeneric&lt;T&gt; {
+    //使用泛型
+    //1.创建变量
+    T t;
+    //2.方法参数
+    public  void  show(T t){
+        // T t =new T();  不可new对象  因为无法确定T的类型
+        this.t = t;
+        System.out.println(t);
+
+    }
+    //3.泛型作为方法的返回值
+    public T getT(){
+        return  t;
+    }
+}
+
+package Mygeneric;
+
+import com.sun.org.glassfish.external.amx.AMX;
+
+public class TestGeneric {
+    public static void main(String[] args) {
+        //泛型为引用类型  不同泛型类型之间不能相互赋值
+        Mygeneric&lt;String&gt; mg1 = new Mygeneric&lt;String&gt;();
+        mg1.show(&quot;生活&quot;);
+        System.out.println(mg1.t);
+        String S = mg1.getT();
+
+        Mygeneric&lt;Integer&gt; mg2 = new Mygeneric&lt;Integer&gt;();
+        mg2.show(150);
+        System.out.println(mg2.t);
+        Integer i1 = mg2.getT();
+
+        //Mygeneric&lt;String&gt; mg1=mg2;  错误
+
+    }
+}
+生活
+生活
+150
+150
+</code></pre>
+<h5 id="泛型接口">泛型接口</h5>
+<p>接口</p>
+<pre><code class="language-java">package Mygeneric;
+
+public interface MyInterface &lt;T&gt;{
+     public static String name= &quot;泛型&quot;;
+    T show(T t);
+}
+</code></pre>
+<p>实现类</p>
+<p>1.实现时声明类型</p>
+<pre><code class="language-java">package Mygeneric;
+
+public class MyInterface01 implements MyInterface&lt;String&gt; {
+    @Override
+    public String show(String s ) {
+        System.out.println(s);
+        System.out.println();
+        return  s;
+    }
+}
+</code></pre>
+<p>2.调用时声明类型</p>
+<pre><code class="language-java">package Mygeneric;
+
+public class MyInterface02 &lt;T&gt; implements MyInterface&lt;T&gt;{
+    @Override
+    public T show(T t) {
+        System.out.println(t);
+        return t;
+    }
+}
+</code></pre>
+<p>测试类</p>
+<pre><code class="language-java">package Mygeneric;
+
+public class MyTest {
+    public static void main(String[] args) {
+        MyInterface01 interface01 = new MyInterface01();
+        interface01.show(&quot;花好月圆&quot;);
+        System.out.println(MyInterface.name);
+
+        MyInterface02&lt;Integer&gt; interface02 = new MyInterface02&lt;Integer&gt;();
+        interface02.show(1314);
+
+    }
+}
+花好月圆
+
+泛型
+泛型
+1314
+</code></pre>
+<h5 id="泛型方法">泛型方法</h5>
+<pre><code class="language-java">public class MyGenericMethod {
+    public &lt;T&gt; T show (T t){
+        System.out.println(&quot;泛型方法&quot;+t);
+        return  t;
+    }
+}
+
+  MyGenericMethod genericMethod = new MyGenericMethod();
+        genericMethod.show(&quot;huhuhu&quot;);//无需声明 类型  根据输入参数决定
+        genericMethod.show(200);
+        genericMethod.show(3.14);
+泛型方法huhuhu
+泛型方法200
+泛型方法3.14
+</code></pre>
+<h5 id="转换异常-正常类">转换异常 正常类</h5>
+<p>需要判断数据类型能否转换</p>
+<pre><code class="language-java">package Mygeneric;
+
+import java.util.ArrayList;
+
+public class Demo0 {
+    public static void main(String[] args) {
+        ArrayList arrayList = new ArrayList();
+        arrayList.add(&quot;huahua&quot;);
+        arrayList.add(&quot;gugu&quot;);
+        arrayList.add(120);
+        arrayList.add(520);
+        for (Object obj:arrayList) {
+            String s =(String) obj;
+            System.out.println(s);
+
+        }
+    }
+
+}
+huahua
+gugu
+Exception in thread &quot;main&quot; java.lang.ClassCastException: java.lang.Integer cannot be cast to java.lang.String
+	at Mygeneric.Demo0.main(Demo0.java:13)
+</code></pre>
+<p>使用泛型 使集合元素为统一类型 避免强类型转换异常</p>
+<pre><code class="language-java">import java.util.ArrayList;
+
+public class Demo0 {
+    public static void main(String[] args) {
+        ArrayList&lt;String&gt; arrayList = new ArrayList&lt;String&gt;();
+        arrayList.add(&quot;huahua&quot;);
+        arrayList.add(&quot;gugu&quot;);
+        //arrayList.add(120);
+        //arrayList.add(520);
+        for (String str:arrayList) {
+            System.out.println(str);
+        }
+    }
+}
+使用泛型约束后  int类型元素就无法添加到集合了 避免使用强类型转换
+</code></pre>
+<h4 id="set集合">Set集合</h4>
+<ul>
+<li>无序 无下标 元素不可重复</li>
+</ul>
+<pre><code class="language-java">package Set;
+
+import java.lang.reflect.Array;
+import java.util.*;
+
+public class Demo01 {
+    public static void main(String[] args) {
+        //创建集合
+        Set&lt;String&gt; set = new HashSet&lt;&gt;();
+        //添加元素
+        set.add(&quot;华为&quot;);
+        set.add(&quot;小米&quot;);
+        set.add(&quot;三星&quot;);
+        set.add(&quot;苹果&quot;);
+        set.add(&quot;魅族&quot;);
+        System.out.println(&quot;元素个数为:&quot;+set.size());
+        System.out.println(set.toString());
+      //遍历
+        //1.增强for
+        for (String str:set) {
+            System.out.println(str);
+        }
+        //迭代器
+        System.out.println(&quot;==========迭代器=========&quot;);
+        Iterator it = set.iterator();
+        while(it.hasNext()){
+            String s =(String)it.next();
+            System.out.println(s);
+        }
+        //判断
+        System.out.println(set.contains(&quot;小米&quot;));
+        System.out.println(set.isEmpty());
+        //删除
+        set.remove(&quot;三星&quot;);
+        System.out.println(set.toString());
+        set.clear();
+        System.out.println(set.toString());
+
+
+    }
+}
+元素个数为:5
+[苹果, 华为, 魅族, 小米, 三星]
+苹果
+华为
+魅族
+小米
+三星
+==========迭代器=========
+苹果
+华为
+魅族
+小米
+三星
+true
+false
+[苹果, 华为, 魅族, 小米]
+[]
+
+</code></pre>
+<h5 id="实现类">实现类</h5>
+<ul>
+<li>HashSet</li>
+<li>TreeSet</li>
+</ul>
+<h6 id="hashset">HashSet</h6>
+<ul>
+<li>基于HashSet计算元素存放位置</li>
+<li>当存入元素的哈希码相同时，会调用equals进行确认，若结果为true 则拒绝后者加入</li>
+</ul>
+<p>存储位置 哈希表（数组加链表+红黑树）</p>
+<pre><code class="language-java">package Set.HashSet;
+
+import java.util.HashSet;
+import java.util.Iterator;
+
+public class Demo01 {
+    public static void main(String[] args) {
+        //创建集合
+        HashSet&lt;String&gt; hashSet = new HashSet&lt;String&gt;();
+        //添加元素
+        hashSet.add(&quot;刘亦菲&quot;);
+        hashSet.add(&quot;杨幂&quot;);
+        hashSet.add(&quot;刘诗诗&quot;);
+        hashSet.add(&quot;唐嫣&quot;);
+        hashSet.add(&quot;赵丽颖&quot;);
+        //hashSet.add(&quot;赵丽颖&quot;);重复 不再添加
+        System.out.println(&quot;元素个数为:&quot;+hashSet.size());
+        System.out.println(hashSet.toString());
+        //遍历
+        System.out.println(&quot;=======增强for==========&quot;);
+        for (String str:hashSet) {
+            System.out.println(str);
+        }
+        //迭代器
+        System.out.println(&quot;============迭代器===========&quot;);
+        Iterator it = hashSet.iterator();
+        while (it.hasNext()){
+            System.out.println(it.next());
+        }
+        //判断
+        System.out.println(hashSet.contains(&quot;杨幂&quot;));
+        System.out.println(hashSet.isEmpty());
+        //删除元素
+        hashSet.remove(&quot;赵丽颖&quot;);
+        System.out.println(hashSet.toString());
+        hashSet.clear();
+        System.out.println(hashSet.toString());
+
+    }
+}
+元素个数为:5
+[赵丽颖, 杨幂, 唐嫣, 刘亦菲, 刘诗诗]
+=======增强for==========
+赵丽颖
+杨幂
+唐嫣
+刘亦菲
+刘诗诗
+============迭代器===========
+赵丽颖
+杨幂
+唐嫣
+刘亦菲
+刘诗诗
+true
+false
+[杨幂, 唐嫣, 刘亦菲, 刘诗诗]
+[]
+</code></pre>
+<p>储存过程</p>
+<p>(1)根据hashcode 计算保存的位置，如果此位置为空 则直接保存 非空 则第二步</p>
+<p>(2)执行equals方法 如果equals方法为true 认为重复 false则链表</p>
+<pre><code class="language-java">package Set.HashSet;
+
+import java.util.Objects;
+
+public class Person {
+    private  String name;
+    private  int age;
+
+    public Person() {
+    }
+
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Person person = (Person) o;
+        return age == person.age &amp;&amp;
+                Objects.equals(name, person.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, age);
+    }
+
+    @Override
+    public String toString() {
+        return &quot;Person{&quot; +
+                &quot;name='&quot; + name + '\'' +
+                &quot;, age=&quot; + age +
+                '}';
+    }
+}
+
+package Set.HashSet;
+
+import java.util.HashSet;
+import java.util.Iterator;
+
+public class Demo02 {
+    public static void main(String[] args) {
+        HashSet&lt;Person&gt; hashSet = new HashSet&lt;Person&gt;();
+        Person p1 = new Person(&quot;刘亦菲&quot;,33);
+        Person p2 = new Person(&quot;杨幂&quot;,34);
+        Person p3 = new Person(&quot;唐嫣&quot;,37);
+        Person p4 = new Person(&quot;刘诗诗&quot;,33);
+        Person p5 = new Person(&quot;赵丽颖&quot;,33);
+        hashSet.add(p1);
+        hashSet.add(p2);
+        hashSet.add(p3);
+        hashSet.add(p4);
+        hashSet.add(p5);
+        hashSet.add(new Person(&quot;赵丽颖&quot;,33));//重写后  由name age决定hashcode
+        System.out.println(&quot;元素个数为:&quot;+hashSet.size());
+        System.out.println(hashSet.toString());
+        //遍历
+        System.out.println(&quot;==========增强for==========&quot;);
+        for (Person person:hashSet) {
+            System.out.println(person.toString());
+        }
+        System.out.println(&quot;=========迭代器=====&quot;);
+        Iterator it =hashSet.iterator();
+        while(it.hasNext()){
+            System.out.println(it.next());
+        }
+        //判断
+        System.out.println(hashSet.contains(p2));
+        System.out.println(hashSet.contains(new Person(&quot;赵丽颖&quot;, 33)));
+        System.out.println(hashSet.isEmpty());
+        //删除
+        hashSet.remove(p5);
+        System.out.println(hashSet.toString());
+        hashSet.clear();
+        System.out.println(hashSet.toString());
+    }
+}
+元素个数为:5
+[Person{name='赵丽颖', age=33}, Person{name='刘诗诗', age=33}, Person{name='刘亦菲', age=33}, Person{name='杨幂', age=34}, Person{name='唐嫣', age=37}]
+==========增强for==========
+Person{name='赵丽颖', age=33}
+Person{name='刘诗诗', age=33}
+Person{name='刘亦菲', age=33}
+Person{name='杨幂', age=34}
+Person{name='唐嫣', age=37}
+=========迭代器=====
+Person{name='赵丽颖', age=33}
+Person{name='刘诗诗', age=33}
+Person{name='刘亦菲', age=33}
+Person{name='杨幂', age=34}
+Person{name='唐嫣', age=37}
+true
+true
+false
+[Person{name='刘诗诗', age=33}, Person{name='刘亦菲', age=33}, Person{name='杨幂', age=34}, Person{name='唐嫣', age=37}]
+[]
+
+</code></pre>
+<h6 id="treeset">TreeSet</h6>
+<ul>
+<li>基于排列顺序实现元素不可重复</li>
+<li>实现SortedSet接口 对集合元素自动排序</li>
+<li>元素对象的类型必须实现Comparable接口，指定排列顺序</li>
+<li>通过</li>
+<li>CompareTo方法确认是否是重复元素</li>
+</ul>
+<pre><code class="language-java">package Set.TreeSet;
+
+import Set.HashSet.Person;
+
+import java.util.Iterator;
+import java.util.TreeSet;
+
+public class DEmo01 {
+    public static void main(String[] args) {
+        //创建集合
+        TreeSet&lt;Person&gt; set = new TreeSet&lt;&gt;();
+        //添加元素
+        Person p1 = new Person(&quot;刘亦菲&quot;,33);
+        Person p2 = new Person(&quot;杨幂&quot;,34);
+        Person p3 = new Person(&quot;唐嫣&quot;,37);
+        Person p4 = new Person(&quot;刘诗诗&quot;,33);
+        Person p5 = new Person(&quot;赵丽颖&quot;,33);
+        set.add(p1);//添加时 Person类必须实现Comparable接口
+        set.add(p2);
+        set.add(p3);
+        set.add(p4);
+        set.add(p5);
+        System.out.println(&quot;元素个数:&quot;+set.size());
+        System.out.println(set.toString());
+        //删除 remove
+        set.remove(p5);
+        System.out.println(&quot;元素个数:&quot;+set.size());
+        System.out.println(set.toString());
+        //遍历
+        System.out.println(&quot;=======增强for=====&quot;);
+        for (Person person: set) {
+            System.out.println(person);
+        }
+        System.out.println(&quot;======迭代器==========&quot;);
+        Iterator it = set.descendingIterator();//倒序
+        while (it.hasNext()){
+            System.out.println(it.next());
+        }
+        //判断
+        System.out.println(set.contains(p1));
+        System.out.println(set.isEmpty());
+    }
+}
+元素个数:5
+[Person{name='刘亦菲', age=33}, Person{name='刘诗诗', age=33}, Person{name='唐嫣', age=37}, Person{name='杨幂', age=34}, Person{name='赵丽颖', age=33}]
+元素个数:4
+[Person{name='刘亦菲', age=33}, Person{name='刘诗诗', age=33}, Person{name='唐嫣', age=37}, Person{name='杨幂', age=34}]
+=======增强for=====
+Person{name='刘亦菲', age=33}
+Person{name='刘诗诗', age=33}
+Person{name='唐嫣', age=37}
+Person{name='杨幂', age=34}
+======迭代器==========
+Person{name='杨幂', age=34}
+Person{name='唐嫣', age=37}
+Person{name='刘诗诗', age=33}
+Person{name='刘亦菲', age=33}
+true
+false
+</code></pre>
+<p>还有一种定制比较器Comparator 不需要对对象类实现Comparable</p>
+<pre><code class="language-java">package Set.TreeSet;
+
+import Set.HashSet.Person;
+
+import java.util.Comparator;
+import java.util.TreeSet;
+
+public class DEMO02 {
+    public static void main(String[] args) {
+        TreeSet&lt;Person&gt; set = new TreeSet&lt;&gt;(new Comparator&lt;Person&gt;() {
+            @Override
+            public int compare(Person o1, Person o2) {
+                int n1 = o1.getName().compareTo(o2.getName());
+                int n2 = o1.getAge()-o2.getAge();
+                return  n1==0?n2:n1;
+            }
+        });
+        Person p1 = new Person(&quot;刘亦菲&quot;,33);
+        Person p2 = new Person(&quot;杨幂&quot;,34);
+        Person p3 = new Person(&quot;唐嫣&quot;,37);
+        Person p4 = new Person(&quot;刘诗诗&quot;,33);
+        Person p5 = new Person(&quot;赵丽颖&quot;,33);
+        set.add(p1);//添加时 Person类必须实现Comparable接口
+        set.add(p2);
+        set.add(p3);
+        set.add(p4);
+        set.add(p5);
+        System.out.println(&quot;元素个数:&quot;+set.size());
+        System.out.println(set.toString());
+    }
+}
+元素个数:5
+[Person{name='刘亦菲', age=33}, Person{name='刘诗诗', age=33}, Person{name='唐嫣', age=37}, Person{name='杨幂', age=34}, Person{name='赵丽颖', age=33}]
+
+package Set.TreeSet;
+
+import sun.reflect.generics.tree.Tree;
+
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.TreeSet;
+
+public class Demo03 {
+    public static void main(String[] args) {
+        TreeSet&lt;String&gt; treeSet = new TreeSet&lt;&gt;(new Comparator&lt;String&gt;() {
+            @Override
+            public int compare(String o1, String o2) {
+                int n1= o1.length()-o2.length();
+                int n2 = o1.compareTo(o2);
+                return n1==0?n2:n1;
+            }
+        });
+        //添加元素
+        treeSet.add(&quot;qingdao&quot;);
+        treeSet.add(&quot;zaozhuang&quot;);
+        treeSet.add(&quot;tengzhou&quot;);
+        treeSet.add(&quot;nanjing&quot;);
+        treeSet.add(&quot;jinan&quot;);
+        System.out.println(&quot;城市个数为:&quot;+treeSet.size());
+        System.out.println(treeSet.toString());
+        //遍历
+        //增强for
+        System.out.println(&quot;=======增强for=========&quot;);
+        for (String str:treeSet) {
+            System.out.println(str);
+        }
+        //迭代
+        System.out.println(&quot;==========迭代器=====&quot;);
+        Iterator iterator = treeSet.descendingIterator();
+        while (iterator.hasNext()){
+            System.out.println(iterator.next());
+        }
+        //判断
+        System.out.println(treeSet.contains(&quot;jinan&quot;));
+        System.out.println(treeSet.isEmpty());
+        //删除
+        System.out.println(treeSet.remove(&quot;jinan&quot;));
+        treeSet.clear();
+
+    }
+}
+城市个数为:5
+[jinan, nanjing, qingdao, tengzhou, zaozhuang]
+=======增强for=========
+jinan
+nanjing
+qingdao
+tengzhou
+zaozhuang
+==========迭代器=====
+zaozhuang
+tengzhou
+qingdao
+nanjing
+jinan
+true
+false
+true
+
+</code></pre>
+<h3 id="map">Map</h3>
+<figure data-type="image" tabindex="3"><img src="https://ganhan999.github.io//post-images/1606823014185.png" alt="" loading="lazy"></figure>
+<p>Map:</p>
+<ul>
+<li>存储键值对</li>
+<li>键不能重复，值可以重复</li>
+<li>无序</li>
+</ul>
+<pre><code class="language-java">package Map;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+
+public class Demo0 {
+    public static void main(String[] args) {
+        //添加元素
+        Map&lt;String,String&gt; map =new HashMap&lt;&gt;();
+        map.put(&quot;没头脑&quot;,&quot;不高兴&quot;);
+        map.put(&quot;汤姆&quot;,&quot;杰瑞&quot;);
+        map.put(&quot;喜羊羊&quot;,&quot;美羊羊&quot;);
+        map.put(&quot;喜羊羊&quot;,&quot;灰太狼&quot;);
+        map.put(&quot;虹猫&quot;,&quot;蓝兔&quot;);
+        System.out.println(&quot;键值对个数:&quot;+map.size());
+        System.out.println(map.toString());
+        Map&lt;String,String&gt; map2 =new HashMap&lt;&gt;();
+        map2.putAll(map);//复制全部
+        System.out.println(&quot;键值对个数:&quot;+map2.size());
+        System.out.println(map2.toString());
+        //判断
+        System.out.println(map.containsKey(&quot;没头脑&quot;));//判断是否包含键
+        System.out.println(map.containsValue(&quot;蓝兔&quot;));//判断是否包含值
+        System.out.println(map.isEmpty());
+        //迭代
+        System.out.println( &quot;=============keyset迭代========&quot;);
+        for (String key:map.keySet()) {
+            System.out.println(key+&quot;--&gt;&quot;+map.get(key));
+        }
+        //entryset迭代
+        System.out.println(&quot;============entryset迭代=============&quot;);
+        //Set&lt;Map.Entry&lt;String,String&gt;&gt; entry=map.entrySet();
+        for(Map.Entry&lt;String,String&gt; entry:map.entrySet()){
+            System.out.println(entry);
+        }
+
+        //视图
+        System.out.println(map.entrySet());//返回映射对
+        System.out.println(map.keySet());//返回键
+        System.out.println(map.values());//返回值
+        //其他
+        System.out.println(map.get(&quot;汤姆&quot;));//返回键对应值
+
+
+    }
+}
+键值对个数:4
+{虹猫=蓝兔, 没头脑=不高兴, 喜羊羊=灰太狼, 汤姆=杰瑞}
+键值对个数:4
+{虹猫=蓝兔, 没头脑=不高兴, 喜羊羊=灰太狼, 汤姆=杰瑞}
+true
+true
+false
+=============keyset迭代========
+虹猫--&gt;蓝兔
+没头脑--&gt;不高兴
+喜羊羊--&gt;灰太狼
+汤姆--&gt;杰瑞
+============entryset迭代=============
+虹猫=蓝兔
+没头脑=不高兴
+喜羊羊=灰太狼
+汤姆=杰瑞
+[虹猫=蓝兔, 没头脑=不高兴, 喜羊羊=灰太狼, 汤姆=杰瑞]
+[虹猫, 没头脑, 喜羊羊, 汤姆]
+[蓝兔, 不高兴, 灰太狼, 杰瑞]
+杰瑞
+</code></pre>
+<h4 id="实现类-2">实现类</h4>
+<h5 id="hashmap">HashMap</h5>
+<p>默认容量16 0.75 扩容</p>
+<pre><code class="language-java">package Map.HashMap;
+
+import java.util.Objects;
+
+public class Student {
+    private String name;
+    private int StuTo;
+
+    public Student(String name, int stuTo) {
+        this.name = name;
+        StuTo = stuTo;
+    }
+
+    public Student() {
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getStuTo() {
+        return StuTo;
+    }
+
+    public void setStuTo(int stuTo) {
+        StuTo = stuTo;
+    }
+
+    @Override
+    public String toString() {
+        return &quot;Student{&quot; + &quot;name='&quot; + name + '\'' + &quot;, StuTo=&quot; + StuTo + '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Student)) return false;
+        Student student = (Student) o;
+        return StuTo == student.StuTo &amp;&amp;
+                Objects.equals(name, student.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, StuTo);
+    }
+}
+package Map.HashMap;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+
+public class Demo00 {
+    public static void main(String[] args) {
+        //创建集合
+        HashMap&lt;Student, String&gt; students = new HashMap&lt;Student, String&gt;();
+        //添加元素
+        Student s1 = new Student(&quot;周杰伦&quot;,20200001);
+        Student s2 = new Student(&quot;林俊杰&quot;,20200002);
+        Student s3 = new Student(&quot;王力宏&quot;,20200003);
+        Student s4 = new Student(&quot;张杰&quot;,20200004);
+        Student s5 = new Student(&quot;薛之谦&quot;,20200005);
+        students.put(s1,&quot;屋顶&quot;);
+        students.put(s2,&quot;一眼万年&quot;);
+        students.put(s3,&quot;真的爱你&quot;);
+        students.put(s4,&quot;天下&quot;);
+        students.put(s5,&quot;其实&quot;);
+        students.put(new Student(&quot;薛之谦&quot;,20200005),&quot;其实&quot;);//重写hashcode和equals后 由name StuTo判断相等
+        System.out.println(&quot;歌手与其作品:&quot;+students.size());
+        System.out.println(students.toString());//无序排列
+        //迭代
+        System.out.println(&quot;==========keySet=======&quot;);
+        for (Student student:students.keySet()) {
+            System.out.println(student+&quot;--&gt;&quot;+students.get(student));
+        }
+        System.out.println(&quot;=========EntrySet=============&quot;);
+        for (Map.Entry&lt;Student,String&gt; entry: students.entrySet()){
+            System.out.println(entry);
+        }
+        //判断
+        System.out.println(students.containsKey(s1));
+        System.out.println(students.containsValue(&quot;认真的雪&quot;));
+        //删除
+        System.out.println(students.remove(s1));//删除键 返回值
+        System.out.println(students.toString());//无序排列
+        System.out.println(students.remove(s2,&quot;江南&quot;));
+        System.out.println(students.remove(s2,&quot;一眼万年&quot;));
+        students.clear();
+        System.out.println(students.toString());//无序排列
+
+    }
+}
+歌手与其作品:5
+{Student{name='张杰', StuTo=20200004}=天下, Student{name='周杰伦', StuTo=20200001}=屋顶, Student{name='林俊杰', StuTo=20200002}=一眼万年, Student{name='薛之谦', StuTo=20200005}=其实, Student{name='王力宏', StuTo=20200003}=真的爱你}
+==========keySet=======
+Student{name='张杰', StuTo=20200004}--&gt;天下
+Student{name='周杰伦', StuTo=20200001}--&gt;屋顶
+Student{name='林俊杰', StuTo=20200002}--&gt;一眼万年
+Student{name='薛之谦', StuTo=20200005}--&gt;其实
+Student{name='王力宏', StuTo=20200003}--&gt;真的爱你
+=========EntrySet=============
+Student{name='张杰', StuTo=20200004}=天下
+Student{name='周杰伦', StuTo=20200001}=屋顶
+Student{name='林俊杰', StuTo=20200002}=一眼万年
+Student{name='薛之谦', StuTo=20200005}=其实
+Student{name='王力宏', StuTo=20200003}=真的爱你
+true
+false
+屋顶
+{Student{name='张杰', StuTo=20200004}=天下, Student{name='林俊杰', StuTo=20200002}=一眼万年, Student{name='薛之谦', StuTo=20200005}=其实, Student{name='王力宏', StuTo=20200003}=真的爱你}
+false
+true
+{}
+
+</code></pre>
+<figure data-type="image" tabindex="4"><img src="https://img-blog.csdnimg.cn/2020111022034387.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzMjAzMjQ2,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
+<p>刚创建hashmap table=null size=0 传入一个元素后 size=1&lt;&lt;4(16)</p>
+<p>当传输到16*0.75=12时 扩容到原来2倍64 以此类推</p>
+<figure data-type="image" tabindex="5"><img src="https://img-blog.csdnimg.cn/20201110220357756.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQzMjAzMjQ2,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
+<h5 id="hashtable">Hashtable</h5>
+<p>properties</p>
+<h5 id="treemap">TreeMap</h5>
+<pre><code class="language-java">package Map.TreeMap;
+
+import Map.HashMap.Student;
+
+import java.util.Comparator;
+import java.util.Map;
+import java.util.TreeMap;
+
+public class Demo00 {
+    public static void main(String[] args) {
+        //创建集合 用定制比较器 或使类实现 Comparable
+        TreeMap&lt;Student, String&gt; students = new TreeMap&lt;&gt;(new Comparator&lt;Student&gt;() {
+            @Override
+            public int compare(Student o1, Student o2) {
+                int n1 =  o1.getName().compareTo(o2.getName());
+                int n2 = o1.getStuTo()-o2.getStuTo();
+                return n1==0?n2:n1;
+            }
+        });
+        Student s1 = new Student(&quot;周杰伦&quot;,20200001);
+        Student s2 = new Student(&quot;林俊杰&quot;,20200002);
+        Student s3 = new Student(&quot;王力宏&quot;,20200003);
+        Student s4 = new Student(&quot;张杰&quot;,20200004);
+        Student s5 = new Student(&quot;薛之谦&quot;,20200005);
+        students.put(s1,&quot;屋顶&quot;);
+        students.put(s2,&quot;一眼万年&quot;);
+        students.put(s3,&quot;真的爱你&quot;);
+        students.put(s4,&quot;天下&quot;);
+        students.put(s5,&quot;其实&quot;);
+        students.put(new Student(&quot;薛之谦&quot;,20200005),&quot;其实&quot;);//重写hashcode和equals后 由name StuTo判断相等
+        System.out.println(&quot;歌手与其作品:&quot;+students.size());
+        System.out.println(students.toString());//无序排列
+        //迭代
+        System.out.println(&quot;=======keySet()=========&quot;);
+        for (Student key:students.keySet()) {
+            System.out.println(key+&quot;----------&quot;+students.get(key));
+        }
+        System.out.println(&quot;============entrySet()===========&quot;);
+        for(Map.Entry&lt;Student,String&gt; entry: students.entrySet()){
+            System.out.println(entry.getKey()+&quot;------&quot;+entry.getValue());
+        }
+        ///判断
+        System.out.println(students.containsKey(s1));
+        System.out.println(students.containsValue(&quot;认真的雪&quot;));
+        System.out.println(students.isEmpty());
+        //移除
+        students.remove(s1);
+        System.out.println(&quot;歌手与其作品:&quot;+students.size());
+        students.clear();
+        System.out.println(&quot;歌手与其作品:&quot;+students.size());
+
+    }
+}
+歌手与其作品:5
+{Student{name='周杰伦', StuTo=20200001}=屋顶, Student{name='张杰', StuTo=20200004}=天下, Student{name='林俊杰', StuTo=20200002}=一眼万年, Student{name='王力宏', StuTo=20200003}=真的爱你, Student{name='薛之谦', StuTo=20200005}=其实}
+=======keySet()=========
+Student{name='周杰伦', StuTo=20200001}----------屋顶
+Student{name='张杰', StuTo=20200004}----------天下
+Student{name='林俊杰', StuTo=20200002}----------一眼万年
+Student{name='王力宏', StuTo=20200003}----------真的爱你
+Student{name='薛之谦', StuTo=20200005}----------其实
+============entrySet()===========
+Student{name='周杰伦', StuTo=20200001}------屋顶
+Student{name='张杰', StuTo=20200004}------天下
+Student{name='林俊杰', StuTo=20200002}------一眼万年
+Student{name='王力宏', StuTo=20200003}------真的爱你
+Student{name='薛之谦', StuTo=20200005}------其实
+true
+false
+false
+歌手与其作品:4
+歌手与其作品:0
+
+</code></pre>
+<h2 id="collections">Collections</h2>
+<pre><code class="language-java">package Collections;
+
+import java.lang.reflect.Array;
+import java.util.*;
+
+public class Demo01 {
+    public static void main(String[] args) {
+        List&lt;Integer&gt; list = new ArrayList&lt;&gt;();
+        //添加元素
+        list.add(20);
+        list.add(6);
+        list.add(12);
+        list.add(25);
+        list.add(30);
+        System.out.println(&quot;元素个数:&quot; + list.size());
+        System.out.println(list.toString());
+        //排列
+        Collections.sort(list);
+        System.out.println(list.toString());
+        //二叉树查找 排序之后
+        int s = Collections.binarySearch(list, 20);//存在返回索引值 不存在为负
+        System.out.println(s);
+        //倒序
+        Collections.reverse(list);
+        System.out.println(list);
+        //乱序
+        Collections.shuffle(list);
+        System.out.println(list);
+        //copy复制
+        List&lt;Integer&gt; list1 = new ArrayList();
+        for (int i = 0; i &lt; list.size(); i++) {
+            list1.add(0);
+        }
+        Collections.copy(list1,list);//IndexOutOfBoundsException  要求复制的列表大小一致
+        System.out.println(list1);
+
+        //其他
+        //list转为数组
+        System.out.println(&quot;===list转为数组===&quot;);
+        Integer[] array = list.toArray(new Integer[0]);//参数小于list元素个数时 得到的数组大小为list.size  大于则为参数大小 其余以null填充
+        System.out.println(Arrays.toString(array));
+        System.out.println(array.length);
+        //数组转为列表
+        System.out.println(&quot;====数组转为列表========&quot;);
+        String[] singer= {&quot;邓紫棋&quot;,&quot;毛不易&quot;,&quot;廖俊涛&quot;};
+        //数组转为的列表为受限列表 不能添加或删除
+        List list2= Arrays.asList(singer);
+        System.out.println(list2);
+        //基本类型转换时 需要用包装类型
+        //int[] i1= {10,20,100,200};
+        //List&lt;int&gt;  list3 =Arrays.asList(i1);  报错
+        Integer[] i1= {10,20,100,200};
+        List&lt;Integer&gt;  list3 =Arrays.asList(i1);
+        System.out.println(list3);
+
+    }
+}
+元素个数:5
+[20, 6, 12, 25, 30]
+[6, 12, 20, 25, 30]
+2
+[30, 25, 20, 12, 6]
+[20, 25, 6, 30, 12]
+[20, 25, 6, 30, 12]
+===list转为数组===
+[20, 25, 6, 30, 12]
+5
+====数组转为列表========
+[邓紫棋, 毛不易, 廖俊涛]
+[10, 20, 100, 200
+
+</code></pre>
+<p>数组特点：大小固定，只能存储相同数据类型的数据</p>
+<p>集合特点：大小可动态扩展，可以存储各种类型的数据</p>
+
+                </div>
+            </article>
+        </div>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://ganhan999.github.io/post/Java多态/" class="post-title gt-a-link">
+                    Java多态
+                </a>
+            </div>
+        
+
+        
+
+        
+
+        
+
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first">温故而知新</div>
+    <div class="social-container">
+        
+            
+        
+            
+        
+            
+        
+            
+                <a href="https://www.zhihu.com/hot" target="_blank">
+                    <i class="fab fa-zhihu gt-c-content-color-first"></i>
+                </a>
+            
+        
+            
+        
+            
+        
+    </div>
+    <div class="footer-info">
+        Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+    </div>
+    <div>
+        Theme by <a href="https://imhanjie.com/" target="_blank">imhanjie</a>, Powered by <a
+                href="https://github.com/getgridea/gridea" target="_blank">Gridea | <a href="https://ganhan999.github.io//atom.xml" target="_blank">RSS</a></a>
+    </div>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+    </div>
+</div>
+</body>
+</html>

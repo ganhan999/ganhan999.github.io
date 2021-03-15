@@ -1,0 +1,489 @@
+<html>
+<head>
+    <meta charset="utf-8"/>
+<meta name="description" content=""/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+<title>Python算法入门（查找排序） | Gridea</title>
+
+<link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1615809991680">
+
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://ganhan999.github.io//styles/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dockerfile.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dart.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script>
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
+
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css">
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg">
+    <div class="navbar-brand">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            Gridea
+        </div>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
+            
+                <div class="nav-item">
+                    
+                        <a href="/" class="menu gt-a-link">
+                            首页
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/archives" class="menu gt-a-link">
+                            归档
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/tags" class="menu gt-a-link">
+                            标签
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/post/about" class="menu gt-a-link">
+                            关于
+                        </a>
+                    
+                </div>
+            
+        </div>
+        <div style="text-align: center">
+            <form id="gridea-search-form" style="position: relative" data-update="1615809991680" action="/search/index.html">
+                <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+                <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+        </div>
+    </div>
+</nav>
+
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    Python算法入门（查找排序）
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2020-11-24 ·
+                    </time>
+                    
+                        <a href="https://ganhan999.github.io/tag/2UGIvmMaOp/" class="post-tags">
+                            # Python
+                        </a>
+                    
+                </div>
+                <div class="post-content">
+                    <h1 id="查找排序">查找排序</h1>
+<p><strong>1、插入排序</strong></p>
+<pre><code class="language-python">def insert_sort(li):
+    for i in range(1,len(li)):
+        tmp=li[i]
+        j=i-1
+        while j&gt;=0 and li[j]&gt;tmp:
+            li[j+1]=li[j]
+            j=j-1
+        li[j+1]=tmp
+    return li
+
+li = [3,4,2,1,5,6,8,7,9]
+print(li)
+print(insert_sort(li))
+</code></pre>
+<p><strong>2、选择排序</strong></p>
+<pre><code class="language-python">#-----------------------方法1----------------------------#
+def select_sort_simple1(li):
+    lnew=[]
+    for i in range(len(li)):
+        minval=min(li)
+        lnew.append(minval)
+        li.remove(minval)
+    return  lnew
+
+li = [3,4,2,1,5,6,8,7,9]
+print(li)
+print(select_sort_simple1(li))
+
+
+#-----------------------方法2----------------------------#
+def select_sort1(li):
+    for i in range(len(li)):
+        minidx=i
+        for j in range(i+1,len(li)):
+            if li[j]&lt;li[minidx]:
+                minidx=j
+        li[minidx],li[i]=li[i],li[minidx]
+    return  li
+
+li = [3,4,2,1,5,6,8,7,9]
+print(li)
+print(select_sort1(li))
+</code></pre>
+<p><strong>3、冒泡排序</strong></p>
+<pre><code class="language-python">def bubble_sort1(li):
+    for i in range(len(li)-1):
+        changeflag=False
+        for j in range(len(li) - i - 1):
+            if li[j] &gt; li[j+1]:
+                li[j],li[j+1]=li[j+1],li[j]
+                changeflag=True
+        if not changeflag:
+            return li
+    return li
+
+li = [3,4,2,1,5,6,8,7,9]
+print(li)
+print(bubble_sort1(li))
+</code></pre>
+<p><strong>4、希尔排序</strong></p>
+<pre><code class="language-python">def insert_sort_gap1(li, gap):
+    for i in range(gap,len(li)):
+        tmp=li[i]
+        j=i-gap
+        while j&gt;=0 and li[j]&gt;tmp:
+            li[j+gap]=li[j]
+            j=j-gap
+        li[j+gap]=tmp
+    return li
+
+def shell_sort1(li):
+    d=len(li)//2
+    while d&gt;=1:
+        li=insert_sort_gap1(li,d)
+        d=d//2
+    return li
+
+li = [3,4,2,1,5,6,8,7,9]
+print(li)
+print(shell_sort1(li))
+</code></pre>
+<p><strong>5、快速排序</strong></p>
+<pre><code class="language-python">def partition(li, left, right):
+    tmp = li[left]
+    while left &lt; right:
+        while left &lt; right and li[right] &gt;= tmp:
+            right = right - 1
+        li[left] = li[right]
+        while left &lt; right and li[left] &lt;= tmp:
+            left = left + 1
+        li[right]=li[left]
+    li[left] = tmp
+    mid = left
+    return mid
+
+
+def _quick_sort(li, left, right):
+    if left&lt;right:  # 至少两个元素
+        mid = partition1(li, left, right)
+        _quick_sort(li, left, mid - 1)
+        _quick_sort(li, mid + 1, right)
+    return li         
+
+li = [3, 4, 2, 1, 5, 6, 8, 7, 9]
+print(li)
+print(_quick_sort(li, 0, len(li)-1))
+</code></pre>
+<p><strong>6、归并排序</strong></p>
+<pre><code class="language-python">def merge(li, low, mid, high):
+    i=low
+    j=mid+1
+    ltmp=[]
+    while i&lt;=mid and j&lt;=high:
+        if li[i]&lt;li[j]:
+            ltmp.append(li[i])
+            i=i+1
+        else:
+            ltmp.append(li[j])
+            j=j+1
+    while i&lt;=mid:
+        ltmp.append(li[i])
+        i=i+1
+    while j &lt;= high:
+        ltmp.append(li[j])
+        j += 1
+    li[low:high+1]=ltmp
+    return li
+
+def merge_sort(li, low, high):
+    if low&lt;high:
+        mid=(low+high)//2
+        merge_sort(li,low,mid)
+        merge_sort(li,mid+1,high)
+        merge(li,low,mid,high)
+    return li
+
+li = [3,4,2,1,5,6,8,7,9]
+print(li)
+print(merge_sort(li,0,len(li)-1))
+</code></pre>
+<p><strong>7、计数排序</strong></p>
+<pre><code class="language-python">def count_sort(li, max_count=100):
+    count=[0 for _ in range(max_count+1)]
+    for val in li:
+        count[val]=count[val]+1
+    li.clear()
+    for ind,val in enumerate(count):
+        for _ in range(val):
+            li.append(ind)
+    return li
+
+li = [3,4,2,1,5,6,8,7,9]
+print(li)
+print(count_sort(li))
+</code></pre>
+<p><strong>8、桶排序</strong></p>
+<pre><code class="language-python">def bucket_sort(li, n=100, max_num=10000):
+    buckets=[[] for _ in range(n)]
+    for var in li:
+        i=min(var//(max_num//100),n-1)
+        buckets[i].append(var)
+        for j in range(len(buckets[i])-1, 0, -1):
+            if buckets[i][j] &lt; buckets[i][j-1]:
+                buckets[i][j], buckets[i][j-1] = buckets[i][j-1], buckets[i][j]
+            else:
+                break
+    sorted_li=[]
+    for buc in buckets:
+        sorted_li.extend(buc)
+    return sorted_li
+
+li = [3,4,2,1,5,6,8,7,9]
+print(li)
+print(bucket_sort(li))
+</code></pre>
+<p><strong>9、基数排序</strong></p>
+<pre><code class="language-python">def radix_sort(li):
+    max_num=max(li)
+    it=0
+    while 10**it &lt;=max_num:
+        bucket=[[] for _ in range(10)]
+        for var in li:
+             # 987 it=1  987//10-&gt;98 98%10-&gt;8;    it=2  987//100-&gt;9 9%10=9
+                digit=(var//10**it)%10
+                bucket[digit].append(var)
+        li.clear()
+        for buc in bucket:
+            li.extend(buc)
+        it=it+1
+    return li
+
+li = [3,4,2,1,5,6,8,7,9]
+print(li)
+print(radix_sort(li))
+</code></pre>
+<p><strong>10、堆排序</strong></p>
+<pre><code class="language-python">#-----------------------方法1----------------------------#
+li = [3,4,2,1,5,6,8,7,9]
+
+print(li)
+
+heapq.heapify(li) #建堆
+
+for i in range(len(li)):
+    print(heapq.heappop(li), end=',')
+    
+    
+    
+#-----------------------方法2----------------------------#
+def sift(li, low, high):#大根堆向下调整，前提是子树已经是标准的小根堆或者大根堆
+    &quot;&quot;&quot;
+    :param li: 列表
+    :param low: 堆的根节点位置
+    :param high: 堆的最后一个元素的位置
+    :return: 
+    &quot;&quot;&quot;
+    i = low # i最开始指向根节点
+    j = 2 * i + 1 # j开始是左孩子
+    tmp = li[low] # 把堆顶存起来
+    while j &lt;= high: # 只要j位置有数
+        if j + 1 &lt;= high and li[j+1] &gt; li[j]: # 如果右孩子有并且比较大
+            j = j + 1  # j指向右孩子
+        if li[j] &gt; tmp:
+            li[i] = li[j]
+            i = j           # 往下看一层
+            j = 2 * i + 1
+        else:       # tmp更大，把tmp放到i的位置上
+            li[i] = tmp     # 把tmp放到某一级领导位置上
+            break
+    else:
+        li[i] = tmp  # 把tmp放到叶子节点上
+    return li
+
+def heap_sort(li):
+    n = len(li)
+    for i in range((n-2)//2, -1, -1):#从最后一个父节点开始从后往前建立小根堆
+        # i表示建堆的时候调整的部分的根的下标
+        sift(li, i, n-1)
+    # 建堆完成了
+    for i in range(n-1, -1, -1):
+        # i 指向当前堆的最后一个元素
+        li[0], li[i] = li[i], li[0]
+        sift(li, 0, i - 1) #i-1是新的high
+    return li
+
+li = [3,4,2,1,5,6,8,7,9]
+print(li)
+print(heap_sort(li))
+</code></pre>
+<p><strong>11、寻找最大的前K个值</strong></p>
+<pre><code class="language-python">def sift(li, low, high):#小根堆向下调整
+    i = low
+    j = 2 * i + 1
+    tmp = li[low]
+    while j &lt;= high:
+        if j + 1 &lt;= high and li[j+1] &lt; li[j]:
+            j = j + 1
+        if li[j] &lt; tmp:
+            li[i] = li[j]
+            i = j
+            j = 2 * i + 1
+        else:
+            break
+        li[i] = tmp
+
+
+def topk(li, k):
+    # 1.建堆
+    heap = li[0:k]
+    for i in range((k-2)//2, -1, -1):
+        sift(heap, i, k-1)
+    # 2.遍历，如果后续的值大于小根堆的最小值，那么就把他赋值给根节点，然后再堆排序
+    for i in range(k, len(li)-1):
+        if li[i] &gt; heap[0]:
+            heap[0] = li[i]
+            sift(heap, 0, k-1)
+
+    # 3.出数
+    for i in range(k-1, -1, -1):
+        heap[0], heap[i] = heap[i], heap[0]
+        sift(heap, 0, i - 1)
+    return heap
+
+li = [3,4,2,1,5,6,8,7,9]
+print(li)
+print(topk(li, 3))
+</code></pre>
+<p><strong>12、线性查找</strong></p>
+<pre><code class="language-python">def linear_search(li, val):
+    for ind, v in enumerate(li):
+        if v == val:
+            return ind
+    else:
+        return None
+li =[3,4,2,1,5,6,8,7,9]
+print(linear_search(li, 7))
+</code></pre>
+<p><strong>13、二分查找</strong></p>
+<pre><code class="language-python">def binary_search(li, val):#要有序
+    left = 0
+    right = len(li) - 1
+    while left &lt;= right:    # 候选区有值
+        mid = (left + right) // 2
+        if li[mid] == val:
+            return mid
+        elif li[mid] &gt; val: # 带查找的值在mid左侧
+            right = mid - 1
+        else: # li[mid] &lt; val 带查找的值在mid右侧
+            left = mid + 1
+    else:
+        return None
+
+
+li=[0,1,2,3,4,5,6,7,8,9]
+print(binary_search(li, 7))
+</code></pre>
+<p><strong>14、汉诺塔问题</strong></p>
+<p>随机删除并返回一个键值对</p>
+<pre><code class="language-python">def hanoi(n, a, b, c):
+    if n&gt;0:
+        hanoi(n-1, a, c, b)
+        print(&quot;moving from %s to %s&quot; % (a, c))
+        hanoi(n-1, b, a, c)
+hanoi(30, 'A', 'B', 'C')
+</code></pre>
+
+                </div>
+            </article>
+        </div>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://ganhan999.github.io/post/111、二叉树的最小深度/" class="post-title gt-a-link">
+                    111、二叉树的最小深度
+                </a>
+            </div>
+        
+
+        
+
+        
+
+        
+
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first">温故而知新</div>
+    <div class="social-container">
+        
+            
+        
+            
+        
+            
+        
+            
+                <a href="https://www.zhihu.com/hot" target="_blank">
+                    <i class="fab fa-zhihu gt-c-content-color-first"></i>
+                </a>
+            
+        
+            
+        
+            
+        
+    </div>
+    <div class="footer-info">
+        Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+    </div>
+    <div>
+        Theme by <a href="https://imhanjie.com/" target="_blank">imhanjie</a>, Powered by <a
+                href="https://github.com/getgridea/gridea" target="_blank">Gridea | <a href="https://ganhan999.github.io//atom.xml" target="_blank">RSS</a></a>
+    </div>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+    </div>
+</div>
+</body>
+</html>

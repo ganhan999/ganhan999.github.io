@@ -1,0 +1,233 @@
+<html>
+<head>
+    <meta charset="utf-8"/>
+<meta name="description" content=""/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+<title>27、移除元素 | Gridea</title>
+
+<link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1615809991680">
+
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://ganhan999.github.io//styles/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dockerfile.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dart.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script>
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
+
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css">
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg">
+    <div class="navbar-brand">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            Gridea
+        </div>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
+            
+                <div class="nav-item">
+                    
+                        <a href="/" class="menu gt-a-link">
+                            首页
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/archives" class="menu gt-a-link">
+                            归档
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/tags" class="menu gt-a-link">
+                            标签
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/post/about" class="menu gt-a-link">
+                            关于
+                        </a>
+                    
+                </div>
+            
+        </div>
+        <div style="text-align: center">
+            <form id="gridea-search-form" style="position: relative" data-update="1615809991680" action="/search/index.html">
+                <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+                <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+        </div>
+    </div>
+</nav>
+
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    27、移除元素
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2020-11-06 ·
+                    </time>
+                    
+                        <a href="https://ganhan999.github.io/tag/RJ1fLvr_t/" class="post-tags">
+                            # leetcode
+                        </a>
+                    
+                </div>
+                <div class="post-content">
+                    <h1 id="题目">题目</h1>
+<p>&quot;&quot;&quot;<br>
+给你一个数组 nums 和一个值 val，你需要 原地 移除所有数值等于 val 的元素，并返回移除后数组的新长度。<br>
+不要使用额外的数组空间，你必须仅使用 O(1) 额外空间并 原地 修改输入数组。<br>
+元素的顺序可以改变。你不需要考虑数组中超出新长度后面的元素。</p>
+<p>示例 1:<br>
+给定 nums = [3,2,2,3], val = 3,<br>
+函数应该返回新的长度 2, 并且 nums 中的前两个元素均为 2。<br>
+你不需要考虑数组中超出新长度后面的元素。</p>
+<p>示例 2:<br>
+给定 nums = [0,1,2,2,3,0,4,2], val = 2,<br>
+函数应该返回新的长度 5, 并且 nums 中的前五个元素为 0, 1, 3, 0, 4。<br>
+注意这五个元素可为任意顺序。<br>
+你不需要考虑数组中超出新长度后面的元素。</p>
+<p>&quot;&quot;&quot;</p>
+<h1 id="本体思路">本体思路</h1>
+<p>如果val在列表中，那么就使用index函数得到他的位置，然后再进行一个一个的pop，比较简单</p>
+<h1 id="我的做法">#我的做法：</h1>
+<pre><code class="language-python">class Solution:
+    def removeElement(self, nums: List[int], val: int) -&gt; int:
+        lens=len(nums)
+        i=0
+        if lens==0:
+            return 0
+        while i&lt;=lens-1:
+            if val in nums:
+                inde=nums.index(val)
+                nums.pop(inde)
+                print()
+            else:
+                i=i+1
+        return len(nums)
+
+</code></pre>
+<p>&quot;&quot;&quot;</p>
+<h1 id="大神做法1">大神做法1：</h1>
+<p>双指针法：题意可以理解为直接修改前k个数，因此无需删除操作</p>
+<p>&quot;&quot;&quot;</p>
+<pre><code class="language-python">class Solution:
+    def removeElement(self, nums: List[int], val: int) -&gt; int:
+        for i in range(nums.count(val)):
+            nums.remove(val)
+        return len(nums)
+
+
+
+#复现成功！
+</code></pre>
+<h1 id="大神做法2">大神做法2：</h1>
+<p>双指针其实就是两个数，分别代表两个index，表示数组中第几个数的意思。<br>
+比如这里，我们让a代表一个index，b代表一个index<br>
+然后我们让a一直往后移动，相当于nums[a]从数组第一个数遍历到最后一个数。<br>
+当且仅当我们发现nums[a] != val的时候，我们把这个数拷贝到b指向的位置，<br>
+默认b是从0开始的，然后b += 1指向下一个位置。</p>
+<p>&quot;&quot;&quot;</p>
+<pre><code class="language-python">class Solution:
+    def removeElement(self, nums: List[int], val: int) -&gt; int:
+        a = 0
+        b = 0
+
+        while a &lt; len(nums):
+            if nums[a] != val:
+                nums[b] = nums[a]
+                b += 1
+            a += 1
+        return b
+
+
+#复现成功！
+</code></pre>
+<p>&quot;&quot;&quot;</p>
+
+                </div>
+            </article>
+        </div>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://ganhan999.github.io/post/边缘检测算子汇总/" class="post-title gt-a-link">
+                    边缘检测算子汇总
+                </a>
+            </div>
+        
+
+        
+
+        
+
+        
+
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first">温故而知新</div>
+    <div class="social-container">
+        
+            
+        
+            
+        
+            
+        
+            
+                <a href="https://www.zhihu.com/hot" target="_blank">
+                    <i class="fab fa-zhihu gt-c-content-color-first"></i>
+                </a>
+            
+        
+            
+        
+            
+        
+    </div>
+    <div class="footer-info">
+        Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+    </div>
+    <div>
+        Theme by <a href="https://imhanjie.com/" target="_blank">imhanjie</a>, Powered by <a
+                href="https://github.com/getgridea/gridea" target="_blank">Gridea | <a href="https://ganhan999.github.io//atom.xml" target="_blank">RSS</a></a>
+    </div>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+    </div>
+</div>
+</body>
+</html>

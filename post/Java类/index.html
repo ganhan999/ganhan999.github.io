@@ -1,0 +1,898 @@
+<html>
+<head>
+    <meta charset="utf-8"/>
+<meta name="description" content=""/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+<title>Java 常用类 | Gridea</title>
+
+<link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1615809991680">
+
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://ganhan999.github.io//styles/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dockerfile.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dart.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script>
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
+
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css">
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg">
+    <div class="navbar-brand">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            Gridea
+        </div>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
+            
+                <div class="nav-item">
+                    
+                        <a href="/" class="menu gt-a-link">
+                            首页
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/archives" class="menu gt-a-link">
+                            归档
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/tags" class="menu gt-a-link">
+                            标签
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/post/about" class="menu gt-a-link">
+                            关于
+                        </a>
+                    
+                </div>
+            
+        </div>
+        <div style="text-align: center">
+            <form id="gridea-search-form" style="position: relative" data-update="1615809991680" action="/search/index.html">
+                <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+                <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+        </div>
+    </div>
+</nav>
+
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    Java 常用类
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2020-11-30 ·
+                    </time>
+                    
+                        <a href="https://ganhan999.github.io/tag/pVOKe1jE1_/" class="post-tags">
+                            # Java
+                        </a>
+                    
+                </div>
+                <div class="post-content">
+                    <h1 id="1-内部类">1、内部类</h1>
+<p>内部类编译后也会生成独立的字节码文件，也就是class文件</p>
+<p>内部类可以直接访问外部类的私有成员，而不破坏封装</p>
+<p>可以为外部类提供必要的内部功能组件</p>
+<h2 id="11成员内部类">1.1成员内部类</h2>
+<p>在类的内部定义，与实例变量、实例方法同级别的类</p>
+<p>外部类的一个实例方法，创建内部类对象时，必须依赖外部类对象</p>
+<pre><code class="language-java">Outer out=new Outer();
+Inner inner=out.new Inner()；
+</code></pre>
+<p>当外部类、内部类存在重名属性时，会优先访问内部类属性</p>
+<pre><code class="language-java">System.out.println(Outer.this.name);//访问外部类属性
+</code></pre>
+<p>成员内部类不能定义静态成员，但是可以包括静态常量</p>
+<h2 id="12静态内部类">1.2静态内部类</h2>
+<p>不依赖外部类对象，可直接创建或通过类名访问，可声明静态成员</p>
+<p>与外部类同级别</p>
+<pre><code class="language-java">Outer.Inner inner=onew Outer.Inner()；
+</code></pre>
+<p>只有内部类才能用static修饰</p>
+<h2 id="13局部内部类">1.3局部内部类</h2>
+<p>定义在外部类方法中，作用范围和创建对象范围仅限于方法</p>
+<p>局部变量和局部内部类不能加修饰符</p>
+<p>局部内部类不能定义静态成员，但是可以包括静态常量</p>
+<h2 id="14匿名内部类">1.4匿名内部类</h2>
+<p>使用匿名内部类优化（相当于创建了一个局部内部类)</p>
+<p>没有类名的局部内部类（一切特征都与局部内部类相同）</p>
+<p>必须继承一个父类或者接口</p>
+<p>定义类、实现类、创建对象的语法合并，只能创建一个该类的对象</p>
+<h1 id="2-object类">2、Object类</h1>
+<ul>
+<li>
+<p>getClass()方法 反射中有详细讲解 返回class对象</p>
+</li>
+<li>
+<p>hashCode()方法 返回对象的哈希码值</p>
+</li>
+<li>
+<p>哈希值根据对象的地址或字符串或数字使用hash算法 计算出来的int类型的数值</p>
+</li>
+<li>
+<p>一般情况下相同对象返回相同的哈希值</p>
+</li>
+<li>
+<p>toString 返回字符串表示 可以根据需求 覆盖</p>
+</li>
+<li>
+<p>重写前</p>
+<p>Object01.Student@1b6d3586<br>
+Object01.Student@4554617c</p>
+</li>
+<li>
+<p>equals() 比较是不是同一地址</p>
+</li>
+<li>
+<p>finalize（）回收垃圾</p>
+<pre><code class="language-java">package Object01;
+
+import java.util.Objects;
+
+public class Student {
+       private String name;
+        private int age;
+
+    public Student() {
+    }
+
+    public Student(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public int getAge() {
+            return age;
+        }
+
+        public void setAge(int age) {
+            this.age = age;
+        }
+
+    @Override
+    public String toString() {
+        return &quot;Student{&quot; +
+                &quot;name='&quot; + name + '\'' +
+                &quot;, age=&quot; + age +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Student)) return false;
+        Student student = (Student) o;
+        return age == student.age &amp;&amp;
+                Objects.equals(name, student.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, age);
+    }
+
+    @Override
+    protected void finalize() throws Throwable {
+        System.out.println(this.name+&quot;对象已被删除&quot;);
+    }
+}
+
+
+package Object01;
+public class HashCode {
+    public static void main(String[] args) {
+       Student s1 = new Student(&quot;age&quot;,20);
+       Student s2 = new Student(&quot;bbb&quot;,22);
+       Class class1 = s1.getClass();
+       Class class2 = s1.getClass();
+       if(class1 == class2){
+           System.out.println(&quot;s1 s2 同类型&quot;);
+       }else{
+           System.out.println(&quot;s1 s2 不同类型&quot;);
+        }
+        System.out.println(&quot;=======================&quot;);
+        Student s3 =s1;
+        int h1 = s1.hashCode();
+        int h2 =s2.hashCode();
+        int h3 =s3.hashCode();
+        int ch1=class1.hashCode();
+        int ch2=class1.hashCode();
+        System.out.println(h1);
+        System.out.println(h2);
+        System.out.println(h3);
+        System.out.println(ch1);
+        System.out.println(ch2);
+        System.out.println(&quot;================&quot;);
+        System.out.println(s1.toString());
+        System.out.println(s2.toString());
+        System.out.println(&quot;=====================&quot;);
+        Student s4 = new Student(&quot;小明&quot;,17);
+        Student s5 = new Student(&quot;小明&quot;,17);
+        if(s4.equals(s5)){
+            System.out.println(&quot;s4 s5 相同&quot;);
+        }else {
+            System.out.println(&quot;s4 s5 不同&quot;);
+        }
+        new Student(&quot;小明&quot;,17);
+        new Student(&quot;小红&quot;,17);
+        new Student(&quot;小张&quot;,17);
+        new Student(&quot;小王&quot;,17);
+        System.out.println(&quot;回收&quot;);
+        System.gc();
+
+    }
+}
+s1 s2 同类型
+=======================
+2992822
+3017717
+2992822
+460141958
+460141958
+================
+    未重写前
+Object01.Student@2DAAB6//2DAAB6哈希值 16进制 转化10进制为2992822
+Object01.Student@2E0BF5
+Student{name='age', age=20}
+Student{name='bbb', age=22}
+=====================
+s4 s5 相同//重写前  不同
+回收
+小王对象已被删除
+小张对象已被删除
+小红对象已被删除
+小明对象已被删除
+</code></pre>
+</li>
+</ul>
+<h1 id="3-包装类">3、包装类</h1>
+<p><strong>java中八种数据类型对应的包装类型   为了方便</strong></p>
+<ul>
+<li><strong>byte------Byte</strong></li>
+<li><strong>short-------Short</strong></li>
+<li><strong>int-------Integer</strong></li>
+<li><strong>long------Long</strong></li>
+<li><strong>float------Float</strong></li>
+<li><strong>double------Double</strong></li>
+<li><strong>boolean -----Boolean</strong></li>
+<li><strong>char-------Character</strong></li>
+</ul>
+<pre><code class="language-java">public class Bao {
+    public static void main(String[] args) {
+        //类型转换：装箱 基本类型转为引用类型
+        System.out.println(&quot;装箱&quot;);
+        int num1=10;
+        Integer integer1 = new Integer(num1);
+        Integer integer2 = Integer.valueOf(num1);
+        System.out.println(integer1);
+        System.out.println(integer2);
+        //类型转换：拆箱 引用类型转为基本类型
+        System.out.println(&quot;拆箱&quot;);
+        Integer integer3 = new Integer(100);
+        int num2 =integer3.intValue();
+        System.out.println(num2);
+        //JDK1.5以后
+        int age=30;
+        //自动装箱
+        System.out.println(&quot;自动装箱&quot;);
+        Integer integer4=age;
+        System.out.println(integer4);
+        //自动拆箱
+        System.out.println(&quot;自动拆箱&quot;);
+        int age2 = integer4;
+        System.out.println(age2);
+        //基本类型与字符串的转换
+        //1.基本类型转为字符串
+        int n1=100;
+        //1.1使用+号
+        String s1 = n1+&quot;&quot;;
+        //使用Integer的toString
+        String s2 =Integer.toString(n1);
+        String s3=Integer.toString(n1,16);//转为16进制
+        System.out.println(s1);
+        System.out.println(s2);
+        System.out.println(s3);
+
+        System.out.println(&quot;=============&quot;);
+        //字符串转为基本类型
+        String str = &quot;150&quot;;
+        int n2 = Integer.parseInt(str);//str中只能为数字
+        System.out.println(n2);
+        //boolean字符串转基本类型 &quot;true&quot;--&gt;true 非&quot;true&quot;--&gt;false
+        String str2 =&quot;true&quot;;
+        boolean b1 = Boolean.parseBoolean(str2);
+        boolean b2 = Boolean.parseBoolean(&quot;str2&quot;);
+        System.out.println(b1);
+        System.out.println(b2);
+
+    }
+}
+装箱
+10
+10
+拆箱
+100
+自动装箱
+30
+自动拆箱
+30
+100
+100
+64
+=============
+150
+true
+false
+
+    
+    
+    
+//Integer 缓冲区 Cache (-128,127)
+public class Cache {
+    public static void main(String[] args) {
+        Integer i1 = new Integer(100);
+        Integer i2 = new Integer(100);
+        System.out.println(i1==i2);//在堆里 故内存地址不同
+        Integer i3 = 100;//自动装箱 本质是valueOf函数
+        Integer i4 = 100;
+        System.out.println(i3==i4);
+        Integer i5 = 200;
+        Integer i6 = 200;
+        System.out.println(i5==i6);
+    }
+}
+false
+true
+false
+
+    
+//valueof源码
+public static Integer valueOf(int i) {
+    if (i &gt;= IntegerCache.low &amp;&amp; i &lt;= IntegerCache.high)
+        return IntegerCache.cache[i + (-IntegerCache.low)];
+    return new Integer(i);
+}
+static final int low = -128;
+ static final int high=127;
+
+</code></pre>
+<h2 id="4-string类">4、String类</h2>
+<ul>
+<li><strong>字符串是常量 创建后不可改</strong></li>
+<li><strong>字符串 字面值储存在字符串池 可以共享</strong></li>
+<li><strong>String s =“hello”: 产生一个对象，字符串池中储存</strong></li>
+<li><strong>String s = new String(“hello”):产生两个对象，堆池各一个</strong></li>
+</ul>
+<pre><code class="language-java">public class Ste01 {
+    public static void main(String[] args) {
+        String name=&quot;hello&quot;;//&quot;hello&quot;常量储存在常量池
+        name=&quot;zhangsan&quot;;//&quot;zhangsan&quot;赋值给name变量 并没有修改数据 而是重新在池中开辟内存
+        String name2=&quot;zhangsan&quot;;//池中已有”zhangsan“ 可直接赋值  此时 name name2指向相同
+
+        //另一种
+        String str =new String(&quot;java&quot;);
+        String str2 = new String(&quot;java&quot;);
+        System.out.println(str==str2);
+        System.out.println(str.equals(str2));
+    }
+}
+false
+true
+
+</code></pre>
+<figure data-type="image" tabindex="1"><img src="https://ganhan999.github.io//post-images/1606738231259.png" alt="" loading="lazy"></figure>
+<pre><code class="language-java">import java.util.Arrays;
+
+public class Ste01 {
+    public static void main(String[] args) {
+        String name=&quot;hello&quot;;//&quot;hello&quot;常量储存在常量池
+        name=&quot;zhangsan&quot;;//&quot;zhangsan&quot;赋值给name变量 并没有修改数据 而是重新在池中开辟内存
+        String name2=&quot;zhangsan&quot;;//池中已有”zhangsan“ 可直接赋值  此时 name name2指向相同
+
+        //另一种
+        String str =new String(&quot;java&quot;);
+        String str2 = new String(&quot;java&quot;);
+        System.out.println(str==str2);
+        System.out.println(str.equals(str2));
+        System.out.println(&quot;======================&quot;);
+
+        String content = &quot;java是世界上最好的java语言,很多人都在学java&quot;;
+        System.out.println(content.length());
+        System.out.println(content.charAt(0));
+        System.out.println(content.contains(&quot;php&quot;));
+        System.out.println(Arrays.toString(content.toCharArray()));
+        System.out.println(content.indexOf(&quot;java&quot;));
+        System.out.println(content.indexOf(&quot;java&quot;,4));
+        System.out.println(content.lastIndexOf(&quot;java&quot;));
+        System.out.println(&quot;=================&quot;);
+        String str3=&quot; Hello World &quot;;
+        System.out.println(str3.trim());
+        System.out.println(str3.toUpperCase());
+        System.out.println(str3.toLowerCase());
+        System.out.println(str3.endsWith(&quot;ld &quot;));
+        System.out.println(str3.startsWith(&quot; Hello&quot;));
+        System.out.println(&quot;================&quot;);
+        System.out.println(content.replace(&quot;java&quot;, &quot;php&quot;));
+        String str4= &quot;有时候,,有时候  宁愿相信一切有尽头 ,  梦一场&quot;;
+        String[] arr=str4.split(&quot;[ ,]+&quot;);//[ ,]表示空格 ， 都可以作为分裂标志 +则是说明个数没有影响 多次当一次使用
+        for (String s : arr) {
+            System.out.println(s);
+        }
+        System.out.println(&quot;======补充=========&quot;);
+        String str5 =&quot;hello&quot;;
+        String str6 =&quot;Hello&quot;;
+        System.out.println(str5.equals(str6));
+        System.out.println(str5.equalsIgnoreCase(str6));//忽略大小写
+        String str7 =&quot;abc&quot;;
+        String str8 =&quot;xyz&quot;;
+        System.out.println(str7.compareTo(str8));
+    }
+}
+false
+true
+======================
+28
+j
+false
+[j, a, v, a, 是, 世, 界, 上, 最, 好, 的, j, a, v, a, 语, 言, ,, 很, 多, 人, 都, 在, 学, j, a, v, a]
+0
+11
+24
+=================
+Hello World
+ HELLO WORLD 
+ hello world 
+true
+true
+================
+php是世界上最好的php语言,很多人都在学php
+有时候
+有时候
+宁愿相信一切有尽头
+梦一场
+======补充=========
+false
+true
+-23
+java
+    
+    
+    
+    
+————————————————————
+public class Str02 {
+        public static void main(String[] args) {
+            String str =&quot;this is a text&quot;;
+            String[] arr = str.split(&quot; &quot;);
+            for (String s : arr) {
+                System.out.println(s);
+            }
+            String replace = str.replace(&quot;text&quot;, &quot;practice&quot;);
+            System.out.println(replace);
+            //奉行的是插入
+            String str2=arr[0]+&quot; &quot;+arr[1]+&quot; &quot;+arr[2]+&quot; easy &quot;+arr[3];
+            System.out.println(str2);
+            //同样效果
+            String replace2 = str.replace(&quot;text&quot;, &quot;easy&quot;);
+            String  str5=replace2+&quot; text&quot;;
+            System.out.println(str5);
+            //我想的愚蠢方法
+            String[] arr2 = str2.split(&quot;&quot;);
+            int t = str2.indexOf(&quot;this&quot;);
+            int is_a = str2.indexOf(&quot;is a&quot;);
+            int a = str2.indexOf(&quot;a&quot;);
+            int e = str2.indexOf(&quot;easy&quot;);
+            int text = str2.indexOf(&quot;text&quot;);
+            int[] arr3={t,is_a,a,e,text};
+            for (int i : arr3) {
+                arr2[i]= arr2[i].toUpperCase();
+            }
+            String str3=&quot;&quot;;
+            for (String s : arr2) {
+                str3+=s;
+            }
+            System.out.println(str3);
+            //方便一些
+            for(int i=0;i&lt;arr.length;i++){
+                char first =arr[i].charAt(0);
+                char upperfirst = Character.toUpperCase(first);
+                String news=upperfirst+arr[i].substring(1);
+                System.out.print(news+&quot; &quot;);
+
+            }
+
+        }
+    }
+
+
+this
+is
+a
+text
+this is a practice
+this is a easy text
+this is a easy text
+This Is A Easy Text
+This Is A Text
+</code></pre>
+<p>StringBuffer:可变字符串 JDK1.0 运行效率慢 线程安全</p>
+<p>StringBuilder:可变字符串 JDK5.0 运行效率快 线程不安全 单线程效果好</p>
+<p>比起String 效率高 节省内存 用法相同</p>
+<pre><code class="language-java">package Object01;
+
+public class Str03 {
+    public static void main(String[] args) {
+        //StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
+        //1.添加append
+        sb.append(&quot;first &quot;);
+        System.out.println(sb.toString());
+        sb.append(&quot;second &quot;);
+        System.out.println(sb);
+        sb.append(&quot;third &quot;);
+        System.out.println(sb);
+        //2.插入insert
+        sb.insert(0,&quot;zero &quot;);
+        System.out.println(sb.toString());
+        //3.替换 replace
+        sb.replace(0,5,&quot;hello&quot;);//含头不含尾
+        System.out.println(sb.toString());
+        //删除 delete
+        sb.delete(0,5);
+        System.out.println(sb.toString());
+        sb.delete(0,sb.length());
+        System.out.println(sb.length());
+
+
+    }
+}
+first 
+first second 
+first second third 
+zero first second third 
+hellofirst second third 
+first second third 
+0
+
+    
+    
+    
+    
+    
+public class Test {
+    public static void main(String[] args) {
+        String s = &quot;&quot;;
+        long start = System.currentTimeMillis();
+        for (int i = 0; i &lt; 99999; i++) {
+            s+=i;
+        }
+        long end =System.currentTimeMillis();
+        System.out.println(&quot;用时:&quot;+(end-start));
+        StringBuffer sb = new StringBuffer();
+        long start1= System.currentTimeMillis();
+        for (int i = 0; i &lt; 99999; i++) {
+            sb.append(i);
+        }
+        long end1 =System.currentTimeMillis();
+        System.out.println(&quot;用时:&quot;+(end1-start1));
+        StringBuilder sb2 = new StringBuilder();
+        long start2= System.currentTimeMillis();
+        for (int i = 0; i &lt; 99999; i++) {
+            sb2.append(i);
+        }
+        long end2 =System.currentTimeMillis();
+        System.out.println(&quot;用时:&quot;+(end2-start2));
+
+    }
+}
+用时:16933
+用时:13
+用时:6
+
+</code></pre>
+<h2 id="5-bigdicimal"><strong>5、BigDicimal</strong></h2>
+<ul>
+<li>
+<p><strong>double long 保存时存在误差 为近似存储；</strong></p>
+<pre><code class="language-java">double d1=1.0;
+double d2=0.9;
+System.out.println(d1-d2)//0.09999999
+double d1=1.4;
+double d2=0.5;
+System.out.println((d1-d2)/0.9)//0.9999999
+</code></pre>
+</li>
+<li>
+<p><strong>BigDicimal:精确存储 实行浮点数的精确计算</strong></p>
+</li>
+<li>
+<p><strong>创建对象时要用字符串形式</strong></p>
+</li>
+<li>
+<p><strong>HALF.UP四舍五入</strong></p>
+<pre><code class="language-java">package Object01;
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
+public class BigDecimal02 {
+    public static void main(String[] args) {
+        double b1=0.9;
+        double b2=1.0;
+        double b3=(1.4-0.5);
+        System.out.println(b2-b1);
+        System.out.println(b3/b1);
+        BigDecimal bd1 = new BigDecimal(&quot;1.0&quot;);
+        BigDecimal bd2 = new BigDecimal(&quot;0.9&quot;);
+        System.out.println(bd1.add(bd2));
+        System.out.println(bd1.subtract(bd2));
+        System.out.println(bd1.multiply(bd2));
+        System.out.println(new BigDecimal(&quot;1.4&quot;).subtract(new BigDecimal(&quot;0.5&quot;)).divide(new BigDecimal(&quot;0.9&quot;)));
+        //System.out.println(new BigDecimal(&quot;10&quot;).divide(new BigDecimal(&quot;3&quot;))); 除不尽 没指定保留位数
+        System.out.println(new BigDecimal(&quot;10&quot;).divide(new BigDecimal(&quot;3&quot;),3, RoundingMode.HALF_UP));//RoundingMode.HALF_UP四舍五入
+
+
+    }
+}
+
+
+
+0.09999999999999998
+0.9999999999999999
+1.9
+0.1
+0.90
+1
+3.333
+
+</code></pre>
+</li>
+</ul>
+<h2 id="6-data类">6、<strong>Data类</strong></h2>
+<pre><code class="language-java">package Object01;
+
+import java.util.Date;
+
+public class data {
+    public static void main(String[] args) {
+        //1.今天
+        Date date1 = new Date();
+        System.out.println(date1.toString());
+        System.out.println(date1.toLocaleString());
+        //2.昨天
+        Date data2 =new Date(date1.getTime()-(60*60*24*1000));
+        System.out.println(data2.toLocaleString());
+        //方法 after before
+        System.out.println(date1.after(data2));
+        System.out.println(date1.before(data2));
+        //compareTo
+        System.out.println(date1.compareTo(data2));//date1大于date2为1 小于为-1 等于为0
+        //相等
+        System.out.println(date1.equals(data2));
+
+    }
+}
+Sun Nov 15 21:36:29 CST 2020
+2020-11-15 21:36:29
+2020-11-14 21:36:29
+true
+false
+1
+false
+
+</code></pre>
+<h2 id="7-calendar">7、Calendar</h2>
+<pre><code class="language-java">package Object01;
+
+import java.util.Calendar;
+
+public class calendar {
+    public static void main(String[] args) {
+        //获取现在时间
+        Calendar calendar1= Calendar.getInstance();
+        System.out.println(calendar1.getTime().toLocaleString());
+        //获取时间信息
+        int year=calendar1.get(Calendar.YEAR);
+        //设定月份为0到11
+        int month =calendar1.get(Calendar.MONTH);
+        int day =calendar1.get(Calendar.DAY_OF_MONTH);
+        int hour = calendar1.get(Calendar.HOUR_OF_DAY);//HOUR_OF_DAY表示24小时制 HOUR表示12小时进制
+        int minute =calendar1.get(Calendar.MINUTE);
+        int second =calendar1.get(Calendar.SECOND);
+        System.out.println(year+&quot;年&quot;+(month+1)+&quot;月&quot;+day+&quot;日&quot;+hour+&quot;时&quot;+minute+&quot;分&quot;+second+&quot;秒&quot;);
+        //修改时间
+        calendar1.set(Calendar.DAY_OF_MONTH,5);//设置 为5号
+        System.out.println(calendar1.getTime().toLocaleString());
+        //add修改时间
+        Calendar calendar2= Calendar.getInstance();
+        System.out.println(calendar2.getTime().toLocaleString());
+        calendar2.add(Calendar.DAY_OF_MONTH,-1);
+        System.out.println(calendar2.getTime().toLocaleString());
+        //补充
+        int max = calendar2.getActualMaximum(Calendar.DAY_OF_MONTH);
+        int min = calendar2.getActualMinimum(Calendar.DAY_OF_MONTH);
+        System.out.println(max);
+        System.out.println(min);
+
+
+    }
+}
+2020-11-15 21:59:02
+2020年11月15日21时59分2秒
+2020-11-5 21:59:02
+2020-11-15 21:59:02
+2020-11-14 21:59:02
+30
+1
+
+</code></pre>
+<h2 id="8-simpledataformat">8、SimpleDataFormat</h2>
+<figure data-type="image" tabindex="2"><img src="https://ganhan999.github.io//post-images/1606738248645.png" alt="" loading="lazy"></figure>
+<pre><code class="language-java">package Object01;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.SimpleTimeZone;
+
+public class simpleDataFormat {
+    public static void main(String[] args) throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat(&quot;yyyy年MM月dd日 HH:mm:ss&quot;);
+        Date date = new Date();
+        //格式化 时间转为字符串
+        String format = sdf.format(date);
+        System.out.println(format);
+        //解析
+        Date date1 = sdf.parse(&quot;2020年1月24日 10:00:01&quot;);//注意与sdf 参数格式一致
+        System.out.println(date1);
+
+    }
+}
+2020年11月15日 22:09:30
+Fri Jan 24 10:00:01 CST 2020java
+
+</code></pre>
+<h2 id="9-system类">9、System类</h2>
+<figure data-type="image" tabindex="3"><img src="https://ganhan999.github.io//post-images/1606738254569.png" alt="" loading="lazy"></figure>
+<pre><code class="language-java">package Object01;
+
+import java.util.Arrays;
+
+public class System1 {
+    public static void main(String[] args) {
+        int[] arr ={10,25,41,13,14,5,34,14};
+        int[] dest =new int[8];
+        System.arraycopy(arr,0,dest,0,arr.length);//五个参数 被copy数组 开始位置 新数组 开始位置 copy长度
+        for (int i : dest) {
+            System.out.print(i+&quot;\t&quot;);
+        }
+        //Arrays.copyOf()  本质使用System.arraycopy() 说明System.arraycopy()效率高
+        //计时
+        System.out.println();
+        int result=0;
+        long start =System.currentTimeMillis();
+        for (int i = 0; i &lt; 1000; i++) {
+            for (int j = 0; j &lt; 1000; j++) {
+                result=i*j;
+            }
+        }
+        System.out.println(result);
+        long end =System.currentTimeMillis();
+        System.out.println(&quot;用时:&quot;+(end-start));
+       //gc回收
+        new Student(&quot;aaa&quot;,18);
+        new Student(&quot;bbb&quot;,18);
+        new Student(&quot;ccc&quot;,18);
+        System.gc();
+        //exit退出jvm  后面不再执行
+        System.exit(0);
+        System.out.println(&quot;到此为止！！！&quot;);
+    }
+
+}
+10	25	41	13	14	5	34	14	
+998001
+用时:5
+ccc对象已被删除
+bbb对象已被删除
+aaa对象已被删除
+</code></pre>
+
+                </div>
+            </article>
+        </div>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://ganhan999.github.io/post/141、环形链表/" class="post-title gt-a-link">
+                    141、环形链表
+                </a>
+            </div>
+        
+
+        
+
+        
+
+        
+
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first">温故而知新</div>
+    <div class="social-container">
+        
+            
+        
+            
+        
+            
+        
+            
+                <a href="https://www.zhihu.com/hot" target="_blank">
+                    <i class="fab fa-zhihu gt-c-content-color-first"></i>
+                </a>
+            
+        
+            
+        
+            
+        
+    </div>
+    <div class="footer-info">
+        Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+    </div>
+    <div>
+        Theme by <a href="https://imhanjie.com/" target="_blank">imhanjie</a>, Powered by <a
+                href="https://github.com/getgridea/gridea" target="_blank">Gridea | <a href="https://ganhan999.github.io//atom.xml" target="_blank">RSS</a></a>
+    </div>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+    </div>
+</div>
+</body>
+</html>

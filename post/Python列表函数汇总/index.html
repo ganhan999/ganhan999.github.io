@@ -1,0 +1,439 @@
+<html>
+<head>
+    <meta charset="utf-8"/>
+<meta name="description" content=""/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+<title>Python列表函数汇总 | Gridea</title>
+
+<link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1615809991680">
+
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://ganhan999.github.io//styles/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dockerfile.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dart.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script>
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
+
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css">
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg">
+    <div class="navbar-brand">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            Gridea
+        </div>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
+            
+                <div class="nav-item">
+                    
+                        <a href="/" class="menu gt-a-link">
+                            首页
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/archives" class="menu gt-a-link">
+                            归档
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/tags" class="menu gt-a-link">
+                            标签
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/post/about" class="menu gt-a-link">
+                            关于
+                        </a>
+                    
+                </div>
+            
+        </div>
+        <div style="text-align: center">
+            <form id="gridea-search-form" style="position: relative" data-update="1615809991680" action="/search/index.html">
+                <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+                <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+        </div>
+    </div>
+</nav>
+
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    Python列表函数汇总
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2020-11-12 ·
+                    </time>
+                    
+                        <a href="https://ganhan999.github.io/tag/2UGIvmMaOp/" class="post-tags">
+                            # Python
+                        </a>
+                    
+                </div>
+                <div class="post-content">
+                    <p>list列表是Python内置的一种数据类型，本质是一种有序的集合，这里将会讲到list的具体的一些用法以及常见的函数</p>
+<h5 id="创建列表">创建列表</h5>
+<p>语法：列表名 = [元素1，元素2，元素3…元素n]</p>
+<p>说明：列表中的选项被称为元素，跟string类似，下标也是从0开始计数，一个列表中的数据类型可以各不相同。</p>
+<p>创建列表代码如下：</p>
+<pre><code class="language-python">#创建空列表
+list1 = []
+#创建带有元素的列表
+list2 = [10, 20, 30, 10]
+print(list2)		#[10, 20, 30, 10]
+list3 = [33, &quot;good&quot;, True, 10.32]
+print(list3)		#[33, 'good', True, 10.32]
+1234567
+</code></pre>
+<h5 id="列表元素的访问">列表元素的访问</h5>
+<h6 id="列表的取值">列表的取值</h6>
+<p>语法：列表名[索引]</p>
+<p>功能：访问list列表中元素值</p>
+<pre><code class="language-python">list4 = [22, 33, 12, 32, 45]
+#下标从0开始，最大值为len(list4)-1
+print(list4[0])		#22
+123
+</code></pre>
+<p>注意：当索引值大于len(list4)-1的时候，会出现以下错误：</p>
+<pre><code class="language-python">IndexError: list index out of range
+1
+</code></pre>
+<p>这个错误就是下标越界【下标超出了可表示的范围】</p>
+<h6 id="列表元素的替换">列表元素的替换</h6>
+<p>语法：列表名[下标] = 值</p>
+<p>功能：更改列表元素的值</p>
+<pre><code class="language-python">list4 = [22, 33, 12, 32, 45]
+list4[0] = &quot;hello&quot;
+print(list4)		#['hello', 33, 12, 32, 45]
+123
+</code></pre>
+<h5 id="列表的操作">列表的操作</h5>
+<h6 id="列表组合">列表组合</h6>
+<p>语法： list3 = list1 + list2，如下代码：</p>
+<pre><code class="language-python">list1 = [1, 2, 3]
+list2 = ['hello','yes','no']
+print(list1+list2)		#[1, 2, 3, 'hello', 'yes', 'no']
+123
+</code></pre>
+<h6 id="列表重复">列表重复</h6>
+<p>语法： list2 = list1 * n，如下代码：</p>
+<pre><code class="language-python">list1 = [1, 2, 3]
+print(list1*3)		#[1, 2, 3, 1, 2, 3, 1, 2, 3]
+12
+</code></pre>
+<h6 id="判断元素是否在列表中">判断元素是否在列表中</h6>
+<p>语法：x in list1</p>
+<p>若存在则返回True，否则返回False，如下代码：</p>
+<pre><code class="language-python">list1 = [1, 2, 3]
+print(1 in list1)	#True
+12
+</code></pre>
+<h6 id="列表截取">列表截取</h6>
+<p>语法：list1[start:end]</p>
+<p>表示获取从开始下标到结束下标的所有元素[start, end)。若不指定start，则默认从0开始截取，截取到指定位置；若不指定end，则从指定位置开始截取，截取到末尾结束。如下代码：</p>
+<pre><code class="language-python">list1 = [1, 2, 3, 'hello', 'yes', 'no']
+print(list1[2:4])		#[3, 'hello']
+12
+</code></pre>
+<h6 id="二维列表">二维列表</h6>
+<p>语法：list = [list1,list2,…,listn]</p>
+<p>创建二维列表，即列表中的元素还是列表,如下代码：</p>
+<pre><code class="language-python">list1 = [[1, 2, 3],[2, 3, 4],[5, 4, 9]]
+1
+</code></pre>
+<h6 id="二维列表取值">二维列表取值</h6>
+<p>语法：list1[n][m]</p>
+<p>注意：n代表list列表中第n个列表（下标从0开始），m代表list列表第n个列表中的第m个元素</p>
+<pre><code class="language-python">list1 = [[1, 2, 3],[2, 3, 4],[5, 4, 9]]
+print(list1[1][1])		#3
+12
+</code></pre>
+<h5 id="常见函数的使用">常见函数的使用</h5>
+<h6 id="1-listappend元素列表">1. list.append(元素/列表)</h6>
+<p>功能：在列表中末尾添加新的元素【在原本的列表中追加元素】</p>
+<p>注意：append()中的值可以是列表也可以是普通元素</p>
+<pre><code class="language-python">list1 = [3, 4, 6]
+list1.append(6)
+print(list1)		#[3, 4, 6, 6]
+123
+</code></pre>
+<h6 id="2-listextend列表">2. list.extend(列表)</h6>
+<p>功能：在列表的末尾一次性追加另外一个列表中的多个值</p>
+<p>注意：extend()中的值只能是列表/元组[一个可迭代对象]，不能是元素</p>
+<pre><code class="language-python">list1 = [1,2,3]
+list2 = [3, 4,5]
+list1.extend(list2)
+print(list1)		#[1, 2, 3, 3, 4, 5]
+1234
+</code></pre>
+<h6 id="3-listinsert下标值-元素列表">3. list.insert(下标值, 元素/列表)</h6>
+<p>功能：在下标处插入元素，不覆盖原本的数据，原数据向后顺延</p>
+<p>注意：插入的数据可以是元素也可以为列表</p>
+<pre><code class="language-python">list1 = [1,2,3]
+list1.insert(1,0)
+print(list1)		#[1, 0, 2, 3]
+list1.insert(1,[2, 4, 8])
+print(list1)		#[1, [2, 4, 8], 0, 2, 3]
+12345
+</code></pre>
+<h6 id="4-listpop下标值">4. list.pop(下标值)</h6>
+<p>功能：移除列表中指定下标处的元素(默认移除最后一个元素)，并返回移除的数据</p>
+<pre><code class="language-python">list1 = [1, [2, 4, 8], 0, 2, 3]
+print(list1.pop())		#3
+print(list1.pop(2))		#0
+print(list1)			#[1, [2, 4, 8], 2]
+1234
+</code></pre>
+<h6 id="5-listremove元素">5. list.remove(元素)</h6>
+<p>功能：移除列表中的某个元素第一个匹配结果</p>
+<pre><code class="language-python">list1 = [1, 2, 3]
+list1.remove(2)
+print(list1)		#[1, 3]
+123
+</code></pre>
+<h6 id="6-listclear">6. list.clear()</h6>
+<p>功能：清除列表中所有的数据</p>
+<pre><code class="language-python">list1 = [1, 2, 3]
+list1.clear()
+print(list1)		#[]
+123
+</code></pre>
+<h6 id="7-listindexobject-start-stop">7. list.index(object[, start][, stop])</h6>
+<p>功能：从指定的范围的列表中找出某个值第一匹配的索引值 ；若不指定范围，则默认是整个列表</p>
+<pre><code class="language-python">list1 = [1, 2, 3]
+print(list1.index(2))	#1
+12
+</code></pre>
+<p>注意：若在列表中找不到这个元素，则会报错。如下：</p>
+<pre><code class="language-python">list1 = [1, 2, 3]
+print(list1.index(4))
+
+ValueError: 4 is not in list
+1234
+</code></pre>
+<h6 id="8-listcount元素">8. list.count(元素)</h6>
+<p>功能：查看元素在列表中出现的次数</p>
+<pre><code class="language-python">list1 = [1, 2, 3, 1]
+print(list1.count(1))	#2
+12
+</code></pre>
+<h6 id="9-lenlist">9. len(list)</h6>
+<p>功能： 获取元素列表个数</p>
+<pre><code class="language-python">list1 = [1, 2, 3, 1]
+print(len(list1))	#4
+12
+</code></pre>
+<h6 id="10-maxlist">10. max(list)</h6>
+<p>功能： 获取列表中的最大值</p>
+<pre><code class="language-python">list1 = [1, 2, 3, 1]
+print(max(list1))	#3
+12
+</code></pre>
+<h6 id="11-minlist">11. min(list)</h6>
+<p>功能：获取列表中的最小值</p>
+<pre><code class="language-python">list1 = [1, 2, 3, 1]
+print(min(list1))	#1
+12
+</code></pre>
+<h6 id="12-listreverse">12. list.reverse()</h6>
+<p>功能：将列表中的元素倒叙，操作原列表，不返回新的列表</p>
+<pre><code class="language-python">list1 = [1, 2, 3, 1]
+list1.reverse()
+print(list1)		#[1, 3, 2, 1]
+123
+</code></pre>
+<h6 id="13-listsortreversefalse">13. list.sort(reverse=False)</h6>
+<p>功能：将list中的元素进行升序排列【默认reverse=False】，当reverse为True的时候，降序排列。</p>
+<pre><code class="language-python">list1 = [1, 2, 3, 1]
+list1.sort()
+print(list1)		#[1, 1, 2, 3]
+123
+</code></pre>
+<h6 id="14-list元组">14. list(元组)</h6>
+<p>功能：将元组转为列表</p>
+<pre><code class="language-python">list1 = list((1, 2, 3, 4))
+print(list1)		#[1, 2, 3, 4]
+12
+</code></pre>
+<h5 id="拷贝">拷贝</h5>
+<h6 id="1-赋值拷贝引用拷贝">1. 赋值拷贝/引用拷贝</h6>
+<p>语法： list2 = list1</p>
+<pre><code class="language-python">list1 = [1, 2, 3, 1]
+list2 = list1
+print(list2)		#[1, 2, 3, 1]
+print(id(list1))	#43148104
+print(id(list2))	#43148104
+12345
+</code></pre>
+<p>注意：赋值拷贝为引用拷贝，类似于快捷方式</p>
+<h6 id="2-浅拷贝">2. 浅拷贝</h6>
+<p>用法：list2 = list1.copy()</p>
+<pre><code class="language-python">list1 = [1, 2, 3, 1]
+list2 = list1.copy()
+print(list2)		#[1, 2, 3, 1]
+print(id(list2))	#35534216
+print(id(list1))	#36332360
+12345
+</code></pre>
+<p>注意：只适用于一维列表。</p>
+<p>不完全内存拷贝，对于一维列表重新开辟了一块内存空间，但若出现二维列表的情况下，因为二维列表存放在一维列表中存放的是列表的地址，因此，若出现二维列表相当于间接的引用了同一块内存区域。</p>
+<h6 id="3深拷贝">3.深拷贝</h6>
+<p>import copy<br>
+list2 = copy.deepcopy(list1)</p>
+<p>完全内存拷贝，相当于将list1中的所有列表中元素重新复制了一份，对于多维的也重新开辟了内存空间，因此它不会出现内存共用的情况。</p>
+<pre><code class="language-python">import copy
+
+list1 = [1,2,3,4,[1,2,3,4]]
+list2 = copy.deepcopy(list1)
+list2[-1][-1] =&quot;hello&quot;
+print(list1)		#[1, 2, 3, 4, [1, 2, 3, 4]]
+print(list2)		#[1, 2, 3, 4, [1, 2, 3, 'hello']]
+print(id(list1))	#43225864
+print(id(list2))	#43227144
+123456789
+</code></pre>
+<h5 id="列表的遍历">列表的遍历</h5>
+<h6 id="使用for循环遍历列表">使用for循环遍历列表</h6>
+<pre><code class="language-python">for x in list1
+	循环体
+12
+</code></pre>
+<p>功能：for循环主要用于遍历列表</p>
+<p>遍历：指的是依次访问列表中的每一个元素，获取每个下标对应的元素值</p>
+<p>说明：按照顺序获取列表中的每个元素，赋值给变量名，再执行语句，如此循环往复，直到取完列表中所有的元素为止</p>
+<pre><code class="language-python">list1 = ['hello', 78, '你好', 'good']
+for item in list1:
+    print(item,end=' ')		
+
+#hello 78 你好 good 
+12345
+</code></pre>
+<h6 id="使用while循环遍历列表使用下标循环">使用while循环遍历列表[使用下标循环]</h6>
+<pre><code class="language-python">index = 0
+while index &lt; len(list1):
+	循环体
+	index += 1
+1234
+</code></pre>
+<p>具体代码如下：</p>
+<pre><code class="language-python">list1 = ['hello', 78, '你好', 'good']
+index = 0
+while index &lt; len(list1):
+    print(list1[index],end=' ')  
+    index += 1
+
+#hello 78 你好 good 
+1234567
+</code></pre>
+<h6 id="同时遍历下标与元素">同时遍历下标与元素</h6>
+<pre><code class="language-python">for index,value in enumerate(list1):
+	循环体
+12
+</code></pre>
+<p>enumerate()[枚举]函数用于一个可遍历的数据对象(如列表,元组或者字符串)组合为一个索引序列，同时列出数据与数据下标，一般使用在for循环中</p>
+<pre><code class="language-python">enumerate(obj, [start =0])
+obj:一个可迭代对象
+start:下标起始位置
+123
+</code></pre>
+<p>具体代码实现如下：</p>
+<pre><code class="language-python">list1 = ['hello', 78, '你好', 'good']
+for index,item in enumerate(list1):
+    print(index, item)
+123
+</code></pre>
+<p>运行结果如下：</p>
+<pre><code class="language-python">0 hello
+1 78
+2 你好
+3 good
+</code></pre>
+
+                </div>
+            </article>
+        </div>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://ganhan999.github.io/post/Python字符串函数汇总/" class="post-title gt-a-link">
+                    Python字符串函数汇总
+                </a>
+            </div>
+        
+
+        
+
+        
+
+        
+
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first">温故而知新</div>
+    <div class="social-container">
+        
+            
+        
+            
+        
+            
+        
+            
+                <a href="https://www.zhihu.com/hot" target="_blank">
+                    <i class="fab fa-zhihu gt-c-content-color-first"></i>
+                </a>
+            
+        
+            
+        
+            
+        
+    </div>
+    <div class="footer-info">
+        Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+    </div>
+    <div>
+        Theme by <a href="https://imhanjie.com/" target="_blank">imhanjie</a>, Powered by <a
+                href="https://github.com/getgridea/gridea" target="_blank">Gridea | <a href="https://ganhan999.github.io//atom.xml" target="_blank">RSS</a></a>
+    </div>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+    </div>
+</div>
+</body>
+</html>

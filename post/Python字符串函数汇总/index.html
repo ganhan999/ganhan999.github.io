@@ -1,0 +1,3648 @@
+<html>
+<head>
+    <meta charset="utf-8"/>
+<meta name="description" content=""/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+<title>Python字符串函数汇总 | Gridea</title>
+
+<link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1615809991680">
+
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://ganhan999.github.io//styles/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dockerfile.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dart.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script>
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
+
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css">
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg">
+    <div class="navbar-brand">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            Gridea
+        </div>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
+            
+                <div class="nav-item">
+                    
+                        <a href="/" class="menu gt-a-link">
+                            首页
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/archives" class="menu gt-a-link">
+                            归档
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/tags" class="menu gt-a-link">
+                            标签
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/post/about" class="menu gt-a-link">
+                            关于
+                        </a>
+                    
+                </div>
+            
+        </div>
+        <div style="text-align: center">
+            <form id="gridea-search-form" style="position: relative" data-update="1615809991680" action="/search/index.html">
+                <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+                <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+        </div>
+    </div>
+</nav>
+
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    Python字符串函数汇总
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2020-11-12 ·
+                    </time>
+                    
+                        <a href="https://ganhan999.github.io/tag/2UGIvmMaOp/" class="post-tags">
+                            # Python
+                        </a>
+                    
+                </div>
+                <div class="post-content">
+                    <p>目录<br>
+1.0 capitalize()函数</p>
+<p>2.0 title()函数</p>
+<p>3.0 swapcase()函数</p>
+<p>4.0 lower()函数</p>
+<p>5.0 upper()函数</p>
+<p>6.0 casefold()函数</p>
+<p>7.0 center()函数</p>
+<p>8.0 ljust()函数</p>
+<p>9.0 rjust()函数</p>
+<p>10.0 zfill()函数</p>
+<p>11.0 count(）函数</p>
+<p>12.0 encode()函数</p>
+<p>13.0 decode()函数</p>
+<p>14.0 expandtabs()函数</p>
+<p>15.0 find()函数</p>
+<p>16.0 rfind()函数</p>
+<p>17.0 index()函数</p>
+<p>18.0 rindex()函数</p>
+<p>19.0 format()函数</p>
+<p>20.0 format_map()函数</p>
+<p>21.0 endswith()函数</p>
+<p>22.0 startswith()函数</p>
+<p>23.0 isalnum()函数</p>
+<p>24.0 isalpha()函数</p>
+<p>25.0 isdecimal()函数</p>
+<p>26.0 isdigit()函数</p>
+<p>27.0 isidentifier()函数</p>
+<p>28.0  islower()函数</p>
+<p>29.0 isupper()函数</p>
+<p>30.0 isnumeric()函数</p>
+<p>31.0 isprintable()函数</p>
+<p>32.0 isspace()函数</p>
+<p>33.0 istitle()函数</p>
+<p>34.0  strip()函数</p>
+<p>35.0 lstrip()函数</p>
+<p>36.0rstrip()函数</p>
+<p>37.0 maketrans()函数</p>
+<p>38.0 translate()函数</p>
+<p>39.0 partition()函数</p>
+<p>40.0  rpartition()函数</p>
+<p>41.0  split()函数</p>
+<p>42.0  rsplit()函数</p>
+<p>43.0 splitlines()函数</p>
+<p>44.0 join()函数</p>
+<p>45.0 replace()函数</p>
+<h1 id="解决英文单词大小写问题">解决英文单词大小写问题：</h1>
+<h1 id="10-capitalize函数"><strong>1.0 capitalize()函数</strong></h1>
+<p><strong>描述：将字符串的第一个字母变成大写，其余字母变为小写。</strong></p>
+<p><strong>语法：str.capitalize() —&gt; str 返回字符串</strong></p>
+<h3 id="程序示例"><strong>程序示例：</strong></h3>
+<pre><code class="language-python">str1 = &quot;i Love python&quot;
+
+
+
+str2 = &quot; i Love python&quot; #字母i前有空格
+
+
+
+str3 = &quot;I Love python&quot;
+
+
+
+print(str1.capitalize())
+
+
+
+print(str2.capitalize())
+
+
+
+print(str3.capitalize())
+</code></pre>
+<h3 id="程序运行结果"><strong>程序运行结果：</strong></h3>
+<pre><code class="language-html">I love python
+
+
+
+ i love python
+
+
+
+I love python
+</code></pre>
+<h1 id="20-title函数"><strong>2.0 title()函数</strong></h1>
+<p><strong>描述：返回一个满足标题格式的字符串。即所有英文单词首字母大写，其余英文字母小写。</strong></p>
+<p><strong>语法：str.title() -&gt; str 返回一个字符串</strong></p>
+<h3 id="程序示例-2"><strong>程序示例：</strong></h3>
+<pre><code class="language-python">str = &quot;i love python&quot;
+
+
+
+print(str.title()) #将字符串str的所有单词首字母大写，其余字母小写
+</code></pre>
+<h3 id="程序运行结果-2"><strong>程序运行结果：</strong></h3>
+<pre><code class="language-html">I Love Python
+</code></pre>
+<h1 id="30-swapcase函数"><strong>3.0 swapcase()函数</strong></h1>
+<p><strong>描述：将字符串str中的大小写字母同时进行互换。即将字符串str中的大写字母转换为小写字母，将小写字母转换为大写字母。</strong></p>
+<p><strong>语法：str.swapcase() -&gt; str 返回字符串</strong></p>
+<h3 id="程序示例-3"><strong>程序示例：</strong></h3>
+<pre><code class="language-python">str1 = &quot;I Love PYTHON&quot;
+
+
+
+str2 = &quot;我爱python Python pYTHON&quot;
+
+
+
+print(str1.swapcase()) #将字符串str1中的大写字母转为小写字母，小写字母转换为大写字母。
+
+
+
+print(str2.swapcase())
+</code></pre>
+<h3 id="程序运行结果-3">程序运行结果：</h3>
+<pre><code class="language-html">i lOVE python
+
+
+
+我爱PYTHON pYTHON Python
+</code></pre>
+<h1 id="40-lower函数"><strong>4.0 lower()函数</strong></h1>
+<p><strong>描述：将字符串中的所有大写字母转换为小写字母。</strong></p>
+<p><strong>语法：str.lower() -&gt; str 返回字符串</strong></p>
+<h3 id="程序示例-4"><strong>程序示例：</strong></h3>
+<pre><code class="language-python">str1 = &quot;I Love Python&quot;
+
+
+
+str2 = &quot;Groß - α&quot; #德语 大写α
+
+
+
+print(str1.casefold())
+
+
+
+print(str1.lower())
+
+
+
+print(str2.casefold())
+
+
+
+print(str2.lower())
+</code></pre>
+<h3 id="程序运行结果-4"><strong>程序运行结果：</strong></h3>
+<pre><code class="language-html">i love python
+
+
+
+i love python
+
+
+
+gross - α
+
+
+
+groß - α
+</code></pre>
+<p><em><strong>*注意 lower()函数和casefold()函数的区别：*</strong></em></p>
+<p>lower() 方法只对ASCII编码，即‘A-Z’有效，对于其它语言中把大写转换为小写的情况无效，只能用 casefold() 函数。</p>
+<h1 id="50-upper函数">5.0 upper()函数</h1>
+<p><strong>描述：将字符串中的所有小写字母转换为大写字母。</strong></p>
+<p><strong>语法： str.upper() -&gt; str 返回字符串</strong></p>
+<h3 id="程序示例-5"><strong>程序示例：</strong></h3>
+<pre><code class="language-python">str1 = &quot;i love python&quot;  #全为小写字母
+
+
+
+str2 = &quot;I Love Python&quot;  #所有单词首字母大写
+
+
+
+print(str1.upper())
+
+
+
+print(str2.upper())
+</code></pre>
+<h3 id="程序运行结果-5">程序运行结果：</h3>
+<pre><code class="language-html">I LOVE PYTHON
+
+
+
+I LOVE PYTHON
+</code></pre>
+<h1 id="60-casefold函数"><strong>6.0 casefold()函数</strong></h1>
+<p><strong>描述：将字符串中的所有大写字母转换为小写字母。也可以将非英文 语言中的大写转换为小写。</strong></p>
+<p>注意 **lower()函数和casefold()函数的区别：**lower() 方法只对ASCII编码，即‘A-Z’有效，对于其它语言中把大写转换为小写的情况无效，只能用 casefold() 函数。</p>
+<p><strong>语法：str.casefold()  -&gt; str 返回字符串</strong></p>
+<h3 id="程序示例-6"><strong>程序示例：</strong></h3>
+<pre><code class="language-python">str1 = &quot;I Love Python&quot;
+
+
+
+str2 = &quot;Groß - α&quot; #德语 大写α
+
+
+
+print(str1.casefold())
+
+
+
+print(str1.lower())
+
+
+
+print(str2.casefold())
+
+
+
+print(str2.lower())
+</code></pre>
+<h3 id="程序运行结果-6"><strong>程序运行结果：</strong></h3>
+<pre><code class="language-html">i love python
+
+
+
+i love python
+
+
+
+gross - α
+
+
+
+groß - α
+</code></pre>
+<h1 id=""></h1>
+<h1 id="解决字符串填充问题">解决字符串填充问题：</h1>
+<h1 id="70-center函数"><strong>7.0 center()函数</strong></h1>
+<p><strong>描述：返回一个长度为width,两边用fillchar(单字符)填充的字符串，即字符串str居中，两边用fillchar填充。若字符串的长度大于width,则直接返回字符串str。</strong></p>
+<p><strong>语法：str.center(width , &quot;fillchar&quot;) -&gt; str 返回字符串    注意：引号不可省</strong></p>
+<ul>
+<li><strong>width —— 指定字符串长度。</strong></li>
+<li><strong>fillchar —— 要填充的单字符，默认为空格。</strong></li>
+</ul>
+<h3 id="程序示例-7"><strong>程序示例：</strong></h3>
+<pre><code class="language-python">str = &quot;i love python&quot;
+
+
+
+print(str.center(20,&quot;*&quot;)) #指定字符串长度为20 用单字符&quot;*&quot;填充
+
+
+
+print(str.center(1,&quot;*&quot;)) #指定字符串长度为1，小于原字符串的长度。
+
+
+
+print(str.center(20,&quot;8&quot;))
+
+
+
+print(str.center(20)) #fillchar 默认为空格
+</code></pre>
+<h3 id="程序运行结果-7">程序运行结果：</h3>
+<pre><code class="language-html">***i love python****
+
+
+
+i love python
+
+
+
+888i love python8888
+
+
+
+   i love python  
+</code></pre>
+<h1 id="80-ljust函数"><strong>8.0 ljust()函数</strong></h1>
+<p><strong>描述：返回一个原字符串左对齐,并使用fillchar填充(默认为空格)至指定长度的新字符串。如果指定的长度小于原字符串的长度则返回原字符串。</strong></p>
+<p><strong>语法： str.ljust(width, fillchar) -&gt; str 返回一个新的字符串</strong></p>
+<ul>
+<li><strong>width —— 指定字符串的输出长度。</strong></li>
+<li><strong>fillchar—— 将要填充的单字符，默认为空格</strong>。</li>
+</ul>
+<h3 id="程序示例-8"><strong>程序示例：</strong></h3>
+<pre><code class="language-python">str = &quot;python&quot;
+
+
+
+print(str.ljust(30,&quot;*&quot;)) #指定宽度为30，填充字符为*
+
+
+
+print(str.ljust(30))  #指定宽度为30，填充字符默认为空格
+
+
+
+print(str.ljust(30),&quot;1&quot;) #对比
+</code></pre>
+<h3 id="程序运行结果-8">程序运行结果：</h3>
+<pre><code class="language-html">python************************
+
+
+
+python                        
+
+
+
+python                         1
+</code></pre>
+<h1 id="90-rjust函数"><strong>9.0 rjust()函数</strong></h1>
+<p><strong>描述：返回一个原字符串右对齐,并使用fillchar填充(默认为空格)至指定长度的新字符串。如果指定的长度小于原字符串的长度则返回原字符串。</strong></p>
+<p><strong>语法： str.ljust(width, fillchar) -&gt; str 返回一个新的字符串</strong></p>
+<ul>
+<li><strong>width —— 指定字符串的输出长度。</strong></li>
+<li><strong>fillchar—— 将要填充的单字符，默认为空格。</strong></li>
+</ul>
+<h3 id="程序示例-9"><strong>程序示例：</strong></h3>
+<pre><code class="language-python">str = &quot;python&quot;
+
+
+
+print(str.rjust(30,&quot;*&quot;)) #指定宽度为30，填充字符为*
+
+
+
+print(str.rjust(30))  #指定宽度为30，填充字符默认为空格
+
+
+
+print(&quot;1&quot;,str.rjust(30)) #对比
+</code></pre>
+<h3 id="程序运行结果-9">程序运行结果：</h3>
+<pre><code class="language-html">************************python
+
+
+
+                        python
+
+
+
+1                         python
+</code></pre>
+<h1 id="100-zfill函数"><strong>10.0 zfill()函数</strong></h1>
+<p><strong>描述：返回指定长度的字符串，使原字符串右对齐，前面用0填充到指定字符串长度。</strong></p>
+<p><strong>语法：str.zfill(width) -&gt; str 返回一个字符串</strong></p>
+<ul>
+<li><strong>width —— 指定字符串的长度,但不能为空。若指定长度小于字符串长度，则直接输出原字符串。</strong></li>
+</ul>
+<h3 id="程序示例-10"><strong>程序示例：</strong></h3>
+<pre><code class="language-python">str = &quot;i love python&quot;
+
+
+
+print(str.zfill(30)) #指定字符串长度为30
+
+
+
+print(str.zfill(2)) #指定字符串长度为2，小于原字符串长度。
+
+
+
+print(str.zfill()) #参数width为空，报错.
+</code></pre>
+<h3 id="程序运行结果-10">程序运行结果：</h3>
+<pre><code class="language-html">00000000000000000i love python
+
+
+
+i love python
+
+
+
+---------------------------------------------------------------------------
+
+
+
+TypeError                                 Traceback (most recent call last)
+
+
+
+&lt;ipython-input-22-45e4baf7a246&gt; in &lt;module&gt;()
+
+
+
+      2 print(str.zfill(30)) #指定字符串长度为30
+
+
+
+      3 print(str.zfill(2)) #指定字符串长度为2，小于原字符串长度。
+
+
+
+----&gt; 4 print(str.zfill()) #参数width为空，报错.
+
+
+
+ 
+
+
+
+TypeError: zfill() takes exactly 1 argument (0 given)
+</code></pre>
+<h1 id="解决统计字符次数问题">解决统计字符次数问题：</h1>
+<h1 id="110-count函数"><strong>11.0 count(）函数</strong></h1>
+<p><strong>描述：统计字符串里某个字符出现的次数。可以选择字符串索引的起始位置和结束位置。</strong></p>
+<p><strong>语法：str.count(&quot;char&quot;, start,end) 或 str.count(&quot;char&quot;)  -&gt; int  返回整数</strong></p>
+<ul>
+<li><strong>str —— 为要统计的字符(可以是单字符，也可以是多字符)。</strong></li>
+<li><strong>star —— 为索引字符串的起始位置，默认参数为0。</strong></li>
+<li><strong>end —— 为索引字符串的结束位置，默认参数为字符串长度即len(str)。</strong></li>
+</ul>
+<h3 id="程序示例-11"><strong>程序示例：</strong></h3>
+<pre><code class="language-python">str = &quot;i love python,i am learning python&quot;
+
+
+
+print(str.count(&quot;i&quot;)) #star 和end 为默认参数
+
+
+
+print(str.count(&quot;i&quot;,2)) # star值为2，end值为默认参数
+
+
+
+print(str.count(&quot;i&quot;,2,5)) #star值为2，end值为5
+
+
+
+print(str.count(&quot;am&quot;))  #多字符统计
+</code></pre>
+<h3 id="程序运行结果-11">程序运行结果：</h3>
+<pre><code class="language-html">3
+
+
+
+2
+
+
+
+0
+
+
+
+1
+</code></pre>
+<h1 id="-2"></h1>
+<h1 id="解决编码问题">解决编码问题：</h1>
+<h1 id="120-encode函数"><strong>12.0 encode()函数</strong></h1>
+<p><strong>描述：以指定的编码格式编码字符串，默认编码为 'utf-8'。</strong></p>
+<p><strong>语法：str.encode(encoding='utf-8', errors='strict')   -&gt; bytes (获得bytes类型对象)</strong></p>
+<ul>
+<li><strong>encoding 参数可选，即要使用的编码，默认编码为 'utf-8'。字符串编码常用类型有：utf-8,gb2312,cp936,gbk等。</strong></li>
+<li><strong>errors 参数可选，设置不同错误的处理方案。默认为 'strict',意为编码错误引起一个UnicodeEncodeError。 其它可能值有 'ignore', 'replace', 'xmlcharrefreplace'以及通过 codecs.register_error() 注册其它的值。</strong></li>
+</ul>
+<h3 id="程序示例-12"><strong>程序示例：</strong></h3>
+<pre><code class="language-python">str1 = &quot;我爱祖国&quot;
+
+
+
+str2 = &quot;I love my country&quot;
+
+
+
+print(&quot;utf8编码：&quot;,str1.encode(encoding=&quot;utf8&quot;,errors=&quot;strict&quot;)) #等价于print(&quot;utf8编码：&quot;,str1.encode(&quot;utf8&quot;))
+
+
+
+print(&quot;utf8编码：&quot;,str2.encode(encoding=&quot;utf8&quot;,errors=&quot;strict&quot;))
+
+
+
+print(&quot;gb2312编码：&quot;,str1.encode(encoding=&quot;gb2312&quot;,errors=&quot;strict&quot;))#以gb2312编码格式对str1进行编码，获得bytes类型对象的str
+
+
+
+print(&quot;gb2312编码：&quot;,str2.encode(encoding=&quot;gb2312&quot;,errors=&quot;strict&quot;))
+
+
+
+print(&quot;cp936编码：&quot;,str1.encode(encoding=&quot;cp936&quot;,errors=&quot;strict&quot;))
+
+
+
+print(&quot;cp936编码：&quot;,str2.encode(encoding=&quot;cp936&quot;,errors=&quot;strict&quot;))
+
+
+
+print(&quot;gbk编码：&quot;,str1.encode(encoding=&quot;gbk&quot;,errors=&quot;strict&quot;))
+
+
+
+print(&quot;gbk编码：&quot;,str2.encode(encoding=&quot;gbk&quot;,errors=&quot;strict&quot;))
+</code></pre>
+<h3 id="程序运行结果-12">程序运行结果：</h3>
+<pre><code class="language-html">utf8编码： b'\xe6\x88\x91\xe7\x88\xb1\xe7\xa5\x96\xe5\x9b\xbd'
+
+
+
+utf8编码： b'I love my country'
+
+
+
+gb2312编码： b'\xce\xd2\xb0\xae\xd7\xe6\xb9\xfa'
+
+
+
+gb2312编码： b'I love my country'
+
+
+
+cp936编码： b'\xce\xd2\xb0\xae\xd7\xe6\xb9\xfa'
+
+
+
+cp936编码： b'I love my country'
+
+
+
+gbk编码： b'\xce\xd2\xb0\xae\xd7\xe6\xb9\xfa'
+
+
+
+gbk编码： b'I love my country'
+
+
+
+ 
+</code></pre>
+<p><em><strong>*<code>注：在python中encode和decode分别指编码和解码</code>*</strong></em></p>
+<h1 id="130-decode函数"><strong>13.0 decode()函数</strong></h1>
+<p><strong>描述：以 *encoding* 指定的编码格式解码字符串，默认编码为字符串编码。</strong></p>
+<p><strong>语法：str.decode(encoding='utf-8', errors='strict')</strong></p>
+<ul>
+<li><strong>encoding ——要使用的编码，如：utf-8,gb2312,cp936,gbk等。</strong></li>
+<li><strong>errors ——设置不同解码错误的处理方案。默认为 'strict',意为编码错误引起一个 UnicodeDecodeError。 其它可能得值有 'ignore', 'replace'以及通过 codecs.register_error() 注册的1其它值。</strong></li>
+</ul>
+<h3 id="程序示例-13"><strong>程序示例：</strong></h3>
+<pre><code class="language-python">s = &quot;我爱祖国&quot;
+
+
+
+str1 = s.encode(encoding=&quot;utf-8&quot;,errors=&quot;strict&quot;)
+
+
+
+str2 = s.encode(&quot;gb2312&quot;) #编码错误的处理方案默认为&quot;strict&quot;
+
+
+
+str3 = s.encode(&quot;gbk&quot;)
+
+
+
+print(str1.decode(encoding=&quot;utf-8&quot;,errors=&quot;strict&quot;))#用utf-8的解码格式，解码str1.
+
+
+
+print(str1.decode(encoding=&quot;gbk&quot;,errors=&quot;ignore&quot;))##如果以gbk的解码格式对str1进行解码得，将无法还原原来的字符串内容
+
+
+
+print(str1.decode(encoding=&quot;gbk&quot;,errors=&quot;strict&quot;))
+
+
+
+print(str1.decode(encoding=&quot;gbk&quot;,errors=&quot;replace&quot;))
+
+
+
+print(&quot;\n&quot;)
+
+
+
+print(str2.decode(&quot;gb2312&quot;))
+
+
+
+print(str3.decode(&quot;gbk&quot;))
+</code></pre>
+<h3 id="程序运行结果-13">程序运行结果：</h3>
+<pre><code class="language-html">我爱祖国
+
+
+
+鎴戠埍绁栧浗
+
+
+
+鎴戠埍绁栧浗
+
+
+
+鎴戠埍绁栧浗
+
+
+
+ 
+
+
+
+ 
+
+
+
+我爱祖国
+
+
+
+我爱祖国
+</code></pre>
+<h3 id="注在python3x中encode函数只能用于字符串类型而decode函数只能用于字节数据类型"><em><strong>*注：在python3.x中，encode()函数只能用于字符串类型，而decode()函数只能用于字节数据类型。*</strong></em></h3>
+<p><strong>程序示例中 str1,str2,str3都是字节数据类型(通过encode()函数把 字符串类型s 转换为字节数据类型)。</strong></p>
+<h1 id="-3"></h1>
+<h1 id="140-expandtabs函数"><strong>14.0 expandtabs()函数</strong></h1>
+<p><strong>描述：返回一个字符串的副本。使原字符串中的制表符（&quot;\t&quot;）的使用空间变大。使用空格来扩展空间。</strong></p>
+<p><strong>语法： str.expandtabs(tabsize=8) —&gt; str 返回字符串</strong></p>
+<ul>
+<li><strong>tabsize 的默认值为8。tabsize值为0到7等效于tabsize=8。tabsize每增加1，原字符串中“\t”的空间会多加一个空格。</strong></li>
+</ul>
+<h3 id="程序示例-14"><strong>程序示例：</strong></h3>
+<pre><code class="language-python">str = &quot;i love\tpython&quot;
+
+
+
+print(str.expandtabs())#默认值为8
+
+
+
+print(str.expandtabs(tabsize=8))
+
+
+
+print(str.expandtabs())
+
+
+
+print(str.expandtabs(2)) #tabsize值为0到7，与tabsize值为8相同
+
+
+
+print(str.expandtabs(tabsize=2))
+
+
+
+print(str.expandtabs(tabsize=9))      
+
+
+
+print(str.expandtabs(tabsize=10))
+</code></pre>
+<h3 id="程序运行结果-14">程序运行结果：</h3>
+<pre><code class="language-html">i love  python
+
+
+
+i love  python
+
+
+
+i love  python
+
+
+
+i love  python
+
+
+
+i love  python
+
+
+
+i love   python
+
+
+
+i love    python
+</code></pre>
+<h1 id="-4"></h1>
+<h1 id="解决查找指定字符子字符串位置问题">解决查找指定字符(子字符串)位置问题：</h1>
+<h1 id="150-find函数"><strong>15.0 find()函数</strong></h1>
+<p><strong>描述：查找字符串中指定的子字符串sub第一次出现的位置，可以规定字符串的索引查找范围。若无则返回 -1。</strong></p>
+<p><strong>语法：str<code>.find(sub,start,end) -&gt; int 返回整数</code></strong></p>
+<ul>
+<li><strong>sum —要索引的子字符串。</strong></li>
+<li><strong>start —索引的起始位置。默认值为0。</strong></li>
+<li><strong>end —索引的结束位置。默认值为字符串长度len(str)。</strong></li>
+<li><strong>[start,end) 不包括end。</strong></li>
+</ul>
+<h3 id="程序示例-15"><strong>程序示例：</strong></h3>
+<pre><code class="language-python">str = &quot;i love python&quot;
+
+
+
+print(str.find(&quot;o&quot;)) #索引子字符串&quot;o&quot;
+
+
+
+print(str.find(&quot;0&quot;,4))#索引起始位置为4 索引范围为：ve python
+
+
+
+print(str.find(&quot;o&quot;,4,12))#索引起始位置为4,结束位置为12 索引范围为：ve pytho
+
+
+
+print(str.find(&quot;&quot;))
+
+
+
+print(str.find(&quot; &quot;))#返回第一个空格出现的位置。
+
+
+
+print(str.find(&quot;k&quot;)) #索引子字符串&quot;k&quot;,不存在，返回-1
+</code></pre>
+<h3 id="程序运行结果-15">程序运行结果：</h3>
+<pre><code class="language-html">3
+
+
+
+-1
+
+
+
+11
+
+
+
+0
+
+
+
+1
+
+
+
+-1
+</code></pre>
+<h1 id="160-rfind函数"><strong>16.0 rfind()函数</strong></h1>
+<p><strong>描述：查找字符串中指定的子字符串sub最后一次出现的位置，可以规定字符串的索引查找范围。若无则返回 -1。</strong></p>
+<p><strong>语法：str<code>.rfind(sub,start,end) -&gt; int 返回整数</code></strong></p>
+<ul>
+<li><strong>sum —要索引的子字符串。</strong></li>
+<li><strong>start —索引的起始位置。默认值为0。</strong></li>
+<li><strong>end —索引的结束位置。默认值为字符串长度len(str)。</strong></li>
+<li><strong>[start,end) 不包括end。</strong></li>
+</ul>
+<p><em><strong>*注：rfind()函数用法与find()函数相似，rfind()函数返回指定子字符串最后一次出现的位置，find()函数返回指定子字符串第一次出现的位置。*</strong></em></p>
+<h3 id="程序示例-16"><strong>程序示例：</strong></h3>
+<pre><code class="language-python">str = &quot;i love python python&quot;
+
+
+
+print(str.rfind(&quot;o&quot;)) #默认索引整个字符串str
+
+
+
+print(str.rfind(&quot;o&quot;,11)) #索引范围为：on python
+
+
+
+print(str.rfind(&quot;o&quot;,0,12)) #索引范围为 i love pytho
+
+
+
+print(str.rfind(&quot;python&quot;)) #返回最后一次出现&quot;python&quot;的位置,即字母&quot;p&quot;最后一次出现的位置。
+
+
+
+print(str.rfind(&quot;&quot;)) #等效于返回字符串str的长度。
+
+
+
+print(str.rfind(&quot; &quot;))#返回最后一个空格出现的位置
+
+
+
+print(str.rfind(&quot;2&quot;))  #字符串str中不存在字符&quot;2&quot;,返回值为 -1
+</code></pre>
+<h3 id="程序运行结果-16">程序运行结果：</h3>
+<pre><code class="language-html">18
+
+
+
+18
+
+
+
+11
+
+
+
+14
+
+
+
+20
+
+
+
+13
+
+
+
+-1
+</code></pre>
+<h1 id="170-index函数"><strong>17.0 index()函数</strong></h1>
+<p><strong>描述：查找字符串中第一次出现的子字符串的位置，可以规定字符串的索引查找范围[star,end)。若无则会报错。</strong></p>
+<p><strong>语法：str.index(sub, start, end) -&gt; int 返回整数</strong></p>
+<ul>
+<li><strong>sub —— 查找的子字符串。</strong></li>
+<li><strong>start —— 索引的起始位置，默认为0。</strong></li>
+<li><strong>end —— 索引的结束位置，默认为字符串的长度。</strong></li>
+<li><strong>[star,end)</strong></li>
+</ul>
+<h3 id="程序示例-17"><strong>程序示例：</strong></h3>
+<pre><code class="language-python">str = &quot;i love python&quot;
+
+
+
+print(str.index(&quot;o&quot;))  #默认索引整个字符串
+
+
+
+print(str.index(&quot;o&quot;,4))  #索引 ve python
+
+
+
+print(str.index(&quot;o&quot;,4,12)) #索引 ve pytho
+
+
+
+print(str.index(&quot;love&quot;))    #索引多个字符
+
+
+
+print(str.index(&quot;k&quot;))    #索引字符串不存在，报错
+</code></pre>
+<h3 id="程序运行结果-17"><strong>程序运行结果：</strong></h3>
+<pre><code class="language-html">3
+
+
+
+11
+
+
+
+11
+
+
+
+2
+
+
+
+---------------------------------------------------------------------------
+
+
+
+ValueError                                Traceback (most recent call last)
+
+
+
+&lt;ipython-input-90-a880e13b1574&gt; in &lt;module&gt;()
+
+
+
+      4 print(str.index(&quot;o&quot;,4,12)) #索引 ve pytho
+
+
+
+      5 print(str.index(&quot;love&quot;))    #索引多个字符
+
+
+
+----&gt; 6 print(str.index(&quot;k&quot;))
+
+
+
+ 
+
+
+
+ValueError: substring not found
+</code></pre>
+<p><em><strong>*注：index()函数和find()函数类似，但index()函数没有找到子字符串会报错。*</strong></em></p>
+<h1 id="180-rindex函数"><strong>18.0</strong> rindex()<strong>函数</strong></h1>
+<p><strong>描述：查找字符串中最后一次出现的子字符串的位置，可以规定字符串的索引查找范围[star,end)，若无则会报错。</strong></p>
+<p><strong>语法：str.rindex(sub, start, end) -&gt; int  返回整数。</strong></p>
+<ul>
+<li><strong>sub —— 查找的子字符串。</strong></li>
+<li><strong>start —— 索引的起始位置，默认为0。</strong></li>
+<li><strong>end —— 索引的结束位置，默认为字符串的长度。</strong></li>
+<li><strong>[star,end)</strong></li>
+</ul>
+<p><em><strong>*注：rindex()函数用法与index()函数相似，rindex()函数返回指定子字符串最后一次出现的位置，index()函数返回指定子字符串第一次出现的位置。*</strong></em></p>
+<h3 id="程序示例-18"><strong>程序示例：</strong></h3>
+<pre><code class="language-python">str = &quot;i love python python&quot;
+
+
+
+print(str.rindex(&quot;p&quot;)) #默认索引整个字符串
+
+
+
+print(str.rindex(&quot;o&quot;,5)) #索引的范围为：e python python
+
+
+
+print(str.rindex(&quot;o&quot;,5,13)) #索引范围为：e python
+
+
+
+print(str.rindex(&quot;python&quot;)) #返回最后一次出现&quot;python&quot;的位置,即字母&quot;p&quot;最后一次出现的位置。
+
+
+
+print(str.rindex(&quot;k&quot;))  #索引字符串不存在，报错
+
+
+
+len(str),str[5:13]
+</code></pre>
+<h3 id="程序运行结果-18">程序运行结果：</h3>
+<pre><code class="language-html">14
+
+
+
+18
+
+
+
+11
+
+
+
+14
+
+
+
+---------------------------------------------------------------------------
+
+
+
+ValueError                                Traceback (most recent call last)
+
+
+
+&lt;ipython-input-116-44cc5c1acea1&gt; in &lt;module&gt;()
+
+
+
+      4 print(str.rindex(&quot;o&quot;,5,13)) #索引范围为：e python
+
+
+
+      5 print(str.rindex(&quot;python&quot;)) #返回最后一次出现&quot;python&quot;的位置,即字母&quot;p&quot;最后一次出现的位置。
+
+
+
+----&gt; 6 print(str.rindex(&quot;k&quot;))
+
+
+
+      7 len(str),str[5:13]
+
+
+
+ 
+
+
+
+ValueError: substring not found
+</code></pre>
+<h1 id="-5"></h1>
+<h1 id="解决格式化输出问题"><em><strong>*解决格式化输出问题：*</strong></em></h1>
+<h1 id="190-format函数"><strong>19.0 format()函数</strong></h1>
+<p><strong>描述：返回一个格式化的字符串。</strong></p>
+<p>*<em>语法：str.format(*args, *<em>kwargs) ——&gt; str 返回字符串  [模板字符串].format(逗号分隔的参数)</em></em></p>
+<p><strong>或 {参数序号:格式控制标记}.format(逗号分隔的参数)</strong></p>
+<ul>
+<li><strong>它是通过{}和:来代替%。</strong></li>
+<li><strong>模板字符串是一个由槽(用大括号{}来表示)和字符串组成的字符串，用来控制字符串的显示效果。</strong></li>
+<li><strong>大括号{}对应着format()中逗号分隔的参数。</strong></li>
+</ul>
+<h1 id="format基本用法"><em>format()基本用法 ：</em></h1>
+<h3 id="语法模板字符串format逗号分隔的参数"><strong>语法：</strong>[模板字符串].format(逗号分隔的参数)</h3>
+<blockquote>
+<h2 id="通过位置"><strong>通过位置</strong></h2>
+</blockquote>
+<h3 id="程序示例-19"><strong>程序示例：</strong></h3>
+<pre><code class="language-python">print(&quot;用法一:&quot;)
+
+
+
+print(&quot;一日之计在于{}&quot;.format(&quot;晨&quot;))
+
+
+
+ 
+
+
+
+#如果模板字符串有多个槽{}，并且槽内没有指定的序号，则按照槽{}出现的顺序一一对应format()函数中的不同参数
+
+
+
+print(&quot;用法二：&quot;)
+
+
+
+print(&quot;{}之计在于{}&quot;.format(&quot;一日&quot;,&quot;晨&quot;))
+
+
+
+ 
+
+
+
+#也可以通过在槽{}中指定format()函数中参数的序号来使用，参数是从0开始编号的。
+
+
+
+print(&quot;用法三：&quot;)
+
+
+
+print(&quot;{0}之计在于{1}&quot;.format(&quot;一日&quot;,&quot;晨&quot;))
+
+
+
+print(&quot;{1}之计在于{0}&quot;.format(&quot;晨&quot;,&quot;一日&quot;))
+
+
+
+ 
+
+
+
+# 如果想要在模板字符串中输出大括号(&quot;{}&quot;),则使用{{ 来表示 {   用 }} 来表示 }
+
+
+
+print(&quot;用法四：&quot;)
+
+
+
+print(&quot;{0}说得好：{{一{1}之计在于晨 一{2}之计在于春}}&quot;.format(&quot;俗话&quot;,&quot;日&quot;,&quot;年&quot;))
+
+
+
+ 
+
+
+
+#如果模板字符串中出现的槽{}和format()函数中参数个数不一致，
+
+
+
+#则必须要在槽{}中使用序号来指定参数的使用，否者会产生IndexError的错误。
+
+
+
+print(&quot;用法五：&quot;)
+
+
+
+print(&quot;{0}日之计在于晨, {0}年之计在于春&quot;.format(&quot;一&quot;))
+
+
+
+print(&quot;{}日之计在于晨, {}年之计在于春&quot;.format(&quot;一&quot;)) #槽中没有指定参数序号，会报错。
+</code></pre>
+<h3 id="程序运行结果-19">程序运行结果：</h3>
+<pre><code class="language-html">用法一:
+
+
+
+一日之计在于晨
+
+
+
+用法二：
+
+
+
+一日之计在于晨
+
+
+
+用法三：
+
+
+
+一日之计在于晨
+
+
+
+一日之计在于晨
+
+
+
+用法四：
+
+
+
+俗话说得好：{一日之计在于晨 一年之计在于春}
+
+
+
+用法五：
+
+
+
+一日之计在于晨, 一年之计在于春
+
+
+
+---------------------------------------------------------------------------
+
+
+
+IndexError                                Traceback (most recent call last)
+
+
+
+&lt;ipython-input-20-5f7b4f063a3b&gt; in &lt;module&gt;()
+
+
+
+     19 print(&quot;用法五：&quot;)
+
+
+
+     20 print(&quot;{0}日之计在于晨, {0}年之计在于春&quot;.format(&quot;一&quot;))
+
+
+
+---&gt; 21 print(&quot;{}日之计在于晨, {}年之计在于春&quot;.format(&quot;一&quot;)) #槽中没有指定参数序号，会报错。
+
+
+
+ 
+
+
+
+IndexError: tuple index out of range
+</code></pre>
+<blockquote>
+<h2 id="通过关键字参数">通过关键字参数</h2>
+</blockquote>
+<h3 id="程序示例-20"><strong>程序示例：</strong></h3>
+<pre><code class="language-python">print(&quot;{year}之计在于{season}&quot;.format(year=&quot;一年&quot;,season=&quot;春&quot;))
+</code></pre>
+<h3 id="程序运行结果-20">程序运行结果：</h3>
+<pre><code class="language-html">一年之计在于春
+</code></pre>
+<blockquote>
+<h2 id="通过列表">通过列表</h2>
+</blockquote>
+<h3 id="程序示例-21"><strong>程序示例：</strong></h3>
+<pre><code class="language-python">l = [&quot;一日&quot;,&quot;晨&quot;,&quot;一年&quot;,&quot;春&quot;]
+
+
+
+a = [&quot;一日&quot;,&quot;晨&quot;]
+
+
+
+b = [&quot;一年&quot;,&quot;春&quot;]
+
+
+
+print(&quot;{0[0]}之计在于{0[1]}, {0[2]}之计在于{0[3]}&quot;.format(l))
+
+
+
+ 
+
+
+
+#format()函数中的参数可以是一个或多个列表，但要注意槽中序号的差异。
+
+
+
+print(&quot;{0[0]}之计在于{0[1]}, {1[0]}之计在于{1[1]}&quot;.format(a,b)) 
+</code></pre>
+<h3 id="程序运行结果-21">程序运行结果：</h3>
+<pre><code class="language-html">一日之计在于晨, 一年之计在于春
+
+
+
+一日之计在于晨, 一年之计在于春
+</code></pre>
+<blockquote>
+<h2 id="通过字典">通过字典</h2>
+</blockquote>
+<h3 id="程序示例-22"><strong>程序示例：</strong></h3>
+<pre><code class="language-python">d1 = {&quot;year&quot;:&quot;一年&quot;,&quot;season&quot;:&quot;春&quot;}
+
+
+
+print(&quot; {year}之计在于{season}&quot;.format(**d1))
+
+
+
+ 
+
+
+
+d2 = {&quot;time&quot;:[&quot;一日&quot;,&quot;一年&quot;],&quot;season&quot;:[&quot;晨&quot;,&quot;春&quot;]}
+
+
+
+print(&quot;{time[0]}之计在于{season[0]},{time[1]}之计在于{season[1]}&quot;.format(**d2))
+</code></pre>
+<h3 id="程序运行结果-22">程序运行结果：</h3>
+<pre><code class="language-html">一年之计在于春
+
+
+
+一日之计在于晨,一年之计在于春
+</code></pre>
+<h2 id="format函数格式控制方法"><strong>format()函数格式控制方法：</strong></h2>
+<h3 id="语法参数序号格式控制标记format逗号分隔的参数"><strong>语法：{参数序号:格式控制标记}.format(逗号分隔的参数)</strong></h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:left"><em><strong>：</strong></em></th>
+<th style="text-align:left"><em><strong>[填充]</strong></em></th>
+<th style="text-align:left"><em><strong>[对齐]</strong></em></th>
+<th style="text-align:left"><em><strong>[宽度]</strong></em></th>
+<th style="text-align:left"><em><strong>[,]</strong></em></th>
+<th style="text-align:left"><em><strong>[.精度]</strong></em></th>
+<th style="text-align:left"><em><strong>[类型]</strong></em></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><em>引导符号</em></td>
+<td style="text-align:left"><em>要填充的单个字符</em></td>
+<td style="text-align:left"><em>&lt; 左对齐</em>*&gt; 右对齐**^ 居中对齐*</td>
+<td style="text-align:left"><em>设定槽的输出宽度</em></td>
+<td style="text-align:left"><em>数字的千位分隔符**适用于整数和浮点数</em></td>
+<td style="text-align:left">*用于控制浮点数小数部分**的精度(长度)*<em>或字符串的最大输出长度</em></td>
+<td style="text-align:left"><em>整数类型：b,c,d,o,x,X**浮点数类型：e,E,f,%</em></td>
+</tr>
+</tbody>
+</table>
+<p><strong>[填充]——只能填充单个字符。填充字符时，一定要选择对齐方式，否者会有 Invalid format specifier 的报错</strong></p>
+<p><strong>[对齐]——默认对齐方式为左对齐。</strong></p>
+<p><strong>[宽度]——指的是槽的输出宽度，当槽的实际宽度比槽的设定宽度大，则输出槽的实际宽度，否者按设定的宽度输出。</strong></p>
+<p><strong>[类型]——解析如下表</strong>：</p>
+<table>
+<thead>
+<tr>
+<th><em><strong>类型</strong></em></th>
+<th><em><strong>描述</strong></em></th>
+<th><em><strong>类型</strong></em></th>
+<th><em><strong>描述</strong></em></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em><strong>b</strong></em></td>
+<td><em>输出整数的二进制形式</em></td>
+<td><em><strong>e</strong></em></td>
+<td><em>输出浮点数对应的小写字母e的指数形式</em></td>
+</tr>
+<tr>
+<td><em><strong>c</strong></em></td>
+<td><em>输出整数对应的Unicode字符</em></td>
+<td><em><strong>E</strong></em></td>
+<td><em>输出浮点数对应的大写字母E的指数形式</em></td>
+</tr>
+<tr>
+<td><em><strong>d</strong></em></td>
+<td><em>输出整数的十进制形式</em></td>
+<td><em><strong>f</strong></em></td>
+<td><em>输出标准浮点数形式</em></td>
+</tr>
+<tr>
+<td><em><strong>o</strong></em></td>
+<td><em>输出整数的八进制形式</em></td>
+<td><em><strong>%</strong></em></td>
+<td><em>输出浮点数的百分比形式</em></td>
+</tr>
+<tr>
+<td><em><strong>x</strong></em></td>
+<td><em>输出整数的小写十六进制形式</em></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><em><strong>X</strong></em></td>
+<td><em>输出整数的大写写十六进制形式</em></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>格式控制标记规则:[填充], [对齐], [宽度], [,], [.精度], [类型] 这六个规则是可以任意组合使用的，但要按以上顺序使用。不过一般可以分为两组。</strong></p>
+<blockquote>
+<h2 id="一组为填充-对齐-宽度-主要用于规范字符串的显示格式"><strong>一组为：[填充] [对齐] [宽度]  主要用于规范字符串的显示格式。</strong></h2>
+</blockquote>
+<h3 id="程序示例-23"><strong>程序示例：</strong></h3>
+<pre><code class="language-python">s = &quot;厉害了，我的国&quot;
+
+
+
+print(&quot;{0:30}&quot;.format(s))  #默认为左对齐，宽度为30,序号0可省
+
+
+
+print(&quot;{0:&gt;30}&quot;.format(s))  #右对齐  
+
+
+
+print(&quot;{0:*&gt;30}&quot;.format(s)) #填充*字符，右对齐
+
+
+
+print(&quot;{0:*^30}&quot;.format(s)) #居中对齐
+
+
+
+print(&quot;{0:*30}&quot;.format(s)) #填充字符时，没有选择对齐方式，会有 Invalid format specifier 的报错
+</code></pre>
+<h3 id="程序运行结果-23">程序运行结果：</h3>
+<pre><code class="language-html">厉害了，我的国                       
+
+
+
+                       厉害了，我的国
+
+
+
+***********************厉害了，我的国
+
+
+
+***********厉害了，我的国************
+
+
+
+---------------------------------------------------------------------------
+
+
+
+ValueError                                Traceback (most recent call last)
+
+
+
+&lt;ipython-input-86-959132fb938a&gt; in &lt;module&gt;()
+
+
+
+      4 print(&quot;{0:*&gt;30}&quot;.format(s)) #填充*字符，右对齐
+
+
+
+      5 print(&quot;{0:*^30}&quot;.format(s)) #居中对齐
+
+
+
+----&gt; 6 print(&quot;{0:*30}&quot;.format(s)) #填充字符时，没有选择对齐方式，会有 Invalid format specifier 的报错
+
+
+
+ 
+
+
+
+ValueError: Invalid format specifier
+</code></pre>
+<h3 id="格式控制标记规则也可以用变量来表示即用槽来指定对应的格式控制标记规则"><strong>格式控制标记规则也可以用变量来表示，即用槽{}来指定对应的格式控制标记规则。</strong></h3>
+<h3 id="程序示例-24"><strong>程序示例：</strong></h3>
+<pre><code class="language-python">s = &quot;厉害了，我的国&quot;
+
+
+
+a = &quot;*&quot;
+
+
+
+b = &quot;^&quot;
+
+
+
+c = 30
+
+
+
+d = [&quot;&lt;&quot;,&quot;^&quot;,&quot;&gt;&quot;]
+
+
+
+print(&quot;{0:{1}{2}{3}}&quot;.format(s,a,b,c))  #居中对齐，宽度为30，填充字符为*
+
+
+
+print(&quot;{0:{1}{2[2]}{3}}&quot;.format(s,a,d,c))#右对齐，用列表选择对齐方式。
+
+
+
+print(&quot;{0:{1}{2[0]}{3}}&quot;.format(s,a,d,c)) 
+</code></pre>
+<h3 id="程序运行结果-24"><strong>程序运行结果：</strong></h3>
+<pre><code class="language-html">***********厉害了，我的国************
+
+
+
+***********************厉害了，我的国
+
+
+
+厉害了，我的国***********************
+</code></pre>
+<blockquote>
+<h2 id="另一组为-精度-类型-主要于规范数字的输出格式和控制字符串的输出长度"><strong>另一组为：[,] [.精度] [类型]  主要于规范数字的输出格式和控制字符串的输出长度。</strong></h2>
+</blockquote>
+<h3 id="程序示例-25"><strong>程序示例：</strong></h3>
+<pre><code class="language-python">print(&quot;{0:,}&quot;.format(123456789)) # 千位分隔符
+
+
+
+print(&quot;{:,.3}&quot;.format(123456.123)) #保留3为有效数字
+
+
+
+print(&quot;{:.3}&quot;.format(&quot;厉害了，我的国&quot;)) # 输出前三个字符
+
+
+
+ 
+
+
+
+ 
+
+
+
+#输出整数类型的格式化规则：
+
+
+
+#print(&quot;输出整数的二进制形式:{0:b}\n输出整数对应的Unicode字符:{0:c}\n输出整数的十进制形式:{0:d}\n输出整数的八进制形式:{0:o}\n输出整数的小写十六进制形式:{0:x}\n输出整数的大写写十六进制形式:{0:X}&quot;.format(123456))
+
+
+
+# 等效于一下语句：
+
+
+
+print(&quot;输出整数的二进制形式: {:b}&quot;.format(123456))
+
+
+
+print(&quot;输出整数对应的Unicode字符: {:c}&quot;.format(123456))
+
+
+
+print(&quot;输出整数的十进制形式: {:d}&quot;.format(123456))
+
+
+
+print(&quot;输出整数的八进制形式: {:o}&quot;.format(123456))
+
+
+
+print(&quot;输出整数的小写十六进制形式: {:x}&quot;.format(123456))
+
+
+
+print(&quot;输出整数的大写写十六进制形式: {:X}&quot;.format(123456))
+
+
+
+ 
+
+
+
+ 
+
+
+
+#输出浮点数类型的格式化规则：
+
+
+
+print(&quot;输出浮点数对应的小写字母e的指数形式: {:e}&quot;.format(123456.123456))
+
+
+
+print(&quot;输出浮点数对应的大写字母E的指数形式: {:E}&quot;.format(123456.123456))
+
+
+
+print(&quot;输出标准浮点数形式: {:f}&quot;.format(123456.123456))
+
+
+
+print(&quot;输出浮点数的百分比形式: {:%}&quot;.format(123456.123456))
+
+
+
+ 
+
+
+
+#对比  [.精度]可以控制小数部分的输出长度
+
+
+
+print(&quot;输出浮点数对应的小写字母e的指数形式: {:.3e}&quot;.format(123456.123456))
+
+
+
+print(&quot;输出浮点数对应的大写字母E的指数形式: {:.3E}&quot;.format(123456.123456))
+
+
+
+print(&quot;输出标准浮点数形式: {:.3f}&quot;.format(123456.123456))
+
+
+
+print(&quot;输出浮点数的百分比形式: {:.3%}&quot;.format(123456.123456))
+</code></pre>
+<h3 id="程序运行结果-25"><strong>程序运行结果：</strong></h3>
+<pre><code class="language-html">123,456,789
+
+
+
+1.23e+05
+
+
+
+厉害了
+
+
+
+ 
+
+
+
+输出整数的二进制形式: 11110001001000000
+
+
+
+输出整数对应的Unicode字符: ?
+
+
+
+输出整数的十进制形式: 123456
+
+
+
+输出整数的八进制形式: 361100
+
+
+
+输出整数的小写十六进制形式: 1e240
+
+
+
+输出整数的大写写十六进制形式: 1E240
+
+
+
+ 
+
+
+
+输出浮点数对应的小写字母e的指数形式: 1.234561e+05
+
+
+
+输出浮点数对应的大写字母E的指数形式: 1.234561E+05
+
+
+
+输出标准浮点数形式: 123456.123456
+
+
+
+输出浮点数的百分比形式: 12345612.345600%
+
+
+
+ 
+
+
+
+输出浮点数对应的小写字母e的指数形式: 1.235e+05
+
+
+
+输出浮点数对应的大写字母E的指数形式: 1.235E+05
+
+
+
+输出标准浮点数形式: 123456.123
+
+
+
+输出浮点数的百分比形式: 12345612.346%
+</code></pre>
+<blockquote>
+<h2 id="综合运用实例"><strong>综合运用实例：</strong></h2>
+</blockquote>
+<h3 id="程序示例-26"><strong>程序示例：</strong></h3>
+<pre><code class="language-python">print(&quot;{:*^30,.2f}&quot;.format(123456.1235))#用*字符填充，居中对齐，宽度为30，千位分隔符，保留小数点后两位，输出标准浮点数
+
+
+
+s = &quot;一年有:&quot;
+
+
+
+a = 365.0000
+
+
+
+b = &quot;天&quot;
+
+
+
+print(&quot;{0:*&gt;8}{1:,.1f}{2:*&lt;5}&quot;.format(s,a,b))
+</code></pre>
+<h3 id="程序运行结果-26"><strong>程序运行结果：</strong></h3>
+<pre><code class="language-html">**********123,456.12**********
+
+
+
+****一年有:365.0天****
+</code></pre>
+<h1 id="200-format_map函数"><strong>20.0 format_map()函数</strong></h1>
+<p><strong>描述：返回字符串的格式化版本。</strong></p>
+<p><strong>语法：str.format_map(mapping) -&gt; str 返回字符串</strong></p>
+<h3 id="程序示例-27"><strong>程序示例：</strong></h3>
+<pre><code class="language-python">student = {&quot;name&quot;:[&quot;张三&quot;,&quot;李四&quot;],&quot;idcard&quot;:[1,2]}
+
+
+
+ 
+
+
+
+print(&quot;我的名字是{name[0]}，我的学号是{idcard[0]}&quot;.format_map(student))
+
+
+
+print(&quot;我的名字是{name[0]}，我的学号是{idcard[1]}&quot;.format_map(student))
+
+
+
+ 
+
+
+
+ 
+
+
+
+print([&quot;我的名字是{}，我的学号是{}&quot;.format(*x) for x in zip(student[&quot;name&quot;],student[&quot;idcard&quot;])]) #以列表的形式输出
+
+
+
+print(&quot;我的名字是{}，我的学号是{}&quot;.format(*x) for x in zip(student[&quot;name&quot;],student[&quot;idcard&quot;]))
+
+
+
+ 
+
+
+
+print([&quot;我的名字是{}，我的学号是{}&quot;.format(*x) for x in zip(*map(student.get,[&quot;name&quot;,&quot;idcard&quot;]))]) #以列表的形式输出
+
+
+
+print(&quot;我的名字是{}，我的学号是{}&quot;.format(*x) for x in zip(*map(student.get,[&quot;name&quot;,&quot;idcard&quot;]))) 
+
+
+
+ 
+
+
+
+for i in range(len(student)):
+
+
+
+    print(&quot;我的名字是{{name[0]}}，我的学号是{{idcard[0]}}&quot;.format(i).format_map(student))
+
+
+
+    # {{ }} 等效于{ }  
+</code></pre>
+<h2 id="程序运行结果-27"><strong>程序运行结果：</strong></h2>
+<pre><code class="language-html">我的名字是张三，我的学号是1
+
+
+
+我的名字是张三，我的学号是2
+
+
+
+ 
+
+
+
+['我的名字是张三，我的学号是1', '我的名字是李四，我的学号是2']
+
+
+
+&lt;generator object &lt;genexpr&gt; at 0x0000018F5E1CFF68&gt;
+
+
+
+ 
+
+
+
+['我的名字是张三，我的学号是1', '我的名字是李四，我的学号是2']
+
+
+
+&lt;generator object &lt;genexpr&gt; at 0x0000018F5E1CF200&gt;
+
+
+
+ 
+
+
+
+我的名字是张三，我的学号是1
+
+
+
+我的名字是张三，我的学号是1
+</code></pre>
+<h1 id="-6"></h1>
+<h1 id="-7"></h1>
+<h1 id="解决判断问题返回bool类型"><strong>解决判断问题(返回bool类型)</strong></h1>
+<h1 id="210-endswith函数"><strong>21.0 endswith()函数</strong></h1>
+<p><strong>描述：判断字符串是否以指定字符或子字符串结尾。</strong></p>
+<p><strong>语法：str.endswith(&quot;suffix&quot;, start, end) 或</strong></p>
+<p><strong>str[start,end].endswith(&quot;suffix&quot;)   用于判断字符串中某段字符串是否以指定字符或子字符串结尾。</strong></p>
+<p><strong>—&gt; bool  返回值为布尔类型（True,False）</strong></p>
+<ul>
+<li><strong>suffix — 后缀，可以是单个字符，也可以是字符串，还可以是元组（&quot;suffix&quot;中的引号要省略，常用于判断文件类型）。</strong></li>
+<li><strong>start —索引字符串的起始位置。</strong></li>
+<li><strong>end — 索引字符串的结束位置。</strong></li>
+<li><strong>str.endswith(suffix) star默认为0，end默认为字符串的长度len(str)</strong></li>
+</ul>
+<p>注意：空字符的情况。返回值通常为True</p>
+<h3 id="程序示例-28"><strong>程序示例：</strong></h3>
+<pre><code class="language-python">str = &quot;i love python&quot;
+
+
+
+print(&quot;1:&quot;,str.endswith(&quot;n&quot;)) 
+
+
+
+print(&quot;2:&quot;,str.endswith(&quot;python&quot;))
+
+
+
+print(&quot;3:&quot;,str.endswith(&quot;n&quot;,0,6))# 索引 i love 是否以“n”结尾。
+
+
+
+print(&quot;4:&quot;,str.endswith(&quot;&quot;)) #空字符
+
+
+
+print(&quot;5:&quot;,str[0:6].endswith(&quot;n&quot;)) # 只索引 i love
+
+
+
+print(&quot;6:&quot;,str[0:6].endswith(&quot;e&quot;))
+
+
+
+print(&quot;7:&quot;,str[0:6].endswith(&quot;&quot;))
+
+
+
+print(&quot;8:&quot;,str.endswith((&quot;n&quot;,&quot;z&quot;)))#遍历元组的元素，存在即返回True，否者返回False
+
+
+
+print(&quot;9:&quot;,str.endswith((&quot;k&quot;,&quot;m&quot;)))
+
+
+
+ 
+
+
+
+ 
+
+
+
+#元组案例
+
+
+
+file = &quot;python.txt&quot;
+
+
+
+if file.endswith(&quot;txt&quot;):
+
+
+
+    print(&quot;该文件是文本文件&quot;)
+
+
+
+elif file.endswith((&quot;AVI&quot;,&quot;WMV&quot;,&quot;RM&quot;)):
+
+
+
+    print(&quot;该文件为视频文件&quot;)
+
+
+
+else:
+
+
+
+    print(&quot;文件格式未知&quot;)
+</code></pre>
+<h3 id="程序运行结果-28">程序运行结果：</h3>
+<pre><code class="language-html">1: True
+
+
+
+2: True
+
+
+
+3: False
+
+
+
+4: True
+
+
+
+5: False
+
+
+
+6: True
+
+
+
+7: True
+
+
+
+8: True
+
+
+
+9: False
+
+
+
+该文件是文本文件
+</code></pre>
+<h1 id="220-startswith函数"><strong>22.0 startswith()函数</strong></h1>
+<p><strong>描述：判断字符串是否以指定字符或子字符串开头。</strong></p>
+<p><strong>语法：str.endswith(&quot;suffix&quot;, start, end) 或</strong></p>
+<p><strong>str[start,end].endswith(&quot;suffix&quot;)   用于判断字符串中某段字符串是否以指定字符或子字符串结尾。</strong></p>
+<p><strong>—&gt; bool  返回值为布尔类型（True,False）</strong></p>
+<ul>
+<li><strong>suffix — 后缀，可以是单个字符，也可以是字符串，还可以是元组（&quot;suffix&quot;中的引号要省略）。</strong></li>
+<li><strong>start —索引字符串的起始位置。</strong></li>
+<li><strong>end — 索引字符串的结束位置。</strong></li>
+<li><strong>str.endswith(suffix) star默认为0，end默认为字符串的长度减一（len(str)-1）。</strong></li>
+</ul>
+<p>注意：空字符的情况。返回值通常也为True</p>
+<h3 id="程序示例-29"><strong>程序示例：</strong></h3>
+<pre><code class="language-python">str = &quot;hello,i love python&quot;
+
+
+
+print(&quot;1:&quot;,str.startswith(&quot;h&quot;))
+
+
+
+print(&quot;2:&quot;,str.startswith(&quot;l&quot;,2,10))# 索引 llo,i lo 是否以“n”结尾。
+
+
+
+print(&quot;3:&quot;,str.startswith(&quot;&quot;)) #空字符
+
+
+
+print(&quot;4:&quot;,str[0:6].startswith(&quot;h&quot;)) # 只索引  hello,
+
+
+
+print(&quot;5:&quot;,str[0:6].startswith(&quot;e&quot;))
+
+
+
+print(&quot;6:&quot;,str[0:6].startswith(&quot;&quot;))
+
+
+
+print(&quot;7:&quot;,str.startswith((&quot;h&quot;,&quot;z&quot;)))#遍历元组的元素，存在即返回True，否者返回False
+
+
+
+print(&quot;8:&quot;,str.startswith((&quot;k&quot;,&quot;m&quot;)))
+</code></pre>
+<h3 id="程序运行结果-29">程序运行结果：</h3>
+<pre><code class="language-html">1: True
+
+
+
+2: True
+
+
+
+3: True
+
+
+
+4: True
+
+
+
+5: False
+
+
+
+6: True
+
+
+
+7: True
+
+
+
+8: False
+</code></pre>
+<h1 id="230-isalnum函数"><strong>23.0 isalnum()函数</strong></h1>
+<p><strong>描述：检测字符串是否由字母和数字组成。</strong></p>
+<p><strong>语法：str.isalnum() -&gt; bool 返回值为布尔类型（True,False）</strong></p>
+<ul>
+<li><strong>str中至少有一个字符且所有字符都是字母或数字则返回 True,否则返回 False</strong></li>
+</ul>
+<h3 id="程序示例-30"><strong>程序示例：</strong></h3>
+<pre><code class="language-python">str1 = &quot;i love python 666&quot;  #有空格，不全是字母或数字
+
+
+
+str2 = &quot;python&quot; #全为字母
+
+
+
+str3 = &quot;123&quot;  #全为数字
+
+
+
+str4 = &quot;python666&quot;  #字母和数字的组合
+
+
+
+print(str1.isalnum())
+
+
+
+print(str2.isalnum())
+
+
+
+print(str3.isalnum())
+
+
+
+print(str4.isalnum())
+</code></pre>
+<h3 id="程序运行结果-30">程序运行结果：</h3>
+<pre><code class="language-html">False
+
+
+
+True
+
+
+
+True
+
+
+
+True
+</code></pre>
+<h1 id="240-isalpha函数"><strong>24.0 isalpha()函数</strong></h1>
+<p><strong>描述：检测字符串是否只由字母组成。</strong></p>
+<p><strong>语法：str.isalpha() -&gt; bool 返回值为布尔类型（True,False）</strong></p>
+<ul>
+<li><strong>字符串中至少有一个字符且所有字符都是字母则返回 True,否则返回 False。</strong></li>
+</ul>
+<h3 id="程序示例-31"><strong>程序示例：</strong></h3>
+<pre><code class="language-python">str1 = &quot;python&quot; #全为字母
+
+
+
+str2 = &quot; python&quot; #存在空格
+
+
+
+str3 = &quot;123&quot;  #全为数字
+
+
+
+str4 = &quot;python666&quot;   #字母和数字的组合
+
+
+
+print(str1.isalpha())
+
+
+
+print(str2.isalpha())
+
+
+
+print(str3.isalpha())
+
+
+
+print(str4.isalpha()
+</code></pre>
+<h3 id="程序运行结果-31">程序运行结果：</h3>
+<pre><code class="language-html">True
+
+
+
+False
+
+
+
+False
+
+
+
+False
+</code></pre>
+<h1 id="250-isdecimal函数"><strong>25.0 isdecimal()函数</strong></h1>
+<p><strong>描述：检查字符串是否只包含十进制字符。该方法只存在于unicode对象中。</strong></p>
+<p><strong>注意:定义一个十进制字符串，只需要在字符串前添加前缀 'u' 即可。</strong></p>
+<p><strong>语法： str.isdecimal() -&gt; bool 返回值为布尔类型（True,False）</strong></p>
+<ul>
+<li><strong>字符串中若只包含十进制字符返回True，否则返回False。</strong></li>
+</ul>
+<h3 id="程序示例-32"><strong>程序示例：</strong></h3>
+<pre><code class="language-python">str1 = u&quot;123456&quot; 
+
+
+
+str2 = u&quot;python666&quot;
+
+
+
+str3 = &quot;123456&quot;
+
+
+
+str4 = &quot;python666&quot;
+
+
+
+print(str1.isdecimal())
+
+
+
+print(str2.isdecimal())
+
+
+
+print(str3.isdecimal())
+
+
+
+print(str4.isdecimal())
+</code></pre>
+<h3 id="程序运行结果-32"><strong>程序运行结果：</strong></h3>
+<pre><code class="language-html">True
+
+
+
+False
+
+
+
+True
+
+
+
+False
+</code></pre>
+<h1 id="260-isdigit函数"><strong>26.0 isdigit()函数</strong></h1>
+<p><strong>描述：检测字符串是否只由数字组成.</strong></p>
+<p><strong>语法： str.isdigit() -&gt; bool 返回值为布尔类型（True,False）</strong></p>
+<ul>
+<li><strong>字符串中至少有一个字符且所有字符都是数字则返回 True,否则返回 False。</strong></li>
+<li><strong>注：能判断“①”，不能判断中文数字。但 isnumeric() 函数可以。</strong></li>
+</ul>
+<h3 id="程序示例-33"><strong>程序示例：</strong></h3>
+<pre><code class="language-python">str1 = &quot;python&quot; #全为字母
+
+
+
+str2 = &quot; python&quot; #存在空格
+
+
+
+str3 = &quot;123&quot;  #全为数字
+
+
+
+str4 = &quot;python666&quot;   #字母和数字的组合
+
+
+
+str5 = &quot;一二三四五六七&quot; #中文数字输出False
+
+
+
+str6 = &quot;①&quot;  
+
+
+
+print(str1.isdigit())
+
+
+
+print(str2.isdigit())
+
+
+
+print(str3.isdigit())
+
+
+
+print(str4.isdigit())
+
+
+
+print(str5.isdigit())
+
+
+
+print(str6.isdigit())
+</code></pre>
+<h3 id="程序运行结果-33"><strong>程序运行结果：</strong></h3>
+<pre><code class="language-html">False
+
+
+
+False
+
+
+
+True
+
+
+
+False
+
+
+
+False
+
+
+
+True
+</code></pre>
+<h1 id="270-isidentifier函数"><strong>27.0 isidentifier()函数</strong></h1>
+<p><strong>描述：判断str是否是有效的标识符。str为符合命名规则的变量，保留标识符则返回True,否者返回False。</strong></p>
+<p><strong>语法：str.isidentifier() -&gt; bool 返回值为布尔类型（True,False）</strong></p>
+<h3 id="程序示例-34"><strong>程序示例：</strong></h3>
+<pre><code class="language-python">str1 = &quot;123&quot;  #变量名为123
+
+
+
+str2 = &quot;def&quot;  #变量名为保留字
+
+
+
+str3 = &quot;_123&quot;  #变量名有下划线开头
+
+
+
+str4 = &quot;student&quot;#变量名由字母开端
+
+
+
+print(str1.isidentifier())
+
+
+
+print(str2.isidentifier())
+
+
+
+print(str3.isidentifier())
+
+
+
+print(str4.isidentifier())
+</code></pre>
+<h3 id="程序运行结果-34"><strong>程序运行结果：</strong></h3>
+<pre><code class="language-html">False
+
+
+
+True
+
+
+
+True
+
+
+
+True
+</code></pre>
+<h1 id="280-islower函数"><strong>28.0</strong> islower**()函数**</h1>
+<p><strong>描述：检测字符串中的字母是否全由小写字母组成。（字符串中可包含非字母字符）</strong></p>
+<p><strong>语法：str.islower() -&gt; bool  返回值为布尔类型（True,False）</strong></p>
+<ul>
+<li><strong>字符串中包含至少一个区分大小写的字符，且所有这些区分大小写的字符都是小写，则返回 True，否则返回 False。</strong></li>
+</ul>
+<h3 id="程序示例-35"><strong>程序示例：</strong></h3>
+<pre><code class="language-python">str1 = &quot;i love python&quot;  #字符串中的字母全为小写
+
+
+
+str2 = &quot;我爱python！&quot;  #字符串中的字母全为小写，也存在非字母的字符
+
+
+
+str3 = &quot;I love python&quot; #字符串中有大写字符
+
+
+
+print(str1.islower())
+
+
+
+print(str2.islower())
+
+
+
+print(str3.islower())
+</code></pre>
+<h3 id="程序运行结果-35">程序运行结果：</h3>
+<pre><code class="language-html">True
+
+
+
+True
+
+
+
+False
+</code></pre>
+<h1 id="290-isupper函数"><strong>29.0 isupper()函数</strong></h1>
+<p><strong>描述：检测字符串中的字母是否全由大写字母组成。（字符串中可包含非字母字符）。</strong></p>
+<p><strong>语法：str.isupper() -&gt; bool 返回值为布尔类型（True,False）</strong></p>
+<ul>
+<li><strong>字符串中包含至少一个区分大小写的字符，且所有这些区分大小写的字符都是大写，则返回 True，否则返回 False。</strong></li>
+</ul>
+<h3 id="程序示例-36"><strong>程序示例：</strong></h3>
+<pre><code class="language-python">str1 = &quot;I LOVE PYTHON&quot;  #全为大写字母
+
+
+
+str2 = &quot;i LOVE PYTHON&quot;  #存在小写字母
+
+
+
+str3 = &quot;我爱PYTHON&quot;   #存在非字母的字符
+
+
+
+print(str1.isupper())
+
+
+
+print(str2.isupper())
+
+
+
+print(str3.isupper())
+</code></pre>
+<h3 id="程序运行结果-36">程序运行结果：</h3>
+<pre><code class="language-html">True
+
+
+
+False
+
+
+
+True
+</code></pre>
+<h1 id="300-isnumeric函数"><strong>30.0 isnumeric()函数</strong></h1>
+<p><strong>描述：测字符串是否只由数字组成。这种方法是只适用于unicode对象。</strong></p>
+<p><strong>注：把一个字符串定义为Unicode，只需要在字符串前添加 前缀 'u'</strong></p>
+<p><strong>语法：str.isnumeric() -&gt; bool 返回值为布尔类型（True,False）</strong></p>
+<ul>
+<li><strong>字符串中只包含数字字符，则返回 True，否则返回 False。</strong></li>
+<li><strong>与isdigit()函数类似，但isnumeric()函数可以判断中文数字，功能更强大。</strong></li>
+</ul>
+<h3 id="程序示例-37"><strong>程序示例：</strong></h3>
+<pre><code class="language-python">str1 = u&quot;123456&quot;  #全为数字
+
+
+
+str2 = &quot;123456&quot;
+
+
+
+str3 = &quot;python666&quot;  #字母数字组合
+
+
+
+str4 = &quot;一二三四五六&quot;  #中文数字
+
+
+
+str5 = &quot;①&quot;
+
+
+
+print(str1.isnumeric())
+
+
+
+print(str2.isnumeric())
+
+
+
+print(str3.isnumeric())
+
+
+
+print(str4.isnumeric())
+
+
+
+print(str5.isnumeric())
+</code></pre>
+<h3 id="程序运行结果-37">程序运行结果：</h3>
+<pre><code class="language-html">True
+
+
+
+True
+
+
+
+False
+
+
+
+True
+
+
+
+True
+</code></pre>
+<h1 id="310-isprintable函数"><strong>31.0 isprintable()函数</strong></h1>
+<p><strong>描述：判断字符串中是否有打印后不可见的内容。如：\n \t 等字符。</strong></p>
+<p><strong>语法： str.isprintable() -&gt; bool 返回值为布尔类型（True,False）</strong></p>
+<ul>
+<li><strong>若字符串中不存在\n \t 等不可见的内容，则返回True,否者返回False。</strong></li>
+</ul>
+<h3 id="程序示例-38"><strong>程序示例：</strong></h3>
+<pre><code class="language-python">str1 = &quot;i love  python&quot;  #不存在用print()打印后不可见的内容
+
+
+
+str2 = &quot;i love python \n&quot; #存在用print()打印后不可见的内容 \n
+
+
+
+str3 = &quot;i love \t python&quot;
+
+
+
+print(str1.isprintable())
+
+
+
+print(str2.isprintable())
+
+
+
+print(str3.isprintable())
+</code></pre>
+<h3 id="程序运行结果-38"><strong>程序运行结果：</strong></h3>
+<pre><code class="language-html">True
+
+
+
+False
+
+
+
+False
+</code></pre>
+<h1 id="320-isspace函数"><strong>32.0 isspace()函数</strong></h1>
+<p><strong>描述： 检测字符串是否只由空格组成。</strong></p>
+<p><strong>语法：str.isspace() -&gt; bool  返回值为布尔类型（True,False）</strong></p>
+<ul>
+<li><strong>若字符串中只包含空格，则返回 True，否则返回 False。</strong></li>
+</ul>
+<h3 id="程序示例-39"><strong>程序示例：</strong></h3>
+<pre><code class="language-python">str1 = &quot;   &quot;#空格
+
+
+
+str2 = &quot;i love python&quot; 
+
+
+
+print(str1.isspace())
+
+
+
+print(str2.isspace())
+
+
+
+print(str2[1].isspace()) #字符串str2 的第二个字符为空格
+</code></pre>
+<h3 id="程序运行结果-39">程序运行结果：</h3>
+<pre><code class="language-html">True
+
+
+
+False
+
+
+
+True
+</code></pre>
+<h1 id="330-istitle函数"><strong>33.0 istitle()函数</strong></h1>
+<p><strong>描述：检测判断字符串中所有单词的首字母是否为大写，且其它字母是否为小写，字符串中可以存在其它非字母的字符。</strong></p>
+<p><strong>语法：str.istitle() -&gt; bool 返回值为布尔类型（True,False）</strong></p>
+<ul>
+<li><strong>若字符串中所有单词的首字母为大写，且其它字母为小写，则返回 True，否则返回 False.</strong></li>
+</ul>
+<h3 id="程序示例-40"><strong>程序示例：</strong></h3>
+<pre><code class="language-python">str1 = &quot;I Love Python&quot; #各单词的首字母均为大写，其余字母为小写
+
+
+
+str2 = &quot;I love python&quot; 
+
+
+
+str3 = &quot;I LOVE PYTHON&quot;
+
+
+
+str4 = &quot;我爱Python&quot;  #存在其它非字母字符，
+
+
+
+print(str1.istitle())
+
+
+
+print(str2.istitle())
+
+
+
+print(str3.istitle())
+
+
+
+print(str4.istitle())
+</code></pre>
+<h3 id="程序运行结果-40">程序运行结果：</h3>
+<pre><code class="language-html">True
+
+
+
+False
+
+
+
+False
+
+
+
+True
+</code></pre>
+<h1 id="-8"></h1>
+<h1 id="-9"></h1>
+<h1 id="-10"></h1>
+<h1 id="解决字符串两端">解决字符串两端：</h1>
+<h1 id="340-strip函数"><strong>34.0 strip()函数</strong></h1>
+<p><strong>描述：从字符串str中去掉在其左右两边chars中列出的字符。</strong></p>
+<p><strong>注：chars传入的是一个字符数组，编译器去除两端所有相应的字符，直到出现第一个在chars中不匹配的字符。详看示例。</strong></p>
+<p><strong>语法： str.strip(chars) -&gt; str 返回一个新的字符串</strong></p>
+<ul>
+<li><strong>chars —— 要去除的字符 默认为空格或换行符。</strong></li>
+</ul>
+<h3 id="程序示例-41"><strong>程序示例：</strong></h3>
+<pre><code class="language-python">str = &quot;123456789321&quot;
+
+
+
+print(str.strip(&quot;123&quot;)) #除去123，对于字符串str右边，1 在 &quot;123&quot;中去除，2在&quot;123&quot;中去除，同理3也去除，但9不在&quot;123&quot;中,去除结束
+
+
+
+str1 = &quot;my name is ymyyyy&quot;
+
+
+
+print(str1.strip(&quot;my&quot;))  #&quot;my&quot; 无空格，字母n前的空格不去掉。
+
+
+
+print(str1.strip(&quot;my &quot;)) #&quot;my &quot;有空格，所以str1左边字母n前的空格被去掉。
+</code></pre>
+<h3 id="程序运行结果-41">程序运行结果：</h3>
+<pre><code class="language-html">456789
+
+
+
+ name is 
+
+
+
+name is
+</code></pre>
+<h1 id="350-lstrip函数"><strong>35.0 lstrip()函数</strong></h1>
+<p><strong>描述：从字符串str中去掉在其左边chars中列出的字符。</strong></p>
+<p><strong>注：chars传入的是一个字符数组，编译器去除两端所有相应的字符，直到出现第一个在chars中不匹配的字符。详看示例。</strong></p>
+<p><strong>语法：str.lstrip(chars) -&gt; str 返回一个新的字符串</strong></p>
+<ul>
+<li><strong>chars —— 要去除的字符 默认为空格或换行符。</strong></li>
+</ul>
+<h3 id="程序示例-42"><strong>程序示例：</strong></h3>
+<pre><code class="language-python">str1 = &quot;bacjabck123kluabc&quot;
+
+
+
+print(str1.lstrip(&quot;abc&quot;))  #只去掉左边的&quot;bac&quot;,左边第4个字符j不在&quot;abc&quot;中，去除结束
+
+
+
+str2 = &quot;12578asdfgh12&quot;
+
+
+
+print(str2.lstrip(&quot;12&quot;)) #只去掉字符串str2左边的 12
+</code></pre>
+<h3 id="程序运行结果-42">程序运行结果：</h3>
+<pre><code class="language-html">jabck123kluabc
+
+
+
+578asdfgh12
+</code></pre>
+<h1 id="36-rstrip函数"><strong>36. rstrip()函数</strong></h1>
+<p><strong>描述：从字符串str中去掉在其右边chars中列出的字符。</strong></p>
+<p><strong>注：chars传入的是一个字符数组，编译器去除两端所有相应的字符，直到出现第一个在chars中不匹配的字符。详看示例。</strong></p>
+<p><strong>语法：str.rstrip(chars) -&gt; str 返回一个新的字符串</strong></p>
+<ul>
+<li><strong>chars —— 要去除的字符 默认为空格或换行符。</strong></li>
+</ul>
+<h3 id="程序示例-43"><strong>程序示例：</strong></h3>
+<pre><code class="language-python">str1 = &quot;abcjabck123kluabcca&quot;
+
+
+
+print(str1.rstrip(&quot;abc&quot;))  #只去掉右边的&quot;abcca&quot;,右边第6个字符u不在&quot;abc&quot;中，去除结束
+
+
+
+str2 = &quot;12578asdfgh11112&quot;
+
+
+
+print(str2.rstrip(&quot;12&quot;)) #只去掉字符串str2右边的 11112
+</code></pre>
+<h3 id="程序运行结果-43">程序运行结果：</h3>
+<pre><code class="language-html">abcjabck123klu
+
+
+
+12578asdfgh
+</code></pre>
+<h1 id="-11"></h1>
+<h1 id="解决-制表-翻译-问题"><strong>解决 制表 翻译 问题：</strong></h1>
+<h1 id="370-maketrans函数"><strong>37.0 maketrans()函数</strong></h1>
+<p><strong>描述：制作翻译表，删除表，常与translate()函数连用。 即：返回用于str.translate（）函数翻译的的转换表。</strong></p>
+<p><strong>语法：maketrans(x, y=None, z=None, /) 返回可用于str.translate()函数的转换表</strong></p>
+<pre><code class="language-python">str.maketrans(x,y,z)  #返回的是Unicode映射的字典。
+
+
+
+ 
+
+
+
+bytes.maketrans(x,y)  #返回的是bytes类型.
+
+
+
+ 
+
+
+
+bytearray.maketrans(x,y)  #返回的是bytes类型。
+</code></pre>
+<ul>
+<li><strong>如果只有一个参数x,它必须是一个字典且为Unicode形式的映射。</strong></li>
+<li><strong>如果有两个参数x和y，它们必须是长度相等的字符串，并且在结果映射中，x中的每个字符都将映射到y中相同位置的字符(Unicode形式的映射)。</strong></li>
+<li><strong>如果有三个参数x,y和z. x和y用法同上，z为指定要删除的字符串，其结果中的字符将一一映射为：None。</strong></li>
+<li><strong>bytes.maketrans(x,y) 和  bytearray.maketrans(x,y) 必须要有x和y两个参数。<br>
+*<em>注：z的长度可以和x和y不同。*</em></strong></li>
+</ul>
+<blockquote>
+<h2 id="strmaketransxyz形式"><strong>str.maketrans(x,y,z)形式：</strong></h2>
+</blockquote>
+<h3 id="程序示例-44"><strong>程序示例：</strong></h3>
+<pre><code class="language-python">s = &quot;123456789&quot;
+
+
+
+ 
+
+
+
+#只有参数x，且x为字典。
+
+
+
+map1 = str.maketrans({&quot;1&quot;:&quot;a&quot;,&quot;2&quot;:&quot;b&quot;,&quot;3&quot;:&quot;c&quot;}) 
+
+
+
+#单字符&quot;1&quot; &quot;2&quot; &quot;3&quot;对应的Unicode编码值分别为：49，50,51
+
+
+
+#制作翻译表,将 字符串s 中的单字符&quot;1&quot;替换为单字符&quot;a&quot;，单字符&quot;2&quot;替换为单字符&quot;b&quot;,一一对应。
+
+
+
+print(map1,type(map1),ord(&quot;1&quot;),ord(&quot;2&quot;),ord(&quot;3&quot;)) #map1返回的是一个Unicode形式映射的字典
+
+
+
+ 
+
+
+
+#只有参数x和参数y
+
+
+
+map2 = str.maketrans(&quot;123&quot;,&quot;abc&quot;)
+
+
+
+#单字符&quot;1&quot; &quot;2&quot; &quot;3&quot;对应的Unicode编码值如上，单字符&quot;a&quot; &quot;b&quot; &quot;c&quot;对应的Unicode编码值分别为：97，98,99
+
+
+
+#制作翻译表,将字符串s中的单字符&quot;1&quot;替换为单字符&quot;a&quot;，单字符&quot;2&quot;替换为单字符&quot;b&quot;,一一对应
+
+
+
+print(map2,type(map2),ord(&quot;a&quot;),ord(&quot;b&quot;),ord(&quot;c&quot;))#map2返回的也是一个Unicode形式映射的字典
+
+
+
+ 
+
+
+
+#有x,y,z三个参数
+
+
+
+map3 = str.maketrans(&quot;123&quot;,&quot;abc&quot;,&quot;56k&quot;) 
+
+
+
+#字符串&quot;123&quot;和&quot;abc&quot;含义如上。字符串&quot;567&quot;为 字符串s 要删除的字符,即制作删除表。
+
+
+
+#单字符&quot;5&quot; &quot;6&quot; &quot;k&quot;对应的Unicode编码值分别为：53,54,107
+
+
+
+print(map3,type(map3),ord(&quot;5&quot;),ord(&quot;6&quot;),ord(&quot;k&quot;)) #map3返回的也是一个Unicode形式映射的字典
+</code></pre>
+<h3 id="程序运行结果-44">程序运行结果：</h3>
+<pre><code class="language-html">49: 'a', 50: 'b', 51: 'c'} &lt;class 'dict'&gt; 49 50 51
+
+
+
+{49: 97, 50: 98, 51: 99} &lt;class 'dict'&gt; 97 98 99
+
+
+
+{49: 97, 50: 98, 51: 99, 53: None, 54: None, 107: None} &lt;class 'dict'&gt; 53 54 107
+
+
+
+In [6]:
+</code></pre>
+<blockquote>
+<h2 id="bytesmaketransxy形式"><strong>bytes.maketrans(x,y)形式：</strong></h2>
+</blockquote>
+<h3 id="程序示例-45"><strong>程序示例：</strong></h3>
+<pre><code class="language-python">map4 = bytes.maketrans(b&quot;123&quot;,b&quot;abc&quot;)
+
+
+
+print(type(b&quot;123&quot;),type(b&quot;abc&quot;),type(map4),map4)
+</code></pre>
+<h2 id="程序运行结果-45">程序运行结果：</h2>
+<pre><code class="language-html">&lt;class 'bytes'&gt; &lt;class 'bytes'&gt; &lt;class 'bytes'&gt; 
+
+
+
+ 
+
+
+
+b'\x00\x01\x02\x03\x04\x05\x06\x07\x08\t\n\x0b\x0c\r\x0e\x0f\x10\x11\x12\x13\x14\x15\x16\x17\x18\x19\x1a\x1b\x1c\x1d\x1e\x1f !&quot;#$%&amp;\'()*+,-./0abc456789:;&lt;=&gt;?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~\x7f\x80\x81\x82\x83\x84\x85\x86\x87\x88\x89\x8a\x8b\x8c\x8d\x8e\x8f\x90\x91\x92\x93\x94\x95\x96\x97\x98\x99\x9a\x9b\x9c\x9d\x9e\x9f\xa0\xa1\xa2\xa3\xa4\xa5\xa6\xa7\xa8\xa9\xaa\xab\xac\xad\xae\xaf\xb0\xb1\xb2\xb3\xb4\xb5\xb6\xb7\xb8\xb9\xba\xbb\xbc\xbd\xbe\xbf\xc0\xc1\xc2\xc3\xc4\xc5\xc6\xc7\xc8\xc9\xca\xcb\xcc\xcd\xce\xcf\xd0\xd1\xd2\xd3\xd4\xd5\xd6\xd7\xd8\xd9\xda\xdb\xdc\xdd\xde\xdf\xe0\xe1\xe2\xe3\xe4\xe5\xe6\xe7\xe8\xe9\xea\xeb\xec\xed\xee\xef\xf0\xf1\xf2\xf3\xf4\xf5\xf6\xf7\xf8\xf9\xfa\xfb\xfc\xfd\xfe\xff'
+</code></pre>
+<blockquote>
+<h2 id="bytearraymaketransxy形式"><strong>bytearray.maketrans(x,y)形式：</strong></h2>
+</blockquote>
+<h3 id="程序示例-46"><strong>程序示例：</strong></h3>
+<pre><code class="language-python">map5 = bytearray.maketrans(b&quot;123&quot;,b&quot;abc&quot;)
+
+
+
+print(type(b&quot;123&quot;),type(b&quot;abc&quot;),type(map5),map5)
+</code></pre>
+<h1 id="程序运行结果-46">程序运行结果：</h1>
+<pre><code class="language-html">&lt;class 'bytes'&gt; &lt;class 'bytes'&gt; &lt;class 'bytes'&gt; 
+
+
+
+ 
+
+
+
+b'\x00\x01\x02\x03\x04\x05\x06\x07\x08\t\n\x0b\x0c\r\x0e\x0f\x10\x11\x12\x13\x14\x15\x16\x17\x18\x19\x1a\x1b\x1c\x1d\x1e\x1f !&quot;#$%&amp;\'()*+,-./0abc456789:;&lt;=&gt;?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~\x7f\x80\x81\x82\x83\x84\x85\x86\x87\x88\x89\x8a\x8b\x8c\x8d\x8e\x8f\x90\x91\x92\x93\x94\x95\x96\x97\x98\x99\x9a\x9b\x9c\x9d\x9e\x9f\xa0\xa1\xa2\xa3\xa4\xa5\xa6\xa7\xa8\xa9\xaa\xab\xac\xad\xae\xaf\xb0\xb1\xb2\xb3\xb4\xb5\xb6\xb7\xb8\xb9\xba\xbb\xbc\xbd\xbe\xbf\xc0\xc1\xc2\xc3\xc4\xc5\xc6\xc7\xc8\xc9\xca\xcb\xcc\xcd\xce\xcf\xd0\xd1\xd2\xd3\xd4\xd5\xd6\xd7\xd8\xd9\xda\xdb\xdc\xdd\xde\xdf\xe0\xe1\xe2\xe3\xe4\xe5\xe6\xe7\xe8\xe9\xea\xeb\xec\xed\xee\xef\xf0\xf1\xf2\xf3\xf4\xf5\xf6\xf7\xf8\xf9\xfa\xfb\xfc\xfd\xfe\xff'
+</code></pre>
+<h1 id="380-translate函数"><strong>38.0 translate()函数</strong></h1>
+<p><strong>描述：过滤(删除)，翻译字符串。即根据maketrans()函数给出的字符映射转换表来转换字符串中的字符。</strong></p>
+<p><strong>注：translate()函数是先过滤(删除)，再根据maketrans()函数返回的转换表来翻译。</strong></p>
+<p><strong>语法：str.translate(table) -&gt; str 返回一个字符串</strong></p>
+<pre><code class="language-python">str.translate(table)
+
+
+
+bytes.translate(table, deletechars)    
+
+
+
+bytearray.translate(table, deletechars) 
+</code></pre>
+<ul>
+<li><strong>table —— 转换表，转换表是通过maketrans()函数转换而来。</strong></li>
+<li><strong>deletechars —— 字符串中要过滤(删除)的字符。</strong></li>
+</ul>
+<h2 id="程序示例-47"><strong>程序示例：</strong></h2>
+<pre><code class="language-python">s = &quot;123456789abc&quot;
+
+
+
+s1 = b&quot;123456789abc&quot;
+
+
+
+#只有参数x，且x为字典。
+
+
+
+map1 = str.maketrans({&quot;1&quot;:&quot;a&quot;,&quot;2&quot;:&quot;b&quot;,&quot;3&quot;:&quot;c&quot;}) 
+
+
+
+#单字符&quot;1&quot; &quot;2&quot; &quot;3&quot;对应的Unicode编码值分别为：49，50,51
+
+
+
+#制作翻译表,将 字符串s 中的单字符&quot;1&quot;替换为单字符&quot;a&quot;，单字符&quot;2&quot;替换为单字符&quot;b&quot;,一一对应。
+
+
+
+print(map1,type(map1),ord(&quot;1&quot;),ord(&quot;2&quot;),ord(&quot;3&quot;)) #map1返回的是一个Unicode形式映射的字典
+
+
+
+ 
+
+
+
+#只有参数x和参数y
+
+
+
+map2 = str.maketrans(&quot;123&quot;,&quot;abc&quot;)
+
+
+
+#单字符&quot;1&quot; &quot;2&quot; &quot;3&quot;对应的Unicode编码值如上，单字符&quot;a&quot; &quot;b&quot; &quot;c&quot;对应的Unicode编码值分别为：97，98,99
+
+
+
+#制作翻译表,将字符串s中的单字符&quot;1&quot;替换为单字符&quot;a&quot;，单字符&quot;2&quot;替换为单字符&quot;b&quot;,一一对应
+
+
+
+print(map2,type(map2),ord(&quot;a&quot;),ord(&quot;b&quot;),ord(&quot;c&quot;))#map2返回的也是一个Unicode形式映射的字典
+
+
+
+ 
+
+
+
+#有x,y,z三个参数
+
+
+
+map3 = str.maketrans(&quot;123&quot;,&quot;abc&quot;,&quot;56k&quot;) 
+
+
+
+#字符串&quot;123&quot;和&quot;abc&quot;含义如上。字符串&quot;567&quot;为 字符串s 要删除的字符,即制作删除表。
+
+
+
+#单字符&quot;5&quot; &quot;6&quot; &quot;k&quot;对应的Unicode编码值分别为：53,54,107
+
+
+
+print(map3,type(map3),ord(&quot;5&quot;),ord(&quot;6&quot;),ord(&quot;k&quot;)) #map3返回的也是一个Unicode形式映射的字典
+
+
+
+ 
+
+
+
+map4 = bytes.maketrans(b&quot;123&quot;,b&quot;abc&quot;)
+
+
+
+print(type(b&quot;123&quot;),type(b&quot;abc&quot;),type(map4),map4)
+
+
+
+ 
+
+
+
+print(&quot;\n&quot;)
+
+
+
+ 
+
+
+
+map5 = bytearray.maketrans(b&quot;123&quot;,b&quot;abc&quot;)
+
+
+
+print(type(b&quot;123&quot;),type(b&quot;abc&quot;),type(map5),map5)
+
+
+
+ 
+
+
+
+print(&quot;\n\n&quot;)
+
+
+
+ 
+
+
+
+ 
+
+
+
+print(s.translate(map1)) #将 字符串s 中的&quot;123&quot; 分别替换为 &quot;abc&quot;
+
+
+
+print(s.translate(map2)) #将 字符串s 中的&quot;123&quot; 分别替换为 &quot;abc&quot;
+
+
+
+print(s.translate(map3)) #先将 字符串s 中的字符 &quot;5&quot;,&quot;6&quot; ,&quot;k&quot;过滤(删除)，再将 字符串s 中的&quot;123&quot; 分别翻译替换为 &quot;abc&quot;
+
+
+
+print(s1.translate(map4))
+
+
+
+print(s1.translate(map5))
+
+
+
+print(s1.translate(map4,b&quot;78b&quot;)) #先将s1中的b&quot;78b&quot; 过滤(删除)，再将 s1 中的b&quot;123&quot; 分别翻译替换为 b&quot;abc&quot;
+
+
+
+print(s1.translate(map5,b&quot;9&quot;))  #先将s1中的b&quot;9&quot; 过滤(删除)，再将 s1 中的b&quot;123&quot; 分别翻译替换为 b&quot;abc&quot;
+</code></pre>
+<h2 id="程序运行结果-47"><strong>程序运行结果：</strong></h2>
+<pre><code>{49: 'a', 50: 'b', 51: 'c'} &lt;class 'dict'&gt; 49 50 51
+
+
+
+{49: 97, 50: 98, 51: 99} &lt;class 'dict'&gt; 97 98 99
+
+
+
+{49: 97, 50: 98, 51: 99, 53: None, 54: None, 107: None} &lt;class 'dict'&gt; 53 54 107
+
+
+
+ 
+
+
+
+ 
+
+
+
+&lt;class 'bytes'&gt; &lt;class 'bytes'&gt; &lt;class 'bytes'&gt; b'\x00\x01\x02\x03\x04\x05\x06\x07\x08\t\n\x0b\x0c\r\x0e\x0f\x10\x11\x12\x13\x14\x15\x16\x17\x18\x19\x1a\x1b\x1c\x1d\x1e\x1f !&quot;#$%&amp;\'()*+,-./0abc456789:;&lt;=&gt;?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~\x7f\x80\x81\x82\x83\x84\x85\x86\x87\x88\x89\x8a\x8b\x8c\x8d\x8e\x8f\x90\x91\x92\x93\x94\x95\x96\x97\x98\x99\x9a\x9b\x9c\x9d\x9e\x9f\xa0\xa1\xa2\xa3\xa4\xa5\xa6\xa7\xa8\xa9\xaa\xab\xac\xad\xae\xaf\xb0\xb1\xb2\xb3\xb4\xb5\xb6\xb7\xb8\xb9\xba\xbb\xbc\xbd\xbe\xbf\xc0\xc1\xc2\xc3\xc4\xc5\xc6\xc7\xc8\xc9\xca\xcb\xcc\xcd\xce\xcf\xd0\xd1\xd2\xd3\xd4\xd5\xd6\xd7\xd8\xd9\xda\xdb\xdc\xdd\xde\xdf\xe0\xe1\xe2\xe3\xe4\xe5\xe6\xe7\xe8\xe9\xea\xeb\xec\xed\xee\xef\xf0\xf1\xf2\xf3\xf4\xf5\xf6\xf7\xf8\xf9\xfa\xfb\xfc\xfd\xfe\xff'
+
+
+
+ 
+
+
+
+ 
+
+
+
+&lt;class 'bytes'&gt; &lt;class 'bytes'&gt; &lt;class 'bytes'&gt; b'\x00\x01\x02\x03\x04\x05\x06\x07\x08\t\n\x0b\x0c\r\x0e\x0f\x10\x11\x12\x13\x14\x15\x16\x17\x18\x19\x1a\x1b\x1c\x1d\x1e\x1f !&quot;#$%&amp;\'()*+,-./0abc456789:;&lt;=&gt;?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~\x7f\x80\x81\x82\x83\x84\x85\x86\x87\x88\x89\x8a\x8b\x8c\x8d\x8e\x8f\x90\x91\x92\x93\x94\x95\x96\x97\x98\x99\x9a\x9b\x9c\x9d\x9e\x9f\xa0\xa1\xa2\xa3\xa4\xa5\xa6\xa7\xa8\xa9\xaa\xab\xac\xad\xae\xaf\xb0\xb1\xb2\xb3\xb4\xb5\xb6\xb7\xb8\xb9\xba\xbb\xbc\xbd\xbe\xbf\xc0\xc1\xc2\xc3\xc4\xc5\xc6\xc7\xc8\xc9\xca\xcb\xcc\xcd\xce\xcf\xd0\xd1\xd2\xd3\xd4\xd5\xd6\xd7\xd8\xd9\xda\xdb\xdc\xdd\xde\xdf\xe0\xe1\xe2\xe3\xe4\xe5\xe6\xe7\xe8\xe9\xea\xeb\xec\xed\xee\xef\xf0\xf1\xf2\xf3\xf4\xf5\xf6\xf7\xf8\xf9\xfa\xfb\xfc\xfd\xfe\xff'
+
+
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+
+abc456789abc
+
+
+
+abc456789abc
+
+
+
+abc4789abc
+
+
+
+b'abc456789abc'
+
+
+
+b'abc456789abc'
+
+
+
+b'abc4569ac'
+
+
+
+b'abc45678abc'
+</code></pre>
+<h1 id="-12"></h1>
+<h1 id="解决分割字符串问题">解决分割字符串问题：</h1>
+<h1 id="390-partition函数"><strong>39.0 partition()函数：</strong></h1>
+<p><strong>描述：根据指定的分隔符(sep)将字符串进行分割。从字符串左边开始索引分隔符sep,索引到则停止索引。</strong></p>
+<p><strong>语法： str.partition(sep) -&gt; (head, sep, tail) 返回一个三元元组，head:分隔符sep前的字符串，sep:分隔符本身，tail:分隔符sep后的字符串。</strong></p>
+<ul>
+<li><strong>sep —— 指定的分隔符。</strong></li>
+<li><strong>如果字符串包含指定的分隔符sep，则返回一个三元元组，第一个为分隔符sep左边的子字符串，第二个为分隔符sep本身，第三个为分隔符sep右边的子字符串。</strong></li>
+<li><strong>如果字符串不包含指定的分隔符sep,仍然返回一个三元元组，第一个元素为字符串本身，第二第三个元素为空字符串</strong></li>
+</ul>
+<h2 id="程序示例-48"><strong>程序示例：</strong></h2>
+<pre><code class="language-python">str = &quot;https://www.baidu.com/&quot;
+
+
+
+print(str.partition(&quot;://&quot;)) #字符串str中存在sep&quot;://&quot;
+
+
+
+print(str.partition(&quot;,&quot;))  #字符串str中不存在sep&quot;,&quot;,返回了两个空字符串。
+
+
+
+print(str.partition(&quot;.&quot;))  #字符串str中存在两个&quot;.&quot; 但索引到www后的&quot;.&quot;  停止索引。
+
+
+
+print(type(str.partition(&quot;://&quot;))) #返回的是tuple类型， 即元组类型
+</code></pre>
+<h2 id="程序运行结果-48"><strong>程序运行结果：</strong></h2>
+<pre><code class="language-html">('https', '://', 'www.baidu.com/')
+
+
+
+('https://www.baidu.com/', '', '')
+
+
+
+('https://www', '.', 'baidu.com/')
+
+
+
+&lt;class 'tuple'&gt;
+</code></pre>
+<h1 id="400-rpartition函数"><strong>40.0 rpartition()函数</strong></h1>
+<p><strong>描述：根据指定的分隔符(sep)将字符串进行分割。从字符串右边(末尾)开始索引分隔符sep,索引到则停止索引。</strong></p>
+<p><strong>语法：str.rpartition(sep) -&gt; (head, sep, tail) 返回一个三元元组，head:分隔符sep前的字符串，sep:分隔符本身，tail:分隔符sep后的字符串。</strong></p>
+<ul>
+<li><strong>sep —— 指定的分隔符。</strong></li>
+<li><strong>如果字符串包含指定的分隔符sep，则返回一个三元元组，第一个为分隔符sep左边的子字符串，第二个为分隔符sep本身，第三个为分隔符sep右边的子字符串。</strong></li>
+<li><strong>如果字符串不包含指定的分隔符sep,仍然返回一个三元元组，第一个元素为字符串本身，第二第三个元素为空字符串。</strong></li>
+</ul>
+<p><strong>注：rpartition()函数与partition()函数用法相似，rpartition()函数从右边(末尾)开始索引，partition()函数从左边开始索引。</strong></p>
+<h2 id="程序示例-49"><strong>程序示例：</strong></h2>
+<pre><code class="language-python">str = &quot;https://www.baidu.com/&quot;
+
+
+
+print(str.rpartition(&quot;://&quot;)) #字符串str中存在sep&quot;://&quot;
+
+
+
+print(str.rpartition(&quot;,&quot;))  #字符串str中不存在sep&quot;,&quot;,返回了两个空字符串。
+
+
+
+print(str.rpartition(&quot;.&quot;))  #字符串str中存在两个&quot;.&quot; 但索引是从右边(末尾)开始，索引到du后的&quot;.&quot;  停止索引。
+
+
+
+print(type(str.partition(&quot;://&quot;))) #返回的也是tuple类型， 即元组类型
+</code></pre>
+<h2 id="程序运行结果-49">程序运行结果：</h2>
+<pre><code class="language-html">('https', '://', 'www.baidu.com/')
+
+
+
+('', '', 'https://www.baidu.com/')
+
+
+
+('https://www.baidu', '.', 'com/')
+
+
+
+&lt;class 'tuple'&gt;
+</code></pre>
+<h1 id="410-split函数"><strong>41.0 split()函数</strong></h1>
+<p><strong>描述：拆分字符串。通过指定分隔符sep对字符串进行分割，并返回分割后的字符串列表。</strong></p>
+<p><strong>语法： str.split(sep=None, maxsplit=-1) -&gt; list of strings 返回 字符串列表 或str.split(sep=None, maxsplit=-1)[n]</strong></p>
+<ul>
+<li><strong>sep —— 分隔符，默认为空格,但不能为空即(&quot;)。</strong></li>
+<li><strong>maxsplit —— 最大分割参数，默认参数为-1。</strong></li>
+<li><strong>[n] —— 返回列表中下标为n的元素。列表索引的用法。</strong></li>
+</ul>
+<h2 id="程序示例-50"><strong>程序示例：</strong></h2>
+<pre><code class="language-python">str1 = &quot;i love python&quot;
+
+
+
+str2 = &quot;https://www.baidu.com&quot;
+
+
+
+str3 = &quot;script&lt;i love python&gt;script&quot;
+
+
+
+str4 = &quot;i \n love \n python&quot;
+
+
+
+print(str1.split()) #默认空格分割。
+
+
+
+print(str2.split(&quot;.&quot;))#以&quot;.&quot;为分隔符,maxsplit默认为-1
+
+
+
+print(str2.split(&quot;.&quot;,-1)) #maxsplit为-1
+
+
+
+print(str2.split(&quot;.&quot;,1)) #以&quot;.&quot;为分隔符,分割一次。
+
+
+
+print(str2.split(&quot;.&quot;)[1]) #分割后，输出列表中下标为1的元素
+
+
+
+print(str3.split(&quot;&lt;&quot;)[1].split(&quot;&gt;&quot;)[0])
+
+
+
+print(str4.split(&quot;\n&quot;)) #可用于去掉字符串中的&quot;\n&quot; &quot;\t&quot;等
+</code></pre>
+<h2 id="程序运行结果-50">程序运行结果：</h2>
+<pre><code class="language-html">['i', 'love', 'python']
+
+
+
+['https://www', 'baidu', 'com']
+
+
+
+['https://www', 'baidu', 'com']
+
+
+
+['https://www', 'baidu.com']
+
+
+
+baidu
+
+
+
+i love python
+
+
+
+['i ', ' love ', ' python']
+</code></pre>
+<h1 id="420-rsplit函数"><strong>42.0 rsplit()函数</strong></h1>
+<p><strong>描述：拆分字符串。通过指定分隔符sep对字符串进行分割，并返回分割后的字符串列表,类似于split()函数，只不过 rsplit()函数是从字符串右边(末尾)开始分割。</strong></p>
+<p><strong>语法： str.rsplit(sep=None, maxsplit=-1) -&gt; list of strings 返回 字符串列表 或str.rsplit(sep=None, maxsplit=-1)[n]</strong></p>
+<ul>
+<li><strong>sep —— 分隔符，默认为空格,但不能为空即(&quot;)。</strong></li>
+<li><strong>maxsplit —— 最大分割参数，默认参数为-1。</strong></li>
+<li><strong>[n] —— 返回列表中下标为n的元素。列表索引的用法。</strong></li>
+</ul>
+<h2 id="程序示例-51"><strong>程序示例：</strong></h2>
+<pre><code class="language-python">str = &quot;https://www.baidu.com&quot;
+
+
+
+print(str.rsplit()) #默认空格分割。
+
+
+
+print(str.rsplit(&quot;.&quot;)) #以&quot;.&quot;为分隔符,maxsplit默认为-1
+
+
+
+print(str.rsplit(&quot;.&quot;,1)) #以&quot;.&quot;为分隔符,分割一次。从字符串右边(末尾)开始分割。
+
+
+
+print(str.rsplit(&quot;.&quot;,1)[1]) #分割后，输出列表中下标为1的元素
+</code></pre>
+<h2 id="程序运行结果-51">程序运行结果：</h2>
+<pre><code class="language-html">['https://www.baidu.com']
+
+
+
+['https://www', 'baidu', 'com']
+
+
+
+['https://www.baidu', 'com']
+
+
+
+com
+</code></pre>
+<h1 id="430-splitlines函数"><strong>43.0 splitlines()函数</strong></h1>
+<p><strong>描述：按照('\n', '\r', \r\n'等)分隔，返回一个包含各行作为元素的列表，默认不包含换行符。</strong></p>
+<table>
+<thead>
+<tr>
+<th><em>符号</em></th>
+<th><em>描述</em></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>\n</em></td>
+<td><em>换行符</em></td>
+</tr>
+<tr>
+<td><em>\r</em></td>
+<td><em>回车符</em></td>
+</tr>
+<tr>
+<td><em>\r\n</em></td>
+<td><em>回车+换行</em></td>
+</tr>
+</tbody>
+</table>
+<p><strong>语法：str.splitlines(keepends) -&gt; list of strings 返回 字符串列表</strong></p>
+<ul>
+<li><strong>keepends —— 默认参数为False ，译为 不保留换行符。参数为True , 译为 保留换行符。</strong></li>
+</ul>
+<h2 id="程序示例-52"><strong>程序示例：</strong></h2>
+<pre><code class="language-python">s1 = &quot;&quot;&quot;i
+
+
+
+love
+
+
+
+python
+
+
+
+&quot;&quot;&quot;
+
+
+
+s2 = &quot;i\nlove\npython\n&quot; #与s1等效。
+
+
+
+s3 = &quot;123\n456\r789\r\nabc&quot;
+
+
+
+print(s1.splitlines(True)) 
+
+
+
+print(s1.splitlines()) #keepends 默认为False
+
+
+
+print(s1.splitlines(False))
+
+
+
+print(s2.splitlines())
+
+
+
+print(s3.splitlines()) #遇到(&quot;\n&quot;  &quot;\r&quot;  &quot;\r\n&quot;等)即分隔。
+</code></pre>
+<h2 id="程序运行结果-52">程序运行结果：</h2>
+<pre><code class="language-html">['i\n', 'love\n', 'python\n']
+
+
+
+['i', 'love', 'python']
+
+
+
+['i', 'love', 'python']
+
+
+
+['i', 'love', 'python']
+
+
+
+['123', '456', '789', 'abc']
+</code></pre>
+<h1 id="440-join函数"><strong>44.0 join()函数</strong></h1>
+<p><strong>描述：将iterable变量的每一个元素后增加一个str字符串。</strong></p>
+<p><strong>语法： str.join(iterable) -&gt; str 返回字符串 即：返回一个以str作为分隔符，将iterable中的各元素合并连接成一个新的字符串。</strong></p>
+<ul>
+<li><strong>str——分隔符。可以为空。</strong></li>
+<li><strong>iterable—— 要连接的变量 ，可以是 字符串，元组，字典，列表等。</strong></li>
+</ul>
+<h2 id="程序示例-53"><strong>程序示例：</strong></h2>
+<pre><code class="language-python">#对列表进行操作
+
+
+
+l = [&quot;1&quot;,&quot;2&quot;,&quot;3&quot;]
+
+
+
+print(&quot; &quot;.join(l)) #以空格为分隔符
+
+
+
+print(&quot;,&quot;.join(l)) #以逗号为分隔符
+
+
+
+ 
+
+
+
+ 
+
+
+
+#对字符串进行操作
+
+
+
+str = &quot;python&quot;
+
+
+
+print(&quot; &quot;.join(str)) #以空格为分隔符
+
+
+
+print(&quot;,&quot;.join(str)) #以逗号为分隔符
+
+
+
+ 
+
+
+
+#对字典进行操作
+
+
+
+d = {&quot;a&quot;:1,&quot;b&quot;:2,&quot;c&quot;:3}
+
+
+
+print(&quot; &quot;.join(d)) #以空格为分隔符
+
+
+
+print(&quot;,&quot;.join(d)) #以逗号为分隔符
+
+
+
+ 
+
+
+
+#对元组进行操作
+
+
+
+s = (&quot;1&quot;,&quot;2&quot;,&quot;3&quot;)
+
+
+
+print(&quot; &quot;.join(s)) #以空格为分隔符
+
+
+
+print(&quot;,&quot;.join(s)) #以逗号为分隔符
+</code></pre>
+<h2 id="程序运行结果-53">程序运行结果：</h2>
+<pre><code class="language-html">1 2 3
+
+
+
+1,2,3
+
+
+
+ 
+
+
+
+p y t h o n
+
+
+
+p,y,t,h,o,n
+
+
+
+ 
+
+
+
+b c a
+
+
+
+b,c,a
+
+
+
+ 
+
+
+
+1 2 3
+
+
+
+1,2,3
+</code></pre>
+<h1 id="-13"></h1>
+<h1 id="解决替换问题"><strong>解决替换问题：</strong></h1>
+<h1 id="450-replace函数"><strong>45.0 replace()函数：</strong></h1>
+<p><strong>描述：返回字符串str的副本，所有old子字符串被替换为new字符串。</strong></p>
+<p><strong>语法：str.replace(old, new, count) -&gt; str 返回字符串str的副本</strong></p>
+<ul>
+<li><strong>old —— 将被替换的子字符串。</strong></li>
+<li><strong>new —— 新子字符串，用于替换old子字符串。</strong></li>
+<li><strong>count —— 替换的次数，默认全部替换。</strong></li>
+</ul>
+<h2 id="程序示例-54"><strong>程序示例：</strong></h2>
+<pre><code class="language-python">s = &quot;i love python python &quot;
+
+
+
+print(s.replace(&quot;o&quot;,&quot;w&quot;)) #默认字符串中的全部&quot;o&quot; 全部替换为&quot;w&quot;
+
+
+
+print(s.replace(&quot;o&quot;,&quot;w&quot;,2)) #只替换掉前两个子字符串 &quot;o&quot;
+
+
+
+print(s.replace(&quot;python&quot;,&quot;c++&quot;))  #子字符串可以是多个字符。
+
+
+
+print(s.replace(&quot;python&quot;,&quot;c++&quot;,1))
+</code></pre>
+<h2 id="程序运行结果-54">程序运行结果：</h2>
+<pre><code class="language-html">i lwve pythwn pythwn 
+
+
+
+i lwve pythwn python 
+
+
+
+i love c++ c++ 
+
+
+
+i love c++ python
+</code></pre>
+
+                </div>
+            </article>
+        </div>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://ganhan999.github.io/post/58、最后一个单词的长度/" class="post-title gt-a-link">
+                    58、最后一个单词的长度
+                </a>
+            </div>
+        
+
+        
+
+        
+
+        
+
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first">温故而知新</div>
+    <div class="social-container">
+        
+            
+        
+            
+        
+            
+        
+            
+                <a href="https://www.zhihu.com/hot" target="_blank">
+                    <i class="fab fa-zhihu gt-c-content-color-first"></i>
+                </a>
+            
+        
+            
+        
+            
+        
+    </div>
+    <div class="footer-info">
+        Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+    </div>
+    <div>
+        Theme by <a href="https://imhanjie.com/" target="_blank">imhanjie</a>, Powered by <a
+                href="https://github.com/getgridea/gridea" target="_blank">Gridea | <a href="https://ganhan999.github.io//atom.xml" target="_blank">RSS</a></a>
+    </div>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,887 @@
+<html>
+<head>
+    <meta charset="utf-8"/>
+<meta name="description" content=""/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+<title>Python算法入门（数据结构） | Gridea</title>
+
+<link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1615809991680">
+
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://ganhan999.github.io//styles/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dockerfile.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dart.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script>
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
+
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css">
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg">
+    <div class="navbar-brand">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            Gridea
+        </div>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
+            
+                <div class="nav-item">
+                    
+                        <a href="/" class="menu gt-a-link">
+                            首页
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/archives" class="menu gt-a-link">
+                            归档
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/tags" class="menu gt-a-link">
+                            标签
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/post/about" class="menu gt-a-link">
+                            关于
+                        </a>
+                    
+                </div>
+            
+        </div>
+        <div style="text-align: center">
+            <form id="gridea-search-form" style="position: relative" data-update="1615809991680" action="/search/index.html">
+                <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+                <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+        </div>
+    </div>
+</nav>
+
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    Python算法入门（数据结构）
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2020-11-25 ·
+                    </time>
+                    
+                        <a href="https://ganhan999.github.io/tag/2UGIvmMaOp/" class="post-tags">
+                            # Python
+                        </a>
+                    
+                </div>
+                <div class="post-content">
+                    <h1 id="数据结构">数据结构</h1>
+<p><strong>1、栈</strong></p>
+<pre><code class="language-python">class Stack:
+    def __init__(self):#初始化
+        self.stack = []
+
+    def push(self, element):#入栈
+        self.stack.append(element)
+
+    def pop(self):#出栈
+        return self.stack.pop()
+
+    def get_top(self):#获得栈顶的元素值
+        if len(self.stack) &gt; 0:
+            return self.stack[-1]
+        else:
+            return None
+
+    def is_empty(self):#判断是否为空栈
+        return len(self.stack) == 0
+</code></pre>
+<p><strong>2、利用栈进行括号匹配</strong></p>
+<pre><code class="language-python">def brace_match(s):
+    match = {'}':'{', ']':&quot;[&quot;, ')':'('}
+    stack = Stack()
+    for ch in s:
+        if ch in {'(','[','{'}:
+            stack.push(ch)
+        else:   #ch in {'}',']',')'}
+            if stack.is_empty():
+                return False
+            elif stack.get_top() == match[ch]:
+                stack.pop()
+            else: # stack.get_top() != match[ch]
+                return False
+    if stack.is_empty():#最后还要判断是否为空
+        return True
+    else:
+        return False
+print(brace_match('[{()}(){()}[]({}){}]'))
+print(brace_match('[]}'))
+</code></pre>
+<p><strong>3、队列</strong></p>
+<pre><code class="language-python">#-----------------------方法1----------------------------#
+class Queue:#初始化
+    def __init__(self, size=100):
+        self.queue = [0 for _ in range(size)]
+        self.size = size
+        self.rear = 0  # 队尾指针
+        self.front = 0 # 队首指针
+
+    def push(self, element):#入队
+        if not self.is_filled():
+            self.rear = (self.rear + 1) % self.size
+            self.queue[self.rear] = element
+        else:
+            raise IndexError(&quot;Queue is filled.&quot;)
+
+    def pop(self):#出队
+        if not self.is_empty():
+            self.front = (self.front + 1) % self.size
+            return self.queue[self.front]
+        else:
+            raise IndexError(&quot;Queue is empty.&quot;)
+
+    # 判断队空
+    def is_empty(self):
+        return self.rear == self.front
+
+    # 判断队满
+    def is_filled(self):
+        return (self.rear + 1) % self.size == self.front
+    
+q = Queue(5)
+for i in range(4):
+    q.push(i)
+print(q.pop())
+q.push(4)
+
+#-----------------------方法2----------------------------#
+from collections import deque
+
+q = deque([1,2,3,4,5], 5)
+q.append(6) # 队尾进队
+print(q.popleft()) # 队首出队
+</code></pre>
+<p><strong>4、链表</strong></p>
+<pre><code class="language-python">class Node:#定义一个链表节点
+    def __init__(self, item):
+        self.item = item
+        self.next = None
+        
+def create_linklist_head(li):#头插法
+    head = Node(li[0])
+    for element in li[1:]:
+        node = Node(element)
+        node.next = head
+        head = node
+    return head
+
+def create_linklist_tail(li):#尾插法
+    head = Node(li[0])
+    tail = head
+    for element in li[1:]:
+        node = Node(element)
+        tail.next = node
+        tail = node
+    return head
+
+def print_linklist(lk):
+    while lk:
+        print(lk.item, end=',')
+        lk = lk.next        
+        
+lk = create_linklist_tail([1,2,3,6,8])
+print_linklist(lk)
+</code></pre>
+<p><strong>5、二叉树</strong></p>
+<pre><code class="language-python">class BiTreeNode:
+    def __init__(self, data):
+        self.data = data
+        self.lchild = None   # 左孩子
+        self.rchild = None # 右孩子
+
+def pre_order(root):#先序遍历
+    if root:
+        print(root.data, end=',')
+        pre_order(root.lchild)
+        pre_order(root.rchild)
+
+def in_order(root):#中序遍历
+    if root:
+        in_order(root.lchild)
+        print(root.data, end=',')
+        in_order(root.rchild)
+
+def post_order(root):#后序遍历
+    if root:
+        post_order(root.lchild)
+        post_order(root.rchild)
+        print(root.data, end=',')
+
+def level_order(root):#
+    queue = deque()
+    queue.append(root)
+    while len(queue) &gt; 0: # 只要队不空
+        node = queue.popleft()
+        print(node.data, end=',')
+        if node.lchild:
+            queue.append(node.lchild)
+        if node.rchild:
+            queue.append(node.rchild)
+a = BiTreeNode(&quot;A&quot;)
+b = BiTreeNode(&quot;B&quot;)
+c = BiTreeNode(&quot;C&quot;)
+d = BiTreeNode(&quot;D&quot;)
+e = BiTreeNode(&quot;E&quot;)
+f = BiTreeNode(&quot;F&quot;)
+g = BiTreeNode(&quot;G&quot;)
+
+e.lchild = a
+e.rchild = g
+a.rchild = c
+c.lchild = b
+c.rchild = d
+g.rchild = f
+
+root = e
+
+
+pre_order(root)
+print(&quot;&quot;)
+in_order(root)
+print(&quot;&quot;)
+post_order(root)
+print(&quot;&quot;)
+level_order(root)
+</code></pre>
+<p><strong>6、二分查找树</strong></p>
+<pre><code class="language-python">class BiTreeNode:
+    def __init__(self, data):
+        self.data = data
+        self.lchild = None   # 左孩子
+        self.rchild = None  # 右孩子
+        self.parent = None
+
+class BST:
+    def __init__(self, li=None):
+        self.root = None
+        if li:
+            for val in li:
+                self.insert_no_rec(val)
+
+    def insert(self, node, val):
+        if not node:
+            node = BiTreeNode(val)
+        elif val &lt; node.data:
+            node.lchild = self.insert(node.lchild, val)
+            node.lchild.parent = node
+        elif val &gt; node.data:
+            node.rchild = self.insert(node.rchild, val)
+            node.rchild.parent = node
+        return node
+
+    def insert_no_rec(self, val):
+        p = self.root
+        if not p:               # 空树
+            self.root = BiTreeNode(val)
+            return
+        while True:
+            if val &lt; p.data:
+                if p.lchild:
+                    p = p.lchild
+                else:           # 左孩子不存在
+                    p.lchild = BiTreeNode(val)
+                    p.lchild.parent = p
+                    return
+            elif val &gt; p.data:
+                if p.rchild:
+                    p = p.rchild
+                else:
+                    p.rchild = BiTreeNode(val)
+                    p.rchild.parent = p
+                    return
+            else:
+                return
+
+    def query(self, node, val):
+        if not node:
+            return None
+        if node.data &lt; val:
+            return self.query(node.rchild, val)
+        elif node.data &gt; val:
+            return self.query(node.lchild, val)
+        else:
+            return node
+
+    def query_no_rec(self, val):
+        p = self.root
+        while p:
+            if p.data &lt; val:
+                p = p.rchild
+            elif p.data &gt; val:
+                p = p.lchild
+            else:
+                return p
+        return None
+
+    def pre_order(self, root):
+        if root:
+            print(root.data, end=',')
+            self.pre_order(root.lchild)
+            self.pre_order(root.rchild)
+
+    def in_order(self, root):
+        if root:
+            self.in_order(root.lchild)
+            print(root.data, end=',')
+            self.in_order(root.rchild)
+
+    def post_order(self, root):
+        if root:
+            self.post_order(root.lchild)
+            self.post_order(root.rchild)
+            print(root.data, end=',')
+
+
+    def __remove_node_1(self, node):
+        # 情况1：node是叶子节点
+        if not node.parent:
+            self.root = None
+        if node == node.parent.lchild:  #node是它父亲的左孩子
+            node.parent.lchild = None
+        else:   #右孩子
+            node.parent.rchild = None
+
+    def __remove_node_21(self, node):
+        # 情况2.1：node只有一个左孩子
+        if not node.parent: # 根节点
+            self.root = node.lchild
+            node.lchild.parent = None
+        elif node == node.parent.lchild:
+            node.parent.lchild = node.lchild
+            node.lchild.parent = node.parent
+        else:
+            node.parent.rchild = node.lchild
+            node.lchild.parent = node.parent
+
+    def __remove_node_22(self, node):
+        # 情况2.2：node只有一个右孩子
+        if not node.parent:
+            self.root = node.rchild
+        elif node == node.parent.lchild:
+            node.parent.lchild = node.rchild
+            node.rchild.parent = node.parent
+        else:
+            node.parent.rchild = node.rchild
+            node.rchild.parent = node.parent
+
+
+    def delete(self, val):
+        if self.root:   # 不是空树
+            node = self.query_no_rec(val)
+            if not node: # 不存在
+                return False
+            if not node.lchild and not node.rchild: #1. 叶子节点
+                self.__remove_node_1(node)
+            elif not node.rchild:       # 2.1 只有一个左孩子
+                self.__remove_node_21(node)
+            elif not node.lchild:       # 2.2 只有一个右孩子
+                self.__remove_node_22(node)
+            else:   # 3. 两个孩子都有
+                min_node = node.rchild
+                while min_node.lchild:
+                    min_node = min_node.lchild
+                node.data = min_node.data
+                # 删除min_node
+                if min_node.rchild:
+                    self.__remove_node_22(min_node)
+                else:
+                    self.__remove_node_1(min_node)
+</code></pre>
+<p><strong>7、二叉平衡树</strong></p>
+<pre><code class="language-python">class AVLNode(BiTreeNode):
+    def __init__(self, data):
+        BiTreeNode.__init__(self, data)
+        self.bf = 0
+
+class AVLTree(BST):
+    def __init__(self, li=None):
+        BST.__init__(self, li)
+
+    def rotate_left(self, p, c):
+        s2 = c.lchild
+        p.rchild = s2
+        if s2:
+            s2.parent = p
+
+        c.lchild = p
+        p.parent = c
+
+        p.bf = 0
+        c.bf = 0
+        return c
+
+    def rotate_right(self, p, c):
+        s2 = c.rchild
+        p.lchild = s2
+        if s2:
+            s2.parent = p
+
+        c.rchild = p
+        p.parent = c
+
+        p.bf = 0
+        c.bf = 0
+        return c
+
+    def rotate_right_left(self, p, c):
+        g = c.lchild
+
+        s3 = g.rchild
+        c.lchild = s3
+        if s3:
+            s3.parent = c
+        g.rchild = c
+        c.parent = g
+
+        s2 = g.lchild
+        p.rchild = s2
+        if s2:
+            s2.parent = p
+        g.lchild = p
+        p.parent = g
+
+        # 更新bf
+        if g.bf &gt; 0:
+            p.bf = -1
+            c.bf = 0
+        elif g.bf &lt; 0:
+            p.bf = 0
+            c.bf = 1
+        else: # 插入的是g
+            p.bf = 0
+            c.bf = 0
+        return g
+
+    def rotate_left_right(self, p, c):
+        g = c.rchild
+
+        s2 = g.lchild
+        c.rchild = s2
+        if s2:
+            s2.parent = c
+        g.lchild = c
+        c.parent = g
+
+        s3 = g.rchild
+        p.lchild = s3
+        if s3:
+            s3.parent = p
+        g.rchild = p
+        p.parent = g
+
+        # 更新bf
+        if g.bf &lt; 0:
+            p.bf = 1
+            c.bf = 0
+        elif g.bf &gt; 0:
+            p.bf = 0
+            c.bf = -1
+        else:
+            p.bf = 0
+            c.bf = 0
+        return g
+
+
+
+    def insert_no_rec(self, val):
+        # 1. 和BST一样，插入
+        p = self.root
+        if not p:  # 空树
+            self.root = AVLNode(val)
+            return
+        while True:
+            if val &lt; p.data:
+                if p.lchild:
+                    p = p.lchild
+                else:  # 左孩子不存在
+                    p.lchild = AVLNode(val)
+                    p.lchild.parent = p
+                    node = p.lchild # node 存储的就是插入的节点
+                    break
+            elif val &gt; p.data:
+                if p.rchild:
+                    p = p.rchild
+                else:
+                    p.rchild = AVLNode(val)
+                    p.rchild.parent = p
+                    node = p.rchild
+                    break
+            else:   # val == p.data
+                return
+
+        # 2. 更新balance factor
+        while node.parent:  # node.parent不空
+            if node.parent.lchild == node: # 传递是从左子树来的，左子树更沉了
+                #更新node.parent的bf -= 1
+                if node.parent.bf &lt; 0: # 原来node.parent.bf == -1, 更新后变成-2
+                    # 做旋转
+                    # 看node哪边沉
+                    g = node.parent.parent # 为了连接旋转之后的子树
+                    x = node.parent  # 旋转前的子树的根
+                    if node.bf &gt; 0:
+                        n = self.rotate_left_right(node.parent, node)
+                    else:
+                        n = self.rotate_right(node.parent, node)
+                    # 记得：把n和g连起来
+                elif node.parent.bf &gt; 0: # 原来node.parent.bf = 1，更新之后变成0
+                    node.parent.bf = 0
+                    break
+                else: # 原来node.parent.bf = 0，更新之后变成-1
+                    node.parent.bf = -1
+                    node = node.parent
+                    continue
+            else: # 传递是从右子树来的，右子树更沉了
+                #更新node.parent.bf += 1
+                if node.parent.bf &gt; 0:  # 原来node.parent.bf == 1, 更新后变成2
+                    # 做旋转
+                    # 看node哪边沉
+                    g = node.parent.parent # 为了连接旋转之后的子树
+                    x = node.parent  # 旋转前的子树的根
+                    if node.bf &lt; 0: # node.bf = 1
+                        n = self.rotate_right_left(node.parent, node)
+                    else:   # node.bf = -1
+                        n = self.rotate_left(node.parent, node)
+                    # 记得连起来
+                elif node.parent.bf &lt; 0: # 原来node.parent.bf = -1，更新之后变成0
+                    node.parent.bf = 0
+                    break
+                else: # 原来node.parent.bf = 0，更新之后变成1
+                    node.parent.bf = 1
+                    node = node.parent
+                    continue
+
+            # 链接旋转后的子树
+            n.parent = g
+            if g: # g不是空
+                if x == g.lchild:
+                    g.lchild = n
+                else:
+                    g.rchild = n
+                break
+            else:
+                self.root = n
+                break
+
+
+tree = AVLTree([9,8,7,6,5,4,3,2,1])
+
+tree.pre_order(tree.root)
+print(&quot;&quot;)
+tree.in_order(tree.root)
+
+</code></pre>
+<p><strong>8、哈希表</strong></p>
+<pre><code class="language-python">class LinkList:
+    class Node:
+        def __init__(self, item=None):
+            self.item = item
+            self.next = None
+
+    class LinkListIterator:
+        def __init__(self, node):
+            self.node = node
+
+        def __next__(self):
+            if self.node:
+                cur_node = self.node
+                self.node = cur_node.next
+                return cur_node.item
+            else:
+                raise StopIteration
+
+        def __iter__(self):
+            return self
+
+    def __init__(self, iterable=None):
+        self.head = None
+        self.tail = None
+        if iterable:
+            self.extend(iterable)
+
+    def append(self, obj):
+        s = LinkList.Node(obj)
+        if not self.head:
+            self.head = s
+            self.tail = s
+        else:
+            self.tail.next = s
+            self.tail = s
+
+    def extend(self, iterable):
+        for obj in iterable:
+            self.append(obj)
+
+    def find(self, obj):
+        for n in self:
+            if n == obj:
+                return True
+        else:
+            return False
+
+    def __iter__(self):
+        return self.LinkListIterator(self.head)
+
+    def __repr__(self):
+        return &quot;&lt;&lt;&quot;+&quot;, &quot;.join(map(str, self))+&quot;&gt;&gt;&quot;
+
+# 类似于集合的结构
+class HashTable:
+    def __init__(self, size=101):
+        self.size = size
+        self.T = [LinkList() for i in range(self.size)]
+
+    def h(self, k):
+        return k % self.size
+
+    def insert(self, k):
+        i = self.h(k)
+        if self.find(k):
+            print(&quot;Duplicated Insert.&quot;)
+        else:
+            self.T[i].append(k)
+
+    def find(self, k):
+        i = self.h(k)
+        return self.T[i].find(k)
+
+
+ht = HashTable()
+
+ht.insert(0)
+ht.insert(1)
+ht.insert(3)
+ht.insert(102)
+ht.insert(508)
+
+#print(&quot;,&quot;.join(map(str, ht.T)))
+print(ht.find(203))
+</code></pre>
+<p><strong>9、基数排序</strong></p>
+<pre><code class="language-python">def radix_sort(li):
+    max_num=max(li)
+    it=0
+    while 10**it &lt;=max_num:
+        bucket=[[] for _ in range(10)]
+        for var in li:
+             # 987 it=1  987//10-&gt;98 98%10-&gt;8;    it=2  987//100-&gt;9 9%10=9
+                digit=(var//10**it)%10
+                bucket[digit].append(var)
+        li.clear()
+        for buc in bucket:
+            li.extend(buc)
+        it=it+1
+    return li
+
+li = [3,4,2,1,5,6,8,7,9]
+print(li)
+print(radix_sort(li))
+</code></pre>
+<p><strong>10、迷宫问题</strong></p>
+<pre><code class="language-python">#-----------------------栈方法----------------------------#
+maze = [
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 0, 0, 1, 0, 0, 0, 1, 0, 1],
+    [1, 0, 0, 1, 0, 0, 0, 1, 0, 1],
+    [1, 0, 0, 0, 0, 1, 1, 0, 0, 1],
+    [1, 0, 1, 1, 1, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 1, 0, 0, 0, 0, 1],
+    [1, 0, 1, 0, 0, 0, 1, 0, 0, 1],
+    [1, 0, 1, 1, 1, 0, 1, 1, 0, 1],
+    [1, 1, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+]
+
+dirs = [
+    lambda x,y: (x+1,y),
+    lambda x,y: (x-1,y),
+    lambda x,y: (x,y-1),
+    lambda x,y: (x,y+1)
+]
+
+def maze_path(x1,y1,x2,y2):
+    stack = []
+    stack.append((x1, y1))
+    while(len(stack)&gt;0):
+        curNode = stack[-1] # 当前的节点
+        if curNode[0] == x2 and curNode[1] == y2:
+            # 走到终点了
+            for p in stack:
+                print(p)
+            return True
+
+        # x,y 四个方向 x-1,y; x+1,y; x,y-1; x,y+1
+        for dir in dirs:
+            nextNode = dir(curNode[0], curNode[1])
+            # 如果下一个节点能走
+            if maze[nextNode[0]][nextNode[1]] == 0:
+                stack.append(nextNode)
+                maze[nextNode[0]][nextNode[1]] = 2 # 2表示为已经走过
+                break
+        else:
+            maze[nextNode[0]][nextNode[1]] = 2
+            stack.pop()
+    else:
+        print(&quot;没有路&quot;)
+        return False
+
+maze_path(1,1,8,8)
+    
+  
+    
+#-----------------------队列方法----------------------------#
+from collections import deque
+
+maze = [
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 0, 0, 1, 0, 0, 0, 1, 0, 1],
+    [1, 0, 0, 1, 0, 0, 0, 1, 0, 1],
+    [1, 0, 0, 0, 0, 1, 1, 0, 0, 1],
+    [1, 0, 1, 1, 1, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 1, 0, 0, 0, 0, 1],
+    [1, 0, 1, 0, 0, 0, 1, 0, 0, 1],
+    [1, 0, 1, 1, 1, 0, 1, 1, 0, 1],
+    [1, 1, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+]
+
+dirs = [
+    lambda x, y: (x + 1, y),
+    lambda x, y: (x - 1, y),
+    lambda x, y: (x, y - 1),
+    lambda x, y: (x, y + 1)
+]
+
+
+def print_r(path):
+    curNode = path[-1]
+
+    realpath = []
+
+    while curNode[2] == -1:
+        realpath.append(curNode[0:2])
+        curNode = path[curNode[2]]
+
+    realpath.append(curNode[0:2])  # 起点
+    realpath.reverse()
+    for node in realpath:
+        print(node)
+
+
+def maze_path_queue(x1, y1, x2, y2):
+    queue = deque()
+    queue.append((x1, y1, -1))
+    path = []
+    while len(queue) &gt; 0:
+        curNode = queue.pop()
+        path.append(curNode)
+        if curNode[0] == x2 and curNode[1] == y2:
+            # 终点
+            print_r(path)
+            return True
+        for dir in dirs:
+            nextNode = dir(curNode[0], curNode[1])
+            if maze[nextNode[0]][nextNode[1]] == 0:
+                queue.append((nextNode[0], nextNode[1], len(path) - 1))  # 后续节点进队，记录哪个节点带他来的
+                maze[nextNode[0]][nextNode[1]] = 2  # 标记为已经走过
+    else:
+        print(&quot;没有路&quot;)
+        return False
+
+
+maze_path_queue(1, 1, 8, 8)
+</code></pre>
+
+                </div>
+            </article>
+        </div>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://ganhan999.github.io/post/119、杨辉三角 II /" class="post-title gt-a-link">
+                    119、杨辉三角 II 
+                </a>
+            </div>
+        
+
+        
+
+        
+
+        
+
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first">温故而知新</div>
+    <div class="social-container">
+        
+            
+        
+            
+        
+            
+        
+            
+                <a href="https://www.zhihu.com/hot" target="_blank">
+                    <i class="fab fa-zhihu gt-c-content-color-first"></i>
+                </a>
+            
+        
+            
+        
+            
+        
+    </div>
+    <div class="footer-info">
+        Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+    </div>
+    <div>
+        Theme by <a href="https://imhanjie.com/" target="_blank">imhanjie</a>, Powered by <a
+                href="https://github.com/getgridea/gridea" target="_blank">Gridea | <a href="https://ganhan999.github.io//atom.xml" target="_blank">RSS</a></a>
+    </div>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+    </div>
+</div>
+</body>
+</html>

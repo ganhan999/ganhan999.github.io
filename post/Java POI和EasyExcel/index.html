@@ -1,0 +1,803 @@
+<html>
+<head>
+    <meta charset="utf-8"/>
+<meta name="description" content=""/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+<title>Java POI和EasyExcel | Gridea</title>
+
+<link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1615809991680">
+
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://ganhan999.github.io//styles/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dockerfile.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dart.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script>
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
+
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css">
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg">
+    <div class="navbar-brand">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            Gridea
+        </div>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
+            
+                <div class="nav-item">
+                    
+                        <a href="/" class="menu gt-a-link">
+                            首页
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/archives" class="menu gt-a-link">
+                            归档
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/tags" class="menu gt-a-link">
+                            标签
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/post/about" class="menu gt-a-link">
+                            关于
+                        </a>
+                    
+                </div>
+            
+        </div>
+        <div style="text-align: center">
+            <form id="gridea-search-form" style="position: relative" data-update="1615809991680" action="/search/index.html">
+                <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+                <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+        </div>
+    </div>
+</nav>
+
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    Java POI和EasyExcel
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2021-01-27 ·
+                    </time>
+                    
+                        <a href="https://ganhan999.github.io/tag/pVOKe1jE1_/" class="post-tags">
+                            # Java
+                        </a>
+                    
+                </div>
+                <div class="post-content">
+                    <h1 id="跟着狂神聊聊poi和easyexcel">跟着狂神聊聊POI和EasyExcel</h1>
+<h2 id="poi和easyexcel讲解">POI和easyExcel讲解</h2>
+<h3 id="常用信息">常用信息</h3>
+<ol>
+<li>将用户信息导出为excel表格</li>
+<li>讲Excel表中的信息录入到网站数据库，大大减小网站数据的录入量！</li>
+</ol>
+<p>开发中经常会涉及到excel的处理，如导出Excel到数据库中！<br>
+操作Excel目前比较流行的就是Apache POI和阿里巴巴的easyExcel</p>
+<h3 id="apache-poi">Apache POI</h3>
+<p>Apache POI官网: <code>https://poi.apache.org/</code></p>
+<p><img src="https://img-blog.csdnimg.cn/20201127202918819.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NhaWVuZW5lbg==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"><br>
+easyExcel</p>
+<p>easyExcel官网地址: <code>https://github.com/alibaba/easyexcel</code></p>
+<p><img src="https://img-blog.csdnimg.cn/20201127202959370.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NhaWVuZW5lbg==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"><br>
+EasyExcel是阿里巴巴开源的一个excel处理框架，以使用简单，节约内存著称。<br>
+EasyExcel能大量减少占用内存的主要原因是在解析Excel时没有将文件数据一次性全部加载到内存中，而是从一个磁盘上一行行读取数据，逐个解析。<br>
+下图是EasyExcel和POI在解析Excel时的对比图(时间与空间的相互取舍)。</p>
+<figure data-type="image" tabindex="1"><img src="https://img-blog.csdnimg.cn/20201127203049787.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NhaWVuZW5lbg==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
+<p>官方文档: <code>https://www.yuque.com/easyexcel/doc/easyexcel</code></p>
+<h3 id="poi-excel操作">POI-Excel操作</h3>
+<h4 id="poi-excel写">POI-Excel写</h4>
+<blockquote>
+<p>创建项目</p>
+</blockquote>
+<ol>
+<li>创建一个普通空项目,然后新建一个model的maven项目</li>
+<li>引入pom依赖</li>
+</ol>
+<pre><code class="language-xml">&lt;!--导入依赖--&gt;
+&lt;dependencies&gt;
+	&lt;!--xLs(03)--&gt;
+	&lt;dependency&gt;
+		&lt;groupId&gt;org.apache.poi&lt;/groupId&gt;
+		&lt;artifactId&gt;poi&lt;/artifactId&gt;
+		&lt;version &gt;3.9&lt;/version&gt;
+	&lt;/dependency&gt;
+	&lt;!--xLsx(07)--&gt;
+	 &lt;dependency&gt;
+        &lt;groupId&gt;org.apache.poi&lt;/groupId&gt;
+        &lt;artifactId&gt;poi-ooxml&lt;/artifactId&gt;
+        &lt;version&gt;3.9&lt;/version&gt;
+     &lt;/dependency&gt;
+	&lt;!--日期格式化工具--&gt;
+	&lt;dependency&gt;
+		&lt;groupId&gt;joda-time&lt;/groupId&gt;
+		&lt;artifactId&gt;joda-time&lt;/artifactId&gt;
+		&lt;version&gt;2.10.1&lt;/version&gt;
+	&lt;/dependency&gt;
+	&lt;!--test--&gt;
+	&lt;dependency&gt;
+		&lt;groupId&gt;junit&lt;/groupId&gt;
+		&lt;artifactId&gt;junit&lt;/artifactId&gt;
+		&lt;version&gt;4.12&lt;/version&gt;
+	&lt;/dependency&gt;
+&lt;/dependencies&gt;
+</code></pre>
+<h4 id="0307版本的写就是对象不同方法是一样的">03|07版本的写，就是对象不同，方法是一样的</h4>
+<p>区别：03版最多65536行，07行数没有限制</p>
+<figure data-type="image" tabindex="2"><img src="https://img-blog.csdnimg.cn/20201127203244822.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NhaWVuZW5lbg==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
+<ul>
+<li>工作薄</li>
+<li>工作表</li>
+<li>行</li>
+<li>单元格</li>
+</ul>
+<h4 id="03版本">03版本</h4>
+<pre><code class="language-java">package com.kuang;
+
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.joda.time.DateTime;
+import org.junit.Test;
+
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Date;
+
+public class ExcelWriteTest {
+
+    String PATH=&quot;ExcelCreate\\&quot;;
+
+    @Test
+    public void testWrite03() throws IOException {
+        //1,创建一个工作簿
+        Workbook workbook = new HSSFWorkbook();
+        //2,创建一个工作表
+        Sheet sheet = workbook.createSheet(&quot;03统计表&quot;);
+        //3，创建一行（1，1）
+        Row row1 = sheet.createRow(0);
+        //4，创建一个单元格
+        Cell cell11 = row1.createCell(0);
+        cell11.setCellValue(&quot;新增观众&quot;);
+        //（1，2）
+        Cell cell12 = row1.createCell(1);
+        cell12.setCellValue(666);
+        //第二行（2，1）
+        Row row2 = sheet.createRow(1);
+        Cell cell21 = row2.createCell(0);
+        cell21.setCellValue(&quot;时间记录&quot;);
+        //（2，2）
+        Cell cell22 = row2.createCell(1);
+        cell22.setCellValue(new DateTime().toString(&quot;yyyy-MM-dd HH:mm:ss&quot;));
+
+        //生成一张表（IO流）03版本使用xls结尾！
+        FileOutputStream fileOutputStream = new FileOutputStream(PATH + &quot;03版本测试.xls&quot;);
+        //输出
+        workbook.write(fileOutputStream);
+
+        //关闭流
+        fileOutputStream.close();
+
+        System.out.println(&quot;03生成成功&quot;);
+
+    }
+}
+</code></pre>
+<blockquote>
+<p>运行结果</p>
+</blockquote>
+<figure data-type="image" tabindex="3"><img src="https://img-blog.csdnimg.cn/20201127203409654.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NhaWVuZW5lbg==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
+<h4 id="07版和03不同的就这两处">07版(和03不同的就这两处)</h4>
+<pre><code class="language-java">Workbook workbook = new XSSFWorkbook();
+
+//生成一张表（IO流）07版本使用xlsx结尾！
+FileOutputStream fos = new FileOutputStream(PATH+&quot;07版本Excel测试.xlsx&quot;)
+</code></pre>
+<ul>
+<li>注意对象的一个区别,文件后缀!</li>
+</ul>
+<h4 id="大文件写hssf">大文件写HSSF</h4>
+<p>缺点：最多只能处理65536行，否则会报异常</p>
+<pre><code class="language-java">java.lang.IllegalArgumentException:Invalid row number (65536) outside allowable range (0.. 65535)
+</code></pre>
+<p>优点：过程中写入缓存，不操作磁盘，最后一次性写入磁盘，速度快</p>
+<pre><code class="language-java">    @Test
+    public void testwrite03BigData() throws IOException {
+        //时间
+        long begin = System.currentTimeMillis();
+        //创建一个薄
+        Workbook workbook = new HSSFWorkbook();
+        //创建表
+        Sheet sheet = workbook.createSheet();
+        //写入数据
+        for (int rowNum = 0; rowNum &lt; 65536; rowNum++) {
+            Row row = sheet.createRow(rowNum);
+            for (int cellNum = 0; cellNum &lt; 10; cellNum++) {
+                Cell cell = row.createCell(cellNum);
+                cell.setCellValue(cellNum);
+            }
+        }
+        FileOutputStream fos = new FileOutputStream(PATH + &quot;03版本Excel大量数据测试.xls&quot;);
+        workbook.write(fos);
+        fos.close();
+        System.out.println(&quot;over&quot;);
+        long end = System.currentTimeMillis();
+        System.out.println((double) (end - begin) / 1000);
+    }
+</code></pre>
+<blockquote>
+<p>运行结果</p>
+</blockquote>
+<pre><code class="language-java">over
+3.057
+</code></pre>
+<h4 id="大文件写xssf">大文件写XSSF</h4>
+<p>缺点：写数据时速度非常慢，非常耗内存，也会发生内存溢出，如100万条数据<br>
+优点：可以写较大的数据量，如20万条数据</p>
+<pre><code class="language-java">Workbook workbook = new XSSFWorkbook();
+Fileoutputstream ops = new Fileoutputstream(PATH +&quot;07版本Excel大量数据测试.xlsx&quot;);
+</code></pre>
+<h4 id="大文件写sxssf">大文件写SXSSF</h4>
+<p>优点：可以写非常大量的数据库，如100万条甚至更多条，写数据速度快，占用更少的内存<br>
+注意：</p>
+<ul>
+<li>过程中会产生临时文件，需要清理临时文件</li>
+<li>默认由100条记录被保存在内存中，如果超出这数量，则最前面的数据被写入临时文件</li>
+<li>如果想自定义内存中数据的数量，可以使用new SXSSFWorkbook（数量）</li>
+</ul>
+<pre><code class="language-java">Workbook workbook = new SXSSFWorkbook();
+Fileoutputstream ops = new Fileoutputstream(PATH +&quot;07版本Excel大量数据测试.xlsx&quot;);
+    @Test
+    public void testwrite07_S_BigData() throws IOException {
+        //时间
+        long begin = System.currentTimeMillis();
+        //创建一个薄
+        Workbook workbook = new SXSSFWorkbook(100);
+        //创建表
+        Sheet sheet = workbook.createSheet();
+        //写入数据
+        for (int rowNum = 0; rowNum &lt; 65536; rowNum++) {
+            Row row = sheet.createRow(rowNum);
+            for (int cellNum = 0; cellNum &lt; 10; cellNum++) {
+                Cell cell = row.createCell(cellNum);
+                cell.setCellValue(cellNum);
+            }
+        }
+        FileOutputStream fos = new FileOutputStream(PATH + &quot;07_S_版本Excel大量数据测试.xlsx&quot;);
+        workbook.write(fos);
+        fos.close();
+        //清除临时缓存
+        ((SXSSFWorkbook)workbook).dispose();
+        System.out.println(&quot;over&quot;);
+        long end = System.currentTimeMillis();
+        System.out.println((double) (end - begin) / 1000);
+    }
+</code></pre>
+<p>SXSSWorkbook 来自官方解释：实现：BigGridDemo策略的流式XSSFWorkbook版本。这允许写入非常大的文件而不会耗尽内存，因为任何时候只有可配置的行部分被保存在内存中。</p>
+<p>SXSSWorkbook 来自官方解释：实现：BigGridDemo策略的流式XSSFWorkbook版本。这允许写入非常大的文件而不会耗尽内存，因为任何时候只有可配置的行部分被保存在内存中。</p>
+<h3 id="poi-excel读">POI-Excel读</h3>
+<h4 id="03类型">03类型</h4>
+<pre><code class="language-java">package com.kuang;
+
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.junit.Test;
+
+import java.io.FileInputStream;
+
+public class ExcelReadTest {
+
+    String PATH = &quot;ExcelCreate\\&quot;;
+
+    @Test
+    public void testRead03() throws Exception {
+        //获取文件流
+        FileInputStream fis = new FileInputStream(PATH + &quot;03版本测试.xls&quot;);
+        //1、创建一个工作簿。使用 exceL能操作的这边他都可以操作！
+        Workbook workbook = new HSSFWorkbook(fis);
+        //2、得到表
+        Sheet sheet = workbook.getSheetAt(0);
+        //3、得到行
+        Row row = sheet.getRow(0);
+        //4、得到列
+        Cell cell = row.getCell(1);
+
+        //读取值的时候，一定要注意类型！
+        //getStringCellValue 字符串类型
+        System.out.println(cell.getNumericCellValue());
+        fis.close();
+    }
+}
+</code></pre>
+<h4 id="07类型">07类型</h4>
+<pre><code class="language-java">    @Test
+    public void testRead07() throws Exception {
+        //获取文件流
+        FileInputStream fis = new FileInputStream(PATH + &quot;07版本测试.xlsx&quot;);
+        //1、创建一个工作簿。使用 exceL能操作的这边他都可以操作！
+        Workbook workbook = new XSSFWorkbook(fis);
+        //2、得到表
+        Sheet sheet = workbook.getSheetAt(0);
+        //3、得到行
+        Row row = sheet.getRow(0);
+        //4、得到列
+        Cell cell = row.getCell(0);
+
+        //读取值的时候，一定要注意类型！
+        //getStringCellValue 字符串类型
+        System.out.println(cell.getStringCellValue());
+        fis.close();
+    }
+</code></pre>
+<p>注意获取值的类型即可</p>
+<h4 id="读取不同的数据类型">读取不同的数据类型</h4>
+<pre><code class="language-java">    @Test
+    public void testCellType() throws Exception {
+
+        //获取文件流
+        FileInputStream fis = new FileInputStream(PATH +&quot;课题信息表20190701.xlsx&quot;);
+
+        //创建一个工作簿。使用 excel能操作的这边他都可以操作
+        Workbook workbook = new XSSFWorkbook(fis);
+        Sheet sheet = workbook.getSheetAt(0);
+
+        //获取标题内容
+        Row rowTitle = sheet.getRow(0);
+        if (rowTitle != null) {
+            //得到一行有多少列有数据
+            int cellCount = rowTitle.getPhysicalNumberOfCells();
+            for (int cellNum = 0; cellNum &lt; cellCount; cellNum++) {
+                Cell cell = rowTitle.getCell(cellNum);
+                if (cell != null) {
+                    int cellType = cell.getCellType();
+                    String cellValue = cell.getStringCellValue();
+                    System.out.print(cellValue + &quot;|&quot;);
+                }
+            }
+            System.out.println();
+        }
+
+        //获取表中的内容
+        //获取表中有多少行有数据
+        int rowCount = sheet.getPhysicalNumberOfRows();
+        for (int rowNum = 1; rowNum &lt; rowCount; rowNum++) {
+            Row rowData = sheet.getRow(rowNum);
+            if (rowData != null) {
+                //读取列
+                int cellCount = rowTitle.getPhysicalNumberOfCells();
+                for (int cellNum = 0; cellNum &lt; cellCount; cellNum++) {
+                    System.out.println(&quot;[&quot; + (rowNum + 1) + &quot;-&quot; + (cellNum + 1) + &quot;]&quot;);
+
+                    Cell cell = rowData.getCell(cellNum);
+                    //匹配列的数据类型
+                    if (cell != null) {
+                        int cellType = cell.getCellType();
+                        String cellValue = &quot;&quot;;
+
+                        switch (cellType) {
+                            case HSSFCell.CELL_TYPE_STRING://字符
+                                System.out.print(&quot;【 String】&quot;);
+                                cellValue = cell.getStringCellValue();
+                                break;
+                            case HSSFCell.CELL_TYPE_BOOLEAN://布尔
+                                System.out.print(&quot;【 BOOLEAN】&quot;);
+                                cellValue = String.valueOf(cell.getBooleanCellValue());
+                                break;
+                            case HSSFCell.CELL_TYPE_BLANK://空
+                                System.out.print(&quot;【 BLANK】&quot;);
+                                break;
+                            case HSSFCell.CELL_TYPE_NUMERIC://数字(日期、普通数字)
+                                System.out.print(&quot;【 NUMERIC】&quot;);
+                                if (HSSFDateUtil.isCellDateFormatted(cell)) {// 日期
+                                    System.out.print(&quot;--【日期】&quot;);
+                                    Date date = cell.getDateCellValue();
+                                    cellValue = new DateTime(date).toString(&quot;yyyy-MM-dd&quot;);
+                                } else {
+                                    //不是日期格式，防止数字过长！
+                                    System.out.print(&quot;--【转换为字符串输出】&quot;);
+                                    cell.setCellType(HSSFCell.CELL_TYPE_STRING);
+                                    cellValue = cell.toString();
+                                }
+                                break;
+                            case HSSFCell.CELL_TYPE_ERROR://错误
+                                System.out.print(&quot;【 数据类型错误】&quot;);
+                                break;
+                        }
+                        System.out.println(cellValue);
+                    }
+                }
+            }
+        }
+        //关闭流
+        fis.close();
+    }
+</code></pre>
+<h4 id="计算公式">计算公式</h4>
+<pre><code class="language-java">    @Test
+    public void testFormula() throws Exception {
+        FileInputStream fis = new FileInputStream(PATH+&quot;公式.xls&quot;);
+        //创建一个工作簿。使用 excel能操作的这边他都可以操作
+        Workbook workbook = new HSSFWorkbook(fis);
+        Sheet sheet = workbook.getSheetAt(0);
+
+        Row row = sheet.getRow(4);
+        Cell cell = row.getCell(0);
+
+        //拿到计算公司 evaL
+        FormulaEvaluator FormulaEvaluator = new HSSFFormulaEvaluator((HSSFWorkbook) workbook);
+
+        //输出单元格的内容
+        int cellType = cell.getCellType();
+        switch (cellType) {
+            case Cell.CELL_TYPE_FORMULA://公式
+                String formula = cell.getCellFormula();
+                System.out.println(formula);
+
+                //计算
+                CellValue evaluate = FormulaEvaluator.evaluate(cell);
+                String cellValue = evaluate.formatAsString();
+                System.out.println(cellValue);
+                break;
+        }
+    }
+</code></pre>
+<blockquote>
+<p>运行结果</p>
+</blockquote>
+<pre><code class="language-java">SUM(A2:A4)
+600.0
+</code></pre>
+<h3 id="easyexcel操作">EasyExcel操作</h3>
+<h4 id="easyexcel写入操作">EasyExcel写入操作：</h4>
+<ul>
+<li>官方API <code>https://www.yuque.com/easyexcel/doc/read</code></li>
+</ul>
+<blockquote>
+<p>导入依赖</p>
+</blockquote>
+<pre><code class="language-xml">	&lt;!--easyexcel--&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;com.alibaba&lt;/groupId&gt;
+            &lt;artifactId&gt;easyexcel&lt;/artifactId&gt;
+            &lt;version &gt;2.2.0-beta2&lt;/version&gt;
+        &lt;/dependency&gt;
+</code></pre>
+<p>由于easyexcel依赖中包含POI相关依赖,有可能发生冲突,所以注释掉</p>
+<pre><code class="language-xml">    &lt;!--导入依赖--&gt;
+    &lt;dependencies&gt;
+        &lt;!--fastjson--&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;com.alibaba&lt;/groupId&gt;
+            &lt;artifactId&gt;fastjson&lt;/artifactId&gt;
+            &lt;version &gt;1.2.62&lt;/version&gt;
+        &lt;/dependency&gt;
+
+        &lt;!--easyexcel--&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;com.alibaba&lt;/groupId&gt;
+            &lt;artifactId&gt;easyexcel&lt;/artifactId&gt;
+            &lt;version &gt;2.2.0-beta2&lt;/version&gt;
+        &lt;/dependency&gt;
+    &lt;!--lombok--&gt;
+	&lt;dependency&gt;
+		&lt;groupId&gt;org.projectlombok&lt;/groupId&gt;
+		&lt;artifactId&gt;lombok&lt;/artifactId&gt;
+		&lt;version &gt;1.18.12&lt;/version&gt;
+	&lt;/dependency&gt;
+
+&lt;!--        &amp;lt;!&amp;ndash;xLs(03)&amp;ndash;&amp;gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.apache.poi&lt;/groupId&gt;
+            &lt;artifactId&gt;poi&lt;/artifactId&gt;
+            &lt;version&gt;3.9&lt;/version&gt;
+        &lt;/dependency&gt;
+        &amp;lt;!&amp;ndash;xLsx(07)&amp;ndash;&amp;gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.apache.poi&lt;/groupId&gt;
+            &lt;artifactId&gt;poi-ooxml&lt;/artifactId&gt;
+            &lt;version&gt;3.9&lt;/version&gt;
+        &lt;/dependency&gt;--&gt;
+        &lt;!--日期格式化工具--&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;joda-time&lt;/groupId&gt;
+            &lt;artifactId&gt;joda-time&lt;/artifactId&gt;
+            &lt;version&gt;2.10.1&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;!--test--&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;junit&lt;/groupId&gt;
+            &lt;artifactId&gt;junit&lt;/artifactId&gt;
+            &lt;version&gt;4.12&lt;/version&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+</code></pre>
+<blockquote>
+<p>实体类</p>
+</blockquote>
+<pre><code class="language-java">package com.kuang.easy;
+
+import com.alibaba.excel.annotation.ExcelIgnore;
+import com.alibaba.excel.annotation.ExcelProperty;
+import lombok.Data;
+
+import java.util.Date;
+
+@Data
+public class DemoData {
+    @ExcelProperty(&quot;字符串标题&quot;)
+    private String string;
+    @ExcelProperty(&quot;日期标题&quot;)
+    private Date date;
+    @ExcelProperty(&quot;数字标题&quot;)
+    private Double doubleData;
+    //忽略这个字段
+    @ExcelIgnore
+    private String ignore;
+}
+</code></pre>
+<blockquote>
+<p>测试</p>
+</blockquote>
+<pre><code class="language-java">package com.kuang.easy;
+
+import com.alibaba.excel.EasyExcel;
+import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+public class EasyTest {
+    String PATH = &quot;ExcelCreate\\&quot;;
+
+    //模拟写入数据
+    private List&lt;DemoData&gt; data() {
+        java.util.List&lt;DemoData&gt; list = new ArrayList&lt;DemoData&gt;();
+        for (int i = 0; i &lt; 10; i++) {
+            DemoData data = new DemoData();
+            data.setString(&quot;字符串&quot; + i);
+            data.setDate(new Date());
+            data.setDoubleData(0.56);
+            list.add(data);
+        }
+        return list;
+    }
+
+    //根据ist写 excel
+    @Test
+    public void simplewrite() {
+        String fileName = PATH + &quot;EasyTest.xlsx&quot;;
+        //这里需要指定写用哪个 class去写，然后写到第一个 sheet，名字为模板然后文件流会自动关闭
+        //write(fileName,格式类)
+        //sheet（表名）
+        //doWrite（数据）
+        EasyExcel.write(fileName, DemoData.class).sheet(&quot;模板&quot;).doWrite(data());
+    }
+}
+</code></pre>
+<figure data-type="image" tabindex="4"><img src="https://img-blog.csdnimg.cn/20201127204724664.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NhaWVuZW5lbg==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" loading="lazy"></figure>
+<h4 id="easyexcel读取操作">EasyExcel读取操作：</h4>
+<blockquote>
+<p>对象</p>
+</blockquote>
+<pre><code class="language-java">@Data
+public class DemoData {
+    private String string;
+    private Date date;
+    private Double doubleData;
+}
+</code></pre>
+<blockquote>
+<p>监听器</p>
+</blockquote>
+<pre><code class="language-java">// 有个很重要的点 DemoDataListener 不能被spring管理，要每次读取excel都要new,然后里面用到spring可以构造方法传进去
+public class DemoDataListener extends AnalysisEventListener&lt;DemoData&gt; {
+    private static final Logger LOGGER = LoggerFactory.getLogger(DemoDataListener.class);
+    /**
+     * 每隔5条存储数据库，实际使用中可以3000条，然后清理list ，方便内存回收
+     */
+    private static final int BATCH_COUNT = 5;
+    List&lt;DemoData&gt; list = new ArrayList&lt;DemoData&gt;();
+    /**
+     * 假设这个是一个DAO，当然有业务逻辑这个也可以是一个service。当然如果不用存储这个对象没用。
+     */
+    private DemoDAO demoDAO;
+    public DemoDataListener() {
+        // 这里是demo，所以随便new一个。实际使用如果到了spring,请使用下面的有参构造函数
+        demoDAO = new DemoDAO();
+    }
+    /**
+     * 如果使用了spring,请使用这个构造方法。每次创建Listener的时候需要把spring管理的类传进来
+     *
+     * @param demoDAO
+     */
+    public DemoDataListener(DemoDAO demoDAO) {
+        this.demoDAO = demoDAO;
+    }
+    /**
+     * 这个每一条数据解析都会来调用
+     *
+     * @param data
+     *            one row value. Is is same as {@link AnalysisContext#readRowHolder()}
+     * @param context
+     */
+    @Override
+    public void invoke(DemoData data, AnalysisContext context) {
+        LOGGER.info(&quot;解析到一条数据:{}&quot;, JSON.toJSONString(data));
+        list.add(data);
+        // 达到BATCH_COUNT了，需要去存储一次数据库，防止数据几万条数据在内存，容易OOM
+        if (list.size() &gt;= BATCH_COUNT) {
+            saveData();
+            // 存储完成清理 list
+            list.clear();
+        }
+    }
+    /**
+     * 所有数据解析完成了 都会来调用
+     *
+     * @param context
+     */
+    @Override
+    public void doAfterAllAnalysed(AnalysisContext context) {
+        // 这里也要保存数据，确保最后遗留的数据也存储到数据库
+        saveData();
+        LOGGER.info(&quot;所有数据解析完成！&quot;);
+    }
+    /**
+     * 加上存储数据库
+     */
+    private void saveData() {
+        LOGGER.info(&quot;{}条数据，开始存储数据库！&quot;, list.size());
+        demoDAO.save(list);
+        LOGGER.info(&quot;存储数据库成功！&quot;);
+    }
+}
+</code></pre>
+<blockquote>
+<p>持久层</p>
+</blockquote>
+<pre><code class="language-java">/**
+ * 假设这个是你的DAO存储。当然还要这个类让spring管理，当然你不用需要存储，也不需要这个类。
+ **/
+public class DemoDAO {
+    public void save(List&lt;DemoData&gt; list) {
+        // 如果是mybatis,尽量别直接调用多次insert,自己写一个mapper里面新增一个方法batchInsert,所有数据一次性插入
+    }
+}
+</code></pre>
+<blockquote>
+<p>代码</p>
+</blockquote>
+<pre><code class="language-java">/**
+ * 最简单的读
+ * &lt;p&gt;1. 创建excel对应的实体对象 参照{@link DemoData}
+ * &lt;p&gt;2. 由于默认一行行的读取excel，所以需要创建excel一行一行的回调监听器，参照{@link DemoDataListener}
+ * &lt;p&gt;3. 直接读即可
+ */
+@Test
+public void simpleRead() {
+    // 有个很重要的点 DemoDataListener 不能被spring管理，要每次读取excel都要new,然后里面用到spring可以构造方法传进去
+    // 写法1：
+    String fileName = TestFileUtil.getPath() + &quot;demo&quot; + File.separator + &quot;demo.xlsx&quot;;
+    // 这里 需要指定读用哪个class去读，然后读取第一个sheet 文件流会自动关闭
+    EasyExcel.read(fileName, DemoData.class, new DemoDataListener()).sheet().doRead();
+    // 写法2：
+    fileName = TestFileUtil.getPath() + &quot;demo&quot; + File.separator + &quot;demo.xlsx&quot;;
+    ExcelReader excelReader = null;
+    try {
+        excelReader = EasyExcel.read(fileName, DemoData.class, new DemoDataListener()).build();
+        ReadSheet readSheet = EasyExcel.readSheet(0).build();
+        excelReader.read(readSheet);
+    } finally {
+        if (excelReader != null) {
+            // 这里千万别忘记关闭，读的时候会创建临时文件，到时磁盘会崩的
+            excelReader.finish();
+        }
+    }
+}
+</code></pre>
+<h4 id="固定套路">固定套路：</h4>
+<ol>
+<li>写入，固定类格式进行写入</li>
+<li>读取，根据监听器设置的规则进行读取！</li>
+</ol>
+
+                </div>
+            </article>
+        </div>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://ganhan999.github.io/post/Java 阿里云验证码/" class="post-title gt-a-link">
+                    Java 阿里云验证码
+                </a>
+            </div>
+        
+
+        
+
+        
+
+        
+
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first">温故而知新</div>
+    <div class="social-container">
+        
+            
+        
+            
+        
+            
+        
+            
+                <a href="https://www.zhihu.com/hot" target="_blank">
+                    <i class="fab fa-zhihu gt-c-content-color-first"></i>
+                </a>
+            
+        
+            
+        
+            
+        
+    </div>
+    <div class="footer-info">
+        Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+    </div>
+    <div>
+        Theme by <a href="https://imhanjie.com/" target="_blank">imhanjie</a>, Powered by <a
+                href="https://github.com/getgridea/gridea" target="_blank">Gridea | <a href="https://ganhan999.github.io//atom.xml" target="_blank">RSS</a></a>
+    </div>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+    </div>
+</div>
+</body>
+</html>

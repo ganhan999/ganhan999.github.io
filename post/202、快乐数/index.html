@@ -1,0 +1,242 @@
+<html>
+<head>
+    <meta charset="utf-8"/>
+<meta name="description" content=""/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+<title>202、快乐数 | Gridea</title>
+
+<link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1615809991680">
+
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://ganhan999.github.io//styles/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dockerfile.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dart.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script>
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
+
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css">
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg">
+    <div class="navbar-brand">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            Gridea
+        </div>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
+            
+                <div class="nav-item">
+                    
+                        <a href="/" class="menu gt-a-link">
+                            首页
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/archives" class="menu gt-a-link">
+                            归档
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/tags" class="menu gt-a-link">
+                            标签
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/post/about" class="menu gt-a-link">
+                            关于
+                        </a>
+                    
+                </div>
+            
+        </div>
+        <div style="text-align: center">
+            <form id="gridea-search-form" style="position: relative" data-update="1615809991680" action="/search/index.html">
+                <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+                <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+        </div>
+    </div>
+</nav>
+
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    202、快乐数
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2021-02-24 ·
+                    </time>
+                    
+                        <a href="https://ganhan999.github.io/tag/RJ1fLvr_t/" class="post-tags">
+                            # leetcode
+                        </a>
+                    
+                </div>
+                <div class="post-content">
+                    <h1 id="题目">题目</h1>
+<p>编写一个算法来判断一个数 n 是不是快乐数。</p>
+<p>「快乐数」定义为：</p>
+<p>对于一个正整数，每一次将该数替换为它每个位置上的数字的平方和。<br>
+然后重复这个过程直到这个数变为 1，也可能是 无限循环 但始终变不到 1。<br>
+如果 可以变为  1，那么这个数就是快乐数。<br>
+如果 n 是快乐数就返回 true ；不是，则返回 false 。</p>
+<p>示例 1：<br>
+输入：19<br>
+输出：true<br>
+解释：<br>
+12 + 92 = 82<br>
+82 + 22 = 68<br>
+62 + 82 = 100<br>
+12 + 02 + 02 = 1</p>
+<p>示例 2：<br>
+输入：n = 2<br>
+输出：false</p>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="本体思路">本体思路</h1>
+<p>根据我们的探索，我们猜测会有以下三种可能。</p>
+<p>1、最终会得到 11。<br>
+2、最终会进入循环。<br>
+3、值会越来越大，最后接近无穷大。<br>
+第三种情况不可能发生</p>
+<p>所以只需要判断是否进入了循环</p>
+<h1 id="大神做法1">大神做法1：</h1>
+<pre><code class="language-python">def isHappy(self, n: int) -&gt; bool:
+
+    def get_next(n):#算下一个数
+        total_sum = 0
+        while n &gt; 0:
+            n, digit = divmod(n, 10)
+            total_sum += digit ** 2
+        return total_sum
+
+    seen = set()
+    while n != 1 and n not in seen:#如果是1就是快乐数，如果存在了那么就是遇到了循环就不是快乐数
+        seen.add(n)
+        n = get_next(n)
+
+    return n == 1
+</code></pre>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<p>快慢指针判断循环</p>
+<h1 id="大神做法2">大神做法2：</h1>
+<pre><code class="language-python">def isHappy(self, n: int) -&gt; bool:
+    def get_next(number):
+        total_sum = 0
+        while number &gt; 0:
+            number, digit = divmod(number, 10)
+            total_sum += digit ** 2
+        return total_sum
+
+    slow_runner = n
+    fast_runner = get_next(n)
+    while fast_runner != 1 and slow_runner != fast_runner:
+        slow_runner = get_next(slow_runner)
+        fast_runner = get_next(get_next(fast_runner))
+    return fast_runner == 1
+</code></pre>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<p>cycle_members = {4, 16, 37, 58, 89, 145, 42, 20}   循环链只有这一条</p>
+<h1 id="大神做法3">大神做法3：</h1>
+<pre><code class="language-python">def isHappy(self, n: int) -&gt; bool:
+
+    cycle_members = {4, 16, 37, 58, 89, 145, 42, 20}
+
+    def get_next(number):
+        total_sum = 0
+        while number &gt; 0:
+            number, digit = divmod(number, 10)
+            total_sum += digit ** 2
+        return total_sum
+
+    while n != 1 and n not in cycle_members:
+        n = get_next(n)
+
+    return n == 1
+</code></pre>
+
+                </div>
+            </article>
+        </div>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://ganhan999.github.io/post/557、反转字符串中的单词 III/" class="post-title gt-a-link">
+                    557、反转字符串中的单词 III
+                </a>
+            </div>
+        
+
+        
+
+        
+
+        
+
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first">温故而知新</div>
+    <div class="social-container">
+        
+            
+        
+            
+        
+            
+        
+            
+                <a href="https://www.zhihu.com/hot" target="_blank">
+                    <i class="fab fa-zhihu gt-c-content-color-first"></i>
+                </a>
+            
+        
+            
+        
+            
+        
+    </div>
+    <div class="footer-info">
+        Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+    </div>
+    <div>
+        Theme by <a href="https://imhanjie.com/" target="_blank">imhanjie</a>, Powered by <a
+                href="https://github.com/getgridea/gridea" target="_blank">Gridea | <a href="https://ganhan999.github.io//atom.xml" target="_blank">RSS</a></a>
+    </div>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+    </div>
+</div>
+</body>
+</html>

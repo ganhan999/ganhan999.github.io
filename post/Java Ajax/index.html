@@ -1,0 +1,314 @@
+<html>
+<head>
+    <meta charset="utf-8"/>
+<meta name="description" content=""/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+<title>Java Ajax | Gridea</title>
+
+<link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1615809991680">
+
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://ganhan999.github.io//styles/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dockerfile.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dart.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script>
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
+
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css">
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg">
+    <div class="navbar-brand">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            Gridea
+        </div>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
+            
+                <div class="nav-item">
+                    
+                        <a href="/" class="menu gt-a-link">
+                            首页
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/archives" class="menu gt-a-link">
+                            归档
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/tags" class="menu gt-a-link">
+                            标签
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/post/about" class="menu gt-a-link">
+                            关于
+                        </a>
+                    
+                </div>
+            
+        </div>
+        <div style="text-align: center">
+            <form id="gridea-search-form" style="position: relative" data-update="1615809991680" action="/search/index.html">
+                <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+                <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+        </div>
+    </div>
+</nav>
+
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    Java Ajax
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2020-12-27 ·
+                    </time>
+                    
+                        <a href="https://ganhan999.github.io/tag/pVOKe1jE1_/" class="post-tags">
+                            # Java
+                        </a>
+                    
+                </div>
+                <div class="post-content">
+                    <h1 id="ajax">Ajax</h1>
+<p>AjAX=Asynchronous javaScript and XML(异步的javaScript和XML)。</p>
+<p>Ajax不是一种新的编程语言，而是一种用于创建更好更快以及交互性更强的Web应用程序的技术</p>
+<p>C/S</p>
+<p>增加B/S的体验性</p>
+<p>B/S：未来的主流，并且会爆发式的持续增长；</p>
+<p>H5+网页+客户端+手机端</p>
+<p>使用JQuery需要先导入jQuery的js文件；</p>
+<pre><code class="language-html">Copy@Controller
+@RequestMapping(&quot;/ajax&quot;)
+public class AjaxController{
+    //第一种方式，服务器要返回一个字符串，直接使用response
+    @RequestMapping(&quot;/a1&quot;)
+    public void ajax(String name,HttpServletResponse response){
+        if(&quot;admin&quot;.equals(name)){
+            response.getWriter().print(&quot;true&quot;);
+        }else{
+            response.getWriter().print(&quot;false&quot;);
+        }
+    }
+}
+
+@RequestMapping(&quot;/a2&quot;)
+@ResponseBody
+public List&lt;User&gt; ajax2(){
+    List&lt;User&gt; list =new ArrayList&lt;&gt;();
+    User user1 =new User(&quot;豪&quot;,1,&quot;男&quot;);
+    User user2=new User(&quot;豪&quot;,1,&quot;男&quot;);
+    list.add(user1);
+    list.add(user2);
+    return list; //由于加了@ResponseBody注解，他会返回一个字符串
+}
+</code></pre>
+<p>ajax 写法</p>
+<pre><code class="language-html">Copy&lt;script type=&quot;text/javascript&quot;&gt;
+    function a1() {
+        //所有参数：
+        //url:待载入页面的URL地址，Json
+        //data:待发送Key/value参数
+        //success:载入成功时回调函数
+        //data：封装了服务器返回的数据
+        //status：状态
+        $.ajax({
+            url:&quot;${pageContext.request.contextPath}/ajax/a1&quot;,
+            data:{&quot;name&quot;:$(&quot;txtName&quot;).val()},
+            success:function (data,status) {
+                console.log(data)
+                console.log(status)
+            }
+        });
+        //将文本输入的值，
+        $(&quot;txtName&quot;).val();
+        // //发送给服务器，
+        // //接受服务器返回的数据
+    }
+Copy&lt;script&gt;
+    $(function(){
+        $(&quot;#btn&quot;).click(function(){
+            $.post(&quot;${pageContest.request.contextPath}/ajax/a2&quot;,function(data){
+                console.log(data);
+                var html=&quot;&quot;;
+                for(var i=0;i&lt;data.length;i++){
+                    html+=&quot;&lt;tr&gt;&quot;+
+                        &quot;&lt;td&gt;&quot;+data[i].name+&quot;&lt;/td&gt;&quot;+
+                        &quot;&lt;td&gt;&quot;+data[i].age+&quot;&lt;/td&gt;&quot;+
+                        &quot;&lt;td&gt;&quot;+data[i].sex+&quot;&lt;/td&gt;&quot;+
+                        &quot;&lt;/tr&gt;&quot;
+                }
+                $(&quot;#content&quot;).html(html);
+            })
+        })
+})
+&lt;/script&gt;    
+</code></pre>
+<h2 id="第三种">第三种<a href="https://www.cnblogs.com/small-hao/p/13190663.html#3506785055">#</a></h2>
+<pre><code class="language-html">Copy@RequestMapping(&quot;/a3&quot;)
+@ResponseBody
+public String ajax3(String name,String pwd){
+    String msg=&quot;&quot;;
+    if(name!=null){
+        if(&quot;admin&quot;.equals(name)){
+            msg=&quot;ok&quot;;
+        }else{
+            msg=&quot;用户名有误&quot;；
+        }
+    }
+    if(pwd != null){
+        if(&quot;123456&quot;.equals(pwd)){
+            msg=&quot;ok&quot;;
+        }else{
+            msg=&quot;密码输入有误&quot;;
+        }
+            
+    }
+    return msg;
+}
+Copy&lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;Title&lt;/title&gt;
+        &lt;script&gt;
+            function a1(){
+                $.post({
+                    url:&quot;${pageContext.request.contextPath}/ajax/a3&quot;,
+                    data:{&quot;name&quot;:$(&quot;#name&quot;).val()},
+                    success:function(data){
+                        if(data.toString()=='ok'){
+                            //信息核对成功
+                            $('#userInfo').css(&quot;color&quot;,&quot;green&quot;);
+                        }else{
+                            $(&quot;#userInfo&quot;).css(&quot;color&quot;,&quot;red&quot;);
+                        }
+                        $(&quot;#userInfo&quot;).html(data);
+                    }
+                })
+            }
+            function a2(){
+                $.post(&quot;${pageContext.request.contextPath}/ajax/a3&quot;,{&quot;pwd&quot;:$(&quot;pwd&quot;).val()},function(data){
+                    if(data.toString()='ok'){//信息核对成功
+                        $('#pwdInfo').css(&quot;color&quot;,&quot;green&quot;);                     
+                    }else{
+                        $('#pwdInfo').css(&quot;color&quot;,&quot;red&quot;);
+                    }
+                    $(&quot;#pwdInfo&quot;).html(data);
+                })
+            }
+        &lt;/script&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;p&gt;
+            用户名：
+            &lt;input type=&quot;text&quot; id=&quot;name&quot; onblur=&quot;a1()&quot;/&gt;
+            &lt;span id=&quot;userInfo&quot;&gt;&lt;/span&gt;
+        &lt;/p&gt;
+        &lt;p&gt;
+                密码：
+            &lt;input type=&quot;text&quot; id=&quot;pwd&quot; onblur=&quot;a2()&quot;/&gt;
+            &lt;span id=&quot;pwdInfo&quot;&gt;&lt;/span&gt;
+            
+        &lt;/p&gt;   
+        
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p><strong>Ajax 总结：</strong></p>
+<p>使用jQuery需要导入JQuery，使用Vue就导入Vue，两个都用，自己原生态实现</p>
+<p><strong>三步曲：</strong></p>
+<p>1.编写对应处理的Controller,返回消息或者字符串汇总json格式的数据</p>
+<p>2.编写ajax请求</p>
+<p>1.url: Controller 请求</p>
+<p>2.data： 键值对</p>
+<p>3 . SUCCESS: 回调函数</p>
+<p>3.给Ajax绑定事件，点击click，失去焦点onblur,键盘弹起keyup</p>
+
+                </div>
+            </article>
+        </div>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://ganhan999.github.io/post/31、下一个排列/" class="post-title gt-a-link">
+                    中等31. 下一个排列
+                </a>
+            </div>
+        
+
+        
+
+        
+
+        
+
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first">温故而知新</div>
+    <div class="social-container">
+        
+            
+        
+            
+        
+            
+        
+            
+                <a href="https://www.zhihu.com/hot" target="_blank">
+                    <i class="fab fa-zhihu gt-c-content-color-first"></i>
+                </a>
+            
+        
+            
+        
+            
+        
+    </div>
+    <div class="footer-info">
+        Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+    </div>
+    <div>
+        Theme by <a href="https://imhanjie.com/" target="_blank">imhanjie</a>, Powered by <a
+                href="https://github.com/getgridea/gridea" target="_blank">Gridea | <a href="https://ganhan999.github.io//atom.xml" target="_blank">RSS</a></a>
+    </div>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+    </div>
+</div>
+</body>
+</html>

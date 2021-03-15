@@ -1,0 +1,237 @@
+<html>
+<head>
+    <meta charset="utf-8"/>
+<meta name="description" content=""/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+<title>中等29. 两数相除 | Gridea</title>
+
+<link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1615809991680">
+
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://ganhan999.github.io//styles/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dockerfile.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dart.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script>
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
+
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css">
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg">
+    <div class="navbar-brand">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            Gridea
+        </div>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
+            
+                <div class="nav-item">
+                    
+                        <a href="/" class="menu gt-a-link">
+                            首页
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/archives" class="menu gt-a-link">
+                            归档
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/tags" class="menu gt-a-link">
+                            标签
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/post/about" class="menu gt-a-link">
+                            关于
+                        </a>
+                    
+                </div>
+            
+        </div>
+        <div style="text-align: center">
+            <form id="gridea-search-form" style="position: relative" data-update="1615809991680" action="/search/index.html">
+                <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+                <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+        </div>
+    </div>
+</nav>
+
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    中等29. 两数相除
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2020-12-25 ·
+                    </time>
+                    
+                        <a href="https://ganhan999.github.io/tag/RJ1fLvr_t/" class="post-tags">
+                            # leetcode
+                        </a>
+                    
+                </div>
+                <div class="post-content">
+                    <h1 id="题目">题目</h1>
+<p>给定两个整数，被除数 dividend 和除数 divisor。将两数相除，要求不使用乘法、除法和 mod 运算符。</p>
+<p>返回被除数 dividend 除以除数 divisor 得到的商。</p>
+<p>整数除法的结果应当截去（truncate）其小数部分，例如：truncate(8.345) = 8 以及 truncate(-2.7335) = -2</p>
+<p>示例 1:<br>
+输入: dividend = 10, divisor = 3<br>
+输出: 3<br>
+解释: 10/3 = truncate(3.33333..) = truncate(3) = 3</p>
+<p>示例 2:<br>
+输入: dividend = 7, divisor = -3<br>
+输出: -2<br>
+解释: 7/-3 = truncate(-2.33333..) = -2</p>
+<h1 id="本体思路">本体思路</h1>
+<p>题干中说明不能用乘法和除法, 那么我们可以用减法, 被除数最多可以减多少个除数还能保证是非负的即可.</p>
+<h1 id="大神做法1">#大神做法1：</h1>
+<pre><code class="language-python">class Solution:
+    def divide(self, dividend, divisor):
+        sig = True if dividend*divisor &gt; 0 else False  # 判断二者相除是正or负
+        dividend, divisor= abs(dividend), abs(divisor)  # 将被除数和除数都变成正数
+        count = 0  # 用来表示减去了多少个除数，也就是商为多少
+        while divisor &lt;= dividend:  # 当被除数小于除数的时候终止循环
+            dividend -= divisor
+            count += 1
+        res = count if sig == True else -count  # 给结果加上符号
+        return max(min(res, 2**31-1), -2**31)
+
+</code></pre>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="大神做法2">大神做法2：</h1>
+<p>比如 divide(20, 3)：</p>
+<p>先将3不断翻倍，知道超过20，翻1次为2倍得6，翻2次为4倍得12，翻3次为8倍的24<br>
+这时4倍12是我们需要的值<br>
+递归 4 + divide(20-12, 3)<br>
+递归出口为：被除数 &lt; 除数时返回0， 被除数 == 除数时返回1<br>
+需要额外处理被除数和除数不同号</p>
+<p>用翻倍的形式减少时间！！</p>
+<pre><code class="language-python">class Solution:
+	def divide(self, dividend: int, divisor: int) -&gt; int:
+		def recursion(dividend, divisor):
+			if dividend &lt; divisor:
+				return 0
+			if dividend == divisor:
+				return 1
+			nn = 1
+			dd = divisor
+			while True:
+				if dividend &gt; dd:
+					n = nn
+					nn += nn
+					d = dd
+					dd += dd#翻倍
+				elif dividend == dd:
+					return nn
+				else:
+					return n + recursion(dividend - d, divisor)
+
+		if dividend &gt;= 0:
+			if divisor &gt; 0:
+				positive = True
+			else:
+				positive = False
+		else:
+			if divisor &gt; 0:
+				positive = False
+			else:
+				positive = True
+		ans = recursion(abs(dividend), abs(divisor))
+		if positive:
+			if ans &gt; 2 ** 31 - 1:
+				return 2 ** 31 - 1
+			else:
+				return ans
+		else:
+			return -ans
+</code></pre>
+
+                </div>
+            </article>
+        </div>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://ganhan999.github.io/post/24、两两交换链表中的节点/" class="post-title gt-a-link">
+                    中等24. 两两交换链表中的节点
+                </a>
+            </div>
+        
+
+        
+
+        
+
+        
+
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first">温故而知新</div>
+    <div class="social-container">
+        
+            
+        
+            
+        
+            
+        
+            
+                <a href="https://www.zhihu.com/hot" target="_blank">
+                    <i class="fab fa-zhihu gt-c-content-color-first"></i>
+                </a>
+            
+        
+            
+        
+            
+        
+    </div>
+    <div class="footer-info">
+        Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+    </div>
+    <div>
+        Theme by <a href="https://imhanjie.com/" target="_blank">imhanjie</a>, Powered by <a
+                href="https://github.com/getgridea/gridea" target="_blank">Gridea | <a href="https://ganhan999.github.io//atom.xml" target="_blank">RSS</a></a>
+    </div>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+    </div>
+</div>
+</body>
+</html>

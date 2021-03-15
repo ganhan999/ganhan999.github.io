@@ -1,0 +1,252 @@
+<html>
+<head>
+    <meta charset="utf-8"/>
+<meta name="description" content=""/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+<title>110、平衡二叉树 | Gridea</title>
+
+<link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1615809991680">
+
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://ganhan999.github.io//styles/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dockerfile.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dart.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script>
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
+
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css">
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg">
+    <div class="navbar-brand">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            Gridea
+        </div>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
+            
+                <div class="nav-item">
+                    
+                        <a href="/" class="menu gt-a-link">
+                            首页
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/archives" class="menu gt-a-link">
+                            归档
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/tags" class="menu gt-a-link">
+                            标签
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/post/about" class="menu gt-a-link">
+                            关于
+                        </a>
+                    
+                </div>
+            
+        </div>
+        <div style="text-align: center">
+            <form id="gridea-search-form" style="position: relative" data-update="1615809991680" action="/search/index.html">
+                <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+                <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+        </div>
+    </div>
+</nav>
+
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    110、平衡二叉树
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2020-11-22 ·
+                    </time>
+                    
+                        <a href="https://ganhan999.github.io/tag/RJ1fLvr_t/" class="post-tags">
+                            # leetcode
+                        </a>
+                    
+                </div>
+                <div class="post-content">
+                    <h1 id="题目">题目</h1>
+<p>给定一个二叉树，判断它是否是高度平衡的二叉树。<br>
+本题中，一棵高度平衡二叉树定义为：<br>
+一个二叉树每个节点 的左右两个子树的高度差的绝对值不超过 1 。</p>
+<p>示例 1：<br>
+输入：root = [3,9,20,null,null,15,7]<br>
+输出：true</p>
+<p>示例 2：<br>
+输入：root = [1,2,2,3,3,null,null,4,4]<br>
+输出：false</p>
+<p>示例 3：<br>
+输入：root = []<br>
+输出：true</p>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="本体思路">本体思路</h1>
+<p>递归每一个节点的平衡因子，如果绝对值小于2，那么就平衡。<br>
+用到了求最大深度的函数</p>
+<h1 id="我的做法">#我的做法：</h1>
+<pre><code class="language-python">class Solution:
+    def isBalanced(self, root: TreeNode) -&gt; bool:
+        if not root:
+            return True
+        return abs(self.height(root.right)-self.height(root.left))&lt;2 and self.isBalanced(root.left) and self.isBalanced(root.right)
+	# 求高度
+    def height(self, node):
+        if not node:
+            return 0
+        return 1+max(self.height(node.right),self.height(node.left))
+</code></pre>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="大神做法1">#大神做法1：</h1>
+<p>利用字典保存，最大深度的值，可以减少递归次数。</p>
+<pre><code class="language-Python">class Solution:
+    dct = {}
+    def isBalanced(self, root: TreeNode) -&gt; bool:
+        if not root:
+            return True
+
+        def maxDepth(root: TreeNode) -&gt; int:
+            if not root:
+                return 0
+            if root not in self.dct:
+                self.dct[root] = 1 + max(maxDepth(root.left), maxDepth(root.right))
+            return self.dct[root]
+
+        tmp = maxDepth(root.left) - maxDepth(root.right)
+        return abs(tmp)&lt;2  and self.isBalanced(root.left) and self.isBalanced(root.right)
+
+</code></pre>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="大神做法2">#大神做法2：</h1>
+<p>在求取左右子节点时，判断子节点是否失衡，<br>
+如果失衡则无需求根节点的平衡度，向上通知提前退出递归。<br>
+因为-1表示递归提前退出或者失衡.<br>
+如果左子树已经出现了失衡状况，就只会遍历一半！！！<br>
+在算深度的时候，就把平衡的条件给判定了。</p>
+<pre><code class="language-Python">class Solution:
+    def height(self, root):
+        if root is None:
+            return 0
+        left = self.height(root.left)
+        if left &lt; 0: return -1#左子树失衡
+        right = self.height(root.right)
+        if right &lt; 0 : return -1#右子树失衡
+        if abs(left - right) &gt; 1:
+            return -1#当前节点失衡
+        return max(left, right) + 1#平衡，继续递归
+
+    def isBalanced(self, root: TreeNode) -&gt; bool:
+        return self.height(root) &gt;= 0
+</code></pre>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="大神做法3">#大神做法3：</h1>
+<p>自底向上<br>
+通过直接判断左右子树高度，改变res参数，递归仍然会进行完毕</p>
+<pre><code class="language-Python">class Solution:
+    def isBalanced(self, root: TreeNode) -&gt; bool:
+        self.res = True
+        def helper(root):
+            if not root:
+                return 0
+            left = helper(root.left) + 1
+            right = helper(root.right) + 1
+            #print(right, left)
+            if abs(right - left) &gt; 1:
+                self.res = False
+            return max(left, right)
+        helper(root)
+        return self.res
+</code></pre>
+
+                </div>
+            </article>
+        </div>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://ganhan999.github.io/post/108、将有序数组转换为二叉搜索树/" class="post-title gt-a-link">
+                    108、将有序数组转换为二叉搜索树
+                </a>
+            </div>
+        
+
+        
+
+        
+
+        
+
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first">温故而知新</div>
+    <div class="social-container">
+        
+            
+        
+            
+        
+            
+        
+            
+                <a href="https://www.zhihu.com/hot" target="_blank">
+                    <i class="fab fa-zhihu gt-c-content-color-first"></i>
+                </a>
+            
+        
+            
+        
+            
+        
+    </div>
+    <div class="footer-info">
+        Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+    </div>
+    <div>
+        Theme by <a href="https://imhanjie.com/" target="_blank">imhanjie</a>, Powered by <a
+                href="https://github.com/getgridea/gridea" target="_blank">Gridea | <a href="https://ganhan999.github.io//atom.xml" target="_blank">RSS</a></a>
+    </div>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+    </div>
+</div>
+</body>
+</html>

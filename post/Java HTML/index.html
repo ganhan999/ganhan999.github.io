@@ -1,0 +1,1085 @@
+<html>
+<head>
+    <meta charset="utf-8"/>
+<meta name="description" content=""/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+<title>Java HTML | Gridea</title>
+
+<link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1615809991680">
+
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://ganhan999.github.io//styles/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dockerfile.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dart.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script>
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
+
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css">
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg">
+    <div class="navbar-brand">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            Gridea
+        </div>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
+            
+                <div class="nav-item">
+                    
+                        <a href="/" class="menu gt-a-link">
+                            首页
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/archives" class="menu gt-a-link">
+                            归档
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/tags" class="menu gt-a-link">
+                            标签
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/post/about" class="menu gt-a-link">
+                            关于
+                        </a>
+                    
+                </div>
+            
+        </div>
+        <div style="text-align: center">
+            <form id="gridea-search-form" style="position: relative" data-update="1615809991680" action="/search/index.html">
+                <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+                <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+        </div>
+    </div>
+</nav>
+
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    Java HTML
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2020-12-13 ·
+                    </time>
+                    
+                        <a href="https://ganhan999.github.io/tag/pVOKe1jE1_/" class="post-tags">
+                            # Java
+                        </a>
+                    
+                </div>
+                <div class="post-content">
+                    <figure data-type="image" tabindex="1"><img src="https://img-blog.csdnimg.cn/20200516202636178.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2MjU5MTQz,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" loading="lazy"></figure>
+<ul>
+<li>初始HTML</li>
+<li>网页基本标签</li>
+<li>图像，超链接，网页布局</li>
+<li>列表，表格，媒体元素</li>
+<li>表单及表单应用</li>
+<li>表单初级验证</li>
+</ul>
+<h3 id="1初识html">1.初识HTML</h3>
+<blockquote>
+<p>什么是HTML</p>
+</blockquote>
+<ul>
+<li>HTML
+<ul>
+<li>Hyper Text Markup Language（超文本标记语言）</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>HTML发展史</p>
+</blockquote>
+<figure data-type="image" tabindex="2"><img src="https://ganhan999.github.io//post-images/1607847322036.png" alt="" loading="lazy"></figure>
+<blockquote>
+<p>HTML的优势</p>
+</blockquote>
+<ul>
+<li>世界知名浏览器厂商对HTML5的支持
+<ul>
+<li>微软</li>
+<li>Google</li>
+<li>苹果</li>
+<li>Opera</li>
+<li>Mozilla</li>
+</ul>
+</li>
+<li>市场的需求</li>
+<li>跨平台</li>
+</ul>
+<blockquote>
+<p>W3C标准</p>
+</blockquote>
+<ul>
+<li>W3C
+<ul>
+<li><strong>W</strong>orld <strong>W</strong>ide <strong>W</strong>eb <strong>C</strong>onsortium</li>
+<li>成立于1994年，Web技术领域最权威和具影响力的国际<strong>中立性技术标准机构</strong></li>
+<li>http://www.w3.org/</li>
+<li>http://www.chinaw3c.org/</li>
+</ul>
+</li>
+<li>W3C标准包括
+<ul>
+<li><strong>结构</strong>化标准语言（HTML、XML）</li>
+<li><strong>表现</strong>标准语言（CSS）</li>
+<li><strong>行为</strong>标准（DOM、ECMAScript）</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>常见IDE</p>
+</blockquote>
+<ul>
+<li>记事本</li>
+<li>Dreamweaver</li>
+<li><strong>IDEA</strong>（咱们用IDEA）</li>
+<li>WebStorm</li>
+<li>…等等</li>
+</ul>
+<blockquote>
+<p>HTML基本结构</p>
+</blockquote>
+<figure data-type="image" tabindex="3"><img src="https://ganhan999.github.io//post-images/1607847326898.png" alt="" loading="lazy"></figure>
+<h3 id="2网页基本信息">2.网页基本信息</h3>
+<blockquote>
+<p>网页基本信息</p>
+</blockquote>
+<pre><code class="language-html">&lt;!-- DOCTYPE：告诉浏览器，我们要使用什么规范 --&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;!-- head标签代表网页头部 --&gt;
+&lt;head&gt;
+    &lt;!-- meta描述性标签，它用来描述我们网站一些信息 --&gt;
+    &lt;!-- meta一般用来做SEO --&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta name=&quot;keywords&quot; content=&quot;狂神说Java&quot;&gt;
+    &lt;meta name=&quot;description&quot; content=&quot;来这个地方学习Java&quot;&gt;
+
+    &lt;!-- title网页标题 --&gt;
+    &lt;title&gt;Title&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;!-- body标签代表网页主题 --&gt;
+&lt;body&gt;
+
+Hello，World！
+
+&lt;/body&gt;
+&lt;/html&gt;
+
+</code></pre>
+<h3 id="3网页基本标签">3.网页基本标签</h3>
+<blockquote>
+<p>网页基本标签</p>
+</blockquote>
+<ul>
+<li>标题标签</li>
+<li>段落标签</li>
+<li>换行标签</li>
+<li>水平线标签</li>
+<li>字体样式标签</li>
+<li>注释和特殊符号</li>
+</ul>
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;基本标签学习&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;!--标题标签--&gt;
+    &lt;h1&gt;一级标签&lt;/h1&gt;
+    &lt;h2&gt;二级标签&lt;/h2&gt;
+    &lt;h3&gt;三级标签&lt;/h3&gt;
+    &lt;h4&gt;四级标签&lt;/h4&gt;
+    &lt;h5&gt;五级标签&lt;/h5&gt;
+    &lt;h6&gt;六级标签&lt;/h6&gt;
+
+    &lt;!--段落标签--&gt;
+    &lt;p&gt;跑得快跑得快&lt;/p&gt;
+    &lt;p&gt;一只没有耳朵&lt;/p&gt;
+    &lt;p&gt;一只没有尾巴&lt;/p&gt;
+    &lt;p&gt;真奇怪真奇怪&lt;/p&gt;
+    &lt;p&gt;两只老虎两只老虎&lt;/p&gt;
+
+    &lt;!--水平标签--&gt;
+    &lt;hr/&gt;
+
+    &lt;!--换行标签--&gt;
+    跑得快跑得快&lt;br&gt;
+    一只没有耳朵&lt;br&gt;
+    一只没有尾巴&lt;br&gt;
+    真奇怪真奇怪&lt;br&gt;
+    两只老虎两只老虎&lt;br&gt;
+    &lt;hr/&gt;
+
+    &lt;!-- 粗体，斜体--&gt;
+    粗体：&lt;strong&gt;i love you&lt;/strong&gt;
+    斜体：&lt;em&gt;i love you&lt;/em&gt;
+
+    &lt;br/&gt;
+    &lt;!--特殊符号--&gt;
+    空格：
+    空&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;格
+
+    &lt;!--特殊符号--&gt;
+    &lt;br/&gt;
+    &amp;gt;
+    &lt;br/&gt;
+    &amp;lt;
+    &lt;br/&gt;
+    &amp;copy;版权所有
+    &lt;!--
+    特殊符号记忆方式：
+
+    &amp;开头   ;结尾
+    --&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+</code></pre>
+<h3 id="4图像标签">4.图像标签</h3>
+<blockquote>
+<p>图像标签</p>
+</blockquote>
+<ul>
+<li>常见的图像格式
+<ul>
+<li>JPG</li>
+<li>GIF</li>
+<li>PNG</li>
+<li>BMP（位图）</li>
+<li>…</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-html">&lt;img src=&quot;path&quot; alt=&quot;text&quot; title=&quot;text&quot; width=&quot;x&quot; height=&quot;y&quot; /&gt;
+src：图像地址
+alt：图像的替代文字
+title：鼠标悬停提示文字
+width：图像宽度
+height：图像高度
+
+&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;图像标签&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;!--img学习
+    src：图片地址
+        相对地址(推荐使用)，绝对地址
+    --&gt;
+	&lt;img src=&quot;../resources/img/1.jpg&quot; 
+         alt=&quot;狂神头像&quot; title=&quot;悬停文字&quot; width=&quot;300&quot; height=&quot;300&quot;&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+
+</code></pre>
+<h3 id="5超链接标签应用">5.超链接标签应用</h3>
+<blockquote>
+<p>链接标签</p>
+</blockquote>
+<ul>
+<li>文本超链接</li>
+<li>图像超链接</li>
+</ul>
+<pre><code class="language-html">&lt;a href=&quot;链接路径&quot; target=&quot;目标窗口位置&quot;&gt;链接文本或图像&lt;/a&gt;
+1
+</code></pre>
+<blockquote>
+<p>超链接</p>
+</blockquote>
+<ul>
+<li>页面间链接：从一个页面跳转到另一个页面</li>
+<li>锚链接</li>
+<li>功能性链接</li>
+</ul>
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;链接标签学习&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;!--使用name作为标记--&gt;
+    &lt;a name=&quot;top&quot;&gt;顶部&lt;/a&gt;
+
+    &lt;!--锚标签
+    1.需要一个锚标记
+    2.跳转到标记
+    --&gt;
+    &lt;a href=&quot;#down&quot;&gt;回到底部&lt;/a&gt;
+
+    &lt;!--a标签
+    href:必填，表示要跳转到那个页面
+    target:表示窗口再哪里打开
+        _blank:再新标签中打开
+        _self:在自己的网页中打开
+    --&gt;
+    &lt;a href=&quot;1.我的第一个HTML.html&quot; target=&quot;_blank&quot;&gt;点击我跳转到页面&lt;/a&gt;
+    &lt;a href=&quot;https://baidu.com&quot; target=&quot;_self&quot;&gt;点击我跳转到百度&lt;/a&gt;
+
+    &lt;br&gt;
+
+    &lt;a href=&quot;1.我的第一个HTML.html&quot;&gt;
+        &lt;img src=&quot;../resources/img/1.jpg&quot; 
+             alt=&quot;狂神头像&quot; title=&quot;悬停文字&quot; width=&quot;300&quot; height=&quot;300&quot;&gt;
+    &lt;/a&gt;
+
+
+
+    &lt;!--锚标签
+    1.需要一个锚标记
+    2.跳转到标记
+    --&gt;
+    &lt;a href=&quot;#top&quot;&gt;回到顶部&lt;/a&gt;
+    &lt;a name=&quot;down&quot;&gt;底部&lt;/a&gt;
+
+
+    &lt;!--功能性链接
+
+    邮件链接：mailto；
+    QQ链接：
+    --&gt;
+    &lt;a href=&quot;mailto:8629303@qq.com&quot;&gt;点击联系我&lt;/a&gt;
+    &lt;a target=&quot;_blank&quot; href=&quot;http://wpa.qq.com/msgrd?v=3&amp;uin=&amp;site=qq&amp;menu=yes&quot;&gt;
+        &lt;img border=&quot;0&quot; src=&quot;http://wpa.qq.com/pa?p=2::53&quot; 
+             alt=&quot;点击联系我&quot; title=&quot;点击联系我&quot;/&gt;
+    &lt;/a&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+
+</code></pre>
+<h3 id="6行内元素和块元素">6.行内元素和块元素</h3>
+<blockquote>
+<p>行内元素和块元素</p>
+</blockquote>
+<ul>
+<li>块元素
+<ul>
+<li>无论内容多少，该元素独占一行</li>
+<li>（p、h1-h6…）</li>
+</ul>
+</li>
+<li>行内元素
+<ul>
+<li>内容撑开宽度，左右都是行内元素的可以排在一行</li>
+<li>（a、strong、em…）</li>
+</ul>
+</li>
+</ul>
+<h3 id="7列表标签">7.列表标签</h3>
+<blockquote>
+<p>列表</p>
+</blockquote>
+<ul>
+<li>什么是列表
+<ul>
+<li>列表就是信息资源的一种展示形式。它可以使信息结构化和条理化，并以列表的样式显示出来，以便浏览者能更快捷的获得相应信息</li>
+</ul>
+</li>
+<li>列表的分类
+<ul>
+<li>无序列表</li>
+<li>有序列表</li>
+<li>自定义列表</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;列表学习&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+    &lt;!--有序列表--&gt;
+    &lt;ol&gt;
+        &lt;li&gt;Java&lt;/li&gt;
+        &lt;li&gt;Python&lt;/li&gt;
+        &lt;li&gt;运维&lt;/li&gt;
+        &lt;li&gt;前端&lt;/li&gt;
+        &lt;li&gt;C/C++&lt;/li&gt;
+    &lt;/ol&gt;
+    &lt;hr&gt;
+    &lt;!--无序列表--&gt;
+    &lt;ul&gt;
+        &lt;li&gt;Java&lt;/li&gt;
+        &lt;li&gt;Python&lt;/li&gt;
+        &lt;li&gt;运维&lt;/li&gt;
+        &lt;li&gt;前端&lt;/li&gt;
+        &lt;li&gt;C/C++&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;hr&gt;
+    &lt;!--自定义列表
+    dl：标签
+    dt：列表名称
+    dd：列表内容
+    应用范围：公司网站底部
+    --&gt;
+    &lt;dl&gt;
+        &lt;dt&gt;学科&lt;/dt&gt;
+
+        &lt;dd&gt;Java&lt;/dd&gt;
+        &lt;dd&gt;Python&lt;/dd&gt;
+        &lt;dd&gt;Linux&lt;/dd&gt;
+        &lt;dd&gt;C&lt;/dd&gt;
+
+        &lt;dt&gt;位置&lt;/dt&gt;
+        &lt;dd&gt;湖南&lt;/dd&gt;
+        &lt;dd&gt;广东&lt;/dd&gt;
+    &lt;/dl&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+
+</code></pre>
+<h3 id="8表格标签">8.表格标签</h3>
+<blockquote>
+<p>表格</p>
+</blockquote>
+<ul>
+<li>为什么使用表格
+<ul>
+<li>简单通用</li>
+<li>结构稳定</li>
+</ul>
+</li>
+<li>基本结构
+<ul>
+<li>单元格</li>
+<li>行</li>
+<li>列</li>
+<li>跨行</li>
+<li>跨列</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;表格学习&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;!--表格table
+    行：tr
+    列：td
+    --&gt;
+    &lt;table border=&quot;1px&quot;&gt;
+        &lt;tr&gt;
+            &lt;!--colspan 跨列--&gt;
+            &lt;td colspan=&quot;4&quot;&gt;1-1&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;!--rowspan 跨行--&gt;
+            &lt;td rowspan=&quot;2&quot;&gt;2-1&lt;/td&gt;
+            &lt;td&gt;2-2&lt;/td&gt;
+            &lt;td&gt;2-3&lt;/td&gt;
+            &lt;td&gt;2-4&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td&gt;3-2&lt;/td&gt;
+            &lt;td&gt;3-3&lt;/td&gt;
+            &lt;td&gt;3-4&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/table&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+</code></pre>
+<h3 id="9媒体元素">9.媒体元素</h3>
+<blockquote>
+<p>视频和音频</p>
+</blockquote>
+<ul>
+<li>视频元素：video</li>
+<li>音频元素：audio</li>
+</ul>
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;媒体元素学习&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;!--音频和视频
+    src：资源路径
+    controls：控制条
+    autoplay ：自动播放
+    --&gt;
+    &lt;video src=&quot;../resources/video/xxx.mp4&quot; controls autoplay&gt;&lt;/video&gt;
+
+    &lt;audio src=&quot;../resources/audio/xxx.mp3&quot; controls autoplay&gt;&lt;/audio&gt;
+
+
+&lt;/body&gt;
+&lt;/html&gt;
+
+</code></pre>
+<h3 id="10页面结构分析">10.页面结构分析</h3>
+<blockquote>
+<p>页面结构分析</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>元素名</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>header</td>
+<td>标题头部区域的内容（用于页面或页面中的一块区域）</td>
+</tr>
+<tr>
+<td>footer</td>
+<td>标记脚部区域的内容（用于整个页面或页面的一块区域）</td>
+</tr>
+<tr>
+<td>section</td>
+<td>Web网页中的一块独立区域</td>
+</tr>
+<tr>
+<td>article</td>
+<td>独立的文章内容</td>
+</tr>
+<tr>
+<td>aside</td>
+<td>相关内容或应用</td>
+</tr>
+<tr>
+<td>nav</td>
+<td>导航类辅助内容</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;页面结构分析&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+    &lt;header&gt;
+        &lt;h2&gt;页面头部&lt;/h2&gt;
+    &lt;/header&gt;
+
+    &lt;section&gt;
+        &lt;h2&gt;页面主体&lt;/h2&gt;
+    &lt;/section&gt;
+
+    &lt;footer&gt;
+        &lt;h2&gt;页面底部&lt;/h2&gt;
+    &lt;/footer&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+
+</code></pre>
+<h3 id="11iframe内联框架">11.iframe内联框架</h3>
+<blockquote>
+<p>iframe内联框架</p>
+</blockquote>
+<pre><code class="language-html">&lt;iframe src=&quot;path&quot; name=&quot;mainFrame&quot;&gt;&lt;/iframe&gt;
+path:引用网页地址
+mainFrame:框架标识名
+
+&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;内联框架&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;!--iframe内联框架
+    src：地址
+    w-h：宽度高度
+    --&gt;
+    &lt;iframe src=&quot;http://baidu.com&quot; frameborder=&quot;0&quot; width=&quot;300px&quot; height=&quot;300px&quot;&gt;
+    &lt;/iframe&gt;
+
+    &lt;iframe src=&quot;&quot; name=&quot;hello&quot; frameborder=&quot;0&quot;&gt;&lt;/iframe&gt;
+    &lt;a href=&quot;1.我的第一个HTML.html&quot; target=&quot;hello&quot;&gt;点击跳转&lt;/a&gt;
+
+
+    &lt;iframe src=&quot;//player.bilibili.com/player.html?aid=55631961&amp;bvid=BV1x4411V75C&amp;cid=97257627&amp;page=10&quot; 
+            scrolling=&quot;no&quot; border=&quot;0&quot; 
+            frameborder=&quot;no&quot; framespacing=&quot;0&quot; allowfullscreen=&quot;true&quot;&gt;
+    &lt;/iframe&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+</code></pre>
+<h3 id="12初始表单post和get提交">12.初始表单post和get提交</h3>
+<figure data-type="image" tabindex="4"><img src="https://ganhan999.github.io//post-images/1607847342328.png" alt="" loading="lazy"></figure>
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;登录注册&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;注册&lt;/h1&gt;
+
+    &lt;!--表单form
+    action：表单提交的位置，可以是网站，也可以是一个请求处理地址
+    method：post，get 提交方式
+        get方式提交：外面可以在url中看到外面提交的信息，不安全，高效
+        post方式提交，比较安全，可以传输大文件
+    --&gt;
+    &lt;form action=&quot;1.我的第一个HTML.html&quot; method=&quot;get&quot;&gt;
+        &lt;!--文本输入框--&gt;
+        &lt;p&gt;名称：&lt;input type=&quot;text&quot; name=&quot;username&quot;&gt;&lt;/p&gt;
+        &lt;!--密码框--&gt;
+        &lt;p&gt;密码：&lt;input type=&quot;password&quot; name=&quot;pwd&quot;&gt;&lt;/p&gt;
+
+        &lt;p&gt;
+            &lt;input type=&quot;submit&quot;&gt;
+            &lt;input type=&quot;reset&quot;&gt;
+        &lt;/p&gt;
+    &lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+</code></pre>
+<figure data-type="image" tabindex="5"><img src="https://ganhan999.github.io//post-images/1607847348060.png" alt="" loading="lazy"></figure>
+<h3 id="13文本框和单选框">13.文本框和单选框</h3>
+<blockquote>
+<p>表单元素格式</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>type</td>
+<td>指定元素的类型。text、password、checkbox、radio、submit、reset、file、hidden、image、button，默认text</td>
+</tr>
+<tr>
+<td>name</td>
+<td>指定表单元素的名称</td>
+</tr>
+<tr>
+<td>value</td>
+<td>元素的初始值。type为radio时必须指定一个值</td>
+</tr>
+<tr>
+<td>size</td>
+<td>指定表单元素的初始宽度。但type为text或password时，表单元素的大小以字符为单位。对于其他类型，宽度以像素为单位。</td>
+</tr>
+<tr>
+<td>maxlength</td>
+<td>type为text或password时，输入的最大字符数</td>
+</tr>
+<tr>
+<td>checked</td>
+<td>type为radio或checkbox时，指定按钮是否被选中</td>
+</tr>
+</tbody>
+</table>
+<h3 id="14按钮和多选框">14.按钮和多选框</h3>
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;登录注册&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;注册&lt;/h1&gt;
+
+    &lt;!--表单form
+    action：表单提交的位置，可以是网站，也可以是一个请求处理地址
+    method：post，get 提交方式
+        get方式提交：外面可以在url中看到外面提交的信息，不安全，高效
+        post方式提交，比较安全，可以传输大文件
+    --&gt;
+    &lt;form action=&quot;1.我的第一个HTML.html&quot; method=&quot;get&quot;&gt;
+        &lt;!--文本输入框
+        value=&quot;好帅&quot;  默认初始值
+        maxlength=&quot;8&quot;   最长能写几个字符
+        size=&quot;30&quot;   文本框的长度
+        --&gt;
+        &lt;p&gt;名称：&lt;input type=&quot;text&quot; name=&quot;username&quot; &gt;&lt;/p&gt;
+        &lt;!--密码框--&gt;
+        &lt;p&gt;密码：&lt;input type=&quot;password&quot; name=&quot;pwd&quot;&gt;&lt;/p&gt;
+
+        &lt;!--单选框标签
+        type=&quot;radio&quot;：单选框的值
+        value：单选框的值
+        name：表示组
+        --&gt;
+        &lt;input type=&quot;radio&quot; value=&quot;boy&quot; name=&quot;sex&quot;/&gt;男
+        &lt;input type=&quot;radio&quot; value=&quot;girl&quot; name=&quot;sex&quot; checked/&gt;女
+
+        &lt;!--多选框
+        type=&quot;checkbox&quot;
+        --&gt;
+        &lt;p&gt;爱好：
+            &lt;input type=&quot;checkbox&quot; value=&quot;sleep&quot; name=&quot;hobby&quot;&gt;睡觉
+            &lt;input type=&quot;checkbox&quot; value=&quot;code&quot; name=&quot;hobby&quot; checked&gt;敲代码
+            &lt;input type=&quot;checkbox&quot; value=&quot;chat&quot; name=&quot;hobby&quot;&gt;聊天
+            &lt;input type=&quot;checkbox&quot; value=&quot;game&quot; name=&quot;hobby&quot;&gt;游戏
+        &lt;/p&gt;
+
+        &lt;!--按钮
+        input type=&quot;button&quot;    普通按钮
+        input type=&quot;image&quot;     图片按钮
+        input type=&quot;submit&quot;     提交按钮
+        input type=&quot;reset&quot;      重置按钮
+        --&gt;
+        &lt;p&gt;
+            &lt;input type=&quot;button&quot; name=&quot;btn1&quot; value=&quot;点击变长&quot;&gt;
+            &lt;input type=&quot;image&quot; src=&quot;../resources/img/1.jpg&quot;&gt;
+        &lt;/p&gt;
+
+        &lt;p&gt;
+            &lt;input type=&quot;submit&quot;&gt;
+            &lt;input type=&quot;reset&quot;&gt;
+        &lt;/p&gt;
+    &lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+</code></pre>
+<h3 id="15列表框文本域和文件域">15.列表框文本域和文件域</h3>
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;登录注册&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;注册&lt;/h1&gt;
+
+    &lt;!--表单form
+    action：表单提交的位置，可以是网站，也可以是一个请求处理地址
+    method：post，get 提交方式
+        get方式提交：外面可以在url中看到外面提交的信息，不安全，高效
+        post方式提交，比较安全，可以传输大文件
+    --&gt;
+    &lt;form action=&quot;1.我的第一个HTML.html&quot; method=&quot;get&quot;&gt;
+        &lt;!--文本输入框
+        value=&quot;好帅&quot;  默认初始值
+        maxlength=&quot;8&quot;   最长能写几个字符
+        size=&quot;30&quot;   文本框的长度
+        --&gt;
+        &lt;p&gt;名称：&lt;input type=&quot;text&quot; name=&quot;username&quot; &gt;&lt;/p&gt;
+        &lt;!--密码框--&gt;
+        &lt;p&gt;密码：&lt;input type=&quot;password&quot; name=&quot;pwd&quot;&gt;&lt;/p&gt;
+
+        &lt;!--单选框标签
+        type=&quot;radio&quot;：单选框的值
+        value：单选框的值
+        name：表示组
+        --&gt;
+        &lt;input type=&quot;radio&quot; value=&quot;boy&quot; name=&quot;sex&quot;/&gt;男
+        &lt;input type=&quot;radio&quot; value=&quot;girl&quot; name=&quot;sex&quot; checked/&gt;女
+
+        &lt;!--多选框
+        type=&quot;checkbox&quot;
+        --&gt;
+        &lt;p&gt;爱好：
+            &lt;input type=&quot;checkbox&quot; value=&quot;sleep&quot; name=&quot;hobby&quot;&gt;睡觉
+            &lt;input type=&quot;checkbox&quot; value=&quot;code&quot; name=&quot;hobby&quot; checked&gt;敲代码
+            &lt;input type=&quot;checkbox&quot; value=&quot;chat&quot; name=&quot;hobby&quot;&gt;聊天
+            &lt;input type=&quot;checkbox&quot; value=&quot;game&quot; name=&quot;hobby&quot;&gt;游戏
+        &lt;/p&gt;
+
+        &lt;!--按钮
+        input type=&quot;button&quot;    普通按钮
+        input type=&quot;image&quot;     图片按钮
+        input type=&quot;submit&quot;     提交按钮
+        input type=&quot;reset&quot;      重置按钮
+        --&gt;
+        &lt;p&gt;
+            &lt;input type=&quot;button&quot; name=&quot;btn1&quot; value=&quot;点击变长&quot;&gt;
+            &lt;input type=&quot;image&quot; src=&quot;../resources/img/1.jpg&quot;&gt;
+        &lt;/p&gt;
+        &lt;p&gt;
+            &lt;input type=&quot;submit&quot;&gt;
+            &lt;input type=&quot;reset&quot;&gt;
+        &lt;/p&gt;
+
+        &lt;!--下拉框，列表框
+        --&gt;
+        &lt;p&gt;国家：
+            &lt;select name=&quot;列表名称&quot;&gt;
+                &lt;option value=&quot;china&quot;&gt;中国&lt;/option&gt;
+                &lt;option value=&quot;us&quot;&gt;美国&lt;/option&gt;
+                &lt;option value=&quot;eth&quot; selected&gt;瑞士&lt;/option&gt;
+                &lt;option value=&quot;yd&quot;&gt;印度&lt;/option&gt;
+            &lt;/select&gt;
+        &lt;/p&gt;
+
+        &lt;!--文本域--&gt;
+        &lt;p&gt;反馈：
+            &lt;textarea name=&quot;textarea&quot; id=&quot;&quot; cols=&quot;30&quot; rows=&quot;10&quot;&gt;&lt;/textarea&gt;
+        &lt;/p&gt;
+
+        &lt;!--文件域
+        --&gt;
+        &lt;p&gt;
+            &lt;input type=&quot;file&quot; name=&quot;files&quot;&gt;
+            &lt;input type=&quot;button&quot; value=&quot;上传&quot; name=&quot;upload&quot;&gt;
+        &lt;/p&gt;
+
+    &lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+</code></pre>
+<h3 id="16搜索框滑块和简单验证">16.搜索框滑块和简单验证</h3>
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;登录注册&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;注册&lt;/h1&gt;
+
+    &lt;!--表单form
+    action：表单提交的位置，可以是网站，也可以是一个请求处理地址
+    method：post，get 提交方式
+        get方式提交：外面可以在url中看到外面提交的信息，不安全，高效
+        post方式提交，比较安全，可以传输大文件
+    --&gt;
+    &lt;form action=&quot;1.我的第一个HTML.html&quot; method=&quot;get&quot;&gt;
+        &lt;!--文本输入框
+        value=&quot;好帅&quot;  默认初始值
+        maxlength=&quot;8&quot;   最长能写几个字符
+        size=&quot;30&quot;   文本框的长度
+        --&gt;
+        &lt;p&gt;名称：&lt;input type=&quot;text&quot; name=&quot;username&quot; &gt;&lt;/p&gt;
+        &lt;!--密码框--&gt;
+        &lt;p&gt;密码：&lt;input type=&quot;password&quot; name=&quot;pwd&quot;&gt;&lt;/p&gt;
+
+        &lt;!--单选框标签
+        type=&quot;radio&quot;：单选框的值
+        value：单选框的值
+        name：表示组
+        --&gt;
+        &lt;input type=&quot;radio&quot; value=&quot;boy&quot; name=&quot;sex&quot;/&gt;男
+        &lt;input type=&quot;radio&quot; value=&quot;girl&quot; name=&quot;sex&quot; checked/&gt;女
+
+        &lt;!--多选框
+        type=&quot;checkbox&quot;
+        --&gt;
+        &lt;p&gt;爱好：
+            &lt;input type=&quot;checkbox&quot; value=&quot;sleep&quot; name=&quot;hobby&quot;&gt;睡觉
+            &lt;input type=&quot;checkbox&quot; value=&quot;code&quot; name=&quot;hobby&quot; checked&gt;敲代码
+            &lt;input type=&quot;checkbox&quot; value=&quot;chat&quot; name=&quot;hobby&quot;&gt;聊天
+            &lt;input type=&quot;checkbox&quot; value=&quot;game&quot; name=&quot;hobby&quot;&gt;游戏
+        &lt;/p&gt;
+
+        &lt;!--按钮
+        input type=&quot;button&quot;    普通按钮
+        input type=&quot;image&quot;     图片按钮
+        input type=&quot;submit&quot;     提交按钮
+        input type=&quot;reset&quot;      重置按钮
+        --&gt;
+        &lt;p&gt;
+            &lt;input type=&quot;button&quot; name=&quot;btn1&quot; value=&quot;点击变长&quot;&gt;
+            &lt;input type=&quot;image&quot; src=&quot;../resources/img/1.jpg&quot;&gt;
+        &lt;/p&gt;
+
+
+        &lt;!--下拉框，列表框
+        --&gt;
+        &lt;p&gt;国家：
+            &lt;select name=&quot;列表名称&quot;&gt;
+                &lt;option value=&quot;china&quot;&gt;中国&lt;/option&gt;
+                &lt;option value=&quot;us&quot;&gt;美国&lt;/option&gt;
+                &lt;option value=&quot;eth&quot; selected&gt;瑞士&lt;/option&gt;
+                &lt;option value=&quot;yd&quot;&gt;印度&lt;/option&gt;
+            &lt;/select&gt;
+        &lt;/p&gt;
+
+        &lt;!--文本域--&gt;
+        &lt;p&gt;反馈：
+            &lt;textarea name=&quot;textarea&quot; id=&quot;&quot; cols=&quot;30&quot; rows=&quot;10&quot;&gt;&lt;/textarea&gt;
+        &lt;/p&gt;
+
+        &lt;!--文件域
+        --&gt;
+        &lt;p&gt;
+            &lt;input type=&quot;file&quot; name=&quot;files&quot;&gt;
+            &lt;input type=&quot;button&quot; value=&quot;上传&quot; name=&quot;upload&quot;&gt;
+        &lt;/p&gt;
+
+        &lt;!--邮件验证--&gt;
+        &lt;p&gt;邮件：
+            &lt;input type=&quot;email&quot; name=&quot;email&quot;&gt;
+        &lt;/p&gt;
+        &lt;!--URL--&gt;
+        &lt;p&gt;URL：
+            &lt;input type=&quot;url&quot; name=&quot;url&quot;&gt;
+        &lt;/p&gt;
+        &lt;!--数字--&gt;
+        &lt;p&gt;数字：
+            &lt;input type=&quot;number&quot; name=&quot;num&quot; max=&quot;100&quot; min=&quot;0&quot; size=&quot;10&quot;&gt;
+        &lt;/p&gt;
+
+        &lt;!--滑块--&gt;
+        &lt;p&gt;音量：
+            &lt;input type=&quot;range&quot; name=&quot;voice&quot; min=&quot;0&quot; max=&quot;100&quot; step=&quot;2&quot;&gt;
+        &lt;/p&gt;
+
+        &lt;!--搜索框--&gt;
+        &lt;p&gt;搜索：
+            &lt;input type=&quot;search&quot; name=&quot;search&quot;&gt;
+        &lt;/p&gt;
+
+
+        &lt;p&gt;
+            &lt;input type=&quot;submit&quot;&gt;
+            &lt;input type=&quot;reset&quot;&gt;
+        &lt;/p&gt;
+    &lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+</code></pre>
+<h3 id="17表单的应用">17.表单的应用</h3>
+<blockquote>
+<p>表单的应用</p>
+</blockquote>
+<ul>
+<li>隐藏域：hidden</li>
+<li>只读：readonly</li>
+<li>禁用：disabled</li>
+</ul>
+<pre><code class="language-html">   &lt;!--增强鼠标可用性，点击label，光标自动到text上--&gt;
+    &lt;p&gt;
+        &lt;label for=&quot;mark&quot;&gt;你点我试试&lt;/label&gt;
+        &lt;input type=&quot;text&quot; id=&quot;mark&quot;&gt;
+    &lt;/p&gt;
+</code></pre>
+<h3 id="18表单初级验证">18.表单初级验证</h3>
+<blockquote>
+<p>表单初级验证</p>
+</blockquote>
+<ul>
+<li>常用方式
+<ul>
+<li>placeholder：提示信息</li>
+<li>required：非空判断</li>
+<li>pattern：正则表达式</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-html">&lt;p&gt;名称：&lt;input type=&quot;text&quot; name=&quot;username&quot; placeholder=&quot;请输入用户名&quot;&gt;&lt;/p&gt;
+&lt;p&gt;名称：&lt;input type=&quot;text&quot; name=&quot;username&quot; required&gt;&lt;/p&gt;
+&lt;!--常用的正则：https://www.jb51.net/tools/regexsc.htm--&gt;
+&lt;p&gt;自定义邮箱：
+    &lt;input type=&quot;text&quot; 
+           name=&quot;diy&quot; 
+           pattern=&quot;/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/&quot;&gt;
+&lt;/p&gt;
+</code></pre>
+
+                </div>
+            </article>
+        </div>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://ganhan999.github.io/post/6、Z 字形变换/" class="post-title gt-a-link">
+                    中等6. Z字形变换
+                </a>
+            </div>
+        
+
+        
+
+        
+
+        
+
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first">温故而知新</div>
+    <div class="social-container">
+        
+            
+        
+            
+        
+            
+        
+            
+                <a href="https://www.zhihu.com/hot" target="_blank">
+                    <i class="fab fa-zhihu gt-c-content-color-first"></i>
+                </a>
+            
+        
+            
+        
+            
+        
+    </div>
+    <div class="footer-info">
+        Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+    </div>
+    <div>
+        Theme by <a href="https://imhanjie.com/" target="_blank">imhanjie</a>, Powered by <a
+                href="https://github.com/getgridea/gridea" target="_blank">Gridea | <a href="https://ganhan999.github.io//atom.xml" target="_blank">RSS</a></a>
+    </div>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+    </div>
+</div>
+</body>
+</html>

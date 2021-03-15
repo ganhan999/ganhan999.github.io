@@ -1,0 +1,238 @@
+<html>
+<head>
+    <meta charset="utf-8"/>
+<meta name="description" content=""/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+<title>111、二叉树的最小深度 | Gridea</title>
+
+<link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1615809991680">
+
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://ganhan999.github.io//styles/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dockerfile.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dart.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script>
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
+
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css">
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg">
+    <div class="navbar-brand">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            Gridea
+        </div>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
+            
+                <div class="nav-item">
+                    
+                        <a href="/" class="menu gt-a-link">
+                            首页
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/archives" class="menu gt-a-link">
+                            归档
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/tags" class="menu gt-a-link">
+                            标签
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/post/about" class="menu gt-a-link">
+                            关于
+                        </a>
+                    
+                </div>
+            
+        </div>
+        <div style="text-align: center">
+            <form id="gridea-search-form" style="position: relative" data-update="1615809991680" action="/search/index.html">
+                <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+                <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+        </div>
+    </div>
+</nav>
+
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    111、二叉树的最小深度
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2020-11-23 ·
+                    </time>
+                    
+                        <a href="https://ganhan999.github.io/tag/RJ1fLvr_t/" class="post-tags">
+                            # leetcode
+                        </a>
+                    
+                </div>
+                <div class="post-content">
+                    <h1 id="题目">题目</h1>
+<p>给定一个二叉树，判断它是否是高度平衡的二叉树。<br>
+本题中，一棵高度平衡二叉树定义为：<br>
+一个二叉树每个节点 的左右两个子树的高度差的绝对值不超过 1 。</p>
+<p>给定一个二叉树，找出其最小深度。<br>
+最小深度是从根节点到最近叶子节点的最短路径上的节点数量。<br>
+说明：叶子节点是指没有子节点的节点。</p>
+<p>示例 1：<br>
+输入：root = [3,9,20,null,null,15,7]<br>
+输出：2</p>
+<p>示例 2：<br>
+输入：root = [2,null,3,null,4,null,5,null,6]<br>
+输出：5</p>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="本体思路">本体思路</h1>
+<p>DFS，递归大法，分情况讨论（节点为空，左右节点为空，仅左节点为空等等）</p>
+<h1 id="我的做法">#我的做法：</h1>
+<pre><code class="language-python">class Solution:
+    def minDepth(self, root: TreeNode) -&gt; int:
+        if not root:
+            return 0
+        elif not root.left and not root.right:
+            return 1
+        elif not root.left:
+            return self.minDepth(root.right)+1
+        elif not root.right:
+            return self.minDepth(root.left)+1
+        return 1+min(self.minDepth(root.left),self.minDepth(root.right))
+</code></pre>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="大神做法1">#大神做法1：</h1>
+<p>BFS，看左右子树的节点谁先没有左右节点，就停止循环。</p>
+<pre><code class="language-Python">class Solution:
+    dct = {}
+    def isBalanced(self, root: TreeNode) -&gt; bool:
+        if not root:
+            return True
+
+        def maxDepth(root: TreeNode) -&gt; int:
+            if not root:
+                return 0
+            if root not in self.dct:
+                self.dct[root] = 1 + max(maxDepth(root.left), maxDepth(root.right))
+            return self.dct[root]
+
+        tmp = maxDepth(root.left) - maxDepth(root.right)
+        return abs(tmp)&lt;2  and self.isBalanced(root.left) and self.isBalanced(root.right)
+
+</code></pre>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="大神做法2">#大神做法2：</h1>
+<p>在求取左右子节点时，判断子节点是否失衡，<br>
+如果失衡则无需求根节点的平衡度，向上通知提前退出递归。<br>
+因为-1表示递归提前退出或者失衡.<br>
+如果左子树已经出现了失衡状况，就只会遍历一半！！！<br>
+在算深度的时候，就把平衡的条件给判定了。</p>
+<pre><code class="language-Python">class Solution:
+    def minDepth(self, root: TreeNode) -&gt; int:
+        if not root:
+            return 0
+
+        from collections import deque
+        q = deque([(root, 1)])
+        while q:
+            node, depth = q.popleft()
+            if not node.left and not node.right:
+                return depth
+            if node.left:
+                q.append((node.left, depth + 1))
+                print(depth)
+            if node.right:
+                q.append((node.right, depth + 1))
+                print(depth)
+        return 0
+
+</code></pre>
+
+                </div>
+            </article>
+        </div>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://ganhan999.github.io/post/110、平衡二叉树/" class="post-title gt-a-link">
+                    110、平衡二叉树
+                </a>
+            </div>
+        
+
+        
+
+        
+
+        
+
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first">温故而知新</div>
+    <div class="social-container">
+        
+            
+        
+            
+        
+            
+        
+            
+                <a href="https://www.zhihu.com/hot" target="_blank">
+                    <i class="fab fa-zhihu gt-c-content-color-first"></i>
+                </a>
+            
+        
+            
+        
+            
+        
+    </div>
+    <div class="footer-info">
+        Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+    </div>
+    <div>
+        Theme by <a href="https://imhanjie.com/" target="_blank">imhanjie</a>, Powered by <a
+                href="https://github.com/getgridea/gridea" target="_blank">Gridea | <a href="https://ganhan999.github.io//atom.xml" target="_blank">RSS</a></a>
+    </div>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,367 @@
+<html>
+<head>
+    <meta charset="utf-8"/>
+<meta name="description" content=""/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+<title>Python算法入门 (动态规划) | Gridea</title>
+
+<link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1615809991680">
+
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://ganhan999.github.io//styles/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dockerfile.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dart.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script>
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
+
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css">
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg">
+    <div class="navbar-brand">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            Gridea
+        </div>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
+            
+                <div class="nav-item">
+                    
+                        <a href="/" class="menu gt-a-link">
+                            首页
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/archives" class="menu gt-a-link">
+                            归档
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/tags" class="menu gt-a-link">
+                            标签
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/post/about" class="menu gt-a-link">
+                            关于
+                        </a>
+                    
+                </div>
+            
+        </div>
+        <div style="text-align: center">
+            <form id="gridea-search-form" style="position: relative" data-update="1615809991680" action="/search/index.html">
+                <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+                <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+        </div>
+    </div>
+</nav>
+
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    Python算法入门 (动态规划)
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2020-11-25 ·
+                    </time>
+                    
+                        <a href="https://ganhan999.github.io/tag/2UGIvmMaOp/" class="post-tags">
+                            # Python
+                        </a>
+                    
+                </div>
+                <div class="post-content">
+                    <h1 id="动态规划">动态规划</h1>
+<p><strong>1、斐波那契数列</strong></p>
+<pre><code class="language-python"># 子问题的重复计算
+def fibnacci(n):
+    if n == 1 or n == 2:
+        return 1
+    else:
+        return fibnacci(n-1) + fibnacci(n-2)
+
+
+# 动态规划（DP）的思想 = 递推式 + 重复子问题
+def fibnacci_no_recurision(n):
+    f = [0,1,1]
+    if n &gt; 2:
+        for i in range(n-2):
+            num = f[-1] + f[-2]
+            f.append(num)
+    return f[n]
+
+print(fibnacci_no_recurision(100))
+</code></pre>
+<p><strong>2、最长公共子序列</strong></p>
+<pre><code class="language-python">def lcs_length(x, y):
+    m = len(x)
+    n = len(y)
+    c = [[0 for _ in range(n+1)] for _ in range(m+1)]
+    for i in range(1, m+1):
+        for j in range(1, n+1):
+            if x[i-1] == y[j-1]:    # i j 位置上的字符匹配的时候，来自于左上方+1
+                c[i][j] = c[i-1][j-1] + 1
+            else:
+                c[i][j] = max(c[i-1][j], c[i][j-1])
+    return c[m][n]
+
+def lcs(x, y):
+    m = len(x)
+    n = len(y)
+    c = [[0 for _ in range(n + 1)] for _ in range(m + 1)]
+    b = [[0 for _ in range(n + 1)] for _ in range(m + 1)] # 1 左上方 2 上方 3 左方
+    for i in range(1, m+1):
+        for j in range(1, n+1):
+            if x[i-1] == y[j-1]:    # i j 位置上的字符匹配的时候，来自于左上方+1
+                c[i][j] = c[i-1][j-1] + 1
+                b[i][j] = 1
+            elif c[i-1][j] &gt; c[i][j-1]: # 来自于上方
+                c[i][j] = c[i-1][j]
+                b[i][j] = 2
+            else:
+                c[i][j] = c[i][j-1]
+                b[i][j] = 3
+    return c[m][n], b
+
+
+def lcs_trackback(x, y):
+    c, b = lcs(x, y)
+    i = len(x)
+    j = len(y)
+    res = []
+    while i &gt; 0 and j &gt; 0:
+        if b[i][j] == 1:    # 来自左上方=&gt;匹配
+            res.append(x[i-1])
+            i -= 1
+            j -= 1
+        elif b[i][j] == 2:  # 来自于上方=&gt;不匹配
+            i -= 1
+        else: # ==3 来自于左方=&gt;不匹配
+            j -= 1
+    return &quot;&quot;.join(reversed(res))
+
+
+print(lcs_trackback(&quot;ABCBDAB&quot;, &quot;BDCABA&quot;))
+</code></pre>
+<p><strong>3、最大公约数</strong></p>
+<pre><code class="language-python">def gcd(a, b):
+    if b == 0:
+        return a
+    else:
+        return gcd(b, a % b)
+
+
+def gcd2(a, b):
+    while b &gt; 0:
+        r = a % b
+        a = b
+        b = r
+    return a
+
+
+print(gcd2(12,16))
+</code></pre>
+<p><strong>4、切木头问题</strong></p>
+<pre><code class="language-python">p = [0, 1, 5, 8, 9, 10, 17, 17, 20, 21, 23, 24, 26, 27, 27, 28, 30, 33, 36, 39, 40]
+# p = [0, 1, 5, 8, 9, 10, 17, 17, 20, 24, 30]
+
+
+def cut_rod_recurision_1(p, n):
+    if n == 0:
+        return 0
+    else:
+        res = p[n]
+        for i in range(1, n):
+            res = max(res, cut_rod_recurision_1(p, i) + cut_rod_recurision_1(p, n-i))
+        return res
+
+
+def c1(p, n):
+    return cut_rod_recurision_1(p, n)
+
+
+def cut_rod_recurision_2(p, n):
+    if n == 0:
+        return 0
+    else:
+        res = 0
+        for i in range(1, n+1):
+            res = max(res, p[i] + cut_rod_recurision_2(p, n-i))
+        return res
+
+
+def c2(p,n):
+    return cut_rod_recurision_2(p, n)
+
+
+
+def cut_rod_dp(p, n):
+    r = [0]
+    for i in range(1, n+1):
+        res = 0
+        for j in range(1, i+1):
+            res = max(res, p[j] + r[i - j])
+        r.append(res)
+    return r[n]
+
+
+def cut_rod_extend(p, n):
+    r = [0]
+    s = [0]
+    for i in range(1, n+1):
+        res_r = 0 # 价格的最大值
+        res_s = 0 # 价格最大值对应方案的左边不切割部分的长度
+        for j in range(1, i + 1):
+            if p[j] + r[i - j] &gt; res_r:
+                res_r = p[j] + r[i - j]
+                res_s = j
+        r.append(res_r)
+        s.append(res_s)
+    return r[n], s
+
+
+def cut_rod_solution(p, n):
+    r, s = cut_rod_extend(p, n)
+    ans = []
+    while n &gt; 0:
+        ans.append(s[n])
+        n -= s[n]
+    return ans
+
+
+r, s = cut_rod_extend(p,20)
+print(s)
+
+print(cut_rod_dp(p, 20))
+print(cut_rod_solution(p, 20))
+</code></pre>
+<p><strong>5、分数相加</strong></p>
+<pre><code class="language-Python">class Fraction:
+    def __init__(self, a, b):
+        self.a = a
+        self.b = b
+        x = self.gcd(a,b)
+        self.a /= x
+        self.b /= x
+
+    def gcd(self, a, b):
+        while b &gt; 0:
+            r = a % b
+            a = b
+            b = r
+        return a
+
+    def zgs(self, a, b):
+        # 12 16 -&gt; 4
+        # 3*4*4=48
+        x = self.gcd(a, b)
+        return a * b / x
+
+    def __add__(self, other):
+        a = self.a
+        b = self.b
+        c = other.a
+        d = other.b
+        fenmu = self.zgs(b, d)
+        fenzi = a * fenmu / b + c * fenmu / d
+        return Fraction(fenzi, fenmu)
+
+
+
+    def __str__(self):
+        return &quot;%d/%d&quot; % (self.a, self.b)
+
+
+a = Fraction(1,3)
+b = Fraction(1,2)
+print(a+b)
+</code></pre>
+
+                </div>
+            </article>
+        </div>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://ganhan999.github.io/post/Python算法入门3/" class="post-title gt-a-link">
+                    Python算法入门 (贪心算法)
+                </a>
+            </div>
+        
+
+        
+
+        
+
+        
+
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first">温故而知新</div>
+    <div class="social-container">
+        
+            
+        
+            
+        
+            
+        
+            
+                <a href="https://www.zhihu.com/hot" target="_blank">
+                    <i class="fab fa-zhihu gt-c-content-color-first"></i>
+                </a>
+            
+        
+            
+        
+            
+        
+    </div>
+    <div class="footer-info">
+        Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+    </div>
+    <div>
+        Theme by <a href="https://imhanjie.com/" target="_blank">imhanjie</a>, Powered by <a
+                href="https://github.com/getgridea/gridea" target="_blank">Gridea | <a href="https://ganhan999.github.io//atom.xml" target="_blank">RSS</a></a>
+    </div>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+    </div>
+</div>
+</body>
+</html>

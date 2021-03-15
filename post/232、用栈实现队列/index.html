@@ -1,0 +1,284 @@
+<html>
+<head>
+    <meta charset="utf-8"/>
+<meta name="description" content=""/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+<title>232、用栈实现队列 | Gridea</title>
+
+<link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1615809991680">
+
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://ganhan999.github.io//styles/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dockerfile.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dart.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script>
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
+
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css">
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg">
+    <div class="navbar-brand">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            Gridea
+        </div>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
+            
+                <div class="nav-item">
+                    
+                        <a href="/" class="menu gt-a-link">
+                            首页
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/archives" class="menu gt-a-link">
+                            归档
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/tags" class="menu gt-a-link">
+                            标签
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/post/about" class="menu gt-a-link">
+                            关于
+                        </a>
+                    
+                </div>
+            
+        </div>
+        <div style="text-align: center">
+            <form id="gridea-search-form" style="position: relative" data-update="1615809991680" action="/search/index.html">
+                <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+                <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+        </div>
+    </div>
+</nav>
+
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    232、用栈实现队列
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2021-03-02 ·
+                    </time>
+                    
+                        <a href="https://ganhan999.github.io/tag/RJ1fLvr_t/" class="post-tags">
+                            # leetcode
+                        </a>
+                    
+                </div>
+                <div class="post-content">
+                    <h1 id="题目">题目</h1>
+<p>请你仅使用两个栈实现先入先出队列。队列应当支持一般队列的支持的所有操作（push、pop、peek、empty）：</p>
+<p>实现 MyQueue 类：</p>
+<p>void push(int x) 将元素 x 推到队列的末尾<br>
+int pop() 从队列的开头移除并返回元素<br>
+int peek() 返回队列开头的元素<br>
+boolean empty() 如果队列为空，返回 true ；否则，返回 false</p>
+<p>说明：<br>
+你只能使用标准的栈操作 —— 也就是只有 push to top, peek/pop from top, size,<br>
+和 is empty 操作是合法的。<br>
+你所使用的语言也许不支持栈。你可以使用 list 或者 deque（双端队列）来模拟一个栈，只要是标准的栈操作即可。</p>
+<p>进阶：</p>
+<p>你能否实现每个操作均摊时间复杂度为 O(1) 的队列？换句话说，执行 n 个操作的总时间复杂度为 O(n) ，<br>
+即使其中一个操作可能花费较长时间。</p>
+<p>示例：</p>
+<p>输入：<br>
+[&quot;MyQueue&quot;, &quot;push&quot;, &quot;push&quot;, &quot;peek&quot;, &quot;pop&quot;, &quot;empty&quot;]<br>
+[[], [1], [2], [], [], []]<br>
+输出：<br>
+[null, null, null, 1, 1, false]<br>
+解释：<br>
+MyQueue myQueue = new MyQueue();<br>
+myQueue.push(1); // queue is: [1]<br>
+myQueue.push(2); // queue is: [1, 2] (leftmost is front of the queue)<br>
+myQueue.peek(); // return 1<br>
+myQueue.pop(); // return 1, queue is [2]<br>
+myQueue.empty(); // return false</p>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="本体思路">本体思路</h1>
+<p>双栈<br>
+元素全部在stack1里面</p>
+<h1 id="大神做法1">大神做法1：</h1>
+<pre><code class="language-python">class MyQueue:
+
+    def __init__(self):
+        &quot;&quot;&quot;
+        Initialize your data structure here.
+        &quot;&quot;&quot;
+        self.stack1 = []
+        self.stack2 = []
+
+    def push(self, x: int) -&gt; None:
+        &quot;&quot;&quot;
+        Push element x to the back of queue.
+        &quot;&quot;&quot;
+        self.stack1.append(x)
+
+    def pop(self) -&gt; int:
+        &quot;&quot;&quot;
+        Removes the element from in front of queue and returns that element.
+        &quot;&quot;&quot;
+        while self.stack1:
+            self.stack2.append(self.stack1.pop())
+        res = self.stack2.pop()
+        while self.stack2:
+            self.stack1.append(self.stack2.pop())
+        return res
+
+    def peek(self) -&gt; int:
+        &quot;&quot;&quot;
+        Get the front element.
+        &quot;&quot;&quot;
+        while self.stack1:
+            self.stack2.append(self.stack1.pop())
+        res = self.stack2[-1]
+        while self.stack2:
+            self.stack1.append(self.stack2.pop())
+        return res
+
+    def empty(self) -&gt; bool:
+        &quot;&quot;&quot;
+        Returns whether the queue is empty.
+        &quot;&quot;&quot;
+        return not self.stack1
+</code></pre>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<p>双栈</p>
+<p>每次都更新front</p>
+<p>压入的元素在1栈，要被弹出的元素在2栈</p>
+<h1 id="大神做法2">大神做法2：</h1>
+<pre><code class="language-python">class MyQueue:
+
+    def __init__(self):
+        &quot;&quot;&quot;
+        Initialize your data structure here.
+        &quot;&quot;&quot;
+        self.stack1 = []
+        self.stack2 = []
+        self.front = None
+
+    def push(self, x: int) -&gt; None:
+        &quot;&quot;&quot;
+        Push element x to the back of queue.
+        &quot;&quot;&quot;
+        if not self.stack1:
+            self.front = x
+        self.stack1.append(x)
+
+    def pop(self) -&gt; int:
+        &quot;&quot;&quot;
+        Removes the element from in front of queue and returns that element.
+        &quot;&quot;&quot;
+        if not self.stack2:
+            while self.stack1:
+                self.stack2.append(self.stack1.pop())
+            self.front = None
+        return self.stack2.pop()
+
+    def peek(self) -&gt; int:
+        &quot;&quot;&quot;
+        Get the front element.
+        &quot;&quot;&quot;
+        if self.stack2:
+            return self.stack2[-1]
+        return self.front
+
+    def empty(self) -&gt; bool:
+        &quot;&quot;&quot;
+        Returns whether the queue is empty.
+        &quot;&quot;&quot;
+        return not self.stack1 and not self.stack2
+</code></pre>
+
+                </div>
+            </article>
+        </div>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://ganhan999.github.io/post/228、汇总区间/" class="post-title gt-a-link">
+                    228、汇总区间
+                </a>
+            </div>
+        
+
+        
+
+        
+
+        
+
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first">温故而知新</div>
+    <div class="social-container">
+        
+            
+        
+            
+        
+            
+        
+            
+                <a href="https://www.zhihu.com/hot" target="_blank">
+                    <i class="fab fa-zhihu gt-c-content-color-first"></i>
+                </a>
+            
+        
+            
+        
+            
+        
+    </div>
+    <div class="footer-info">
+        Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+    </div>
+    <div>
+        Theme by <a href="https://imhanjie.com/" target="_blank">imhanjie</a>, Powered by <a
+                href="https://github.com/getgridea/gridea" target="_blank">Gridea | <a href="https://ganhan999.github.io//atom.xml" target="_blank">RSS</a></a>
+    </div>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+    </div>
+</div>
+</body>
+</html>

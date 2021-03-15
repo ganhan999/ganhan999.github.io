@@ -1,0 +1,519 @@
+<html>
+<head>
+    <meta charset="utf-8"/>
+<meta name="description" content=""/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+<title>JavaIO流 | Gridea</title>
+
+<link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1615809991680">
+
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://ganhan999.github.io//styles/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dockerfile.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dart.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script>
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
+
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css">
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg">
+    <div class="navbar-brand">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            Gridea
+        </div>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
+            
+                <div class="nav-item">
+                    
+                        <a href="/" class="menu gt-a-link">
+                            首页
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/archives" class="menu gt-a-link">
+                            归档
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/tags" class="menu gt-a-link">
+                            标签
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/post/about" class="menu gt-a-link">
+                            关于
+                        </a>
+                    
+                </div>
+            
+        </div>
+        <div style="text-align: center">
+            <form id="gridea-search-form" style="position: relative" data-update="1615809991680" action="/search/index.html">
+                <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+                <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+        </div>
+    </div>
+</nav>
+
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    JavaIO流
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2020-12-02 ·
+                    </time>
+                    
+                        <a href="https://ganhan999.github.io/tag/pVOKe1jE1_/" class="post-tags">
+                            # Java
+                        </a>
+                    
+                </div>
+                <div class="post-content">
+                    <h1 id="一-file">一、File</h1>
+<h2 id="1创建">1.创建</h2>
+<pre><code class="language-java">package IO;
+
+import java.io.File;
+import java.io.IOException;
+
+public class File01 {
+    public static void main(String[] args) {
+        try {
+            //创建一个文本文件
+            File file = new File(&quot;D:\\hh.txt&quot;);
+            boolean flag=file.createNewFile();//文件已存在 则不会重新建立
+            System.out.println(flag?&quot;创建成功&quot;:&quot;创建失败&quot;);
+            //创建文件夹
+            File file1 = new File(&quot;D:\\文件夹&quot;);
+            boolean flag1 = file1.mkdir();//文件已存在 则不会重新建立
+            System.out.println(flag1?&quot;创建成功&quot;:&quot;创建失败&quot;);
+            //创建多级文件
+            File file2 = new File(&quot;D:\\文件夹啊\\da\\呵呵&quot;);
+            boolean flag2 = file2.mkdirs();//文件已存在 则不会重新建立
+            System.out.println(flag2?&quot;创建成功&quot;:&quot;创建失败&quot;);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+}
+</code></pre>
+<h2 id="2删除与查询">2.删除与查询</h2>
+<p>删除 delete()</p>
+<pre><code class="language-java">package IO;
+
+import java.io.File;
+
+public class File02 {
+    public static void main(String[] args) {
+        File file = new File(&quot;D:\\文件夹&quot;);
+        boolean flag = file.delete();
+        System.out.println(flag?&quot;删除成功&quot;: &quot;删除失败&quot;);
+
+    }
+}
+</code></pre>
+<p>查询</p>
+<pre><code class="language-java">package IO;
+
+import java.io.File;
+import java.io.IOException;
+
+public class FIle03 {
+    public static void main(String[] args) {
+        File file = new File(&quot;D:\\文价夹啊&quot;);
+        boolean flag=file.exists();
+        if(flag){
+            System.out.println(&quot;您的文件已经存在，不需创建&quot;);
+        }else{
+            file.mkdir();
+            System.out.println(&quot;已创建&quot;);
+        }
+        //2.获取文件大小
+        File file1 = new File(&quot;D:\\000.txt&quot;);
+        try {
+            file1.createNewFile();
+             Long size=file1.length();//返回字节数
+            //length  字符串 .length() 获取字符个数
+            //         数组  .length属性 获取数组元素个数
+            //		   集合   .size()方法 size 返回集合元素个数 
+            System.out.println(&quot;size  &quot;+size);
+            //返回文件名
+            String name =file1.getName();
+            System.out.println(name);
+            //获取路径
+            String path = file1.getPath();
+            System.out.println(path);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+</code></pre>
+<h2 id="3递归">3.递归</h2>
+<p>isDirectory()判断是否是文件夹</p>
+<p>listFiles() 查询某个文件夹下的所有文件</p>
+<pre><code class="language-java">package IO;
+
+import java.io.File;
+//递归找出文件夹中的所有文件
+public class File04 {
+    public static void showFile(String pathname) {
+        File f1 = new File(pathname);
+        //1.判断文件是否是文件夹
+        boolean flag = f1.isDirectory();
+        //选择文件夹下所有文件
+        if (flag) {
+            File[] files = f1.listFiles();
+            if (files != null) {
+                for (File tempFile : files) {
+                    boolean flag2 = tempFile.isDirectory();
+                    if (flag2) {
+                        showFile(tempFile.getPath());
+                    } else {
+                        String filePath2 = tempFile.getPath();
+                        System.out.println(&quot;普通文件-------------&quot; + filePath2);
+                    }
+                }
+            } else {
+                String filePath = f1.getPath();
+                System.out.println(&quot;普通文件-------------&quot; + filePath);
+            }
+        }else{
+            return;
+        }
+    }
+
+    public static void main(String[] args) {
+        File04.showFile(&quot;G:\\&quot;);
+    }
+}
+
+
+//高级循环 造成的空指针异常  用if判断
+if (files != null) {
+    for (File tempFile : files) {
+//可使用普通循环
+package IO;
+
+import java.io.File;
+//递归找出文件夹中的所有文件
+public class File04 {
+    public static void showFile(String pathname) {
+        File f1 = new File(pathname);
+        //1.判断文件是否是文件夹
+        boolean flag = f1.isDirectory();
+        //选择文件夹下所有文件
+        if (flag) {
+            File[] files = f1.listFiles();
+            for (int i = 0; files!=null &amp;&amp; i &lt; files.length; i++) {
+                    boolean flag2 = files[i].isDirectory();
+                    if (flag2) {
+                        showFile(files[i].getPath());
+                    }else{
+                        String filePath2 = files[i].getPath();
+                        System.out.println(&quot;普通文件-------------&quot; + filePath2);
+                    }
+                }
+            } else {
+                String filePath = f1.getPath();
+                System.out.println(&quot;普通文件-------------&quot; + filePath);
+            }
+
+    }
+
+    public static void main(String[] args) {
+        File04.showFile(&quot;G:\\&quot;);
+    }
+}
+</code></pre>
+<h1 id="二-io输入输出流">二、IO：输入输出流</h1>
+<h2 id="1字节流">1.字节流</h2>
+<h3 id="字节输入流">字节输入流</h3>
+<p>InputStream()字节输入流父类</p>
+<p>FileInputStream()</p>
+<p>BurfferedInputStream()</p>
+<pre><code class="language-java">package IO;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+
+public class File05 {
+    public static void main(String[] args) {
+        //1.文件和程序之间
+        try {
+            FileInputStream fls =new FileInputStream(&quot;D:\\000.txt&quot;);
+            //2.读取数据
+            int ch=0;
+                while ( (ch=fls.read()) != -1){
+                    System.out.print((char)ch);
+            }
+            //int ch =fls.read();//返回值为-1 则读取完毕
+           // System.out.println(&quot;ch=&quot;+(char)ch);
+            //关闭
+            fls.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+        /*
+        File file = new File(&quot;D:\\000.txt&quot;);
+        if(file.exists() &amp;&amp; file.length()&gt;0){
+            try {
+                FileInputStream fls =new FileInputStream(file);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+                }*/
+
+        }
+
+}
+
+abc/adjkagfdhkfbk,seahgroiwyroiYwgTEDYUKAä¸­å›½
+    //读中文出现乱码 因为read只能返回一个字符 汉字占多个字符 
+</code></pre>
+<h3 id="字节输出流">字节输出流</h3>
+<p>可以读取一切文件</p>
+<p>OutputStream()父类</p>
+<p>FileOutputStream()</p>
+<p>BurfferedOutputStream()</p>
+<pre><code class="language-java">package IO;
+
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+
+public class File6 {
+    public static void main(String[] args) {
+        try {
+            String data =&quot;hello my love&quot;;
+            //输出
+            FileOutputStream fos = new FileOutputStream(&quot;D:\\000.txt&quot;,true);
+            //如果文件不存在 则自动创建 同时 覆盖之前的内容  加true参数  则为追加
+            byte[] tempbyte = data.getBytes();
+            fos.write(tempbyte);
+            //关闭
+            fos.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+</code></pre>
+<h3 id="复制">复制</h3>
+<pre><code class="language-java">package IO;
+
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+
+public class FIle07 {
+    public static void main(String[] args) {
+        try {
+            FileInputStream fls =new FileInputStream(&quot;D:\\000.txt&quot;);
+            FileOutputStream fos = new FileOutputStream(&quot;D:\\00.txt&quot;);
+            //创建一个输出
+            int ch=0;
+            while ( (ch=fls.read()) != -1){
+                fos.write(ch);
+            }
+            //关闭
+            fls.close();
+            fos.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+    }
+} 
+</code></pre>
+<p>FileInputStream,FileOutputStream 效率较慢 故介绍BufferedInputStream, BufferedOutputStream 字节缓冲输入流/字节缓冲输出流</p>
+<p>改写：</p>
+<pre><code class="language-java">package IO;
+
+import java.io.*;
+
+public class Buffer1 {
+    public static void main(String[] args) {
+        //建立连接
+        try {
+            InputStream fis = new FileInputStream(&quot;D:\\000.txt&quot;);
+            BufferedInputStream bis = new BufferedInputStream(fis);
+            FileOutputStream fos = new FileOutputStream(&quot;D:\\001.txt&quot;);
+            BufferedOutputStream bos = new BufferedOutputStream(fos);
+            //一次 1024字节
+            byte[] bar =new byte[1024];
+            int len=0;
+            while((len=bis.read(bar))!=-1) {
+                System.out.println(len);
+                String s = new String(bar);
+                System.out.println(s);
+                bos.write(bar, 0, len);
+            }
+                //关闭
+
+                bis.close();
+                fis.close();
+                bos.close();
+                fos.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+    }
+}
+24 
+hello worldhello my love
+</code></pre>
+<p>对于输入流 先关FileInputStream或BufferedInpytStream都可以</p>
+<p>对于输出流 先关BufferedOutputStream 再关FileOutputStream</p>
+<p>否则报错 Stream closed</p>
+<h2 id="2字符流">2.字符流</h2>
+<p>读取纯文本文件比较方便，帮助我们处理乱码问题</p>
+<p>字符输入流</p>
+<p>reader父类 Filereader Bufferedreader</p>
+<pre><code class="language-java">package IO;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+
+public class File08 {
+    public static void main(String[] args) {
+        try {
+            FileReader fr = new FileReader(&quot;D:\\00.txt&quot;);
+            char[] car = new char[1024];
+            int len=0;
+            while ((len = fr.read(car))!= -1) {
+               String str = new String(car,0,len);
+                System.out.println(str);
+            }
+            fr.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+hello worldhello my love中国//汉字不会乱码
+</code></pre>
+<p>Bufferedreader 与Filereader类似</p>
+<p>字符输出流</p>
+<p>Writer 父类 FileWriter BufferedWriter</p>
+<pre><code class="language-java">package IO;
+
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+
+public class File09 {
+    public static void main(String[] args) {
+        try {
+            FileReader fr = new FileReader(&quot;D:\\00.txt&quot;);
+            FileWriter fw = new FileWriter(&quot;D:\\001.txt&quot;,true);
+            char[] car =new char[1024];
+            int len=0;
+            while ((len=fr.read(car))!=-1) {
+                String str = new String(car,0,len);
+                fw.write(str);
+            }
+            fr.close();
+            fw.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+</code></pre>
+
+                </div>
+            </article>
+        </div>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://ganhan999.github.io/post/Java权限修饰符/" class="post-title gt-a-link">
+                    Java权限修饰符
+                </a>
+            </div>
+        
+
+        
+
+        
+
+        
+
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first">温故而知新</div>
+    <div class="social-container">
+        
+            
+        
+            
+        
+            
+        
+            
+                <a href="https://www.zhihu.com/hot" target="_blank">
+                    <i class="fab fa-zhihu gt-c-content-color-first"></i>
+                </a>
+            
+        
+            
+        
+            
+        
+    </div>
+    <div class="footer-info">
+        Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+    </div>
+    <div>
+        Theme by <a href="https://imhanjie.com/" target="_blank">imhanjie</a>, Powered by <a
+                href="https://github.com/getgridea/gridea" target="_blank">Gridea | <a href="https://ganhan999.github.io//atom.xml" target="_blank">RSS</a></a>
+    </div>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+    </div>
+</div>
+</body>
+</html>

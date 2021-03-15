@@ -1,0 +1,227 @@
+<html>
+<head>
+    <meta charset="utf-8"/>
+<meta name="description" content=""/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+<title>389、找不同 | Gridea</title>
+
+<link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1615809991680">
+
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://ganhan999.github.io//styles/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dockerfile.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dart.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script>
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
+
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css">
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg">
+    <div class="navbar-brand">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            Gridea
+        </div>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
+            
+                <div class="nav-item">
+                    
+                        <a href="/" class="menu gt-a-link">
+                            首页
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/archives" class="menu gt-a-link">
+                            归档
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/tags" class="menu gt-a-link">
+                            标签
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/post/about" class="menu gt-a-link">
+                            关于
+                        </a>
+                    
+                </div>
+            
+        </div>
+        <div style="text-align: center">
+            <form id="gridea-search-form" style="position: relative" data-update="1615809991680" action="/search/index.html">
+                <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+                <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+        </div>
+    </div>
+</nav>
+
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    389、找不同
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2021-03-09 ·
+                    </time>
+                    
+                        <a href="https://ganhan999.github.io/tag/RJ1fLvr_t/" class="post-tags">
+                            # leetcode
+                        </a>
+                    
+                </div>
+                <div class="post-content">
+                    <h1 id="题目">题目</h1>
+<p>给定两个字符串 s 和 t，它们只包含小写字母。<br>
+字符串 t 由字符串 s 随机重排，然后在随机位置添加一个字母。<br>
+请找出在 t 中被添加的字母。</p>
+<p>示例 1：<br>
+输入：s = &quot;abcd&quot;, t = &quot;abcde&quot;<br>
+输出：&quot;e&quot;<br>
+解释：'e' 是那个被添加的字母。</p>
+<p>示例 2：<br>
+输入：s = &quot;&quot;, t = &quot;y&quot;<br>
+输出：&quot;y&quot;</p>
+<p>示例 3：<br>
+输入：s = &quot;a&quot;, t = &quot;aa&quot;<br>
+输出：&quot;a&quot;</p>
+<p>示例 4：<br>
+输入：s = &quot;ae&quot;, t = &quot;aea&quot;<br>
+输出：&quot;a&quot;</p>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="本体思路">本体思路</h1>
+<p>首先将两个字符串合并为a<br>
+在a中遍历，如果出现奇数次的字符即为不同的字符</p>
+<h1 id="大神做法1">大神做法1：</h1>
+<pre><code class="language-python">class Solution:
+    def findTheDifference(self, s: str, t: str) -&gt; str:
+        a = &quot;&quot;.join([s,t])
+        for ch in a:
+            if a.count(ch) % 2 == 1:
+                return ch
+</code></pre>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<p>题目已说明，字符串 t 比字符串 s 多一个字母，那么我们可以先用数组统计 ss 的字符出现的次数。</p>
+<p>然后开始遍历字符串 t，数组中对应字符的次数减 1。当数组中出现负数，那么代表对应的字符就是添加的字母。</p>
+<h1 id="大神做法2">大神做法2：</h1>
+<pre><code class="language-python">class Solution:
+    def findTheDifference(self, s: str, t: str) -&gt; str:
+        # 长度为 26 的数组，用以统计字符出现次数
+        str_count = [0] * 26
+        # 先遍历 s，统计 s 中字符出现的次数
+        for ch in s:
+            str_count[ord(ch) - ord('a')] += 1
+        # 再遍历 t，将出现字符对应次数减 1，
+        # 当出现负值，表示对应的字符就是添加的字母
+        for ch in t:
+            str_count[ord(ch) - ord('a')] -= 1
+            if str_count[ord(ch) - ord('a')] &lt; 0:
+                return ch
+
+        return ''
+</code></pre>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<p>异或，最后的结果就是多出来的数字</p>
+<h1 id="大神做法3">大神做法3：</h1>
+<pre><code class="language-python">class Solution:
+    def findTheDifference(self, s: str, t: str) -&gt; str:
+        # 初始化 ans 为 0
+        ans = 0
+        # 对字符串 s 的字符进行异或
+        for ch in s:
+            ans ^= ord(ch)
+        # 对字符串 t 的字符进行异或
+        for ch in t:
+            ans ^= ord(ch)
+        # 最终结果转换为 ASCII 字符
+        return chr(ans)
+</code></pre>
+
+                </div>
+            </article>
+        </div>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://ganhan999.github.io/post/387、字符串中的第一个唯一字符/" class="post-title gt-a-link">
+                    387、字符串中的第一个唯一字符
+                </a>
+            </div>
+        
+
+        
+
+        
+
+        
+
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first">温故而知新</div>
+    <div class="social-container">
+        
+            
+        
+            
+        
+            
+        
+            
+                <a href="https://www.zhihu.com/hot" target="_blank">
+                    <i class="fab fa-zhihu gt-c-content-color-first"></i>
+                </a>
+            
+        
+            
+        
+            
+        
+    </div>
+    <div class="footer-info">
+        Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+    </div>
+    <div>
+        Theme by <a href="https://imhanjie.com/" target="_blank">imhanjie</a>, Powered by <a
+                href="https://github.com/getgridea/gridea" target="_blank">Gridea | <a href="https://ganhan999.github.io//atom.xml" target="_blank">RSS</a></a>
+    </div>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,263 @@
+<html>
+<head>
+    <meta charset="utf-8"/>
+<meta name="description" content=""/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+<title>160、相交链表 | Gridea</title>
+
+<link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1615809991680">
+
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://ganhan999.github.io//styles/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dockerfile.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dart.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script>
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
+
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css">
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg">
+    <div class="navbar-brand">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            Gridea
+        </div>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
+            
+                <div class="nav-item">
+                    
+                        <a href="/" class="menu gt-a-link">
+                            首页
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/archives" class="menu gt-a-link">
+                            归档
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/tags" class="menu gt-a-link">
+                            标签
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/post/about" class="menu gt-a-link">
+                            关于
+                        </a>
+                    
+                </div>
+            
+        </div>
+        <div style="text-align: center">
+            <form id="gridea-search-form" style="position: relative" data-update="1615809991680" action="/search/index.html">
+                <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+                <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+        </div>
+    </div>
+</nav>
+
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    160、相交链表
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2020-12-01 ·
+                    </time>
+                    
+                        <a href="https://ganhan999.github.io/tag/RJ1fLvr_t/" class="post-tags">
+                            # leetcode
+                        </a>
+                    
+                </div>
+                <div class="post-content">
+                    <h1 id="题目">题目</h1>
+<p>编写一个程序，找到两个单链表相交的起始节点。</p>
+<p>示例 1：<br>
+输入：intersectVal = 8, listA = [4,1,8,4,5], listB = [5,0,1,8,4,5], skipA = 2, skipB = 3<br>
+输出：Reference of the node with value = 8<br>
+输入解释：相交节点的值为 8 （注意，如果两个链表相交则不能为 0）。从各自的表头开始算起，链表 A 为 [4,1,8,4,5]，链表 B 为 [5,0,1,8,4,5]。在 A 中，相交节点前有 2 个节点；在 B 中，相交节点前有 3 个节点。</p>
+<p>示例 2：<br>
+输入：intersectVal = 2, listA = [0,9,1,2,4], listB = [3,2,4], skipA = 3, skipB = 1<br>
+输出：Reference of the node with value = 2<br>
+输入解释：相交节点的值为 2 （注意，如果两个链表相交则不能为 0）。从各自的表头开始算起，链表 A 为 [0,9,1,2,4]，链表 B 为 [3,2,4]。在 A 中，相交节点前有 3 个节点；在 B 中，相交节点前有 1 个节点。</p>
+<p>示例 3：<br>
+输入：intersectVal = 0, listA = [2,6,4], listB = [1,5], skipA = 3, skipB = 2<br>
+输出：null<br>
+输入解释：从各自的表头开始算起，链表 A 为 [2,6,4]，链表 B 为 [1,5]。由于这两个链表不相交，所以 intersectVal 必须为 0，而 skipA 和 skipB 可以是任意值。<br>
+解释：这两个链表不相交，因此返回 null。</p>
+<p>注意：<br>
+如果两个链表没有交点，返回 null.<br>
+在返回结果后，两个链表仍须保持原有的结构。<br>
+可假定整个链表结构中没有循环。<br>
+程序尽量满足 O(n) 时间复杂度，且仅用 O(1) 内存。.</p>
+<h1 id="本体思路">本体思路</h1>
+<p>将所有A的节点记录在字典中，再用B去查找，如果找到了则返回节点</p>
+<h1 id="我的做法">#我的做法：</h1>
+<pre><code class="language-python">class MinStack:
+    class Solution:
+        def getIntersectionNode(self, headA: ListNode, headB: ListNode) -&gt; ListNode:
+            if headA is None or headB is None:
+                return None
+            m = {}
+            m = self.bianli(headA, m)
+            ans = self.bianli(headB, m)
+            return None if (isinstance(ans, dict)) else ans
+
+        def bianli(self, head, m):
+            while head:
+                if m.get(head):
+                    return head
+                m[head] = 1
+                head = head.next
+            else:
+                return m
+</code></pre>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="大神做法1">#大神做法1：</h1>
+<p>用集合，但不是用字典，思路差不多</p>
+<pre><code class="language-Python">class Solution:
+    def getIntersectionNode(self, headA: ListNode, headB: ListNode) -&gt; ListNode:
+        A = set()
+        cur1 = headA
+        cur2 = headB
+        while cur1:
+            A.add(cur1)
+            cur1 = cur1.next
+        while cur2:
+            if cur2 in A:
+                return cur2
+            cur2 = cur2.next
+        return None
+
+</code></pre>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="大神做法2">#大神做法2：</h1>
+<p>分别遍历两个链表，并记录两链表的长度差n，将出现两种情况，<br>
+(1)让长链表先走n步<br>
+(2)再同时开始走，并对比两个链表的当前节点，节点相等时即为交点<br>
+(3)若没有交点，则在最后的Null处相交</p>
+<pre><code class="language-python">class Solution:
+    def getIntersectionNode(self, headA: ListNode, headB: ListNode) -&gt; ListNode:
+        cur1 = headA
+        cur2 = headB
+        n = 0
+        while cur1:
+            n += 1
+            cur1 = cur1.next
+        while cur2:
+            n -= 1
+            cur2 = cur2.next
+        if cur1 != cur2:
+            return None
+        cur1 = headA if n &gt; 0 else headB
+        cur2 = headB if cur1 == headA else headA
+        n = abs(n)
+        while n:
+            n -= 1
+            cur1 = cur1.next
+        while cur1 != cur2:
+            cur1 = cur1.next
+            cur2 = cur2.next
+        return cur1
+</code></pre>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="大神做法3">#大神做法3：</h1>
+<p>长短链表相互拼接，遇到相同节点跳出循环，该节点即为相交节点</p>
+<pre><code class="language-python">class Solution:
+    def getIntersectionNode(self, L1: ListNode, L2: ListNode) -&gt; ListNode:
+        h1, h2 = L1, L2
+        while h1 is not h2:
+            h1 = h1.next if h1 else L2
+            h2 = h2.next if h2 else L1
+        return h1
+</code></pre>
+
+                </div>
+            </article>
+        </div>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://ganhan999.github.io/post/Java集合/" class="post-title gt-a-link">
+                    Java集合
+                </a>
+            </div>
+        
+
+        
+
+        
+
+        
+
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first">温故而知新</div>
+    <div class="social-container">
+        
+            
+        
+            
+        
+            
+        
+            
+                <a href="https://www.zhihu.com/hot" target="_blank">
+                    <i class="fab fa-zhihu gt-c-content-color-first"></i>
+                </a>
+            
+        
+            
+        
+            
+        
+    </div>
+    <div class="footer-info">
+        Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+    </div>
+    <div>
+        Theme by <a href="https://imhanjie.com/" target="_blank">imhanjie</a>, Powered by <a
+                href="https://github.com/getgridea/gridea" target="_blank">Gridea | <a href="https://ganhan999.github.io//atom.xml" target="_blank">RSS</a></a>
+    </div>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+    </div>
+</div>
+</body>
+</html>

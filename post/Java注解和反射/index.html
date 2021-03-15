@@ -1,0 +1,926 @@
+<html>
+<head>
+    <meta charset="utf-8"/>
+<meta name="description" content=""/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+<title>Java注解和反射 | Gridea</title>
+
+<link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1615809991680">
+
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://ganhan999.github.io//styles/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dockerfile.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dart.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script>
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
+
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css">
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg">
+    <div class="navbar-brand">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            Gridea
+        </div>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
+            
+                <div class="nav-item">
+                    
+                        <a href="/" class="menu gt-a-link">
+                            首页
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/archives" class="menu gt-a-link">
+                            归档
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/tags" class="menu gt-a-link">
+                            标签
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/post/about" class="menu gt-a-link">
+                            关于
+                        </a>
+                    
+                </div>
+            
+        </div>
+        <div style="text-align: center">
+            <form id="gridea-search-form" style="position: relative" data-update="1615809991680" action="/search/index.html">
+                <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+                <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+        </div>
+    </div>
+</nav>
+
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    Java注解和反射
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2020-12-07 ·
+                    </time>
+                    
+                        <a href="https://ganhan999.github.io/tag/pVOKe1jE1_/" class="post-tags">
+                            # Java
+                        </a>
+                    
+                </div>
+                <div class="post-content">
+                    <h1 id="注解annotation">注解Annotation</h1>
+<figure data-type="image" tabindex="1"><img src="https://ganhan999.github.io//post-images/1607332469055.png" alt="" loading="lazy"></figure>
+<h2 id="内置注解">内置注解</h2>
+<p>@override:定义重写声明</p>
+<p>@Deprecated：表示不鼓励使用</p>
+<p>@SuppressWarnings：抑制警告信息</p>
+<p>使用</p>
+<p>1.@SuppressWarnings（“all”）</p>
+<p>2.@SuppressWarnings（“unchecked”）</p>
+<p>3.@SuppressWarnings（value={“unchecked”,“deprecation”}）</p>
+<pre><code class="language-java">package First;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Demo01  extends  Object{
+    //@Override 重写的注解
+    @Override
+    public String toString() {
+        return &quot;Demo01{}&quot;;
+    }
+    //@Deprecated 不推荐程序员使用 但是可以使用 一般有更好的方法
+    @Deprecated
+    public  static void test(){
+        System.out.println(&quot;Deprecated&quot;);
+    }
+    @SuppressWarnings(&quot;all&quot;) //下方未使用的警告不再提示
+    public  static void test02(){
+        List list = new ArrayList();
+    }
+
+    public static void main(String[] args) {
+        test();
+    }
+}
+
+</code></pre>
+<h2 id="元注解-meta-annotation">元注解 meta-annotation</h2>
+<figure data-type="image" tabindex="2"><img src="https://ganhan999.github.io//post-images/1607332474979.png" alt="" loading="lazy"></figure>
+<p>自定义注解 @interface</p>
+<pre><code class="language-java">package First;
+
+import java.lang.annotation.*;
+
+//@MyAnnotation 定义注解目标为方法 故不可以使用
+public class Test02 {
+
+
+        @MyAnnotation//定义注解目标为方法 故可以使用
+        public void test(){
+    }
+}
+
+//@Target 表示我们的注解可以用在那些地方 值为ElementType
+@Target(value = ElementType.METHOD)
+
+//@Retention 表示我们的注解可以用在哪些地方
+//runtime运行时&gt;class&gt;sourcejava
+@Retention(value = RetentionPolicy.RUNTIME)
+//@Documented 表示是否我们的注解生成在JAVAdoc中
+@Documented
+@Inherited //表示子类可以继承注解
+ 
+@interface MyAnnotation{}
+
+</code></pre>
+<figure data-type="image" tabindex="3"><img src="https://ganhan999.github.io//post-images/1607332488159.png" alt="" loading="lazy"></figure>
+<pre><code class="language-java">package First;
+
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
+public class Test03 {
+    @MyAnnotation03(&quot;当场注解&quot;)
+    @MyAnnotation02(age = 10,name = &quot;alin&quot;)//参数顺序可以调换 必许带参数名
+    public void test03(){
+        
+    }
+    
+}
+
+@Target({ElementType.TYPE,ElementType.METHOD})
+@Retention(RetentionPolicy.RUNTIME)
+@interface MyAnnotation0 2{
+    //参数定义 参数类型 参数名()
+    String name() default &quot;&quot;;//default 进行默认赋值
+    int age() default 0;
+    int id()  default -1;//表示不存在
+    String[] students() default {&quot;青岛大学&quot;,&quot;南京邮电大学&quot; };
+} 
+@Target({ElementType.TYPE,ElementType.METHOD})
+@Retention(RetentionPolicy.RUNTIME)
+@interface  MyAnnotation03{
+    String value();//一个参数时 最好命名为value 命名为value时 在使用此注解时可以不加value
+}
+</code></pre>
+<h1 id="反射reflection">反射Reflection</h1>
+<p><img src="https://ganhan999.github.io//post-images/1607332496278.png" alt="" loading="lazy"><br>
+<img src="https://ganhan999.github.io//post-images/1607332499207.png" alt="" loading="lazy"><br>
+<img src="https://ganhan999.github.io//post-images/1607332503829.png" alt="" loading="lazy"></p>
+<pre><code class="language-java">package Reflection;
+
+public class Demo01 {
+    public static void main(String[] args) throws ClassNotFoundException {
+        //通过反射获取类的Class类型
+        Class  c1 = Class.forName(&quot;Reflection.User&quot;);
+        Class  c2 = Class.forName(&quot;Reflection.User&quot;);
+        Class  c3 = Class.forName(&quot;Reflection.User&quot;);
+        //一个类只有一个Class对象 故c1 c2 c3 hashcode相同
+        //一个类被加载之后 类的整个结构都会被封装在Class对象中
+        System.out.println(c1.hashCode());
+        System.out.println(c1.hashCode());
+        System.out.println(c1.hashCode());
+    }
+}
+
+//实体类 pojo entity
+class User{
+    String name;
+    int age;
+    int id;
+
+    public User() {
+    }
+
+    public User(String name, int age, int id) {
+        this.name = name;
+        this.age = age;
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return &quot;User{&quot; +
+                &quot;name='&quot; + name + '\'' +
+                &quot;, age=&quot; + age +
+                &quot;, id=&quot; + id +
+                '}';
+    }
+}
+</code></pre>
+<figure data-type="image" tabindex="4"><img src="https://ganhan999.github.io//post-images/1607332510816.png" alt="" loading="lazy"></figure>
+<h3 id="class类">Class类</h3>
+<p><img src="https://ganhan999.github.io//post-images/1607332517407.png" alt="" loading="lazy"><br>
+<img src="https://ganhan999.github.io//post-images/1607332521774.png" alt="" loading="lazy"><br>
+<img src="https://ganhan999.github.io//post-images/1607332524928.png" alt="" loading="lazy"><br>
+获得class的方法</p>
+<pre><code class="language-java">package Reflection;
+
+
+
+public class Demo02 {
+    public static void main(String[] args) throws ClassNotFoundException {
+        Person person = new Student();
+        System.out.println(&quot;这个人是:&quot;+person.name);
+        //通过对象获得class
+        Class c1 = person.getClass();
+        System.out.println(c1.hashCode());
+        //通过类获得class
+        Class c2 = Student.class;
+        System.out.println(c2.hashCode());
+        //通过forname获得class
+        Class c3 = Class.forName(&quot;Reflection.Student&quot;);
+        System.out.println(c3.hashCode());
+        //通过内置函数的包装类获得class
+        Class c4 = Integer.TYPE;
+        System.out.println(c4);
+        //获得父类的class
+        Class c5 = c1.getSuperclass();
+        System.out.println(c5);
+
+    }
+}
+
+
+class Person{
+    public String name;
+
+    public Person() {
+    }
+
+    public Person(String name) {
+        this.name = name;
+    }
+}
+class Student extends Person{
+    public Student() {
+        this.name=&quot;学生&quot;;
+    }
+}
+class Teacher extends  Person{
+    public Teacher() {
+        this.name = &quot;教师&quot;;
+    }
+}
+这个人是:学生
+460141958
+460141958
+460141958
+int
+class Reflection.Person
+</code></pre>
+<p>有Class对象</p>
+<figure data-type="image" tabindex="5"><img src="https://ganhan999.github.io//post-images/1607332533980.png" alt="" loading="lazy"></figure>
+<pre><code class="language-java">package Reflection;
+
+import java.net.InterfaceAddress;
+import java.util.Enumeration;
+
+//拥有class对象的类型
+public class Demo03 {
+    public static void main(String[] args) {
+        Class c1 = Object.class;
+        Class c2 = Comparable.class;
+        Class c3 = String[].class;
+        Class c4 = int[][].class;
+        Class c5 = Enumeration.class;
+        Class c6 = Integer.class;
+        Class c7 = Override.class;
+        Class c8 = Void.class;
+        Class c9 = void.class;
+        Class c10 = Class.class;
+        System.out.println(c1 );
+        System.out.println(c2 );
+        System.out.println(c3 );
+        System.out.println(c4 );
+        System.out.println(c5 );
+        System.out.println(c6 );
+        System.out.println(c7 );
+        System.out.println(c8 );
+        System.out.println(c9 );
+        System.out.println(c10);
+
+        //当类型和维数相同时只有一个class对象
+        int[] a = new int[10];
+        int[] b = new int[100];
+        System.out.println(a.getClass().hashCode());
+        System.out.println(b.getClass().hashCode());
+
+    }
+}
+class java.lang.Object
+interface java.lang.Comparable
+class [Ljava.lang.String;
+class [[I
+interface java.util.Enumeration
+class java.lang.Integer
+interface java.lang.Override
+class java.lang.Void
+void
+class java.lang.Class
+</code></pre>
+<p>加载类class</p>
+<pre><code class="language-java">package Reflection;
+
+public class Demo04 {
+    public static void main(String[] args) {
+        A a = new A();
+        System.out.println(A.m);
+
+    }
+}
+/*
+    1.加载到内存，会产生一个类对应Class对象在堆区
+    2.链接，在栈中产生 main m=0;
+    3.初始化
+    &lt;clinit&gt;{
+    System.out.println(&quot;A类静态代码块初始化&quot;);
+        m=300;
+        m=100;  静态 按顺序执行的 若把 int m =100 ;放上面 则为300；
+        }
+
+ */
+
+class A{
+    static {
+        System.out.println(&quot;A类静态代码块初始化&quot;);
+        m=300;
+    }
+    /*
+    m=300;
+    m=100; 覆盖上方300
+     */
+    static int m =100;
+
+    public A() {
+        System.out.println(&quot;A类的无参构造器&quot;);
+    }
+}
+A类静态代码块初始化
+A类的无参构造器
+100
+123456789101112131415161718192021222324252627282930313233343536373839
+</code></pre>
+<p>类的初始化<br>
+<img src="https://ganhan999.github.io//post-images/1607332544477.png" alt="" loading="lazy"></p>
+<pre><code class="language-java">package Reflection;
+
+public class Demo05 {
+    static {
+        System.out.println(&quot;Main类被调用了&quot;);
+    }
+
+    public static void main(String[] args) throws ClassNotFoundException {
+        //1.创建对象 若父类没初始化 先初始化父类
+        //Son son = new Son();
+        /*
+        Main类被调用了
+        父类被加载
+        子类被加载了
+        100
+         */
+        //2.通过反射
+        //Class c1 = Class.forName(&quot;Reflection.Son&quot;);//Main类被调用  父类被加载  子类被加载了
+        //3.调用静态
+        //System.out.println(Son.m);//Main类被调用了 父类被加载 子类被加载了 200
+
+        //被动引用
+        //子类引用父类静态变量
+        //System.out.println(Son.b);//Main类被调用了 父类被加载 100
+        //数组定义类引用
+        //Son[] a1 = new Son[5]; Main类被调用了
+        //引用常量
+        //System.out.println(Son.M);      Main类被调用了 1
+
+    }
+}
+class Father{
+    static {
+        System.out.println(&quot;父类被加载&quot;);
+        //int b=10;
+    }
+    static int b =100;
+}
+class Son extends Father{
+    static {
+        System.out.println(&quot;子类被加载了&quot;);
+        m=300;
+    }
+    static int m=200;
+    static final int M=1;
+}
+</code></pre>
+<h3 id="类加载器">类加载器</h3>
+<figure data-type="image" tabindex="6"><img src="https://ganhan999.github.io//post-images/1607332584448.png" alt="" loading="lazy"></figure>
+<pre><code class="language-java">package Reflection;
+
+public class Demo06 {
+    public static void main(String[] args) throws ClassNotFoundException {
+        //获得系统类加载器
+        ClassLoader systemClassLoader = ClassLoader.getSystemClassLoader();
+        System.out.println(systemClassLoader);
+        //获得系统类加载器的父类--&gt;扩展类加载器
+        ClassLoader parent = systemClassLoader.getParent();
+        System.out.println(parent);
+        //获得扩展类加载器的父类--&gt;根加载器（c/c++）无法直接获得
+        ClassLoader parent1 = parent.getParent();
+        System.out.println(parent1);
+        //测试当前类由哪个加载器产生
+        ClassLoader classLoader = Class.forName(&quot;Reflection.Demo06&quot;).getClassLoader();
+        System.out.println(classLoader);
+        //测试jdk类
+        classLoader = Class.forName(&quot;java.lang.Object&quot;).getClassLoader();
+        System.out.println(classLoader);
+        //如何获得系统类加载器的加载路径
+        System.out.println(System.getProperty(&quot;java.class.path&quot;));
+        /*
+        D:\Java\jdk1.8.0_261\jre\lib\charsets.jar;
+        D:\Java\jdk1.8.0_261\jre\lib\deploy.jar;
+        D:\Java\jdk1.8.0_261\jre\lib\ext\access-bridge-64.jar;
+        D:\Java\jdk1.8.0_261\jre\lib\ext\cldrdata.jar;
+        D:\Java\jdk1.8.0_261\jre\lib\ext\dnsns.jar;
+        D:\Java\jdk1.8.0_261\jre\lib\ext\jaccess.jar;
+        D:\Java\jdk1.8.0_261\jre\lib\ext\jfxrt.jar;
+        D:\Java\jdk1.8.0_261\jre\lib\ext\localedata.jar;
+        D:\Java\jdk1.8.0_261\jre\lib\ext\nashorn.jar;
+        D:\Java\jdk1.8.0_261\jre\lib\ext\sunec.jar;
+        D:\Java\jdk1.8.0_261\jre\lib\ext\sunjce_provider.jar;
+        D:\Java\jdk1.8.0_261\jre\lib\ext\sunmscapi.jar;
+        D:\Java\jdk1.8.0_261\jre\lib\ext\sunpkcs11.jar;
+        D:\Java\jdk1.8.0_261\jre\lib\ext\zipfs.jar;
+        D:\Java\jdk1.8.0_261\jre\lib\javaws.jar;
+        D:\Java\jdk1.8.0_261\jre\lib\jce.jar;
+        D:\Java\jdk1.8.0_261\jre\lib\jfr.jar;
+        D:\Java\jdk1.8.0_261\jre\lib\jfxswt.jar;
+        D:\Java\jdk1.8.0_261\jre\lib\jsse.jar;
+        D:\Java\jdk1.8.0_261\jre\lib\management-agent.jar;
+        D:\Java\jdk1.8.0_261\jre\lib\plugin.jar;
+        D:\Java\jdk1.8.0_261\jre\lib\resources.jar;
+        D:\Java\jdk1.8.0_261\jre\lib\rt.jar;
+        D:\Program Files\IDEA\IntelliJ IDEA Community Edition 2020.2.2\Annotation\out\production\Annotation;
+        D:\Program Files\IDEA\IntelliJ IDEA Community Edition 2020.2.2\lib\idea_rt.jar
+         */
+        //双亲委派机制
+        //当你定义的与根加载器中有类重复 为保证安全 仍使用根加载器中的类
+    }
+    }
+sun.misc.Launcher$AppClassLoader@18b4aac2
+sun.misc.Launcher$ExtClassLoader@1b6d3586
+null
+sun.misc.Launcher$AppClassLoader@18b4aac2
+null
+</code></pre>
+<p>双亲委派机制: 当某个类加载器需要加载某个<code>.class</code>文件时，它首先把这个任务委托给他的上级类加载器，递归这个操作，如果上级的类加载器没有加载，自己才会去加载这个类。</p>
+<figure data-type="image" tabindex="7"><img src="https://ganhan999.github.io//post-images/1607332591804.png" alt="" loading="lazy"></figure>
+<h3 id="获取类的运行时状态">获取类的运行时状态</h3>
+<pre><code class="language-java">package Reflection;
+
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+
+public class Demo07 {
+    public static void main(String[] args) throws Exception {
+        Class c1 = Class.forName(&quot;Reflection.User&quot;);
+        //User user = new User(); c1 =User.Class();
+        System.out.println(c1.getName());//获取包名加类名
+        System.out.println(c1.getSimpleName());//获取类名
+        //获取属性
+        Field[] fields = c1.getFields();//获得public属性
+        for (Field field:fields) {
+            System.out.println(field);
+        }
+        fields = c1.getDeclaredFields();//获得全部属性
+        for (Field field:fields) {
+            System.out.println(field);
+        }
+        //获得指定属性
+        System.out.println(c1.getDeclaredField(&quot;name&quot;));
+        //获取方法
+        Method[] methods = c1.getMethods();//获得当前类与父类的public方法
+        for (Method method : methods) {
+            System.out.println(&quot;正常的&quot;+method);
+        }
+        methods =c1.getDeclaredMethods();//获得当前类的所有方法
+        for (Method method : methods) {
+            System.out.println(&quot;getDeclaredMethods&quot;+method);
+        }
+        //获得指定方法
+        //加参数 处理重载
+        System.out.println(c1.getMethod(&quot;getId&quot;,null));
+        System.out.println(c1.getMethod(&quot;setName&quot;, String.class));//含参数需指定
+        //获取构造器
+        Constructor[] constructors = c1.getConstructors();//获得public构造器
+        for (Constructor constructor : constructors) {
+            System.out.println(constructor);
+        }
+        constructors = c1.getDeclaredConstructors();//获得全部构造器
+        for (Constructor constructor : constructors) {
+            System.out.println(constructor);
+        }
+        //获得指定构造器
+        System.out.println(c1.getConstructor(String.class,int.class,int.class));
+    }
+}
+Reflection.User
+User
+java.lang.String Reflection.User.name
+int Reflection.User.age
+int Reflection.User.id
+java.lang.String Reflection.User.name
+正常的public java.lang.String Reflection.User.toString()
+正常的public java.lang.String Reflection.User.getName()
+正常的public int Reflection.User.getId()
+正常的public void Reflection.User.setName(java.lang.String)
+正常的public int Reflection.User.getAge()
+正常的public void Reflection.User.setId(int)
+正常的public void Reflection.User.setAge(int)
+正常的public final void java.lang.Object.wait() throws java.lang.InterruptedException
+正常的public final void java.lang.Object.wait(long,int) throws java.lang.InterruptedException
+正常的public final native void java.lang.Object.wait(long) throws java.lang.InterruptedException
+正常的public boolean java.lang.Object.equals(java.lang.Object)
+正常的public native int java.lang.Object.hashCode()
+正常的public final native java.lang.Class java.lang.Object.getClass()
+正常的public final native void java.lang.Object.notify()
+正常的public final native void java.lang.Object.notifyAll()
+getDeclaredMethodspublic java.lang.String Reflection.User.toString()
+getDeclaredMethodspublic java.lang.String Reflection.User.getName()
+getDeclaredMethodspublic int Reflection.User.getId()
+getDeclaredMethodspublic void Reflection.User.setName(java.lang.String)
+getDeclaredMethodspublic int Reflection.User.getAge()
+getDeclaredMethodspublic void Reflection.User.setId(int)
+getDeclaredMethodspublic void Reflection.User.setAge(int)
+public int Reflection.User.getId()
+public void Reflection.User.setName(java.lang.String)
+public Reflection.User()
+public Reflection.User(java.lang.String,int,int)
+public Reflection.User()
+public Reflection.User(java.lang.String,int,int)
+public Reflection.User(java.lang.String,int,int)
+</code></pre>
+<p>动态创建对象</p>
+<p>invoke setAccessible</p>
+<figure data-type="image" tabindex="8"><img src="https://ganhan999.github.io//post-images/1607332600448.png" alt="" loading="lazy"></figure>
+<pre><code class="language-java">package Reflection;
+
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+
+public class Demo08 {
+    public static void main(String[] args) throws Exception {
+        Class c1 = Class.forName(&quot;Reflection.User&quot;);
+        //反射得到对象
+        //User user = (User) c1.newInstance();//调用无参构造器 new一个对象  高版本此方法已过时 使用c1.getDeclaredConstructor().newInstance()
+        //System.out.println(user);
+        //使用构造器
+        //Constructor constructor = c1.getDeclaredConstructor(String.class, int.class, int.class);
+        //User user1=(User)constructor.newInstance(&quot;小明&quot;,18,001);
+        //System.out.println(user1);
+        //反射调用普通方法
+        User user= (User) c1.newInstance();
+        //通过反射获取一个方法
+        Method setName = c1.getMethod(&quot;setName&quot;,String.class);
+        //invoke 激活 （对象，&quot;方法的值&quot;）
+        setName.invoke(user,&quot;ck&quot;);
+        System.out.println(user.getName());
+        //通过反射操作属性
+        System.out.println(&quot;==========&quot;);
+        User user1=(User)c1.newInstance();
+        Field name = c1.getDeclaredField(&quot;name&quot;);
+        name.setAccessible(true);//关闭安全检测 对私有属性可以操作
+        name.set(user1,&quot;小小&quot;);
+        System.out.println(user1.getName());
+        
+    }
+}
+ck
+==========
+小小
+</code></pre>
+<h3 id="性能检测">性能检测</h3>
+<pre><code class="language-java">package Reflection;
+
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+
+public class Demo09 {
+    //普通调用
+    public static void test01(){
+        User user = new User();
+        long startTime = System.currentTimeMillis();
+        for (int i = 0; i &lt; 1000000000; i++) {
+            user.getName();
+        }
+        long endTime =System.currentTimeMillis();
+        System.out.println(&quot;普通调用10亿次耗费&quot;+(endTime-startTime)+&quot;ms&quot;);
+    }
+    //反射调用
+    public static   void test02() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        User user = new User();
+        Class c1 = user.getClass();
+        Method getName = c1.getDeclaredMethod(&quot;getName&quot;, null);
+        long startTime = System.currentTimeMillis();
+        for (int i = 0; i &lt; 1000000000; i++) {
+            getName.invoke(user,null);
+        }
+        long endTime =System.currentTimeMillis();
+        System.out.println(&quot;反射调用10亿次耗费&quot;+(endTime-startTime)+&quot;ms&quot;);
+    }
+    //关闭安全检测
+    public static void test03() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        User user = new User();
+        Class c1 = user.getClass();
+        Method getName = c1.getDeclaredMethod(&quot;getName&quot;, null);
+        getName.setAccessible(true);
+        long startTime = System.currentTimeMillis();
+        for (int i = 0; i &lt; 1000000000; i++) {
+            getName.invoke(user,null);
+        }
+        long endTime =System.currentTimeMillis();
+        System.out.println(&quot;关闭安全检测后反射调用10亿次耗费&quot;+(endTime-startTime)+&quot;ms&quot;);
+    }
+
+    public static void main(String[] args) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+        test01();
+        test02();
+        test03();
+    }
+
+
+}
+普通调用10亿次耗费4ms
+反射调用10亿次耗费2063ms
+关闭安全检测后反射调用10亿次耗费1265ms
+</code></pre>
+<p>可以看出 反射的方式调用 耗时较久</p>
+<h3 id="获取泛型">获取泛型</h3>
+<figure data-type="image" tabindex="9"><img src="https://ganhan999.github.io//post-images/1607332611488.png" alt="" loading="lazy"></figure>
+<pre><code class="language-java">package Reflection;
+
+import java.lang.reflect.Method;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+import java.util.List;
+import java.util.Map;
+
+public class Demo10 {
+    public void test01(Map&lt;String ,User&gt; map,List&lt;String&gt; list){
+        System.out.println(&quot;这不重要&quot;);
+    }
+    public  Map&lt;String ,User&gt; test02(){
+        System.out.println(&quot;这不重要&quot;);
+        return null;
+    }
+
+    public static void main(String[] args) throws NoSuchMethodException {
+        Method method = Demo10.class.getDeclaredMethod(&quot;test01&quot;,Map.class,List.class);
+        Type[] genericParameterTypes = method.getGenericParameterTypes();
+        for (Type genericParameterType : genericParameterTypes) {
+            System.out.println(genericParameterType);
+            if(genericParameterType instanceof ParameterizedType){
+                Type[] actualTypeArguments = ((ParameterizedType) genericParameterType).getActualTypeArguments();
+                for (Type actualTypeArgument : actualTypeArguments) {
+                    System.out.println(actualTypeArgument);
+                }
+
+            }
+        }
+        System.out.println(&quot;=========================&quot;);
+       method = Demo10.class.getDeclaredMethod(&quot;test02&quot;);
+        Type genericReturnType = method.getGenericReturnType();
+        if(genericReturnType instanceof  ParameterizedType){
+            Type[] actualTypeArguments = ((ParameterizedType) genericReturnType).getActualTypeArguments();
+            for (Type actualTypeArgument : actualTypeArguments) {
+                System.out.println(actualTypeArgument);
+            }
+
+        }
+        }
+    }
+java.util.Map&lt;java.lang.String, Reflection.User&gt;
+class java.lang.String
+class Reflection.User
+java.util.List&lt;java.lang.String&gt;
+class java.lang.String
+=========================
+class java.lang.String
+class Reflection.User
+</code></pre>
+<h3 id="通过反射获得注解">通过反射获得注解</h3>
+<pre><code class="language-java">package Reflection;
+
+import java.lang.annotation.*;
+import java.lang.reflect.Field;
+
+public class Demo11 {
+    public static void main(String[] args) throws ClassNotFoundException, NoSuchFieldException {
+        Class c1 = Class.forName(&quot;Reflection.Student2&quot;);
+        //获得类的注解
+        Annotation[] annotations = c1.getAnnotations();
+        for (Annotation annotation : annotations) {
+            System.out.println(annotation);
+        }
+        //获得注解的值
+        Typekang typekang =(Typekang) c1.getAnnotation(Typekang.class);
+        String value =typekang.value();
+        System.out.println(value);
+        //获得指定注解的值
+        Field field = c1.getDeclaredField(&quot;name&quot;);
+        Fieldkang fieldkang =  field.getAnnotation(Fieldkang.class);
+        System.out.println(fieldkang.columname());
+        System.out.println(fieldkang.type());
+        System.out.println(fieldkang.length());
+    }
+
+}
+
+@Typekang(&quot;db_Student&quot;)
+class Student2{
+    @Fieldkang(columname = &quot;db_name&quot;,type = &quot;varchar&quot;,length = 10)
+    private String name;
+    @Fieldkang(columname = &quot;db_age&quot;,type = &quot;int&quot;,length = 10)
+    private int age;
+    @Fieldkang(columname = &quot;db_id&quot;,type = &quot;int&quot;,length = 10)
+    private  int id;
+
+    public Student2(String name, int age, int id) {
+        this.name = name;
+        this.age = age;
+        this.id = id;
+    }
+
+    public Student2() {
+    }
+
+    @Override
+    public String toString() {
+        return &quot;Student2{&quot; +
+                &quot;name='&quot; + name + '\'' +
+                &quot;, age=&quot; + age +
+                &quot;, id=&quot; + id +
+                '}';
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+}
+
+@Target(ElementType.TYPE)
+@Retention(RetentionPolicy.RUNTIME)
+@interface  Typekang{
+      String value();
+}
+@Target(ElementType.FIELD)
+@Retention(RetentionPolicy.RUNTIME)
+@interface Fieldkang{
+    String columname();
+    String type();
+    int length();
+}
+@Reflection.Typekang(value=db_Student)
+db_Student
+db_name
+varchar
+
+</code></pre>
+
+                </div>
+            </article>
+        </div>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://ganhan999.github.io/post/172、阶乘后的零/" class="post-title gt-a-link">
+                    172、阶乘后的零
+                </a>
+            </div>
+        
+
+        
+
+        
+
+        
+
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first">温故而知新</div>
+    <div class="social-container">
+        
+            
+        
+            
+        
+            
+        
+            
+                <a href="https://www.zhihu.com/hot" target="_blank">
+                    <i class="fab fa-zhihu gt-c-content-color-first"></i>
+                </a>
+            
+        
+            
+        
+            
+        
+    </div>
+    <div class="footer-info">
+        Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+    </div>
+    <div>
+        Theme by <a href="https://imhanjie.com/" target="_blank">imhanjie</a>, Powered by <a
+                href="https://github.com/getgridea/gridea" target="_blank">Gridea | <a href="https://ganhan999.github.io//atom.xml" target="_blank">RSS</a></a>
+    </div>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+    </div>
+</div>
+</body>
+</html>

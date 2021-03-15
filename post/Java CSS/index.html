@@ -1,0 +1,773 @@
+<html>
+<head>
+    <meta charset="utf-8"/>
+<meta name="description" content=""/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+<title>Java CSS | Gridea</title>
+
+<link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1615809991680">
+
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://ganhan999.github.io//styles/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dockerfile.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dart.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script>
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
+
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css">
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg">
+    <div class="navbar-brand">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            Gridea
+        </div>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
+            
+                <div class="nav-item">
+                    
+                        <a href="/" class="menu gt-a-link">
+                            首页
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/archives" class="menu gt-a-link">
+                            归档
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/tags" class="menu gt-a-link">
+                            标签
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/post/about" class="menu gt-a-link">
+                            关于
+                        </a>
+                    
+                </div>
+            
+        </div>
+        <div style="text-align: center">
+            <form id="gridea-search-form" style="position: relative" data-update="1615809991680" action="/search/index.html">
+                <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+                <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+        </div>
+    </div>
+</nav>
+
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    Java CSS
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2020-12-15 ·
+                    </time>
+                    
+                        <a href="https://ganhan999.github.io/tag/pVOKe1jE1_/" class="post-tags">
+                            # Java
+                        </a>
+                    
+                </div>
+                <div class="post-content">
+                    <h1 id="1-css的3种导入方式">1、CSS的3种导入方式</h1>
+<pre><code class="language-css">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;Title&lt;/title&gt;
+
+    &lt;!--内部样式--&gt;
+    &lt;style&gt;
+        h1{
+            color: green;
+        }
+    &lt;/style&gt;
+
+    &lt;!--外部样式--&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;css/style.css&quot; /&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;!--优先级：就近原则--&gt;
+&lt;!--行内样式：在标签元素中，编写一个style属性，编写样式即可--&gt;
+&lt;h1 style=&quot;color: red&quot;&gt;这是标签&lt;/h1&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<h1 id="2-选择器">2、选择器</h1>
+<h2 id="21基本选择器">2.1基本选择器</h2>
+<h3 id="211标签选择器">2.1.1标签选择器</h3>
+<p>选择一类标签 标签{}</p>
+<pre><code class="language-css">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;Title&lt;/title&gt;
+    &lt;style&gt;
+        h1{
+            color: aqua;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1&gt;标签1&lt;/h1&gt;
+&lt;h1&gt;标签2&lt;/h1&gt;
+&lt;h1&gt;标签3&lt;/h1&gt;
+&lt;h1&gt;标签4&lt;/h1&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<h3 id="212类选择器class">2.1.2类选择器(class)</h3>
+<p>选择所有class一致的标签，跨标签，格式：.类名{}</p>
+<pre><code class="language-css">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;Title&lt;/title&gt;
+
+    &lt;style&gt;
+        /*类选择器的格式 .class的名称{}
+            好处：可以多个标签归类，是同一个class，可以复用
+        */
+        .demo1{
+            color: blue;
+        }
+        .demo2{
+            color: red;
+        }
+        .demo3{
+            color: aqua;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1 class =&quot;demo1&quot;&gt;类选择器：demo1&lt;/h1&gt;
+&lt;h1 class=&quot;demo2&quot;&gt;类选择器：demo2&lt;/h1&gt;
+&lt;h1 class=&quot;demo3&quot;&gt;类选择器：demo3&lt;/h1&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<h3 id="213id-选择器">2.1.3id 选择器</h3>
+<p>全局唯一，格式：#id名{}</p>
+<pre><code class="language-css">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;Title&lt;/title&gt;
+    &lt;style&gt;
+        /*id选择器：id必须保证全局唯一
+            #id名称{}
+            不遵循就近原则，优先级是固定的
+            id选择器 &gt; 类选择器  &gt;  标签选择器
+        */
+        #demo1{
+            color: aqua;
+        }
+        .demo2{
+            color: red;
+        }
+        #demo2{
+            color: orange;
+        }
+        h1{
+            color: blue;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;h1 id=&quot;demo1&quot;&gt;id选择器：demo1&lt;/h1&gt;
+&lt;h1 class=&quot;demo2&quot; id = &quot;demo2&quot;&gt;id选择器：demo2&lt;/h1&gt;
+&lt;h1 class=&quot;demo2&quot;&gt;id选择器：demo3&lt;/h1&gt;
+&lt;h1&gt;id选择器：demo4&lt;/h1&gt;
+&lt;h1&gt;id选择器：demo5&lt;/h1&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>**注意：**优先级：id &gt; class &gt; 标签</p>
+<h2 id="22层次选择器">2.2层次选择器</h2>
+<h3 id="221后代选择器">2.2.1后代选择器</h3>
+<p>在某个元素的后面</p>
+<pre><code class="language-css">/*后代选择器*/
+&lt;style&gt;
+body p{
+	background:red;
+}
+&lt;/style&gt;
+
+
+</code></pre>
+<h3 id="222子选择器">2.2.2子选择器</h3>
+<p>子类一代</p>
+<pre><code class="language-css">/*子选择器*/
+&lt;style&gt;
+body&gt;p{
+	background:orange;
+}
+&lt;/style&gt;
+</code></pre>
+<h3 id="223相邻的兄弟选择器">2.2.3相邻的兄弟选择器</h3>
+<p>注意：同辈只有一个，相邻（向下）</p>
+<pre><code class="language-css">/*相邻兄弟选择器：只有一个，相邻（向下）*/
+&lt;style&gt;
+.active+p{
+background: red
+}
+&lt;/style&gt;
+
+&lt;body&gt;
+	&lt;p class=&quot;active&quot;&gt;p1&lt;p&gt;
+	&lt;p&gt;p2&lt;/p&gt;
+&lt;/body&gt;
+</code></pre>
+<h3 id="224通用选择器">2.2.4通用选择器</h3>
+<p>注意：当前选中元素的向下的所有兄弟元素</p>
+<pre><code class="language-css">&lt;style&gt;
+/*通用兄弟选择器，当前选中元素的向下的所有兄弟元素*/
+	.active~p{
+	background:red;
+}
+&lt;/style&gt;
+&lt;body&gt;
+	&lt;p class=&quot;active&quot;&gt;p1&lt;p&gt;
+	&lt;p&gt;p2&lt;/p&gt;
+&lt;/body&gt;
+</code></pre>
+<h2 id="23结构伪类选择器">2.3结构伪类选择器</h2>
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;Title&lt;/title&gt;
+    &lt;style&gt;
+        /*ul的第一个子元素*/
+        ul li:first-child{
+            background: aqua;
+        }
+        /*ul的最后一个子元素*/
+        ul li:last-child{
+            background: blue;
+        }
+        /*选中p1：定位到父元素，选择当前的第一个元素
+            选择当前p元素 的父级元素，选中父级元素的第一个，并且是当前元素才生效！
+        */
+        p:nth-child(1){
+            background: orange;
+        }
+        /*选中父元素下的，第2个p元素*/
+        p:nth-of-type(2){
+            background: red;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;p&gt;p1&lt;/p&gt;
+    &lt;p&gt;p2&lt;/p&gt;
+    &lt;p&gt;p3&lt;/p&gt;
+    &lt;p&gt;p4&lt;/p&gt;
+    &lt;ul&gt;
+        &lt;li&gt;l1&lt;/li&gt;
+        &lt;li&gt;
+            &lt;p&gt;p5&lt;/p&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+            &lt;p&gt;p6&lt;/p&gt;
+        &lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;p&gt;p7&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<h2 id="24属性选择器常用">2.4属性选择器（常用）</h2>
+<p>标签[属性名=属性值(正则)]{}</p>
+<pre><code class="language-html">正则：
+=表示绝对等于
+*=表示包含
+^=表示以...开头
+$=表示以...结尾
+
+&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;Title&lt;/title&gt;
+    &lt;style&gt;
+         .demo a{
+            display: block;
+            height: 50px;
+            width: 50px;
+            float:left;
+            border-radius: 10px;
+            background: blue;
+            text-align: center;
+            color: beige;
+            text-decoration: none;
+            margin-right: 5px;
+            font: bold 20px/50px Arial;
+        }
+         /*属性名，属性名=属性值（正则）
+         =表示绝对等于
+         *=表示包含
+         ^=表示以...开头
+         $=表示以...结尾
+         存在id属性的元素  a[]{}
+         */
+        /* a[id]{
+             background: red;
+         }*/
+
+         /*id=first的元素*/
+       /* a[id=first]{
+            background: aqua;
+        }*/
+
+        /*class中有links元素*/
+       /* a[class = &quot;links item2 first2&quot;]{
+            background: orange;
+        }*/
+        /*a[class*=&quot;links&quot;]{
+            background: black ;
+        }*/
+        /*选中href中以http开头的元素*/
+        a[href^=&quot;http&quot;]{
+            background: orange;
+        }
+    &lt;/style&gt;
+
+&lt;/head&gt;
+&lt;body&gt;
+&lt;p class=&quot;demo&quot;&gt;
+    &lt;a href=&quot;http://www.baidu.com&quot; class=&quot;links item first&quot; id=&quot;first&quot;&gt;1&lt;/a&gt;
+    &lt;a href=&quot;/adad/faf&quot; class=&quot;links item2 first2&quot; &gt;2&lt;/a&gt;
+    &lt;a href=&quot;qwe123&quot; class=&quot;links item3 first3&quot; &gt;3&lt;/a&gt;
+    &lt;a href=&quot;eweqe&quot; class=&quot;links item4 first4&quot; &gt;4&lt;/a&gt;
+    &lt;a href=&quot;rrrrr&quot; class=&quot;links item5 first5&quot; &gt;5&lt;/a&gt;
+    &lt;a href=&quot;ttt&quot; class=&quot;links item6 first6&quot; &gt;6&lt;/a&gt;
+    &lt;a href=&quot;yyy&quot; class=&quot;links item7 first7&quot; &gt;7&lt;/a&gt;
+&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+</code></pre>
+<figure data-type="image" tabindex="1"><img src="https://ganhan999.github.io//post-images/1607947959260.png" alt="" loading="lazy"></figure>
+<h1 id="3-美化网页元素">3、美化网页元素</h1>
+<h2 id="31为什么要美化网页">3.1为什么要美化网页</h2>
+<ol>
+<li>有效的传递页面信息</li>
+<li>美化网页，页面漂亮才能吸引客户</li>
+<li>凸显页面的主题</li>
+<li>提高用户的体验</li>
+</ol>
+<p>span标签：重点要突出的字，使用span标签套起来</p>
+<pre><code class="language-css">font-family：字体
+font-size：字体大小
+font-weight：字体粗细
+
+&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;Title&lt;/title&gt;
+    &lt;style&gt;
+        #study{
+            font-size: 100px;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+学习&lt;span id=&quot;study&quot;&gt;CSS&lt;/span&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<h2 id="32字体样式">3.2字体样式</h2>
+<pre><code class="language-css">font-weight:bolder;/*也可以填px，但数值不能超过900,900相当于bloder*/
+/*常用写法：*/
+font:oblique bloder 12px &quot;楷体&quot;
+</code></pre>
+<h2 id="33文本样式">3.3文本样式</h2>
+<ol>
+<li>颜色–&gt;color</li>
+<li>文本对齐方式–&gt;text-align：center</li>
+<li>首行缩进–&gt;text-indent：2em</li>
+<li>行高–&gt;line-height：300px；</li>
+<li>下划线–&gt;text-decoration</li>
+</ol>
+<pre><code class="language-css">color:red;/*红色*/
+text-align: center;/*居中*/
+text-decoration:underline/*下划线*/
+text-decoration:line-through/*中划线*/
+text-decoration:overline/*上划线*/
+text-decoration:none/*超链接去下划线*/
+</code></pre>
+<p>图片、文字水平对齐</p>
+<pre><code class="language-css">img,span{vetical-align:middle}
+</code></pre>
+<h2 id="34文本阴影和超链接伪类">3.4文本，阴影和超链接伪类</h2>
+<pre><code class="language-css">&lt;style&gt;
+	a{/*超链接有默认的颜色*/
+		text-decoration:none;/*下划线设置为空*/
+		color:#000000;
+	}
+	a:hover{/*鼠标悬浮的状态*/
+		color:orange;
+	}
+	a:active{/*鼠标按住未释放的状态*/
+		color:green
+	}
+	a:visited{/*点击之后的状态*/
+		color:red
+	}
+&lt;/style&gt;
+</code></pre>
+<p>阴影：</p>
+<pre><code class="language-css">/*	第一个参数：表示水平偏移
+	第二个参数：表示垂直偏移
+	第三个参数：表示模糊半径
+	第四个参数：表示颜色
+*/
+text-shadow:5px 5px 5px 颜色
+</code></pre>
+<h2 id="35列表ul-li">3.5列表ul li</h2>
+<pre><code class="language-css">/*list-style{
+	none:去掉原点
+	circle：空心圆
+	decimal：数字
+	square：正方形
+}*/
+ul li{
+	height:30px;
+	list-style:none;
+	text-indent:1em;
+}
+a{
+	text-decoration:none;
+	font-size:14px;
+	color:#000;
+}
+a:hover{
+	color:orange;
+	text-decoration:underline
+}
+/*放在div中，作为导航栏*/
+&lt;div id=&quot;nav&quot;&gt;&lt;/div&gt;
+#nav{
+	width:300px;
+}
+</code></pre>
+<h2 id="36列表ul-li">3.6列表ul li</h2>
+<pre><code class="language-css">/*list-style{
+	none:去掉原点
+	circle：空心圆
+	decimal：数字
+	square：正方形
+}*/
+ul li{
+	height:30px;
+	list-style:none;
+	text-indent:1em;
+}
+a{
+	text-decoration:none;
+	font-size:14px;
+	color:#000;
+}
+a:hover{
+	color:orange;
+	text-decoration:underline
+}
+/*放在div中，作为导航栏*/
+&lt;div id=&quot;nav&quot;&gt;&lt;/div&gt;
+#nav{
+	width:300px;
+}
+</code></pre>
+<h2 id="37背景">3.7背景</h2>
+<ol>
+<li>背景颜色：background</li>
+<li>背景图片</li>
+</ol>
+<pre><code class="language-css">background-image:url(&quot;&quot;);/*默认是全部平铺的*/
+background-repeat:repeat-x/*水平平铺*/
+background-repeat:repeat-y/*垂直平铺*/
+background-repeat:no-repeat/*不平铺*/
+</code></pre>
+<p>综合使用</p>
+<pre><code class="language-css">background:red url(&quot;图片相对路劲&quot;) 270px 10px no-repeat
+background-position：/*定位：背景位置*/
+</code></pre>
+<h1 id="4-盒子模型">4、盒子模型</h1>
+<h2 id="41什么是盒子模型">4.1什么是盒子模型</h2>
+<ol>
+<li>margin：外边距</li>
+<li>padding：内边距</li>
+<li>border：边框</li>
+</ol>
+<h2 id="42边框">4.2边框</h2>
+<p>border：粗细 样式 颜色</p>
+<ol>
+<li>
+<p>边框的粗细</p>
+</li>
+<li>
+<p>边框的样式</p>
+</li>
+<li>
+<p>边框的颜色</p>
+<p>测试代码</p>
+</li>
+</ol>
+<pre><code class="language-css">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;Title&lt;/title&gt;
+    &lt;style&gt;
+        #nav{
+            text-align: center;
+            width: 300px;
+            height: 200px;
+            border:1px solid red;
+        }
+        #user input{
+            border: 2px solid green;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div id=&quot;nav&quot;&gt;
+    &lt;h1&gt;会员登录&lt;/h1&gt;
+    &lt;form action=&quot;#&quot;&gt;
+        &lt;div id=&quot;user&quot;&gt;
+            &lt;span&gt;用户名：&lt;/span&gt;
+            &lt;input type=&quot;text&quot;&gt;
+        &lt;/div&gt;
+        &lt;div&gt;
+            &lt;span&gt;密码：&lt;/span&gt;
+            &lt;input type=&quot;text&quot;&gt;
+        &lt;/div&gt;
+        &lt;div&gt;
+            &lt;span&gt;邮箱：&lt;/span&gt;
+            &lt;input type=&quot;text&quot;&gt;
+        &lt;/div&gt;
+    &lt;/form&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<h2 id="43外边距-妙用居中">4.3外边距----妙用：居中</h2>
+<p>margin-left/right/top/bottom–&gt;表示四边，可分别设置，也可以同时设置如下</p>
+<pre><code class="language-css">margin:0 0 0 0/*分别表示上、右、下、左；从上开始顺时针*/
+/*例1：居中*/
+margin:0 auto /*auto表示左右自动*/
+/*例2：*/
+margin:4px/*表示上、右、下、左都为4px*/
+/*例3*/
+margin:10px 20px 30px/*表示上为10px，左右为20px，下为30px*/
+</code></pre>
+<p>盒子的计算方式：<br>
+margin+border+padding+内容的大小</p>
+<p>总结：<br>
+body总有一个默认的外边距 margin:0<br>
+常见操作：初始化</p>
+<pre><code class="language-css">margin:0;
+padding:0;
+text-decoration:none;
+</code></pre>
+<h2 id="44圆角边框-border-radius">4.4圆角边框----border-radius</h2>
+<p>border-radius有四个参数（顺时针），左上-&gt;右上-&gt;右下-&gt;左下<br>
+圆圈：圆角=<strong>半径</strong></p>
+<h1 id="5-浮动">5、浮动</h1>
+<h2 id="51标准文档流">5.1标准文档流</h2>
+<figure data-type="image" tabindex="2"><img src="https://ganhan999.github.io//post-images/1607947968049.png" alt="" loading="lazy"></figure>
+<p>块级元素：独占一行 h1~h6 、p、div、 列表…<br>
+行内元素：不独占一行 span、a、img、strong</p>
+<blockquote>
+<p>注： 行内元素可以包含在块级元素中，反之则不可以。</p>
+</blockquote>
+<h2 id="52-display重要">5.2、display（重要）</h2>
+<ul>
+<li>block：块元素</li>
+<li>inline：行内元素</li>
+<li>inline-block：是块元素，但是可以内联，在一行</li>
+</ul>
+<blockquote>
+<p>这也是一种实现行内元素排列的方式，但是我们很多情况用float</p>
+</blockquote>
+<ul>
+<li>none：消失</li>
+</ul>
+<pre><code class="language-css">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;Title&lt;/title&gt;
+    &lt;!--block 块元素
+        inline 行内元素
+        inline-block 是块元素，但是可以内联 ，在一行
+    --&gt;
+    &lt;style&gt;
+        div{
+            width: 100px;
+            height: 100px;
+            border: 1px solid red;
+            display: inline-block;
+        }
+        span{
+            width: 100px;
+            height: 100px;
+            border: 1px solid red;
+            display: inline-block;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div&gt;div块元素&lt;/div&gt;
+&lt;span&gt;span行内元素&lt;/span&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<h2 id="53floatleftright左右浮动">5.3float：left/right左右浮动</h2>
+<p>clear：both</p>
+<h2 id="54overflow及父级边框塌陷问题">5.4overflow及父级边框塌陷问题</h2>
+<p>clear：<br>
+right：右侧不允许有浮动元素<br>
+left：左侧不允许有浮动元素<br>
+both：两侧不允许有浮动元素<br>
+none：</p>
+<p>解决塌陷问题方案：<br>
+方案一：增加父级元素的高度；<br>
+方案二：增加一个空的div标签，清除浮动</p>
+<pre><code class="language-html">&lt;div class = &quot;clear&quot;&gt;&lt;/div&gt;
+&lt;style&gt;
+	.clear{
+		clear:both;
+		margin:0;
+		padding:0;
+}
+&lt;/style&gt;
+</code></pre>
+<p>方案三：在父级元素中增加一个overflow：hidden</p>
+<pre><code class="language-css">overflow:hidden/*隐藏*/
+overflow：scoll/*滚动*/
+</code></pre>
+<p>方案四：父类添加一个伪类:after</p>
+<pre><code class="language-css">#father:after{
+	content:'';
+	display:block;
+	clear:both;
+}
+</code></pre>
+<p>小结：</p>
+<ol>
+<li>浮动元素增加空div-&gt;简单、代码尽量避免空div</li>
+<li>设置父元素的高度-&gt;简单，元素假设没有了固定的高度，就会超出</li>
+<li>overflow-&gt;简单，下拉的一些场景避免使用</li>
+<li>父类添加一个伪类:after（推荐）-&gt;写法稍微复杂，但是没有副作用，<strong>推荐使用</strong></li>
+</ol>
+<h2 id="55display与float对比">5.5display与float对比</h2>
+<ol>
+<li>display：方向不可以控制</li>
+<li>float：浮动起来的话会脱离标准文档流，所以要解决父级边框塌陷的问题。</li>
+</ol>
+<h1 id="6-定位">6、定位</h1>
+<h2 id="61-相对定位">6.1、相对定位</h2>
+<p>相对定位：positon：relstive；<br>
+相对于原来的位置，进行指定的偏移，相对定位的话，它仍然在标准文档流中，原来的位置会被保留</p>
+<pre><code class="language-css">top:-20px;
+left:20px;
+bottom:-10px;
+right:20px;
+</code></pre>
+<h1 id="7-css总结">7、css总结</h1>
+<figure data-type="image" tabindex="3"><img src="https://ganhan999.github.io//post-images/1607947974498.png" alt="" loading="lazy"></figure>
+
+                </div>
+            </article>
+        </div>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://ganhan999.github.io/post/11、盛最多水的容器/" class="post-title gt-a-link">
+                    11、盛最多水的容器
+                </a>
+            </div>
+        
+
+        
+
+        
+
+        
+
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first">温故而知新</div>
+    <div class="social-container">
+        
+            
+        
+            
+        
+            
+        
+            
+                <a href="https://www.zhihu.com/hot" target="_blank">
+                    <i class="fab fa-zhihu gt-c-content-color-first"></i>
+                </a>
+            
+        
+            
+        
+            
+        
+    </div>
+    <div class="footer-info">
+        Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+    </div>
+    <div>
+        Theme by <a href="https://imhanjie.com/" target="_blank">imhanjie</a>, Powered by <a
+                href="https://github.com/getgridea/gridea" target="_blank">Gridea | <a href="https://ganhan999.github.io//atom.xml" target="_blank">RSS</a></a>
+    </div>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+    </div>
+</div>
+</body>
+</html>

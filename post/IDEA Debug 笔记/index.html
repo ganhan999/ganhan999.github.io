@@ -1,0 +1,246 @@
+<html>
+<head>
+    <meta charset="utf-8"/>
+<meta name="description" content=""/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+<title>IDEA Debug 笔记 | Gridea</title>
+
+<link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1615809991680">
+
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://ganhan999.github.io//styles/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dockerfile.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dart.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script>
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
+
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css">
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg">
+    <div class="navbar-brand">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            Gridea
+        </div>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
+            
+                <div class="nav-item">
+                    
+                        <a href="/" class="menu gt-a-link">
+                            首页
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/archives" class="menu gt-a-link">
+                            归档
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/tags" class="menu gt-a-link">
+                            标签
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/post/about" class="menu gt-a-link">
+                            关于
+                        </a>
+                    
+                </div>
+            
+        </div>
+        <div style="text-align: center">
+            <form id="gridea-search-form" style="position: relative" data-update="1615809991680" action="/search/index.html">
+                <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+                <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+        </div>
+    </div>
+</nav>
+
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    IDEA Debug 笔记
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2021-01-02 ·
+                    </time>
+                    
+                        <a href="https://ganhan999.github.io/tag/pVOKe1jE1_/" class="post-tags">
+                            # Java
+                        </a>
+                    
+                </div>
+                <div class="post-content">
+                    <h1 id="debug-设置">Debug 设置</h1>
+<p>使用<code>File -&gt; Settings -&gt; Build, Execution, Deployment -&gt; Debugger</code>可以打开Debug设置界面，如下图</p>
+<p><code>Transport</code>表示设置 Debug 连接方式，默认是 <code>Socket</code>。<code>Shared memory</code> 是 Windows 特有的一个属性，一般在 Windows 系统下建议使用此设置，相对于 <code>Socket</code> 会快点</p>
+<h1 id="debug-常用快捷键">Debug 常用快捷键</h1>
+<table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>介绍</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>F7</td>
+<td>在 Debug 模式下，进入下一步，如果当前行断点是一个方法，则进入当前方法体内，如果该方法体还有方法，则不会进入该内嵌的方法中</td>
+</tr>
+<tr>
+<td>F8</td>
+<td>在 Debug 模式下，进入下一步，如果当前行断点是一个方法，则不进入当前方法体内</td>
+</tr>
+<tr>
+<td>F9</td>
+<td>在 Debug 模式下，恢复程序运行，但是如果该断点下面代码还有断点则停在下一个断点上</td>
+</tr>
+<tr>
+<td>Alt + F8</td>
+<td>在 Debug 的状态下，选中对象，弹出可输入计算表达式调试框，查看该输入内容的调试结果</td>
+</tr>
+<tr>
+<td>Ctrl + F8</td>
+<td>在 Debug 模式下，设置光标当前行为断点，如果当前已经是断点则去掉断点</td>
+</tr>
+<tr>
+<td>Shift + F7</td>
+<td>在 Debug 模式下，智能步入。断点所在行上有多个方法调用，会弹出进入哪个方法</td>
+</tr>
+<tr>
+<td>Shift + F8</td>
+<td>在 Debug 模式下，跳出，表现出来的效果跟 F9 一样</td>
+</tr>
+<tr>
+<td>Ctrl + Shift + F8</td>
+<td>在 Debug 模式下，指定断点进入条件</td>
+</tr>
+<tr>
+<td>Alt + Shift + F7</td>
+<td>在 Debug 模式下，进入下一步，如果当前行断点是一个方法，则进入当前方法体内，如果方法体还有方法，则会进入该内嵌的方法中，依此循环进入</td>
+</tr>
+</tbody>
+</table>
+<h1 id="debug-技巧">Debug 技巧</h1>
+<h2 id="debug-时查看对象的几种方法">Debug 时查看对象的几种方法</h2>
+<p><strong>1. 在<code>Variables</code>窗口直接查看</strong><br>
+<img src="https://ganhan999.github.io//post-images/1609592767565.png" alt="" loading="lazy"></p>
+<p><strong>2. 使用快捷键 <code>Alt + F8</code></strong><br>
+<img src="https://ganhan999.github.io//post-images/1609592771537.png" alt="" loading="lazy"></p>
+<p>这种方法还可以对变量进行一定的加工，比如</p>
+<p><img src="https://ganhan999.github.io//post-images/1609592774981.png" alt="" loading="lazy"><br>
+  或者</p>
+<p><img src="https://ganhan999.github.io//post-images/1609592778043.png" alt="" loading="lazy"><br>
+  <strong>3. 拖动对象到 <code>Watches</code>窗口</strong></p>
+<p><img src="https://ganhan999.github.io//post-images/1609592782248.png" alt="" loading="lazy"><br>
+  <strong>4. 鼠标悬停在对象上 2 秒左右</strong></p>
+<figure data-type="image" tabindex="1"><img src="https://ganhan999.github.io//post-images/1609592786771.png" alt="" loading="lazy"></figure>
+<h2 id="快速跳过后面的断点">快速跳过后面的断点</h2>
+<p>当我们需要过掉后面的所有断点的时候，我们不需要去掉这些断点，只需要点击左下角<code>Mute Breakpoints</code>，之后，所有断点变成灰色，然后我们再按快捷键 <code>F9</code> 即可过掉当前和后面所有的断点，如图</p>
+<p><img src="https://ganhan999.github.io//post-images/1609592790754.png" alt="" loading="lazy">## 设置断点进入条件</p>
+<p><strong>1. 在断点上点击鼠标右键</strong></p>
+<p><img src="https://ganhan999.github.io//post-images/1609592793939.png" alt="" loading="lazy"><br>
+  <strong>2. 使用快捷键 <code>Ctrl + Shift + F8</code></strong></p>
+<p><img src="https://ganhan999.github.io//post-images/1609592798272.png" alt="" loading="lazy"><br>
+  断点进入条件在对循环进行调试时会经常用到，常用于观察循环变量满足某一条件时的循环体执行情况</p>
+<h2 id="更复杂的步入条件">更复杂的步入条件</h2>
+<p>可以设置断点在跳过多少次后开始步入，这在循环中也比较常用，比如要查看一个变量循环 3 次后的结果，设置方法如下图</p>
+<p><img src="https://ganhan999.github.io//post-images/1609592802047.png" alt="" loading="lazy"><br>
+  对于某些不重要的断点，只要步入一次就够了，就可以勾选<code>Remnove once hit</code>，让它步入之后自动删除，如下图</p>
+<p><img src="https://ganhan999.github.io//post-images/1609592806560.png" alt="" loading="lazy"><br>
+  对于某些场景的断点，需要其他断点先触发之后再进行触发，可以如下图选择。默认选择的是： None</p>
+<p><img src="https://ganhan999.github.io//post-images/1609592810841.png" alt="" loading="lazy">## 从方法体中跳出</p>
+<p>有时候当我们步入方法体之后，还想回退到方法体外。可以点击 <code>Drop Frame</code> 按钮实现，如下图</p>
+<figure data-type="image" tabindex="2"><img src="https://ganhan999.github.io//post-images/1609592814869.png" alt="" loading="lazy"></figure>
+<h2 id="其他">其他</h2>
+<p>如下图</p>
+<figure data-type="image" tabindex="3"><img src="https://ganhan999.github.io//post-images/1609592818890.png" alt="" loading="lazy"></figure>
+
+                </div>
+            </article>
+        </div>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://ganhan999.github.io/post/43、字符串相乘/" class="post-title gt-a-link">
+                    中等43. 字符串相乘
+                </a>
+            </div>
+        
+
+        
+
+        
+
+        
+
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first">温故而知新</div>
+    <div class="social-container">
+        
+            
+        
+            
+        
+            
+        
+            
+                <a href="https://www.zhihu.com/hot" target="_blank">
+                    <i class="fab fa-zhihu gt-c-content-color-first"></i>
+                </a>
+            
+        
+            
+        
+            
+        
+    </div>
+    <div class="footer-info">
+        Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+    </div>
+    <div>
+        Theme by <a href="https://imhanjie.com/" target="_blank">imhanjie</a>, Powered by <a
+                href="https://github.com/getgridea/gridea" target="_blank">Gridea | <a href="https://ganhan999.github.io//atom.xml" target="_blank">RSS</a></a>
+    </div>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+    </div>
+</div>
+</body>
+</html>

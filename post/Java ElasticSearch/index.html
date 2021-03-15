@@ -1,0 +1,973 @@
+<html>
+<head>
+    <meta charset="utf-8"/>
+<meta name="description" content=""/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+<title>Java ElasticSearch | Gridea</title>
+
+<link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1615809991680">
+
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://ganhan999.github.io//styles/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dockerfile.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dart.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script>
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
+
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css">
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg">
+    <div class="navbar-brand">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            Gridea
+        </div>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
+            
+                <div class="nav-item">
+                    
+                        <a href="/" class="menu gt-a-link">
+                            首页
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/archives" class="menu gt-a-link">
+                            归档
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/tags" class="menu gt-a-link">
+                            标签
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/post/about" class="menu gt-a-link">
+                            关于
+                        </a>
+                    
+                </div>
+            
+        </div>
+        <div style="text-align: center">
+            <form id="gridea-search-form" style="position: relative" data-update="1615809991680" action="/search/index.html">
+                <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+                <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+        </div>
+    </div>
+</nav>
+
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    Java ElasticSearch
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2021-01-23 ·
+                    </time>
+                    
+                        <a href="https://ganhan999.github.io/tag/pVOKe1jE1_/" class="post-tags">
+                            # Java
+                        </a>
+                    
+                </div>
+                <div class="post-content">
+                    <h1 id="elasticsearch">ElasticSearch</h1>
+<h2 id="1-介绍">1. 介绍</h2>
+<ul>
+<li>本笔记参考狂神说，版本为7.6.X
+<ul>
+<li>https://www.bilibili.com/video/BV17a4y1x7zq?p=2</li>
+</ul>
+</li>
+<li>Lucene是一套信息检索工具包（jar包），不含搜索引擎系统</li>
+<li>ElasticSearch是基于Lucene做了一些封装和增强</li>
+</ul>
+<h2 id="2-入门操作">2. 入门操作</h2>
+<ul>
+<li>JDK1.8以上，客户端，界面工具</li>
+<li>版本对应。</li>
+</ul>
+<h3 id="21-下载">2.1 下载</h3>
+<blockquote>
+<p>官网下载</p>
+<p>windows下解压就可以使用</p>
+</blockquote>
+<p>目录：</p>
+<pre><code class="language-bash">bin：启动文件
+config：配置文件
+	log4j2 日志文件
+	jvm.options 虚拟机文件
+	elasticsearch.yml 配置文件  比如默认9200端口
+lib：相关jar包
+
+modules：功能模块
+plugins：插件：比如ik插件
+</code></pre>
+<p>启动，然后<strong>localhost:9200</strong>访问</p>
+<h3 id="22-安装可视化界面head">2.2 安装可视化界面head</h3>
+<ul>
+<li>
+<p>es head插件，github上面下载</p>
+<ul>
+<li>https://github.com/mobz/elasticsearch-head</li>
+</ul>
+</li>
+<li>
+<pre><code class="language-bash">npm install
+npm run start #启动插件：localhost:9100
+</code></pre>
+</li>
+<li>
+<p>解决跨域问题：修改elasticsearch.yml文件</p>
+<ul>
+<li>
+<pre><code class="language-yml">#解决跨域问题
+http.cors.enabled: true
+http.cors.allow-origin: &quot;*&quot;
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="23-安装kibana">2.3 安装kibana</h3>
+<ul>
+<li>ELK：日志分析架构栈</li>
+<li>注意：下载版本与es一致；可以在配置文件中汉化</li>
+<li>默认端口 localhost:5601</li>
+</ul>
+<h2 id="3-es核心概念">3. ES核心概念</h2>
+<ul>
+<li>
+<p>es是<strong>面向文档的</strong>，一切都是JSON</p>
+</li>
+<li>
+<p>对比</p>
+<ul>
+<li>
+<table>
+<thead>
+<tr>
+<th>关系型数据库</th>
+<th>Elasticsearch</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>数据库database</td>
+<td>索引 indices（数据库）</td>
+</tr>
+<tr>
+<td>表tables</td>
+<td>types （以后会被启用）</td>
+</tr>
+<tr>
+<td>行rows</td>
+<td>documents （文档）</td>
+</tr>
+<tr>
+<td>字段columns</td>
+<td>fields</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+</li>
+<li>
+<p>物理设计</p>
+<ul>
+<li>在后台把每个<strong>索引划分为多个分片</strong>，每片可以再集群中的不同服务器间迁移；</li>
+</ul>
+</li>
+<li>
+<p>逻辑设计</p>
+<ul>
+<li>文档：索引和搜索数据的最小单位是文档；
+<ul>
+<li>自我包含：key：value</li>
+<li>层次型：一个文档中包含文档（json对象）</li>
+</ul>
+</li>
+<li>类型：文档的逻辑容器</li>
+<li>索引：数据库</li>
+</ul>
+</li>
+<li>
+<p>倒排索引</p>
+<ul>
+<li>es使用倒排索引的结构，采用Lucene倒排索引作为底层。用于快速全文检索。</li>
+</ul>
+</li>
+</ul>
+<h2 id="4-ik分词器插件">4. IK分词器插件</h2>
+<ul>
+<li>什么是IK分词器：
+<ul>
+<li>把一句话分词</li>
+<li>如果使用中文：推荐IK分词器</li>
+<li>两个分词算法：ik_smart（最少切分），ik_max_word（最细粒度划分）</li>
+</ul>
+</li>
+</ul>
+<h3 id="41-下载安装">4.1 下载安装</h3>
+<blockquote>
+<p>下载地址：https://github.com/medcl/elasticsearch-analysis-ik/releases</p>
+<p>然后解压，放到elasticsearch的plugins中，建立“ik”文件夹，然后放入；</p>
+<p>重启观察es：发现加载ik插件了</p>
+<p>[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-ewUmG3or-1590485221083)(http://njpsz.xyz/images/ik.png)]</p>
+</blockquote>
+<h3 id="42-使用kibana测试">4.2 使用Kibana测试：</h3>
+<p><strong>【ik_smart】测试：</strong></p>
+<p>输入：</p>
+<pre><code class="language-json">GET _analyze
+{
+  &quot;analyzer&quot;: &quot;ik_smart&quot;,
+  &quot;text&quot;: &quot;我是社会主义接班人&quot;
+}
+</code></pre>
+<p>输出：</p>
+<pre><code class="language-json">{
+  &quot;tokens&quot; : [
+    {
+      &quot;token&quot; : &quot;我&quot;,
+      &quot;start_offset&quot; : 0,
+      &quot;end_offset&quot; : 1,
+      &quot;type&quot; : &quot;CN_CHAR&quot;,
+      &quot;position&quot; : 0
+    },
+    {
+      &quot;token&quot; : &quot;是&quot;,
+      &quot;start_offset&quot; : 1,
+      &quot;end_offset&quot; : 2,
+      &quot;type&quot; : &quot;CN_CHAR&quot;,
+      &quot;position&quot; : 1
+    },
+    {
+      &quot;token&quot; : &quot;社会主义&quot;,
+      &quot;start_offset&quot; : 2,
+      &quot;end_offset&quot; : 6,
+      &quot;type&quot; : &quot;CN_WORD&quot;,
+      &quot;position&quot; : 2
+    },
+    {
+      &quot;token&quot; : &quot;接班人&quot;,
+      &quot;start_offset&quot; : 6,
+      &quot;end_offset&quot; : 9,
+      &quot;type&quot; : &quot;CN_WORD&quot;,
+      &quot;position&quot; : 3
+    }
+  ]
+}
+</code></pre>
+<p><strong>【ik_max_word】测试：</strong></p>
+<p>输入：</p>
+<pre><code class="language-json">GET _analyze
+{
+  &quot;analyzer&quot;: &quot;ik_max_word&quot;,
+  &quot;text&quot;: &quot;我是社会主义接班人&quot;
+}
+</code></pre>
+<p>输入：</p>
+<pre><code class="language-json">{
+  &quot;tokens&quot; : [
+    {
+      &quot;token&quot; : &quot;我&quot;,
+      &quot;start_offset&quot; : 0,
+      &quot;end_offset&quot; : 1,
+      &quot;type&quot; : &quot;CN_CHAR&quot;,
+      &quot;position&quot; : 0
+    },
+    {
+      &quot;token&quot; : &quot;是&quot;,
+      &quot;start_offset&quot; : 1,
+      &quot;end_offset&quot; : 2,
+      &quot;type&quot; : &quot;CN_CHAR&quot;,
+      &quot;position&quot; : 1
+    },
+    {
+      &quot;token&quot; : &quot;社会主义&quot;,
+      &quot;start_offset&quot; : 2,
+      &quot;end_offset&quot; : 6,
+      &quot;type&quot; : &quot;CN_WORD&quot;,
+      &quot;position&quot; : 2
+    },
+    {
+      &quot;token&quot; : &quot;社会&quot;,
+      &quot;start_offset&quot; : 2,
+      &quot;end_offset&quot; : 4,
+      &quot;type&quot; : &quot;CN_WORD&quot;,
+      &quot;position&quot; : 3
+    },
+    {
+      &quot;token&quot; : &quot;主义&quot;,
+      &quot;start_offset&quot; : 4,
+      &quot;end_offset&quot; : 6,
+      &quot;type&quot; : &quot;CN_WORD&quot;,
+      &quot;position&quot; : 4
+    },
+    {
+      &quot;token&quot; : &quot;接班人&quot;,
+      &quot;start_offset&quot; : 6,
+      &quot;end_offset&quot; : 9,
+      &quot;type&quot; : &quot;CN_WORD&quot;,
+      &quot;position&quot; : 5
+    },
+    {
+      &quot;token&quot; : &quot;接班&quot;,
+      &quot;start_offset&quot; : 6,
+      &quot;end_offset&quot; : 8,
+      &quot;type&quot; : &quot;CN_WORD&quot;,
+      &quot;position&quot; : 6
+    },
+    {
+      &quot;token&quot; : &quot;人&quot;,
+      &quot;start_offset&quot; : 8,
+      &quot;end_offset&quot; : 9,
+      &quot;type&quot; : &quot;CN_CHAR&quot;,
+      &quot;position&quot; : 7
+    }
+  ]
+}
+</code></pre>
+<h3 id="43-用户配置字典">4.3 用户配置字典</h3>
+<p>当一些特殊词（比如姓名）不能被识别切分时候，用户可以自定义字典：</p>
+<figure data-type="image" tabindex="1"><img src="https://imgconvert.csdnimg.cn/aHR0cDovL25qcHN6Lnh5ei9pbWFnZXMvaWsyLnBuZw?x-oss-process=image/format,png" alt="img" loading="lazy"></figure>
+<p>重启es和kibana测试</p>
+<p>[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-dNxpUIif-1590485221097)(http://njpsz.xyz/images/20200417150218.png)]</p>
+<h2 id="5-rest风格">5. Rest风格</h2>
+<h3 id="51-简介">5.1 简介</h3>
+<p>RESTful是一种架构的规范与约束、原则，符合这种规范的架构就是RESTful架构。</p>
+<p>操作</p>
+<table>
+<thead>
+<tr>
+<th>method</th>
+<th>url地址</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PUT</td>
+<td>localhost:9100/索引名称/类型名称/文档id</td>
+<td>创建文档（指定id）</td>
+</tr>
+<tr>
+<td>POST</td>
+<td>localhost:9100/索引名称/类型名称</td>
+<td>创建文档（随机id）</td>
+</tr>
+<tr>
+<td>POST</td>
+<td>localhost:9100/索引名称/文档类型/文档id/_update</td>
+<td>修改文档</td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td>localhost:9100/索引名称/文档类型/文档id</td>
+<td>删除文档</td>
+</tr>
+<tr>
+<td>GET</td>
+<td>localhost:9100/索引名称/文档类型/文档id</td>
+<td>查询文档通过文档id</td>
+</tr>
+<tr>
+<td>POST</td>
+<td>localhost:9100/索引名称/文档类型/_search</td>
+<td>查询所有文档</td>
+</tr>
+</tbody>
+</table>
+<h3 id="52-测试">5.2 测试</h3>
+<ul>
+<li>1、创建一个索引<code>PUT /索引名/类型名/id</code></li>
+<li>默认是_doc</li>
+<li>[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-DeUg5fjf-1590485221110)(http://njpsz.xyz/images/20200417153651.png)]</li>
+</ul>
+<figure data-type="image" tabindex="2"><img src="https://imgconvert.csdnimg.cn/aHR0cDovL25qcHN6Lnh5ei9pbWFnZXMvMjAyMDA0MTcxNTM4MzYucG5n?x-oss-process=image/format,png" alt="img" loading="lazy"></figure>
+<h3 id="53-数据类型">5.3 数据类型</h3>
+<ol>
+<li>基本数据类型</li>
+</ol>
+<ul>
+<li>字符串 text, keyword</li>
+<li>数据类型 long, integer,short,byte,double,float,half_float,scaled_float</li>
+<li>日期 date</li>
+<li>布尔 boolean</li>
+<li>二进制 binary</li>
+</ul>
+<ol>
+<li>制定数据类型</li>
+</ol>
+<p>输入：创建规则</p>
+<pre><code class="language-bash">PUT /test2
+{
+  &quot;mappings&quot;: {
+    
+    &quot;properties&quot;: {
+      &quot;name&quot;: {
+        &quot;type&quot;: &quot;text&quot;
+      },
+      &quot;age&quot;: {
+        &quot;type&quot;: &quot;long&quot;
+      },
+      &quot;birthday&quot;: {
+        &quot;type&quot;: &quot;date&quot;
+      }
+    }
+  }  
+}
+</code></pre>
+<p>输出：</p>
+<pre><code class="language-bash">{
+  &quot;acknowledged&quot; : true,
+  &quot;shards_acknowledged&quot; : true,
+  &quot;index&quot; : &quot;test2&quot;
+}
+</code></pre>
+<p><strong>如果不指定具体类型，es会默认配置类型</strong></p>
+<h3 id="54-关于索引的基本操作">5.4 关于索引的基本操作</h3>
+<ul>
+<li>
+<p>查看索引信息：</p>
+<blockquote>
+<p>GET test2</p>
+</blockquote>
+</li>
+<li>
+<p>查看es信息</p>
+<blockquote>
+<p>get _cat/</p>
+</blockquote>
+</li>
+<li>
+<p><strong>修改</strong></p>
+<blockquote>
+<ol>
+<li>之前的办法：直接put</li>
+<li>现在的办法：</li>
+</ol>
+<p>POST /test3/_doc/1/_update<br>
+{<br>
+“doc”: {<br>
+“name”: “庞世宗”<br>
+}<br>
+}</p>
+</blockquote>
+</li>
+<li>
+<p>删除索引</p>
+<blockquote>
+<p>DELETE test1</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="55-关于文档的基本操作重点">5.5 关于文档的基本操作（重点）</h3>
+<h4 id="551-基本操作">5.5.1 基本操作</h4>
+<p>1、添加数据</p>
+<pre><code class="language-bash">PUT /psz/user/1
+{
+  &quot;name&quot;: &quot;psz&quot;,
+  &quot;age&quot;: 22,
+  &quot;desc&quot;: &quot;偶像派程序员&quot;,
+  &quot;tags&quot;: [&quot;暖&quot;,&quot;帅&quot;]
+}
+</code></pre>
+<p>2、获取数据</p>
+<pre><code class="language-bash">GEt psz/user/1
+===============输出===========
+{
+  &quot;_index&quot; : &quot;psz&quot;,
+  &quot;_type&quot; : &quot;user&quot;,
+  &quot;_id&quot; : &quot;1&quot;,
+  &quot;_version&quot; : 1,
+  &quot;_seq_no&quot; : 0,
+  &quot;_primary_term&quot; : 1,
+  &quot;found&quot; : true,
+  &quot;_source&quot; : {
+    &quot;name&quot; : &quot;psz&quot;,
+    &quot;age&quot; : 22,
+    &quot;desc&quot; : &quot;偶像派程序员&quot;,
+    &quot;tags&quot; : [
+      &quot;暖&quot;,
+      &quot;帅&quot;
+    ]
+  }
+}
+</code></pre>
+<p>3、 更新数据PUT</p>
+<figure data-type="image" tabindex="3"><img src="https://imgconvert.csdnimg.cn/aHR0cDovL25qcHN6Lnh5ei9pbWFnZXMvMjAyMDA0MjAxMzAzMjYucG5n?x-oss-process=image/format,png" alt="img" loading="lazy"></figure>
+<p>4、更新数据，推荐POST _update</p>
+<ul>
+<li>不推荐</li>
+</ul>
+<pre><code class="language-bash">POST psz/user/1
+{
+  &quot;doc&quot;:{
+    &quot;name&quot;: &quot;庞庞胖&quot;    #后面信息会没有
+  }
+}
+</code></pre>
+<ul>
+<li>推荐！</li>
+</ul>
+<pre><code class="language-bash">POST psz/user/1/_update
+{
+  &quot;doc&quot;:{
+    &quot;name&quot;: &quot;庞庞胖&quot;    #后面信息存在
+  }
+}
+</code></pre>
+<p>5、简单搜索 GET</p>
+<pre><code class="language-bash">GET psz/user/1
+</code></pre>
+<p>简答的条件查询：根据默认映射规则产生基本的查询</p>
+<pre><code class="language-bash">GET psz/user/_search?q=name:庞世宗
+</code></pre>
+<h4 id="552-复杂查询">5.5.2 复杂查询</h4>
+<p>1、查询，参数使用JSON体</p>
+<pre><code class="language-bash">GET psz/user/_search
+{
+  &quot;query&quot;: {
+    &quot;match&quot;: {
+      &quot;name&quot;: &quot;庞世宗&quot;   //根据name匹配
+    }  
+  },
+    &quot;_source&quot;: [&quot;name&quot;,&quot;age&quot;],  //结果的过滤，只显示name和age
+    &quot;sort&quot;: [
+    {
+      &quot;age&quot;: {
+        &quot;order&quot;: &quot;desc&quot; //根据年龄降序
+    }
+    }
+  ],
+    
+  &quot;from&quot;: 0, //分页：起始值，从0还是
+  &quot;size&quot;: 1  //返回多少条数据
+}
+</code></pre>
+<ul>
+<li>之后只用java操作es时候，所有的对象和方法就是这里面的key</li>
+<li>分页前端 /search/{current}/{pagesize}</li>
+</ul>
+<p>2 、布尔值查询</p>
+<ul>
+<li>must(对应mysql中的and) ,所有条件都要符合</li>
+</ul>
+<pre><code class="language-bash">GET psz/user/_search
+{
+  &quot;query&quot;: {
+    &quot;bool&quot;: {
+      &quot;must&quot;: [  //相当于and
+        {
+          &quot;match&quot;: {
+            &quot;name&quot;: &quot;庞世宗&quot;
+          }
+          
+        },
+        {
+          &quot;match&quot;: {
+            &quot;age&quot;: 22
+          }
+        }
+          
+      ]
+    }
+  }
+}
+</code></pre>
+<ul>
+<li>shoule(对应mysql中的or)</li>
+</ul>
+<pre><code class="language-bash">GET psz/user/_search
+{
+  &quot;query&quot;: {
+    &quot;bool&quot;: {
+      &quot;should&quot;: [ //should相当于or
+        {
+          &quot;match&quot;: {
+            &quot;name&quot;: &quot;庞世宗&quot;
+          }
+          
+        },
+        {
+          &quot;match&quot;: {
+            &quot;age&quot;: 22
+          }
+        }
+          
+      ]
+    }
+  }
+}
+</code></pre>
+<ul>
+<li>must_not (对应mysql中的not)</li>
+<li><strong>过滤器</strong></li>
+</ul>
+<pre><code class="language-bash">GET psz/user/_search
+{
+  &quot;query&quot;: {
+    &quot;bool&quot;: {
+      &quot;should&quot;: [
+        {
+          &quot;match&quot;: {
+            &quot;name&quot;: &quot;庞世宗&quot;
+          }
+          
+        }
+      ],
+      &quot;filter&quot;: [
+        {
+          &quot;range&quot;: {
+            &quot;age&quot;: {
+              &quot;gt&quot;: 20   //过滤年龄大于20的
+            }
+          }
+        }
+      ]
+    }
+  }
+}
+</code></pre>
+<p>3、精确查询</p>
+<ul>
+<li>trem查询是直接通过倒排索引指定的词条进行精确的查找的。</li>
+</ul>
+<p>关于分词：</p>
+<p>trem，直接查询精确地</p>
+<p>match，会使用<strong>分词器解析</strong></p>
+<p>关于类型：</p>
+<p>text: 分词器会解析</p>
+<p>keywords: 不会被拆分</p>
+<p>4、高亮查询</p>
+<pre><code class="language-bash">GET psz/user/_search
+{
+  &quot;query&quot;: {
+    &quot;match&quot;: {
+      &quot;name&quot;: &quot;庞世宗&quot;
+    }
+  },
+  &quot;_source&quot;: [&quot;name&quot;,&quot;age&quot;],
+  &quot;sort&quot;: [
+    {
+      &quot;age&quot;: {
+        &quot;order&quot;: &quot;desc&quot;
+      }
+    }
+  ],
+  &quot;highlight&quot;: //高亮
+  {
+    &quot;pre_tags&quot;: &quot;&lt;P&gt;&quot;,   //自定义高亮
+    &quot;post_tags&quot;: &quot;&lt;/P&gt;&quot;, 
+    &quot;fields&quot;: {
+      &quot;name&quot;:{}  //自定义高亮区域
+    }  
+  }
+}
+</code></pre>
+<h2 id="6-集成springboot">6. 集成Springboot</h2>
+<h3 id="61-集成springboot">6.1 集成Springboot</h3>
+<p>官方文档：https://www.elastic.co/guide/en/elasticsearch/client/java-rest/current/index.html</p>
+<p>1、找到原生的依赖</p>
+<pre><code class="language-xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.elasticsearch.client&lt;/groupId&gt;
+    &lt;artifactId&gt;elasticsearch-rest-high-level-client&lt;/artifactId&gt;
+    &lt;version&gt;7.6.2&lt;/version&gt;
+&lt;/dependency&gt;
+
+    &lt;properties&gt;
+        &lt;java.version&gt;1.8&lt;/java.version&gt;
+        &lt;elasticsearch.version&gt;7.6.1&lt;/elasticsearch.version&gt;
+    &lt;/properties&gt;
+12345678910
+</code></pre>
+<p>2、找对象</p>
+<p><strong>Initialization</strong></p>
+<p>A <code>RestHighLevelClient</code> instance needs a <a href="https://www.elastic.co/guide/en/elasticsearch/client/java-rest/current/java-rest-low-usage-initialization.html">REST low-level client builder</a> to be built as follows:</p>
+<pre><code class="language-java">RestHighLevelClient client = new RestHighLevelClient(
+        RestClient.builder(
+                new HttpHost(&quot;localhost&quot;, 9200, &quot;http&quot;),
+                new HttpHost(&quot;localhost&quot;, 9201, &quot;http&quot;)));
+</code></pre>
+<p>The high-level client will internally create the low-level client used to perform requests based on the provided builder. That low-level client maintains a pool of connections and starts some threads so you should close the high-level client when you are well and truly done with it and it will in turn close the internal low-level client to free those resources. This can be done through the <code>close</code>:</p>
+<pre><code class="language-java">client.close();
+</code></pre>
+<p>In the rest of this documentation about the Java High Level Client, the <code>RestHighLevelClient</code> instance will be referenced as <code>client</code>.</p>
+<p>3、分析类中的方法</p>
+<blockquote>
+<p>一定要版本一致！默认es是6.8.1，要改成与本地一致的。</p>
+</blockquote>
+<pre><code class="language-xml">	&lt;properties&gt;
+		&lt;java.version&gt;1.8&lt;/java.version&gt;
+		&lt;elasticsearch.version&gt;7.6.1&lt;/elasticsearch.version&gt;
+	&lt;/properties&gt;
+1234
+</code></pre>
+<p>Java配置类</p>
+<pre><code class="language-java">@Configuration  //xml
+public class EsConfig {
+
+    @Bean
+    public RestHighLevelClient restHighLevelClient(){
+        RestHighLevelClient client = new RestHighLevelClient(
+                RestClient.builder(
+                        new HttpHost(&quot;localhost&quot;, 9200, &quot;http&quot;))); //妈的被这个端口搞了
+        return client;
+    }
+}
+</code></pre>
+<h3 id="62-索引api操作">6.2 索引API操作</h3>
+<p>1、创建索引</p>
+<pre><code class="language-java">@SpringBootTest
+class EsApplicationTests {
+	
+	@Autowired
+	@Qualifier(&quot;restHighLevelClient&quot;)
+	private RestHighLevelClient restHighLevelClient;
+
+	//创建索引的创建 Request
+	@Test
+	void testCreateIndex() throws IOException {
+		//1.创建索引请求
+		CreateIndexRequest request = new CreateIndexRequest(&quot;索引名&quot;);
+		//2.执行创建请求 indices 请求后获得响应
+		CreateIndexResponse createIndexResponse = restHighLevelClient.indices().create(request, RequestOptions.DEFAULT);
+
+		System.out.println(createIndexResponse);
+	}
+
+}
+</code></pre>
+<p>2、获取索引</p>
+<pre><code class="language-java">	@Test
+	void testExistIndex() throws IOException {
+		GetIndexRequest request = new GetIndexRequest(&quot;索引名&quot;);
+		boolean exist =restHighLevelClient.indices().exists(request,RequestOptions.DEFAULT);
+		System.out.println(exist);
+
+	}
+</code></pre>
+<p>3、删除索引</p>
+<pre><code class="language-java">	@Test
+	void deleteIndex() throws IOException{
+		DeleteIndexRequest requset = new DeleteIndexRequest(&quot;索引名&quot;);
+		AcknowledgedResponse delete = restHighLevelClient.indices().delete(requset, RequestOptions.DEFAULT);
+		System.out.println(delete.isAcknowledged());
+	}
+</code></pre>
+<h3 id="63-文档api操作">6.3 文档API操作</h3>
+<p>1、测试添加文档</p>
+<pre><code class="language-java">	//测试添加文档
+	@Test
+	void testAddDocument() throws IOException {
+		//创建对象
+		User user = new User(&quot;psz&quot;, 22);
+		IndexRequest request = new IndexRequest(&quot;ppp&quot;);
+		//规则 PUT /ppp/_doc/1
+		request.id(&quot;1&quot;);
+		request.timeout(timeValueSeconds(1));
+		//数据放入请求
+		IndexRequest source = request.source(JSON.toJSONString(user), XContentType.JSON);
+
+		//客户端发送请求,获取响应结果
+		IndexResponse indexResponse = restHighLevelClient.index(request, RequestOptions.DEFAULT);
+		System.out.println(indexResponse.toString());
+		System.out.println(indexResponse.status());
+	}
+</code></pre>
+<p>2、获取文档</p>
+<pre><code class="language-java">	//获取文档，判断是否存在 GET /index/doc/1
+	@Test
+	void testIsExists() throws IOException {
+
+		GetRequest getRequest = new GetRequest(&quot;ppp&quot;, &quot;1&quot;);
+		//过滤，不放回_source上下文
+		getRequest.fetchSourceContext(new FetchSourceContext(false));
+		getRequest.storedFields(&quot;_none_&quot;);
+		boolean exists = restHighLevelClient.exists(getRequest, RequestOptions.DEFAULT);
+		System.out.println(exists);
+	}
+</code></pre>
+<p>3、获取文档信息</p>
+<pre><code class="language-java">	//获取文档信息
+	@Test
+	void getDocument() throws IOException {
+		GetRequest getRequest = new GetRequest(&quot;ppp&quot;, &quot;1&quot;);
+		GetResponse getResponse = restHighLevelClient.get(getRequest, RequestOptions.DEFAULT);
+		System.out.println(getResponse.getSourceAsString());
+		System.out.println(getResponse);
+	}
+==============输出==========================
+{&quot;age&quot;:22,&quot;name&quot;:&quot;psz&quot;}
+{&quot;_index&quot;:&quot;ppp&quot;,&quot;_type&quot;:&quot;_doc&quot;,&quot;_id&quot;:&quot;1&quot;,&quot;_version&quot;:2,&quot;_seq_no&quot;:1,&quot;_primary_term&quot;:1,&quot;found&quot;:true,&quot;_source&quot;:{&quot;age&quot;:22,&quot;name&quot;:&quot;psz&quot;}}
+</code></pre>
+<p>4、更新文档信息</p>
+<pre><code class="language-java">	//更新文档信息
+	@Test
+	void updateDocument() throws IOException {
+
+		UpdateRequest updateRequest = new UpdateRequest(&quot;ppp&quot;,&quot;1&quot;);
+		updateRequest.timeout(&quot;1s&quot;);
+
+		//json格式传入对象
+		User user=new User(&quot;新名字&quot;,21);
+		updateRequest.doc(JSON.toJSONString(user),XContentType.JSON);
+		//请求，得到响应
+		UpdateResponse updateResponse = restHighLevelClient.update(updateRequest, RequestOptions.DEFAULT);
+		System.out.println(updateResponse);
+	}
+</code></pre>
+<p>5、删除文档信息</p>
+<pre><code>//删除文档信息
+@Test
+void deleteDocument() throws IOException {
+
+   DeleteRequest deleteRequest = new DeleteRequest(&quot;ppp&quot;,&quot;1&quot;);
+   deleteRequest.timeout(&quot;1s&quot;);
+   DeleteResponse deleteResponse = restHighLevelClient.delete(deleteRequest, RequestOptions.DEFAULT);
+   System.out.println(deleteResponse);
+}
+</code></pre>
+<h3 id="64-批量操作bulk">6.4 批量操作Bulk</h3>
+<ul>
+<li>真实项目中，肯定用到大批量查询</li>
+</ul>
+<pre><code class="language-java">	@Test
+	void testBulkRequest() throws IOException{
+		BulkRequest bulkRequest = new BulkRequest();
+		bulkRequest.timeout(&quot;10s&quot;);//数据量大的时候，秒数可以增加
+
+		ArrayList&lt;User&gt; userList = new ArrayList&lt;&gt;();
+		userList.add(new User(&quot;psz&quot;,11));
+		userList.add(new User(&quot;psz2&quot;,12));
+		userList.add(new User(&quot;psz3&quot;,13));
+		userList.add(new User(&quot;psz4&quot;,14));
+		userList.add(new User(&quot;psz5&quot;,15));
+
+		for (int i = 0; i &lt; userList.size(); i++) {
+			bulkRequest.add(
+					new IndexRequest(&quot;ppp&quot;)
+					.id(&quot;&quot;+(i+1))
+					.source(JSON.toJSONString(userList.get(i)),XContentType.JSON));
+		}
+		//请求+获得响应
+		BulkResponse bulkResponse = restHighLevelClient.bulk(bulkRequest, RequestOptions.DEFAULT);
+		System.out.println(bulkResponse.hasFailures());//返回false：成功
+	}
+</code></pre>
+<h3 id="65-搜索">6.5 搜索</h3>
+<pre><code class="language-java">	/*
+		查询:
+		搜索请求：SearchRequest
+		条件构造：SearchSourceBuilder
+	 */
+	@Test
+	void testSearch() throws IOException {
+		SearchRequest searchRequest = new SearchRequest(&quot;ppp&quot;);
+		//构建搜索条件
+		SearchSourceBuilder searchSourceBuilderBuilder = new SearchSourceBuilder();
+		// 查询条件QueryBuilders工具
+		// ：比如：精确查询
+		TermQueryBuilder termQueryBuilder = QueryBuilders.termQuery(&quot;name&quot;, &quot;psz&quot;);
+		searchSourceBuilderBuilder.query(termQueryBuilder);
+		//设置查询时间
+		searchSourceBuilderBuilder.timeout(new TimeValue(60, TimeUnit.SECONDS));
+		//设置高亮
+		//searchSourceBuilderBuilder.highlighter()
+
+		searchRequest.source(searchSourceBuilderBuilder);
+		SearchResponse searchResponse = restHighLevelClient.search(searchRequest, RequestOptions.DEFAULT);
+		System.out.println(JSON.toJSONString(searchResponse.getHits()));
+	}
+</code></pre>
+
+                </div>
+            </article>
+        </div>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://ganhan999.github.io/post/Java Redis/" class="post-title gt-a-link">
+                    Java Redis
+                </a>
+            </div>
+        
+
+        
+
+        
+
+        
+
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first">温故而知新</div>
+    <div class="social-container">
+        
+            
+        
+            
+        
+            
+        
+            
+                <a href="https://www.zhihu.com/hot" target="_blank">
+                    <i class="fab fa-zhihu gt-c-content-color-first"></i>
+                </a>
+            
+        
+            
+        
+            
+        
+    </div>
+    <div class="footer-info">
+        Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+    </div>
+    <div>
+        Theme by <a href="https://imhanjie.com/" target="_blank">imhanjie</a>, Powered by <a
+                href="https://github.com/getgridea/gridea" target="_blank">Gridea | <a href="https://ganhan999.github.io//atom.xml" target="_blank">RSS</a></a>
+    </div>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+    </div>
+</div>
+</body>
+</html>

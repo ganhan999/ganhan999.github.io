@@ -1,0 +1,213 @@
+<html>
+<head>
+    <meta charset="utf-8"/>
+<meta name="description" content=""/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+<title>中等89. 格雷编码 | Gridea</title>
+
+<link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1615809991680">
+
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://ganhan999.github.io//styles/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dockerfile.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dart.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script>
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
+
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css">
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg">
+    <div class="navbar-brand">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            Gridea
+        </div>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
+            
+                <div class="nav-item">
+                    
+                        <a href="/" class="menu gt-a-link">
+                            首页
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/archives" class="menu gt-a-link">
+                            归档
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/tags" class="menu gt-a-link">
+                            标签
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/post/about" class="menu gt-a-link">
+                            关于
+                        </a>
+                    
+                </div>
+            
+        </div>
+        <div style="text-align: center">
+            <form id="gridea-search-form" style="position: relative" data-update="1615809991680" action="/search/index.html">
+                <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+                <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+        </div>
+    </div>
+</nav>
+
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    中等89. 格雷编码
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2021-02-01 ·
+                    </time>
+                    
+                        <a href="https://ganhan999.github.io/tag/RJ1fLvr_t/" class="post-tags">
+                            # leetcode
+                        </a>
+                    
+                </div>
+                <div class="post-content">
+                    <h1 id="题目">题目</h1>
+<p>格雷编码是一个二进制数字系统，在该系统中，两个连续的数值仅有一个位数的差异。<br>
+给定一个代表编码总位数的非负整数 n，打印其格雷编码序列。即使有多个不同答案，你也只需要返回其中一种。<br>
+格雷编码序列必须以 0 开头。</p>
+<p>示例 1:<br>
+输入: 2<br>
+输出: [0,1,3,2]<br>
+解释:<br>
+00 - 0<br>
+01 - 1<br>
+11 - 3<br>
+10 - 2</p>
+<p>对于给定的 n，其格雷编码序列并不唯一。<br>
+例如，[0,2,3,1] 也是一个有效的格雷编码序列。<br>
+00 - 0<br>
+10 - 2<br>
+11 - 3<br>
+01 - 1</p>
+<p>示例 2:<br>
+输入: 0<br>
+输出: [0]<br>
+解释: 我们定义格雷编码序列必须以 0 开头。<br>
+给定编码总位数为 n 的格雷编码序列，其长度为 2n。当 n = 0 时，长度为 20 = 1。<br>
+因此，当 n = 0 时，其格雷编码序列为 [0]。</p>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="本体思路">本体思路</h1>
+<p>看官方文档<br>
+https://leetcode-cn.com/problems/gray-code/solution/gray-code-jing-xiang-fan-she-fa-by-jyd/</p>
+<p><img src="C:%5CUsers%5CWindows10%5CDocuments%5CGridea%5Cimages%5Cimage-20210201222013511.png" alt="image-20210201222013511" loading="lazy"><img src="C:%5CUsers%5CWindows10%5CDocuments%5CGridea%5Cimages%5Cimage-20210201222017649.png" alt="image-20210201222017649" loading="lazy"><img src="C:%5CUsers%5CWindows10%5CDocuments%5CGridea%5Cimages%5Cimage-20210201222024596.png" alt="image-20210201222024596" loading="lazy"><img src="C:%5CUsers%5CWindows10%5CDocuments%5CGridea%5Cimages%5Cimage-20210201222033347.png" alt="image-20210201222033347" loading="lazy"></p>
+<pre><code class="language-python">class Solution:
+    def grayCode(self, n: int) -&gt; List[int]:
+        '''
+        格雷编码结论：
+        设G(n)表示总位数为n的各类编码集合，根据以下策略可以求出G(n+1)
+        1. 将G(n)的每个元素前添加0得到G'(n)
+        2. 将G'(n)反转得到镜像R(n)，在R(n)中的每个元素前添加1得到R'(n)
+        3. 将G'(n)与R'(n)合并得到G(n+1)
+
+        编码思路：
+        1. 初始化G(0)和位数标识head
+        2. 外层循环次数为总位数n
+        3. 内层循环倒序遍历res(对应上述第2步反转),位数标识加上当前索引对应的值即为R'(n)中的元素
+        4. 在res后追加上述计算的元素，遍历结束，得到Gray编码集
+        '''
+        res, head = [0], 1
+        for i in range(n):
+            for j in range(len(res)-1, -1, -1):
+                res.append(head+res[j])#这里就相当于在最前面加了一个1，前面的不变，后面加一倍
+            head &lt;&lt;= 1
+        return res
+</code></pre>
+
+                </div>
+            </article>
+        </div>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://ganhan999.github.io/post/86、分隔链表/" class="post-title gt-a-link">
+                    中等86. 分隔链表
+                </a>
+            </div>
+        
+
+        
+
+        
+
+        
+
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first">温故而知新</div>
+    <div class="social-container">
+        
+            
+        
+            
+        
+            
+        
+            
+                <a href="https://www.zhihu.com/hot" target="_blank">
+                    <i class="fab fa-zhihu gt-c-content-color-first"></i>
+                </a>
+            
+        
+            
+        
+            
+        
+    </div>
+    <div class="footer-info">
+        Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+    </div>
+    <div>
+        Theme by <a href="https://imhanjie.com/" target="_blank">imhanjie</a>, Powered by <a
+                href="https://github.com/getgridea/gridea" target="_blank">Gridea | <a href="https://ganhan999.github.io//atom.xml" target="_blank">RSS</a></a>
+    </div>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+    </div>
+</div>
+</body>
+</html>

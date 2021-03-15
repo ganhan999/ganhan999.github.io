@@ -1,0 +1,304 @@
+<html>
+<head>
+    <meta charset="utf-8"/>
+<meta name="description" content=""/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+<title>JavaSE基础1 | Gridea</title>
+
+<link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1615809991680">
+
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://ganhan999.github.io//styles/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dockerfile.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dart.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script>
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
+
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css">
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg">
+    <div class="navbar-brand">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            Gridea
+        </div>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
+            
+                <div class="nav-item">
+                    
+                        <a href="/" class="menu gt-a-link">
+                            首页
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/archives" class="menu gt-a-link">
+                            归档
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/tags" class="menu gt-a-link">
+                            标签
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/post/about" class="menu gt-a-link">
+                            关于
+                        </a>
+                    
+                </div>
+            
+        </div>
+        <div style="text-align: center">
+            <form id="gridea-search-form" style="position: relative" data-update="1615809991680" action="/search/index.html">
+                <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+                <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+        </div>
+    </div>
+</nav>
+
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    JavaSE基础1
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2020-11-26 ·
+                    </time>
+                    
+                        <a href="https://ganhan999.github.io/tag/pVOKe1jE1_/" class="post-tags">
+                            # Java
+                        </a>
+                    
+                </div>
+                <div class="post-content">
+                    <h2 id="1-markdown语法">1、Markdown语法</h2>
+<p>#+语句表示标题，#越多表示标题级别越低</p>
+<h3 id="三级标题">三级标题</h3>
+<p>两个**包夹着一段文字，表示黑体</p>
+<p><strong>黑体</strong></p>
+<p>两个*包夹着一段文字，表示斜体</p>
+<p><em>斜体</em></p>
+<p>两个***包夹着一段文字，表示黑斜体</p>
+<p><em><strong>黑斜体</strong></em></p>
+<p>一个&gt;表示引用</p>
+<blockquote>
+<p>一个&gt;表示引用</p>
+</blockquote>
+<p>三个-或者*表示分割线</p>
+<hr>
+<hr>
+<p>一个!+[]+()表示图片</p>
+<figure data-type="image" tabindex="1"><img src="https://ganhan999.github.io//post-images/1606388968536.jpg" alt="" loading="lazy"></figure>
+<p>一个[]+()表示超链接</p>
+<p><a href="https://ganhan999.github.io/">点击跳转到我的博客</a></p>
+<p>数字＋.＋空格表示有序列表</p>
+<ol>
+<li>
+<p>A</p>
+</li>
+<li>
+<p>B</p>
+</li>
+</ol>
+<ul>
+<li>
+<p>A</p>
+</li>
+<li>
+<p>B</p>
+</li>
+</ul>
+<p>|||表示表格</p>
+<table>
+<thead>
+<tr>
+<th>名字</th>
+<th>性别</th>
+<th>生日</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>张三</td>
+<td>男</td>
+<td>1991</td>
+</tr>
+</tbody>
+</table>
+<p>用tab上面的三个点`表示代码</p>
+<pre><code class="language-Java">123
+</code></pre>
+<p><code>Hello</code></p>
+<h1 id="2-电脑常用快捷键">2、电脑常用快捷键</h1>
+<ul>
+<li>win+E 打开我的电脑</li>
+<li>win+R 打开运行界面</li>
+<li>shift+Del 永久删除</li>
+<li>ctrl+shift+esc 任务管理器</li>
+</ul>
+<h1 id="3-dos命令">3、Dos命令</h1>
+<h3 id="打开cmd的方式">打开CMD的方式：</h3>
+<ol>
+<li>开始+系统+命令提示符</li>
+<li>win+R 输入cmd 打开控制台</li>
+<li>在任意的文件夹下，按住shift＋鼠标右键，在此处打开命令行窗口</li>
+<li>资源管理器的地址栏前面加上cmd路径</li>
+</ol>
+<h3 id="常用的dos命令">常用的Dos命令</h3>
+<pre><code class="language-bash">#盘符切换 直接F:
+
+#查看当前目录下的所有文件 dir
+
+#切换目录 cd (change directory)  
+    cd /d 可以跨盘符切换
+    cd .. 返回上一级目录
+    cd 目录名 直接可以进入当前一下的目录
+    
+#清除屏幕 cls(clear screen)
+
+#退出终端 exit
+
+#查看电脑Ip ipconfig
+
+#打开应用  
+    calc  打开计算机
+    mspaint 打开画图工具
+    notepad 打开记事本
+    
+#ping命令
+	ping www.baidu.com
+	
+#文件操作命令	
+    md 创建文件夹
+    cd&gt; 创建文件
+    del 删除文件
+    rd 删除文件夹(remove directory)
+
+</code></pre>
+<h2 id="4-jdk-jre-jvm">4、JDK、JRE、JVM</h2>
+<ul>
+<li>
+<p><strong>JDK:Java Development Kit  (Java 开发者工具)</strong></p>
+</li>
+<li>
+<p><strong>JRE:Java Runtime Environment  (Java运行时环境)(JDK包括JRE)</strong></p>
+</li>
+<li>
+<p><strong>JVM:Java Virtual Machine  (Java虚拟机)</strong></p>
+</li>
+</ul>
+<h2 id="5-hello-world">5、Hello World！</h2>
+<pre><code class="language-Java">public class Hello{
+    public static void main(String[] args){
+        System.out.print(&quot;Hello World!&quot;);
+    }
+}
+#注意String要大写，注意分号，注意“”号
+    
+#cmd 当前目录
+javac Hello.java
+java Hello
+</code></pre>
+<ol>
+<li>
+<p>javac java文件，会生成class文件</p>
+</li>
+<li>
+<p>运行class文件，java class文件</p>
+</li>
+</ol>
+<h2 id="6-编译和解释">6、编译和解释</h2>
+<p><strong>解释就是一句一句翻译</strong></p>
+<p><strong>编译就是全部翻译</strong></p>
+<p><strong>Java是一种两种结合的语言</strong></p>
+<p><strong>先经过编译生成class文件</strong></p>
+<p><strong>再解释</strong></p>
+
+                </div>
+            </article>
+        </div>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://ganhan999.github.io/post/121、买卖股票的最佳时机/" class="post-title gt-a-link">
+                    121、买卖股票的最佳时机
+                </a>
+            </div>
+        
+
+        
+
+        
+
+        
+
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first">温故而知新</div>
+    <div class="social-container">
+        
+            
+        
+            
+        
+            
+        
+            
+                <a href="https://www.zhihu.com/hot" target="_blank">
+                    <i class="fab fa-zhihu gt-c-content-color-first"></i>
+                </a>
+            
+        
+            
+        
+            
+        
+    </div>
+    <div class="footer-info">
+        Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+    </div>
+    <div>
+        Theme by <a href="https://imhanjie.com/" target="_blank">imhanjie</a>, Powered by <a
+                href="https://github.com/getgridea/gridea" target="_blank">Gridea | <a href="https://ganhan999.github.io//atom.xml" target="_blank">RSS</a></a>
+    </div>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+    </div>
+</div>
+</body>
+</html>

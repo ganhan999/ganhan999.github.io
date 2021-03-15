@@ -1,0 +1,260 @@
+<html>
+<head>
+    <meta charset="utf-8"/>
+<meta name="description" content=""/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+<title>101、对称二叉树 | Gridea</title>
+
+<link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1615809991680">
+
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://ganhan999.github.io//styles/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dockerfile.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dart.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script>
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
+
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css">
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg">
+    <div class="navbar-brand">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            Gridea
+        </div>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
+            
+                <div class="nav-item">
+                    
+                        <a href="/" class="menu gt-a-link">
+                            首页
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/archives" class="menu gt-a-link">
+                            归档
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/tags" class="menu gt-a-link">
+                            标签
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/post/about" class="menu gt-a-link">
+                            关于
+                        </a>
+                    
+                </div>
+            
+        </div>
+        <div style="text-align: center">
+            <form id="gridea-search-form" style="position: relative" data-update="1615809991680" action="/search/index.html">
+                <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+                <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+        </div>
+    </div>
+</nav>
+
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    101、对称二叉树
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2020-11-19 ·
+                    </time>
+                    
+                        <a href="https://ganhan999.github.io/tag/RJ1fLvr_t/" class="post-tags">
+                            # leetcode
+                        </a>
+                    
+                </div>
+                <div class="post-content">
+                    <h1 id="题目">题目</h1>
+<p>给定一个二叉树，检查它是否是镜像对称的。</p>
+<p>例如，二叉树 [1,2,2,3,4,4,3] 是对称的。</p>
+<p>​    1</p>
+<p>/ <br>
+2   2<br>
+/ \ / <br>
+3  4 4  3</p>
+<p>但是下面这个 [1,2,2,null,3,null,3] 则不是镜像对称的:</p>
+<p>​    1</p>
+<p>/ <br>
+2   2<br>
+\   <br>
+3    3</p>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="本体思路">本体思路</h1>
+<p>递归大法<br>
+判断p1的左子树，和p2的右子树是否相等。<br>
+值得一提的是，需要将root也一分为二，这样就可以判断根节点了。<br>
+这是广度优先遍历了！</p>
+<h1 id="我的做法">#我的做法：</h1>
+<pre><code class="language-python">class Solution:
+    def isSymmetric(self, root: TreeNode) -&gt; bool:
+        return self.ismirror(root, root)
+
+    def ismirror(self, p1, p2):
+        if not p1 and not p2:
+            return True
+        if not p1 or not p2:
+            return False
+        return p1.val == p2.val and self.ismirror(p1.right, p2.left) and self.ismirror(p2.right, p1.left)
+</code></pre>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="大神做法1">#大神做法1：</h1>
+<p>不难发现 post_order 就是 pre_order的逆序，其实这也是对称二叉树的一个性质，<br>
+根据这一点就不难写出代码了。<br>
+前序遍历等于后序遍历的倒序，则为镜像！（妙啊）</p>
+<pre><code class="language-Python">class Solution:
+    def isSymmetric(self, root: TreeNode) -&gt; bool:
+        bli = []     # 用来存左子树的前序遍历
+        fli = []     # 用来存右子树的后序遍历
+        if root == None:   # 无根节点
+            return True
+        if root and root.left == None and root.right == None:  # 只有根节点
+            return True
+
+        if root and root.left and root.right:
+            self.pre_order(root.left, bli)
+            self.post_order(root.right, fli)
+            fli.reverse()            # 将后序遍历的列表倒序
+            if bli == fli:
+                return True
+            else:
+                return False
+
+    def pre_order(self,root,li):    # 二叉树的前序遍历
+        if root:
+            li.append(root.val)
+            self.pre_order(root.left,li)
+            self.pre_order(root.right,li)
+        elif root == None:
+            li.append(None)
+
+    def post_order(self,root,li):   # 二叉树的后序遍历
+        if root:
+            self.post_order(root.left,li)
+            self.post_order(root.right,li)
+            li.append(root.val)
+        elif root == None:
+            li.append(None)
+
+</code></pre>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="大神做法2">#大神做法2：</h1>
+<p>迭代方法。<br>
+BFS 使用一个队列，很多题解中的 BFS 都是放入了四次节点，一种更直观的做法是两两一组放入队列中。</p>
+<p>在队列中同时取出两个节点left, right，判断这两个节点的值是否相等，然后把他们的孩子中按照(left.left, right.right) 一组，(left.right, right.left)一组放入队列中。</p>
+<p>BFS做法需要把所有的节点都检查完才能确定返回结果True，除非提前遇到不同的节点值而终止返回False。</p>
+<p>如图所示<br>
+<img src="https://ganhan999.github.io//post-images/1605776416905.gif" alt="" loading="lazy"></p>
+<pre><code class="language-Python">class Solution:
+    def isSymmetric(self, root: TreeNode) -&gt; bool:
+        if not root:
+            return True
+        queue=collections.deque()
+        queue.append((root.left,root.right))#注意这里只传递了一个参数，他们一起组成了迭代器
+        while queue:
+            left,right=queue.popleft()
+            if not left and not right:
+                continue
+            if not left or not right:
+                return False
+            if left.val!=right.val:
+                return False
+            queue.append((left.left,right.right))
+            queue.append((left.right,right.left))
+        return True
+</code></pre>
+
+                </div>
+            </article>
+        </div>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://ganhan999.github.io/post/100、相同的树/" class="post-title gt-a-link">
+                    100、相同的树
+                </a>
+            </div>
+        
+
+        
+
+        
+
+        
+
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first">温故而知新</div>
+    <div class="social-container">
+        
+            
+        
+            
+        
+            
+        
+            
+                <a href="https://www.zhihu.com/hot" target="_blank">
+                    <i class="fab fa-zhihu gt-c-content-color-first"></i>
+                </a>
+            
+        
+            
+        
+            
+        
+    </div>
+    <div class="footer-info">
+        Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+    </div>
+    <div>
+        Theme by <a href="https://imhanjie.com/" target="_blank">imhanjie</a>, Powered by <a
+                href="https://github.com/getgridea/gridea" target="_blank">Gridea | <a href="https://ganhan999.github.io//atom.xml" target="_blank">RSS</a></a>
+    </div>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+    </div>
+</div>
+</body>
+</html>

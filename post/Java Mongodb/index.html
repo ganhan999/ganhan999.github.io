@@ -1,0 +1,809 @@
+<html>
+<head>
+    <meta charset="utf-8"/>
+<meta name="description" content=""/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+<title>Java Mongodb | Gridea</title>
+
+<link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1615809991680">
+
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://ganhan999.github.io//styles/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dockerfile.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dart.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script>
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
+
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css">
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg">
+    <div class="navbar-brand">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            Gridea
+        </div>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
+            
+                <div class="nav-item">
+                    
+                        <a href="/" class="menu gt-a-link">
+                            首页
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/archives" class="menu gt-a-link">
+                            归档
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/tags" class="menu gt-a-link">
+                            标签
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/post/about" class="menu gt-a-link">
+                            关于
+                        </a>
+                    
+                </div>
+            
+        </div>
+        <div style="text-align: center">
+            <form id="gridea-search-form" style="position: relative" data-update="1615809991680" action="/search/index.html">
+                <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+                <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+        </div>
+    </div>
+</nav>
+
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    Java Mongodb
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2021-01-31 ·
+                    </time>
+                    
+                        <a href="https://ganhan999.github.io/tag/pVOKe1jE1_/" class="post-tags">
+                            # Java
+                        </a>
+                    
+                </div>
+                <div class="post-content">
+                    <h1 id="mongodb">MongoDB</h1>
+<h2 id="1database">1.Database</h2>
+<ul>
+<li>数据库分类
+<ul>
+<li>关系型数据库(RDBMS)
+<ul>
+<li>MySQL, Oracle, DB2， SQL Server…</li>
+<li>该数据库中全都是表</li>
+</ul>
+</li>
+<li>非关系型数据库(No SQL)
+<ul>
+<li>MongoDB, Redis…</li>
+<li>键值对数据库</li>
+<li>文档数据库MongoDB</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>MongoDB是为快速开发互联网web应用而设计的数据库系统</li>
+<li>MongoDB的数据模型时面向文档的(BSON)</li>
+</ul>
+<h2 id="2mongodb">2.MongoDB</h2>
+<h3 id="21安装mongodb">2.1.安装MongoDB</h3>
+<ul>
+<li>
+<p>安装</p>
+</li>
+<li>
+<p>配置环境</p>
+</li>
+<li>
+<p>在c盘根目录创建data文件夹，在data中创建文件夹db</p>
+</li>
+<li>
+<p>运行mongodb</p>
+<ul>
+<li>cmd：mongod //启动mongodb服务器，不要关闭</li>
+<li>另一个cmd：mongo //连接mongodb，出现&gt;</li>
+</ul>
+</li>
+<li>
+<p>如果想更改文件目录（不在c盘下，但仍需data+db)</p>
+<ul>
+<li>mongod --dbpath 文件路径\data\db [–port 123 //更改端口]</li>
+</ul>
+</li>
+<li>
+<p>database</p>
+<ul>
+<li>服务器：
+<ul>
+<li>服务器用来保存数据</li>
+<li>mongod 用来启动服务器</li>
+</ul>
+</li>
+<li>客户端：
+<ul>
+<li>客户端用来操作服务器，对数据进行增删查改的操作</li>
+<li>mongo 用来启动客户端</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>将mongodb设置为系统服务，可以自动在后台启动，不需要每次都手动启动</p>
+<ul>
+<li>
+<p>在C盘根目录创建目录data</p>
+<ul>
+<li>mkdir c:\data\db</li>
+<li>mkdir c:\data\log</li>
+</ul>
+</li>
+<li>
+<p>创建配置文件</p>
+<ul>
+<li>在bin同目录下添加一个配置文件 mongod.cfg</li>
+</ul>
+</li>
+<li>
+<p>以管理员身份运行cmd</p>
+</li>
+<li>
+<p>执行如下命令</p>
+<ul>
+<li>
+<pre><code>sc.exe create MongoDB binPath=&quot;\&quot;D:\MongoDB\Server\4.0\bin\mongod.exe\&quot; --service --config=\&quot;D:\MongoDB\Server\4.0\mongod.cfg\&quot;&quot; DisplayName=&quot;MongoDB&quot; start=&quot;auto&quot;
+1
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>启动mongodb服务</p>
+</li>
+<li>
+<p>如果启动失败，证明操作有误</p>
+<ul>
+<li>在控制台输入 sc delete MongoDB 删除之前的操作</li>
+<li>重新再来一次</li>
+</ul>
+</li>
+</ul>
+<h3 id="22基本概念">2.2.基本概念</h3>
+<ul>
+<li>数据库
+<ul>
+<li>是一个仓库，可以存放集合</li>
+</ul>
+</li>
+<li>集合
+<ul>
+<li>类似于数组，在集合中可以存放文档</li>
+</ul>
+</li>
+<li>文档
+<ul>
+<li>文档数据库中最小单位，我们存储和操作的内容都是文档</li>
+</ul>
+</li>
+<li>在mongodb中，数据库和集合都不需要手动创建，当创建文档时，如果文档所在的集合或数据库不存在则会自动创建</li>
+<li>当一个文档的属性值是一个文档时，内部的文档称为 内嵌文档，mongoDB支持通过内嵌文档的属性进行查询，如果要查询内嵌文档则可以通过.的形式来匹配，此时必须使用引号
+<ul>
+<li>eg: db.users.find({‘hobby.movies’:‘hero’})</li>
+</ul>
+</li>
+<li>数据库的方法能少调用尽量少调用，因为会降低性能</li>
+</ul>
+<h3 id="23基本指令">2.3.基本指令</h3>
+<ul>
+<li>显示当前所有数据库：show dbs|databases</li>
+<li>进入到指定的数据库中：use tes</li>
+<li>当前所处数据库：db</li>
+<li>显示数据库中所有集合：show collections</li>
+</ul>
+<h3 id="24数据库的crud的操作">2.4.数据库的CRUD的操作</h3>
+<h4 id="241数据库中插入文档">2.4.1数据库中插入文档</h4>
+<ul>
+<li>
+<p>db.collection_name.insert(doc)</p>
+<ul>
+<li>
+<p>向集合中插入一个或多个文档</p>
+</li>
+<li>
+<p>eg: 向test数据库中，stus集合中插入一个新的学生对象</p>
+<p>{name: “www”, age: 18, gender: 男}</p>
+<p>db.stus.insert({name: “www”, age: 18, gender: “男”})</p>
+</li>
+<li>
+<p>当我们向集合中插入文档时，如果没有给文档指定_id属性，则数据库自动为文档添加该属性，该属性用来作为文档唯一标识；如果自己 _id属性，需要注意该属性的唯一性</p>
+</li>
+</ul>
+</li>
+<li>
+<p>db.collection_name.insertOne()</p>
+<ul>
+<li>插入一个文档</li>
+</ul>
+</li>
+<li>
+<p>db.collection_name.insertMany()</p>
+<ul>
+<li>插入多个文档</li>
+</ul>
+</li>
+</ul>
+<h4 id="242数据库中查找文档">2.4.2数据库中查找文档</h4>
+<ul>
+<li>db.collection_name.find()
+<ul>
+<li>查询所有文档</li>
+<li>可以接受一个对象作为条件参数</li>
+<li>find()返回一个数组</li>
+</ul>
+</li>
+<li>db.conllection_name.find(“hello”);</li>
+<li>db.conllection_name.find(“hello”);</li>
+<li>eg: db.stus.find({idb.&quot;hello})’</li>
+<li>db.collection_name.findOne({{}});</li>
+<li>db.conllection_name.find(“hello”).count()|length(); //f返回数量</li>
+</ul>
+<h4 id="243数据中更改文档">2.4.3数据中更改文档</h4>
+<ul>
+<li>db.collection_name.update(查询条件， 新对象)
+<ul>
+<li>update()默认情况下会自动使用新对象替换就旧对象</li>
+<li>如果需要指定属性，而不是替换则需要使用修改操作符
+<ul>
+<li>$set：可以用来修改文档中的指定属性
+<ul>
+<li>db.stuts.update(匹配条件, {$set: {修改属性键值对}})</li>
+</ul>
+</li>
+<li>$unset: 删除属性，用法同set</li>
+<li>$push: 用于向数组中添加一个新的元素</li>
+<li>$addToSet: 向数组中添加一个新元素，如果数组中已经存在了该元素则添加失败</li>
+</ul>
+</li>
+<li>update()默认只会修改一个，可以更改multi属性</li>
+</ul>
+</li>
+<li>db.collection_name.updateMany()
+<ul>
+<li>同时修改多个符合条件的文档</li>
+</ul>
+</li>
+<li>db.collection_name.updateOne()
+<ul>
+<li>修改一个符合条件的文档</li>
+</ul>
+</li>
+</ul>
+<h4 id="244数据库文档删除">2.4.4数据库文档删除</h4>
+<ul>
+<li>
+<p>db.collection_name.remove()</p>
+<ul>
+<li>remove可以根据条件删除文档，传递条件的方式同find一样</li>
+<li>默认会删除符合条件的所有文档</li>
+<li>如果传递第二个参数，值为true，则只会删除一个</li>
+<li>如果传递一个空对象，则会删除所有文档，性能较差，此时可删除集合：
+<ul>
+<li>db.collection_name.drop()</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>db.collection_name.deleteOne()</p>
+<ul>
+<li>删除一个文档</li>
+</ul>
+</li>
+<li>
+<p>db.collection_name.deleteMany()</p>
+<ul>
+<li>删除多个文档</li>
+</ul>
+</li>
+<li>
+<p>db.collection_name.drop() 删除集合</p>
+</li>
+<li>
+<p>db.dropDatabase() 删除数据库</p>
+</li>
+<li>
+<p>一般数据库中的数据都不会删除，所以删除的方法很少调用</p>
+<p>一般会在数据中添加一个字段，来表示数据是否被删除</p>
+</li>
+</ul>
+<h3 id="25文档之间的关系">2.5.文档之间的关系</h3>
+<h4 id="251-一对一">2.5.1 一对一</h4>
+<ul>
+<li>
+<p>MongoDB中，可以通过内嵌文档的形式来体现出一对一的关系</p>
+</li>
+<li>
+<pre><code class="language-database">db.wifeAndHusband.insert([
+    {
+        name: &quot;huangrong&quot;,
+        husband: {
+            name: &quot;guojing&quot;
+        }
+     },
+     {
+     name: &quot;panjinlian&quot;,
+        husband: {
+        name: &quot;wudalang&quot;
+        }
+     },
+]);
+1234567891011121314
+</code></pre>
+</li>
+</ul>
+<h4 id="252-一对多多对一">2.5.2 一对多/多对一</h4>
+<ul>
+<li>
+<p>用户 - 订单</p>
+</li>
+<li>
+<p>映射</p>
+</li>
+<li>
+<pre><code>db.users.insert([
+    {username: 'swk'},
+    {username: 'zbj'}
+]);
+
+db.order.insert({
+    list: ['apple','banana'],
+    user_id: ObjectId(&quot;5fc49a3d759231f39f683f4d&quot;)
+});
+
+12345678910
+</code></pre>
+</li>
+</ul>
+<h4 id="253-多对多">2.5.3 多对多</h4>
+<ul>
+<li>分类 - 商品</li>
+<li>同为映射，把上列user_id改为数组即可</li>
+</ul>
+<h3 id="26-补充内容">2.6 补充内容</h3>
+<ul>
+<li>排序
+<ul>
+<li>查询文档时，默认情况按_id值进行排序（升序）</li>
+<li>sort() 可以用来指定文档排序的规则，需要传递一个对象指定排序规则（属性名：1|-1）</li>
+<li>limit skip sort 可以以任意的顺序进行调用</li>
+</ul>
+</li>
+<li>投影
+<ul>
+<li>在查询时，可以在第二个参数的位置来设置查询结果的投影</li>
+<li>{属性名：0|1}</li>
+</ul>
+</li>
+</ul>
+<h2 id="3mongoose">3.Mongoose</h2>
+<ul>
+<li>
+<p>Mongoose是一个让我们可以通过Node来操作mongoDB的模块</p>
+</li>
+<li>
+<p>Mongoose是一个对象文档模型（ODM）</p>
+</li>
+<li>
+<p>好处</p>
+<ul>
+<li>可以为文档创建一个模式结构（Schema） - <strong>约束</strong></li>
+<li>可以对模型中的对象/文档进行验证</li>
+<li>数据可以通过类型转换为对象模型</li>
+<li>可以使用中间件来应用业务逻辑挂钩</li>
+</ul>
+</li>
+<li>
+<p>mongoose提供的新对象</p>
+<ul>
+<li>Schema 模式对象
+<ul>
+<li>schema对象定义约束了数据库中的文档结构</li>
+</ul>
+</li>
+<li>Model
+<ul>
+<li>Model对象作为集合中的所有文档的表示，相当于mongodb数据库中的集合collection</li>
+</ul>
+</li>
+<li>Document
+<ul>
+<li>Document表示集合中的具体文档，相当于集合中的一个具体的文档</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>使用</p>
+<ul>
+<li>下载安装
+<ul>
+<li>npm i mongoose --save</li>
+</ul>
+</li>
+<li>在项目中引入mongoose
+<ul>
+<li>var mongoose = require(“mongoose”)</li>
+</ul>
+</li>
+<li>连接mongodb数据库
+<ul>
+<li>mongoose.connect(‘mongodb://数据库的ip地址:端口号/数据库名’, {useMongoClient: true})</li>
+<li>如果端口号默认可以省略不写</li>
+</ul>
+</li>
+<li>断开数据库连接（一般不需要）
+<ul>
+<li>mongdb数据库，一般情况下只需连接一次，之后除非项目停止服务器关闭，否则连接一般不会断开</li>
+<li>mongoose.disconnect()</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>监听MongoDB数据库的连接状态</p>
+<ul>
+<li>在mongoose对象中，有一个属性叫做connection，该对象表示的就是数据库连接</li>
+<li>通过监视该对象的状态，可以来监听数据库的连接与断开</li>
+<li>数据库连接成功的事件
+<ul>
+<li>mongoose.connection.once(“open”, function(){});</li>
+</ul>
+</li>
+<li>数据库断开的事件
+<ul>
+<li>mongoose.connection.once(“close”, function(){});</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>连接数据库</p>
+<ul>
+<li>
+<p>创建schema</p>
+<pre><code class="language-js">  var mongoose = require('mongoose');
+  var Schema = mongoose.Schema;
+
+  var blogSchema = new Schema({
+    title:  String,
+    author: String,
+    body:   String,
+    comments: [{ body: String, date: Date }],
+    date: { type: Date, default: Date.now },
+    hidden: Boolean,
+    meta: {
+      votes: Number,
+      favs:  Number
+    }
+  });
+123456789101112131415
+</code></pre>
+</li>
+<li>
+<p>通过schema创建model</p>
+<ul>
+<li>model代表的是数据库中的集合，通过model才能对数据库进行操作</li>
+<li>mongoose.model(modelName, schema);
+<ul>
+<li>modelName: 要映射的集合(mongoose会自动将集合变为复数)</li>
+<li>schema: 约束</li>
+</ul>
+</li>
+<li>stuModel.create(doc, function(err){});</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>有了model，就可以对数据库进行增删改查的操作了</p>
+</li>
+</ul>
+<h3 id="model">model</h3>
+<ul>
+<li>
+<p>增加</p>
+<ul>
+<li>Model.create(doc(s), [callback])
+<ul>
+<li>用来创建一个或多个文档并添加到数据库中</li>
+<li>参数：
+<ul>
+<li>doc(s) 可以是一个文档对象，也可以是一个文档对象的数组</li>
+<li>callback 当操作完成以后调用的回调函数</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>查找</p>
+<ul>
+<li>
+<p>Model.find()</p>
+<ul>
+<li>
+<pre><code class="language-js">//直接获取
+StuModel.find({name: &quot;唐僧&quot;}, function(err, docs){
+    if(!err){
+        console.log(docs);
+    }
+});
+
+//投影获取字段
+StuModel.find({},{name:1, _id:0}, function(err, docs){
+    if(!err){
+        console.log(docs);
+    }
+});
+
+//skip：跳过的数量    limit：显示的数量
+StuModel.find({},&quot;name age -_id&quot;,{skip: 3, limit: 1}, function(err, docs){
+    if(!err){
+        console.log(docs);
+    }
+});
+1234567891011121314151617181920
+</code></pre>
+</li>
+<li>
+<p>通过find()查询的结果，返回的对象，就是document，文档对象</p>
+</li>
+<li>
+<p>document对象就是model的实例</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Model.findById()</p>
+<ul>
+<li>通过id寻找</li>
+</ul>
+</li>
+<li>
+<p>Model.findOne()</p>
+<ul>
+<li>只返回第一个</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>修改</p>
+<ul>
+<li>
+<p>Model.update(conditions, doc[, options] [, callback])</p>
+</li>
+<li>
+<p>Model.updateMany(conditions, doc[, options] [, callback])</p>
+</li>
+<li>
+<p>Model.updateOne(conditions, doc[, options] [, callback])</p>
+<ul>
+<li>参数：
+<ul>
+<li>conditions 查询条件</li>
+<li>doc 修改后的对象</li>
+<li>options 配置参数</li>
+<li>callback 回调函数</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<pre><code class="language-js">StuModel.updateOne({name:&quot;唐僧&quot;},{$set:{age:20}}, function(err){});
+1
+</code></pre>
+</li>
+</ul>
+</li>
+<li>
+<p>删除</p>
+<ul>
+<li>Model.remove(conditions [, callback])</li>
+<li>Model.deleteOne(conditions [, callback])</li>
+<li>Model.deleteMany(conditions [, callback]</li>
+</ul>
+</li>
+<li>
+<p>统计文档数量</p>
+<ul>
+<li>Model.count(conditions [,callback])</li>
+</ul>
+</li>
+</ul>
+<h3 id="document">Document</h3>
+<ul>
+<li>
+<p>save()</p>
+<ul>
+<li>
+<p>Model#save([options], [fn])</p>
+</li>
+<li>
+<pre><code class="language-js">stu.save(function(err){
+    if(!err){
+        console.log(&quot;保存成功&quot;);
+    }
+})
+12345
+</code></pre>
+</li>
+</ul>
+</li>
+<li>
+<p>update(update, [options], [callback])</p>
+<ul>
+<li>
+<p>修改对象</p>
+</li>
+<li>
+<pre><code class="language-js">StuModel.findOne({}, function(err, doc){
+    if(!err){
+        doc.update({$set:{age:28}}, function(err){
+            console.log(&quot;修改成功&quot;);
+        });
+        // console.log(doc);
+    }
+});
+12345678
+</code></pre>
+</li>
+</ul>
+</li>
+<li>
+<p>remove([callback])</p>
+<ul>
+<li>
+<p>删除对象</p>
+</li>
+<li>
+<pre><code class="language-js">StuModel.findOne({}, function(err, doc){
+    if(!err){
+        doc.remove(function(err){
+            if(!err){
+                console.log(&quot;大师兄再见&quot;);
+            }
+        });
+    }
+});
+123456789
+</code></pre>
+</li>
+</ul>
+</li>
+<li>
+<p>get(name)</p>
+<ul>
+<li>获取文档中的指定属性值</li>
+</ul>
+</li>
+<li>
+<p>set(name, value)</p>
+<ul>
+<li>设置文档的指定的属性值s</li>
+</ul>
+</li>
+<li>
+<p>id</p>
+<ul>
+<li>获取文档的_id 属性值</li>
+</ul>
+</li>
+<li>
+<p>toObject()</p>
+<ul>
+<li>将document对象转换为普通的js对象</li>
+<li>转换以后所有的document对象的方法都不能使用了</li>
+</ul>
+</li>
+</ul>
+
+                </div>
+            </article>
+        </div>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://ganhan999.github.io/post/82、 删除排序链表中的重复元素 II - 副本/" class="post-title gt-a-link">
+                    中等82. 删除排序链表中的重复元素 II
+                </a>
+            </div>
+        
+
+        
+
+        
+
+        
+
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first">温故而知新</div>
+    <div class="social-container">
+        
+            
+        
+            
+        
+            
+        
+            
+                <a href="https://www.zhihu.com/hot" target="_blank">
+                    <i class="fab fa-zhihu gt-c-content-color-first"></i>
+                </a>
+            
+        
+            
+        
+            
+        
+    </div>
+    <div class="footer-info">
+        Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+    </div>
+    <div>
+        Theme by <a href="https://imhanjie.com/" target="_blank">imhanjie</a>, Powered by <a
+                href="https://github.com/getgridea/gridea" target="_blank">Gridea | <a href="https://ganhan999.github.io//atom.xml" target="_blank">RSS</a></a>
+    </div>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,1755 @@
+<html>
+<head>
+    <meta charset="utf-8"/>
+<meta name="description" content=""/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+<title>Java多线程编程 | Gridea</title>
+
+<link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1615809991680">
+
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://ganhan999.github.io//styles/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dockerfile.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dart.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script>
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
+
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css">
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg">
+    <div class="navbar-brand">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            Gridea
+        </div>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
+            
+                <div class="nav-item">
+                    
+                        <a href="/" class="menu gt-a-link">
+                            首页
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/archives" class="menu gt-a-link">
+                            归档
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/tags" class="menu gt-a-link">
+                            标签
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/post/about" class="menu gt-a-link">
+                            关于
+                        </a>
+                    
+                </div>
+            
+        </div>
+        <div style="text-align: center">
+            <form id="gridea-search-form" style="position: relative" data-update="1615809991680" action="/search/index.html">
+                <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+                <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+        </div>
+    </div>
+</nav>
+
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    Java多线程编程
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2020-12-06 ·
+                    </time>
+                    
+                        <a href="https://ganhan999.github.io/tag/pVOKe1jE1_/" class="post-tags">
+                            # Java
+                        </a>
+                    
+                </div>
+                <div class="post-content">
+                    <h1 id="多线程">多线程</h1>
+<h2 id="简介">简介</h2>
+<p>任务 线程Thread 进程 Process多线程</p>
+<p>多任务 看似同时进行多项任务 实际同一时间只能做一次</p>
+<p>进程：执行程序的一次执行过程，动态概念 包含若干个线程 至少一个</p>
+<p>多线程 是模拟出来的 切换速度快而已</p>
+<ul>
+<li>线程是独立的执行路径</li>
+<li>程序运行时，即使没有自己创建线程，后台也或有多个线程如 主线程，gc线程</li>
+<li>进程中，如果包含多个线程，线程的运行由调度器安排调度，调度器与操作系统紧密相关，先后顺序不能人为干扰</li>
+<li>main（）称之为主进程，为系统的入口，用于执行整个程序</li>
+<li>对同一份资源操作时，会存在资源抢夺的问题，需要加入并发控制</li>
+<li>线程会带来额外的开销，如CPU调度时间，并发控制开销</li>
+<li>每个线程在自己的工作内存交互，内存控制不当会造成数据不一致</li>
+</ul>
+<h3 id="创建进程">创建进程</h3>
+<ul>
+<li>继承Thread类（重点）</li>
+<li>使用runnable接口（重点）</li>
+<li>了解callable接口</li>
+</ul>
+<h4 id="继承thread类">继承Thread类</h4>
+<figure data-type="image" tabindex="1"><img src="https://ganhan999.github.io//post-images/1607248797684.png" alt="" loading="lazy"></figure>
+<pre><code class="language-java">package thread;
+
+//创建线程方式一: 继承Thread类,重写run()方法，start开启多线程
+public class ThreadCreate extends Thread {
+    @Override
+    public void run() {
+        for (int i = 0; i &lt; 20; i++) {
+            System.out.println(i+&quot;我在看代码&quot;);
+
+        }
+    }
+
+    public static void main(String[] args) {
+        //main线程 主线程
+        //创建一个线程对象
+        ThreadCreate threadCreate = new ThreadCreate();
+        //调用start（）线程
+        threadCreate.start();
+        //threadCreate.run();普通方法 先调用&quot;我在看代码&quot;后&quot;我在跑程序&quot;
+
+        for (int i = 0; i &lt; 2000; i++) {
+            System.out.println(i+&quot;我在跑程序&quot;);
+
+        }
+
+
+    }
+}
+</code></pre>
+<p>总结：注意，线程开启不一定立即执行，由cpu调度执行</p>
+<p>网图下载</p>
+<pre><code class="language-java">package thread;
+
+import org.apache.commons.io.FileUtils;
+
+import javax.swing.*;
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
+
+public class ThreadCreate2 extends  Thread{
+
+    private  String url;
+    private  String name;
+
+    public ThreadCreate2(String name,String url) {
+        this.name = name;
+        this.url=url;
+    }
+
+    @Override
+    public void run() {
+        WebDownLoader webDownLoader = new WebDownLoader();
+        webDownLoader.DownLoader(url,name);
+        System.out.println(&quot;下载了文件为:&quot;+name);
+    }
+
+    public static void main(String[] args) {
+        ThreadCreate2 t1 = new ThreadCreate2(&quot;1.jpg&quot;,&quot;https://dss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2534506313,1688529724&amp;fm=26&amp;gp=0.jpg&quot;);
+        ThreadCreate2 t2 = new ThreadCreate2(&quot;2.jpg&quot;,&quot;https://dss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2534506313,1688529724&amp;fm=26&amp;gp=0.jpg&quot;);
+        ThreadCreate2 t3 = new ThreadCreate2(&quot;3.jpg&quot;,&quot;https://dss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2534506313,1688529724&amp;fm=26&amp;gp=0.jpg&quot;);
+
+        t1.start();
+        t2.start();
+        t3.start();
+    }
+}
+class WebDownLoader {
+    //下载方法
+    public void DownLoader(String url,String name) {
+        try {
+            FileUtils.copyURLToFile(new URL(url), new File(name));
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println(&quot;IO异常 download方法出现问题&quot;);
+        }
+    }
+}
+下载了文件为:3.jpg
+下载了文件为:1.jpg
+下载了文件为:2.jpg
+</code></pre>
+<h4 id="实现runnable接口">实现runnable接口</h4>
+<pre><code class="language-Java">package thread;
+
+//创建线程2:实现runnable接口，重写run()方法 执行线程需要将runnable丢入
+public class TestCreate3 implements Runnable{
+    @Override
+    public void run() {
+        for (int i = 0; i &lt; 20; i++) {
+            System.out.println(i+&quot;我在看代码&quot;);
+        }
+    }
+
+    public static void main(String[] args) {
+        //创建runnable接口的实现类对象
+        TestCreate3 testCreate3 = new TestCreate3();
+        //创建线程对象，通过线程对象来开启我们的线程 代理
+        new Thread(testCreate3).start();
+
+        for (int i = 0; i &lt; 20; i++) {
+            System.out.println(i+&quot;我在执行多线程&quot;);
+        }
+
+    }
+}
+0我在执行多线程
+0我在看代码
+1我在执行多线程
+1我在看代码
+2我在看代码
+3我在看代码
+</code></pre>
+<p>总结:</p>
+<p>继承Thread类</p>
+<ul>
+<li>子类继承Thread类具备多线程能力</li>
+<li>启动线程：子类对象。start()</li>
+<li>不建议使用：避免oop单继承局限性</li>
+</ul>
+<p>实现runnable接口</p>
+<ul>
+<li>实现runnable接口具备多线程能力</li>
+<li>启动线程：传入目标对象+Thread对象.start()</li>
+<li>推荐使用：避免单继承局限性，灵活方便，方便同一个对象被多个线程使用</li>
+</ul>
+<pre><code class="language-java">package thread;
+
+//多个线程同时操作一个对象
+//买国车票例子
+
+//发现问题：多个线程使用同一份资源 线程不安全 数据紊乱
+public class TestThread2 implements Runnable{
+    //车票数
+    int ticketNums=10;
+    @Override
+    public void run() {
+        while(true){
+            if(ticketNums&lt;=0){
+                break;
+            }
+            try {
+                Thread.sleep(200);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println(Thread.currentThread().getName()+&quot;--&gt;拿到了第&quot;+ticketNums--+&quot;张票&quot;);
+        }
+    }
+
+    public static void main(String[] args) {
+        TestThread2 ticket = new TestThread2();
+        new Thread(ticket,&quot;学生&quot;).start();
+        new Thread(ticket,&quot;打工者&quot;).start();
+        new Thread(ticket,&quot;黄牛党&quot;).start();
+
+    }
+}
+学生--&gt;拿到了第4张票
+黄牛党--&gt;拿到了第4张票
+打工者--&gt;拿到了第2张票
+学生--&gt;拿到了第2张票
+黄牛党--&gt;拿到了第1张票
+</code></pre>
+<p>龟兔赛跑</p>
+<pre><code class="language-Java">package thread;
+
+import com.sun.deploy.nativesandbox.NativeSandboxBroker;
+
+public class Race implements Runnable{
+    private static String winner;//胜利者
+
+    @Override
+    public void run() {
+        if(Thread.currentThread().getName().equals(&quot;兔子&quot;)){
+        for (int i = 2; i &lt;=100; i+=2) {
+            boolean flag=gameover(i);
+            if(flag){
+                break;
+            }
+            System.out.println(&quot;兔子跑了&quot;+i+&quot;步&quot;);
+            if(i%50==0){
+                try {
+                    Thread.sleep(2);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        }else{
+            for (int i = 1; i &lt;= 100; i++) {
+                boolean flag=gameover(i);
+                if(flag){
+                    break;
+                }
+                System.out.println(Thread.currentThread().getName()+&quot;跑了&quot;+i+&quot;步&quot;);
+            }
+        }
+
+    }
+
+    public boolean gameover(int step){
+        if(winner!=null){
+            return true;
+        }else if(step&gt;=100){
+            winner=Thread.currentThread().getName();
+            System.out.println(&quot;winner is &quot;+winner);
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public static void main(String[] args) {
+        Race race = new Race();
+
+        new Thread(race,&quot;兔子&quot;).start();
+        new Thread(race,&quot;乌龟&quot;).start();
+
+    }
+}
+winner is 乌龟
+兔子跑了52步
+</code></pre>
+<p>龟兔都有希望获胜 但有个问题在于即便胜利者出现 有时还会有一个前进 这是因为用了if 后相当与两个线程 故有反应时间差吧</p>
+<h4 id="实现callable">实现Callable</h4>
+<p>1.实现Callable,需要返回值类型</p>
+<p>2.重写call方法，需要抛出异常</p>
+<p>3.创建目标对象</p>
+<p>4.创建执行服务：ExecutorService ser=Executors.newFixedThreadPool(1)</p>
+<p>5.提交执行：Futureresult1=ser.submit(t1);</p>
+<p>6.获取结果：Boolean r1 =result.get()</p>
+<p>7.关闭服务:ser.shutdownNow();</p>
+<pre><code class="language-java">package thread;
+
+import org.apache.commons.io.FileUtils;
+
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
+import java.util.concurrent.*;
+
+public class TestCallable implements Callable&lt;Boolean&gt;{
+
+    private  String url;
+    private  String name;
+
+    public TestCallable(String name,String url) {
+        this.name = name;
+        this.url=url;
+    }
+    @Override
+    public Boolean call() {
+        WebDownLoader1 webDownLoader1 = new WebDownLoader1();
+        webDownLoader1.DownLoader(url,name);
+        System.out.println(&quot;下载了文件为:&quot;+name);
+        return true;
+    }
+
+    public static void main(String[] args) throws ExecutionException, InterruptedException {
+        TestCallable t1 = new TestCallable(&quot;1.jpg&quot;,&quot;https://dss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2534506313,1688529724&amp;fm=26&amp;gp=0.jpg&quot;);
+        TestCallable t2 = new TestCallable(&quot;2.jpg&quot;,&quot;https://dss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2534506313,1688529724&amp;fm=26&amp;gp=0.jpg&quot;);
+        TestCallable t3 = new TestCallable(&quot;3.jpg&quot;,&quot;https://dss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2534506313,1688529724&amp;fm=26&amp;gp=0.jpg&quot;);
+
+        //4.创建执行服务
+        ExecutorService ser= Executors.newFixedThreadPool(3);
+
+        //5.提交执行
+        Future&lt;Boolean&gt; result1=ser.submit(t1);
+        Future&lt;Boolean&gt; result2=ser.submit(t2);
+        Future&lt;Boolean&gt; result3=ser.submit(t3);
+
+        //6.获取结果
+        Boolean r1 =result1.get();
+        Boolean r2 =result1.get();
+        Boolean r3 =result1.get();
+        System.out.println(r1);
+        System.out.println(r2);
+        System.out.println(r3);
+
+        //7.关闭服务:
+        ser.shutdownNow();
+    }
+
+}
+class WebDownLoader1 {
+    //下载方法
+    public void DownLoader(String url,String name) {
+        try {
+            FileUtils.copyURLToFile(new URL(url), new File(name));
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println(&quot;IO异常 download方法出现问题&quot;);
+        }
+    }
+}
+下载了文件为:3.jpg
+下载了文件为:2.jpg
+下载了文件为:1.jpg
+true
+true
+true
+</code></pre>
+<p>好处：可以定义返回值 可以抛出异常</p>
+<h4 id="静态代理">静态代理</h4>
+<p>自己简单改版</p>
+<pre><code class="language-java">package thread;
+
+public class StaticProxy {
+    public static void main(String[] args) {
+        You you = new You();
+        Weddingproxy weddingproxy = new Weddingproxy();
+        weddingproxy.Happy();
+
+    }
+}
+
+interface Marry{
+  public  void Happy();
+}
+class You implements Marry{
+    @Override
+    public void Happy() {
+        System.out.println(&quot;能与你深爱的人步入婚姻殿堂 这才是最幸福的吧&quot;);
+    }
+}
+class Weddingproxy extends You implements Marry{
+
+
+    @Override
+    public void Happy() {
+        before();
+        super.Happy();
+        after();
+    }
+    private void after() {
+        System.out.println(&quot;婚礼结束 收尾款&quot;);
+    }
+
+    private void before() {
+        System.out.println(&quot;布置婚礼，安排工作&quot;);
+    }
+}
+</code></pre>
+<p>官方正版</p>
+<pre><code class="language-java">package thread;
+
+public class StaticProxy2 {
+    public static void main(String[] args) {
+        You1 you1 = new You1();
+        Weddingproxy1 weddingproxy1 = new Weddingproxy1(you1);
+        weddingproxy1.Happy();
+
+    }
+}
+
+interface Marry1{
+    public  void Happy();
+}
+class You1 implements Marry{
+    @Override
+    public void Happy() {
+        System.out.println(&quot;能与你深爱的人步入婚姻殿堂 这才是最幸福的吧&quot;);
+    }
+}
+class Weddingproxy1  implements Marry{
+    private Marry target;
+
+    public Weddingproxy1(Marry target) {
+        this.target = target;
+    }
+
+    @Override
+    public void Happy() {
+        before();
+        this.target.Happy();
+        after();
+    }
+    private void after() {
+        System.out.println(&quot;婚礼结束 收尾款&quot;);
+    }
+
+    private void before() {
+        System.out.println(&quot;布置婚礼，安排工作&quot;);
+    }
+}
+</code></pre>
+<p>总结：代理对象可以做很多对象做不到的事情（回头看看静态10分后）</p>
+<h3 id="lamda表达式">lamda表达式</h3>
+<p>函数式编程 简化匿名内部类</p>
+<p>函数式接口 ：接口中只包含一个抽象方法</p>
+<p>对于函数式接口，可以通过lambda表达式来创建该接口的对象</p>
+<pre><code class="language-java">package thread;
+
+public class lambda {
+    //3.静态内部类
+    static class Like2 implements Ilike {
+        @Override
+        public void lambda() {
+            System.out.println(&quot; i like lambda2&quot;);
+        }
+    }
+
+    public static void main(String[] args) {
+        Ilike like = new Like();
+        like.lambda();
+        Like2 like2 = new Like2();
+        like2.lambda();
+
+        //4.局部内部类
+        class Like3 implements Ilike {
+            @Override
+            public void lambda() {
+                System.out.println(&quot; i like lambda3&quot;);
+            }
+        }
+        like = new Like3();
+        like.lambda();
+        //5.匿名内部类 ,没有类的名字 借助接口
+        like = new Ilike() {
+            @Override
+            public void lambda() {
+                System.out.println(&quot; i like lambda4&quot;);
+            }
+        };
+        like.lambda();
+        //6.lambda
+        like= ()-&gt; {
+            System.out.println(&quot; i like lambda5&quot;);
+        };
+        like.lambda();
+
+
+    }
+}
+//1.函数式接口
+interface Ilike{
+    void lambda();
+}
+//2.实现类
+ class Like implements  Ilike {
+    @Override
+    public void lambda() {
+        System.out.println(&quot; i like lambda&quot;);
+    }
+}
+</code></pre>
+<p>带参数 实际差不多</p>
+<pre><code class="language-java">package thread;
+
+public class Lambda2 {
+    static  class Love2 implements Ilove{
+        @Override
+        public void love(int a) {
+            System.out.println(&quot;I LOVE YOU2 -&gt; &quot;+a);
+        }
+    }
+    public static void main(String[] args) {
+        class Love3 implements Ilove{
+            @Override
+            public void love(int a) {
+                System.out.println(&quot;I LOVE YOU3 -&gt; &quot;+a);
+            }
+        }
+        Ilove love = new Love();
+        love.love(1);
+        love = new Love2();
+        love.love(2);
+        love = new Love3();
+        love.love(3);
+        love = new Ilove() {
+            @Override
+            public void love(int a) {
+                System.out.println(&quot;I LOVE YOU4 -&gt; &quot;+a);
+            }
+        };
+        love.love(4);
+        love=(int a)-&gt;{
+            System.out.println(&quot;I LOVE YOU5 -&gt; &quot;+a);
+        };
+        love.love(5);
+        //简化1:去int
+        love=(a)-&gt;{
+            System.out.println(&quot;I LOVE YOU6 -&gt; &quot;+a);
+        };
+        love.love(6);
+        //简化2：去小括号
+        love=a-&gt;{
+            System.out.println(&quot;I LOVE YOU7 -&gt; &quot;+a);
+        };
+        love.love(7);
+        //简化3:去花括号
+        love=a-&gt;
+            System.out.println(&quot;I LOVE YOU8 -&gt; &quot;+a);
+        love.love(8);
+
+
+    }
+}
+interface Ilove{
+ void love(int a);
+}
+class Love implements Ilove{
+    @Override
+    public void love(int a) {
+        System.out.println(&quot;I LOVE YOU1 -&gt; &quot;+a);
+    }
+}
+</code></pre>
+<p>总结：</p>
+<ol>
+<li>
+<p>lambda表达式只能在有一行代码的情况下才能简化成一行，如果有多行，那么就用代码块（花括号）包裹</p>
+<p>2.前提是函数式接口</p>
+<p>3.多个参数也可去掉类型 要去掉参数都去掉 但要加小括号</p>
+</li>
+</ol>
+<h3 id="线程状态">线程状态</h3>
+<p>创建 就绪 运行 阻塞 停止</p>
+<p>线程方法:</p>
+<p>setPriority :更改线程的优先级</p>
+<p>static void sleep(long millis): 在指定的毫秒数内让当前执正在执行的线程休眠</p>
+<p>void join()等待该线程终止</p>
+<p>static void yield（）暂停当前正在执行的线程对象，并执行其他线程</p>
+<p>void interrupt () 中断线程 不建议使用</p>
+<p>boolean isAlive()测试线程是否处于活动状态</p>
+<h4 id="停止线程">停止线程</h4>
+<p>不推荐使用JDK提供的stop()、destroy()方法【已废弃】</p>
+<p>推荐线程自己停下来</p>
+<p>建议使用一个标志位来终止变量 当flag=false ,则终止线程运行</p>
+<pre><code class="language-java">package thread;
+
+//测试stop
+//1.建议线程正常停止---&gt;利用次数 不建议死循环
+//2.建议使用标志位---》设置一个标志位
+//3.不要使用stop、destroy等过时或者JDK不建议·使用的方法
+public class ThreadStop implements Runnable {
+    //设置一个标志位
+    private  Boolean flag=true;
+    @Override
+    public void run() {
+        int i=0;
+        while(flag){
+            System.out.println(&quot;run...Thread&quot;+i++);
+        }
+    }
+    public void stop(){
+        this.flag=false;
+    }
+    public static void main(String[] args) {
+        ThreadStop threadStop = new ThreadStop();
+        new Thread(threadStop).start();
+
+        for (int i = 0; i &lt; 1000; i++) {
+            System.out.println(&quot;main&quot;+i);
+            if (i==900){
+                threadStop.stop();
+                System.out.println(&quot;线程停止&quot;);
+            }
+
+        }
+
+    }
+}
+</code></pre>
+<h4 id="线程休眠">线程休眠</h4>
+<ul>
+<li>sleep(时间) 指定当前阻塞的毫秒数；</li>
+<li>sleep存在异常InterruptedException</li>
+<li>sleep时间达到后进程进入就绪状态</li>
+<li>sleep可以模拟网络延时 倒计时等</li>
+<li>每一个对象都有一个锁 sleep不会释放锁</li>
+</ul>
+<p>模拟网络延时：放大问题的发生性 见火车票的例子</p>
+<p>模拟倒计时</p>
+<pre><code class="language-Java">package thread;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+//模拟倒计时
+public class ThreadSleep {
+    public static void main(String[] args) {
+
+        try {
+          tendown();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        //打印当前系统时间
+        Date startTime = new Date(System.currentTimeMillis());//获取当前系统时间
+        while(true){
+            try {
+                Thread.sleep(1000);
+                System.out.println(new SimpleDateFormat(&quot;HH:mm:ss&quot;).format(startTime));
+                startTime = new Date(System.currentTimeMillis());//更新当前时间
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+
+    }
+    //模拟倒计时
+    public static void tendown() throws InterruptedException {
+        int num=10;
+        while(true){
+            Thread.sleep(1000);
+            System.out.println(num--);
+            if(num&lt;=0){
+                break;
+            }
+        }
+    }
+}
+10
+9
+8
+7
+6
+5
+4
+3
+2
+1
+10:23:37
+10:23:38
+10:23:39
+10:23:40
+10:23:41
+10:23:42
+10:23:43
+</code></pre>
+<h4 id="线程礼让">线程礼让</h4>
+<p>yield 礼让：让cpu调度 礼让不一定成功</p>
+<pre><code class="language-java">package thread;
+
+//测试礼让线程
+public class TestYield {
+    public static void main(String[] args) {
+        MyYield myYield = new MyYield();
+
+
+        new Thread(myYield,&quot;a&quot;).start();
+        new Thread(myYield, &quot;b&quot;).start();
+
+    }
+}
+
+class MyYield implements Runnable{
+    @Override
+    public void run() {
+        System.out.println(Thread.currentThread().getName()+&quot;线程开始执行了&quot;);
+        Thread.yield();
+        System.out.println(Thread.currentThread().getName()+&quot;线程结束了&quot;);
+    }
+}
+(礼让失败)
+a线程开始执行了
+a线程结束了
+b线程开始执行了
+b线程结束了
+（礼让成功）
+a线程开始执行了
+b线程开始执行了
+a线程结束了
+b线程结束了
+</code></pre>
+<h4 id="线程状态观测">线程状态观测</h4>
+<pre><code class="language-java">package thread;
+
+public class TestState {
+    public static void main(String[] args) throws InterruptedException {
+        Thread thread = new Thread(()-&gt;{
+            for (int i = 0; i &lt; 5; i++) {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+            }
+            System.out.println(&quot;//&quot;);
+        });
+        Thread.State state = thread.getState();//获得状态
+        System.out.println(state);
+
+        thread.start();
+        state = thread.getState();
+        System.out.println(state);
+
+        while(state!= Thread.State.TERMINATED) {//只要线程不终止 一直输出状态
+            Thread.sleep(1000);
+            state = thread.getState();
+            System.out.println(state);
+        }
+    }
+}
+NEW
+RUNNABLE
+TIMED_WAITING
+TIMED_WAITING
+TIMED_WAITING
+TIMED_WAITING
+TIMED_WAITING
+//
+TERMINATED
+</code></pre>
+<p>NEW RUNNABLE BLOCKED WAITING TERMINATED</p>
+<p>死亡的线程不能再次start</p>
+<h4 id="线程的优先级">线程的优先级</h4>
+<p>Priority 优先级 从1到10</p>
+<p>使用以下方法来获取或改变优先级</p>
+<p>getPriority() .setPriority()</p>
+<pre><code class="language-java">package thread;
+
+public class TestPrority {
+    public static void main(String[] args) {
+        System.out.println(Thread.currentThread().getName() + &quot;--&gt;&quot; + Thread.currentThread().getPriority());
+
+        MyPrority myPrority = new MyPrority();
+        Thread t1 = new Thread(myPrority,&quot;t1&quot;);
+        Thread t2 = new Thread(myPrority,&quot;t2&quot;);
+        Thread t3 = new Thread(myPrority,&quot;t3&quot;);
+        Thread t4 = new Thread(myPrority,&quot;t4&quot;);
+        Thread t5 = new Thread(myPrority,&quot;t5&quot;);
+        Thread t6 = new Thread(myPrority,&quot;t6&quot;);
+
+        //先设优先级 后启动
+        t1.start();
+
+        t2.setPriority(3);
+        t2.start();
+
+        t3.setPriority(7);
+        t3.start();
+
+        t4.setPriority(10);
+        t4.start();
+
+        /*t5.setPriority(-1);//低于边界1 抛出异常
+        t5.start();
+
+        t6.setPriority(11);//高于边界10 抛出异常
+        t6.start();*/
+
+    }
+}
+class MyPrority implements Runnable{
+    @Override
+    public void run() {
+        System.out.println(Thread.currentThread().getName()+&quot;--&gt;&quot;+Thread.currentThread().getPriority());
+
+    }
+}
+main--&gt;5
+t1--&gt;5
+t2--&gt;3
+t3--&gt;7
+t4--&gt;10//优先级并不能决定先后顺序  仍有cpu调度
+</code></pre>
+<p>优先级低只是意味获得调度的概率低</p>
+<p>注意 建议在调用start()前设置优先级</p>
+<h4 id="守护线程daemon">守护线程（daemon）</h4>
+<pre><code class="language-Java">package thread;
+
+public class TestDaemon {
+    public static void main(String[] args) {
+
+        You2 you = new You2();
+        God god = new God();
+        Thread thread = new Thread(god);
+        thread.setDaemon(true);//默认false true启动守护线程
+        thread.start();
+
+        new Thread(you).start();
+    }
+
+}
+
+class  God implements  Runnable{
+    @Override
+    public void run() {
+        while (true){
+            System.out.println(&quot;上帝永生&quot;);
+        }
+    }
+}
+
+class You2 implements Runnable{
+    @Override
+    public void run() {
+        for (int i = 0; i &lt; 30000; i++) {
+            System.out.println(&quot;你幸福的面对每天升起的太阳&quot;);
+        }
+        System.out.println(&quot;你没能再见到清晨的朝阳&quot;);
+    }
+}
+</code></pre>
+<p>虚拟机必须确保用户线程执行完毕 不用等待守护线程执行完毕</p>
+<h3 id="线程同步synchronized">线程同步（synchronized）</h3>
+<p>并发：同一个对象被多个线程同时操作</p>
+<h4 id="三大不安全实例">三大不安全实例</h4>
+<pre><code class="language-java">package thread.unsafe;
+
+public class UnsafeStation {
+    public static void main(String[] args) {
+        BuyTicket station = new BuyTicket();
+
+        new Thread(station,&quot;学生&quot;).start();
+        new Thread(station,&quot;工人&quot;).start();
+        new Thread(station,&quot;黄牛党&quot;).start();
+
+    }
+}
+class BuyTicket implements Runnable{
+    //票
+    int ticketnums=10;
+    Boolean flag=true;
+    @Override
+    public void run() {
+        while(flag){
+            try {
+                buy();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    //买票
+    public void  buy() throws InterruptedException {
+        if(ticketnums&lt;1){
+            flag =false;
+            return;
+        }
+        Thread.sleep(100);
+        System.out.println(Thread.currentThread().getName()+&quot;获得第&quot;+ticketnums--+&quot;张票&quot;);
+
+    }
+}
+
+
+package thread.unsafe;
+
+public class UnsafeBank {
+    public static void main(String[] args) {
+        Account account = new Account(100,&quot;结婚基金&quot;);
+
+        Drawing you = new Drawing(account,50,&quot;你&quot;);
+        Drawing girlfriend = new Drawing(account,100,&quot;girlfriend&quot;);
+        you.start();
+        girlfriend.start();
+
+    }
+}
+//账户
+class Account{
+     int accountMoney;
+    String name;
+
+    public Account(int accountMoney, String name) {
+        this.accountMoney = accountMoney;
+        this.name = name;
+    }
+}
+//取钱
+class Drawing extends  Thread{
+    Account account;
+    int drawMoney;
+    int nowMoney;
+
+    @Override
+    public void run() {
+        if(account.accountMoney-drawMoney&lt;0){
+            System.out.println(Thread.currentThread().getName()+account.name+&quot;余额不足&quot;);
+            return;
+        }
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        account.accountMoney=account.accountMoney-drawMoney;
+        nowMoney=nowMoney+drawMoney;
+        System.out.println(account.name+&quot;余额为&quot;+account.accountMoney);
+        System.out.println(this.getName()+&quot;手里的钱&quot;+nowMoney);
+        //Thread.currentThread().getName()=this.getName()
+
+
+    }
+    //取钱
+
+    public Drawing(Account account, int drawMoney,String name) {
+        super(name);
+        this.account = account;
+        this.drawMoney = drawMoney;
+
+    }
+}
+结婚基金余额为-50
+girlfriend手里的钱100
+结婚基金余额为-50
+你手里的钱50
+
+    
+package thread.unsafe;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class UnsafeList {
+    public static void main(String[] args) {
+        List&lt;String&gt; list = new ArrayList&lt;String&gt;();
+        for (int i = 0; i &lt; 100000; i++) {
+            new Thread(() -&gt; {
+                list.add(Thread.currentThread().getName());
+            }).start();
+        }
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println(list.size());
+    }
+}
+99996
+</code></pre>
+<h4 id="同步方法">同步方法</h4>
+<p>关键字：synchronized 保证数据对象只能被方法访问</p>
+<p>包括synchronized方法和synchronized块</p>
+<p>synchronized 控制对对象的访问 每个对象对应一把锁 方法一旦执行 就独占该锁</p>
+<p>锁的对象应该是变化的量，需要增添改</p>
+<p>买车票</p>
+<pre><code class="language-Java">private synchronized void  buy() throws InterruptedException {
+
+把sleep放run里面
+工人获得第10张票
+黄牛党获得第9张票
+学生获得第8张票
+工人获得第7张票
+黄牛党获得第6张票
+学生获得第5张票
+工人获得第4张票
+学生获得第3张票
+黄牛党获得第2张票
+工人获得第1张票
+安全
+</code></pre>
+<p>银行 使用块</p>
+<pre><code class="language-Java">public void run() {
+    //synchronized块
+    synchronized (account) {
+        if (account.accountMoney - drawMoney &lt; 0) {
+            System.out.println(Thread.currentThread().getName() + account.name + &quot;余额不足&quot;);
+            return;
+        }
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        account.accountMoney = account.accountMoney - drawMoney;
+        nowMoney = nowMoney + drawMoney;
+        System.out.println(account.name + &quot;余额为&quot; + account.accountMoney);
+        System.out.println(this.getName() + &quot;手里的钱&quot; + nowMoney);
+        //Thread.currentThread().getName()=this.getName()
+
+    }
+}
+直接锁函数不行 直接锁函数锁Drawing类  但改变的是Account类 故不行
+</code></pre>
+<p>同步块：synchronized(obj){}</p>
+<p>obj称之为同步监视器</p>
+<ul>
+<li>
+<p>obj可以是任何对象，但是推荐使用共享资源作为同步监视器</p>
+</li>
+<li>
+<p>同步方法中无需指定同步监视器 因为同步方法的同步监视器就是这个对象本身，就是this，或者class</p>
+</li>
+<li>
+<p>同步监视器执行过程：</p>
+<p>1.第一个线程访问，锁定同步监视器，执行其中代码</p>
+<p>2.第二个线程访问，发现同步监视器被锁定，无法访问</p>
+<p>3.第一个线程访问完毕，解锁同步监视器</p>
+<p>4.第二个线程访问。发现同步监视器没有锁，然后锁定并访问</p>
+</li>
+</ul>
+<h4 id="juc">JUC</h4>
+<pre><code class="language-Java">package thread;
+
+import java.util.concurrent.CopyOnWriteArrayList;
+// 测试JUC安全类型的集合
+public class TestJuc {
+    public static void main(String[] args) throws InterruptedException {
+        CopyOnWriteArrayList&lt;String&gt; list =new CopyOnWriteArrayList&lt;String&gt;();
+        for (int i = 0; i &lt; 10000; i++) {
+            new Thread(() -&gt;{
+                list.add(Thread.currentThread().getName());
+            }).start();
+        }
+        Thread.sleep(3000);
+        System.out.println(list.size());
+        }
+
+
+}
+</code></pre>
+<h4 id="死锁">死锁</h4>
+<p>某一个同步块 同时拥有 &quot;两个以上对象的锁&quot;时，就会可能发生”死锁“的问题</p>
+<pre><code class="language-java">package thread;
+
+//多个线程抱着对方需要的资源，然后形成僵持
+public class DeadLock {
+    public static void main(String[] args) {
+        Makeup g1 = new Makeup(0, &quot;灰姑娘&quot;);
+        Makeup g2 = new Makeup(1, &quot;白雪公主&quot;);
+
+        g1.start();
+        g2.start();
+    }
+}
+//口红
+class Tipstick{
+
+}
+//镜子
+class Mirror{
+
+}
+class Makeup extends  Thread{
+    //仅获得一份资源
+    static Tipstick tipstick =new Tipstick();
+    static Mirror mirror =new Mirror();
+    int choice;
+    String girlName;
+
+    public Makeup(int choice, String girlName) {
+        this.choice = choice;
+        this.girlName = girlName;
+    }
+
+    @Override
+    public void run() {
+        //化妆
+        try {
+            makeup();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+    private void makeup() throws InterruptedException {
+        if (choice==0){
+            synchronized (tipstick) {//获得口红的锁
+                System.out.println(this.girlName + &quot;获得口红&quot;);
+                Thread.sleep(1000);
+                synchronized (mirror) {//获得镜子的锁
+                    System.out.println(this.girlName + &quot;获得镜子&quot;);
+                }
+            }
+
+        }else{
+            synchronized (mirror) {//获得镜子的锁
+                System.out.println(this.girlName + &quot;获得镜子&quot;);
+
+                Thread.sleep(2000);
+                synchronized (tipstick) {//获得口红的锁
+                    System.out.println(this.girlName + &quot;获得口红&quot;);
+                }
+            }
+
+        }
+    }
+}
+灰姑娘获得口红
+白雪公主获得镜子
+    僵持
+</code></pre>
+<p>将锁拿出来</p>
+<pre><code class="language-Java">package thread;
+
+//多个线程抱着对方需要的资源，然后形成僵持
+public class DeadLock {
+    public static void main(String[] args) {
+        Makeup g1 = new Makeup(0, &quot;灰姑娘&quot;);
+        Makeup g2 = new Makeup(1, &quot;白雪公主&quot;);
+
+        g1.start();
+        g2.start();
+    }
+}
+//口红
+class Tipstick{
+
+}
+//镜子
+class Mirror{
+
+}
+class Makeup extends  Thread{
+    //仅获得一份资源
+    static Tipstick tipstick =new Tipstick();
+    static Mirror mirror =new Mirror();
+    int choice;
+    String girlName;
+
+    public Makeup(int choice, String girlName) {
+        this.choice = choice;
+        this.girlName = girlName;
+    }
+
+    @Override
+    public void run() {
+        //化妆
+        try {
+            makeup();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+    private void makeup() throws InterruptedException {
+        if (choice==0){
+            synchronized (tipstick) {//获得口红的锁
+                System.out.println(this.girlName + &quot;获得口红&quot;);
+                Thread.sleep(1000);
+            }
+                synchronized (mirror) {//获得镜子的锁
+                    System.out.println(this.girlName + &quot;获得镜子&quot;);
+                }
+
+
+        }else{
+            synchronized (mirror) {//获得镜子的锁
+                System.out.println(this.girlName + &quot;获得镜子&quot;);
+                Thread.sleep(2000);
+            }
+                synchronized (tipstick) {//获得口红的锁
+                    System.out.println(this.girlName + &quot;获得口红&quot;);
+                }
+            
+
+        }
+    }
+}
+灰姑娘获得口红
+白雪公主获得镜子
+白雪公主获得口红
+灰姑娘获得镜子
+</code></pre>
+<p>弹幕说：锁不能嵌套？ 在理解理解。。。</p>
+<h4 id="lock锁">Lock(锁)</h4>
+<p>Lock对象 reentrantlock</p>
+<p>不安全</p>
+<pre><code class="language-Java">package thread;
+
+//测试Lock
+public class TestLock {
+    public static void main(String[] args) {
+        TestLock2 testLock2 = new TestLock2();
+
+        new Thread(testLock2,&quot;a&quot;).start();
+        new Thread(testLock2,&quot;b&quot;).start();
+        new Thread(testLock2,&quot;c&quot;).start();
+
+    }
+}
+class  TestLock2 extends Thread{
+    int sticknums=10;
+    
+    @Override
+    public void run() {
+        while(true){
+            if(sticknums&gt;0){
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                System.out.println(Thread.currentThread().getName()+sticknums--);
+            }else{
+                break;
+            }
+        }
+    }
+}
+c9
+b10
+a10
+b8
+a6
+c7
+a5
+c4
+b4
+b3
+c2
+a1
+</code></pre>
+<p>加锁</p>
+<pre><code class="language-java">package thread;
+
+import java.util.concurrent.locks.ReentrantLock;
+
+//测试Lock
+public class TestLock {
+    public static void main(String[] args) {
+        TestLock2 testLock2 = new TestLock2();
+
+        new Thread(testLock2,&quot;a&quot;).start();
+        new Thread(testLock2,&quot;b&quot;).start();
+        new Thread(testLock2,&quot;c&quot;).start();
+
+    }
+}
+class  TestLock2 extends Thread{
+    int sticknums=10;
+    //加锁
+    private final ReentrantLock lock =new ReentrantLock();
+    @Override
+    public void run() {
+        while(true){
+				lock.lock();
+            try {
+                if(sticknums&gt;0){
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    System.out.println(Thread.currentThread().getName()+sticknums--);
+                }else{
+                    break;
+                }
+            } finally {
+                    lock.unlock();
+            }
+        }
+    }
+}
+a10
+a9
+a8
+a7
+a6
+a5
+a4
+a3
+a2
+a1
+</code></pre>
+<p>因为sleep在锁里面 且等待时不会释放锁 故变为单线程执行</p>
+<p>改进 ： 将sleep拿出锁</p>
+<pre><code class="language-Java">package thread;
+
+import java.util.concurrent.locks.ReentrantLock;
+
+//测试Lock
+public class TestLock {
+    public static void main(String[] args) {
+        TestLock2 testLock2 = new TestLock2();
+
+        new Thread(testLock2,&quot;a&quot;).start();
+        new Thread(testLock2,&quot;b&quot;).start();
+        new Thread(testLock2,&quot;c&quot;).start();
+
+    }
+}
+class  TestLock2 extends Thread{
+    int sticknums=10;
+    //加锁
+    private final ReentrantLock lock =new ReentrantLock();
+    @Override
+    public void run() {
+        while(true){
+            try {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                lock.lock();
+                if(sticknums&gt;0){
+                    System.out.println(Thread.currentThread().getName()+sticknums--);
+                }else{
+                    break;
+                }
+            } finally {
+                lock.unlock();
+            }
+        }
+    }
+}
+b10
+c9
+a8
+b7
+a6
+c5
+b4
+a3
+c2
+b1
+    成功！！！！
+</code></pre>
+<p>Lock显示锁 synchronized 隐式锁</p>
+<p><strong>private final ReentrantLock lock =new ReentrantLock();</strong></p>
+<h3 id="线程协作">线程协作</h3>
+<h4 id="线程通信">线程通信</h4>
+<p>均是Object类 都只能在同步方法或同步块中使用</p>
+<p>wait():表示线程会一直等待，直到其他线程通知，与sleep不同，会释放锁</p>
+<p>wait(long timeout)：指定等待的毫秒数</p>
+<p>notify()唤醒一个处于等待的线程</p>
+<p>notifyAll():唤醒同一个对象上所有的wait()方法的线程，优先级别高的线程优先调度</p>
+<p><strong>代码有些问题。。 感觉消费与生产次数不对 有时候出现连着10几次生产 希望以后的明白为什么</strong></p>
+<pre><code class="language-Java">package thread.Communication;
+
+//消费者生产者模式 管程法
+//生产者 消费者 产品 缓冲区
+public class TestPc {
+    public static void main(String[] args) {
+        synContainer container = new synContainer();
+        Productor productor = new Productor(container);
+        Consumer consumer = new Consumer(container);
+        new Thread(productor).start();
+        new Thread(consumer).start();
+
+
+    }
+}
+//生产者
+class Productor extends Thread{
+    synContainer container;
+    public Productor(synContainer container) {
+        this.container = container;
+
+    }
+
+    @Override
+    public  void run() {
+        for (int i = 1; i &lt; 100; i++) {
+            container.push(new Chicken(i));
+            System.out.println(&quot;生产了第&quot;+i+&quot;只鸡&quot;);
+
+        }
+    }
+}
+//消费者
+class Consumer extends Thread{
+    synContainer container;
+
+
+    public Consumer(synContainer container) {
+
+        this.container = container;
+    }
+    @Override
+    public  void run() {
+        for (int i = 1; i &lt; 100; i++) {
+            System.out.println(&quot;消费了-&gt;&quot;+container.pop().id+&quot;只鸡&quot;);
+        }
+    }
+
+}
+//产品 鸡
+class Chicken {
+    int id;//产品标号
+    public Chicken(int id) {
+        this.id = id;
+    }
+}
+
+class synContainer {
+    Chicken[] chickens=new Chicken[10];
+    int count=0;
+
+    public synchronized void push(Chicken chicken) {
+        while(count==chickens.length){//判断是否生产 如果已满 生产等待
+            try {
+                this.wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        chickens[count]= chicken;
+        count++;
+        this.notifyAll();
+    }
+    public synchronized Chicken pop() {
+        while (count==0){//判断是消费 如果为0 消费等待
+            try {
+                this.wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        count--;
+        Chicken chicken = chickens[count];
+        this.notifyAll();
+        return chicken;
+    }
+
+}
+
+
+package thread.Communication;
+
+public class TestPC2 {
+    public static void main(String[] args) {
+        Show show = new Show();
+        new Actor(show).start();
+        new Audience(show).start();
+
+    }
+}
+//演员
+class Actor extends Thread{
+   Show show;
+    public Actor(Show show) {
+        this.show = show;
+    }
+    @Override
+    public void run() {
+        for (int i = 0; i &lt; 20; i++) {
+            if(i%5!=0){
+                this.show.play(&quot;快乐大本营播放中&quot;);
+            }else{
+                this.show.play(&quot;广告投放中。。&quot;);
+            }
+        }
+    }
+}
+//观众
+class Audience extends Thread{
+    Show show;
+    public Audience(Show show) {
+        this.show = show;
+    }
+    @Override
+    public void run() {
+        for (int i = 0; i &lt; 20; i++) {
+            show.watch();
+        }
+    }
+}
+//节目
+class Show{
+    //演员表演 观众等待
+    //观众观看 演员等待
+    String video;//节目
+    boolean flag=true;
+    //表演
+    public synchronized void play( String video) {
+        if(!flag) {
+            try {
+                this.wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+            System.out.println(&quot;演员表演了&quot; + video);
+        //通知观众观看
+        this.notifyAll();
+        this.video = video;
+        this.flag = !flag;
+    }
+
+    //收看
+    public synchronized void watch() {
+        if(flag) {
+            try {
+                this.wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+            System.out.println(&quot;观众收看了&quot; + video);
+            //通知演员表演
+            this.notifyAll();
+            this.flag = !flag;
+        }
+    
+
+}
+演员表演了广告投放中。。
+观众收看了广告投放中。。
+演员表演了快乐大本营播放中
+观众收看了快乐大本营播放中
+演员表演了快乐大本营播放中
+观众收看了快乐大本营播放中
+演员表演了快乐大本营播放中
+观众收看了快乐大本营播放中
+演员表演了快乐大本营播放中
+观众收看了快乐大本营播放中
+演员表演了广告投放中。。
+观众收看了广告投放中。。
+演员表演了快乐大本营播放中
+观众收看了快乐大本营播放中
+演员表演了快乐大本营播放中
+观众收看了快乐大本营播放中
+演员表演了快乐大本营播放中
+观众收看了快乐大本营播放中
+演员表演了快乐大本营播放中
+观众收看了快乐大本营播放中
+演员表演了广告投放中。。
+观众收看了广告投放中。。
+演员表演了快乐大本营播放中
+观众收看了快乐大本营播放中
+演员表演了快乐大本营播放中
+观众收看了快乐大本营播放中
+演员表演了快乐大本营播放中
+观众收看了快乐大本营播放中
+演员表演了快乐大本营播放中
+观众收看了快乐大本营播放中
+演员表演了广告投放中。。
+观众收看了广告投放中。。
+演员表演了快乐大本营播放中
+观众收看了快乐大本营播放中
+演员表演了快乐大本营播放中
+观众收看了快乐大本营播放中
+演员表演了快乐大本营播放中
+观众收看了快乐大本营播放中
+演员表演了快乐大本营播放中
+观众收看了快乐大本营播放中
+</code></pre>
+<p>信号灯法 看起来就舒服了些 大概是因为没有储存</p>
+<h4 id="线程池">线程池</h4>
+<p>储存提前创建的线程 使用时直接获取 实现重复利用</p>
+<p>好处</p>
+<ul>
+<li>提高响应速度（减少创建新线程的时间）</li>
+<li>降低资源消耗</li>
+<li>便于线程管理
+<ul>
+<li>corePoolSIze:核心池的大小</li>
+<li>maximumPoolSIze:最大线程数</li>
+<li>keepAliveTime: 线程没有任务时最多保持多长时间后会终止</li>
+</ul>
+</li>
+</ul>
+<figure data-type="image" tabindex="2"><img src="https://ganhan999.github.io//post-images/1607248872862.png" alt="" loading="lazy"></figure>
+<pre><code class="language-java">package thread;
+
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+public class TestPool {
+    public static void main(String[] args) {
+        //1.创建
+        ExecutorService service = Executors.newFixedThreadPool(10);
+        //2.执行
+        service.execute(new MyTest());
+        service.execute(new MyTest());
+        service.execute(new MyTest());
+        service.execute(new MyTest());
+        //3.关闭
+        service.shutdown();
+    }
+}
+class MyTest implements Runnable{
+    @Override
+    public void run() {
+        System.out.println(Thread.currentThread().getName());
+    }
+}
+pool-1-thread-1
+pool-1-thread-4
+pool-1-thread-2
+pool-1-thread-3
+</code></pre>
+
+                </div>
+            </article>
+        </div>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://ganhan999.github.io/post/171、Excel表列序号/" class="post-title gt-a-link">
+                    171、Excel表列序号
+                </a>
+            </div>
+        
+
+        
+
+        
+
+        
+
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first">温故而知新</div>
+    <div class="social-container">
+        
+            
+        
+            
+        
+            
+        
+            
+                <a href="https://www.zhihu.com/hot" target="_blank">
+                    <i class="fab fa-zhihu gt-c-content-color-first"></i>
+                </a>
+            
+        
+            
+        
+            
+        
+    </div>
+    <div class="footer-info">
+        Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+    </div>
+    <div>
+        Theme by <a href="https://imhanjie.com/" target="_blank">imhanjie</a>, Powered by <a
+                href="https://github.com/getgridea/gridea" target="_blank">Gridea | <a href="https://ganhan999.github.io//atom.xml" target="_blank">RSS</a></a>
+    </div>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,501 @@
+<html>
+<head>
+    <meta charset="utf-8"/>
+<meta name="description" content=""/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+<title>Java多态 | Gridea</title>
+
+<link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1615809991680">
+
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://ganhan999.github.io//styles/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dockerfile.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dart.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script>
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
+
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css">
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg">
+    <div class="navbar-brand">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            Gridea
+        </div>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
+            
+                <div class="nav-item">
+                    
+                        <a href="/" class="menu gt-a-link">
+                            首页
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/archives" class="menu gt-a-link">
+                            归档
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/tags" class="menu gt-a-link">
+                            标签
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/post/about" class="menu gt-a-link">
+                            关于
+                        </a>
+                    
+                </div>
+            
+        </div>
+        <div style="text-align: center">
+            <form id="gridea-search-form" style="position: relative" data-update="1615809991680" action="/search/index.html">
+                <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+                <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+        </div>
+    </div>
+</nav>
+
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    Java多态
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2020-12-01 ·
+                    </time>
+                    
+                        <a href="https://ganhan999.github.io/tag/pVOKe1jE1_/" class="post-tags">
+                            # Java
+                        </a>
+                    
+                </div>
+                <div class="post-content">
+                    <h2 id="1多态概述">1.多态概述</h2>
+<ol>
+<li><strong>多态</strong>是继封装、继承之后，面向对象的第三大特性。</li>
+<li>多态<strong>现实意义</strong>理解：</li>
+</ol>
+<ul>
+<li>
+<p>现实事物经常会体现出多种形态，如学生，学生是人的一种，则一个具体的同学张三既是<strong>学生</strong>也是<strong>人</strong>，即出现<strong>两种形态</strong>。</p>
+</li>
+<li>
+<p>Java作为面向对象的语言，同样可以描述一个事物的多种形态。如Student类继承了Person类，一个Student的对象便既是Student，又是Person。</p>
+<p>3.多态体现为<strong>父类引用变量可以指向子类对象</strong>。</p>
+<p>4.前提条件：必须有子父类关系。</p>
+<p><em><strong>*注意：在使用多态后的父类引用变量调用方法时，会调用子类重写后的方法。*</strong></em></p>
+<p>5.多态的定义与使用格式</p>
+</li>
+</ul>
+<p>​          定义格式：父类类型 变量名=new 子类类型();</p>
+<p>6.理解:</p>
+<p>​        多态是同一个行为具有多个不同表现形式或形态的能力。</p>
+<p>​        多态就是同一个接口，使用不同的实例而执行不同操作。</p>
+<h2 id="2多态中成员的特点">2.多态中成员的特点</h2>
+<ol>
+<li>多态成员变量：编译运行看左边</li>
+</ol>
+<p>​     Fu f=new Zi();</p>
+<p>​     System.out.println(f.num);//f是Fu中的值，只能取到父中的值</p>
+<p>2.多态成员方法：编译看左边，运行看右边</p>
+<p>​    Fu f1=new Zi();</p>
+<p>​    System.out.println(f1.show());//f1的门面类型是Fu,但实际类型是Zi,所以调用的是重写后的方法。</p>
+<h2 id="3instanceof关键字">3.instanceof关键字</h2>
+<p>作用：用来判断某个对象是否属于某种数据类型。</p>
+<ul>
+<li>注意： 返回类型为布尔类型</li>
+</ul>
+<p>使用案例：</p>
+<pre><code class="language-java">        Fu f1=new Zi();
+
+
+
+        Fu f2=new Son();
+
+
+
+        if(f1 instanceof Zi){
+
+
+
+            System.out.println(&quot;f1是Zi的类型&quot;);
+
+
+
+        }
+
+
+
+        else{
+
+
+
+            System.out.println(&quot;f1是Son的类型&quot;);
+
+
+
+        }
+</code></pre>
+<h2 id="4多态的转型">4.多态的转型</h2>
+<ul>
+<li>多态的转型分为向上转型和向下转型两种</li>
+<li>向上转型：多态本身就是向上转型过的过程</li>
+</ul>
+<p>​     使用格式：父类类型 变量名=new 子类类型();</p>
+<p>​     适用场景：当不需要面对子类类型时，通过提高扩展性，或者使用父类的功能就能完成相应的操作。</p>
+<ul>
+<li>向下转型：一个已经向上转型的子类对象可以使用强制类型转换的格式，将父类引用类型转为子类引用各类型</li>
+</ul>
+<p>​     使用格式：子类类型 变量名=（子类类型） 父类类型的变量；</p>
+<p>​     适用场景：当要使用子类特有功能时。</p>
+<h2 id="5多态案例">5.多态案例：</h2>
+<p>例1：（<strong>理解多态，可以重点看这个案例</strong>）</p>
+<pre><code class="language-java">package day0524;
+
+
+
+ 
+
+
+
+public class demo04 {
+
+
+
+    public static void main(String[] args) {
+
+
+
+        People p=new Stu();
+
+
+
+        p.eat();
+
+
+
+        //调用特有的方法
+
+
+
+        Stu s=(Stu)p;
+
+
+
+        s.study();
+
+
+
+        //((Stu) p).study();
+
+
+
+    }
+
+
+
+}
+
+
+
+class People{
+
+
+
+    public void eat(){
+
+
+
+        System.out.println(&quot;吃饭&quot;);
+
+
+
+    }
+
+
+
+}
+
+
+
+class Stu extends People{
+
+
+
+    @Override
+
+
+
+    public void eat(){
+
+
+
+        System.out.println(&quot;吃水煮肉片&quot;);
+
+
+
+    }
+
+
+
+    public void study(){
+
+
+
+        System.out.println(&quot;好好学习&quot;);
+
+
+
+    }
+
+
+
+}
+
+
+
+class Teachers extends People{
+
+
+
+    @Override
+
+
+
+    public void eat(){
+
+
+
+        System.out.println(&quot;吃樱桃&quot;);
+
+
+
+    }
+
+
+
+    public void teach(){
+
+
+
+        System.out.println(&quot;认真授课&quot;);
+
+
+
+    }
+
+
+
+}
+</code></pre>
+<p>例2：</p>
+<p>请问题目运行结果是什么？</p>
+<pre><code class="language-java">package day0524;
+
+
+
+public class demo1 {
+
+
+
+    public static void main(String[] args) {
+
+
+
+        A a=new A();
+
+
+
+        a.show();
+
+
+
+        B b=new B();
+
+
+
+        b.show();
+
+
+
+    }
+
+
+
+}
+
+
+
+class A{
+
+
+
+    public void show(){
+
+
+
+        show2();
+
+
+
+    }
+
+
+
+    public void show2(){
+
+
+
+        System.out.println(&quot;A&quot;);
+
+
+
+    }
+
+
+
+}
+
+
+
+class B extends A{
+
+
+
+    public void show2(){
+
+
+
+        System.out.println(&quot;B&quot;);
+
+
+
+    }
+
+
+
+}
+
+
+
+class C extends B{
+
+
+
+    public void show(){
+
+
+
+        super.show();
+
+
+
+    }
+
+
+
+    public void show2(){
+
+
+
+        System.out.println(&quot;C&quot;);
+
+
+
+    }
+
+
+
+}
+</code></pre>
+<p>答案：A B</p>
+
+                </div>
+            </article>
+        </div>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://ganhan999.github.io/post/155、最小栈/" class="post-title gt-a-link">
+                    155、最小栈
+                </a>
+            </div>
+        
+
+        
+
+        
+
+        
+
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first">温故而知新</div>
+    <div class="social-container">
+        
+            
+        
+            
+        
+            
+        
+            
+                <a href="https://www.zhihu.com/hot" target="_blank">
+                    <i class="fab fa-zhihu gt-c-content-color-first"></i>
+                </a>
+            
+        
+            
+        
+            
+        
+    </div>
+    <div class="footer-info">
+        Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+    </div>
+    <div>
+        Theme by <a href="https://imhanjie.com/" target="_blank">imhanjie</a>, Powered by <a
+                href="https://github.com/getgridea/gridea" target="_blank">Gridea | <a href="https://ganhan999.github.io//atom.xml" target="_blank">RSS</a></a>
+    </div>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+    </div>
+</div>
+</body>
+</html>
