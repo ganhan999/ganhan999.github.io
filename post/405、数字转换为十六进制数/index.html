@@ -4,7 +4,7 @@
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-<title>中等16. 最接近的三数之和 | Gridea</title>
+<title>405、数字转换为十六进制数 | Gridea</title>
 
 <link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1615898986121">
 
@@ -89,11 +89,11 @@
         <div class="post-detail gt-bg-theme-color-second">
             <article class="gt-post-content">
                 <h2 class="post-title">
-                    中等16. 最接近的三数之和
+                    405、数字转换为十六进制数
                 </h2>
                 <div class="post-info">
                     <time class="post-time gt-c-content-color-first">
-                        · 2020-12-17 ·
+                        · 2021-03-16 ·
                     </time>
                     
                         <a href="https://ganhan999.github.io/tag/RJ1fLvr_t/" class="post-tags">
@@ -103,39 +103,60 @@
                 </div>
                 <div class="post-content">
                     <h1 id="题目">题目</h1>
-<p>&quot;&quot;&quot;</p>
-<p>给定一个包括 n 个整数的数组 nums 和 一个目标值 target。找出 nums 中的三个整数，使得它们的和与target 最接近。返回这三个数的和。假定每组输入只存在唯一答案。</p>
-<p>示例：<br>
-输入：nums = [-1,2,1,-4], target = 1<br>
-输出：2<br>
-解释：与 target 最接近的和是 2 (-1 + 2 + 1 = 2) 。<br>
-&quot;&quot;&quot;</p>
+<p>给定一个整数，编写一个算法将这个数转换为十六进制数。对于负整数，我们通常使用补码运算方法。</p>
+<p>注意:<br>
+十六进制中所有字母(a-f)都必须是小写。<br>
+十六进制字符串中不能包含多余的前导零。如果要转化的数为0，那么以单个字符'0'来表示；对于其他情况，十六进制字符串中的第一个字符将不会是0字符。<br>
+给定的数确保在32位有符号整数范围内。<br>
+不能使用任何由库提供的将数字直接转换或格式化为十六进制的方法。</p>
+<p>示例 1：<br>
+输入:<br>
+26<br>
+输出:<br>
+&quot;1a&quot;</p>
+<p>示例 2：<br>
+输入:<br>
+-1<br>
+输出:<br>
+&quot;ffffffff&quot;</p>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
 <h1 id="本体思路">本体思路</h1>
-<p>和上一题差不多，排序＋双指针法，排序后可以化简为双指针的twosum题</p>
-<h1 id="我的做法">#我的做法：</h1>
+<p>1、当正数时，直接循环右移4位（除以16也可以），直到商为0，再依次将余数字符串起来，逆序排列。<br>
+2、当0时，直接返回0。<br>
+3、当负数时，将其绝对值通过与（2的32次方减1）异或再加1，转化为对应的十进制正数，然后执第一步的操作。</p>
+<h1 id="大神做法1">大神做法1：</h1>
 <pre><code class="language-python">class Solution:
-    def threeSumClosest(self, nums: List[int], target: int) -&gt; int:
-        n = len(nums)
-        if (not nums or n &lt; 3):
-            return []
-        nums.sort()
-        d = float('inf')
-        for i in range(n):
-            if (i &gt; 0 and nums[i] == nums[i - 1]):
-                continue
-            L = i + 1
-            R = n - 1
-            while (L &lt; R):
-                x = (nums[i] + nums[L] + nums[R]) - target
-                if (nums[i] + nums[L] + nums[R] == target):
-                    return nums[i] + nums[L] + nums[R]
-                if abs(x)&lt;d:
-                    ans = nums[i] + nums[L] + nums[R]
-                    d=abs(x)
-                if x&gt;0:
-                    R=R-1
-                else:
-                    L = L + 1
+    def toHex(self, num: int) -&gt; str:
+        stra = ''
+        if num &lt; 0:
+            num = (abs(num) ^ ((2 ** 32) - 1)) + 1
+        elif num == 0:
+            return '0'
+        while (num &gt;&gt; 4) &gt; 0 or num &gt; 0:
+            a = str(num &amp; 0xf)
+            if a == '10': a = 'a'
+            elif a == '11': a = 'b'
+            elif a == '12': a = 'c'
+            elif a == '13': a = 'd'
+            elif a == '14': a = 'e'
+            elif a == '15': a = 'f'
+            stra += a
+            num = num &gt;&gt; 4
+        return ''.join(reversed(stra))
+</code></pre>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<p>核心思想，使用位运算，每4位，对应1位16进制数字。</p>
+<p>使用0xf(00...01111b)获取num的低4位。<br>
+算数位移，其中正数右移左边补0，负数右移左边补1。</p>
+<p>位移运算并不能保证num==0，需要使用32位int保证（对应16进制小于等于8位).大神做法1：</p>
+<pre><code class="language-python">class Solution:
+    def toHex(self, num: int) -&gt; str:
+        if num==0:
+            return &quot;0&quot;
+        hex, ans = &quot;0123456789abcdef&quot;,  &quot;&quot;
+        while num and len(ans) &lt; 8:
+            ans = hex[num &amp; 0xf] + ans
+            num &gt;&gt;=  4
         return ans
 </code></pre>
 
@@ -146,8 +167,8 @@
         
             <div class="next-post">
                 <div class="next gt-c-content-color-first">下一篇</div>
-                <a href="https://ganhan999.github.io/post/15、三数之和/" class="post-title gt-a-link">
-                    中等15. 三数之和
+                <a href="https://ganhan999.github.io/post/404、左叶子之和/" class="post-title gt-a-link">
+                    404、左叶子之和
                 </a>
             </div>
         
