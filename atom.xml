@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ganhan999.github.io/</id>
     <title>Gridea</title>
-    <updated>2021-03-16T12:49:48.538Z</updated>
+    <updated>2021-03-18T13:17:27.082Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ganhan999.github.io/"/>
     <link rel="self" href="https://ganhan999.github.io/atom.xml"/>
@@ -10,6 +10,175 @@
     <logo>https://ganhan999.github.io/images/avatar.png</logo>
     <icon>https://ganhan999.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, Gridea</rights>
+    <entry>
+        <title type="html"><![CDATA[414、第三大的数]]></title>
+        <id>https://ganhan999.github.io/post/414、第三大的数/</id>
+        <link href="https://ganhan999.github.io/post/414、第三大的数/">
+        </link>
+        <updated>2021-03-18T11:29:35.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
+<p>给你一个非空数组，返回此数组中 第三大的数 。如果不存在，则返回数组中最大的数。</p>
+<p>示例 1：<br>
+输入：[3, 2, 1]<br>
+输出：1<br>
+解释：第三大的数是 1 。<br>
+示例 2：</p>
+<p>输入：[1, 2]<br>
+输出：2<br>
+解释：第三大的数不存在, 所以返回最大的数 2 。</p>
+<p>示例 3：<br>
+输入：[2, 2, 3, 1]<br>
+输出：1<br>
+解释：注意，要求返回第三大的数，是指在所有不同数字中排第三大的数。<br>
+此例中存在两个值为 2 的数，它们都排第二。在所有不同数字中排第三大的数为 1 。</p>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="本体思路">本体思路</h1>
+<p>转成字典再转列表再排序</p>
+<h1 id="大神做法1">大神做法1：</h1>
+<pre><code class="language-python">class Solution:
+    def thirdMax(self, nums: List[int]) -&gt; int:
+        nums = sorted(list(set(nums)))
+        return nums[-1] if len(nums) &lt;= 2 else nums[-3]
+</code></pre>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<p>小顶堆</p>
+<h1 id="大神做法2">大神做法2：</h1>
+<pre><code class="language-python">class Solution:
+    def thirdMax(self, nums: List[int]) -&gt; int:
+        # time O(nlog3) = O(n), space O(n)
+        nums = set(nums)
+        if len(nums) &lt; 3:
+            return max(nums)
+
+        nums = list(nums)
+
+        pq = []
+        for n in nums:
+            heapq.heappush(pq, n)
+            if len(pq) &gt; 3:
+                heapq.heappop(pq)
+
+        return pq[0]
+</code></pre>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<p>快速排序<br>
+最差的可能性， time O(n^2), space O(n)<br>
+加入随机变量后, time O(n), space O(logn)<br>
+一种减而治之的思想。搜索区域中是否匹配到k-1（topk的索引）<br>
+partition 可以灵活应变，前面大后面小，或者前面小后面大。</p>
+<h1 id="大神做法3">大神做法3：</h1>
+<pre><code class="language-python">class Solution:
+    def thirdMax(self, nums: List[int]) -&gt; int:
+        # time O(nlog3) = O(n), space O(n)
+        nums = set(nums)
+        if len(nums) &lt; 3:
+            return max(nums)
+
+        nums = list(nums)
+
+        pq = []
+        for n in nums:
+            heapq.heappush(pq, n)
+            if len(pq) &gt; 3:
+                heapq.heappop(pq)
+        return pq[0]
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[412、Fizz Buzz]]></title>
+        <id>https://ganhan999.github.io/post/412、Fizz Buzz/</id>
+        <link href="https://ganhan999.github.io/post/412、Fizz Buzz/">
+        </link>
+        <updated>2021-03-17T11:29:35.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
+<p>写一个程序，输出从 1 到 n 数字的字符串表示。</p>
+<ol>
+<li>
+<p>如果n是3的倍数，输出“Fizz”；</p>
+</li>
+<li>
+<p>如果n是5的倍数，输出“Buzz”；</p>
+</li>
+</ol>
+<p>3.如果n同时是3和5的倍数，输出 “FizzBuzz”。</p>
+<p>示例：</p>
+<p>n = 15,</p>
+<p>返回:<br>
+[<br>
+&quot;1&quot;,<br>
+&quot;2&quot;,<br>
+&quot;Fizz&quot;,<br>
+&quot;4&quot;,<br>
+&quot;Buzz&quot;,<br>
+&quot;Fizz&quot;,<br>
+&quot;7&quot;,<br>
+&quot;8&quot;,<br>
+&quot;Fizz&quot;,<br>
+&quot;Buzz&quot;,<br>
+&quot;11&quot;,<br>
+&quot;Fizz&quot;,<br>
+&quot;13&quot;,<br>
+&quot;14&quot;,<br>
+&quot;FizzBuzz&quot;<br>
+]</p>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="本体思路">本体思路</h1>
+<p>初始化一个空的答案列表。<br>
+遍历 1 ... N1...N。<br>
+对于每个数，判断它能不能同时被 3 和 5 整除，如果可以就把 FizzBuzz 加入答案列表。<br>
+如果不行，判断它能不能被 3 整除，如果可以，把 Fizz 加入答案列表。<br>
+如果还是不行，判断它能不能被 5 整除，如果可以，把 Buzz 加入答案列表。<br>
+如果以上都不行，把这个数加入答案列表。</p>
+<h1 id="大神做法1">大神做法1：</h1>
+<pre><code class="language-python">class Solution:
+    def fizzBuzz(self, n: int) -&gt; List[str]:
+        ans=[]
+        for i in range(1,n+1):
+            if i%3==0 and i%5==0:ans.append('FizzBuzz')
+            elif i%3==0:ans.append('Fizz')
+            elif i%5==0:ans.append('Buzz')
+            else:ans.append(str(i))
+        return ans
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[409、最长回文串]]></title>
+        <id>https://ganhan999.github.io/post/409、最长回文串/</id>
+        <link href="https://ganhan999.github.io/post/409、最长回文串/">
+        </link>
+        <updated>2021-03-17T09:29:35.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
+<p>给定一个包含大写字母和小写字母的字符串，找到通过这些字母构造成的最长的回文串。<br>
+在构造过程中，请注意区分大小写。比如&quot;Aa&quot;不能当做一个回文字符串。</p>
+<p>注意:<br>
+假设字符串的长度不会超过 1010。</p>
+<p>示例 1:<br>
+输入:<br>
+&quot;abccccdd&quot;</p>
+<p>输出:<br>
+7</p>
+<p>解释:<br>
+我们可以构造的最长的回文串是&quot;dccaccd&quot;, 它的长度是 7。</p>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="本体思路">本体思路</h1>
+<p>1.统计各字符次数，eg:&quot;ddsad&quot;:[3, 1, 1]<br>
+2.统计两两配对的字符总个数，eg: {&quot;ddass&quot;:4,&quot;ddsss&quot;:4}<br>
+3.判断是否有没配对的单字符，有结果加一。 eg: {&quot;ddss&quot;:4, &quot;ddhjSS&quot;:4+1}--&gt;{&quot;ddss&quot;:4, &quot;ddhjSS&quot;:5}</p>
+<h1 id="大神做法1">大神做法1：</h1>
+<pre><code class="language-python">class Solution:
+    def longestPalindrome(self, s: str) -&gt; int:
+        ans = 0
+        count = collections.Counter(s)
+        for v in count.values():
+            ans += v // 2 * 2
+            if ans % 2 == 0 and v % 2 == 1:
+                ans += 1
+        return ans
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[405、数字转换为十六进制数]]></title>
         <id>https://ganhan999.github.io/post/405、数字转换为十六进制数/</id>
@@ -428,167 +597,6 @@ s = &quot;leetcode&quot;<br>
             if magazine.count(k) &lt; v:
                 return False
         return True
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[374、猜数字大小]]></title>
-        <id>https://ganhan999.github.io/post/374、猜数字大小/</id>
-        <link href="https://ganhan999.github.io/post/374、猜数字大小/">
-        </link>
-        <updated>2021-03-08T09:39:35.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
-<p>猜数字游戏的规则如下：<br>
-每轮游戏，我都会从 1 到 n 随机选择一个数字。 请你猜选出的是哪个数字。<br>
-如果你猜错了，我会告诉你，你猜测的数字比我选出的数字是大了还是小了。<br>
-你可以通过调用一个预先定义好的接口 int guess(int num) 来获取猜测结果，<br>
-返回值一共有 3 种可能的情况（-1，1 或 0）：</p>
-<p>-1：我选出的数字比你猜的数字小 pick &lt; num<br>
-1：我选出的数字比你猜的数字大 pick &gt; num<br>
-0：我选出的数字和你猜的数字一样。恭喜！你猜对了！pick == num<br>
-返回我选出的数字。</p>
-<p>示例 1：<br>
-输入：n = 10, pick = 6<br>
-输出：6</p>
-<p>示例 2：<br>
-输入：n = 1, pick = 1<br>
-输出：1</p>
-<p>示例 3：<br>
-输入：n = 2, pick = 1<br>
-输出：1</p>
-<p>示例 4：<br>
-输入：n = 2, pick = 2<br>
-输出：2</p>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="本体思路">本体思路</h1>
-<p>二分法</p>
-<h1 id="大神做法1">大神做法1：</h1>
-<pre><code class="language-python">class Solution:
-    def guessNumber(self, n: int) -&gt; int:
-        l, r = 1, n
-        # 二分查找
-        while l &lt; r:
-            mid = (l + r) &gt;&gt; 1
-            check = guess(mid)
-            if check &lt; 0:
-                r = mid
-            elif check &gt; 0:
-                l = mid + 1
-            else:
-                return mid
-        return l
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[367、有效的完全平方数]]></title>
-        <id>https://ganhan999.github.io/post/367、有效的完全平方数/</id>
-        <link href="https://ganhan999.github.io/post/367、有效的完全平方数/">
-        </link>
-        <updated>2021-03-08T09:29:35.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
-<p>给定一个正整数 num，编写一个函数，如果 num 是一个完全平方数，则返回 True，否则返回 False。</p>
-<p>说明：不要使用任何内置的库函数，如 sqrt。</p>
-<p>示例 1：<br>
-输入：16<br>
-输出：True</p>
-<p>示例 2：<br>
-输入：14<br>
-输出：False&quot;</p>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="本体思路">本体思路</h1>
-<p>二分法</p>
-<h1 id="大神做法1">大神做法1：</h1>
-<pre><code class="language-python">class Solution:
-    def isPerfectSquare(self, num: int) -&gt; bool:
-        l, r = 1, num
-        while l &lt; r:
-            mid = (l + r) // 2
-            if mid * mid &lt; num:
-                l = mid + 1
-            else:
-                r = mid
-        return l * l == num
-</code></pre>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<p>牛顿迭代法</p>
-<h1 id="大神做法2">大神做法2：</h1>
-<pre><code class="language-python">class Solution:
-    def isPerfectSquare(self, num: int) -&gt; bool:
-        if num &lt; 2:
-            return True
-
-        x = num // 2
-        while x * x &gt; num:
-            x = (x + num // x) // 2
-        return x * x == num
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[350、两个数组的交集 II]]></title>
-        <id>https://ganhan999.github.io/post/350、两个数组的交集 II/</id>
-        <link href="https://ganhan999.github.io/post/350、两个数组的交集 II/">
-        </link>
-        <updated>2021-03-07T14:34:35.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
-<p>给定两个数组，编写一个函数来计算它们的交集。</p>
-<p>示例 1：<br>
-输入：nums1 = [1,2,2,1], nums2 = [2,2]<br>
-输出：[2,2]</p>
-<p>示例 2：<br>
-输入：nums1 = [4,9,5], nums2 = [9,4,9,8,4]<br>
-输出：[9,4]</p>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="本体思路">本体思路</h1>
-<p>哈希表<br>
-由于同一个数字在两个数组中都可能出现多次，因此需要用哈希表存储每个数字出现的次数。对于一个数字，<br>
-其在交集中出现的次数等于该数字在两个数组中出现次数的最小值。</p>
-<p>首先遍历第一个数组，并在哈希表中记录第一个数组中的每个数字以及对应出现的次数，然后遍历第二个数组，<br>
-对于第二个数组中的每个数字，如果在哈希表中存在这个数字，则将该数字添加到答案，并减少哈希表中该数字出现的次数。</p>
-<p>为了降低空间复杂度，首先遍历较短的数组并在哈希表中记录每个数字以及对应出现的次数，然后遍历较长的数组得到交集</p>
-<h1 id="大神做法1">大神做法1：</h1>
-<pre><code class="language-python">class Solution:
-    def intersect(self, nums1: List[int], nums2: List[int]) -&gt; List[int]:
-        if len(nums1) &gt; len(nums2):
-            return self.intersect(nums2, nums1)
-
-        m = collections.Counter()
-        for num in nums1:
-            m[num] += 1
-
-        intersection = list()
-        for num in nums2:
-            if (m.get(num, 0)) &gt; 0:
-                intersection.append(num)
-                m[num] -= 1
-                if m[num] == 0:
-                    m.pop(num)
-        return intersection
-</code></pre>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<p>排序加双指针</p>
-<h1 id="大神做法2">大神做法2：</h1>
-<pre><code class="language-python">class Solution:
-    def intersection(self, nums1: List[int], nums2: List[int]) -&gt; List[int]:
-        nums1.sort()
-        nums2.sort()
-        length1, length2 = len(nums1), len(nums2)
-        intersection = list()
-        index1 = index2 = 0
-        while index1 &lt; length1 and index2 &lt; length2:
-            num1 = nums1[index1]
-            num2 = nums2[index2]
-            if num1 == num2:
-                # 保证加入元素的唯一性
-                intersection.append(num1)
-                index1 += 1
-                index2 += 1
-            elif num1 &lt; num2:
-                index1 += 1
-            else:
-                index2 += 1
-        return intersection
 </code></pre>
 ]]></content>
     </entry>
