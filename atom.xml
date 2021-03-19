@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ganhan999.github.io/</id>
     <title>Gridea</title>
-    <updated>2021-03-19T02:04:31.233Z</updated>
+    <updated>2021-03-19T13:17:32.579Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ganhan999.github.io/"/>
     <link rel="self" href="https://ganhan999.github.io/atom.xml"/>
@@ -10,6 +10,58 @@
     <logo>https://ganhan999.github.io/images/avatar.png</logo>
     <icon>https://ganhan999.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, Gridea</rights>
+    <entry>
+        <title type="html"><![CDATA[415、字符串相加]]></title>
+        <id>https://ganhan999.github.io/post/415、字符串相加/</id>
+        <link href="https://ganhan999.github.io/post/415、字符串相加/">
+        </link>
+        <updated>2021-03-19T11:29:35.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
+<p>给定两个字符串形式的非负整数num1 和num2，计算它们的和。</p>
+<p>提示：</p>
+<p>num1 和num2的长度都小于 5100<br>
+num1 和num2 都只包含数字0-9<br>
+num1 和num2 都不包含任何前导零<br>
+你不能使用任何內建 BigInteger 库，也不能直接将输入的字符串转换为整数形式</p>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="本体思路">本体思路</h1>
+<p>利用int函数</p>
+<h1 id="大神做法1">大神做法1：</h1>
+<pre><code class="language-python">class Solution:
+    def addStrings(self, num1: str, num2: str) -&gt; str:
+        res = &quot;&quot;
+        i, j, carry = len(num1) - 1, len(num2) - 1, 0
+        while i &gt;= 0 or j &gt;= 0:
+            n1 = int(num1[i]) if i &gt;= 0 else 0
+            n2 = int(num2[j]) if j &gt;= 0 else 0
+            tmp = n1 + n2 + carry
+            carry = tmp // 10
+            res = str(tmp % 10) + res
+            i, j = i - 1, j - 1
+        return &quot;1&quot; + res if carry else res
+</code></pre>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<p>标准加法进位，主要理解一下ASCII转换。</p>
+<h1 id="大神做法2">大神做法2：</h1>
+<pre><code class="language-python">class Solution:
+    def addStrings(self, num1: str, num2: str) -&gt; str:
+        i = len(num1) - 1
+        j = len(num2) - 1
+        res = &quot;&quot;
+        carry = 0
+        while i &gt;= 0 or j &gt;= 0:
+            n1 = num1[i] if i &gt;= 0 else '0'
+            n2 = num2[j] if j &gt;= 0 else '0'
+            temp = ord(n1) + ord(n2) - 2 * ord('0') + carry
+            cur = temp % 10
+            carry = temp // 10
+            res = chr(cur + 48) + res
+            i -= 1
+            j -= 1
+        return '1' + res if carry != 0 else res
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[414、第三大的数]]></title>
         <id>https://ganhan999.github.io/post/414、第三大的数/</id>
@@ -549,54 +601,6 @@ s = &quot;leetcode&quot;<br>
             ans ^= ord(ch)
         # 最终结果转换为 ASCII 字符
         return chr(ans)
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[383、赎金信]]></title>
-        <id>https://ganhan999.github.io/post/383、赎金信/</id>
-        <link href="https://ganhan999.github.io/post/383、赎金信/">
-        </link>
-        <updated>2021-03-08T10:29:35.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
-<p>给定一个赎金信 (ransom) 字符串和一个杂志(magazine)字符串，判断第一个字符串 ransom<br>
-能不能由第二个字符串 magazines 里面的字符构成。如果可以构成，返回 true ；否则返回 false。</p>
-<p>(题目说明：为了不暴露赎金信字迹，要从杂志上搜索各个需要的字母，组成单词来表达意思。杂志字符串中的每个字符只能在赎金信字符串中使用一次。)</p>
-<p>示例 1：<br>
-输入：ransomNote = &quot;a&quot;, magazine = &quot;b&quot;<br>
-输出：false</p>
-<p>示例 2：<br>
-输入：ransomNote = &quot;aa&quot;, magazine = &quot;ab&quot;<br>
-输出：false</p>
-<p>示例 3：<br>
-输入：ransomNote = &quot;aa&quot;, magazine = &quot;aab&quot;<br>
-输出：true</p>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="本体思路">本体思路</h1>
-<p>首先利用collections.Counter 得到元素的计数集合<br>
-再利用差集</p>
-<h1 id="大神做法1">大神做法1：</h1>
-<pre><code class="language-python">class Solution:
-    def canConstruct(self, ransomNote: str, magazine: str) -&gt; bool:
-        hash_table_m = collections.Counter(magazine)
-        hash_table_r = collections.Counter(ransomNote)
-
-        &quot;&quot;&quot;for i in hash_table_r:
-            if hash_table_r[i] &gt; hash_table_m[i]:
-                return False
-        return True&quot;&quot;&quot;
-        return not hash_table_r - hash_table_m
-</code></pre>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<p>得到ransomnote的计数集合，然后分析magazine中的元素计数是不是比ransomnote的计数集合的更少</p>
-<h1 id="大神做法2">大神做法2：</h1>
-<pre><code class="language-python">class Solution:
-    def canConstruct(self, ransomNote: str, magazine: str) -&gt; bool:
-        a = dict(collections.Counter(ransomNote))
-        for k, v in a.items():
-            if magazine.count(k) &lt; v:
-                return False
-        return True
 </code></pre>
 ]]></content>
     </entry>

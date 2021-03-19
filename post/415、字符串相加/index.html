@@ -4,7 +4,7 @@
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-<title>中等16. 最接近的三数之和 | Gridea</title>
+<title>415、字符串相加 | Gridea</title>
 
 <link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1616159849581">
 
@@ -89,11 +89,11 @@
         <div class="post-detail gt-bg-theme-color-second">
             <article class="gt-post-content">
                 <h2 class="post-title">
-                    中等16. 最接近的三数之和
+                    415、字符串相加
                 </h2>
                 <div class="post-info">
                     <time class="post-time gt-c-content-color-first">
-                        · 2020-12-17 ·
+                        · 2021-03-19 ·
                     </time>
                     
                         <a href="https://ganhan999.github.io/tag/RJ1fLvr_t/" class="post-tags">
@@ -103,40 +103,48 @@
                 </div>
                 <div class="post-content">
                     <h1 id="题目">题目</h1>
-<p>&quot;&quot;&quot;</p>
-<p>给定一个包括 n 个整数的数组 nums 和 一个目标值 target。找出 nums 中的三个整数，使得它们的和与target 最接近。返回这三个数的和。假定每组输入只存在唯一答案。</p>
-<p>示例：<br>
-输入：nums = [-1,2,1,-4], target = 1<br>
-输出：2<br>
-解释：与 target 最接近的和是 2 (-1 + 2 + 1 = 2) 。<br>
-&quot;&quot;&quot;</p>
+<p>给定两个字符串形式的非负整数num1 和num2，计算它们的和。</p>
+<p>提示：</p>
+<p>num1 和num2的长度都小于 5100<br>
+num1 和num2 都只包含数字0-9<br>
+num1 和num2 都不包含任何前导零<br>
+你不能使用任何內建 BigInteger 库，也不能直接将输入的字符串转换为整数形式</p>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
 <h1 id="本体思路">本体思路</h1>
-<p>和上一题差不多，排序＋双指针法，排序后可以化简为双指针的twosum题</p>
-<h1 id="我的做法">#我的做法：</h1>
+<p>利用int函数</p>
+<h1 id="大神做法1">大神做法1：</h1>
 <pre><code class="language-python">class Solution:
-    def threeSumClosest(self, nums: List[int], target: int) -&gt; int:
-        n = len(nums)
-        if (not nums or n &lt; 3):
-            return []
-        nums.sort()
-        d = float('inf')
-        for i in range(n):
-            if (i &gt; 0 and nums[i] == nums[i - 1]):
-                continue
-            L = i + 1
-            R = n - 1
-            while (L &lt; R):
-                x = (nums[i] + nums[L] + nums[R]) - target
-                if (nums[i] + nums[L] + nums[R] == target):
-                    return nums[i] + nums[L] + nums[R]
-                if abs(x)&lt;d:
-                    ans = nums[i] + nums[L] + nums[R]
-                    d=abs(x)
-                if x&gt;0:
-                    R=R-1
-                else:
-                    L = L + 1
-        return ans
+    def addStrings(self, num1: str, num2: str) -&gt; str:
+        res = &quot;&quot;
+        i, j, carry = len(num1) - 1, len(num2) - 1, 0
+        while i &gt;= 0 or j &gt;= 0:
+            n1 = int(num1[i]) if i &gt;= 0 else 0
+            n2 = int(num2[j]) if j &gt;= 0 else 0
+            tmp = n1 + n2 + carry
+            carry = tmp // 10
+            res = str(tmp % 10) + res
+            i, j = i - 1, j - 1
+        return &quot;1&quot; + res if carry else res
+</code></pre>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<p>标准加法进位，主要理解一下ASCII转换。</p>
+<h1 id="大神做法2">大神做法2：</h1>
+<pre><code class="language-python">class Solution:
+    def addStrings(self, num1: str, num2: str) -&gt; str:
+        i = len(num1) - 1
+        j = len(num2) - 1
+        res = &quot;&quot;
+        carry = 0
+        while i &gt;= 0 or j &gt;= 0:
+            n1 = num1[i] if i &gt;= 0 else '0'
+            n2 = num2[j] if j &gt;= 0 else '0'
+            temp = ord(n1) + ord(n2) - 2 * ord('0') + carry
+            cur = temp % 10
+            carry = temp // 10
+            res = chr(cur + 48) + res
+            i -= 1
+            j -= 1
+        return '1' + res if carry != 0 else res
 </code></pre>
 
                 </div>
@@ -146,8 +154,8 @@
         
             <div class="next-post">
                 <div class="next gt-c-content-color-first">下一篇</div>
-                <a href="https://ganhan999.github.io/post/15、三数之和/" class="post-title gt-a-link">
-                    中等15. 三数之和
+                <a href="https://ganhan999.github.io/post/414、第三大的数/" class="post-title gt-a-link">
+                    414、第三大的数
                 </a>
             </div>
         
