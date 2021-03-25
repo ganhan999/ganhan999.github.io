@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ganhan999.github.io/</id>
     <title>Gridea</title>
-    <updated>2021-03-23T02:57:31.725Z</updated>
+    <updated>2021-03-25T23:40:06.690Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ganhan999.github.io/"/>
     <link rel="self" href="https://ganhan999.github.io/atom.xml"/>
@@ -10,6 +10,46 @@
     <logo>https://ganhan999.github.io/images/avatar.png</logo>
     <icon>https://ganhan999.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, Gridea</rights>
+    <entry>
+        <title type="html"><![CDATA[459、重复的子字符串]]></title>
+        <id>https://ganhan999.github.io/post/459、重复的子字符串/</id>
+        <link href="https://ganhan999.github.io/post/459、重复的子字符串/">
+        </link>
+        <updated>2021-03-25T02:29:35.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
+<p>给定一个非空的字符串，判断它是否可以由它的一个子串重复多次构成。给定的字符串只含有小写英文字母，并且长度不超过10000。</p>
+<p>示例 1:<br>
+输入: &quot;abab&quot;<br>
+输出: True<br>
+解释: 可由子字符串 &quot;ab&quot; 重复两次构成。</p>
+<p>示例 2:<br>
+输入: &quot;aba&quot;<br>
+输出: False</p>
+<p>示例 3:<br>
+输入: &quot;abcabcabcabc&quot;<br>
+输出: True<br>
+解释: 可由子字符串 &quot;abc&quot; 重复四次构成。 (或者子字符串 &quot;abcabc&quot; 重复两次构成。)</p>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="本体思路">本体思路</h1>
+<p>如果s中包含重复的子字符串，那么说明s中至少包含两个子字符串，s+s至少包含4个字串，前后各去掉一位，查找s是否在新构建的字符串中。</p>
+<h1 id="大神做法1">大神做法1：</h1>
+<pre><code class="language-python">class Solution:
+    def repeatedSubstringPattern(self, s: str) -&gt; bool:
+        return s in (s+s)[1:-1]
+</code></pre>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<p>把两个字符串s拼接在一起，会有以下两种情况：</p>
+<p>当s不是循环字符串时：<br>
+第一次发现s的起点是在lens（s）</p>
+<p>当s是循环字符串时：<br>
+第一次发现s的起点是在小于lens（s）</p>
+<h1 id="大神做法2">大神做法2：</h1>
+<pre><code class="language-python">class Solution:
+    def repeatedSubstringPattern(self, s: str) -&gt; bool:
+        return (s+s).find(s,1) != len(s)
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[455、分发饼干]]></title>
         <id>https://ganhan999.github.io/post/455、分发饼干/</id>
@@ -456,42 +496,6 @@ partition 可以灵活应变，前面大后面小，或者前面小后面大。<
             return dfs(root.right, False) + dfs(root.left, True)  # 递归root的左孩子并让flag = True, 右孩子flag = False
         return dfs(root)  # 返回结果
 
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[401、二进制手表]]></title>
-        <id>https://ganhan999.github.io/post/401、二进制手表/</id>
-        <link href="https://ganhan999.github.io/post/401、二进制手表/">
-        </link>
-        <updated>2021-03-15T09:29:35.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
-<p>二进制手表顶部有 4 个 LED 代表 小时（0-11），底部的 6 个 LED 代表 分钟（0-59）。</p>
-<p>每个 LED 代表一个 0 或 1，最低位在右侧。</p>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="本体思路">本体思路</h1>
-<p>为了方便计算，分别设置了小时数组和分钟数组<br>
-递归的四个参数分别代表：剩余需要点亮的灯数量，从索引index开始往后点亮灯，当前小时数，当前分钟数<br>
-每次进入递归后，先判断当前小时数和分钟数是否符合要求，不符合直接return<br>
-for循环枚举点亮灯的情况，从index枚举到10，每次枚举</p>
-<h1 id="大神做法1">大神做法1：</h1>
-<pre><code class="language-python">class Solution(object):
-    def readBinaryWatch(self, num: int) -&gt; List[str]:
-        hours = [1, 2, 4, 8, 0, 0, 0, 0, 0, 0]
-        minutes = [0, 0, 0, 0, 1, 2, 4, 8, 16, 32]
-        res = []
-
-        def backtrack(num, index, hour, minute):
-            if hour &gt; 11 or minute &gt; 59:
-                return
-            if num == 0:
-                res.append('%d:%02d' % (hour, minute))
-                return
-            for i in range(index, 10):
-                backtrack(num - 1, i + 1, hour + hours[i], minute + minutes[i])
-
-        backtrack(num, 0, 0, 0)
-        return res
 </code></pre>
 ]]></content>
     </entry>
