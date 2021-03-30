@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ganhan999.github.io/</id>
     <title>Gridea</title>
-    <updated>2021-03-26T03:37:33.687Z</updated>
+    <updated>2021-03-30T03:19:10.034Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ganhan999.github.io/"/>
     <link rel="self" href="https://ganhan999.github.io/atom.xml"/>
@@ -10,6 +10,346 @@
     <logo>https://ganhan999.github.io/images/avatar.png</logo>
     <icon>https://ganhan999.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, Gridea</rights>
+    <entry>
+        <title type="html"><![CDATA[501、二叉搜索树中的众数 ]]></title>
+        <id>https://ganhan999.github.io/post/501、二叉搜索树中的众数 /</id>
+        <link href="https://ganhan999.github.io/post/501、二叉搜索树中的众数 /">
+        </link>
+        <updated>2021-03-30T04:39:35.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
+<p>给定一个有相同值的二叉搜索树（BST），找出 BST 中的所有众数（出现频率最高的元素）。</p>
+<p>假定 BST 有如下定义：</p>
+<p>结点左子树中所含结点的值小于等于当前结点的值<br>
+结点右子树中所含结点的值大于等于当前结点的值<br>
+左子树和右子树都是二叉搜索树<br>
+例如：<br>
+给定 BST [1,null,2,2],</p>
+<p>1<br>
+<br>
+2<br>
+/<br>
+2<br>
+返回[2].</p>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="本体思路">本体思路</h1>
+<p>中序遍历后再操作</p>
+<h1 id="大神做法1">大神做法1：</h1>
+<pre><code class="language-python">class Solution:
+    def findMode(self, root: TreeNode) -&gt; List[int]:
+        ans = []
+        base = None
+        count = 0
+        maxCount = 0
+
+        def update(x):
+            nonlocal base, count, maxCount, ans
+            if x == base:
+                count += 1
+            else:
+                base = x
+                count = 1
+            if count == maxCount:
+                ans.append(x)
+            elif count &gt; maxCount:
+                maxCount = count
+                ans.clear()
+                ans.append(x)
+
+        def midtraverse(node):
+            if not node:
+                return
+            midtraverse(node.left)
+            update(node.val)
+            midtraverse(node.right)
+
+        midtraverse(root)
+        return ans
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[500、键盘行]]></title>
+        <id>https://ganhan999.github.io/post/500、键盘行/</id>
+        <link href="https://ganhan999.github.io/post/500、键盘行/">
+        </link>
+        <updated>2021-03-30T03:39:35.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
+<p>给你一个字符串数组 words ，只返回可以使用在 美式键盘 同一行的字母打印出来的单词。键盘如下图所示。</p>
+<p>美式键盘 中：<br>
+第一行由字符 &quot;qwertyuiop&quot; 组成。<br>
+第二行由字符 &quot;asdfghjkl&quot; 组成。<br>
+第三行由字符 &quot;zxcvbnm&quot; 组成。</p>
+<p>示例 1：<br>
+输入：words = [&quot;Hello&quot;,&quot;Alaska&quot;,&quot;Dad&quot;,&quot;Peace&quot;]<br>
+输出：[&quot;Alaska&quot;,&quot;Dad&quot;]</p>
+<p>示例 2：<br>
+输入：words = [&quot;omk&quot;]<br>
+输出：[]</p>
+<p>示例 3：<br>
+输入：words = [&quot;adsdf&quot;,&quot;sfd&quot;]<br>
+输出：[&quot;adsdf&quot;,&quot;sfd&quot;]</p>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="本体思路">本体思路</h1>
+<p>1.先将三行键盘分别存储在三个数组中<br>
+2.利用两次for循环判断字母是否在对应的数组中，分别设置三个计数器如果在对应的键盘数组则计数器加一<br>
+3.分别判断三个计数器的值是否和单词长度一样，如果有一个一样就说明这个单词的字母全部都在某一个键盘数组</p>
+<h1 id="大神做法1">大神做法1：</h1>
+<pre><code class="language-python">class Solution:
+    def findWords(self, words: List[str]) -&gt; List[str]:
+        array_1 = [&quot;q&quot;,&quot;w&quot;,&quot;e&quot;,&quot;r&quot;,&quot;t&quot;,&quot;y&quot;,&quot;u&quot;,&quot;i&quot;,&quot;o&quot;,&quot;p&quot;,&quot;Q&quot;,&quot;W&quot;,&quot;E&quot;,&quot;R&quot;,&quot;T&quot;,&quot;Y&quot;,&quot;U&quot;,&quot;I&quot;,&quot;O&quot;,&quot;P&quot;]
+        array_2 = [&quot;A&quot;,&quot;S&quot;,&quot;D&quot;,&quot;F&quot;,&quot;G&quot;,&quot;H&quot;,&quot;J&quot;,&quot;K&quot;,&quot;L&quot;,&quot;a&quot;,&quot;s&quot;,&quot;d&quot;,&quot;f&quot;,&quot;g&quot;,&quot;h&quot;,&quot;j&quot;,&quot;k&quot;,&quot;l&quot;]
+        array_3 = [&quot;z&quot;,&quot;x&quot;,&quot;c&quot;,&quot;v&quot;,&quot;b&quot;,&quot;n&quot;,&quot;m&quot;,&quot;Z&quot;,&quot;X&quot;,&quot;C&quot;,&quot;V&quot;,&quot;B&quot;,&quot;N&quot;,&quot;M&quot;]
+
+        result = []
+        for word in words:
+            count_1 = 0
+            count_2 = 0
+            count_3 = 0
+            for letter in word:
+                if letter in array_1:
+                    count_1 += 1
+                if letter in array_2:
+                    count_2 += 1
+                if letter in array_3:
+                    count_3 += 1
+            if count_1==len(word) or count_2==len(word) or count_3 == len(word):
+                result.append(word)
+        return result
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[496、下一个更大元素 I]]></title>
+        <id>https://ganhan999.github.io/post/496、下一个更大元素 I/</id>
+        <link href="https://ganhan999.github.io/post/496、下一个更大元素 I/">
+        </link>
+        <updated>2021-03-29T11:39:35.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
+<p>给你两个 没有重复元素 的数组nums1 和nums2，其中nums1是nums2的子集。</p>
+<p>请你找出 nums1中每个元素在nums2中的下一个比其大的值。</p>
+<p>nums1中数字x的下一个更大元素是指x在nums2中对应位置的右边的第一个比x大的元素。如果不存在，对应位置输出 -1 。</p>
+<p>示例 1:<br>
+输入: nums1 = [4,1,2], nums2 = [1,3,4,2].<br>
+输出: [-1,3,-1]<br>
+解释:<br>
+对于 num1 中的数字 4 ，你无法在第二个数组中找到下一个更大的数字，因此输出 -1 。<br>
+对于 num1 中的数字 1 ，第二个数组中数字1右边的下一个较大数字是 3 。<br>
+对于 num1 中的数字 2 ，第二个数组中没有下一个更大的数字，因此输出 -1 。</p>
+<p>示例 2:<br>
+输入: nums1 = [2,4], nums2 = [1,2,3,4].<br>
+输出: [3,-1]<br>
+解释:<br>
+对于 num1 中的数字 2 ，第二个数组中的下一个较大数字是 3 。<br>
+对于 num1 中的数字 4 ，第二个数组中没有下一个更大的数字，因此输出 -1 。</p>
+<p>提示：<br>
+1 &lt;= nums1.length &lt;= nums2.length &lt;= 1000<br>
+0 &lt;= nums1[i], nums2[i] &lt;= 104<br>
+nums1和nums2中所有整数 互不相同<br>
+nums1 中的所有整数同样出现在 nums2 中</p>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="本体思路">本体思路</h1>
+<p>单调栈的应用并不广泛，一般用来解决下一个更大元素的问题。<br>
+对于单调栈问题，给定一个乱序的数组nums，返回一个索引数组res，<br>
+res中存储着nums中元素对应的下一个更大元素的索引。例如，nums = [1, 3, 4, 2]，<br>
+则单调栈算法会返回res = [1, 2, -1, -1]。</p>
+<h1 id="大神做法1">大神做法1：</h1>
+<pre><code class="language-python">class Solution:
+    def nextGreaterElement(self, nums1: List[int], nums2: List[int]) -&gt; List[int]:
+        stack = []
+        idx_list = [-1] * len(nums2)
+        for i in range(len(nums2)-1, -1, -1):
+            while stack and nums2[i] &gt;= stack[-1]:
+                stack.pop()
+            idx_list[i] = -1 if not stack else stack[-1]
+            stack.append(nums2[i])
+        res = []
+        for i in nums1:
+            res.append(idx_list[nums2.index(i)])
+        return res
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[492、构造矩形]]></title>
+        <id>https://ganhan999.github.io/post/492、构造矩形/</id>
+        <link href="https://ganhan999.github.io/post/492、构造矩形/">
+        </link>
+        <updated>2021-03-29T11:29:35.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
+<p>作为一位web开发者， 懂得怎样去规划一个页面的尺寸是很重要的。 现给定一个具体的矩形页面面积，<br>
+你的任务是设计一个长度为 L 和宽度为 W 且满足以下要求的矩形的页面。</p>
+<p>要求：</p>
+<ol>
+<li>
+<p>你设计的矩形页面必须等于给定的目标面积。</p>
+</li>
+<li>
+<p>宽度 W 不应大于长度 L，换言之，要求 L &gt;= W 。</p>
+</li>
+<li>
+<p>长度 L 和宽度 W 之间的差距应当尽可能小。<br>
+你需要按顺序输出你设计的页面的长度 L 和宽度 W。</p>
+</li>
+</ol>
+<p>示例：<br>
+输入: 4<br>
+输出: [2, 2]<br>
+解释: 目标面积是 4， 所有可能的构造方案有 [1,4], [2,2], [4,1]。<br>
+但是根据要求2，[1,4] 不符合要求; 根据要求3，[2,2] 比 [4,1] 更能符合要求. 所以输出长度 L 为 2， 宽度 W 为 2。</p>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="本体思路">本体思路</h1>
+<p>从中间的数开始找</p>
+<h1 id="大神做法1">大神做法1：</h1>
+<pre><code class="language-python">class Solution:
+    def constructRectangle(self, area: int) -&gt; List[int]:
+    # 思路:先找到中间值，循环中间值 挨个找就ok
+    # 其实还可以先把素数和平方数找出来，然后再找剩下的。
+        two = area ** 0.5
+        one = int(two)
+        for i in range(one,0,-1):
+            re = area/i
+            if re % 1 == 0.0:
+                return int(re),i
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[482、密钥格式化]]></title>
+        <id>https://ganhan999.github.io/post/482、密钥格式化/</id>
+        <link href="https://ganhan999.github.io/post/482、密钥格式化/">
+        </link>
+        <updated>2021-03-27T11:29:35.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
+<p>有一个密钥字符串 S ，只包含字母，数字以及 '-'（破折号）。其中， N 个 '-' 将字符串分成了 N+1 组。<br>
+给你一个数字 K，请你重新格式化字符串，使每个分组恰好包含 K 个字符。特别地，第一个分组包含的字符个数必须小于等于 K，但至少要包含 1 个字符。两个分组之间需要用 '-'（破折号）隔开，并且将所有的小写字母转换为大写字母。<br>
+给定非空字符串 S 和数字 K，按照上面描述的规则进行格式化。</p>
+<p>示例 1：<br>
+输入：S = &quot;5F3Z-2e-9-w&quot;, K = 4<br>
+输出：&quot;5F3Z-2E9W&quot;<br>
+解释：字符串 S 被分成了两个部分，每部分 4 个字符；<br>
+注意，两个额外的破折号需要删掉。</p>
+<p>示例 2：<br>
+输入：S = &quot;2-5g-3-J&quot;, K = 2<br>
+输出：&quot;2-5G-3J&quot;<br>
+解释：字符串 S 被分成了 3 个部分，按照前面的规则描述，第一部分的字符可以少于给定的数量，其余部分皆为 2 个字符。</p>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="本体思路">本体思路</h1>
+<p>朴实无华解法</p>
+<h1 id="大神做法1">大神做法1：</h1>
+<pre><code class="language-python">class Solution:
+    def licenseKeyFormatting(self, S: str, K: int) -&gt; str:
+        st = S.replace('-','').upper()
+        a = len(st)
+        if a == 0:
+            return ''
+        b = a%K
+        if b == 0:
+            c = (a//K) - 1
+            b = K
+        else:
+            c = a//K
+        s = st[:b]
+        while c != 0:
+            s += '-' + st[b:b+K]
+            b = b+K
+            c -= 1
+        return s
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[485、最大连续 1 的个数]]></title>
+        <id>https://ganhan999.github.io/post/485、最大连续 1 的个数/</id>
+        <link href="https://ganhan999.github.io/post/485、最大连续 1 的个数/">
+        </link>
+        <updated>2021-03-27T11:29:35.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
+<p>给定一个二进制数组， 计算其中最大连续 1 的个数。</p>
+<p>示例：<br>
+输入：[1,1,0,1,1,1]<br>
+输出：3<br>
+解释：开头的两位和最后的三位都是连续 1 ，所以最大连续 1 的个数是 3.</p>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="本体思路">本体思路</h1>
+<p>为了得到数组中最大连续 1 的个数，需要遍历数组，并记录最大的连续 1 的个数和当前的连续 1 的个数。如果当前元素是 1，<br>
+则将当前的连续 11 的个数加 11，否则，使用之前的连续 11 的个数更新最大的连续 1 的个数，并将当前的连续 1 的个数清零。</p>
+<p>遍历数组结束之后，需要再次使用当前的连续 1 的个数更新最大的连续 1 的个数，<br>
+因为数组的最后一个元素可能是 1，且最长连续 1 的子数组可能出现在数组的末尾，如果遍历数组结束之后不更新最大的连续 1 的个数，则会导致结果错误。</p>
+<h1 id="大神做法1">大神做法1：</h1>
+<pre><code class="language-python">class Solution:
+    def findMaxConsecutiveOnes(self, nums: List[int]) -&gt; int:
+        maxCount = count = 0
+
+        for i, num in enumerate(nums):
+            if num == 1:
+                count += 1
+            else:
+                maxCount = max(maxCount, count)
+                count = 0
+
+        maxCount = max(maxCount, count)
+        return maxCount
+</code></pre>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<p>记录零的位置</p>
+<h1 id="大神做法2">大神做法2：</h1>
+<pre><code class="language-python">class Solution(object):
+    def findMaxConsecutiveOnes(self, nums):
+        &quot;&quot;&quot;
+        :type nums: List[int]
+        :rtype: int
+        &quot;&quot;&quot;
+        index = -1
+        res = 0
+        for i, num in enumerate(nums):
+            if num == 0:
+                index = i
+            else:
+                res = max(res, i - index)
+        return res
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[476、数字的补数]]></title>
+        <id>https://ganhan999.github.io/post/476、数字的补数/</id>
+        <link href="https://ganhan999.github.io/post/476、数字的补数/">
+        </link>
+        <updated>2021-03-27T10:29:35.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
+<p>给你一个正整数 num ，输出它的补数。补数是对该数的二进制表示取反。</p>
+<p>示例 1：<br>
+输入：num = 5<br>
+输出：2<br>
+解释：5 的二进制表示为 101（没有前导零位），其补数为 010。所以你需要输出 2 。</p>
+<p>示例 2：<br>
+输入：num = 1<br>
+输出：0<br>
+解释：1 的二进制表示为 1（没有前导零位），其补数为 0。所以你需要输出 0 。</p>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="本体思路">本体思路</h1>
+<p>诸位遍历 把1换0 0换1</p>
+<h1 id="大神做法1">大神做法1：</h1>
+<pre><code class="language-python">class Solution:
+    def findComplement(self, num: int) -&gt; int:
+        num = bin(num)[2:] # 转二进制
+        res = ''
+        for i in range(len(num)):
+            if num[i] == '0':res += '1'
+            else:res += '0'
+        # print (res,num)
+        return int(res,2) # 转十进制
+</code></pre>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<p>安排一个全1给它异或</p>
+<h1 id="大神做法2">大神做法2：</h1>
+<pre><code class="language-python">class Solution:
+    def findComplement(self, num: int) -&gt; int:
+        bits = len(str(bin(num))) - 2
+        return num ^ (2 ** bits - 1)
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[463、岛屿的周长]]></title>
         <id>https://ganhan999.github.io/post/463、岛屿的周长/</id>
@@ -117,345 +457,6 @@
 <pre><code class="language-python">class Solution:
     def repeatedSubstringPattern(self, s: str) -&gt; bool:
         return (s+s).find(s,1) != len(s)
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[455、分发饼干]]></title>
-        <id>https://ganhan999.github.io/post/455、分发饼干/</id>
-        <link href="https://ganhan999.github.io/post/455、分发饼干/">
-        </link>
-        <updated>2021-03-23T02:29:35.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
-<p>假设你是一位很棒的家长，想要给你的孩子们一些小饼干。但是，每个孩子最多只能给一块饼干。</p>
-<p>对每个孩子 i，都有一个胃口值g[i]，这是能让孩子们满足胃口的饼干的最小尺寸；并且每块饼干 j，都有一个尺寸 s[j]。如果 s[j]&gt;= g[i]，<br>
-我们可以将这个饼干 j 分配给孩子 i ，这个孩子会得到满足。你的目标是尽可能满足越多数量的孩子，并输出这个最大数值。</p>
-<p>示例1:<br>
-输入: g = [1,2,3], s = [1,1]<br>
-输出: 1<br>
-解释:<br>
-你有三个孩子和两块小饼干，3个孩子的胃口值分别是：1,2,3。<br>
-虽然你有两块小饼干，由于他们的尺寸都是1，你只能让胃口值是1的孩子满足。<br>
-所以你应该输出1。</p>
-<p>示例2:<br>
-输入: g = [1,2], s = [1,2,3]<br>
-输出: 2<br>
-解释:<br>
-你有两个孩子和三块小饼干，2个孩子的胃口值分别是1,2。<br>
-你拥有的饼干数量和尺寸都足以让所有孩子满足。<br>
-所以你应该输出2.</p>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="本体思路">本体思路</h1>
-<p>排序+贪心算法<br>
-1、对每个值进行倒序排序<br>
-2、保障让每一个饼干刚好满足当前的小朋友，就可以使得最后满足的人数最多。</p>
-<h1 id="大神做法1">大神做法1：</h1>
-<pre><code class="language-python">class Solution:
-    def findContentChildren(self, g: List[int], s: List[int]) -&gt; int:
-        ##典型的贪心算法：先排序，倒序最好。让最大饼干的满足最贪心的小朋友，如果当前的饼干不能满足当前的小朋友，就找下一个小朋友看是否能满足
-        gi = 0 ## g:小朋友的胃口，也就是贪心值
-        si = 0 ## s:饼干值
-        g.sort(reverse=True) ##倒序输出
-        s.sort(reverse=True)
-        res = 0
-        lens_g = len(g)
-        lens_s = len(s)
-        while gi&lt;lens_g and si&lt;lens_s:
-            if s[si]&gt;=g[gi]:
-                res+=1
-                si+=1
-                gi+=1
-            else:
-                gi+=1 ##看一下小朋友的胃口是否能满足当前的饼干
-        return res
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[453、最小操作次数使数组元素相等]]></title>
-        <id>https://ganhan999.github.io/post/453、最小操作次数使数组元素相等/</id>
-        <link href="https://ganhan999.github.io/post/453、最小操作次数使数组元素相等/">
-        </link>
-        <updated>2021-03-22T10:29:35.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
-<p>给定一个长度为 n 的 非空 整数数组，每次操作将会使 n - 1 个元素增加 1。找出让数组所有元素相等的最小操作次数。</p>
-<p>示例：<br>
-输入：<br>
-[1,2,3]</p>
-<p>输出：<br>
-3<br>
-解释：<br>
-只需要3次操作（注意每次操作会增加两个元素的值）：<br>
-[1,2,3]  =&gt;  [2,3,3]  =&gt;  [3,4,3]  =&gt;  [4,4,4]</p>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="本体思路">本体思路</h1>
-<p>数学题</p>
-<p>假设目前数组总和为sum，我们需要移动次数为m，那么整体数组总和将会增加m * (n - 1)，这里的n为数组长度，最后数组所有元素都相等为x，于是有：<br>
-sum + m * (n - 1) = x * n (1)<br>
-我们再设数组最小的元素为min_val，m = x - min_val，即 x = m + min_val带入(1)得：<br>
-m = sum - min_val * n</p>
-<h1 id="大神做法1">大神做法1：</h1>
-<pre><code class="language-python">class Solution:
-    def minMoves(self, nums: List[int]) -&gt; int:
-        return sum(nums) - len(nums) * min(nums)
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[434、字符串中的单词数]]></title>
-        <id>https://ganhan999.github.io/post/434、字符串中的单词数/</id>
-        <link href="https://ganhan999.github.io/post/434、字符串中的单词数/">
-        </link>
-        <updated>2021-03-20T02:29:35.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
-<p>统计字符串中的单词个数，这里的单词指的是连续的不是空格的字符。</p>
-<p>请注意，你可以假定字符串里不包括任何不可打印的字符。</p>
-<p>示例:<br>
-输入: &quot;Hello, my name is John&quot;<br>
-输出: 5<br>
-解释: 这里的单词是指连续的不是空格的字符，所以 &quot;Hello,&quot; 算作 1 个单词。</p>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="本体思路">本体思路</h1>
-<p>内置算法</p>
-<h1 id="大神做法1">大神做法1：</h1>
-<pre><code class="language-python">class Solution:
-    def countSegments(self, s):
-        return len(s.split())
-</code></pre>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<p>计算单词的数量，就等同于计数单词开始的下标个数。因此，只需要定义好下标的条件，<br>
-就可以遍历整个字符串，检测每个下标。定义如下：若该下标前为空格（或者为初始下标），<br>
-且自身不为空格，则其为单词开始的下标。该条件可以以常数时间检测。最后，返回满足条件的下标个数。<br>
-相当于数空格的数量</p>
-<h1 id="大神做法2">大神做法2：</h1>
-<pre><code class="language-python">class Solution:
-    def countSegments(self, s):
-        segment_count = 0
-        for i in range(len(s)):
-            if (i == 0 or s[i-1] == ' ') and s[i] != ' ':
-                segment_count += 1
-        return segment_count
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[415、字符串相加]]></title>
-        <id>https://ganhan999.github.io/post/415、字符串相加/</id>
-        <link href="https://ganhan999.github.io/post/415、字符串相加/">
-        </link>
-        <updated>2021-03-19T11:29:35.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
-<p>给定两个字符串形式的非负整数num1 和num2，计算它们的和。</p>
-<p>提示：</p>
-<p>num1 和num2的长度都小于 5100<br>
-num1 和num2 都只包含数字0-9<br>
-num1 和num2 都不包含任何前导零<br>
-你不能使用任何內建 BigInteger 库，也不能直接将输入的字符串转换为整数形式</p>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="本体思路">本体思路</h1>
-<p>利用int函数</p>
-<h1 id="大神做法1">大神做法1：</h1>
-<pre><code class="language-python">class Solution:
-    def addStrings(self, num1: str, num2: str) -&gt; str:
-        res = &quot;&quot;
-        i, j, carry = len(num1) - 1, len(num2) - 1, 0
-        while i &gt;= 0 or j &gt;= 0:
-            n1 = int(num1[i]) if i &gt;= 0 else 0
-            n2 = int(num2[j]) if j &gt;= 0 else 0
-            tmp = n1 + n2 + carry
-            carry = tmp // 10
-            res = str(tmp % 10) + res
-            i, j = i - 1, j - 1
-        return &quot;1&quot; + res if carry else res
-</code></pre>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<p>标准加法进位，主要理解一下ASCII转换。</p>
-<h1 id="大神做法2">大神做法2：</h1>
-<pre><code class="language-python">class Solution:
-    def addStrings(self, num1: str, num2: str) -&gt; str:
-        i = len(num1) - 1
-        j = len(num2) - 1
-        res = &quot;&quot;
-        carry = 0
-        while i &gt;= 0 or j &gt;= 0:
-            n1 = num1[i] if i &gt;= 0 else '0'
-            n2 = num2[j] if j &gt;= 0 else '0'
-            temp = ord(n1) + ord(n2) - 2 * ord('0') + carry
-            cur = temp % 10
-            carry = temp // 10
-            res = chr(cur + 48) + res
-            i -= 1
-            j -= 1
-        return '1' + res if carry != 0 else res
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[414、第三大的数]]></title>
-        <id>https://ganhan999.github.io/post/414、第三大的数/</id>
-        <link href="https://ganhan999.github.io/post/414、第三大的数/">
-        </link>
-        <updated>2021-03-18T11:29:35.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
-<p>给你一个非空数组，返回此数组中 第三大的数 。如果不存在，则返回数组中最大的数。</p>
-<p>示例 1：<br>
-输入：[3, 2, 1]<br>
-输出：1<br>
-解释：第三大的数是 1 。<br>
-示例 2：</p>
-<p>输入：[1, 2]<br>
-输出：2<br>
-解释：第三大的数不存在, 所以返回最大的数 2 。</p>
-<p>示例 3：<br>
-输入：[2, 2, 3, 1]<br>
-输出：1<br>
-解释：注意，要求返回第三大的数，是指在所有不同数字中排第三大的数。<br>
-此例中存在两个值为 2 的数，它们都排第二。在所有不同数字中排第三大的数为 1 。</p>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="本体思路">本体思路</h1>
-<p>转成字典再转列表再排序</p>
-<h1 id="大神做法1">大神做法1：</h1>
-<pre><code class="language-python">class Solution:
-    def thirdMax(self, nums: List[int]) -&gt; int:
-        nums = sorted(list(set(nums)))
-        return nums[-1] if len(nums) &lt;= 2 else nums[-3]
-</code></pre>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<p>小顶堆</p>
-<h1 id="大神做法2">大神做法2：</h1>
-<pre><code class="language-python">class Solution:
-    def thirdMax(self, nums: List[int]) -&gt; int:
-        # time O(nlog3) = O(n), space O(n)
-        nums = set(nums)
-        if len(nums) &lt; 3:
-            return max(nums)
-
-        nums = list(nums)
-
-        pq = []
-        for n in nums:
-            heapq.heappush(pq, n)
-            if len(pq) &gt; 3:
-                heapq.heappop(pq)
-
-        return pq[0]
-</code></pre>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<p>快速排序<br>
-最差的可能性， time O(n^2), space O(n)<br>
-加入随机变量后, time O(n), space O(logn)<br>
-一种减而治之的思想。搜索区域中是否匹配到k-1（topk的索引）<br>
-partition 可以灵活应变，前面大后面小，或者前面小后面大。</p>
-<h1 id="大神做法3">大神做法3：</h1>
-<pre><code class="language-python">class Solution:
-    def thirdMax(self, nums: List[int]) -&gt; int:
-        # time O(nlog3) = O(n), space O(n)
-        nums = set(nums)
-        if len(nums) &lt; 3:
-            return max(nums)
-
-        nums = list(nums)
-
-        pq = []
-        for n in nums:
-            heapq.heappush(pq, n)
-            if len(pq) &gt; 3:
-                heapq.heappop(pq)
-        return pq[0]
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[412、Fizz Buzz]]></title>
-        <id>https://ganhan999.github.io/post/412、Fizz Buzz/</id>
-        <link href="https://ganhan999.github.io/post/412、Fizz Buzz/">
-        </link>
-        <updated>2021-03-17T11:29:35.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
-<p>写一个程序，输出从 1 到 n 数字的字符串表示。</p>
-<ol>
-<li>
-<p>如果n是3的倍数，输出“Fizz”；</p>
-</li>
-<li>
-<p>如果n是5的倍数，输出“Buzz”；</p>
-</li>
-</ol>
-<p>3.如果n同时是3和5的倍数，输出 “FizzBuzz”。</p>
-<p>示例：</p>
-<p>n = 15,</p>
-<p>返回:<br>
-[<br>
-&quot;1&quot;,<br>
-&quot;2&quot;,<br>
-&quot;Fizz&quot;,<br>
-&quot;4&quot;,<br>
-&quot;Buzz&quot;,<br>
-&quot;Fizz&quot;,<br>
-&quot;7&quot;,<br>
-&quot;8&quot;,<br>
-&quot;Fizz&quot;,<br>
-&quot;Buzz&quot;,<br>
-&quot;11&quot;,<br>
-&quot;Fizz&quot;,<br>
-&quot;13&quot;,<br>
-&quot;14&quot;,<br>
-&quot;FizzBuzz&quot;<br>
-]</p>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="本体思路">本体思路</h1>
-<p>初始化一个空的答案列表。<br>
-遍历 1 ... N1...N。<br>
-对于每个数，判断它能不能同时被 3 和 5 整除，如果可以就把 FizzBuzz 加入答案列表。<br>
-如果不行，判断它能不能被 3 整除，如果可以，把 Fizz 加入答案列表。<br>
-如果还是不行，判断它能不能被 5 整除，如果可以，把 Buzz 加入答案列表。<br>
-如果以上都不行，把这个数加入答案列表。</p>
-<h1 id="大神做法1">大神做法1：</h1>
-<pre><code class="language-python">class Solution:
-    def fizzBuzz(self, n: int) -&gt; List[str]:
-        ans=[]
-        for i in range(1,n+1):
-            if i%3==0 and i%5==0:ans.append('FizzBuzz')
-            elif i%3==0:ans.append('Fizz')
-            elif i%5==0:ans.append('Buzz')
-            else:ans.append(str(i))
-        return ans
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[409、最长回文串]]></title>
-        <id>https://ganhan999.github.io/post/409、最长回文串/</id>
-        <link href="https://ganhan999.github.io/post/409、最长回文串/">
-        </link>
-        <updated>2021-03-17T09:29:35.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
-<p>给定一个包含大写字母和小写字母的字符串，找到通过这些字母构造成的最长的回文串。<br>
-在构造过程中，请注意区分大小写。比如&quot;Aa&quot;不能当做一个回文字符串。</p>
-<p>注意:<br>
-假设字符串的长度不会超过 1010。</p>
-<p>示例 1:<br>
-输入:<br>
-&quot;abccccdd&quot;</p>
-<p>输出:<br>
-7</p>
-<p>解释:<br>
-我们可以构造的最长的回文串是&quot;dccaccd&quot;, 它的长度是 7。</p>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="本体思路">本体思路</h1>
-<p>1.统计各字符次数，eg:&quot;ddsad&quot;:[3, 1, 1]<br>
-2.统计两两配对的字符总个数，eg: {&quot;ddass&quot;:4,&quot;ddsss&quot;:4}<br>
-3.判断是否有没配对的单字符，有结果加一。 eg: {&quot;ddss&quot;:4, &quot;ddhjSS&quot;:4+1}--&gt;{&quot;ddss&quot;:4, &quot;ddhjSS&quot;:5}</p>
-<h1 id="大神做法1">大神做法1：</h1>
-<pre><code class="language-python">class Solution:
-    def longestPalindrome(self, s: str) -&gt; int:
-        ans = 0
-        count = collections.Counter(s)
-        for v in count.values():
-            ans += v // 2 * 2
-            if ans % 2 == 0 and v % 2 == 1:
-                ans += 1
-        return ans
 </code></pre>
 ]]></content>
     </entry>
