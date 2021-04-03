@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ganhan999.github.io/</id>
     <title>Gridea</title>
-    <updated>2021-03-30T03:19:10.034Z</updated>
+    <updated>2021-04-03T12:57:37.937Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ganhan999.github.io/"/>
     <link rel="self" href="https://ganhan999.github.io/atom.xml"/>
@@ -10,6 +10,300 @@
     <logo>https://ganhan999.github.io/images/avatar.png</logo>
     <icon>https://ganhan999.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, Gridea</rights>
+    <entry>
+        <title type="html"><![CDATA[530、二叉搜索树的最小绝对差]]></title>
+        <id>https://ganhan999.github.io/post/530、二叉搜索树的最小绝对差/</id>
+        <link href="https://ganhan999.github.io/post/530、二叉搜索树的最小绝对差/">
+        </link>
+        <updated>2021-04-03T11:39:35.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
+<p>给你一棵所有节点为非负值的二叉搜索树，请你计算树中任意两节点的差的绝对值的最小值。</p>
+<p>示例：</p>
+<p>输入：</p>
+<p>1<br>
+<br>
+3<br>
+/<br>
+2</p>
+<p>输出：<br>
+1</p>
+<p>解释：<br>
+最小绝对差为 1，其中 2 和 1 的差的绝对值为 1（或者 2 和 3）。</p>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="本体思路">本体思路</h1>
+<p>中序遍历 然后记录每一次的最小差值</p>
+<h1 id="大神做法1">大神做法1：</h1>
+<pre><code class="language-python">#大神做法1
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def getMinimumDifference(self, root: TreeNode) -&gt; int:
+        #初始化，最小值赋值为无穷大，last_value记录上一个节点的值
+        min_value, last_value = float(&quot;inf&quot;), -1
+        def pengding_num(val):
+            nonlocal min_value, last_value
+            #第一个节点赋值给last_value
+            if last_value == -1:
+                last_value = val
+            else:
+                #每次求差的绝对值的最小值，更新
+                min_value = min(min_value, abs(val - last_value))
+                last_value = val
+        #中序遍历
+        def mid_order(root):
+            nonlocal min_value, last_value
+            if root:
+                mid_order(root.left)
+                #处理当前节点
+                pengding_num(root.val)
+                mid_order(root.right)
+        mid_order(root)
+        return min_value
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[521、最长特殊序列 Ⅰ]]></title>
+        <id>https://ganhan999.github.io/post/521、最长特殊序列 Ⅰ/</id>
+        <link href="https://ganhan999.github.io/post/521、最长特殊序列 Ⅰ/">
+        </link>
+        <updated>2021-04-03T10:39:35.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
+<p>给你两个字符串，请你从这两个字符串中找出最长的特殊序列。<br>
+「最长特殊序列」定义如下：该序列为某字符串独有的最长子序列（即不能是其他字符串的子序列）。<br>
+子序列 可以通过删去字符串中的某些字符实现，但不能改变剩余字符的相对顺序。空序列为所有字符串的子序列，任何字符串为其自身的子序列。<br>
+输入为两个字符串，输出最长特殊序列的长度。如果不存在，则返回 -1。</p>
+<p>示例 1：<br>
+输入: &quot;aba&quot;, &quot;cdc&quot;<br>
+输出: 3<br>
+解释: 最长特殊序列可为 &quot;aba&quot; (或 &quot;cdc&quot;)，两者均为自身的子序列且不是对方的子序列。</p>
+<p>示例 2：<br>
+输入：a = &quot;aaa&quot;, b = &quot;bbb&quot;<br>
+输出：3</p>
+<p>示例 3：<br>
+输入：a = &quot;aaa&quot;, b = &quot;aaa&quot;<br>
+输出：-1</p>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="本体思路">本体思路</h1>
+<p>简单来说就是a，b不相等的话就返回a，b最长的长度，否则就-1</p>
+<h1 id="大神做法1">大神做法1：</h1>
+<pre><code class="language-python">class Solution:
+    def findLUSlength(self, a: str, b: str) -&gt; int:
+        return max(len(a),len(b)) if a!=b else -1
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[520、检测大写字母]]></title>
+        <id>https://ganhan999.github.io/post/520、检测大写字母/</id>
+        <link href="https://ganhan999.github.io/post/520、检测大写字母/">
+        </link>
+        <updated>2021-04-02T10:39:35.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
+<p>给定一个单词，你需要判断单词的大写使用是否正确。</p>
+<p>我们定义，在以下情况时，单词的大写用法是正确的：</p>
+<p>全部字母都是大写，比如&quot;USA&quot;。<br>
+单词中所有字母都不是大写，比如&quot;leetcode&quot;。<br>
+如果单词不只含有一个字母，只有首字母大写，比如&quot;Google&quot;。<br>
+否则，我们定义这个单词没有正确使用大写字母。</p>
+<p>示例 1:<br>
+输入: &quot;USA&quot;<br>
+输出: True</p>
+<p>示例 2:<br>
+输入: &quot;FlaG&quot;<br>
+输出: False</p>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="本体思路">本体思路</h1>
+<p>每种情况都判断一遍</p>
+<h1 id="大神做法1">大神做法1：</h1>
+<pre><code class="language-python">class Solution:
+    def detectCapitalUse(self, word: str) -&gt; bool:
+        if word == word.capitalize():
+            return True
+        elif word == word.upper():
+            return True
+        elif word == word.lower():
+            return True
+        else:
+            return False
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[509、斐波那契数]]></title>
+        <id>https://ganhan999.github.io/post/509、斐波那契数/</id>
+        <link href="https://ganhan999.github.io/post/509、斐波那契数/">
+        </link>
+        <updated>2021-04-02T09:39:35.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
+<p>斐波那契数，通常用F(n) 表示，形成的序列称为 斐波那契数列 。该数列由0 和 1 开始，<br>
+后面的每一项数字都是前面两项数字的和。也就是：</p>
+<p>F(0) = 0，F(1)= 1<br>
+F(n) = F(n - 1) + F(n - 2)，其中 n &gt; 1<br>
+给你 n ，请计算 F(n) 。</p>
+<p>示例 1：<br>
+输入：2<br>
+输出：1<br>
+解释：F(2) = F(1) + F(0) = 1 + 0 = 1</p>
+<p>示例 2：<br>
+输入：3<br>
+输出：2<br>
+解释：F(3) = F(2) + F(1) = 1 + 1 = 2</p>
+<p>示例 3：<br>
+输入：4<br>
+输出：3<br>
+解释：F(4) = F(3) + F(2) = 2 + 1 = 3</p>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="本体思路">本体思路</h1>
+<p>递归</p>
+<h1 id="大神做法1">大神做法1：</h1>
+<pre><code class="language-python">class Solution:
+    def fib(self, n: int) -&gt; int:
+        if n &lt;= 1:
+            return n
+        return self.fib(n - 1) + self.fib(n - 2)
+</code></pre>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<p>动态规划</p>
+<h1 id="大神做法2">大神做法2：</h1>
+<pre><code class="language-python">class Solution:
+    def fib(self, n: int) -&gt; int:
+        data = [0, 1]
+        for i in range(n-1):
+            data.append(data[-2] + data[-1])
+        return data[n]
+</code></pre>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<p>递推+动态规划 节省空间</p>
+<h1 id="大神做法2-2">大神做法2：</h1>
+<pre><code class="language-python">class Solution:
+    def fib(self, n: int) -&gt; int:
+        a, b = 0, 1
+        for i in range(n):
+            a, b = b, a + b
+        return a
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[507、完美数]]></title>
+        <id>https://ganhan999.github.io/post/507、完美数/</id>
+        <link href="https://ganhan999.github.io/post/507、完美数/">
+        </link>
+        <updated>2021-04-01T05:39:35.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
+<p>对于一个正整数，如果它和除了它自身以外的所有 正因子 之和相等，我们称它为 「完美数」。</p>
+<p>给定一个整数n，如果是完美数，返回 true，否则返回 false</p>
+<p>示例 1：<br>
+输入：28<br>
+输出：True<br>
+解释：28 = 1 + 2 + 4 + 7 + 14<br>
+1, 2, 4, 7, 和 14 是 28 的所有正因子。</p>
+<p>示例 2：<br>
+输入：num = 6<br>
+输出：true</p>
+<p>示例 3：<br>
+输入：num = 496<br>
+输出：true</p>
+<p>示例 4：<br>
+输入：num = 8128<br>
+输出：true</p>
+<p>示例 5：<br>
+输入：num = 2<br>
+输出：false</p>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="本体思路">本体思路</h1>
+<p>对于数字1:直接返回False<br>
+我们只需要判断2-int(sqrt(num))+1的数，全部累加：判断total == num：</p>
+<h1 id="大神做法1">大神做法1：</h1>
+<pre><code class="language-python">class Solution:
+    def checkPerfectNumber(self, num: int) -&gt; bool:
+        # 对于数字1:直接返回`False`
+        if num == 1:
+            return False
+        # 计数从1开始
+        total = 1
+        # 我们只需要判断`2-int(sqrt(num))+1`的数，全部累加
+        for i in range(2, int(math.sqrt(num)) + 1):
+            if num % i == 0:
+                # 这里total要加上i和num // i
+                total += (i + num // i)
+        return total == num
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[506、相对名次]]></title>
+        <id>https://ganhan999.github.io/post/506、相对名次/</id>
+        <link href="https://ganhan999.github.io/post/506、相对名次/">
+        </link>
+        <updated>2021-03-31T05:39:35.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
+<p>给出N 名运动员的成绩，找出他们的相对名次并授予前三名对应的奖牌。<br>
+前三名运动员将会被分别授予 “金牌”，“银牌” 和“ 铜牌”（&quot;Gold Medal&quot;, &quot;Silver Medal&quot;, &quot;Bronze Medal&quot;）。</p>
+<p>(注：分数越高的选手，排名越靠前。)</p>
+<p>示例 1:<br>
+输入: [5, 4, 3, 2, 1]<br>
+输出: [&quot;Gold Medal&quot;, &quot;Silver Medal&quot;, &quot;Bronze Medal&quot;, &quot;4&quot;, &quot;5&quot;]<br>
+解释: 前三名运动员的成绩为前三高的，因此将会分别被授予 “金牌”，“银牌”和“铜牌” (&quot;Gold Medal&quot;, &quot;Silver Medal&quot; and &quot;Bronze Medal&quot;).<br>
+余下的两名运动员，我们只需要通过他们的成绩计算将其相对名次即可。</p>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="本体思路">本体思路</h1>
+<p>如果直接排序是不行的，因为会丢失老的索引。 因此我用了一个 pairs 数组，<br>
+来维护一个 nums -&gt; 索引的映射。之后对 paris 进行降序排列即可。由于我事先保存了老的索引信息，因此是没有问题的。</p>
+<h1 id="大神做法1">大神做法1：</h1>
+<pre><code class="language-python">class Solution:
+    def findRelativeRanks(self, nums: List[int]) -&gt; List[str]:
+        pairs = []
+        for i in range(len(nums)):
+            pairs.append([nums[i], i])
+        pairs.sort(key=lambda a: a[0], reverse=True)
+        for i in range(len(nums)):
+            if i == 0:
+                nums[pairs[i][1]] = &quot;Gold Medal&quot;
+            if i == 1:
+                nums[pairs[i][1]] = &quot;Silver Medal&quot;
+            if i == 2:
+                nums[pairs[i][1]] = &quot;Bronze Medal&quot;
+            if i &gt; 2:
+                nums[pairs[i][1]] = str(i + 1)
+        return nums
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[504、七进制数]]></title>
+        <id>https://ganhan999.github.io/post/504、七进制数/</id>
+        <link href="https://ganhan999.github.io/post/504、七进制数/">
+        </link>
+        <updated>2021-03-31T04:39:35.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
+<p>给定一个整数，将其转化为7进制，并以字符串形式输出。</p>
+<p>示例 1:<br>
+输入: 100<br>
+输出: &quot;202&quot;</p>
+<p>示例 2:<br>
+输入: -7<br>
+输出: &quot;-10&quot;</p>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="本体思路">本体思路</h1>
+<p>递归</p>
+<h1 id="大神做法1">大神做法1：</h1>
+<pre><code class="language-python">class Solution:
+    def convertToBase7(self, num: int) -&gt; str:
+        if num &lt; 0:
+            return &quot;-&quot; + self.convertToBase7(-num)
+        if num &lt; 7:
+            return str(num)
+        return self.convertToBase7(num // 7) + str(num % 7)
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[501、二叉搜索树中的众数 ]]></title>
         <id>https://ganhan999.github.io/post/501、二叉搜索树中的众数 /</id>
@@ -166,297 +460,6 @@ res中存储着nums中元素对应的下一个更大元素的索引。例如，n
         for i in nums1:
             res.append(idx_list[nums2.index(i)])
         return res
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[492、构造矩形]]></title>
-        <id>https://ganhan999.github.io/post/492、构造矩形/</id>
-        <link href="https://ganhan999.github.io/post/492、构造矩形/">
-        </link>
-        <updated>2021-03-29T11:29:35.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
-<p>作为一位web开发者， 懂得怎样去规划一个页面的尺寸是很重要的。 现给定一个具体的矩形页面面积，<br>
-你的任务是设计一个长度为 L 和宽度为 W 且满足以下要求的矩形的页面。</p>
-<p>要求：</p>
-<ol>
-<li>
-<p>你设计的矩形页面必须等于给定的目标面积。</p>
-</li>
-<li>
-<p>宽度 W 不应大于长度 L，换言之，要求 L &gt;= W 。</p>
-</li>
-<li>
-<p>长度 L 和宽度 W 之间的差距应当尽可能小。<br>
-你需要按顺序输出你设计的页面的长度 L 和宽度 W。</p>
-</li>
-</ol>
-<p>示例：<br>
-输入: 4<br>
-输出: [2, 2]<br>
-解释: 目标面积是 4， 所有可能的构造方案有 [1,4], [2,2], [4,1]。<br>
-但是根据要求2，[1,4] 不符合要求; 根据要求3，[2,2] 比 [4,1] 更能符合要求. 所以输出长度 L 为 2， 宽度 W 为 2。</p>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="本体思路">本体思路</h1>
-<p>从中间的数开始找</p>
-<h1 id="大神做法1">大神做法1：</h1>
-<pre><code class="language-python">class Solution:
-    def constructRectangle(self, area: int) -&gt; List[int]:
-    # 思路:先找到中间值，循环中间值 挨个找就ok
-    # 其实还可以先把素数和平方数找出来，然后再找剩下的。
-        two = area ** 0.5
-        one = int(two)
-        for i in range(one,0,-1):
-            re = area/i
-            if re % 1 == 0.0:
-                return int(re),i
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[482、密钥格式化]]></title>
-        <id>https://ganhan999.github.io/post/482、密钥格式化/</id>
-        <link href="https://ganhan999.github.io/post/482、密钥格式化/">
-        </link>
-        <updated>2021-03-27T11:29:35.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
-<p>有一个密钥字符串 S ，只包含字母，数字以及 '-'（破折号）。其中， N 个 '-' 将字符串分成了 N+1 组。<br>
-给你一个数字 K，请你重新格式化字符串，使每个分组恰好包含 K 个字符。特别地，第一个分组包含的字符个数必须小于等于 K，但至少要包含 1 个字符。两个分组之间需要用 '-'（破折号）隔开，并且将所有的小写字母转换为大写字母。<br>
-给定非空字符串 S 和数字 K，按照上面描述的规则进行格式化。</p>
-<p>示例 1：<br>
-输入：S = &quot;5F3Z-2e-9-w&quot;, K = 4<br>
-输出：&quot;5F3Z-2E9W&quot;<br>
-解释：字符串 S 被分成了两个部分，每部分 4 个字符；<br>
-注意，两个额外的破折号需要删掉。</p>
-<p>示例 2：<br>
-输入：S = &quot;2-5g-3-J&quot;, K = 2<br>
-输出：&quot;2-5G-3J&quot;<br>
-解释：字符串 S 被分成了 3 个部分，按照前面的规则描述，第一部分的字符可以少于给定的数量，其余部分皆为 2 个字符。</p>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="本体思路">本体思路</h1>
-<p>朴实无华解法</p>
-<h1 id="大神做法1">大神做法1：</h1>
-<pre><code class="language-python">class Solution:
-    def licenseKeyFormatting(self, S: str, K: int) -&gt; str:
-        st = S.replace('-','').upper()
-        a = len(st)
-        if a == 0:
-            return ''
-        b = a%K
-        if b == 0:
-            c = (a//K) - 1
-            b = K
-        else:
-            c = a//K
-        s = st[:b]
-        while c != 0:
-            s += '-' + st[b:b+K]
-            b = b+K
-            c -= 1
-        return s
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[485、最大连续 1 的个数]]></title>
-        <id>https://ganhan999.github.io/post/485、最大连续 1 的个数/</id>
-        <link href="https://ganhan999.github.io/post/485、最大连续 1 的个数/">
-        </link>
-        <updated>2021-03-27T11:29:35.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
-<p>给定一个二进制数组， 计算其中最大连续 1 的个数。</p>
-<p>示例：<br>
-输入：[1,1,0,1,1,1]<br>
-输出：3<br>
-解释：开头的两位和最后的三位都是连续 1 ，所以最大连续 1 的个数是 3.</p>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="本体思路">本体思路</h1>
-<p>为了得到数组中最大连续 1 的个数，需要遍历数组，并记录最大的连续 1 的个数和当前的连续 1 的个数。如果当前元素是 1，<br>
-则将当前的连续 11 的个数加 11，否则，使用之前的连续 11 的个数更新最大的连续 1 的个数，并将当前的连续 1 的个数清零。</p>
-<p>遍历数组结束之后，需要再次使用当前的连续 1 的个数更新最大的连续 1 的个数，<br>
-因为数组的最后一个元素可能是 1，且最长连续 1 的子数组可能出现在数组的末尾，如果遍历数组结束之后不更新最大的连续 1 的个数，则会导致结果错误。</p>
-<h1 id="大神做法1">大神做法1：</h1>
-<pre><code class="language-python">class Solution:
-    def findMaxConsecutiveOnes(self, nums: List[int]) -&gt; int:
-        maxCount = count = 0
-
-        for i, num in enumerate(nums):
-            if num == 1:
-                count += 1
-            else:
-                maxCount = max(maxCount, count)
-                count = 0
-
-        maxCount = max(maxCount, count)
-        return maxCount
-</code></pre>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<p>记录零的位置</p>
-<h1 id="大神做法2">大神做法2：</h1>
-<pre><code class="language-python">class Solution(object):
-    def findMaxConsecutiveOnes(self, nums):
-        &quot;&quot;&quot;
-        :type nums: List[int]
-        :rtype: int
-        &quot;&quot;&quot;
-        index = -1
-        res = 0
-        for i, num in enumerate(nums):
-            if num == 0:
-                index = i
-            else:
-                res = max(res, i - index)
-        return res
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[476、数字的补数]]></title>
-        <id>https://ganhan999.github.io/post/476、数字的补数/</id>
-        <link href="https://ganhan999.github.io/post/476、数字的补数/">
-        </link>
-        <updated>2021-03-27T10:29:35.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
-<p>给你一个正整数 num ，输出它的补数。补数是对该数的二进制表示取反。</p>
-<p>示例 1：<br>
-输入：num = 5<br>
-输出：2<br>
-解释：5 的二进制表示为 101（没有前导零位），其补数为 010。所以你需要输出 2 。</p>
-<p>示例 2：<br>
-输入：num = 1<br>
-输出：0<br>
-解释：1 的二进制表示为 1（没有前导零位），其补数为 0。所以你需要输出 0 。</p>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="本体思路">本体思路</h1>
-<p>诸位遍历 把1换0 0换1</p>
-<h1 id="大神做法1">大神做法1：</h1>
-<pre><code class="language-python">class Solution:
-    def findComplement(self, num: int) -&gt; int:
-        num = bin(num)[2:] # 转二进制
-        res = ''
-        for i in range(len(num)):
-            if num[i] == '0':res += '1'
-            else:res += '0'
-        # print (res,num)
-        return int(res,2) # 转十进制
-</code></pre>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<p>安排一个全1给它异或</p>
-<h1 id="大神做法2">大神做法2：</h1>
-<pre><code class="language-python">class Solution:
-    def findComplement(self, num: int) -&gt; int:
-        bits = len(str(bin(num))) - 2
-        return num ^ (2 ** bits - 1)
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[463、岛屿的周长]]></title>
-        <id>https://ganhan999.github.io/post/463、岛屿的周长/</id>
-        <link href="https://ganhan999.github.io/post/463、岛屿的周长/">
-        </link>
-        <updated>2021-03-26T04:29:35.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
-<p>给定一个 row x col 的二维网格地图 grid ，其中：grid[i][j] = 1 表示陆地， grid[i][j] = 0 表示水域。</p>
-<p>网格中的格子 水平和垂直 方向相连（对角线方向不相连）。整个网格被水完全包围，但其中恰好有一个岛屿（或者说，一个或多个表示陆地的格子相连组成的岛屿）。</p>
-<p>岛屿中没有“湖”（“湖” 指水域在岛屿内部且不和岛屿周围的水相连）。格子是边长为 1 的正方形。网格为长方形，且宽度和高度均不超过 100 。</p>
-<p>计算这个岛屿的周长。</p>
-<p>示例 1：<br>
-输入：grid = [[0,1,0,0],[1,1,1,0],[0,1,0,0],[1,1,0,0]]<br>
-输出：16<br>
-解释：它的周长是上面图片中的 16 个黄色的边</p>
-<p>示例 2：<br>
-输入：grid = [[1]]<br>
-输出：4</p>
-<p>示例 3：<br>
-输入：grid = [[1,0]]<br>
-输出：4</p>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="本体思路">本体思路</h1>
-<p>直接遍历，如果当前值为1，加4（四条边），如果左边有1，减2（两条边重合），上面有1，减2。<br>
-最后相加即可</p>
-<h1 id="大神做法1">大神做法1：</h1>
-<pre><code class="language-python">class Solution:
-    def islandPerimeter(self, grid: List[List[int]]) -&gt; int:
-        res=0
-        for i in range(len(grid)):
-            for j in range(len(grid[0])):
-                if grid[i][j]==1:
-                    res+=4
-                    if i-1&gt;=0 and grid[i-1][j]==1:
-                        res-=2
-                    if j-1&gt;=0 and grid[i][j-1]==1:
-                        res-=2
-        return res
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[461、汉明距离]]></title>
-        <id>https://ganhan999.github.io/post/461、汉明距离/</id>
-        <link href="https://ganhan999.github.io/post/461、汉明距离/">
-        </link>
-        <updated>2021-03-26T03:29:35.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
-<p>两个整数之间的汉明距离指的是这两个数字对应二进制位不同的位置的数目。<br>
-给出两个整数 x 和 y，计算它们之间的汉明距离。</p>
-<p>注意：<br>
-0 ≤ x, y &lt; 231.</p>
-<p>示例:<br>
-输入: x = 1, y = 4<br>
-输出: 2</p>
-<p>解释:<br>
-1   (0 0 0 1)<br>
-4   (0 1 0 0)<br>
-↑   ↑<br>
-上面的箭头指出了对应二进制位不同的位置。</p>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="本体思路">本体思路</h1>
-<p>先异或 再数1</p>
-<h1 id="大神做法1">大神做法1：</h1>
-<pre><code class="language-python">class Solution:
-    def hammingDistance(self, x: int, y: int) -&gt; int:
-        return bin(x ^ y).count('1')
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[459、重复的子字符串]]></title>
-        <id>https://ganhan999.github.io/post/459、重复的子字符串/</id>
-        <link href="https://ganhan999.github.io/post/459、重复的子字符串/">
-        </link>
-        <updated>2021-03-25T02:29:35.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
-<p>给定一个非空的字符串，判断它是否可以由它的一个子串重复多次构成。给定的字符串只含有小写英文字母，并且长度不超过10000。</p>
-<p>示例 1:<br>
-输入: &quot;abab&quot;<br>
-输出: True<br>
-解释: 可由子字符串 &quot;ab&quot; 重复两次构成。</p>
-<p>示例 2:<br>
-输入: &quot;aba&quot;<br>
-输出: False</p>
-<p>示例 3:<br>
-输入: &quot;abcabcabcabc&quot;<br>
-输出: True<br>
-解释: 可由子字符串 &quot;abc&quot; 重复四次构成。 (或者子字符串 &quot;abcabc&quot; 重复两次构成。)</p>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="本体思路">本体思路</h1>
-<p>如果s中包含重复的子字符串，那么说明s中至少包含两个子字符串，s+s至少包含4个字串，前后各去掉一位，查找s是否在新构建的字符串中。</p>
-<h1 id="大神做法1">大神做法1：</h1>
-<pre><code class="language-python">class Solution:
-    def repeatedSubstringPattern(self, s: str) -&gt; bool:
-        return s in (s+s)[1:-1]
-</code></pre>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<p>把两个字符串s拼接在一起，会有以下两种情况：</p>
-<p>当s不是循环字符串时：<br>
-第一次发现s的起点是在lens（s）</p>
-<p>当s是循环字符串时：<br>
-第一次发现s的起点是在小于lens（s）</p>
-<h1 id="大神做法2">大神做法2：</h1>
-<pre><code class="language-python">class Solution:
-    def repeatedSubstringPattern(self, s: str) -&gt; bool:
-        return (s+s).find(s,1) != len(s)
 </code></pre>
 ]]></content>
     </entry>
