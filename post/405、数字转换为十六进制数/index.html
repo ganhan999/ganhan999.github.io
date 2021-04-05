@@ -6,7 +6,7 @@
 
 <title>405、数字转换为十六进制数 | Gridea</title>
 
-<link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1617454626252">
+<link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1617617514168">
 
 <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://ganhan999.github.io//styles/main.css">
@@ -77,7 +77,7 @@
             
         </div>
         <div style="text-align: center">
-            <form id="gridea-search-form" style="position: relative" data-update="1617454626252" action="/search/index.html">
+            <form id="gridea-search-form" style="position: relative" data-update="1617617514168" action="/search/index.html">
                 <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
                 <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
             </form>
@@ -148,7 +148,8 @@
 <p>核心思想，使用位运算，每4位，对应1位16进制数字。</p>
 <p>使用0xf(00...01111b)获取num的低4位。<br>
 算数位移，其中正数右移左边补0，负数右移左边补1。</p>
-<p>位移运算并不能保证num==0，需要使用32位int保证（对应16进制小于等于8位).大神做法1：</p>
+<p>位移运算并不能保证num==0，需要使用32位int保证（对应16进制小于等于8位).</p>
+<h1 id="大神做法2">大神做法2：</h1>
 <pre><code class="language-python">class Solution:
     def toHex(self, num: int) -&gt; str:
         if num==0:
