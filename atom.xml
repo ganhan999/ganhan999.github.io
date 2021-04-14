@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://ganhan999.github.io/</id>
     <title>Gridea</title>
-    <updated>2021-04-05T10:12:04.477Z</updated>
+    <updated>2021-04-14T09:23:40.016Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://ganhan999.github.io/"/>
     <link rel="self" href="https://ganhan999.github.io/atom.xml"/>
@@ -11,443 +11,474 @@
     <icon>https://ganhan999.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, Gridea</rights>
     <entry>
-        <title type="html"><![CDATA[559、N 叉树的最大深度]]></title>
-        <id>https://ganhan999.github.io/post/559、N 叉树的最大深度/</id>
-        <link href="https://ganhan999.github.io/post/559、N 叉树的最大深度/">
+        <title type="html"><![CDATA[617、合并二叉树]]></title>
+        <id>https://ganhan999.github.io/post/617、合并二叉树/</id>
+        <link href="https://ganhan999.github.io/post/617、合并二叉树/">
         </link>
-        <updated>2021-04-05T11:59:35.000Z</updated>
+        <updated>2021-04-14T10:59:35.000Z</updated>
         <content type="html"><![CDATA[<h1 id="题目">题目</h1>
-<p>给定一个 N 叉树，找到其最大深度。</p>
-<p>最大深度是指从根节点到最远叶子节点的最长路径上的节点总数。</p>
-<p>N 叉树输入按层序遍历序列化表示，每组子节点由空值分隔（请参见示例）。</p>
-<p>示例 1：<br>
-输入：root = [1,null,3,2,4,null,5,6]<br>
-输出：3</p>
-<p>示例 2：<br>
-输入：root = [1,null,2,3,4,5,null,null,6,7,null,8,null,9,10,null,null,11,null,12,null,13,null,null,14]<br>
-输出：5</p>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="本体思路">本体思路</h1>
-<p>解决这个问题的最直观方法就是递归。<br>
-此处展示了深度优先搜索的策略。</p>
-<h1 id="大神做法1">大神做法1：</h1>
-<pre><code class="language-python">class Solution(object):
-    def maxDepth(self, root):
-        &quot;&quot;&quot;
-        :type root: Node
-        :rtype: int
-        &quot;&quot;&quot;
-        if root is None:
-            return 0
-        elif root.children == []:
-            return 1
-        else:
-            height = [self.maxDepth(c) for c in root.children]
-            return max(height) + 1
-</code></pre>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<p>我们还可以在堆栈的帮助下将上面的递归转换为迭代。<br>
-思路是是使用深度优先搜索策略访问每个节点，同时更新每次访问时的最大深度。<br>
-所以可以从包含根节点的、对应深度为 11 的栈开始。<br>
-然后继续迭代，从栈中弹出当前节点并将子节点压入栈中，每次都更新对应深度。</p>
-<h1 id="大神做法2">大神做法2：</h1>
-<pre><code class="language-python">class Solution(object):
-    def maxDepth(self, root):
-        &quot;&quot;&quot;
-        :type root: Node
-        :rtype: int
-        &quot;&quot;&quot;
-        stack = []
-        if root is not None:
-            stack.append((1, root))
-
-        depth = 0
-        while stack != []:
-            current_depth, root = stack.pop()
-            if root is not None:
-                depth = max(depth, current_depth)
-                for c in root.children:
-                    stack.append((current_depth + 1, c))
-
-        return depth
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[551、学生出勤记录 I]]></title>
-        <id>https://ganhan999.github.io/post/551、学生出勤记录 I/</id>
-        <link href="https://ganhan999.github.io/post/551、学生出勤记录 I/">
-        </link>
-        <updated>2021-04-05T11:39:35.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
-<p>给定一个字符串来代表一个学生的出勤记录，这个记录仅包含以下三个字符：</p>
-<p>'A' : Absent，缺勤<br>
-'L' : Late，迟到<br>
-'P' : Present，到场<br>
-如果一个学生的出勤记录中不超过一个'A'(缺勤)并且不超过两个连续的'L'(迟到),那么这个学生会被奖赏。<br>
-你需要根据这个学生的出勤记录判断他是否会被奖赏。</p>
-<p>示例 1:<br>
-输入: &quot;PPALLP&quot;<br>
-输出: True</p>
-<p>示例 2:<br>
-输入: &quot;PPALLL&quot;<br>
-输出: False</p>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="本体思路">本体思路</h1>
-<p>解决这个问题最简单的方法就是统计字符串中 A 的数目并检查 LLL<br>
-是否是给定字符串的一个子串。如果 AA 的数目比 22 少且 LLL 不是给定字符串的一个子串，那么返回 true，否则返回 false。</p>
-<h1 id="大神做法1">大神做法1：</h1>
-<pre><code class="language-python">class Solution:
-    def checkRecord(self, s: str) -&gt; bool:
-        #判断是否存在超过两个连续的'L'
-        def pending_s(s):
-            count = 0
-            for i in range(0, len(s)):
-                if s[i] == &quot;L&quot;:
-                    count += 1
-                    if count &gt; 2:
-                        return False
-                else:
-                    count = 0
-            return True
-        #不超过一个'A'(缺勤)并且不超过两个连续的'L'(迟到)
-        return s.count(&quot;A&quot;) &lt;= 1 and pending_s(s)
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[543、二叉树的直径]]></title>
-        <id>https://ganhan999.github.io/post/543、二叉树的直径/</id>
-        <link href="https://ganhan999.github.io/post/543、二叉树的直径/">
-        </link>
-        <updated>2021-04-04T11:39:35.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
-<p>给定一棵二叉树，你需要计算它的直径长度。一棵二叉树的直径长度是任意两个结点路径长度中的最大值。这条路径可能穿过也可能不穿过根结点。</p>
-<p>示例 :<br>
-给定二叉树</p>
-<pre><code>      1
-     / \
-    2   3
-   / \
-  4   5
-</code></pre>
-<p>返回 3, 它的长度是路径 [4,2,1,3] 或者 [5,2,1,3]。</p>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="本体思路">本体思路</h1>
-<p>深度优先遍历 分别计算子节点的深度</p>
-<h1 id="大神做法1">大神做法1：</h1>
-<pre><code class="language-python">class Solution:
-    def diameterOfBinaryTree(self, root: TreeNode) -&gt; int:
-        self.ans = 1
-        def depth(node):
-            # 访问到空节点了，返回0
-            if not node:
-                return 0
-            # 左儿子为根的子树的深度
-            L = depth(node.left)
-            # 右儿子为根的子树的深度
-            R = depth(node.right)
-            # 计算d_node即L+R+1 并更新ans
-            self.ans = max(self.ans, L + R + 1)
-            # 返回该节点为根的子树的深度
-            return max(L, R) + 1
-
-        depth(root)
-        return self.ans - 1
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[530、二叉搜索树的最小绝对差]]></title>
-        <id>https://ganhan999.github.io/post/530、二叉搜索树的最小绝对差/</id>
-        <link href="https://ganhan999.github.io/post/530、二叉搜索树的最小绝对差/">
-        </link>
-        <updated>2021-04-03T11:39:35.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
-<p>给你一棵所有节点为非负值的二叉搜索树，请你计算树中任意两节点的差的绝对值的最小值。</p>
-<p>示例：</p>
-<p>输入：</p>
-<p>1<br>
-<br>
+<p>给定两个二叉树，想象当你将它们中的一个覆盖到另一个上时，两个二叉树的一些节点便会重叠。</p>
+<p>你需要将他们合并为一个新的二叉树。合并的规则是如果两个节点重叠，那么将他们的值相加作为节点合并后的新值，否则不为NULL 的节点将直接作为新二叉树的节点。</p>
+<p>示例1:</p>
+<p>输入:<br>
+Tree 1                     Tree 2<br>
+1                         2<br>
+/ \                       / \<br>
+3   2                   1   3<br>
+/                           \   \<br>
+5                             4   7<br>
+输出:<br>
+合并后的树:<br>
 3<br>
-/<br>
-2</p>
-<p>输出：<br>
-1</p>
-<p>解释：<br>
-最小绝对差为 1，其中 2 和 1 的差的绝对值为 1（或者 2 和 3）。</p>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="本体思路">本体思路</h1>
-<p>中序遍历 然后记录每一次的最小差值</p>
-<h1 id="大神做法1">大神做法1：</h1>
-<pre><code class="language-python">#大神做法1
-# Definition for a binary tree node.
-# class TreeNode:
-#     def __init__(self, x):
-#         self.val = x
-#         self.left = None
-#         self.right = None
-
-class Solution:
-    def getMinimumDifference(self, root: TreeNode) -&gt; int:
-        #初始化，最小值赋值为无穷大，last_value记录上一个节点的值
-        min_value, last_value = float(&quot;inf&quot;), -1
-        def pengding_num(val):
-            nonlocal min_value, last_value
-            #第一个节点赋值给last_value
-            if last_value == -1:
-                last_value = val
-            else:
-                #每次求差的绝对值的最小值，更新
-                min_value = min(min_value, abs(val - last_value))
-                last_value = val
-        #中序遍历
-        def mid_order(root):
-            nonlocal min_value, last_value
-            if root:
-                mid_order(root.left)
-                #处理当前节点
-                pengding_num(root.val)
-                mid_order(root.right)
-        mid_order(root)
-        return min_value
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[521、最长特殊序列 Ⅰ]]></title>
-        <id>https://ganhan999.github.io/post/521、最长特殊序列 Ⅰ/</id>
-        <link href="https://ganhan999.github.io/post/521、最长特殊序列 Ⅰ/">
-        </link>
-        <updated>2021-04-03T10:39:35.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
-<p>给你两个字符串，请你从这两个字符串中找出最长的特殊序列。<br>
-「最长特殊序列」定义如下：该序列为某字符串独有的最长子序列（即不能是其他字符串的子序列）。<br>
-子序列 可以通过删去字符串中的某些字符实现，但不能改变剩余字符的相对顺序。空序列为所有字符串的子序列，任何字符串为其自身的子序列。<br>
-输入为两个字符串，输出最长特殊序列的长度。如果不存在，则返回 -1。</p>
-<p>示例 1：<br>
-输入: &quot;aba&quot;, &quot;cdc&quot;<br>
-输出: 3<br>
-解释: 最长特殊序列可为 &quot;aba&quot; (或 &quot;cdc&quot;)，两者均为自身的子序列且不是对方的子序列。</p>
-<p>示例 2：<br>
-输入：a = &quot;aaa&quot;, b = &quot;bbb&quot;<br>
-输出：3</p>
-<p>示例 3：<br>
-输入：a = &quot;aaa&quot;, b = &quot;aaa&quot;<br>
-输出：-1</p>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="本体思路">本体思路</h1>
-<p>简单来说就是a，b不相等的话就返回a，b最长的长度，否则就-1</p>
-<h1 id="大神做法1">大神做法1：</h1>
-<pre><code class="language-python">class Solution:
-    def findLUSlength(self, a: str, b: str) -&gt; int:
-        return max(len(a),len(b)) if a!=b else -1
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[520、检测大写字母]]></title>
-        <id>https://ganhan999.github.io/post/520、检测大写字母/</id>
-        <link href="https://ganhan999.github.io/post/520、检测大写字母/">
-        </link>
-        <updated>2021-04-02T10:39:35.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
-<p>给定一个单词，你需要判断单词的大写使用是否正确。</p>
-<p>我们定义，在以下情况时，单词的大写用法是正确的：</p>
-<p>全部字母都是大写，比如&quot;USA&quot;。<br>
-单词中所有字母都不是大写，比如&quot;leetcode&quot;。<br>
-如果单词不只含有一个字母，只有首字母大写，比如&quot;Google&quot;。<br>
-否则，我们定义这个单词没有正确使用大写字母。</p>
-<p>示例 1:<br>
-输入: &quot;USA&quot;<br>
-输出: True</p>
-<p>示例 2:<br>
-输入: &quot;FlaG&quot;<br>
-输出: False</p>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<h1 id="本体思路">本体思路</h1>
-<p>每种情况都判断一遍</p>
-<h1 id="大神做法1">大神做法1：</h1>
-<pre><code class="language-python">class Solution:
-    def detectCapitalUse(self, word: str) -&gt; bool:
-        if word == word.capitalize():
-            return True
-        elif word == word.upper():
-            return True
-        elif word == word.lower():
-            return True
-        else:
-            return False
-</code></pre>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[509、斐波那契数]]></title>
-        <id>https://ganhan999.github.io/post/509、斐波那契数/</id>
-        <link href="https://ganhan999.github.io/post/509、斐波那契数/">
-        </link>
-        <updated>2021-04-02T09:39:35.000Z</updated>
-        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
-<p>斐波那契数，通常用F(n) 表示，形成的序列称为 斐波那契数列 。该数列由0 和 1 开始，<br>
-后面的每一项数字都是前面两项数字的和。也就是：</p>
-<p>F(0) = 0，F(1)= 1<br>
-F(n) = F(n - 1) + F(n - 2)，其中 n &gt; 1<br>
-给你 n ，请计算 F(n) 。</p>
-<p>示例 1：<br>
-输入：2<br>
-输出：1<br>
-解释：F(2) = F(1) + F(0) = 1 + 0 = 1</p>
-<p>示例 2：<br>
-输入：3<br>
-输出：2<br>
-解释：F(3) = F(2) + F(1) = 1 + 1 = 2</p>
-<p>示例 3：<br>
-输入：4<br>
-输出：3<br>
-解释：F(4) = F(3) + F(2) = 2 + 1 = 3</p>
+/ <br>
+4   5<br>
+/ \   \<br>
+5   4   7</p>
 <p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
 <h1 id="本体思路">本体思路</h1>
 <p>递归</p>
 <h1 id="大神做法1">大神做法1：</h1>
 <pre><code class="language-python">class Solution:
-    def fib(self, n: int) -&gt; int:
-        if n &lt;= 1:
-            return n
-        return self.fib(n - 1) + self.fib(n - 2)
-</code></pre>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<p>动态规划</p>
-<h1 id="大神做法2">大神做法2：</h1>
-<pre><code class="language-python">class Solution:
-    def fib(self, n: int) -&gt; int:
-        data = [0, 1]
-        for i in range(n-1):
-            data.append(data[-2] + data[-1])
-        return data[n]
-</code></pre>
-<p>&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;</p>
-<p>递推+动态规划 节省空间</p>
-<h1 id="大神做法2-2">大神做法2：</h1>
-<pre><code class="language-python">class Solution:
-    def fib(self, n: int) -&gt; int:
-        a, b = 0, 1
-        for i in range(n):
-            a, b = b, a + b
-        return a
+    def mergeTrees(self, t1: TreeNode, t2: TreeNode) -&gt; TreeNode:
+        if not t1:
+            return t2
+        if not t2:
+            return t1
+        merged = TreeNode(t1.val + t2.val)
+        merged.left = self.mergeTrees(t1.left, t2.left)
+        merged.right = self.mergeTrees(t1.right, t2.right)
+        return merged
 </code></pre>
 ]]></content>
     </entry>
     <entry>
-        <title type="html"><![CDATA[507、完美数]]></title>
-        <id>https://ganhan999.github.io/post/507、完美数/</id>
-        <link href="https://ganhan999.github.io/post/507、完美数/">
+        <title type="html"><![CDATA[606、根据二叉树创建字符串]]></title>
+        <id>https://ganhan999.github.io/post/606、根据二叉树创建字符串/</id>
+        <link href="https://ganhan999.github.io/post/606、根据二叉树创建字符串/">
         </link>
-        <updated>2021-04-01T05:39:35.000Z</updated>
+        <updated>2021-04-14T09:59:35.000Z</updated>
         <content type="html"><![CDATA[<h1 id="题目">题目</h1>
-<p>对于一个正整数，如果它和除了它自身以外的所有 正因子 之和相等，我们称它为 「完美数」。</p>
-<p>给定一个整数n，如果是完美数，返回 true，否则返回 false</p>
+<p>你需要采用前序遍历的方式，将一个二叉树转换成一个由括号和整数组成的字符串。<br>
+空节点则用一对空括号 &quot;()&quot; 表示。而且你需要省略所有不影响字符串与原始二叉树之间的一对一映射关系的空括号对。</p>
+<p>示例 1:<br>
+输入: 二叉树: [1,2,3,4]<br>
+1<br>
+/   <br>
+2     3<br>
+/<br>
+4</p>
+<p>输出: &quot;1(2(4))(3)&quot;</p>
+<p>解释: 原本将是“1(2(4)())(3())”，<br>
+在你省略所有不必要的空括号对之后，<br>
+它将是“1(2(4))(3)”。</p>
+<p>示例 2:<br>
+输入: 二叉树: [1,2,3,null,4]<br>
+1<br>
+/   <br>
+2     3<br>
+<br>
+4</p>
+<p>输出: &quot;1(2()(4))(3)&quot;<br>
+解释: 和第一个示例相似，<br>
+除了我们不能省略第一个对括号来中断输入和输出之间的一对一映射关系。</p>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="本体思路">本体思路</h1>
+<p>递归</p>
+<h1 id="大神做法1">大神做法1：</h1>
+<pre><code class="language-python">class Solution:
+    def tree2str(self, t: TreeNode) -&gt; str:
+        def func(node):
+            if not node:
+                return '()'
+            l = func(node.left)
+            r = func(node.right)
+            if l == r == '()':
+                return '(' + str(node.val) + ')'
+            elif l != '()' and r == '()':
+                return '(' + str(node.val) + l + ')'
+            else:
+                return '(' + str(node.val) + l + r + ')'
+
+        return func(t)[1:-1]#去除第一个和最后一个括号
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[605、种花问题]]></title>
+        <id>https://ganhan999.github.io/post/605、种花问题/</id>
+        <link href="https://ganhan999.github.io/post/605、种花问题/">
+        </link>
+        <updated>2021-04-13T09:59:35.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
+<p>假设有一个很长的花坛，一部分地块种植了花，另一部分却没有。可是，花不能种植在相邻的地块上，它们会争夺水源，两者都会死去。</p>
+<p>给你一个整数数组flowerbed 表示花坛，由若干 0 和 1 组成，其中 0 表示没种植花，1 表示种植了花。另有一个数n ，能否在不打破种植规则的情况下种入n朵花？能则返回 true ，不能则返回 false。</p>
 <p>示例 1：<br>
-输入：28<br>
-输出：True<br>
-解释：28 = 1 + 2 + 4 + 7 + 14<br>
-1, 2, 4, 7, 和 14 是 28 的所有正因子。</p>
-<p>示例 2：<br>
-输入：num = 6<br>
-输出：true</p>
-<p>示例 3：<br>
-输入：num = 496<br>
-输出：true</p>
-<p>示例 4：<br>
-输入：num = 8128<br>
-输出：true</p>
-<p>示例 5：<br>
-输入：num = 2<br>
+输入：flowerbed = [1,0,0,0,1], n = 1<br>
+输出：true<br>
+示例 2：</p>
+<p>输入：flowerbed = [1,0,0,0,1], n = 2<br>
 输出：false</p>
 <p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
 <h1 id="本体思路">本体思路</h1>
-<p>对于数字1:直接返回False<br>
-我们只需要判断2-int(sqrt(num))+1的数，全部累加：判断total == num：</p>
+<p>连续三个0则可以种一盆花</p>
 <h1 id="大神做法1">大神做法1：</h1>
 <pre><code class="language-python">class Solution:
-    def checkPerfectNumber(self, num: int) -&gt; bool:
-        # 对于数字1:直接返回`False`
-        if num == 1:
-            return False
-        # 计数从1开始
-        total = 1
-        # 我们只需要判断`2-int(sqrt(num))+1`的数，全部累加
-        for i in range(2, int(math.sqrt(num)) + 1):
-            if num % i == 0:
-                # 这里total要加上i和num // i
-                total += (i + num // i)
-        return total == num
+    def canPlaceFlowers(self, flowerbed: List[int], n: int) -&gt; bool:
+        flowerbed = [0] + flowerbed#前后都补0
+        flowerbed = flowerbed + [0]#前后都补0
+        for i in range(1, len(flowerbed) - 1):
+            if flowerbed[i - 1] == 0 and flowerbed[i] == 0 and flowerbed[i + 1] == 0:
+                n = n - 1
+                flowerbed[i] = 1
+        return n &lt;= 0
 </code></pre>
 ]]></content>
     </entry>
     <entry>
-        <title type="html"><![CDATA[506、相对名次]]></title>
-        <id>https://ganhan999.github.io/post/506、相对名次/</id>
-        <link href="https://ganhan999.github.io/post/506、相对名次/">
+        <title type="html"><![CDATA[599、两个列表的最小索引总和]]></title>
+        <id>https://ganhan999.github.io/post/599、两个列表的最小索引总和/</id>
+        <link href="https://ganhan999.github.io/post/599、两个列表的最小索引总和/">
         </link>
-        <updated>2021-03-31T05:39:35.000Z</updated>
+        <updated>2021-04-12T09:59:35.000Z</updated>
         <content type="html"><![CDATA[<h1 id="题目">题目</h1>
-<p>给出N 名运动员的成绩，找出他们的相对名次并授予前三名对应的奖牌。<br>
-前三名运动员将会被分别授予 “金牌”，“银牌” 和“ 铜牌”（&quot;Gold Medal&quot;, &quot;Silver Medal&quot;, &quot;Bronze Medal&quot;）。</p>
-<p>(注：分数越高的选手，排名越靠前。)</p>
+<p>假设Andy和Doris想在晚餐时选择一家餐厅，并且他们都有一个表示最喜爱餐厅的列表，每个餐厅的名字用字符串表示。<br>
+你需要帮助他们用最少的索引和找出他们共同喜爱的餐厅。 如果答案不止一个，则输出所有答案并且不考虑顺序。 你可以假设总是存在一个答案。</p>
 <p>示例 1:<br>
-输入: [5, 4, 3, 2, 1]<br>
-输出: [&quot;Gold Medal&quot;, &quot;Silver Medal&quot;, &quot;Bronze Medal&quot;, &quot;4&quot;, &quot;5&quot;]<br>
-解释: 前三名运动员的成绩为前三高的，因此将会分别被授予 “金牌”，“银牌”和“铜牌” (&quot;Gold Medal&quot;, &quot;Silver Medal&quot; and &quot;Bronze Medal&quot;).<br>
-余下的两名运动员，我们只需要通过他们的成绩计算将其相对名次即可。</p>
+输入:<br>
+[&quot;Shogun&quot;, &quot;Tapioca Express&quot;, &quot;Burger King&quot;, &quot;KFC&quot;]<br>
+[&quot;Piatti&quot;, &quot;The Grill at Torrey Pines&quot;, &quot;Hungry Hunter Steakhouse&quot;, &quot;Shogun&quot;]<br>
+输出: [&quot;Shogun&quot;]<br>
+解释: 他们唯一共同喜爱的餐厅是“Shogun”。</p>
+<p>示例 2:<br>
+输入:<br>
+[&quot;Shogun&quot;, &quot;Tapioca Express&quot;, &quot;Burger King&quot;, &quot;KFC&quot;]<br>
+[&quot;KFC&quot;, &quot;Shogun&quot;, &quot;Burger King&quot;]<br>
+输出: [&quot;Shogun&quot;]<br>
+解释: 他们共同喜爱且具有最小索引和的餐厅是“Shogun”，它有最小的索引和1(0+1)。</p>
 <p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
 <h1 id="本体思路">本体思路</h1>
-<p>如果直接排序是不行的，因为会丢失老的索引。 因此我用了一个 pairs 数组，<br>
-来维护一个 nums -&gt; 索引的映射。之后对 paris 进行降序排列即可。由于我事先保存了老的索引信息，因此是没有问题的。</p>
+<p>步骤：<br>
+1、求两者交集<br>
+2、第一次遍历，找到索引最小的<br>
+3、第二次遍历，把索引最小对应餐厅加入结果中</p>
 <h1 id="大神做法1">大神做法1：</h1>
 <pre><code class="language-python">class Solution:
-    def findRelativeRanks(self, nums: List[int]) -&gt; List[str]:
-        pairs = []
-        for i in range(len(nums)):
-            pairs.append([nums[i], i])
-        pairs.sort(key=lambda a: a[0], reverse=True)
-        for i in range(len(nums)):
-            if i == 0:
-                nums[pairs[i][1]] = &quot;Gold Medal&quot;
-            if i == 1:
-                nums[pairs[i][1]] = &quot;Silver Medal&quot;
-            if i == 2:
-                nums[pairs[i][1]] = &quot;Bronze Medal&quot;
-            if i &gt; 2:
-                nums[pairs[i][1]] = str(i + 1)
-        return nums
+    def findRestaurant(self, list1: List[str], list2: List[str]) -&gt; List[str]:
+        l1=set(list1)
+        l2=set(list2)
+        l12=l1&amp;l2
+        res=[]
+        tmp=float('inf')
+        for i in l12:
+            tmp=min(tmp,list1.index(i)+list2.index(i))
+        for i in l12:
+            if list1.index(i)+list2.index(i)==tmp:
+                res.append(i)
+        return res
+
 </code></pre>
 ]]></content>
     </entry>
     <entry>
-        <title type="html"><![CDATA[504、七进制数]]></title>
-        <id>https://ganhan999.github.io/post/504、七进制数/</id>
-        <link href="https://ganhan999.github.io/post/504、七进制数/">
+        <title type="html"><![CDATA[598、范围求和 II]]></title>
+        <id>https://ganhan999.github.io/post/598、范围求和 II/</id>
+        <link href="https://ganhan999.github.io/post/598、范围求和 II/">
         </link>
-        <updated>2021-03-31T04:39:35.000Z</updated>
+        <updated>2021-04-11T09:59:35.000Z</updated>
         <content type="html"><![CDATA[<h1 id="题目">题目</h1>
-<p>给定一个整数，将其转化为7进制，并以字符串形式输出。</p>
-<p>示例 1:<br>
-输入: 100<br>
-输出: &quot;202&quot;</p>
-<p>示例 2:<br>
-输入: -7<br>
-输出: &quot;-10&quot;</p>
+<p>给定一个初始元素全部为0，大小为 m*n 的矩阵M以及在M上的一系列更新操作。</p>
+<p>操作用二维数组表示，其中的每个操作用一个含有两个正整数a 和 b 的数组表示，含义是将所有符合0 &lt;= i &lt; a 以及 0 &lt;= j &lt; b 的元素M[i][j]的值都增加 1。</p>
+<p>在执行给定的一系列操作后，你需要返回矩阵中含有最大整数的元素个数。</p>
+<p>示例 1:</p>
+<p>输入:<br>
+m = 3, n = 3<br>
+operations = [[2,2],[3,3]]<br>
+输出: 4<br>
+解释:<br>
+初始状态, M =<br>
+[[0, 0, 0],<br>
+[0, 0, 0],<br>
+[0, 0, 0]]</p>
+<p>执行完操作 [2,2] 后, M =<br>
+[[1, 1, 0],<br>
+[1, 1, 0],<br>
+[0, 0, 0]]</p>
+<p>执行完操作 [3,3] 后, M =<br>
+[[2, 2, 1],<br>
+[2, 2, 1],<br>
+[1, 1, 1]]<br>
+M 中最大的整数是 2, 而且 M 中有4个值为2的元素。因此返回 4。</p>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="本体思路">本体思路</h1>
+<p>短板效应</p>
+<h1 id="大神做法1">大神做法1：</h1>
+<pre><code class="language-python">class Solution:
+    def maxCount(self, m: int, n: int, ops: List[List[int]]) -&gt; int:
+        if not ops:
+            return m*n
+        a = min(map(lambda x: x[0], ops))
+        b = min(map(lambda x: x[1], ops))
+        return a*b
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[594、最长和谐子序列]]></title>
+        <id>https://ganhan999.github.io/post/594、最长和谐子序列/</id>
+        <link href="https://ganhan999.github.io/post/594、最长和谐子序列/">
+        </link>
+        <updated>2021-04-10T04:59:35.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
+<p>和谐数组是指一个数组里元素的最大值和最小值之间的差别 正好是 1 。</p>
+<p>现在，给你一个整数数组 nums ，请你在所有可能的子序列中找到最长的和谐子序列的长度。</p>
+<p>数组的子序列是一个由数组派生出来的序列，它可以通过删除一些元素或不删除元素、且不改变其余元素的顺序而得到。</p>
+<p>示例 1：<br>
+输入：nums = [1,3,2,2,5,2,3,7]<br>
+输出：5<br>
+解释：最长的和谐子序列是 [3,2,2,2,3]</p>
+<p>示例 2：<br>
+输入：nums = [1,2,3,4]<br>
+输出：2</p>
+<p>示例 3：<br>
+输入：nums = [1,1,1,1]<br>
+输出：0</p>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="本体思路">本体思路</h1>
+<p>利用哈希表存储数组中元素出现的次数<br>
+遍历哈希表，如果当前元素+1也在哈希表中，那么计算两者次数之和，保留最大值</p>
+<h1 id="大神做法1">大神做法1：</h1>
+<pre><code class="language-python">class Solution:
+    def findLHS(self, nums: List[int]) -&gt; int:
+        dicts={}
+        for i in nums:
+            dicts[i]=dicts.get(i,0)+1
+        res=0
+        for i in dicts:
+            if i+1 in dicts:
+                res=max(res,dicts[i]+dicts[i+1])
+        return res
+</code></pre>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<p>首先将原数组排序，得到递增数组；<br>
+然后遍历一遍数组，利用双指针实现类似滑动窗口的功能</p>
+<h1 id="大神做法2">大神做法2：</h1>
+<pre><code class="language-python">class Solution:
+    def findLHS(self, nums: List[int]) -&gt; int:
+        nums.sort()
+        left=0
+        res=0
+        for right in range(len(nums)):
+            while nums[right]-nums[left]&gt;1:
+                left+=1
+            if nums[right]-nums[left]==1:
+                res=max(res,right-left+1)
+        return res
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[590、N 叉树的后序遍历]]></title>
+        <id>https://ganhan999.github.io/post/590、N 叉树的后序遍历/</id>
+        <link href="https://ganhan999.github.io/post/590、N 叉树的后序遍历/">
+        </link>
+        <updated>2021-04-09T12:59:35.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
+<p>给定一个 N 叉树，返回其节点值的 后序遍历 。<br>
+N 叉树 在输入中按层序遍历进行序列化表示，每组子节点由空值 null 分隔（请参见示例）。</p>
+<p>进阶：<br>
+递归法很简单，你可以使用迭代法完成此题吗?</p>
+<p>示例 1：<br>
+输入：root = [1,null,3,2,4,null,5,6]<br>
+输出：[5,6,3,2,4,1]</p>
+<p>示例 2：<br>
+输入：root = [1,null,2,3,4,5,null,null,6,7,null,8,null,9,10,null,null,11,null,12,null,13,null,null,14]<br>
+输出：[2,6,14,11,7,3,12,8,4,13,9,10,5,1]</p>
 <p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
 <h1 id="本体思路">本体思路</h1>
 <p>递归</p>
 <h1 id="大神做法1">大神做法1：</h1>
 <pre><code class="language-python">class Solution:
-    def convertToBase7(self, num: int) -&gt; str:
-        if num &lt; 0:
-            return &quot;-&quot; + self.convertToBase7(-num)
-        if num &lt; 7:
-            return str(num)
-        return self.convertToBase7(num // 7) + str(num % 7)
+    def preorder(self, root: 'Node') -&gt; List[int]:
+        #保存节点值
+        result = []
+        #后序遍历
+        def pre_order(root):
+            #跟节点非空入队列递归遍历
+            if root:
+                #递归遍历
+                for node in root.children:
+                    pre_order(node)
+                #节点值入队列
+                result.append(root.val)
+        pre_order(root)
+        return result
+</code></pre>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<p>迭代</p>
+<h1 id="大神做法2">大神做法2：</h1>
+<pre><code class="language-python">class Solution:
+    def postorder(self, root: 'Node') -&gt; List[int]:
+        if not root:
+            return []
+        res = []
+        stack = []
+        stack.append(root)
+        while stack:
+            node = stack.pop()
+            res.append(node.val)
+            stack.extend(node.children)
+        return res[::-1]
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[589、N 叉树的前序遍历]]></title>
+        <id>https://ganhan999.github.io/post/589、N 叉树的前序遍历/</id>
+        <link href="https://ganhan999.github.io/post/589、N 叉树的前序遍历/">
+        </link>
+        <updated>2021-04-09T11:59:35.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
+<p>给定一个 N 叉树，返回其节点值的 前序遍历 。<br>
+N 叉树 在输入中按层序遍历进行序列化表示，每组子节点由空值 null 分隔（请参见示例）。</p>
+<p>进阶：<br>
+递归法很简单，你可以使用迭代法完成此题吗?</p>
+<p>示例 1：<br>
+输入：root = [1,null,3,2,4,null,5,6]<br>
+输出：[1,3,5,6,2,4]</p>
+<p>示例 2：<br>
+输入：root = [1,null,2,3,4,5,null,null,6,7,null,8,null,9,10,null,null,11,null,12,null,13,null,null,14]<br>
+输出：[1,2,3,6,7,11,14,4,8,12,5,9,13,10]</p>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="本体思路">本体思路</h1>
+<p>递归</p>
+<h1 id="大神做法1">大神做法1：</h1>
+<pre><code class="language-python">class Solution:
+    def preorder(self, root: 'Node') -&gt; List[int]:
+        res = []
+
+        def helper(root):
+            if not root:
+                return
+            res.append(root.val)
+            for child in root.children:
+                helper(child)
+
+        helper(root)
+        
+        return res
+</code></pre>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<p>迭代</p>
+<h1 id="大神做法2">大神做法2：</h1>
+<pre><code class="language-python">class Solution:
+    def preorder(self, root: 'Node') -&gt; List[int]:
+        if root is None:
+            return []
+        stack = [root]                                  #初始化一个数据
+        out = []
+        while stack:
+            temp = stack.pop()                          #先把栈顶的数据弹出来加入到 输出 集
+            out.append(temp.val)
+            if temp.children:                           #如果该元素有子节点children 则反转加入到 stack 里(因为是前序遍历)
+                for item in temp.children[::-1]:
+                    stack.append(item)
+        return out
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[575、分糖果]]></title>
+        <id>https://ganhan999.github.io/post/575、分糖果/</id>
+        <link href="https://ganhan999.github.io/post/575、分糖果/">
+        </link>
+        <updated>2021-04-09T10:59:35.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
+<p>给定一个偶数长度的数组，其中不同的数字代表着不同种类的糖果，每一个数字代表一个糖果。你需要把这些糖果平均分给一个弟弟和一个妹妹。返回妹妹可以获得的最大糖果的种类数。</p>
+<p>示例 1:<br>
+输入: candies = [1,1,2,2,3,3]<br>
+输出: 3<br>
+解析: 一共有三种种类的糖果，每一种都有两个。<br>
+最优分配方案：妹妹获得[1,2,3],弟弟也获得[1,2,3]。这样使妹妹获得糖果的种类数最多。</p>
+<p>示例 2 :<br>
+输入: candies = [1,1,2,3]<br>
+输出: 2<br>
+解析: 妹妹获得糖果[2,3],弟弟获得糖果[1,1]，妹妹有两种不同的糖果，弟弟只有一种。这样使得妹妹可以获得的糖果种类数最多。</p>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="本体思路">本体思路</h1>
+<p>如果种类超过一半，返回数组的一半<br>
+如果种类没有超过一半，返回集合的长度</p>
+<h1 id="大神做法1">大神做法1：</h1>
+<pre><code class="language-python">class Solution:
+    def distributeCandies(self, candies: List[int]) -&gt; int:
+        return len(set(candies)) if len(set(candies))&lt;len(candies)//2 else len(candies)//2
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[572、另一个树的子树]]></title>
+        <id>https://ganhan999.github.io/post/572、另一个树的子树/</id>
+        <link href="https://ganhan999.github.io/post/572、另一个树的子树/">
+        </link>
+        <updated>2021-04-07T14:59:35.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="题目">题目</h1>
+<p>给定两个非空二叉树 s 和 t，检验s 中是否包含和 t 具有相同结构和节点值的子树。s 的一个子树包括 s 的一个节点和这个节点的所有子孙。<br>
+s 也可以看做它自身的一棵子树。</p>
+<p>示例 1:<br>
+给定的树 s:</p>
+<p>​     3<br>
+​    / \</p>
+<p>4   5<br>
+/ <br>
+1   2<br>
+给定的树 t：</p>
+<p>4<br>
+/ <br>
+1   2<br>
+返回 true，因为 t 与 s 的一个子树拥有相同的结构和节点值。</p>
+<p>示例 2:<br>
+给定的树 s：</p>
+<p>​     3<br>
+​    / \</p>
+<p>4   5<br>
+/ <br>
+1   2<br>
+/<br>
+0<br>
+给定的树 t：</p>
+<p>4<br>
+/ <br>
+1   2<br>
+返回 false。</p>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="本体思路">本体思路</h1>
+<p>判断两个树是否相等的三个条件是与的关系，即：</p>
+<p>当前两个树的根节点值相等；<br>
+并且，s 的左子树和 t 的左子树相等；<br>
+并且，s 的右子树和 t 的右子树相等。<br>
+而判断 t 是否为 s 的子树的三个条件是或的关系，即：</p>
+<p>当前两棵树相等；<br>
+或者，t 是 s 的左子树；<br>
+或者，t 是 s 的右子树。</p>
+<h1 id="大神做法1">大神做法1：</h1>
+<pre><code class="language-python">class Solution(object):
+    def isSubtree(self, s, t):
+        &quot;&quot;&quot;
+        :type s: TreeNode
+        :type t: TreeNode
+        :rtype: bool
+        &quot;&quot;&quot;
+        if not s and not t:
+            return True
+        if not s or not t:
+            return False
+        return self.isSameTree(s, t) or self.isSubtree(s.left, t) or self.isSubtree(s.right, t)
+
+    def isSameTree(self, s, t):
+        if not s and not t:
+            return True
+        if not s or not t:
+            return False
+        return s.val == t.val and self.isSameTree(s.left, t.left) and self.isSameTree(s.right, t.right)
 </code></pre>
 ]]></content>
     </entry>
