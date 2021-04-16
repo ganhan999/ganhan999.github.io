@@ -1,0 +1,253 @@
+<html>
+<head>
+    <meta charset="utf-8"/>
+<meta name="description" content=""/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+<title>Java内存分析 转载 | Gridea</title>
+
+<link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1618573423900">
+
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://ganhan999.github.io//styles/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dockerfile.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dart.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script>
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
+
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css">
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg">
+    <div class="navbar-brand">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            Gridea
+        </div>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
+            
+                <div class="nav-item">
+                    
+                        <a href="/" class="menu gt-a-link">
+                            首页
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/archives" class="menu gt-a-link">
+                            归档
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/tags" class="menu gt-a-link">
+                            标签
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/post/about" class="menu gt-a-link">
+                            关于
+                        </a>
+                    
+                </div>
+            
+        </div>
+        <div style="text-align: center">
+            <form id="gridea-search-form" style="position: relative" data-update="1618573423900" action="/search/index.html">
+                <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+                <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+        </div>
+    </div>
+</nav>
+
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    Java内存分析 转载
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2021-04-16 ·
+                    </time>
+                    
+                        <a href="https://ganhan999.github.io/tag/pVOKe1jE1_/" class="post-tags">
+                            # Java
+                        </a>
+                    
+                </div>
+                <div class="post-content">
+                    <p>这篇文章将简单的说明下当我们运行Java程序时JVM（Java虚拟机）的内存分配情况。</p>
+<p>首先我们先来感观的认识下几个名词：</p>
+<ul>
+<li>**栈：**一般来说，基本数据类型直接在栈中分配空间，局部变量（在方法代码段中定义的变量）也在栈中直接分配空间，当局部变量所在方法执行完成之后该空间便立刻被JVM回收，还有一种是引用数据类型，即我们通常所说的需要用关键字new创建出来的对象所对应的引用也是在栈空间中，此时，JVM在栈空间中给对象引用分配了一个地址空间（相当于一个门牌号，通过这个门牌号就可以找到你家），在堆空间中给该引用的对象分配一个空间，栈空间中的地址引用指向了堆空间中的对象区（通过门牌号找住址）；</li>
+<li>**堆：**一般用来存放用关键字new出来的数据。</li>
+</ul>
+<p>接下来我们再通过一段程序来直观感受下程序运行时JVM的内存情况，</p>
+<p>[<img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码" loading="lazy">](javascript:void(0)😉</p>
+<pre><code> 1 package demo;
+ 2 
+ 3 public class Student {
+ 4     private String name;
+ 5     private int age;
+ 6 
+ 7     public void study() {
+ 8         System.out.println(&quot;I love study!&quot;);
+ 9     }
+10 
+11     public String getName() {
+12         return name;
+13     }
+14 
+15     public void setName(String name) {
+16         this.name = name;
+17     }
+18 
+19     public int getAge() {
+20         return age;
+21     }
+22 
+23     public void setAge(int age) {
+24         this.age = age;
+25     }
+26 }
+</code></pre>
+<p>[<img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码" loading="lazy">](javascript:void(0)😉</p>
+<p>[<img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码" loading="lazy">](javascript:void(0)😉</p>
+<pre><code> 1 package demo;
+ 2 
+ 3 public class StudentDemo {
+ 4     public static void main(String[] args) {
+ 5         Student student = new Student();
+ 6 
+ 7         System.out.println(student.getName() + &quot;:&quot; + student.getAge());
+ 8         student.setName(&quot;John&quot;);
+ 9         student.setAge(23);
+10         System.out.println(student.getName() + &quot;:&quot; + student.getAge());
+11         
+12         student.study();
+13         
+14         Student student2 = student;
+15         student2.setName(&quot;Jack&quot;);
+16         student2.setAge(25);
+17         System.out.println(student2.getName() + &quot;:&quot; + student2.getAge());
+18         System.out.println(student.getName() + &quot;:&quot; + student.getAge());
+19     }
+20 }
+</code></pre>
+<p>[<img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码" loading="lazy">](javascript:void(0)😉</p>
+<p>当我们运行程序时，JVM会把Student类与StudentDemo类编译完然后加载到JVM中一个叫<strong>方法区</strong>的地方，类的成员变量与成员方法也被加载到方法区中，此时内存模型如下</p>
+<figure data-type="image" tabindex="1"><img src="https://images2015.cnblogs.com/blog/1023471/201610/1023471-20161003105022942-1624159483.png" alt="img" loading="lazy"></figure>
+<p>可以看到study方法右边各有一个16进制的标记，而name与age变量没有，这是因为每个对象都有各自的成员变量，而类中的成员方法却可以被每个对象所共用，为了节省内存空间，JVM为方法分配了该标记（也叫内存地址）便于每个new出来的对象查找调用，接着JVM会自动寻找main方法，在栈中为main方法申请一个空间，这个过程也叫入栈，然后执行我们Student类中第5行代码</p>
+<figure data-type="image" tabindex="2"><img src="https://images2015.cnblogs.com/blog/1023471/201706/1023471-20170628153219774-236253981.png" alt="img" loading="lazy"></figure>
+<p>这时候，JVM在堆空间中分配一块内存给Student对象，并为其分配一个内存地址（如果对象的成员变量没有赋值，则JVM会为变量赋初始值），在栈中分配一块内存空间用于指向堆空间中的Student对象区的内存地址，此时内存模型如下</p>
+<figure data-type="image" tabindex="3"><img src="https://images2015.cnblogs.com/blog/1023471/201610/1023471-20161003105825942-1129813995.png" alt="img" loading="lazy"></figure>
+<p>接着看代码第8行与第9行</p>
+<figure data-type="image" tabindex="4"><img src="https://images2015.cnblogs.com/blog/1023471/201706/1023471-20170628152809383-1580114598.png" alt="img" loading="lazy"></figure>
+<p>程序为student对象的成员变量赋值，JVM会根据student所指向的地址在堆内存中寻找Student类的变量，并为变量赋新的值</p>
+<figure data-type="image" tabindex="5"><img src="https://images2015.cnblogs.com/blog/1023471/201610/1023471-20161003110601582-847575839.png" alt="img" loading="lazy"></figure>
+<p>第12行</p>
+<figure data-type="image" tabindex="6"><img src="https://images2015.cnblogs.com/blog/1023471/201706/1023471-20170628153013664-299357383.png" alt="img" loading="lazy"></figure>
+<p>这时student对象调用study方法，JVM在栈空间中为study方法申请了一块内存空间</p>
+<figure data-type="image" tabindex="7"><img src="https://images2015.cnblogs.com/blog/1023471/201610/1023471-20161003111014707-298237402.png" alt="img" loading="lazy"></figure>
+<p>study方法执行完后，立即释放栈空间，代码第14行，</p>
+<figure data-type="image" tabindex="8"><img src="https://images2015.cnblogs.com/blog/1023471/201706/1023471-20170628153044071-1135286478.png" alt="img" loading="lazy"></figure>
+<p>student2对象的引用指向了student所指向的地址</p>
+<figure data-type="image" tabindex="9"><img src="https://images2015.cnblogs.com/blog/1023471/201610/1023471-20161003132857082-1194767868.png" alt="img" loading="lazy"></figure>
+<p>代码15与16行</p>
+<figure data-type="image" tabindex="10"><img src="https://images2015.cnblogs.com/blog/1023471/201706/1023471-20170628153131133-2077229308.png" alt="img" loading="lazy"></figure>
+<p>为student2的变量赋值，由于student2与student指向了同一个地方，所以这时student对象中变量的值也被改变</p>
+<figure data-type="image" tabindex="11"><img src="https://images2015.cnblogs.com/blog/1023471/201610/1023471-20161003133148551-1299541357.png" alt="img" loading="lazy"></figure>
+<p>到这，main方法中所有代码执行完毕，main方法所占用的栈空间也被回收，而堆空间等待GC回收</p>
+<figure data-type="image" tabindex="12"><img src="https://images2015.cnblogs.com/blog/1023471/201610/1023471-20161003111448192-1689689689.png" alt="img" loading="lazy"></figure>
+<p>代码执行结果如下：</p>
+<pre><code>null:0
+John:23
+I love study!
+Jack:25
+Jack:25
+</code></pre>
+<p>写的较为简单，仅作为知识记录，欢迎指正！</p>
+
+                </div>
+            </article>
+        </div>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://ganhan999.github.io/post/628、三个数的最大乘积/" class="post-title gt-a-link">
+                    628、三个数的最大乘积
+                </a>
+            </div>
+        
+
+        
+
+        
+
+        
+
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first">温故而知新</div>
+    <div class="social-container">
+        
+            
+        
+            
+        
+            
+        
+            
+                <a href="https://www.zhihu.com/hot" target="_blank">
+                    <i class="fab fa-zhihu gt-c-content-color-first"></i>
+                </a>
+            
+        
+            
+        
+            
+        
+    </div>
+    <div class="footer-info">
+        Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+    </div>
+    <div>
+        Theme by <a href="https://imhanjie.com/" target="_blank">imhanjie</a>, Powered by <a
+                href="https://github.com/getgridea/gridea" target="_blank">Gridea | <a href="https://ganhan999.github.io//atom.xml" target="_blank">RSS</a></a>
+    </div>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+    </div>
+</div>
+</body>
+</html>
