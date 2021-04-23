@@ -1,0 +1,198 @@
+<html>
+<head>
+    <meta charset="utf-8"/>
+<meta name="description" content=""/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+<title>661、图片平滑器 | Gridea</title>
+
+<link rel="shortcut icon" href="https://ganhan999.github.io//favicon.ico?v=1619179005643">
+
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://ganhan999.github.io//styles/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dockerfile.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dart.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script>
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
+
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css">
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg">
+    <div class="navbar-brand">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            Gridea
+        </div>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
+            
+                <div class="nav-item">
+                    
+                        <a href="/" class="menu gt-a-link">
+                            首页
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/archives" class="menu gt-a-link">
+                            归档
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/tags" class="menu gt-a-link">
+                            标签
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/post/about" class="menu gt-a-link">
+                            关于
+                        </a>
+                    
+                </div>
+            
+        </div>
+        <div style="text-align: center">
+            <form id="gridea-search-form" style="position: relative" data-update="1619179005643" action="/search/index.html">
+                <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+                <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+        </div>
+    </div>
+</nav>
+
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    661、图片平滑器
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2021-04-21 ·
+                    </time>
+                    
+                        <a href="https://ganhan999.github.io/tag/RJ1fLvr_t/" class="post-tags">
+                            # leetcode
+                        </a>
+                    
+                </div>
+                <div class="post-content">
+                    <h1 id="题目">题目</h1>
+<p>包含整数的二维矩阵 M 表示一个图片的灰度。你需要设计一个平滑器来让每一个单元的灰度成为平均灰度 (向下舍入) ，平均灰度的计算是周围的8个单元和它本身的值求平均，如果周围的单元格不足八个，则尽可能多的利用它们。</p>
+<p>示例 1:<br>
+输入:<br>
+[[1,1,1],<br>
+[1,0,1],<br>
+[1,1,1]]<br>
+输出:<br>
+[[0, 0, 0],<br>
+[0, 0, 0],<br>
+[0, 0, 0]]<br>
+解释:<br>
+对于点 (0,0), (0,2), (2,0), (2,2): 平均(3/4) = 平均(0.75) = 0<br>
+对于点 (0,1), (1,0), (1,2), (2,1): 平均(5/6) = 平均(0.83333333) = 0<br>
+对于点 (1,1): 平均(8/9) = 平均(0.88888889) = 0</p>
+<p>&quot;&quot;&quot;&quot;&quot;&quot;</p>
+<h1 id="本体思路">本体思路</h1>
+<p>对于矩阵中的每一个单元格，找所有 9 个包括它自身在内的紧邻的格子。<br>
+然后，我们要将所有邻居的和保存在 ans[r][c] 中，同时记录邻居的数目 count。最终的答案就是和除以邻居数目。</p>
+<h1 id="大神做法1">大神做法1：</h1>
+<pre><code class="language-python">class Solution(object):
+    def imageSmoother(self, M):
+        R, C = len(M), len(M[0])
+        ans = [[0] * C for _ in M]
+
+        for r in range(R):
+            for c in range(C):
+                count = 0
+                for nr in (r-1, r, r+1):
+                    for nc in (c-1, c, c+1):
+                        if 0 &lt;= nr &lt; R and 0 &lt;= nc &lt; C:
+                            ans[r][c] += M[nr][nc]
+                            count += 1
+                ans[r][c] //= count
+        return ans
+</code></pre>
+
+                </div>
+            </article>
+        </div>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://ganhan999.github.io/post/657、机器人能否返回原点/" class="post-title gt-a-link">
+                    657、机器人能否返回原点
+                </a>
+            </div>
+        
+
+        
+
+        
+
+        
+
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first">温故而知新</div>
+    <div class="social-container">
+        
+            
+        
+            
+        
+            
+        
+            
+                <a href="https://www.zhihu.com/hot" target="_blank">
+                    <i class="fab fa-zhihu gt-c-content-color-first"></i>
+                </a>
+            
+        
+            
+        
+            
+        
+    </div>
+    <div class="footer-info">
+        Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a>
+    </div>
+    <div>
+        Theme by <a href="https://imhanjie.com/" target="_blank">imhanjie</a>, Powered by <a
+                href="https://github.com/getgridea/gridea" target="_blank">Gridea | <a href="https://ganhan999.github.io//atom.xml" target="_blank">RSS</a></a>
+    </div>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+    </div>
+</div>
+</body>
+</html>
